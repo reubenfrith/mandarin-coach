@@ -1,0 +1,20 @@
+# TODO: complete once app is built and tested locally
+# Render deployment config — https://render.com/docs/render-yaml
+
+services:
+  - type: web
+    name: mandarin-coach
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: chainlit run app/main.py --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: LANGSMITH_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
