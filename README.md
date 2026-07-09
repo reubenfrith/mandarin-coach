@@ -484,18 +484,16 @@ The application draws on four data sources loaded into ChromaDB, plus two extern
 
 #### User-Uploaded Personal Data
 
-The `{user_id}_personal_errors` collection also accepts **direct file uploads** from the user via the Chainlit interface. This is the primary mechanism for satisfying the "own personal data, uploaded to your application" requirement. Supported upload formats:
+The `{user_id}_personal_errors` collection also accepts **direct file uploads** from the user via the Chainlit interface. This is the primary mechanism for satisfying the "own personal data, uploaded to your application" requirement. Two formats are supported in v1:
 
-| Format | Description | Example |
-|---|---|---|
-| **Anki export (.txt/.tsv)** | Flash card decks exported from Anki — word, translation, notes, tags | User's own Anki deck with their personal mnemonics and difficulty ratings |
-| **Tutor correction log (.txt/.csv)** | Notes from iTalki or human tutor sessions — errors flagged in lessons | "Tutor flagged my 了 usage 3 times in today's session" |
-| **Vocabulary list (.txt)** | Custom word lists the user is working on — Chinese character, pinyin, meaning | Personal list of words encountered in the last book or TV show |
-| **Free-text notes (.txt)** | Any freeform notes — things the user has noticed about their own mistakes | "I always confuse 过 and 了 in the past-experience context" |
+| Format | Description |
+|---|---|
+| **Plain text (.txt)** | Freeform notes — tutor corrections, things the user has noticed about their own mistakes, vocabulary observations. Each line is treated as one record. |
+| **Anki export (.txt/.tsv)** | Tab-separated Anki deck export (front, back, tags). Each card becomes one record with the Chinese and English fields indexed separately. |
 
-Uploaded content is parsed, chunked per record, embedded, and stored in the user's `{user_id}_personal_errors` collection exactly like app-generated error records. This means retrieval is available immediately after upload, and the agent can reference the user's own notes when explaining corrections.
+Uploaded content is parsed, chunked per record, embedded, and stored in the user's `{user_id}_personal_errors` collection exactly like app-generated error records — retrieval is available immediately after upload.
 
-The Chainlit `@cl.action_callback` handles the upload flow. Files are processed server-side — they are never stored in raw form and can be deleted by the user from their profile at any time.
+The Chainlit `@cl.action_callback` handles the upload flow. Files are processed server-side and can be deleted by the user from their profile at any time.
 
 #### External APIs
 
