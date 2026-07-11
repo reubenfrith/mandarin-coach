@@ -1,0 +1,162 @@
+[
+  {
+    "id": "ep_ba_bei_mix",
+    "error_type": "Mixing 把 and 被 in one clause",
+    "category": "grammar",
+    "why_english_speakers": "English has no separate disposal marker, so learners grab both 把 and 被 to signal 'something was done to the object', not realising the two constructions are mutually exclusive.",
+    "incorrect": "她把书被他借走了。",
+    "correct": "书被他借走了。 / 她把书借给了他。",
+    "note": "把 = subject acts on object; 被 = subject is acted upon. Choose one based on which noun is the topic.",
+    "keywords": ["把", "被", "disposal", "passive", "conflict"]
+  },
+  {
+    "id": "ep_le_as_past_tense",
+    "error_type": "Treating 了 as a general past-tense marker",
+    "category": "particle",
+    "why_english_speakers": "English marks all past actions with '-ed', so learners attach 了 to every past verb, including habitual and stative ones where Chinese uses no aspect marker.",
+    "incorrect": "小时候我每天喝了牛奶。",
+    "correct": "小时候我每天喝牛奶。",
+    "note": "了 marks completion of a specific event, not past tense. Habitual past takes no 了.",
+    "keywords": ["了", "past tense", "habitual", "aspect"]
+  },
+  {
+    "id": "ep_missing_measure_word",
+    "error_type": "Omitting the measure word",
+    "category": "measure_word",
+    "why_english_speakers": "English says 'three books' with no classifier, so learners go straight from number to noun and drop the measure word.",
+    "incorrect": "我买了三书。",
+    "correct": "我买了三本书。",
+    "note": "Number/demonstrative + Measure Word + Noun is obligatory in Chinese.",
+    "keywords": ["measure word", "classifier", "量词", "missing"]
+  },
+  {
+    "id": "ep_default_ge",
+    "error_type": "Overusing 个 as a default measure word",
+    "category": "measure_word",
+    "why_english_speakers": "Knowing a measure word is needed but not which one, learners default to 个 for every noun.",
+    "incorrect": "三个书、两个纸",
+    "correct": "三本书、两张纸",
+    "note": "个 is general but many nouns need a specific measure word (本 books, 张 flat items, 只 animals).",
+    "keywords": ["个", "measure word", "default", "overuse"]
+  },
+  {
+    "id": "ep_bi_with_hen",
+    "error_type": "Using 很/非常 in a 比 comparison",
+    "category": "grammar",
+    "why_english_speakers": "English 'much taller / very much taller' pushes learners to add an intensifier, but 比 sentences reject 很/非常.",
+    "incorrect": "他比我很高。",
+    "correct": "他比我高。 / 他比我高得多。",
+    "note": "For degree in a 比 sentence use 更, or a quantity like 一点儿 / 得多.",
+    "keywords": ["比", "很", "comparison", "intensifier"]
+  },
+  {
+    "id": "ep_english_word_order_time",
+    "error_type": "English word order for time and place",
+    "category": "word_order",
+    "why_english_speakers": "English places time and place after the verb ('I go to China next year'), so learners keep that order in Chinese.",
+    "incorrect": "我去中国明年。",
+    "correct": "我明年去中国。",
+    "note": "Chinese: Subject + Time + Place + Verb + Object.",
+    "keywords": ["word order", "time", "place", "before verb"]
+  },
+  {
+    "id": "ep_de_confusion",
+    "error_type": "Writing 的 for all three 'de'",
+    "category": "particle",
+    "why_english_speakers": "的, 得, and 地 are homophones (all 'de') with no spoken distinction, so learners write the most familiar 的 everywhere.",
+    "incorrect": "他跑的很快。",
+    "correct": "他跑得很快。",
+    "note": "的 (noun modifier), 地 (adverb + verb), 得 (verb + degree complement).",
+    "keywords": ["的", "得", "地", "de", "homophone"]
+  },
+  {
+    "id": "ep_dropped_paired_conjunction",
+    "error_type": "Dropping the second half of a paired conjunction",
+    "category": "grammar",
+    "why_english_speakers": "English uses only one connector ('although', 'because'), so learners omit the Chinese partner (但是, 所以).",
+    "incorrect": "虽然很贵，我还是买了。",
+    "correct": "虽然很贵，但是我还是买了。",
+    "note": "Chinese commonly keeps both: 虽然……但是, 因为……所以, 不但……而且.",
+    "keywords": ["虽然", "但是", "因为", "所以", "paired conjunction"]
+  },
+  {
+    "id": "ep_guo_vs_le",
+    "error_type": "Using 了 where experiential 过 is meant",
+    "category": "particle",
+    "why_english_speakers": "English present-perfect 'I have been to...' maps ambiguously; learners reach for 了 instead of the experiential 过.",
+    "incorrect": "我去了法国，很漂亮。（meaning: I have been to France）",
+    "correct": "我去过法国，很漂亮。",
+    "note": "过 = have ever experienced; 了 = a specific completed event.",
+    "keywords": ["过", "了", "experience", "present perfect"]
+  },
+  {
+    "id": "ep_bare_verb_ba",
+    "error_type": "把 sentence with a bare verb",
+    "category": "grammar",
+    "why_english_speakers": "Learners front the object with 把 but forget that the verb needs a result/complement/了 to show disposal.",
+    "incorrect": "请把门开。",
+    "correct": "请把门打开。",
+    "note": "把 + Object + Verb + (complement/了/result). A bare verb is ungrammatical.",
+    "keywords": ["把", "bare verb", "complement", "disposal"]
+  },
+  {
+    "id": "ep_neng_hui_skill",
+    "error_type": "Using 能 for a learned skill",
+    "category": "grammar",
+    "why_english_speakers": "English 'can' covers ability, capability, and permission, so learners pick 能 for everything, including learned skills that need 会.",
+    "incorrect": "我能开车，我学了很久。",
+    "correct": "我会开车，我学了很久。",
+    "note": "会 = acquired skill; 能 = capability/possibility right now; 可以 = permission.",
+    "keywords": ["能", "会", "can", "skill", "modal"]
+  },
+  {
+    "id": "ep_duration_before_verb",
+    "error_type": "Placing duration before the verb",
+    "category": "word_order",
+    "why_english_speakers": "English says 'I studied for two hours' with duration late but treats it like an adverb; learners front it like a time-when phrase.",
+    "incorrect": "我两个小时看了书。",
+    "correct": "我看书看了两个小时。",
+    "note": "Duration (how long) goes AFTER the verb; repeat the verb if there is an object.",
+    "keywords": ["duration", "word order", "after verb"]
+  },
+  {
+    "id": "ep_or_in_question",
+    "error_type": "Using 或者 in a choice question",
+    "category": "grammar",
+    "why_english_speakers": "English uses 'or' for both statements and questions, so learners use 或者 in questions where 还是 is required.",
+    "incorrect": "你要茶或者咖啡？",
+    "correct": "你要茶还是咖啡？",
+    "note": "还是 = 'or' in choice questions; 或者 = 'or' in statements.",
+    "keywords": ["还是", "或者", "or", "question"]
+  },
+  {
+    "id": "ep_wrong_negation_resultative",
+    "error_type": "Negating a completed/resultative verb with 不",
+    "category": "grammar",
+    "why_english_speakers": "Learners default to 不 for all negation, but completed actions and results are negated with 没(有).",
+    "incorrect": "我不看懂这本书。",
+    "correct": "我没看懂这本书。",
+    "note": "没 negates completion/result and past events; 不 negates habits, willingness, and present/future.",
+    "keywords": ["不", "没", "negation", "resultative", "completed"]
+  },
+  {
+    "id": "ep_adjective_shi",
+    "error_type": "Inserting 是 before a predicate adjective",
+    "category": "grammar",
+    "why_english_speakers": "English needs 'to be' before adjectives ('she is tall'), so learners add 是 where Chinese uses 很 or nothing.",
+    "incorrect": "她是很高。",
+    "correct": "她很高。",
+    "note": "Adjectives are predicates on their own; use 很 (often bleached) not 是.",
+    "keywords": ["是", "adjective", "predicate", "很", "to be"]
+  },
+  {
+    "id": "ep_ne_vs_ma_followup",
+    "error_type": "Using 吗 for a 'what about you' follow-up",
+    "category": "particle",
+    "why_english_speakers": "Learners know 吗 makes questions and apply it to the elliptical 'and you?' where Chinese needs 呢.",
+    "incorrect": "我很好，你吗？",
+    "correct": "我很好，你呢？",
+    "note": "呢 asks 'what about X?' when the topic is already set; 吗 makes a yes/no question.",
+    "keywords": ["呢", "吗", "follow-up", "question particle"]
+  }
+]
