@@ -10,7 +10,7 @@
 
 ### Problem Statement
 
-Lower-intermediate to intermediate self-directed Mandarin learners (roughly HSK 2–4) plateau because no tool tracks their specific error patterns across sessions. They can already hold a slow conversation, but a stable set of persistent grammar and word-choice errors — the ones that force native speakers to slow down, repeat, and rephrase to understand them — stays invisible and uncorrected, while generic apps keep them drilling content they have already mastered.
+Lower-intermediate self-directed Mandarin learners (roughly HSK 2–4) keep repeating the same specific grammar and word-choice mistakes month after month, and those persistent errors are exactly what force native speakers to slow down, repeat, and rephrase in order to understand them.
 
 ### Why This Is a Problem
 
