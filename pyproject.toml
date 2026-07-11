@@ -1,0 +1,24 @@
+[project]
+name = "mandarin-coach"
+version = "0.1.0"
+description = "Personal Mandarin coaching agent — error-intelligence Agentic RAG for lower-intermediate learners"
+requires-python = ">=3.11"
+dependencies = [
+    "chainlit",
+    "langchain",
+    "langchain-community",
+    "langchain-core",
+    "langchain-openai",
+    "langchain-litellm",       # ChatLiteLLM wrapper so LLM calls are traced by LangSmith
+    "chromadb",
+    "litellm",
+    "openai",
+    "tavily-python",
+    "requests",                # CC-CEDICT dictionary calls
+    "ragas",
+    "python-dotenv",
+]
+
+[tool.uv]
+# Application project, not an installable package — uv just manages the venv.
+package = false

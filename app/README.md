@@ -10,5 +10,5 @@ This directory contains all application code.
 | `agent.py` | LangChain agent — intent router, tool orchestration, session memory | TODO |
 | `tools.py` | All 5 agent tools: CC-CEDICT lookup, Tavily search, Error Pattern Analyser, Grammar Rule Fetcher, Drill Generator | TODO |
 | `memory.py` | ChromaDB setup — 4 collections, user-namespaced, load/query/write helpers | TODO |
-| `config.py` | LiteLLM + OpenRouter config — model switching for 3-model experiment (DeepSeek V3, GLM-5, Qwen3.5) | TODO |
+| `config.py` | LiteLLM + OpenRouter config — model switching for 3-model experiment (DeepSeek V4, GLM-5.2, Qwen3.5-397B) | DONE (thin slice) |
 | `prompts.py` | All system and tool prompts | TODO |
