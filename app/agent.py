@@ -7,13 +7,73 @@ thinking, surface each tool call to the UI, and stay robust.
 
 All calls go through ChatLiteLLM, so LangSmith traces the whole agent run.
 """
-from langchain_core.messages import AIMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
+from pydantic import BaseModel, Field
 
+import memory
 from config import get_llm
-from prompts import AGENT_SYSTEM_PROMPT
+from prompts import AGENT_SYSTEM_PROMPT, ERROR_EXTRACTION_PROMPT
 from tools import make_tools
 
 MAX_ITERS = 6
+
+VALID_CATEGORIES = {
+    "grammar", "word_order", "measure_word", "particle", "vocabulary", "tones"
+}
+
+
+class ErrorExtraction(BaseModel):
+    """Structured record of the single most important error in the learner's input."""
+
+    had_error: bool = Field(
+        description="True only if the learner's Chinese input contained a correctable error"
+    )
+    original: str = Field(default="", description="The learner's original erroneous Chinese")
+    correction: str = Field(default="", description="The corrected Chinese sentence")
+    category: str = Field(
+        default="",
+        description="One of: grammar, word_order, measure_word, particle, vocabulary, tones",
+    )
+    explanation: str = Field(default="", description="Brief root cause, in English")
+
+
+def _has_chinese(text: str) -> bool:
+    return any("一" <= c <= "鿿" for c in text)
+
+
+async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str):
+    """Post-turn: extract the learner's error (if any) and log it to their corpus.
+
+    Runs deterministically after every turn so the personal error corpus grows from
+    real use. Skips English-only inputs (grammar questions, drill requests) that
+    contain no Chinese to correct. Returns the logged record dict, or None.
+    """
+    if not _has_chinese(user_input):
+        return None
+    try:
+        structured = get_llm(streaming=False).with_structured_output(ErrorExtraction)
+        rec: ErrorExtraction = await structured.ainvoke(
+            [
+                SystemMessage(content=ERROR_EXTRACTION_PROMPT),
+                HumanMessage(
+                    content=f"Learner input:\n{user_input}\n\nCoach reply:\n{agent_answer}"
+                ),
+            ]
+        )
+    except Exception:
+        return None  # never let logging break the turn
+
+    if not rec.had_error or not rec.original.strip():
+        return None
+    category = rec.category if rec.category in VALID_CATEGORIES else "grammar"
+    memory.add_personal_error(
+        user_id, rec.original, rec.correction, category, rec.explanation
+    )
+    return {
+        "category": category,
+        "original": rec.original,
+        "correction": rec.correction,
+    }
 
 
 def answer_text(content) -> str:

@@ -19,6 +19,18 @@ AGENT_SYSTEM_PROMPT = (
     "Keep replies concise and encouraging."
 )
 
+ERROR_EXTRACTION_PROMPT = (
+    "You extract structured error records for a Mandarin learner's error log. "
+    "Given the learner's input and the coach's reply, identify the SINGLE most "
+    "important error the learner made in their Chinese.\n\n"
+    "Set had_error=false if: the input contained no Chinese to correct, the sentence "
+    "was already correct, or the input was only a question/request. Otherwise set "
+    "had_error=true and fill original (the learner's erroneous Chinese), correction "
+    "(the fixed sentence), category (exactly one of: grammar, word_order, "
+    "measure_word, particle, vocabulary, tones), and a brief English explanation.\n"
+    "Choose the category that best matches the root cause; use 'grammar' if unsure."
+)
+
 DRILL_SYSTEM_PROMPT = (
     "You are a Mandarin drill writer. Produce 3-5 short exercises targeting the given "
     "topic. Number each. Give the answer in parentheses after each. Base them on the "

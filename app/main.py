@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 
 import memory
-from agent import build_agent, new_history, run_agent
+from agent import build_agent, extract_and_log_error, new_history, run_agent
 
 load_dotenv()
 
@@ -59,3 +59,11 @@ async def on_message(message: cl.Message):
 
     answer = await run_agent(llm, tools_by_name, history, on_tool=on_tool)
     await cl.Message(content=answer).send()
+
+    # Post-turn: grow the personal error corpus from real use.
+    logged = await extract_and_log_error(USER_ID, message.content, answer)
+    if logged:
+        async with cl.Step(name="📝 logged to your error corpus", type="tool") as step:
+            step.output = (
+                f"{logged['category']}: {logged['original']} → {logged['correction']}"
+            )
