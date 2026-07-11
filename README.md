@@ -10,15 +10,15 @@
 
 ### Problem Statement
 
-Adult self-directed Mandarin learners plateau because no tool tracks their specific error patterns across sessions, so they repeat the same mistakes indefinitely while drilling content they have already mastered.
+Lower-intermediate to intermediate self-directed Mandarin learners (roughly HSK 2–4) plateau because no tool tracks their specific error patterns across sessions. They can already hold a slow conversation, but a stable set of persistent grammar and word-choice errors — the ones that force native speakers to slow down, repeat, and rephrase to understand them — stays invisible and uncorrected, while generic apps keep them drilling content they have already mastered.
 
 ### Why This Is a Problem
 
 **Who has the problem?**  
-Adult English speakers learning Mandarin independently — people using apps like Duolingo or Anki, working with occasional tutors, without the structure of a formal classroom. This learner has real motivation and invests real time, but has no systematic support structure for tracking their individual weaknesses.
+Adult English speakers past the beginner stage — roughly HSK 2–4 — learning Mandarin independently with apps like Duolingo or HelloChinese, Anki decks, and occasional iTalki tutors, without the structure of a formal classroom. This learner is over the first hump: they can build sentences, read with effort, and sustain a slow, cooperative conversation. The moment that exposes the problem is talking with a native speaker at natural speed — the learner hesitates, misorders clauses, reaches for the wrong measure word, misuses aspect markers like 了 and 过, and the native has to visibly work to follow them. The learner feels the strain but cannot see which specific, recurring errors are causing it. They have real motivation and invest real time, but no systematic support for isolating and fixing their individual weaknesses.
 
 **What are they trying to do?**  
-Achieve conversational fluency in Mandarin — one of the hardest languages for English speakers, requiring simultaneous mastery of tones, characters, grammar patterns, and cultural register. Progress is inherently slow and error-prone, and the learner depends on feedback to improve.
+Break out of the intermediate plateau and reach the point where a native speaker no longer has to strain to understand them — genuine conversational fluency. Mandarin is one of the hardest languages for English speakers, requiring simultaneous mastery of tones, characters, grammar patterns, and cultural register. Critically, the errors that make them hard to understand out loud are the same grammar and word-choice errors they make in writing — which is exactly where a tool can catch, track, and trend them. Progress is slow and error-prone, and the learner depends on targeted feedback, not more generic curriculum, to improve.
 
 **How do they handle it today?**  
 Learners cobble together a toolbox: Duolingo or HelloChinese for vocabulary drills, Anki for flashcard review, occasional iTalki tutor sessions for conversation practice, YouTube for grammar explanations, and Google Translate for ad hoc lookups. When they make a mistake, a tutor corrects them in the moment or an app flags a wrong answer. The correction is ephemeral — it lives in the session and is never systematically captured.
@@ -107,38 +107,47 @@ Input/output pairs used to evaluate application performance:
 
 ### Solution Statement
 
-A personal Mandarin coaching agent that accepts user-submitted text, identifies errors by reasoning over a structured personal error corpus and a curated reference knowledge base, returns pattern-level corrections with root cause explanations, logs every mistake to a growing private corpus, and uses LiteLLM and OpenRouter to experimentally compare three models selected from Chinese language benchmarks — DeepSeek V3, Qwen3.5, and GLM-5 — to select the best model for this specific bilingual task with evidence rather than assumption.
+A personal Mandarin coaching agent that accepts user-submitted text, identifies errors by reasoning over a structured personal error corpus and a curated reference knowledge base, returns pattern-level corrections with root cause explanations, logs every mistake to a growing private corpus, and uses LiteLLM and OpenRouter to experimentally compare three models selected from Chinese language benchmarks — DeepSeek V4, GLM-5.2, and Qwen3.5-397B — to select the best model for this specific bilingual task with evidence rather than assumption.
 
 ---
 
-### Why This Cannot Be Done by ChatGPT or Claude Today
+### How This Beats a Naked LLM
 
-Both ChatGPT and Claude now offer memory features, so this distinction needs to be stated precisely.
+This is the central claim of the project, so it is stated precisely and — critically — it is **measured head-to-head in Task 5 rather than asserted.**
 
-**What their memory actually does:**  
-ChatGPT and Claude memory stores short text summaries of things you have told them — think of it as a sticky note. It might remember "user is learning Mandarin at HSK 3 level." It cannot answer "how many times have I made a 把 error?", "is my tone accuracy improving over time?", or "which error category is most persistent across my last 50 sentences?" Those questions require structured, queryable, semantically searchable data — not a sticky note.
+**First, an honest concession.** A naked frontier LLM (Claude or GPT, even with its built-in memory) is already excellent at correcting a single Mandarin sentence and explaining the error in English. On isolated, stateless corrections this system is at *parity* with the base model, because it is the base model plus scaffolding. The differentiation is therefore **not** "better grammar explanations." Staking the argument there would lose the head-to-head — a strong LLM knows Mandarin grammar cold.
 
-**The five specific gaps:**
+**The baseline is the strongest fair version, not a strawman.** The obvious attack on any "we beat a naked LLM" claim is: *"You crippled the baseline — paste the history into context and it does fine."* So the control arm is the same model, a best-effort prompt, and for memory cases the user's **raw error records handed directly into its context.** Beating an amnesiac model proves nothing; the win only counts against a model that has been given everything.
 
-| Capability | ChatGPT / Claude with Memory | This Application |
+Against that fair baseline, the advantage is three things a naked LLM structurally cannot do:
+
+**1. Factual grounding — no hallucinated pinyin, tone marks, or HSK levels.**  
+LLMs routinely emit a wrong tone mark, a plausible-but-wrong pinyin, or an incorrect HSK level. These are objective facts with a ground truth. The agent looks them up via the CC-CEDICT and HSK word-list tools instead of guessing. This is cleanly testable and shows up **even on the "stateless parity" cases** — turning near-parity into a visible, factual win.
+
+**2. Deterministic aggregation and trending over a growing corpus.**  
+This is the core moat, and it only reveals itself **at scale.** Ask a naked LLM "how many 把 errors have I made and is it getting worse?" with five records in context and it answers fine. Give it sixty records across mixed categories and it miscounts, mis-orders the trend, or overflows its context budget — because counting and trending across a large structured record is a *database operation*, not a language operation. ChromaDB does it exactly, cheaply, and indefinitely. This is the difference between a sticky note and a queryable medical record — a GP who jots a note after each visit versus a specialist keeping a structured, trendable record across every encounter.
+
+**3. Proactive, compounding coaching rather than reactive answering.**  
+A naked LLM waits to be asked. This agent opens a session by surfacing the user's most persistent error category, offers a drill built from that specific pattern, and logs each new error back to the corpus so the next session starts sharper. The value **compounds**: the more the plateau learner uses it, the more precisely it targets the exact invisible errors that make natives strain to understand them.
+
+**The gaps at a glance:**
+
+| Capability | Naked LLM (even with memory, records in context) | This Application |
 |---|---|---|
-| Error storage | Unstructured text summary | Structured records with category, count, context, timestamp |
-| Retrieval | No semantic search — flat recall only | Vector similarity search — finds errors semantically related to the current mistake |
-| Pattern detection | Cannot count or trend errors over time | Knows you have made 把 errors 9 times and that frequency is increasing |
-| Reference knowledge | Relies on training data only | RAG over HSK corpus, grammar rules, and English-speaker error archetypes |
+| Factual lookup | Hallucinates pinyin, tone marks, HSK level | Grounded via CC-CEDICT + HSK tools |
+| Error storage | Unstructured text summary | Structured records: category, count, context, timestamp |
+| Retrieval | Flat recall over what fits in context | Vector similarity search across the full corpus |
+| Aggregation at scale | Miscounts / mis-trends / overflows past ~dozens of records | Exact counts and trends, unbounded |
+| Reference knowledge | Training data only | RAG over HSK corpus, grammar rules, L1-specific error archetypes |
 | Data ownership | Locked to provider's servers | Your corpus, your deployment, fully portable |
 
-**The analogy:**  
-ChatGPT memory is a GP who jots a note about you after each visit. This application is a specialist who keeps a structured medical record — searchable, trendable, with pattern analysis across every encounter. Same concept of "memory," completely different capability.
-
-**The key technical reason:**  
-Meaningful personalisation requires retrieval over a growing structured corpus, not a language model's flat context window. As your error history grows to hundreds of records, a context window cannot hold or reason across it. ChromaDB with semantic search scales indefinitely; a sticky note does not.
+**Why the personalisation metric is not circular.** A fair objection is "you invented a metric only your system can pass." It is not arbitrary: the plateau learner's *entire* problem — established in the audience section — is that their persistent, recurring errors are invisible to them. Measuring whether a response explicitly identifies and targets those recurring errors *is* measuring whether the tool solves the stated problem. The metric is the operationalisation of the persona, not a bar built to flatter the system.
 
 ---
 
 ### What This Application Does Not Do (v1 Scope)
 
-This version focuses on text-based interaction only. Voice input, pronunciation correction, and tone recognition are post-v1 features. The core value — longitudinal error intelligence — is fully delivered through typed chat.
+This version focuses on text-based interaction only. Voice input, pronunciation correction, and tone recognition are post-v1 features. This is a deliberate design choice, not a gap: the errors that make an intermediate learner hard to understand in live conversation — wrong aspect marker, broken 把-structure, awkward word order, wrong measure word — are the same grammar and word-choice errors they make in text. Text is where the learner has time to reflect and where the tool can track and trend the pattern over time. The core value — longitudinal error intelligence — is fully delivered through typed chat while directly targeting the spoken-fluency plateau.
 
 ---
 
@@ -156,15 +165,17 @@ The core task requires a model that can simultaneously read Chinese text, identi
 
 **Models selected and their evidence:**
 
-| Model | BenchLM Chinese Score | Rationale |
-|---|---|---|
-| **DeepSeek V3** | 87 (#1) | Top of the Chinese language leaderboard; strong bilingual Chinese+English generation; lowest cost on OpenRouter (~$0.27/M input tokens) making experimentation practical |
-| **GLM-5** (Zhipu AI) | 81 (#3) | Chinese-native model from a Chinese AI lab; strong grammar understanding; distinct architecture from DeepSeek providing a genuine independent data point |
-| **Qwen3.5-235B** | 79 (#5) | Alibaba; same ecosystem as Qwen3-Embedding-8B — testing whether a unified Qwen LLM + Qwen embedding pipeline outperforms mixed stacks |
+All three candidates were verified against the **BenchLM Chinese leaderboard (July 2026)** and confirmed **available on OpenRouter (July 2026)** — versions and scores are current as of this build, not carried over from an older snapshot.
 
-*Note: Western models (Claude, GPT-4o) were considered but do not appear in the top 5 of Chinese language benchmarks. They may still perform well on explanation quality in English but are outperformed on Chinese comprehension. Including them would consume evaluation budget without evidence of competitive performance on the primary task.*
+| Model | Standing (2026) | OpenRouter | Rationale |
+|---|---|---|---|
+| **DeepSeek V4** | #1 on BenchLM Chinese leaderboard (87) | ✓ — V4 Flash ~$0.14/M input | Top of the Chinese leaderboard; strong bilingual Chinese+English generation; lowest cost of the three, making repeated eval runs practical |
+| **GLM-5.2** (Zhipu AI) | #1 open-weight on the Artificial Analysis Intelligence Index, ahead of DeepSeek V4 Pro and Kimi K2.6 | ✓ — ~$0.45/$3.31 per M | Chinese-native from a distinct lab; different architecture from DeepSeek gives a genuine independent data point |
+| **Qwen3.5-397B-A17B** | Top-tier Chinese leaderboard (≈79 band) | ✓ | Alibaba; same ecosystem as the Qwen3-Embedding-8B candidate — tests whether a unified all-Qwen LLM + embedding pipeline beats a mixed stack |
 
-All three models are available on OpenRouter. No separate API keys required.
+*Note on roster: **Kimi K2.6** (Moonshot, ~$0.66/$3.41 on OpenRouter) is a strong current contender but is excluded to keep the bake-off at three and to preserve the all-Qwen pipeline comparison. **Western models** (Claude, GPT-4o) were considered but do not lead Chinese-language benchmarks; they may explain well in English but are outperformed on Chinese comprehension, so including them would spend eval budget without evidence of competitive performance on the primary task.*
+
+All three models are available on OpenRouter under a single API key. No separate provider keys required.
 
 ---
 
@@ -181,7 +192,7 @@ The embedding model determines retrieval quality — how well the agent finds re
 | Model | MTEB Multilingual Score | Rationale |
 |---|---|---|
 | **OpenAI text-embedding-3-small** | Baseline | Widely used, well-documented, easy to integrate — serves as the baseline to beat |
-| **Qwen3-Embedding-8B** | 70.58 (#1 MTEB multilingual) | Current top of the MTEB multilingual leaderboard; Chinese-native from Alibaba; pairs naturally with Qwen3.5 LLM for a fully Chinese-native pipeline comparison |
+| **Qwen3-Embedding-8B** | 70.58 (#1 MTEB multilingual, as of mid-2025) | Top of the MTEB multilingual leaderboard; Chinese-native from Alibaba; pairs naturally with Qwen3.5 LLM for a fully Chinese-native pipeline comparison |
 | **BGE-M3** (BAAI) | Top open-source | Best open-source multilingual embedding model from Beijing Academy of AI; 568M parameters; specifically strong on Chinese; available via HuggingFace Inference API |
 
 *Note: Cohere embed-multilingual-v3 was the prior default recommendation but has been superseded by Qwen3-Embedding-8B on current benchmarks and is not included.*
@@ -212,7 +223,8 @@ The embedding model determines retrieval quality — how well the agent finds re
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                    LITELLM GATEWAY                           │
-│         Routes requests to Claude claude-sonnet-4-6               │
+│  Routes via OpenRouter to the selected Chinese-native LLM   │
+│      (DeepSeek V4 / GLM-5.2 / Qwen3.5-397B)                  │
 └───────────────────────────┬─────────────────────────────────┘
                             │
                             ▼
@@ -289,7 +301,7 @@ The embedding model determines retrieval quality — how well the agent finds re
 
 | Component | Choice | Why |
 |---|---|---|
-| LLM | DeepSeek V3, Qwen3.5-235B, GLM-5 | Selected from Chinese language benchmarks (BenchLM, CMMLU) rather than general popularity — all three are Chinese-native models with strong bilingual Chinese+English capability required for this task (reading errors in Chinese, explaining them in English); DeepSeek V3 leads BenchLM's Chinese leaderboard at score 87, Qwen3.5 at 79, GLM-5 at 81; winner selected by eval score on our specific test set |
+| LLM | DeepSeek V4, GLM-5.2, Qwen3.5-397B | Selected from Chinese language benchmarks (BenchLM, CMMLU) rather than general popularity, and verified current + OpenRouter-available as of July 2026 — all three are Chinese-native models with the bilingual Chinese+English capability this task needs (reading errors in Chinese, explaining them in English); DeepSeek V4 leads BenchLM's Chinese leaderboard (87), GLM-5.2 is the #1 open-weight model on the Artificial Analysis index, and Qwen3.5-397B pairs with the Qwen embedding for an all-Qwen pipeline test; winner selected by eval score on our specific test set |
 | LLM Gateway | LiteLLM + OpenRouter | LiteLLM routes all requests through OpenRouter, providing access to all three models under a single API key with no code changes between experiments; all three models are available on OpenRouter at low cost, well within the available budget |
 | Agent Orchestration | LangChain | Mature framework with built-in support for RAG chains, tool use, and both session and long-term memory patterns |
 | Tools | 5 tools — see below | The agent selects tools based on intent; having multiple tools is what makes this an agent rather than a chatbot |
@@ -572,45 +584,43 @@ The personal error collection and the reference collections work together: the r
 
 ### Retrieval Strategies Under Evaluation
 
-The baseline retrieval pipeline (semantic similarity search with OpenAI embeddings) is the starting point. The following strategies will be tested against the same evaluation dataset in Tasks 5 and 6 to find the best-performing combination for this specific use case.
+Every choice below was made against published 2026 retrieval research, not by intuition. The experiment is deliberately structured as **two independent axes over one baseline**, rather than a sprawling five-way comparison, because the axes measure different things and mixing them produces uninterpretable results.
 
-**Strategy 1: Embedding model comparison — OpenAI vs Qwen3-Embedding vs BGE-M3**
+**The baseline pipeline** is semantic similarity search with OpenAI `text-embedding-3-small`, **with metadata pre-filtering always on** (filter by `user_id`, and by `error_category` / `hsk_level` when the agent has classified the query, before the vector search runs). Pre-filtering is treated as baseline hygiene, not a competing strategy — it is a *complement* to semantic search that narrows the candidate pool, so testing it as a rival arm would be a category error. It is applied in every configuration below.
 
-`text-embedding-3-small` is the baseline — a strong general model with English-dominant training. Two Chinese-native alternatives will be tested against it:
+#### Axis 1 — Embedding model (3-way)
 
-- **Qwen3-Embedding-8B** (Alibaba) — current #1 on the MTEB multilingual leaderboard (score 70.58) with specifically strong Chinese and English performance. This is the same Alibaba ecosystem as the Qwen LLM we are testing, creating a potentially powerful all-Qwen pipeline for Chinese language tasks.
-- **BGE-M3** (BAAI — Beijing Academy of AI) — the leading open-source multilingual embedding model, 568M parameters, trained on 100+ languages with deep Chinese coverage. Can be run via HuggingFace Inference API at low cost.
+The embedding model determines whether the right grammar rule or past error is found at all. Chinese-native models are tested against a strong English-dominant baseline, selected from the MTEB multilingual leaderboard and 2026 open-source embedding guides (sourced in the *Embedding Model Selection* section above).
 
-All three use the same chunks and ChromaDB collections. Retrieval quality is compared via RAGAS context precision and recall on the same test set.
+- **OpenAI `text-embedding-3-small`** — baseline; strong general model, English-dominant training.
+- **Qwen3-Embedding-8B** (Alibaba) — #1 on the MTEB multilingual leaderboard (70.58, as of mid-2025); pairs with the Qwen LLM candidate for an all-Qwen Chinese-native pipeline.
+- **BGE-M3** (BAAI) — leading open-source multilingual model, 568M params, deep Chinese coverage; runnable via HuggingFace Inference API.
 
-**Strategy 2: Pure semantic vs hybrid search (BM25 + semantic)**
+#### Axis 2 — Retrieval technique (3-way)
 
-Semantic search finds conceptually related documents. BM25 keyword search catches exact character matches — when the user writes 把, BM25 finds every document containing 把 directly. For Chinese grammar patterns where specific characters define the error type, exact matching is more important than in English text. Hybrid search combines both signals with a weighted score. LangChain's `EnsembleRetriever` implements this with no additional infrastructure.
+Reduced from five candidates to three via the research below. Two were removed for principled reasons: **metadata filtering** moved to the always-on baseline (above); a fifth slot was never a distinct technique once embeddings and filtering became their own axes.
 
-**Strategy 3: Metadata pre-filtering vs post-filtering**
+**Technique 1 — Hybrid search (BM25 + dense, Reciprocal Rank Fusion).**  
+Across 2026 RAG benchmarks, hybrid retrieval consistently beats both sparse-only and dense-only — often by double-digit nDCG/MAP margins — and **more than halves hallucination and rejection rates** in RAG settings ([digitalapplied 2026](https://www.digitalapplied.com/blog/hybrid-search-bm25-vector-reranking-reference-2026), [denser.ai 2026](https://denser.ai/blog/hybrid-search-for-rag/)). This is the single best-supported technique for our case specifically: a Chinese grammatical particle (把 / 了 / 过) is an exact-match signal that defines the error type, and BM25 catches it where dense search underweights it. Fusion uses RRF (rank-only) to avoid the score-incompatibility problem of naive weighting. *Implementation note: Chinese BM25 requires CJK tokenization (jieba) — the research is explicit that East Asian languages need CJK-aware tokenizers or lexical matching silently fails.* Built via LangChain's `EnsembleRetriever`.
 
-Pre-filtering narrows the candidate pool before semantic search (e.g., filter `error_category = grammar` then search within that subset). Post-filtering runs semantic search across all documents then filters the results. Pre-filtering should give better precision; post-filtering gives better recall. The right trade-off depends on corpus size and query type — both will be measured.
+**Technique 2 — Cross-encoder reranking (BGE-reranker-v2-m3).**  
+Retrieve top-20 by embedding similarity, then rerank to the true top-5 with a cross-encoder that scores (query, document) pairs jointly — reliably lifting nDCG@10 over pure vector search ([futureagi 2026](https://futureagi.com/blog/best-rerankers-for-rag-2026/)). **Model choice is BGE-reranker-v2-m3, not Cohere**: 2026 comparisons put its accuracy on par with Cohere Rerank v3.5 while it is Apache-2.0, self-hostable at zero API cost, and strong on Chinese across 100+ languages ([localaimaster 2026](https://localaimaster.com/blog/reranking-cross-encoders-guide)). It also keeps the stack thematically consistent with the Qwen/BGE Chinese-native components rather than adding a Western API dependency.
 
-**Strategy 4: Reranking with Cohere Rerank**
+**Technique 3 — Multi-query retrieval.**  
+Generate 3 LLM paraphrases of the query, retrieve for each, merge and dedupe. Justified for our case because query intent varies — "why is this sentence wrong?" and "what is the 把-sentence rule?" retrieve complementary documents. This is the recall-oriented arm and carries the highest latency (3× retrieval + one paraphrase LLM call), so it is measured explicitly on the latency/recall trade-off. Built via LangChain's `MultiQueryRetriever`.
 
-Retrieve the top 20 candidates cheaply with embedding similarity, then apply Cohere's cross-encoder reranker to reorder them and return the true top 5. Cross-encoders evaluate query-document pairs jointly and are significantly more accurate than bi-encoder similarity scores. Available via OpenRouter at low cost per call.
+**Comparison table (to be completed in Task 6). Each axis is measured against the same baseline so the winner of each is independently interpretable:**
 
-**Strategy 5: Multi-query retrieval**
-
-Generate 3 paraphrases of the user's query using the LLM, run retrieval for each, and merge the result sets before deduplication. Useful because "why is this sentence wrong?" and "what is the rule for 把-sentences?" retrieve different but complementary documents. LangChain's `MultiQueryRetriever` implements this out of the box.
-
-**Comparison table (to be completed in Task 6):**
-
-| Strategy | Context Precision | Context Recall | Correction Score | Latency (ms) |
+| Configuration | Context Precision | Context Recall | Correction Score | Latency (ms) |
 |---|---|---|---|---|
-| Baseline — semantic only (OpenAI text-embedding-3-small) | | | | |
-| Qwen3-Embedding-8B (MTEB #1 multilingual) | | | | |
-| BGE-M3 (best open-source Chinese embeddings) | | | | |
-| Hybrid search — BM25 + semantic (OpenAI embeddings) | | | | |
-| Semantic + Cohere Rerank | | | | |
-| Multi-query retrieval | | | | |
+| **Baseline** — OpenAI embeddings, dense + metadata pre-filter | | | | |
+| *Axis 1:* Qwen3-Embedding-8B (MTEB #1 multilingual) | | | | |
+| *Axis 1:* BGE-M3 (best open-source Chinese embeddings) | | | | |
+| *Axis 2:* Hybrid — BM25 + dense, RRF | | | | |
+| *Axis 2:* Cross-encoder rerank — BGE-reranker-v2-m3 | | | | |
+| *Axis 2:* Multi-query retrieval | | | | |
 
-The winning strategy will be selected based on correction score (primary) and latency (secondary), and will become the production retrieval pipeline.
+The winning embedding and the winning retrieval technique are selected on correction score (primary) and latency (secondary), then combined into the production pipeline. Task 6's "advanced retriever" deliverable is the Axis 2 winner; the "one other change" deliverable is the Axis 1 embedding swap — both backed by this same eval harness.
 
 ---
 
@@ -626,28 +636,38 @@ The winning strategy will be selected based on correction score (primary) and la
 
 The evaluation dataset must test the capability that actually differentiates this application: **memory-informed personalisation**. A test set of single-turn input → correction pairs only measures stateless correction quality — which any LLM already does without RAG. That is not what this application is selling.
 
-**Two test case types:**
+**The whole harness is designed as a head-to-head.** Every case is run through two systems: the full agent, and a *naked-LLM control arm*. The control arm is the strongest fair baseline, not a strawman — the same LLM, a best-effort prompt, and for memory cases the user's raw error records handed directly into its context. The claim in Task 2 ("How This Beats a Naked LLM") is only credible if it survives this comparison, so the eval is built to give the naked LLM every advantage and still show where it structurally fails.
+
+**Three test case types:**
 
 **Type A — Stateless correction (40 pairs)**  
-A Mandarin sentence with a known error is submitted with no prior error history. The agent should identify the error, retrieve the relevant grammar rule, and return a correct explanation. These test retrieval quality and LLM reasoning.
+A Mandarin sentence with a known error is submitted with no prior error history. The agent should identify the error, retrieve the relevant grammar rule, and return a correct explanation. These test retrieval quality and LLM reasoning. *Expected result: near-parity with the naked LLM on correction accuracy — this is the honest concession — but the agent wins on factual grounding (see below).*
 
-**Type B — Memory-informed correction (10 multi-turn sequences)**  
-Each sequence pre-seeds the user's `personal_errors` collection with 3–5 historical error records of the same category, then submits a new sentence with the same error type. The expected output must explicitly reference the user's history (e.g., "this is your fourth 把 error") and/or personalise the drill to the recurring pattern. These test the feature that makes this agent different.
+**Type B — Memory-informed correction at small scale (10 sequences, N≈5 seeded errors)**  
+Each sequence pre-seeds the user's `personal_errors` collection with 3–5 historical error records of the same category, then submits a new sentence with the same error type. The expected output must explicitly reference the user's history (e.g., "this is your fourth 把 error") and/or personalise the drill. *Expected result: the naked LLM with records in context also passes here — five items is trivial to count. This is deliberately included to prove the harness is fair, not rigged.*
 
-| Test type | # Cases | What it tests |
-|---|---|---|
-| Type A — Stateless correction | 40 | Grammar rule retrieval quality, LLM correction accuracy |
-| Type B — Memory-informed correction | 10 | Personal corpus retrieval, personalisation of correction |
-| **Total** | **50** | |
+**Type C — Memory-informed correction at scale (10 sequences, N≈50–100 seeded errors)**  
+Identical structure to Type B, but the corpus is seeded with 50–100 mixed-category error records before the query, which asks for a count or trend ("how many 把 errors, and is it getting worse?"). *Expected result: this is where the thesis is proven or falsified. Deterministic aggregation over ChromaDB returns exact counts and trends; the naked LLM — even with all records in context — miscounts, mis-orders the trend, or overflows its budget. If the naked LLM passes Type C too, the differentiation is thinner than claimed and the prose is toned down accordingly.*
+
+| Test type | # Cases | What it tests | Naked-LLM expectation |
+|---|---|---|---|
+| Type A — Stateless correction | 40 | Rule retrieval, correction accuracy, factual grounding | Parity on correction; loses on grounding |
+| Type B — Memory-informed, small scale | 10 | Personalisation with N≈5 history | Parity (fair-baseline sanity check) |
+| Type C — Memory-informed, at scale | 10 | Aggregation/trending over N≈50–100 | Fails — the core differentiator |
+| **Total** | **60** | | |
 
 **Metrics:**
 
-| Metric | Tool | Applies to |
-|---|---|---|
-| Context Precision | RAGAS | Type A — was the retrieved grammar rule relevant? |
-| Context Recall | RAGAS | Type A — was the right rule retrieved at all? |
-| Correction Accuracy | LLM-as-Judge | Type A and B — is the correction linguistically correct? |
-| Personalisation Score | LLM-as-Judge | Type B only — does the response explicitly use the error history? |
+| Metric | Tool | Applies to | Why |
+|---|---|---|---|
+| Context Precision | RAGAS | Type A | Was the retrieved grammar rule relevant? |
+| Context Recall | RAGAS | Type A | Was the right rule retrieved at all? |
+| Correction Accuracy | LLM-as-Judge | A, B, C | Is the correction linguistically correct? (expected parity) |
+| **Factual-Grounding Accuracy** | Exact match vs CC-CEDICT / HSK ground truth | A, B, C | Are pinyin, tone marks, and HSK level correct? (agent should win) |
+| Personalisation Score | LLM-as-Judge | B, C | Does the response explicitly use the error history? |
+| **Aggregation Accuracy** | Exact match vs known seeded counts | C only | Is the reported count/trend numerically correct? (the decisive metric) |
+
+Every metric is reported for **both** the agent and the naked-LLM control arm, side by side. The differentiation argument is whatever that table shows — and the strength of the prose in Task 2 will be set by the actual Type C result, not chosen in advance.
 
 *Implementation to be completed in Task 4 build phase.*
 
