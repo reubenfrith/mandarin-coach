@@ -10,7 +10,7 @@
 
 ### Problem Statement
 
-Lower-intermediate self-directed Mandarin learners (roughly HSK 2–4) keep repeating the same specific grammar and word-choice mistakes month after month, and those persistent errors are exactly what force native speakers to slow down, repeat, and rephrase in order to understand them. They can already hold a slow conversation and know the vocabulary and rules in theory, but under real-time pressure the same handful of errors resurface unnoticed, so their progress toward being easily understood stalls.
+Lower-intermediate self-directed Mandarin learners (roughly HSK 2–4) keep repeating the same specific grammar and word-choice mistakes month after month, and those persistent errors are exactly what force native speakers to slow down, repeat, and rephrase in order to understand them. They can already hold a slow conversation and know the vocabulary and rules in theory, but the same handful of errors resurface unnoticed whether they are typing or speaking, so their progress toward being easily understood stalls.
 
 ### Why This Is a Problem
 
