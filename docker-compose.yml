@@ -1,0 +1,38 @@
+# Production compose: the app behind Caddy (automatic HTTPS via Let's Encrypt).
+# Secrets come from a .env file placed next to this file on the VM.
+# SITE_ADDRESS is the public hostname, e.g. 34-1-2-3.nip.io or your domain.
+
+services:
+  app:
+    build: .
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
+      - LANGSMITH_TRACING=true
+      - CHROMA_PATH=/var/data/chroma_db
+    volumes:
+      - chroma-data:/var/data       # persists the ChromaDB corpus across restarts
+    restart: unless-stopped
+    # No published ports: only Caddy is exposed to the internet.
+
+  caddy:
+    image: caddy:2
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - SITE_ADDRESS=${SITE_ADDRESS}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data            # persists TLS certificates
+      - caddy-config:/config
+    restart: unless-stopped
+
+volumes:
+  chroma-data:
+  caddy-data:
+  caddy-config:

@@ -290,8 +290,8 @@ The embedding model determines retrieval quality — how well the agent finds re
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
-│                       RENDER                                 │
-│              Deployment (public endpoint)                    │
+│              GCP COMPUTE ENGINE (Docker + Caddy)             │
+│     Deployment — always-on VM, public HTTPS endpoint         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -311,7 +311,7 @@ The embedding model determines retrieval quality — how well the agent finds re
 | Monitoring | LangSmith | Traces every LLM call, tool invocation, and retrieval step; provides latency and cost visibility across sessions |
 | Evaluation Framework | RAGAS + LLM-as-Judge | RAGAS measures retrieval quality (context precision and recall); LLM-as-Judge scores correction accuracy and explanation quality |
 | User Interface | Chainlit | Chat interface deployable in minutes; browser-based and responsive on both desktop and mobile; natively supports OAuth, `@cl.on_chat_start` for onboarding, and starter action buttons so users always have a clear first step |
-| Deployment | Render | Simple Python app hosting with a free tier; provides a public URL and easy environment variable management |
+| Deployment | GCP Compute Engine (Docker + Caddy) | Always-on VM (no cold starts) in Melbourne region for low latency; Docker Compose runs the app behind Caddy for automatic HTTPS; a persistent Docker volume keeps the ChromaDB corpus across restarts. See `DEPLOY.md`. |
 
 ### Agent Tools
 

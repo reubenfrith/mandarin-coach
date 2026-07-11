@@ -1,0 +1,13 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+.env
+.chainlit
+chainlit.md
+chroma_db
+.chroma
+data/cedict.txt
+evals/results
+.DS_Store
