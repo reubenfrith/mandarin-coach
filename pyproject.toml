@@ -17,6 +17,7 @@ dependencies = [
     "requests",                # CC-CEDICT dictionary calls
     "ragas",
     "python-dotenv",
+    "pypinyin>=0.55.0",
 ]
 
 [tool.uv]

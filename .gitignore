@@ -6,6 +6,9 @@ __pycache__/
 # Chainlit auto-generated boilerplate (config + translations + welcome page)
 .chainlit/
 chainlit.md
+
+# CC-CEDICT dictionary cache (downloaded at runtime)
+data/cedict.txt
 *.pyc
 .chroma/
 chroma_db/
