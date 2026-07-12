@@ -16,5 +16,7 @@ user_data/
 .chroma/
 chroma_db/
 *.db
-evals/results/
 .DS_Store
+
+# Eval scratch (isolated ChromaDB for eval runs)
+evals/.eval_chroma/
