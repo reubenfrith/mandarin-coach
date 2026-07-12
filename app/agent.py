@@ -1,13 +1,17 @@
-"""The coaching agent: an explicit tool-calling loop.
+"""The coaching agent — built with LangGraph.
 
-The LLM is bound to the five tools and decides which to call based on intent. We
-run the loop by hand (rather than AgentExecutor) because the reasoning model
-returns content as mixed thinking/text blocks; an explicit loop lets us strip the
-thinking, surface each tool call to the UI, and stay robust.
+Uses LangGraph's prebuilt tool-calling agent (`create_agent`, the LangGraph 1.0
+successor to `create_react_agent`). LangGraph runs the decide -> call tools ->
+observe -> answer loop as a graph, gives us a MemorySaver checkpointer for
+per-conversation memory (keyed by thread_id), and produces a single grouped
+LangSmith trace per turn.
 
-All calls go through ChatLiteLLM, so LangSmith traces the whole agent run.
+The model is ChatLiteLLM (via OpenRouter), so every graph run is traced by
+LangSmith when LANGSMITH_TRACING is set.
 """
-from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain.agents import create_agent
+from langchain_core.messages import HumanMessage, SystemMessage
+from langgraph.checkpoint.memory import MemorySaver
 from pydantic import BaseModel, Field
 
 import memory
@@ -15,13 +19,52 @@ from config import get_llm
 from prompts import AGENT_SYSTEM_PROMPT, ERROR_EXTRACTION_PROMPT
 from tools import make_tools
 
-MAX_ITERS = 6
-
 VALID_CATEGORIES = {
     "grammar", "word_order", "measure_word", "particle", "vocabulary", "tones"
 }
 
 
+def answer_text(content) -> str:
+    """Extract user-facing text from a message, dropping reasoning-model thinking blocks."""
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        parts = []
+        for block in content:
+            if isinstance(block, str):
+                parts.append(block)
+            elif isinstance(block, dict) and block.get("type") == "text":
+                parts.append(block.get("text", ""))
+        return "".join(parts)
+    return ""
+
+
+def build_agent(user_id: str, profile_note: str = ""):
+    """Build a LangGraph tool-calling agent for one user, with conversation memory.
+
+    The MemorySaver checkpointer keeps per-conversation state keyed by thread_id,
+    so each turn only needs the new message (LangGraph reloads the history).
+    """
+    tools = make_tools(user_id)
+    llm = get_llm(streaming=False)
+    prompt = AGENT_SYSTEM_PROMPT + (f"\n\n{profile_note}" if profile_note else "")
+    return create_agent(llm, tools, system_prompt=prompt, checkpointer=MemorySaver())
+
+
+async def run_agent(graph, user_input: str, thread_id: str, callbacks=None) -> str:
+    """Invoke the LangGraph agent for one turn and return the final answer text."""
+    config = {"configurable": {"thread_id": thread_id}}
+    if callbacks:
+        config["callbacks"] = callbacks
+    result = await graph.ainvoke(
+        {"messages": [HumanMessage(content=user_input)]}, config=config
+    )
+    return answer_text(result["messages"][-1].content) or "(no response)"
+
+
+# --------------------------------------------------------------------------- #
+# Post-turn error logging (structured extraction) — unchanged
+# --------------------------------------------------------------------------- #
 class ErrorExtraction(BaseModel):
     """Structured record of the single most important error in the learner's input."""
 
@@ -42,12 +85,7 @@ def _has_chinese(text: str) -> bool:
 
 
 async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str):
-    """Post-turn: extract the learner's error (if any) and log it to their corpus.
-
-    Runs deterministically after every turn so the personal error corpus grows from
-    real use. Skips English-only inputs (grammar questions, drill requests) that
-    contain no Chinese to correct. Returns the logged record dict, or None.
-    """
+    """Extract the learner's error (if any) and log it so the corpus grows from use."""
     if not _has_chinese(user_input):
         return None
     try:
@@ -61,7 +99,7 @@ async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str
             ]
         )
     except Exception:
-        return None  # never let logging break the turn
+        return None
 
     if not rec.had_error or not rec.original.strip():
         return None
@@ -74,65 +112,3 @@ async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str
         "original": rec.original,
         "correction": rec.correction,
     }
-
-
-def answer_text(content) -> str:
-    """Extract user-facing text from a message, dropping reasoning-model thinking blocks."""
-    if isinstance(content, str):
-        return content
-    if isinstance(content, list):
-        parts = []
-        for block in content:
-            if isinstance(block, str):
-                parts.append(block)
-            elif isinstance(block, dict) and block.get("type") == "text":
-                parts.append(block.get("text", ""))
-        return "".join(parts)
-    return ""
-
-
-def build_agent(user_id: str):
-    """Return (llm_bound_to_tools, {tool_name: tool}) for one user."""
-    tools = make_tools(user_id)
-    llm = get_llm(streaming=False).bind_tools(tools)
-    return llm, {t.name: t for t in tools}
-
-
-def new_history(profile_note: str = "") -> list:
-    prompt = AGENT_SYSTEM_PROMPT
-    if profile_note:
-        prompt = f"{prompt}\n\n{profile_note}"
-    return [SystemMessage(content=prompt)]
-
-
-async def run_agent(llm, tools_by_name, history, on_tool=None) -> str:
-    """Run the tool-calling loop until the model produces a final answer.
-
-    `history` is mutated in place (the running message list). `on_tool`, if given,
-    is an async callback (name, args, result) used by the UI to show each step.
-    Returns the final answer text.
-    """
-    for _ in range(MAX_ITERS):
-        ai: AIMessage = await llm.ainvoke(history)
-        history.append(ai)
-
-        if not ai.tool_calls:
-            return answer_text(ai.content) or "(no response)"
-
-        for call in ai.tool_calls:
-            tool = tools_by_name.get(call["name"])
-            try:
-                result = (
-                    await tool.ainvoke(call["args"])
-                    if tool
-                    else f"Unknown tool: {call['name']}"
-                )
-            except Exception as e:  # a failing tool must not kill the turn
-                result = f"Tool error ({type(e).__name__}): {e}"
-            if on_tool:
-                await on_tool(call["name"], call["args"], str(result))
-            history.append(
-                ToolMessage(content=str(result), tool_call_id=call["id"])
-            )
-
-    return "I wasn't able to finish that within the tool limit — please try rephrasing."

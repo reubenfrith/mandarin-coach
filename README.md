@@ -229,7 +229,7 @@ The embedding model determines retrieval quality — how well the agent finds re
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│               LANGCHAIN AGENT ORCHESTRATION                  │
+│               LANGGRAPH AGENT ORCHESTRATION                  │
 │     Manages conversation flow, tool calls, memory           │
 │                                                             │
 │  ┌─────────────────┐          ┌──────────────────────────┐  │
@@ -303,7 +303,7 @@ The embedding model determines retrieval quality — how well the agent finds re
 |---|---|---|
 | LLM | DeepSeek V4, GLM-5.2, Qwen3.5-397B | Selected from Chinese language benchmarks (BenchLM, CMMLU) rather than general popularity, and verified current + OpenRouter-available as of July 2026 — all three are Chinese-native models with the bilingual Chinese+English capability this task needs (reading errors in Chinese, explaining them in English); DeepSeek V4 leads BenchLM's Chinese leaderboard (87), GLM-5.2 is the #1 open-weight model on the Artificial Analysis index, and Qwen3.5-397B pairs with the Qwen embedding for an all-Qwen pipeline test; winner selected by eval score on our specific test set |
 | LLM Gateway | LiteLLM + OpenRouter | LiteLLM routes all requests through OpenRouter, providing access to all three models under a single API key with no code changes between experiments; all three models are available on OpenRouter at low cost, well within the available budget |
-| Agent Orchestration | LangChain | Mature framework with built-in support for RAG chains, tool use, and both session and long-term memory patterns |
+| Agent Orchestration | LangGraph (`create_agent`) + LangChain | LangGraph runs the tool-calling agent as a graph with a MemorySaver checkpointer for per-conversation memory (keyed by thread_id) and produces one grouped LangSmith trace per turn; LangChain provides the underlying model (`ChatLiteLLM`), `@tool` definitions, and structured output |
 | Tools | 5 tools — see below | The agent selects tools based on intent; having multiple tools is what makes this an agent rather than a chatbot |
 | Embedding Model | OpenAI text-embedding-3-small (baseline) → Qwen3-Embedding-8B (target) | OpenAI used as the starting baseline; Qwen3-Embedding-8B is the current #1 on the MTEB multilingual leaderboard and is Chinese-native from Alibaba — the same ecosystem as our Qwen LLM candidate; BGE-M3 from BAAI tested as the best open-source alternative |
 | Vector Database | ChromaDB | Collections are namespaced per user (e.g. `reuben_personal_errors`) so each user's error corpus is fully isolated; four collection types: `personal_errors`, `grammar_rules`, `hsk_vocabulary`, `error_patterns` |
@@ -469,7 +469,7 @@ The agent has five tools and decides which to call based on the user's intent an
 
 ### How the Application Solves the Problem
 
-The user interacts through a simple text chat interface accessible in any browser on laptop or phone. They type a Mandarin sentence, ask a grammar question, or request a drill session. The LangChain agent classifies the intent and routes accordingly.
+The user interacts through a simple text chat interface accessible in any browser on laptop or phone. They type a Mandarin sentence, ask a grammar question, or request a drill session. The LangGraph agent classifies the intent and routes accordingly.
 
 **Onboarding and session initiation** are handled by Chainlit's `@cl.on_chat_start` hook. On first login, the agent detects an empty error corpus and runs a short two-question onboarding: the user selects their HSK level and their biggest area of difficulty. These answers are stored in their user profile and used to seed the error corpus with level-appropriate patterns, so the app delivers value from the very first session rather than waiting weeks for the personal corpus to build. Three clickable starter prompts are displayed — "Check this sentence," "Drill me on tones," "What is the difference between 了 and 过?" — so the user always has a clear next action. For returning users the session opens with a personalised summary of their last session's errors and a prompt to continue where they left off. A blank chat window is never shown.
 

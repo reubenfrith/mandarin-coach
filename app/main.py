@@ -11,16 +11,16 @@ Run locally:  uv run chainlit run app/main.py -w   (set CHAINLIT_AUTH_SECRET fir
 """
 import os
 import sys
+import uuid
 
 sys.path.insert(0, os.path.dirname(__file__))
 
 import chainlit as cl
 from dotenv import load_dotenv
-from langchain_core.messages import HumanMessage
 
 import memory
 import users
-from agent import build_agent, extract_and_log_error, new_history, run_agent
+from agent import build_agent, extract_and_log_error, run_agent
 
 load_dotenv()
 users.init_db()
@@ -77,11 +77,10 @@ async def on_chat_start():
     user_id = app_user.identifier if app_user else "local_user"
 
     profile_note = await onboard_if_new(user_id)
-    llm, tools_by_name = build_agent(user_id)
+    graph = build_agent(user_id, profile_note)
     cl.user_session.set("user_id", user_id)
-    cl.user_session.set("llm", llm)
-    cl.user_session.set("tools", tools_by_name)
-    cl.user_session.set("history", new_history(profile_note))
+    cl.user_session.set("graph", graph)
+    cl.user_session.set("thread_id", uuid.uuid4().hex)
 
     stats = memory.error_stats(user_id)
     if stats["total"] > 0:
@@ -97,18 +96,13 @@ async def on_chat_start():
 
 @cl.on_message
 async def on_message(message: cl.Message):
-    llm = cl.user_session.get("llm")
-    tools_by_name = cl.user_session.get("tools")
-    history = cl.user_session.get("history")
+    graph = cl.user_session.get("graph")
+    thread_id = cl.user_session.get("thread_id")
     user_id = cl.user_session.get("user_id")
-    history.append(HumanMessage(content=message.content))
 
-    async def on_tool(name, args, result):
-        async with cl.Step(name=name, type="tool") as step:
-            step.input = args
-            step.output = result[:1500]
-
-    answer = await run_agent(llm, tools_by_name, history, on_tool=on_tool)
+    # Chainlit's LangChain callback renders each LangGraph tool call as a step.
+    cb = cl.LangchainCallbackHandler()
+    answer = await run_agent(graph, message.content, thread_id, callbacks=[cb])
     await cl.Message(content=answer).send()
 
     logged = await extract_and_log_error(user_id, message.content, answer)
