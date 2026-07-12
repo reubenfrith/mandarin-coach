@@ -1,0 +1,901 @@
+{
+  "summary": {
+    "n_cases": 40,
+    "n_with_rule_id": 24,
+    "n_generation_failed": 0,
+    "ragas_means": {
+      "ContextRecall": 0.9,
+      "ContextRelevance": 0.84375,
+      "Faithfulness": 0.8395238095238096,
+      "ResponseGroundedness": 0.975,
+      "NoiseSensitivity": 0.23172619047619047,
+      "AnswerAccuracy": 0.83125
+    },
+    "deterministic": {
+      "recall_at_3": 1.0,
+      "mrr": 1.0
+    }
+  },
+  "rows": [
+    {
+      "id": "A01",
+      "category": "grammar",
+      "input": "我把书看。",
+      "expected_rule_id": "gr_ba_disposal",
+      "retrieved_ids": [
+        "gr_ba_disposal",
+        "gr_resultative",
+        "gr_le_completion"
+      ],
+      "response": "(1) Corrected sentence: 我把书看完了。\n\n(2) Explanation: The 把 construction requires the verb to carry something extra after it (such as a resultative complement or 了) to show the effect on the object. A bare verb like 看 cannot be used.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.2,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A02",
+      "category": "grammar",
+      "input": "她把书被他借走了。",
+      "expected_rule_id": "gr_bei_passive",
+      "retrieved_ids": [
+        "gr_bei_passive",
+        "gr_le_completion",
+        "gr_ba_disposal"
+      ],
+      "response": "**Corrected sentence:** 书被他借走了。\n\n**Explanation:** The sentence incorrectly combines the 把 (bǎ) and 被 (bèi) constructions in a single clause. In a passive sentence with 被, the receiver of the action (书) should be the subject placed before 被, not the object of a 把 construction.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.8,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A03",
+      "category": "particle",
+      "input": "以前我每天喝了咖啡。",
+      "expected_rule_id": "gr_le_completion",
+      "retrieved_ids": [
+        "gr_le_completion",
+        "gr_liang_er",
+        "gr_haishi_huozhe"
+      ],
+      "response": "**Corrected sentence:**\n以前我每天喝咖啡。\n\n**Explanation:**\n\"了\" marks the completion of a specific event, not past tense in general. It should not be attached to habitual actions, such as drinking coffee every day.",
+      "ragas": {
+        "ContextRecall": 0.6666666666666666,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.6,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A04",
+      "category": "particle",
+      "input": "我今年二十岁。（when reporting a birthday just passed）",
+      "expected_rule_id": "gr_le_change",
+      "retrieved_ids": [
+        "gr_le_change",
+        "gr_double_le",
+        "gr_liang_er"
+      ],
+      "response": "**Corrected sentence:**\n我今年二十岁了。\n\n**Explanation:**\nWhen reporting a new situation or change of state (such as a birthday just passed, meaning you are now a new age), you must use the sentence-final \"了\" (le) to signal that the situation is now different from before.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.5,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.25,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A05",
+      "category": "particle",
+      "input": "我吃了日本菜，很喜欢。（meaning: I have tried Japanese food）",
+      "expected_rule_id": "gr_guo_experience",
+      "retrieved_ids": [
+        "gr_guo_experience",
+        "gr_le_completion",
+        "gr_bi_comparison"
+      ],
+      "response": "**Corrected sentence:** \n我吃过日本菜，很喜欢。\n\n**Explanation:** \nYou used 了, which marks a specific completed action. However, your intended meaning is about having the *experience* of trying Japanese food. For past experiences, you must use 过 (experiential aspect) instead of 了.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.5,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A06",
+      "category": "grammar",
+      "input": "你怎么来了这里？（asking by what means）",
+      "expected_rule_id": "gr_shi_de",
+      "retrieved_ids": [
+        "gr_shi_de",
+        "gr_directional",
+        "gr_ne_question"
+      ],
+      "response": "**Corrected sentence:**\n你是怎么来的？\n\n**Explanation:**\nFor a completed action, you must use the 是……的 (shì...de) construction to emphasize the manner (how) of the action. Using 了 here is a common mistake when highlighting the circumstances of a known past event.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 0.5,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.6666666666666666,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A07",
+      "category": "measure_word",
+      "input": "我有三书。",
+      "expected_rule_id": "gr_measure_words",
+      "retrieved_ids": [
+        "gr_measure_words",
+        "gr_le_completion",
+        "gr_double_le"
+      ],
+      "response": "(1) 我有三本书。\n\n(2) You dropped the measure word. Chinese requires a measure word between a number and a noun (Number + Measure Word + Noun). For books, the correct measure word is 本.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A08",
+      "category": "grammar",
+      "input": "我在知道答案。",
+      "expected_rule_id": "gr_zai_progressive",
+      "retrieved_ids": [
+        "gr_zai_progressive",
+        "gr_ne_question",
+        "gr_resultative"
+      ],
+      "response": "(1) Corrected sentence: 我知道答案。\n\n(2) Explanation: \"知道\" (to know) is a stative verb, but the progressive aspect marker \"在\" is only used for ongoing actions, not states. Therefore, \"在\" should be removed.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.8,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.4,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A09",
+      "category": "particle",
+      "input": "他写汉字得很漂亮。",
+      "expected_rule_id": "gr_de_complement",
+      "retrieved_ids": [
+        "gr_de_complement",
+        "gr_bi_comparison",
+        "gr_suiran_danshi"
+      ],
+      "response": "**Corrected sentence:**\n他写汉字写得很漂亮。\n\n**Explanation:**\nWhen using the 得 degree/manner complement, if the verb (写) has an object (汉字), you must repeat the verb before adding 得. You cannot place 得 directly after the object.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.6666666666666666,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A10",
+      "category": "particle",
+      "input": "他高兴的笑了。",
+      "expected_rule_id": "gr_de_di_de",
+      "retrieved_ids": [
+        "gr_de_di_de",
+        "gr_le_change",
+        "gr_de_complement"
+      ],
+      "response": "**Corrected sentence:** \n他高兴地笑了。\n\n**Explanation:** \nThe error is using \"的\" instead of \"地\". According to the rules, \"地\" is used to link an adverbial modifier (高兴) to a verb (笑), whereas \"的\" is used to link a modifier to a noun.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.5,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A11",
+      "category": "grammar",
+      "input": "今天比昨天很热。",
+      "expected_rule_id": "gr_bi_comparison",
+      "retrieved_ids": [
+        "gr_bi_comparison",
+        "gr_jiu_cai",
+        "gr_shi_de"
+      ],
+      "response": "**Corrected sentence:** \n今天比昨天热。\n\n**Explanation:** \nIn a \"比\" (bǐ) comparison, you cannot use \"很\" (or \"非常\") directly before the adjective. To express \"much hotter,\" you should use \"更\" or a concrete amount (like \"热得多\"), or simply drop \"很\" as done here.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 0.5,
+        "Faithfulness": 0.75,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.25,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A12",
+      "category": "word_order",
+      "input": "我去中国明年。",
+      "expected_rule_id": "gr_time_before_place",
+      "retrieved_ids": [
+        "gr_time_before_place",
+        "gr_le_change",
+        "gr_double_le"
+      ],
+      "response": "**Corrected sentence:**\n我明年去中国。\n\n**Explanation:**\nIn Chinese, time adverbials like \"明年\" (next year) must be placed *before* the verb, not after the object as in English. The correct word order is Subject + Time + Place + Verb + Object.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.75,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A13",
+      "category": "word_order",
+      "input": "我三个小时看书了。",
+      "expected_rule_id": "gr_duration_complement",
+      "retrieved_ids": [
+        "gr_duration_complement",
+        "gr_le_completion",
+        "gr_double_le"
+      ],
+      "response": "**Corrected sentence:** \n我看书看了三个小时。 (Or: 我看了三个小时书。)\n\n**Explanation:** \nYou placed the duration phrase \"三个小时\" before the verb. According to the duration complement rule, duration must go *after* the verb. When there is an object (书), you must either repeat the verb (我看书看了三个小时) or place the duration between the verb and the object (我看了三个小时书).",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.8,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.5,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A14",
+      "category": "word_order",
+      "input": "我要二杯咖啡。",
+      "expected_rule_id": "gr_liang_er",
+      "retrieved_ids": [
+        "gr_liang_er",
+        "gr_haishi_huozhe",
+        "gr_le_completion"
+      ],
+      "response": "**Corrected sentence:**\n我要两杯咖啡。\n\n**Explanation:**\nYou should use 两 (liǎng) instead of 二 (èr) before a measure word (杯) when expressing \"two of something.\"",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A15",
+      "category": "word_order",
+      "input": "这个一点儿贵。",
+      "expected_rule_id": "gr_youdianr_yidianr",
+      "retrieved_ids": [
+        "gr_youdianr_yidianr",
+        "gr_bi_comparison",
+        "gr_suiran_danshi"
+      ],
+      "response": "**Corrected sentence:** 这个有点儿贵。\n\n**Explanation:** According to the rules, \"有点儿\" goes *before* an adjective to express an undesirable trait (like being a bit too expensive). \"一点儿\" goes *after* an adjective to mean \"a little more\" as a comparison. You incorrectly placed \"一点儿\" before the adjective.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.4,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A16",
+      "category": "grammar",
+      "input": "我能说三种语言。",
+      "expected_rule_id": "gr_hui_neng_keyi",
+      "retrieved_ids": [
+        "gr_hui_neng_keyi",
+        "gr_double_le",
+        "gr_measure_words"
+      ],
+      "response": "**Corrected sentence:**\n我会说三种语言。\n\n**Explanation:**\nAccording to the rules, \"会\" is used for a learned ability (such as speaking a language), while \"能\" indicates physical capability or possibility in the moment. The error was using \"能\" for a learned skill instead of \"会\".",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A17",
+      "category": "grammar",
+      "input": "他昨天很晚就睡觉。",
+      "expected_rule_id": "gr_jiu_cai",
+      "retrieved_ids": [
+        "gr_jiu_cai",
+        "gr_le_completion",
+        "gr_shi_de"
+      ],
+      "response": "**Corrected sentence:** 他昨天很晚才睡觉。\n\n**Explanation:** \"很晚\" (very late) indicates that the action happened later than expected. According to the rules, \"才\" suggests something happens later than expected, whereas \"就\" suggests it happens sooner than expected. Therefore, \"才\" should be used instead of \"就\".",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A18",
+      "category": "grammar",
+      "input": "我不听懂老师的话。",
+      "expected_rule_id": "gr_resultative",
+      "retrieved_ids": [
+        "gr_resultative",
+        "gr_ne_question",
+        "gr_duration_complement"
+      ],
+      "response": "**Corrected sentence:** \n我没听懂老师的话。\n\n**Explanation:** \n\"听懂\" is a resultative complement. According to the rules, resultative complements must be negated with \"没\", not \"不\".",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A19",
+      "category": "grammar",
+      "input": "他跑来进教室。",
+      "expected_rule_id": "gr_directional",
+      "retrieved_ids": [
+        "gr_directional",
+        "gr_double_le",
+        "gr_ne_question"
+      ],
+      "response": "**Corrected sentence:**\n他跑进教室来。\n\n**Explanation:**\nWhen using directional complements, the place object (\"教室\") must go before \"来/去\". The correct order is verb (\"跑\") + direction (\"进\") + place object (\"教室\") + \"来\".",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A20",
+      "category": "grammar",
+      "input": "因为下雨，我没去。（acceptable, but learners often force English single-conjunction）",
+      "expected_rule_id": "gr_yinwei_suoyi",
+      "retrieved_ids": [
+        "gr_yinwei_suoyi",
+        "gr_resultative",
+        "gr_suiran_danshi"
+      ],
+      "response": "**Corrected sentence:**\n因为下雨，所以我没去。\n\n**Explanation:**\nIn Chinese, cause and result conjunctions are naturally paired. English speakers often drop 所以 (so) because English uses only one conjunction, but both 因为 (because) and 所以 (so) should be used together in Chinese.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.25,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A21",
+      "category": "grammar",
+      "input": "虽然很累，我很开心。",
+      "expected_rule_id": "gr_suiran_danshi",
+      "retrieved_ids": [
+        "gr_suiran_danshi",
+        "gr_bi_comparison",
+        "gr_de_complement"
+      ],
+      "response": "**Corrected sentence:** \n虽然很累，但是我很开心。\n\n**Explanation:** \nIn Chinese, 虽然 (although) must be paired with 但是/可是 (but) in the following clause. You dropped 但是, which is a common mistake for English speakers since English only uses \"although\".",
+      "ragas": {
+        "ContextRecall": 0.6666666666666666,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.6,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.6,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A22",
+      "category": "grammar",
+      "input": "你想去北京或者上海？",
+      "expected_rule_id": "gr_haishi_huozhe",
+      "retrieved_ids": [
+        "gr_haishi_huozhe",
+        "gr_time_before_place",
+        "gr_ne_question"
+      ],
+      "response": "**Corrected sentence:**\n你想去北京还是上海？\n\n**Explanation:**\nYou used \"或者\" (huòzhě), which is used for \"or\" in statements. In questions offering a choice, you must use \"还是\" (háishì).",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A23",
+      "category": "particle",
+      "input": "我在这儿住了三年。（meaning: and still live here）",
+      "expected_rule_id": "gr_double_le",
+      "retrieved_ids": [
+        "gr_double_le",
+        "gr_le_change",
+        "gr_duration_complement"
+      ],
+      "response": "**Corrected sentence:**\n我在这儿住了三年了。\n\n**Explanation:**\nTo express an action that has been ongoing up to now and is still continuing, you need two \"了\" (Verb + 了 + duration + 了). The sentence-final \"了\" adds the \"up to now, still true\" sense, which was missing in your sentence.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.8,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.6,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A24",
+      "category": "particle",
+      "input": "我是学生，你吗？",
+      "expected_rule_id": "gr_ne_question",
+      "retrieved_ids": [
+        "gr_ne_question",
+        "gr_le_change",
+        "gr_double_le"
+      ],
+      "response": "**Corrected sentence:** \n我是学生，你呢？\n\n**Explanation:** \nYou used 吗 for a follow-up \"what about you\" question. According to the rule, the particle 呢 (ne) should be used to turn a pronoun into a \"what about...?\" follow-up question when a topic is already established.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.8333333333333334,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "id": "A25",
+      "category": "grammar",
+      "input": "她把书被他借走了。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_bei_passive",
+        "gr_le_completion",
+        "gr_ba_disposal"
+      ],
+      "response": "**Corrected sentence:** 书被他借走了。\n\n**Explanation:** The error is combining the 把 (bǎ) disposal construction and the 被 (bèi) passive construction in the same clause. In a passive sentence, the subject should be the thing acted upon (书), followed by 被 + Agent + Verb + extra.",
+      "ragas": {
+        "ContextRecall": 0.6666666666666666,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.25,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A26",
+      "category": "particle",
+      "input": "小时候我每天喝了牛奶。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_le_completion",
+        "gr_le_change",
+        "gr_youdianr_yidianr"
+      ],
+      "response": "**Corrected sentence:** \n小时候我每天喝牛奶。\n\n**Explanation:** \nThe error is using \"了\" (le) as a general past-tense marker for a habitual action. According to the rules, \"了\" marks a completed or actualized specific event, not habitual past actions like \"每天\" (every day). Therefore, \"了\" should be omitted.",
+      "ragas": {
+        "ContextRecall": 0.6666666666666666,
+        "ContextRelevance": 0.25,
+        "Faithfulness": 0.6,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A27",
+      "category": "measure_word",
+      "input": "我买了三书。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_le_completion",
+        "gr_measure_words",
+        "gr_double_le"
+      ],
+      "response": "**Corrected sentence:** \n我买了三本书。\n\n**Explanation:** \nChinese requires a measure word between a number and a noun. The noun 书 (book) takes the measure word 本, so \"三书\" must be \"三本书\".",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A28",
+      "category": "measure_word",
+      "input": "三个书、两个纸",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_liang_er",
+        "gr_measure_words",
+        "gr_le_completion"
+      ],
+      "response": "**Corrected sentence:**\n三本书、两张纸\n\n**Explanation:**\nThe error is defaulting to the measure word 个 for everything. According to the rules, books require the measure word 本 (三本书), and flat things like paper require the measure word 张 (两张纸). The use of 两 before the measure word is correct.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 0.7142857142857143,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.2857142857142857,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A29",
+      "category": "grammar",
+      "input": "他比我很高。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_bi_comparison",
+        "gr_de_complement",
+        "gr_ne_question"
+      ],
+      "response": "**Corrected sentence:** \n他比我高。\n\n**Explanation:** \nAccording to the rule for 比 (bǐ) comparisons, you should NOT use 很 (or 非常) before the adjective. The correct structure is simply A + 比 + B + Adjective.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.6666666666666666,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A30",
+      "category": "word_order",
+      "input": "我去中国明年。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_time_before_place",
+        "gr_le_change",
+        "gr_double_le"
+      ],
+      "response": "**Corrected sentence:**\n我明年去中国。\n\n**Explanation:**\nIn Chinese, time adverbials like \"明年\" (next year) must be placed *before* the verb, not after the object. The correct word order is Subject + Time + Place + Verb + Object.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A31",
+      "category": "particle",
+      "input": "他跑的很快。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_de_complement",
+        "gr_bi_comparison",
+        "gr_jiu_cai"
+      ],
+      "response": "**Corrected sentence:** \n他跑得很快。\n\n**Explanation:** \nThe sentence uses a degree/manner complement to describe how an action is done. According to the rules, this requires the particle 得 (de) after the verb (跑), not 的. Confusing 得 with 的 is a common mistake.",
+      "ragas": {
+        "ContextRecall": 0.5,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.2,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A32",
+      "category": "grammar",
+      "input": "虽然很贵，我还是买了。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_suiran_danshi",
+        "gr_youdianr_yidianr",
+        "gr_le_completion"
+      ],
+      "response": "**Corrected sentence:** \n虽然很贵，但是我还是买了。\n\n**Explanation:** \nThe learner dropped 但是/可是 in the second clause. In Chinese, 虽然 (although) must be paired with 但是/可是 (but), unlike in English where \"but\" is often omitted.",
+      "ragas": {
+        "ContextRecall": 0.5,
+        "ContextRelevance": 0.25,
+        "Faithfulness": 0.5,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A33",
+      "category": "particle",
+      "input": "我去了法国，很漂亮。（meaning: I have been to France）",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_guo_experience",
+        "gr_double_le",
+        "gr_le_change"
+      ],
+      "response": "**Corrected sentence:** \n我去过法国，很漂亮。\n\n**Explanation:** \nAccording to the rule for the experiential aspect, to express an experience that has happened at least once in the past (like \"I have been to\"), you must use 过 (guò) instead of 了 (le).",
+      "ragas": {
+        "ContextRecall": 0.5,
+        "ContextRelevance": 0.25,
+        "Faithfulness": 0.5,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A34",
+      "category": "grammar",
+      "input": "请把门开。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_directional",
+        "gr_ba_disposal",
+        "gr_bei_passive"
+      ],
+      "response": "1. Corrected sentence: 请把门打开。\n2. Explanation: The 把 construction requires the verb to carry something extra after it (such as a complement or 了) to show the effect on the object. Using a bare verb like \"开\" is incorrect.",
+      "ragas": {
+        "ContextRecall": 0.6666666666666666,
+        "ContextRelevance": 0.0,
+        "Faithfulness": 0.75,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A35",
+      "category": "grammar",
+      "input": "我能开车，我学了很久。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_double_le",
+        "gr_hui_neng_keyi",
+        "gr_duration_complement"
+      ],
+      "response": "**Corrected sentence:** \n我会开车，我学了很久了。\n\n**Explanation:**\n1. **能 → 会:** Driving is a learned ability, so you should use 会 instead of 能. \n2. **学了很久 → 学了很久了:** To express that an action has been going on for a duration and continues up to now, you need a sentence-final 了 in addition to the 了 after the verb. Using only one 了 loses the \"and still continuing\" meaning.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 0.75,
+        "Faithfulness": 0.6,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.2,
+        "AnswerAccuracy": 0.5
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A36",
+      "category": "word_order",
+      "input": "我两个小时看了书。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_duration_complement",
+        "gr_le_completion",
+        "gr_double_le"
+      ],
+      "response": "**Corrected sentence:** 我看书看了两个小时。 (or: 我看了两个小时书。)\n\n**Error:** You placed the duration \"两个小时\" before the verb, treating it like a time-when phrase. Per the duration complement rule, duration must go **after** the verb. With an object (\"书\"), you either repeat the verb (看书看了两个小时) or place the duration between the verb and object (看了两个小时书).",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.4,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A37",
+      "category": "grammar",
+      "input": "你要茶或者咖啡？",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_haishi_huozhe",
+        "gr_liang_er",
+        "gr_le_completion"
+      ],
+      "response": "**Corrected sentence:** \n你要茶还是咖啡？\n\n**Explanation:** \nIn Chinese, 还是 is used for \"or\" in questions offering a choice, while 或者 is used in statements. The learner incorrectly used 或者 in a choice question.",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 0.5,
+        "Faithfulness": 0.75,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.25,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A38",
+      "category": "grammar",
+      "input": "我不看懂这本书。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_resultative",
+        "gr_measure_words",
+        "gr_time_before_place"
+      ],
+      "response": "(1) Corrected sentence: 我没看懂这本书。\n\n(2) Explanation: The error is using \"不\" to negate the resultative complement \"看懂\". According to the rules, resultative complements must be negated with \"没\", not \"不\".",
+      "ragas": {
+        "ContextRecall": 1.0,
+        "ContextRelevance": 0.5,
+        "Faithfulness": 0.6666666666666666,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 1.0
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A39",
+      "category": "grammar",
+      "input": "她是很高。",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_bi_comparison",
+        "gr_de_complement",
+        "gr_ne_question"
+      ],
+      "response": "(1) Corrected sentence: 她很高。\n(2) Explanation: The provided grammar rules do not cover this specific error.",
+      "ragas": {
+        "ContextRecall": 0.5,
+        "ContextRelevance": 0.25,
+        "Faithfulness": 0.0,
+        "ResponseGroundedness": 0.0,
+        "NoiseSensitivity": 0.0,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    },
+    {
+      "id": "A40",
+      "category": "particle",
+      "input": "我很好，你吗？",
+      "expected_rule_id": null,
+      "retrieved_ids": [
+        "gr_ne_question",
+        "gr_bi_comparison",
+        "gr_de_complement"
+      ],
+      "response": "**Corrected sentence:** \n我很好，你呢？\n\n**Explanation:** \nUsing \"吗\" for a follow-up \"what about you\" question is ungrammatical. You must use \"呢\" to turn the pronoun into a \"what about...?\" follow-up question.",
+      "ragas": {
+        "ContextRecall": 0.6666666666666666,
+        "ContextRelevance": 1.0,
+        "Faithfulness": 1.0,
+        "ResponseGroundedness": 1.0,
+        "NoiseSensitivity": 0.5,
+        "AnswerAccuracy": 0.75
+      },
+      "recall_at_k": null,
+      "mrr": null
+    }
+  ]
+}

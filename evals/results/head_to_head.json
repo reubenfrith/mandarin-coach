@@ -1,0 +1,1393 @@
+{
+  "summary": {
+    "A": {
+      "n": 40,
+      "correct_agent": "36/37",
+      "correct_naked": "32/39",
+      "retrieval_recall@3": 1.0,
+      "retrieval_mrr": 1.0,
+      "grounding_agent": [
+        0.75,
+        12,
+        16
+      ],
+      "grounding_naked": [
+        0.8,
+        24,
+        30
+      ]
+    },
+    "B": {
+      "n": 10,
+      "correct_agent": "9/10",
+      "correct_naked": "10/10",
+      "references_history_agent": "7/10",
+      "references_history_naked": "4/10",
+      "cites_number_agent": "0/10",
+      "cites_number_naked": "0/10"
+    },
+    "C": {
+      "n": 10,
+      "aggregation_agent": "10/10",
+      "aggregation_naked": "7/10"
+    }
+  },
+  "rows": [
+    {
+      "id": "A01",
+      "type": "A",
+      "input": "我把书看。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 1,
+          "correct": 0
+        },
+        "answer": "**❌ 我把书看。** → **✅ 我把书看完了。** (or another complement)\n\n---\n\n### What's wrong?\n\nYou've used the **把 (bǎ) construction**, which is great — but it has a strict rule:\n\n> **Subject + 把 + Object + Verb + [something extra]**\n\nThe verb in a 把 sentence **cannot be bare**. It needs a complement, a result, or 了 to show what happened *to* the object. Just saying 看 feels unfinished — it's like saying \"I took the book and... looked at it... and then what?\"\n\n### Fixes (choose one)\n\n| What you mean | Correct sentence |\n|---|---|\n| I finished reading the book. | 我把书**看完了**。 |\n| I read the book (and it's done). | 我把书**看了**。 |\n| I read the book twice. | 我把书**看了两遍**。 |\n| I read the book (and understood it). | 我把书**看懂了**。 |\n\n### Root cause\n\nEnglish doesn't have the 把 construction, so you naturally translated \"I read the book\" → 我把书看. But 把 is about **disposal/effect** — you need to say *what happened* to the book (finished it, understood it, read it twice, etc.).\n\n---\n\n### Quick drill\n\nFill in the blank with a suitable complement:\n\n1. 我把作业做______了。 (finished)\n2. 他把门打______了。 (opened)\n3. 我把手机______了。 (lost)\n\n*(Answers: 做完, 开, 丢)*\n\nWant me to generate more drills on the 把 construction? 😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The verb \"看\" lacks a complement or aspect marker, which is required in a 把 construction.  \n**Corrected:** 我把书看了。 (I read the book.)  \n**Root cause:** In 把 sentences, the verb must be followed by a resultative complement (e.g., 完), a directional complement, or an aspect marker like 了 to indicate the action's outcome or completion. A bare verb like 看 is ungrammatical.  \n**Pinyin:** Wǒ bǎ shū kàn le."
+      }
+    },
+    {
+      "id": "A02",
+      "type": "A",
+      "input": "她把书被他借走了。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子 **她把书被他借走了** 混合了 **把** 和 **被** 两种结构，这在中文里是不正确的。一个句子只能选择其中一种结构。\n\n---\n\n### ❌ 错误\n**她把书被他借走了。**\n\n### ✅ 正确说法（两种选择）\n\n**选项一（被字句 – 强调书被借走）：**\n> **书被他借走了。**\n> *（书是受事者，他是动作的执行者。）*\n\n**选项二（把字句 – 强调他借走了书）：**\n> **他把书借走了。**\n> *（他是主语，书是宾语，强调他对书做了什么。）*\n\n如果你想表达“她”是受影响的一方（她的书被他借走了），可以说：\n> **她的书被他借走了。**\n\n---\n\n### 🧠 根本原因\n\n**把** 和 **被** 不能出现在同一个简单句里，因为它们的功能是相反的：\n- **把** → 主语是动作的执行者（主动处置）\n- **被** → 主语是动作的承受者（被动）\n\n把两者放在一起就像英文说 *\"She by him the book borrowed\"* 一样矛盾。\n\n---\n\n### 🎯 小练习\n\n把下面的句子改成正确的 **把字句** 或 **被字句**：\n\n1. 我 / 吃 / 苹果 → （把字句）\n2. 蛋糕 / 他 / 吃 → （被字句）\n3. 她 / 拿 / 我的笔 → （把字句）\n\n试试看！😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** Incorrect use of both \"把\" and \"被\" in the same sentence.  \n**Corrected sentence:** 她把书借走了。 (She borrowed the book away.)  \n**Or (passive):** 书被他借走了。 (The book was borrowed by him.)  \n\n**Explanation:**  \n- \"把\" and \"被\" cannot be used together in a single clause. \"把\" marks the subject as the agent (doer), while \"被\" marks the subject as the receiver of the action.  \n- In your sentence, \"她\" (she) is the agent, so use \"把\" only. If you want a passive meaning, use \"被\" with the object as the subject.  \n- **Pinyin:** Tā bǎ shū jiè zǒu le. / Shū bèi tā jiè zǒu le.  \n- **HSK:** 2 (basic structure)."
+      }
+    },
+    {
+      "id": "A03",
+      "type": "A",
+      "input": "以前我每天喝了咖啡。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子：~~以前我每天喝了咖啡。~~\n\n**❌ 错误：** 了 (le) 用错了地方。\n\n**✅ 正确：** 以前我每天喝咖啡。\n\n---\n\n### 为什么？\n\n了 (le) 表示 **一个具体动作的完成**（\"I finished drinking that coffee\"），而你的句子说的是 **过去的习惯**（\"I used to drink coffee every day\"）。习惯性的、反复发生的动作，即使发生在过去，**也不加** 了。\n\n| 错误 ❌ | 正确 ✅ | 意思 |\n|---|---|---|\n| 以前我每天**喝了**咖啡。 | 以前我每天**喝**咖啡。 | I used to drink coffee every day. |\n| 去年我常常**去了**公园。 | 去年我常常**去**公园。 | Last year I often went to the park. |\n\n**简单规则：** 以前 / 每天 / 常常 + 动词 → **不加** 了。\n\n---\n\n### 小练习\n\n把下面的句子改成正确的：\n\n1. 以前我每天抽了烟。\n2. 小时候我常常看了动画片。\n3. 去年我每个周末打了篮球。\n\n试试看！😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 6,
+          "correct": 6
+        },
+        "answer": "**Error:** The aspect particle 了 (le) is incorrectly used with the habitual action \"每天\" (every day).  \n**Corrected sentence:** 以前我每天喝咖啡。  \n**Explanation:** 了 indicates a completed action or change of state, but \"每天\" describes a repeated/habitual action in the past. For habitual actions, use the simple verb form without 了.  \n**Pinyin:** Yǐqián wǒ měitiān hē kāfēi.  \n**HSK Level:** 2 (了 usage)"
+      }
+    },
+    {
+      "id": "A04",
+      "type": "A",
+      "input": "我今年二十岁。（when reporting a birthday just passed）",
+      "agent": {
+        "correct": null,
+        "misleading": null,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子基本正确，但少了一个关键的 **了**。\n\n## 问题\n\n**原句：** 我今年二十岁。  \n**正确（刚过生日）：** 我今年二十**了**。\n\n## 为什么？\n\n句尾的 **了** 表示 **\"变化/新情况\"（change of state）**。  \n你刚过完生日 → 以前不是20岁，**现在**是20岁了。这个\"新状态\"需要用 **了** 来标记。\n\n- ❌ 我今年二十岁。（只是陈述事实，没有\"刚变\"的感觉）\n- ✅ 我今年二十**了**。（\"我20了！\"——强调变化）\n\n## 其他自然说法\n\n| 中文 | 意思 |\n|------|------|\n| 我今年二十了。 | 我20了（刚过生日） |\n| 我刚满二十岁。 | 我刚满20岁 |\n| 我昨天过了二十岁生日。 | 我昨天过了20岁生日 |\n\n## 小练习\n\n把下面句子改成\"刚过生日\"的说法：\n\n1. 我今年十八岁。 → 我今年十八**了**。  \n2. 我妹妹现在十六岁。 → 我妹妹现在十六**了**。  \n3. 我爸爸五十岁。（他刚过生日） → 我爸爸五十**了**。\n\n**记住：** 报告刚发生的年龄变化 → 句尾加 **了**！🎂",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": false,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "The sentence **“我今年二十岁。”** is grammatically correct and natural for stating your age in the current year. However, when specifically reporting a birthday that *just passed*, the meaning is still clear, but you might want to emphasize the change or recent event. No error exists here—just a possible nuance.\n\nIf you want to highlight that the birthday just occurred, you could say:\n- **“我刚过了二十岁生日。”** (Wǒ gāng guòle èrshí suì shēngrì.) – *I just had my twentieth birthday.*\n- **“我现在二十岁了。”** (Wǒ xiànzài èrshí suì le.) – *I’m twenty now.* (emphasizing the new age)\n\nThe original sentence **“我今年二十岁”** simply means “I am twenty years old this year” and is perfectly fine for general use, including after a birthday. No correction is necessary.\n\n- **HSK Level:** 1-2 (我, 今年, 二十, 岁)\n- **Pinyin:** wǒ jīnnián èrshí suì"
+      }
+    },
+    {
+      "id": "A05",
+      "type": "A",
+      "input": "我吃了日本菜，很喜欢。（meaning: I have tried Japanese food）",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "Great question — and this is a **classic** English-speaker trap! Let me break it down.\n\n---\n\n## 🔍 The Issue: 了 vs 过\n\nYou wrote: **我吃了日本菜，很喜欢。**\nYou meant: *\"I have tried Japanese food.\"*\n\nBut **了 (le)** marks a **completed action** — it says \"I ate Japanese food (and finished eating it).\" That's not the same as \"I have tried it (as an experience).\"\n\nFor \"have tried / have had the experience of,\" you need **过 (guò)** — the **experiential aspect**.\n\n### ✅ Corrected sentence\n\n> **我吃过日本菜，很喜欢。**\n> *(Wǒ chīguo Rìběn cài, hěn xǐhuān.)*\n> \"I have tried Japanese food, and I really like it.\"\n\n---\n\n## 🧠 Root Cause\n\n| Particle | Meaning | Example |\n|----------|---------|---------|\n| **了** | Action **completed** (a specific event) | 我吃了日本菜 = I ate Japanese food (and finished it) |\n| **过** | **Experience** (at least once in your life) | 我吃过日本菜 = I have tried Japanese food (before) |\n\nEnglish uses \"have + past participle\" for both completed actions AND experiences, so it's very natural to reach for 了. But Mandarin splits these two jobs between **了** and **过**.\n\n---\n\n## 🎯 Quick Drill\n\nFill in the blank with **了** or **过**:\n\n1. 昨天我吃\\_\\_\\_\\_\\_\\_一碗面条。 (Yesterday I ate a bowl of noodles.)\n2. 你吃\\_\\_\\_\\_\\_\\_北京烤鸭吗？ (Have you ever tried Peking duck?)\n3. 我去年去\\_\\_\\_\\_\\_\\_上海。 (I went to Shanghai last year.)\n4. 我没去\\_\\_\\_\\_\\_\\_日本，但是想去。 (I haven't been to Japan, but I want to go.)\n\n*(Answers: 1.了 2.过 3.了 4.过)*\n\n---\n\nYou're off to a great start — keep an eye on this 了/过 distinction and you'll sound much more natural! Want me to generate more drills on this topic?",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": false,
+        "misleading": false,
+        "grounding": {
+          "checked": 3,
+          "correct": 3
+        },
+        "answer": "**Error:** Word-choice mismatch. You used 吃了 (chī le, \"ate\") but intended \"tried\" (first-time sampling).  \n**Corrected sentence:** 我尝了日本菜，很喜欢。 (Wǒ cháng le Rìběn cài, hěn xǐhuān.)  \n**Explanation:** In Chinese, 吃了 means \"ate\" (completed action), not \"tasted/tried\" for the first time. Use 尝了 (cháng le, HSK 4) or 试了 (shì le, HSK 3) to convey \"sampled.\" The second clause 很喜欢 is natural with omitted subject."
+      }
+    },
+    {
+      "id": "A06",
+      "type": "A",
+      "input": "你怎么来了这里？（asking by what means）",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "---\n\n## 总结\n\n| 你想说的 | 应该用 |\n|---------|--------|\n| \"How did you get here?\" (by what means) | **你是怎么来的？** / **你是怎么来这里的？** |\n| \"Why did you come here?\" | **你怎么来了这里？** / **你为什么来这里？** |\n\n**关键规则：** 问已完成动作的 **方式/手段** → 用 **是……的** 结构，不用 **了**。\n\n> 是 + [强调的部分] + 动词 + 的\n>\n> ✅ 我是**坐地铁**来的。\n> ✅ 你是**怎么**来的？\n\n---\n\n**🎯 小练习（试试看）：**\n\n把下面句子改成问 **方式** 的句子：\n\n1. 我开车来的。→ 你 ______？\n2. 他坐飞机来的。→ 他 ______？\n\n（答案：1. 你是怎么来的？2. 他是怎么来的？）\n\n加油！💪 有什么问题继续问！",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** Using \"来了\" (le) instead of \"来的\" (de) changes the meaning from \"by what means\" to \"why\" (completed action).  \n**Corrected sentence:** 你怎么来的这里？  \n**Pinyin:** Nǐ zěnme lái de zhèlǐ?  \n**Explanation:** To ask about the *means* of a past action, use \"怎么 + verb + 的\". \"怎么 + verb + 了\" typically asks for a *reason* (e.g., \"Why did you come here?\").  \n**HSK Level:** 3-4 (grammar point: 怎么...的 for manner)."
+      }
+    },
+    {
+      "id": "A07",
+      "type": "A",
+      "input": "我有三书。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你写的是：**我有三书。**\n\n### 问题\n\n中文里，数字不能直接放在名词前面——**必须用量词 (measure word)**。\n\n- ❌ 我有**三书**。\n- ✅ 我有**三本书**。\n\n**本** 是书的专用量词（一本书、两本书、三本书……）。\n\n### 根因\n\n英语说 *three books*，不需要量词，所以学习者很容易直接把“三”放在“书”前面。但中文的结构是：\n\n> **数字 + 量词 + 名词**\n> 三 + 本 + 书\n\n### 小练习\n\n把下面的短语补上正确的量词：\n\n1. 一 ___ 书  \n2. 两 ___ 猫 (cat)  \n3. 五 ___ 苹果 (apple)  \n4. 这 ___ 人 (this person)\n\n*(提示：书用 **本**，猫和人都用 **个**，苹果用 **个**)*\n\n试试看，然后告诉我你的答案！😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The sentence \"我有三书\" is missing a measure word (量词) between the number and the noun. In Chinese, nouns that are countable require a measure word when preceded by a number.\n\n**Corrected sentence:** 我有三本书。 (Wǒ yǒu sān běn shū.)\n\n**Explanation:** The noun 书 (shū, book) requires the measure word 本 (běn) after the number 三 (sān). Without it, the sentence sounds unnatural and grammatically incorrect. This is a basic HSK 1 grammar point."
+      }
+    },
+    {
+      "id": "A08",
+      "type": "A",
+      "input": "我在知道答案。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 2,
+          "correct": 2
+        },
+        "answer": "你写的句子是：\n\n❌ **我在知道答案。**\n\n这个句子有一个很常见的错误。\n\n---\n\n### 问题出在哪里？\n\n**在** (zài) 表示动作正在进行（相当于英语的 *-ing*），但 **知道** (zhīdào) 是一个**状态动词**（stative verb），不是动作。你不能说 \"I am knowing the answer\" —— 中文也一样，不能说\"在知道\"。\n\n✅ **我知道答案。** — 简单直接，就对了。\n\n---\n\n### 对比一下：\n\n| 正确用法 | 说明 |\n|-----------|------|\n| 我在**看**书。 | 看是动作 → 可以用在 |\n| 我在**吃**饭。 | 吃是动作 → 可以用在 |\n| 我在**知道**答案。❌ | 知道是状态 → 不可以用在 |\n| 我**知道**答案。✅ | 去掉在，就对了 |\n\n---\n\n### 小练习（drill）\n\n试试看下面这些句子，哪些需要去掉\"在\"？\n\n1. 我在___等他。（等 / 知道）\n2. 我在___这件事。（做 / 知道）\n3. 我在___中文。（学 / 知道）\n\n答案：1. 等（动作）→ 我在等他。2. 知道（状态）→ 我知道这件事。3. 学（动作）→ 我在学中文。\n\n---\n\n**总结：** 知道、喜欢、爱、想（think）、认识 —— 这些状态动词前面**不能加\"在\"**。记住这个规律，以后就不会错啦！😊\n\n有什么问题继续问我！",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The progressive aspect marker 在 (zài) is incorrectly used with the stative verb 知道 (zhīdào, \"to know\"). Stative verbs describe a state, not an ongoing action, so they cannot take 在.\n\n**Corrected sentence:** 我知道答案。  \n**Pinyin:** Wǒ zhīdào dá'àn.  \n**HSK level:** 知道 (HSK 1), 答案 (HSK 3).\n\n**Explanation:** 在 indicates an action in progress (e.g., 我在吃饭 \"I am eating\"), but 知道 expresses a mental state, not a dynamic action. Simply remove 在."
+      }
+    },
+    {
+      "id": "A09",
+      "type": "A",
+      "input": "他写汉字得很漂亮。",
+      "agent": {
+        "correct": null,
+        "misleading": null,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子几乎对了，但有一个关键的语法问题。😊\n\n**错误：** 他写汉字**得**很漂亮。\n\n**问题：** 动词带宾语时，不能直接 `动词 + 宾语 + 得 + 补语`。你需要**重复动词**，或者把宾语提前。\n\n**正确说法：**\n- ✅ **他写汉字写得很漂亮。**（重复动词）\n- ✅ **他汉字写得很漂亮。**（宾语提前）\n\n**为什么？**\n这是 **\"得\" 的程度补语** 规则：\n- 动词没有宾语 → `动词 + 得 + 补语` ✅（他跑得很快。）\n- 动词有宾语 → `动词 + 宾语 + 动词 + 得 + 补语` ✅（他说汉语说得很好。）\n- ❌ 不能直接 `动词 + 宾语 + 得 + 补语`（他写汉字得很漂亮 ✘）\n\n---\n\n**小练习：** 把下面句子改成正确的形式：\n\n1. 他做饭很好吃。 → 他做饭______很好吃。\n2. 她唱歌很好听。 → 她唱歌______很好听。\n\n（答案：1. 他做饭**做得**很好吃。2. 她唱歌**唱得**很好听。）\n\n继续加油！💪 你离地道中文又近了一步。",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** Incorrect placement of 得 (de).  \n**Corrected sentence:** 他汉字写得很漂亮。  \n**Pinyin:** Tā hànzì xiě de hěn piàoliang.  \n**Explanation:** The structure for describing an action is \"Subject + Object + Verb + 得 + Adjective.\" Here, 写 (write) is the verb, and 汉字 (Chinese characters) is the object, so 得 should directly follow the verb, not the object. The original sentence placed 得 after the object, which is ungrammatical.  \n**HSK level:** HSK 2 (得 as a complement particle)."
+      }
+    },
+    {
+      "id": "A10",
+      "type": "A",
+      "input": "他高兴的笑了。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Corrected sentence:**  \n他**高兴地**笑了。  \n(Tā gāoxìng de xiào le.)\n\n**What's wrong:**  \n的 (de) is used to link a modifier to a **noun** (e.g. 高兴的笑声 \"a happy laugh\").  \n地 (de) is used to link an adverbial to a **verb** (e.g. 高兴地笑 \"to laugh happily\").  \n\nSince 笑 (laugh/smile) is a **verb**, you need **地**, not 的. This is a very common mix-up for English speakers because all three *de*'s (的, 地, 得) sound identical.\n\n**Quick drill:** Fill in the blank with 的, 地, or 得.\n\n1. 她开心____跳了起来。 (She jumped up happily.)  \n2. 这是我最喜欢____书。 (This is my favourite book.)  \n3. 他跑____很快。 (He runs very fast.)\n\nLet me know if you'd like the answers or more practice! 😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The phrase \"高兴的笑了\" incorrectly uses the particle **的** (de).  \n**Correction:** 他高兴地笑了。  \n**Explanation:** When a descriptive phrase modifies a verb (here, \"笑了\" = laughed), the correct particle is **地** (de), not **的** (de).  \n**Pinyin:** Tā gāoxìng de xiào le.  \n**Grammar rule:** 的 is for nouns/adjectives modifying nouns; 地 is for adverbs modifying verbs."
+      }
+    },
+    {
+      "id": "A11",
+      "type": "A",
+      "input": "今天比昨天很热。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**❌ 今天比昨天很热。**\n**✅ 今天比昨天热。**\n\n---\n\n### Why it's wrong\n\nIn a **比 (bǐ)** comparison, you **cannot** use 很 (very) before the adjective. The structure is:\n\n> **A + 比 + B + Adjective** (no 很/非常)\n\nThis is a very common mistake for English speakers because we'd say \"today is **much** hotter than yesterday\" — so it feels natural to add 很. But in Chinese, the 比 structure already carries the comparative meaning, so the adjective stands alone.\n\nIf you want to emphasise the degree, use **更** (even more) or **多了** (much more):\n\n- 今天比昨天**更**热。 *(Today is even hotter than yesterday.)*\n- 今天比昨天热**多了**。 *(Today is much hotter than yesterday.)*\n\n---\n\n### Quick drill\n\nFill in the blanks with the correct form (no 很!):\n\n1. 他 ______ 我高。 (bǐ)\n2. 这个手机 ______ 那个贵。 (bǐ)\n3. 她比我 ______ 漂亮。 (gèng)\n\nWant me to check your answers? 😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "Error: The sentence uses 很 (hěn, \"very\") after 比 (bǐ, \"compared to\"), which is incorrect in a comparison structure.\n\nCorrected: 今天比昨天热。 (Jīntiān bǐ zuótiān rè.)  \nPinyin: jīn tiān bǐ zuó tiān rè.  \nHSK Level: 2 (比 comparison structure)\n\nExplanation: In Chinese, the adjective after 比 should not be modified by degree adverbs like 很 (very) or 太 (too). The comparison itself implies a degree difference. Simply state the adjective directly."
+      }
+    },
+    {
+      "id": "A12",
+      "type": "A",
+      "input": "我去中国明年。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**❌ 我去中国明年。**\n**✅ 我明年去中国。**\n\n---\n\n### Why is it wrong?\n\nIn Chinese, **time expressions** (like 明年 \"next year\") go **before the verb** — not at the end of the sentence like in English.\n\n| English word order | ❌ Chinese (copying English) | ✅ Correct Chinese |\n|---|---|---|\n| I go to China **next year**. | 我去中国**明年**。 | 我**明年**去中国。 |\n\nThe general rule is:\n\n> **Subject + Time + Place + Verb + Object**\n\nSo: **我 + 明年 + 去 + 中国**\n\n---\n\n### Quick drill\n\nTranslate these into correct Chinese:\n\n1. I eat breakfast at 7 o'clock.  \n2. She goes to work tomorrow.  \n3. We study Chinese this afternoon.\n\nGive it a try! 😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** Word order. In Chinese, time expressions (like 明年, \"next year\") usually come before the verb, not at the end of the sentence.\n\n**Corrected sentence:** 我明年去中国。  \n**Pinyin:** Wǒ míngnián qù Zhōngguó.  \n**HSK Level:** 1 (basic word order)\n\n**Root cause:** English places time adverbials at the end (\"I go to China next year\"), but Mandarin requires them before the verb (Subject + Time + Verb + Object)."
+      }
+    },
+    {
+      "id": "A13",
+      "type": "A",
+      "input": "我三个小时看书了。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "Great question! Your sentence **我三个小时看书了** has a very common word-order issue.\n\n---\n\n### ❌ Your sentence\n我三个小时看书了。\n\n### ✅ Corrected versions\n**我看书看了三个小时。**  \n(I read for three hours — neutral statement)\n\n**我看了三个小时的书。**  \n(I read for three hours — more natural in speech)\n\n**我看书看了三个小时了。**  \n(I've been reading for three hours **and am still reading** — ongoing)\n\n---\n\n### 🔍 Root Cause\n\nIn English, you say *\"I read for three hours\"* — the duration comes **before** the verb. But in Chinese, **duration (how long) goes AFTER the verb**, not before it.\n\n| English pattern | ❌ Wrong Chinese | ✅ Right Chinese |\n|---|---|---|\n| I **for three hours** read | 我**三个小时**看书 | 我看书**看了三个小时** |\n\nThink of it this way:\n- **Time-when** (e.g. \"tomorrow\", \"at 3pm\") → **before** the verb ✅  \n  *我明天看书。*\n- **Duration** (e.g. \"for three hours\") → **after** the verb ✅  \n  *我看书看了三个小时。*\n\n---\n\n### 🎯 Quick Drill\n\nFill in the blanks with the correct word order:\n\n1. 他游泳 ______ (for two hours).  \n2. 我 ______ 睡觉 (at 10pm).  \n3. 她学中文 ______ (for one year).  \n4. 我们 ______ 去公园 (tomorrow).  \n5. 你打电话 ______ (for 30 minutes).\n\n*(Answers: 1. 游了两个小时 / 游泳游了两个小时 2. 十点 3. 学了一年 / 学中文学了一年 4. 明天 5. 打了三十分钟 / 打电话打了三十分钟)*\n\nWant me to drill you more on this pattern? 😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** Incorrect placement of the duration phrase \"三个小时\" (three hours). In Chinese, duration phrases should come **after** the verb, not before it.\n\n**Corrected sentence:**  \n我看了三个小时书。  \n(pinyin: Wǒ kàn le sān ge xiǎoshí shū.)\n\n**Explanation:**  \nThe original sentence \"我三个小时看书了\" places the duration \"三个小时\" before the verb \"看,\" which is a common mistake for English speakers (English: \"I read for three hours\" → duration before verb). In Chinese, duration phrases follow the verb and are often placed after the object or after the verb with a repeated verb structure. The corrected version uses the standard pattern: **Subject + Verb + 了 + Duration + Object**.  \n- HSK level: 2 (basic time expressions).  \n- Note: Adding 的 after the duration (e.g., \"三个小时的书\") is also acceptable but slightly more colloquial."
+      }
+    },
+    {
+      "id": "A14",
+      "type": "A",
+      "input": "我要二杯咖啡。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你写的是：**我要二杯咖啡。**\n\n### ❌ 错误\n\n在中文里，表示数量“两个”的时候，**量词前面要用“两 (liǎng)”，不能用“二 (èr)”**。\n\n- **二** → 用于数字本身、序号、电话号码等（如：第二、十二、一二三）\n- **两** → 用于量词前面，表示数量（如：两个人、两本书、两杯咖啡）\n\n### ✅ 正确句子\n\n**我要两杯咖啡。**\n(Wǒ yào liǎng bēi kāfēi.)\n\n### 🧠 根因\n\n英语里 \"two\" 只有一个形式，但中文把 **\"二\"（数字/序号）** 和 **\"两\"（数量）** 分开了。这是英语母语者很常见的混淆点。\n\n---\n\n### 🎯 小练习\n\n把下面的“二”改成“两”，或者反过来：\n\n1. 我有 __ 个朋友。\n2. 现在是 __ 点。\n3. 这是第 __ 次。\n4. 我要 __ 瓶水。\n\n（答案：1. 两  2. 两  3. 二  4. 两）\n\n继续加油！💪 下次想写什么？",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** Using \"二\" (èr) instead of \"两\" (liǎng) before a measure word (杯).  \n**Corrected sentence:** 我要两杯咖啡。  \n**Pinyin:** Wǒ yào liǎng bēi kāfēi.  \n**Explanation:** In Chinese, when counting objects with a measure word (like 杯), the number \"two\" must be \"两\" (liǎng), not \"二\" (èr). \"二\" is used for ordinal numbers or in fixed expressions (e.g., 第二, 十二). This is a basic grammar rule at HSK 1 level."
+      }
+    },
+    {
+      "id": "A15",
+      "type": "A",
+      "input": "这个一点儿贵。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子 **“这个一点儿贵”** 不太对。问题出在 **一点儿** 和 **有点儿** 的用法上。\n\n---\n\n### ❌ 错误\n**这个一点儿贵。**\n\n### ✅ 正确\n**这个有点儿贵。**  \n(This is a little expensive.)\n\n---\n\n### 📘 为什么？\n\n| 词 | 位置 | 意思 |\n|---|---|---|\n| **有点儿** (yǒudiǎnr) | **放在形容词前面** | \"有点儿 + Adj\" = 有一点儿……（通常带点不满意的语气） |\n| **一点儿** (yìdiǎnr) | **放在形容词后面** | \"Adj + 一点儿\" = 更……一点（比较时用） |\n\n所以：\n- **这个有点儿贵。** ✅ → \"This is a bit expensive.\"（陈述事实，带点\"太贵了\"的感觉）\n- **这个贵一点儿。** ✅ → \"This one is a bit more expensive.\"（跟别的比较）\n\n你的句子 **“这个一点儿贵”** 把 **有点儿** 和 **一点儿** 的位置搞反了，这是英语母语者很常见的错误 😊\n\n---\n\n### 🎯 小练习\n\n把下面的句子改成正确的：\n\n1. 这个 **一点儿小**。 → ________  \n2. 那个 **有点儿便宜**。 → ________  \n3. 请说慢 **有点儿**。 → ________  \n\n（答案：1. 这个有点儿小。 2. 那个便宜一点儿。 3. 请说慢一点儿。）\n\n加油！💪 有什么问题尽管问！",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 2,
+          "correct": 0
+        },
+        "answer": "**错误**：词序错误。  \n**纠正**：这个贵一点儿。 或 这个有点儿贵。  \n**解释**：在中文中，表示“稍微”时，**“一点儿”**（或“一点”）应放在形容词**之后**（如“贵一点儿”），而**“有点儿”**（或“有一点儿”）则放在形容词**之前**（如“有点儿贵”）。原句“一点儿贵”把“一点儿”放在形容词前，不符合汉语语法。  \n**拼音**：zhè ge guì yì diǎnr / zhè ge yǒu diǎnr guì  \n**HSK级别**：HSK 1-2（基础副词和形容词结构）"
+      }
+    },
+    {
+      "id": "A16",
+      "type": "A",
+      "input": "我能说三种语言。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子很接近正确！不过有一个细微但重要的区别。\n\n**你的句子：** 我能说三种语言。\n**更自然的说法：** **我会说三种语言。**\n\n---\n\n### 为什么？\n\n| 词 | 核心意思 | 例子 |\n|---|---|---|\n| **会** | 学会的技能 (learned ability) | 我会说汉语。我会游泳。 |\n| **能** | 身体能力 / 客观可能性 (physical capability / possibility) | 我今天不能来。我能吃两碗饭。 |\n\n说语言是一种**学会的技能**，所以用 **会** 更自然。\n\n> 我能说三种语言 → 听起来像 \"I am physically capable of speaking three languages (right now, maybe with effort)\"\n> 我会说三种语言 → \"I know how to speak three languages\" ✅\n\n---\n\n### 小练习\n\n把下面的句子改成正确的：\n\n1. 我 **能** 开车。（开车 = drive a car → learned skill）\n2. 他 **能** 弹钢琴。（弹钢琴 = play piano → learned skill）\n\n*(答案：1. 我会开车。2. 他会弹钢琴。)*\n\n---\n\n**总结：** 你的句子语法完全没问题，很多人也这么说。但如果你用 **会**，听起来更地道！👍 你还会说什么语言？",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": false,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "句子“我能说三种语言。”没有语法或词汇错误。意思正确，结构完整。无需修改。"
+      }
+    },
+    {
+      "id": "A17",
+      "type": "A",
+      "input": "他昨天很晚就睡觉。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 7,
+          "correct": 7
+        },
+        "answer": "Great sentence — the meaning is clear, but there's one small word-choice issue that makes it sound unnatural to a native ear.\n\n---\n\n### ❌ Issue: 就 vs 才\n\nYou wrote:\n> 他昨天很晚**就**睡觉。\n\n**就** (jiù) means \"as early as\" — it implies something happened **earlier than expected**. But 很晚 (very late) is the opposite of early, so 就 clashes with the meaning.\n\nYou need **才** (cái), which means \"not until\" — it implies something happened **later than expected**.\n\n### ✅ Corrected sentence:\n\n> **他昨天很晚才睡觉。**\n> *(Tā zuótiān hěn wǎn cái shuìjiào.)*\n> \"He didn't go to sleep until very late yesterday.\"\n\nYou could also add 了 at the end for completion (他昨天很晚才睡觉了), but it's fine without it.\n\n---\n\n### 🧠 Root cause\n\n**就** = \"as early as\" (earlier than expected)  \n**才** = \"not until\" (later than expected)\n\nEnglish speakers often mix them up because English doesn't have this exact contrast. Think of it as a pair of opposites:\n\n| Word | Nuance | Example |\n|------|--------|---------|\n| 就 | **early** / sooner than expected | 他**七点就**来了 — He came **as early as** 7. |\n| 才 | **late** / later than expected | 他**十点才**来 — He didn't come **until** 10. |\n\n---\n\n### 🎯 Quick drill\n\nFill in the blank with **就** or **才**:\n\n1. 他早上六点______起床了。(He got up as early as 6am.)\n2. 我晚上十二点______睡觉。(I don't go to sleep until midnight.)\n3. 她三岁______会弹钢琴了。(She could play piano as early as age 3.)\n4. 他昨天很晚______回家。(He didn't come home until very late yesterday.)\n\nTry them out and I'll check your answers! 😊",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The adverb \"就\" (jiù) is incorrectly used with \"很晚\" (very late). \"就\" implies earliness or promptness, creating a semantic contradiction.  \n**Correction:** 他昨天很晚才睡觉。  \n**Pinyin:** Tā zuótiān hěn wǎn cái shuìjiào.  \n**Explanation:** Use \"才\" (cái) instead of \"就\" to indicate that an action happens later than expected. \"才\" pairs with \"很晚\" to mean \"not until very late.\"  \n**HSK Level:** 2-3 (temporal adverbs)."
+      }
+    },
+    {
+      "id": "A18",
+      "type": "A",
+      "input": "我不听懂老师的话。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**错误：** 不 + 听懂 ❌\n\n**正确：** 我没听懂老师的话。✅\n\n**原因：**  \n`听懂` 是一个 **结果补语** (resultative complement) — 听 (listen) + 懂 (understand) = \"to understand by listening\"。结果补语在否定时要用 **没**（表示\"没达到那个结果\"），不能用 **不**。\n\n- ❌ 我不听懂老师的话。  \n- ✅ 我没听懂老师的话。  \n\n**对比一下：**\n| 否定词 | 用法 | 例子 |\n|--------|------|------|\n| 不 | 否定习惯/意愿/一般事实 | 我不听老师的话。(I don't listen to the teacher.) |\n| 没 | 否定已完成动作的结果 | 我没听懂老师的话。(I didn't catch what the teacher said.) |\n\n---\n\n**小练习：** 把下面的句子改成正确的否定形式：\n\n1. 我不看完那本书。 → ________  \n2. 我不找到钥匙。 → ________  \n3. 我不记住这个词。 → ________  \n\n（答案：我没看完那本书。 / 我没找到钥匙。 / 我没记住这个词。）\n\nKeep it up! 😊 下次用 **没** + 结果补语就对了。",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The verb 听懂 (tīng dǒng) is a resultative verb compound, which cannot be negated with 不 (bù) in the present tense. Instead, use 没 (méi) to negate completed actions or results.\n\n**Corrected sentence:** 我没听懂老师的话。  \n**Pinyin:** Wǒ méi tīng dǒng lǎoshī de huà.  \n**Explanation:** 听懂 means \"to listen and understand (result).\" Since it describes a completed outcome, use 没 (méi) for negation, not 不 (bù). 不 is used for habitual or volitional actions (e.g., 我不听 \"I don't listen\").  \n**HSK Level:** 2 (听懂)"
+      }
+    },
+    {
+      "id": "A19",
+      "type": "A",
+      "input": "他跑来进教室。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子是：**他跑来进教室。**\n\n---\n\n### ❌ 问题出在哪里？\n\n你写的是 **「跑来 + 进教室」**，把两个方向成分拼在了一起。在汉语里，**趋向补语**（方向补语）有固定的结构：\n\n> **V + 进/出/上/下/回/过 + 地方 + 来/去**\n\n所以正确的说法是：\n\n> ✅ **他跑进教室来。**\n> (He ran into the classroom — towards the speaker.)\n\n或者，如果方向不强调「朝说话人」：\n\n> ✅ **他跑进教室。**\n> (He ran into the classroom.)\n\n你的版本 **「跑来进教室」** 相当于把 `跑来`（已经带了 `来`）和 `进` 硬拼在一起，这不符合汉语的复合趋向补语规则。\n\n---\n\n### 📘 规则速记\n\n| 错误 ❌ | 正确 ✅ |\n|---|---|\n| 跑来进教室 | 跑进教室来 |\n| 走上楼去 | 走上楼去 ✅（这个是对的） |\n| 飞过来中国 | 飞回中国来 / 飞到中国来 |\n\n**关键点**：地方宾语必须放在 **进/出/上/下/回/过** 和 **来/去** 之间。\n\n---\n\n### 🎯 小练习\n\n把下面错误的句子改成正确的：\n\n1. 他走回来宿舍。 → ?\n2. 她跳下去水。 → ?\n3. 我跑上来楼。 → ?\n\n试试看，我帮你检查！",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": false,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error Analysis:**  \nThe phrase \"跑来进教室\" is incorrect because it combines two directional complements (\"来\" and \"进\") in a non-standard way. The verb \"跑\" should take a single directional complement to indicate direction of movement. \"进\" (enter) is the correct complement to show \"run into,\" while \"来\" (come) is unnecessary and creates a redundant structure.\n\n**Corrected Sentence:**  \n他跑进教室。  \n*Pinyin:* Tā pǎo jìn jiàoshì.  \n*Translation:* He ran into the classroom.\n\n**Root Cause:**  \nIn Chinese, compound directional complements like \"V + 进\" (enter by V-ing) are used directly with a location. Adding \"来\" after \"跑\" (\"跑来\") means \"run towards (speaker),\" which conflicts with \"进教室\" (enter the classroom). The correct pattern is **V + 进 + location**, not **V + 来 + 进 + location**.  \n\n**HSK Level:** 2 (grammar: directional complements)."
+      }
+    },
+    {
+      "id": "A20",
+      "type": "A",
+      "input": "因为下雨，我没去。（acceptable, but learners often force English single-conjunction）",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你这句话**完全正确**，母语者完全听得懂。👍\n\n不过你说得对——这确实是一个**英语思维**的痕迹。\n\n### 问题核心\n\n| 语言 | 因果句结构 |\n|------|-----------|\n| **英语** | *Because it rained, I didn't go.*（只用 **一个** 连词） |\n| **中文** | **因为**下雨，**所以**我没去。（习惯用 **两个** 连词配对） |\n\n英语母语者直觉上会觉得\"因为…所以…\"是冗余的（像 *Because...so* 在英语里是错的），所以常常只写 **因为**，丢掉 **所以**。\n\n### 更地道的说法\n\n> ✅ **因为下雨，所以我没去。**\n\n加了 **所以** 之后，前后因果关系更清晰，听起来也更像母语者。\n\n### 其他常见配对连词\n\n| 英语思维（单连词） | 中文习惯（配对） |\n|---|---|\n| 虽然很累，我很开心 ❌ | **虽然**很累，**但是**我很开心 ✅ |\n| 如果你来，我去 ❌ | **如果**你来，**我就**去 ✅ |\n| 不但他会说中文，他会说法语 ❌ | **不但**他会说中文，**而且**他会说法语 ✅ |\n\n---\n\n要不要来几个小练习巩固一下这个 **配对连词** 的习惯？我可以用 `drill_generator` 给你出题。",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "The sentence **因为下雨，我没去** is grammatically correct and natural in Chinese. No error exists.\n\n**Root cause of learner tendency:**  \nEnglish speakers often feel the need to add a second conjunction like **所以** (*so*) because in English, \"because\" and \"so\" are not used together. However, Chinese allows **因为** alone to introduce a reason, and the result clause can stand without a conjunction. Adding **所以** is optional and would not be wrong, but omitting it is perfectly fine and common.\n\n**Pinyin:** Yīnwèi xiàyǔ, wǒ méi qù.  \n**HSK level:** 1 (all characters are HSK 1)."
+      }
+    },
+    {
+      "id": "A21",
+      "type": "A",
+      "input": "虽然很累，我很开心。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子意思很清楚，但有一个**常见的语法小问题**。😊\n\n## 问题\n\n**虽然……但是……** 是固定搭配。中文里，`虽然`（although）后面通常需要 `但是` 或 `可是`（but）来呼应。英语只用 \"although\" 就够了，但中文习惯两个一起用。\n\n❌ **虽然很累，我很开心。**  \n✅ **虽然很累，但是我很开心。**\n\n## 为什么？\n\n| 英语 | 中文 |\n|------|------|\n| Although I'm tired, **I'm** happy. | 虽然很累，**但是**我很开心。 |\n\n英语只用一个连词（although），中文却需要一对（虽然……但是……）。这是英语母语者最常犯的错误之一！\n\n## 小练习\n\n把下面的句子补充完整：\n\n1. 虽然下雨了，______我还是想去公园。\n2. 虽然这道菜很辣，______他吃得津津有味。\n3. 虽然中文很难，______我觉得很有意思。\n\n*(答案：但是/可是)*\n\n继续加油！你的意思表达得很清楚，这个细节改过来就更地道了。💪",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 7,
+          "correct": 7
+        },
+        "answer": "**Error:** Missing contrastive conjunction (但是/可是) after 虽然.\n\n**Corrected sentence:** 虽然很累，但是我很开心。  \n(suīrán hěn lèi, dànshì wǒ hěn kāixīn)\n\n**Explanation:** In Chinese, 虽然 (although) requires a contrastive word like 但是 (but) or 可是 in the second clause to complete the “although…, but…” structure. Without it, the sentence feels incomplete.\n\n**HSK Level:** 虽然 is HSK 2; 但是 is HSK 1."
+      }
+    },
+    {
+      "id": "A22",
+      "type": "A",
+      "input": "你想去北京或者上海？",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子意思很清楚，但有一个小问题 👇\n\n**原句：** 你想去北京**或者**上海？\n**改正：** 你想去北京**还是**上海？\n\n**原因：**\n- **还是 (háishì)** = \"or\" 用在**问句**里提供选择（A 还是 B？）\n- **或者 (huòzhě)** = \"or\" 用在**陈述句**里（我喝茶或者咖啡都行）\n\n这是英语母语者很常见的混淆，因为英语里两种都用 \"or\"。但在中文里，问选择性问题必须用 **还是**。\n\n---\n\n**小练习：** 选词填空（还是 / 或者）\n\n1. 你想吃米饭 ______ 面条？\n2. 我可以坐地铁 ______ 打车去，都方便。\n3. 你明天 ______ 后天来？\n\n（答案在下面👇）\n\n.\n\n.\n\n.\n\n**答案：** 1. 还是  2. 或者  3. 还是\n\n继续加油！💪 有什么其他句子想让我看看吗？",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 6,
+          "correct": 6
+        },
+        "answer": "The sentence uses \"或者\" (or) incorrectly in a question. In Chinese, \"还是\" is used for alternative questions (choices), while \"或者\" is used for statements.\n\n**Corrected sentence:**  \n你想去北京还是上海？  \nPinyin: nǐ xiǎng qù běijīng háishì shànghǎi?  \nHSK level: 2 (还是), 3 (或者)"
+      }
+    },
+    {
+      "id": "A23",
+      "type": "A",
+      "input": "我在这儿住了三年。（meaning: and still live here）",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子很接近了！不过有一个关键的语法点需要调整。\n\n---\n\n## 问题：一个 了 vs. 两个 了\n\n**你的句子：** 我在这儿住了三年。\n→ 听起来像 \"I lived here for three years (and then moved away).\"\n\n**你想表达：** \"I have lived here for three years (and still live here).\"\n\n**正确的说法：** ✅ **我在这儿住了三年了。**\n\n---\n\n### 为什么？\n\n| 结构 | 意思 |\n|------|------|\n| 动词 + 了 + 时间 | 动作已完成，不再继续 |\n| 动词 + 了 + 时间 + **了** | 动作从过去持续到现在，**还在继续** |\n\n- 第一个 **了**（动词后）→ 标记动作已完成/实现\n- 第二个 **了**（句尾）→ 标记\"到现在为止，还在继续\"\n\n所以：\n- ❌ 我在这儿住了三年。→ \"I lived here for three years (and left).\"\n- ✅ 我在这儿住了三年了。→ \"I've been living here for three years (and still do).\"\n\n---\n\n### 小练习\n\n把下面的句子改成\"还在继续\"的意思：\n\n1. 他学中文一年了。→ 他学中文一年**了**。\n2. 我等你两个小时了。→ 我等你两个小时**了**。\n3. 她当老师五年了。→ 她当老师五年**了**。\n\n（答案：每个句子只需要在末尾加一个 **了**！）\n\n---\n\n**总结：** 想表达\"到现在还在做\"，记得用 **动词 + 了 + 时间 + 了** 这个双了结构。加油！💪",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 2,
+          "correct": 0
+        },
+        "answer": "**Error:** The sentence \"我在这儿住了三年\" is ambiguous. It can mean \"I lived here for three years (and then left)\" or \"I have lived here for three years (and still live here).\" To clearly express that the action continues to the present (as intended), a second **了** at the end of the sentence is needed.\n\n**Corrected sentence:**  \n我在这儿住了三年了。  \n(Pinyin: Wǒ zài zhèr zhù le sān nián le.)\n\n**Root cause:**  \nIn Chinese, **了** after a verb + duration often indicates a completed action or past experience. Adding a second **了** at the end of the sentence (sentence-final **了**) marks a change of state or continuation up to the present. Without it, the listener may assume the action is finished.\n\n**HSK level:** 3–4 (aspect particles, duration expressions)."
+      }
+    },
+    {
+      "id": "A24",
+      "type": "A",
+      "input": "我是学生，你吗？",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 2,
+          "correct": 0
+        },
+        "answer": "你的句子很好，只是有一个小问题！😊\n\n**错误：** 你吗？❌  \n**正确：** 你呢？✅\n\n**原因：**  \n- **吗 (ma)** 是 yes/no 疑问词，用来问\"是/不是\"的问题。  \n- **呢 (ne)** 用来问\"那……呢？\"（what about…?），在上下文已经清楚的时候，用来反问对方。\n\n所以：\n> 我是学生，**你吗？** ❌  \n> 我是学生，**你呢？** ✅  \n> *I'm a student, and you?*\n\n---\n\n**小练习：** 把下面句子里的\"你吗\"改成\"你呢\"：\n\n1. 我很好，你吗？ → 我很好，**你呢**？  \n2. 我喜欢喝茶，你吗？ → 我喜欢喝茶，**你呢**？  \n3. 我是美国人，你吗？ → 我是美国人，**你呢**？\n\n加油！你已经会问问题了，现在只要记住用 **\"你呢\"** 而不是 **\"你吗\"** 就好啦！🎉",
+        "retrieval": {
+          "recall_at_k": 1,
+          "mrr": 1.0
+        }
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**错误分析**：  \n你的句子“我是学生，你吗？”中，“你吗”缺少谓语动词。在中文里，问句需要完整的结构，比如“你是学生吗？”或者用“你呢”来省略重复的谓语（前提是上文已明确动词）。  \n\n**正确句子**：  \n- ✅ **你是学生吗？**（完整问句）  \n- ✅ **我是学生，你呢？**（省略问句，常见口语）  \n\n**原因**：  \n“吗”是疑问语气词，必须放在完整陈述句末尾（如“你是学生吗”）。单独“你吗”不成句，就像英语不能说“You?”而要说“Are you?”或“And you?”。  \n\n**HSK级别**：HSK 1（基础语法）  \n**拼音**：  \n- 你是学生吗？→ Nǐ shì xuéshēng ma?  \n- 我是学生，你呢？→ Wǒ shì xuéshēng, nǐ ne?"
+      }
+    },
+    {
+      "id": "A25",
+      "type": "A",
+      "input": "她把书被他借走了。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子是：\n\n❌ **她把书被他借走了。**\n\n---\n\n### 问题出在哪里？\n\n你把 **把** 和 **被** 两个结构塞进了同一个句子里。这在中文里是不行的——它们表达的是完全不同的视角：\n\n| 结构 | 视角 | 例子 |\n|------|------|------|\n| **把** | 主动（主语做事） | 他把书借走了。 |\n| **被** | 被动（主语被影响） | 书被他借走了。 |\n\n你的句子同时用了 **把**（主动处置）和 **被**（被动标记），语法上冲突了。\n\n---\n\n### 改正方案\n\n你有两个正确的说法，选一个就好：\n\n**1. 用 被（被动）—— 强调书被影响了：**\n> ✅ **书被他借走了。**\n> (The book was borrowed away by him.)\n\n**2. 用 把（主动）—— 强调他做了什么：**\n> ✅ **他把书借走了。**\n> (He borrowed the book away.)\n\n如果你想表达\"她\"是受影响的人，可以说：\n> ✅ **她的书被他借走了。**\n> (Her book was borrowed away by him.)\n\n---\n\n### 核心规则\n\n> **把** 和 **被** 不能在同一个分句里同时使用。它们是互斥的视角——**把** = 主动处置，**被** = 被动标记。选一个就好。\n\n---\n\n### 小练习\n\n把下面的句子改成正确的（用 **把** 或 **被**，但不能都用）：\n\n1. 我把他被他打了。\n2. 她把蛋糕被我吃了。\n\n试试看！😊"
+      },
+      "naked": {
+        "correct": null,
+        "misleading": null,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error**: Mixing the 把 (bǎ) and 被 (bèi) structures in the same clause.  \n**Corrected sentence**: 她的书被他借走了。  \n**Pinyin**: Tā de shū bèi tā jiè zǒu le.  \n**Explanation**:  \n- 把 and 被 serve opposite functions: 把 marks the subject as the agent (active disposal), while 被 marks the subject as the recipient (passive). They cannot be used together in one verb phrase.  \n- The original tries to say “She was borrowed the book by him,” which is ungrammatical. Use either:  \n  - Active: 她把书借给了他 (She lent the book to him).  \n  - Passive: 她的书被他借走了 (Her book was borrowed by him).  \n- The corrected version keeps the intended passive meaning by removing 把 and using 被 with the possessive 的.  \n\n**HSK level**: 把 (HSK 3), 被 (HSK 4)."
+      }
+    },
+    {
+      "id": "A26",
+      "type": "A",
+      "input": "小时候我每天喝了牛奶。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**❌ 小时候我每天喝了牛奶。**\n\n**✅ 小时候我每天喝牛奶。**\n\n---\n\n### Why is it wrong?\n\nThe particle **了** marks a **single, completed action** — it's not a general past-tense marker. When you say **每天** (every day), you're describing a **habitual/repeated action** in the past, not one specific completed event. In English, you'd say \"I drank milk every day\" — but in Chinese, habitual actions don't take 了.\n\n| Wrong ✅ | Right ✅ |\n|---|---|\n| 我每天**喝了**咖啡。 | 我每天**喝**咖啡。 |\n| 以前他**去了**公园。 | 以前他**去**公园。 |\n| 小时候我每天**喝了**牛奶。 | 小时候我每天**喝**牛奶。 |\n\n---\n\n### Quick Drill\n\nFill in the blanks with **了** or **leave blank (✗)**:\n\n1. 昨天我 _____ 喝 _____ 三杯咖啡。  \n2. 以前我每天早上 _____ 喝 _____ 一杯咖啡。  \n3. 上个月我 _____ 去 _____ 一次北京。  \n4. 小时候我 _____ 去 _____ 奶奶家过周末。\n\n*(Answers: 1. 喝了  2. ✗  3. 去了  4. ✗)*\n\nGreat first sentence — keep them coming! 🚀"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**错误**：使用了“喝了”表示每天的习惯性动作。  \n**纠正**：小时候我每天喝牛奶。  \n**原因**：在中文中，描述过去的习惯性动作（如“每天”）时，动词后不加“了”，因为“了”强调动作的完成或变化，而习惯性动作是重复发生的。  \n**拼音**：Xiǎoshíhou wǒ měitiān hē niúnǎi.  \n**HSK级别**：HSK 2（语法点：动态助词“了”的否定用法）。"
+      }
+    },
+    {
+      "id": "A27",
+      "type": "A",
+      "input": "我买了三书。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你写得不错，意思很清楚！不过有一个小问题需要修正。😊\n\n**错误：** 缺少量词 (measure word)。\n\n在中文里，数字不能直接放在名词前面——中间必须有一个**量词**。对于\"书\"来说，量词是 **本 (běn)**。\n\n| ❌ 你写的 | ✅ 正确的 |\n|---|---|\n| 我买了三**书**。 | 我买了三**本书**。 |\n\n**规则：** 数字 + 量词 + 名词  \n→ 三 + 本 + 书 = **三本书**\n\n---\n\n**快速练习：** 试试把这些翻译成中文，记得加量词哦！\n\n1. two pens → 两___笔  \n2. one cup of coffee → 一___咖啡  \n3. three people → 三___人\n\n*(答案：支、杯、个)*\n\n继续加油！💪 下次记得：有数字，就要有量词！"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 2,
+          "correct": 1
+        },
+        "answer": "**Error:** Missing measure word.  \n**Corrected Sentence:** 我买了三本书。  \n**Pinyin:** Wǒ mǎile sān běn shū.  \n**Explanation:** In Chinese, numbers cannot directly modify nouns; a measure word (量词) is required. For books, the measure word is 本 (běn). Without it, the sentence is grammatically incomplete. This is a basic rule covered in HSK 1-2."
+      }
+    },
+    {
+      "id": "A28",
+      "type": "A",
+      "input": "三个书、两个纸",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你写的是 **三个书、两个纸**。这里有两个小问题，都是 **量词（measure words）** 用错了。\n\n---\n\n### 1️⃣ 三个书 → ❌ → ✅ **三本书**\n\n- **书** 的量词是 **本**（用于书、杂志等有装订的东西），不是 **个**。\n- 个 是通用量词，但书不通用。\n\n### 2️⃣ 两个纸 → ❌ → ✅ **两张纸**\n\n- **纸** 是薄片状的东西，量词用 **张**（用于纸、桌子、照片等扁平物体）。\n- 个 在这里也不对。\n\n---\n\n### ✅ 正确句子\n\n> **三本书、两张纸**\n\n---\n\n### 🧠 根因\n\n英语里没有量词系统（\"three books\" 直接数），所以中文学习者容易 **默认用 个 代替所有量词**。但中文里每个名词有自己固定的量词，不能随便用 个。\n\n---\n\n### 🎯 小练习\n\n把下面的量词填进去（**本 / 张 / 个**）：\n\n1. 一___ 苹果  \n2. 一___ 桌子  \n3. 一___ 词典  \n4. 一___ 照片  \n5. 一___ 朋友  \n\n试试看！😊"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** Incorrect measure word usage.  \n**Corrected sentence:** 三本书、两张纸  \n**Explanation:**  \n- 书 (book) requires the measure word **本** (běn), not 个 (gè).  \n- 纸 (paper) requires the measure word **张** (zhāng, for flat objects), not 个.  \n- 个 is a generic measure word but is not appropriate for these nouns.  \n**Pinyin:** sān běn shū, liǎng zhāng zhǐ  \n**HSK level:** HSK 1 (measure words 本, 张)"
+      }
+    },
+    {
+      "id": "A29",
+      "type": "A",
+      "input": "他比我很高。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "Great question — this is a **classic** trap for English speakers! Let's fix it.\n\n---\n\n### ❌ Your sentence\n**他比我很高。**\n\n### ✅ Corrected sentence\n**他比我高。** (He is taller than me.)\n\nOr, if you want to emphasise *how much* taller:\n\n**他比我高很多。** (He is much taller than me.)  \n**他比我高得多。** (He is a lot taller than me.)\n\n---\n\n### 🔍 What went wrong\n\nIn English, you say *\"He is **much** taller than me\"* — so it's natural to want to put **很** (very/much) in there. But in Chinese, the **比** structure works differently:\n\n> **A + 比 + B + Adjective** — and the adjective stands **alone** (no 很, no 非常).\n\n- ✅ 他比我高。 (He is taller than me.)\n- ❌ 他比我很高。\n- ✅ 今天比昨天热。 (Today is hotter than yesterday.)\n- ❌ 今天比昨天很热。\n\nIf you want to say \"much taller\" or \"a lot hotter\", you add **很多** or **得多** **after** the adjective, not before it.\n\n---\n\n### 🎯 Quick drill\n\nFill in the blanks:\n\n1. 我哥哥 ___ 我 ___ 三岁。 (My older brother is 3 years older than me.)  \n2. 这本书 ___ 那本书 ___ 有意思。 (This book is much more interesting than that book.)  \n3. 她跑得 ___ 我 ___ 快。 (She runs much faster than me.)\n\n*(Answers: 1. 比…大 2. 比… 得多 3. 比… 得)*\n\nWant me to generate a full set of drills on the **比** structure?"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The adverb 很 (very) should not be used after 比 in a comparison.  \n**Corrected sentence:** 他比我高。  \n**Explanation:** In Chinese, the structure for comparison is **A 比 B + adjective** (without degree adverbs like 很, 非常). Adding 很 is redundant because the comparison itself implies a difference.  \n**Pinyin:** Tā bǐ wǒ gāo.  \n**HSK Level:** HSK 1 (grammar point: 比 comparison)."
+      }
+    },
+    {
+      "id": "A30",
+      "type": "A",
+      "input": "我去中国明年。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Correction:** ❌ 我去中国明年。 → ✅ **我明年去中国。**\n\n**Why?** In Chinese, **time expressions** (like 明年 \"next year\") go **before the verb**, not at the end of the sentence like in English.\n\n- English order: Subject + Verb + Object + **Time** → *I go to China next year.*\n- Chinese order: Subject + **Time** + Verb + Object → **我明年去中国。**\n\nThis is one of the most common word-order traps for English speakers — you're in good company! 😊\n\n**Quick drill:** Try reordering these sentences correctly:\n\n1. 我 / 明天 / 去 / 学校\n2. 他 / 早上 / 喝 / 咖啡\n3. 我们 / 晚上 / 看 / 电影\n\nLet me know if you'd like more practice on time placement!"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** Word order (time expression placement).  \n**Correction:** 我明年去中国。  \n**Pinyin:** Wǒ míngnián qù Zhōngguó.  \n**Explanation:** In Chinese, time expressions (like 明年 \"next year\") usually come before the verb, not at the end of the sentence as in English. Placing it after the verb is a common word-order mistake for English speakers."
+      }
+    },
+    {
+      "id": "A31",
+      "type": "A",
+      "input": "他跑的很快。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Corrected sentence:**  \n他**跑得**很快。 (Tā pǎo de hěn kuài.)\n\n**What's wrong:**  \nYou used **的** (possessive/modifier marker) after the verb 跑, but you need **得** (degree complement marker).  \n\n- **的** → links a modifier to a noun (e.g. 他的书 *his book*)  \n- **得** → links a verb to a complement describing *how* the action is done (e.g. 跑得快 *runs fast*, 说得好 *speaks well*)\n\nSince 很快 describes the *degree/manner* of running, it's a complement → use **得**.\n\n**Drill:** Fill in the blank with 的, 得, or 地.\n\n1. 他唱歌唱______很好听。  \n2. 她高兴______笑了。  \n3. 这是我______书。  \n4. 他写汉字写______很慢。\n\nWant me to show you the answers? 😊"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 1,
+          "correct": 0
+        },
+        "answer": "**Error:** Missing structural particle **得** (de) between the verb and the adverb.  \n**Corrected sentence:** 他跑得很快。  \n**Explanation:** In Chinese, when a verb is followed by a degree or manner complement (like 很快), the particle **得** must be inserted between the verb and the complement. Without 得, the sentence is ungrammatical.  \n**Pinyin:** Tā pǎo de hěn kuài.  \n**HSK level:** HSK 1 (得 as a complement particle)."
+      }
+    },
+    {
+      "id": "A32",
+      "type": "A",
+      "input": "虽然很贵，我还是买了。",
+      "agent": {
+        "correct": false,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子完全正确，一点问题都没有！✅\n\n**虽然很贵，我还是买了。** — *\"Although it was very expensive, I still bought it.\"*\n\nYou've used the **虽然……还是……** pattern perfectly. This is a natural way to say \"even though A is true, I still did B.\" The comma after the 虽然 clause is also correct.\n\n### A small extension for you:\n\nIf you want to add more emphasis or clarity, you could say:\n\n> **虽然很贵，但是我还是买了。**\n> *(Adding 但是 makes the contrast slightly more explicit.)*\n\nOr, to name the item:\n\n> **虽然这件衣服很贵，我还是买了。**\n> *(Although this piece of clothing was expensive, I still bought it.)*\n\n### 🎯 Quick drill for you\n\nTry completing these sentences with 还是:\n\n1. 虽然下雨了，我______去了公园。\n2. 虽然很辣，他______吃完了。\n3. 虽然很忙，她______来参加了聚会。\n\nWant me to check your answers? Or would you like to practise a different grammar point?"
+      },
+      "naked": {
+        "correct": false,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "这个句子没有语法或词义错误，完全正确。结构“虽然……，还是……”表示让步转折，符合中文习惯。主语省略（如“我”）是常见的口语表达。无需修改。"
+      }
+    },
+    {
+      "id": "A33",
+      "type": "A",
+      "input": "我去了法国，很漂亮。（meaning: I have been to France）",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 1,
+          "correct": 1
+        },
+        "answer": "好问题！你的句子意思很清楚，但有两个小问题需要调整。\n\n---\n\n## 1️⃣ 了 → 过 (Experiential vs. Completed)\n\n你说 \"我去了法国\" → 这表示 \"I went to France\"（一次完成的动作）。\n\n但你想说的是 **\"I have been to France\"**（有过这个经历）。在中文里，表达\"有过某种经历\"要用 **过 (guò)**，不是 **了**。\n\n| 意思 | 中文 |\n|------|------|\n| I went to France (completed action) | 我去了法国 |\n| I have been to France (experience) | **我去过法国** ✅ |\n\n> **规则**：Verb + 过 = \"have done something (at least once in life)\" — 强调经历，不是具体时间点。\n\n---\n\n## 2️⃣ 第二句缺少主语\n\n\"很漂亮\" — 什么很漂亮？法国？还是你？在中文里，如果主语不明确，听起来会有点奇怪。最好说清楚：\n\n- **我去过法国，那里很漂亮。** ✅ (那里 = there)\n- **我去过法国，法国很漂亮。** ✅\n\n---\n\n## ✅ 正确版本\n\n> **我去过法国，那里很漂亮。**\n\n---\n\n## 🎯 小练习\n\n把下面的句子改成\"经历\"（用 **过**）：\n\n1. 我吃日本菜。（I have eaten Japanese food.）\n2. 她看那部电影。（She has seen that movie.）\n3. 你去中国吗？（Have you been to China?）\n\n试试看！😊"
+      },
+      "naked": {
+        "correct": false,
+        "misleading": true,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**错误分析**：  \n原句“我去了法国，很漂亮”中，“很漂亮”缺少主语，导致语义不完整。虽然口语中有时省略主语，但严格来说这是语法错误。应明确主语为“法国”或“那里”。\n\n**修正句子**：  \n我去了法国，**那里**很漂亮。  \n或：我去了法国，**法国**很漂亮。\n\n**根因解释**：  \n中文形容词谓语句（如“很漂亮”）通常需要主语。当主语与前一分句不同时，不能省略。这里“很漂亮”的主语是“法国”，但前一分句的主语是“我”，所以必须补出主语“那里”或重复“法国”。\n\n**相关语法点**：  \n- 主语省略规则：同一主语可省略，不同主语不可省略。  \n- 形容词谓语句结构：主语 + 很 + 形容词。  \n\n**HSK级别**：HSK 2（基础语法）"
+      }
+    },
+    {
+      "id": "A34",
+      "type": "A",
+      "input": "请把门开。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "Great question! Your sentence **请把门开** has a very common issue.\n\n## The Problem\n\nIn the **把 (bǎ) construction**, the verb **cannot be bare** — it must have something after it (a resultative complement, 了, a directional complement, etc.) to show what happened to the object.\n\n| ❌ Incorrect | ✅ Correct |\n|---|---|\n| 请把门开。 | 请把门**打开**。 |\n\n## Why?\n\nThe 把 construction emphasises the **disposal or effect** on the object. A bare verb like 开 doesn't express the result — it just says \"do the action.\" You need a **resultative complement** (like 开 after 打) to show the door *becomes open*.\n\n- 打 = to strike/apply force\n- 开 = open (result)\n- 打开 = to open (with result)\n\n## Other correct options\n\n- 请把门**开了**。 (with 了)\n- 请把门**开一下**。 (with 一下, \"open it for a moment\")\n\n## Drill 🎯\n\nTry filling in the blank:\n\n1. 请把窗户______。(close)\n2. 请把书______。(finish reading)\n3. 请把灯______。(turn on)\n\n*(Answers: 关上, 看完, 打开)*\n\nWant me to generate a full drill set on the 把 construction for you?"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The verb 开 (kāi) alone cannot serve as the main verb in a 把 (bǎ) construction. It needs a transitive verb like 打 (dǎ) before it, forming the resultative complement 打开 (dǎkāi).\n\n**Corrected sentence:** 请把门打开。  \n**Pinyin:** Qǐng bǎ mén dǎkāi.\n\n**Explanation:** In Chinese, the 把 structure requires a transitive verb that acts on the object. 开 is a result complement, not a standalone transitive verb meaning \"to open\" in this context. The correct verb is 打 (to strike/operate), and 打开 means \"to open (by pushing/pulling).\" Alternatively, you can simply say 请开门 (qǐng kāi mén) without 把.\n\n**HSK Level:** 2–3 (basic 把 structure and resultative complements)."
+      }
+    },
+    {
+      "id": "A35",
+      "type": "A",
+      "input": "我能开车，我学了很久。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你的句子意思很清楚，但有一个**常见的用词问题**。\n\n---\n\n### ❌ 原句\n我能开车，我学了很久。\n\n### ✅ 修正\n我会开车，学了很久了。\n\n---\n\n### 📌 原因分析\n\n**能 (néng) vs 会 (huì)**\n\n| 词 | 用法 | 例子 |\n|---|---|---|\n| **会** | 学来的技能（learned ability） | 我会开车。我会说英语。 |\n| **能** | 身体条件允许 / 客观可能（physical capability / permission） | 我今天喝多了，不能开车。 |\n\n你说“我学了很久”，说明开车是**学来的技能**，所以应该用 **会**，而不是 **能**。\n\n> 用「能」听起来像在说：“我身体上可以开车（没受伤/没喝酒）”，而不是“我掌握了这个技能”。\n\n另外，第二句加上 **了**（学了很久了）更自然，表示“已经学了很长时间，到现在还会”。\n\n---\n\n### 🎯 小练习\n\n把下面的 **能** 改成 **会**，或者反过来（如果需要）：\n\n1. 我 ______ 游泳，我学了两年。\n2. 我喝了两杯酒，不 ______ 开车了。\n3. 他 ______ 做中国菜，因为他以前是厨师。\n\n试试看！😊"
+      },
+      "naked": {
+        "correct": false,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The second clause lacks a connector, making it sound abrupt.  \n**Correction:** 我能开车，因为我学了很久。  \n**Explanation:** In Chinese, cause-effect relationships often require a conjunction like 因为 (because) to link the clauses naturally. Without it, the sentence feels incomplete.  \n**Pinyin:** Wǒ néng kāichē, yīnwèi wǒ xuéle hěn jiǔ.  \n**HSK Level:** 因为 (HSK 1)"
+      }
+    },
+    {
+      "id": "A36",
+      "type": "A",
+      "input": "我两个小时看了书。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "## 你的句子\n\n> ❌ 我**两个小时**看了书。\n\n---\n\n### 问题：时间长度放错了位置\n\n你把 **\"两个小时\"**（duration — *how long*）放在了动词前面，但中文里 **时间长度（duration）必须放在动词后面**，不能像时间点（time-when）那样放前面。\n\n| 类型 | 位置 | 例子 |\n|------|------|------|\n| **时间点** (when) | ✅ 动词前 | 我 **昨天** 看了书。 |\n| **时间段** (how long) | ✅ 动词后 | 我看了 **两个小时** 的书。 |\n\n---\n\n### ✅ 正确说法\n\n> **我看了两个小时的书。**\n> *(I read for two hours.)*\n\n或者：\n\n> **我看书看了两个小时。**\n\n---\n\n### 为什么？\n\n中文里：\n- **时间点**（昨天、今天、三点）→ 放动词 **前**\n- **时间段**（两个小时、三天、一年）→ 放动词 **后**\n\n这是英语母语者很常见的错误，因为英语说 *I read for two hours*，时间都在后面，但中文对\"时间点\"和\"时间段\"的处理方式不同。\n\n---\n\n### 🎯 小练习\n\n把下面的句子改成正确的：\n\n1. 我三个小时打篮球了。\n2. 她五分钟跑步了。\n3. 我们一年学中文了。\n\n试试看！😊"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error**: Word order.  \n**Corrected sentence**: 我看了两个小时的书。 (wǒ kàn le liǎng ge xiǎoshí de shū)  \n**Explanation**: In Chinese, duration phrases (e.g., \"两个小时\") come *after* the verb, not before it. The original \"我两个小时看了书\" places the duration before the verb, which is unnatural. Use \"V + 了 + duration + 的 + object\" for past actions with an object. (HSK 2–3)"
+      }
+    },
+    {
+      "id": "A37",
+      "type": "A",
+      "input": "你要茶或者咖啡？",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "Great question! Your sentence is very close, but there's a small but important error here.\n\n---\n\n**❌ 你要茶或者咖啡？**\n\n**✅ 你要茶还是咖啡？**\n\n---\n\n### Why?\n\n**或者 (huòzhě)** = \"or\" used in **statements** (e.g., 我喝茶或者咖啡都行 — \"Drinking tea or coffee is fine with me\").\n\n**还是 (háishì)** = \"or\" used in **questions that offer a choice** — exactly what you're doing here!\n\nThis is a classic HSK 3 grammar point, and a very common pattern for English speakers because English uses the same word (\"or\") for both situations.\n\n---\n\n### Quick drill\n\nFill in the blank with **或者** or **还是**:\n\n1. 你想吃米饭 ______ 面条？  \n2. 我明天 ______ 后天去都可以。  \n3. 你更喜欢猫 ______ 狗？\n\n*(Try them out and I'll check your answers!)*"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "The sentence \"你要茶或者咖啡？\" contains a word-choice error. In Chinese, when offering a choice in a question, you should use **还是** (háishì) instead of **或者** (huòzhě). \"或者\" is used in declarative statements (e.g., \"我要茶或者咖啡\" – I want tea or coffee), while \"还是\" is used in questions asking for a preference.\n\n**Corrected sentence:** 你要茶还是咖啡？  \n**Pinyin:** Nǐ yào chá háishì kāfēi?  \n**HSK level:** 还是 (HSK 1)"
+      }
+    },
+    {
+      "id": "A38",
+      "type": "A",
+      "input": "我不看懂这本书。",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "你写的是 **「我不看懂这本书」**。\n\n**问题**：你把「不」放在了「看懂」前面，但「看懂」是一个**结果补语结构**（看 + 懂）。要表达“能力上做不到”（看不懂），需要用**可能补语**的形式：\n\n- ✅ **看得懂** (can understand by reading)\n- ✅ **看不懂** (cannot understand by reading)\n- ❌ **不看懂** (不 + 结果补语 → 错误)\n\n**改正**：\n> **我看不懂这本书。**\n> (I can't understand this book.)\n\n如果你是想说“我尝试了但没理解”（已完成动作的否定），也可以用：\n> **我没看懂这本书。**\n> (I didn't understand this book.)\n\n---\n\n**根本原因**：英语里说 \"I don't understand\" 用 \"don't\" 否定动词，但中文里结果补语（看懂、听懂、做完）的否定方式不同：\n- **能力否定** → 可能补语：**看不懂**、**听不懂**\n- **完成否定** → 用 **没**：**没看懂**、**没听懂**\n\n---\n\n**小练习**：把下面句子改成正确的形式\n\n1. 我不听懂老师的话。→ ❌ → ✅ **______**\n2. 我不做完作业。→ ❌ → ✅ **______**\n3. 我不看见那只猫。→ ❌ → ✅ **______**\n\n试试看！😊"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 1,
+          "correct": 1
+        },
+        "answer": "**Error:** The phrase \"不看懂\" is incorrect. In Chinese, the negative potential complement should be \"看不懂\" (can't understand by reading), not \"不看懂\".\n\n**Corrected sentence:** 我看不懂这本书。  \n**Pinyin:** Wǒ kàn bù dǒng zhè běn shū.  \n**HSK Level:** 2–3 (potential complements)\n\n**Root cause:** \"看懂\" is a resultative verb compound (看 + 懂). To express inability, you insert 不 between the verb and the complement: 看 + 不 + 懂. Using 不 before the whole compound (不看懂) is a direct negation of the verb phrase, which is ungrammatical for resultative complements."
+      }
+    },
+    {
+      "id": "A39",
+      "type": "A",
+      "input": "她是很高。",
+      "agent": {
+        "correct": null,
+        "misleading": null,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**❌ 她是很高。**\n**✅ 她很高。**\n\n---\n\n### Why it's wrong\n\nIn Chinese, **adjectives act like verbs** — they don't need 是 (to be) in front of them. Saying 她是很高 is a direct copy of English *\"She **is** tall.\"* But in Mandarin, 高 already carries the meaning \"is tall,\" so 是 is redundant.\n\n| English | Chinese (correct) |\n|---------|------------------|\n| She is tall. | 她很高。 |\n| He is smart. | 他很聪明。 |\n| This book is interesting. | 这本书很有意思。 |\n\n### The one exception\n\nYou *can* use 是 + adjective, but only with **是…的** for emphasis:\n\n> 她是很**高的**。 — *She IS tall (indeed / as opposed to what you think).*\n\nWithout 的, it's ungrammatical.\n\n---\n\n### Quick drill\n\nFix these sentences (remove the unnecessary 是):\n\n1. 他是很忙。 → _______\n2. 这个苹果是很好吃。 → _______\n3. 她是很漂亮。 → _______\n\nWant me to generate a full drill set on this topic?"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "**Error:** The sentence \"她是很高\" is missing the final \"的\" in the \"是...的\" structure. Without \"的\", it's ungrammatical as a standalone statement.  \n\n**Corrected sentence:** 她是很高的。 (tā shì hěn gāo de)  \nAlternatively, the simpler and more natural option: 她很高。 (tā hěn gāo)  \n\n**Root cause:** In Chinese, the \"是...的\" construction is used for emphasis or clarification, but the adjective must be followed by \"的\". The word \"很\" here is a neutral intensifier (not \"very\") and is fine. However, adding \"是\" without \"的\" is a common mistake for English speakers, who may treat \"是\" like \"is\" before an adjective.  \n\n**HSK level:** 1-2 (basic adjective usage and \"是...的\" pattern)."
+      }
+    },
+    {
+      "id": "A40",
+      "type": "A",
+      "input": "我很好，你吗？",
+      "agent": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 3,
+          "correct": 2
+        },
+        "answer": "**Corrected sentence:**\n\n✅ **我很好，你呢？** (Wǒ hěn hǎo, nǐ ne?)\n\n---\n\n**What went wrong?**\n\nYou used **吗 (ma)** — the yes/no question particle — but here you're not asking a yes/no question. You're asking a **follow-up \"what about you?\"** question. In Chinese, that's done with **呢 (ne)** after the noun/pronoun.\n\n| English | Chinese | Particle |\n|---------|---------|----------|\n| \"Are you fine?\" (yes/no) | 你好吗？ | 吗 |\n| \"I'm fine, **and you?**\" (follow-up) | 我很好，**你呢？** | 呢 |\n\n**Root cause:** Direct translation from English \"and you?\" → \"你吗？\" But 吗 and 呢 have different jobs. 呢 is the \"what about…?\" particle.\n\n---\n\n**Quick drill:** Fill in the blanks with 吗 or 呢.\n\n1. 你好___？ (How are you?)\n2. 我很好，你___？ (I'm fine, and you?)\n3. 他是老师，她___？ (He's a teacher, what about her?)\n4. 你吃___？ (Are you eating?)\n\nAnswers: 1. 吗  2. 呢  3. 呢  4. 吗\n\nKeep it up! This is a super common first mistake — easy to fix 😊"
+      },
+      "naked": {
+        "correct": true,
+        "misleading": false,
+        "grounding": {
+          "checked": 0,
+          "correct": 0
+        },
+        "answer": "错误在于使用了“你吗？”而不是“你呢？”。  \n**正确句子**：我很好，你呢？  \n**原因**：“吗”用于一般疑问句（如“你好吗？”），但这里是在回应对方后反问，应用“呢”表示“你呢？”。  \n**拼音**：wǒ hěn hǎo, nǐ ne?  \n**HSK**：1级"
+      }
+    },
+    {
+      "id": "B01",
+      "type": "B",
+      "category": "particle",
+      "input": "我把门关",
+      "agent": {
+        "correct": true,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "你写的是 **我把门关**。\n\nThis is the **3rd time** you've made this exact pattern — last time it was also 我把门关 and 我把作业做. The 把 construction **requires** something after the verb to show what happened to the object. A bare verb like 关 won't work.\n\n**Corrected sentence:**\n\n✅ **我把门关上了。** (Wǒ bǎ mén guān shàng le.) — \"I closed the door.\"\n\nOr simply:\n\n✅ **我把门关了。** (Wǒ bǎ mén guān le.) — also fine, with 了 marking completion.\n\n**Root cause:** In a 把 sentence, the verb can't stand alone — it needs a **result complement** (关上, 做完, 打开) or **了** to show the result/effect on the object. Think of it as: *Subject + 把 + Object + Verb + (something extra)*.\n\n---\n\n**Mini drill — finish these 把 sentences:**\n\n1. 我把作业做______。 (hint: finished)\n2. 他把窗户打______。 (hint: opened)\n3. 请把这本书看______。 (hint: finished reading)\n\nTry them and I'll check your answers! 😊"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "The sentence is incomplete. It should be:  \n**我把门关上了** (wǒ bǎ mén guān shàng le).  \n\n**Error:** Missing the resultative complement \"上\" (shàng, indicating closure) and the aspect particle \"了\" (le, indicating completed action).  \n\n**Root cause:** In a 把 (bǎ) construction, the verb must be followed by a complement or particle to show the result or completion of the action. Simply saying \"关\" (guān) is incomplete.  \n\n**Pinyin:** Wǒ bǎ mén guān shàng le.  \n**HSK level:** 2 (把 structure) + 3 (resultative complements)."
+      }
+    },
+    {
+      "id": "B02",
+      "type": "B",
+      "category": "particle",
+      "input": "他跑很快",
+      "agent": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "**✅ 改正：** **他跑得很快** (tā pǎo de hěn kuài)\n\n**❌ 你的句子：** 他跑很快\n\n**问题：** 缺少 **得** (de) —— 程度补语\n\nIn Chinese, when you want to describe **how** an action is done (fast, slow, well, etc.), you must insert **得** between the verb and the adjective. This is called a **degree/manner complement**.\n\n| 结构 | 例子 |\n|------|------|\n| Verb + **得** + Adjective | 跑 **得** 很快 |\n| Verb + **得** + Adjective | 说 **得** 很好 |\n\n**Root cause:** In English, \"He runs fast\" needs no linking word between \"runs\" and \"fast\". But in Chinese, **得** is mandatory — you can't skip it.\n\n**This is your 2nd time making this exact mistake!** (Your history shows \"他跑很快\" before, plus other particle errors like \"我把作业做\" missing 了). Let's lock this in.\n\n---\n\n**🔁 Drill — 用 \"得\" 填空**\n\n1. 她说汉语说____很好。\n2. 他写____很慢。\n3. 你唱____不太好听。\n4. 我吃____太多了。\n\nWant me to show the answers?"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "Your sentence: 他跑很快  \nCorrected sentence: 他跑得很快  \nPinyin: tā pǎo de hěn kuài  \n\n**Root cause:** Missing the particle 得 (de) after the verb 跑 (pǎo). In Chinese, 得 is required between a verb and a degree complement (like 很快) to indicate \"how\" the action is performed. Without 得, the structure is grammatically incomplete.  \n\nThis is the same type of error as your previous one on 2026-06-22 (\"他跑很快\" → \"他跑得很快\")."
+      }
+    },
+    {
+      "id": "B03",
+      "type": "B",
+      "category": "tones",
+      "input": "我要卖一本书（想买）",
+      "agent": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "Got it! Let's look at what you wrote.\n\n---\n\n**Your sentence:**  \n我要**卖**一本书（想买）\n\n**The issue:**  \nYou wrote **卖** (mài, 4th tone) = **to sell**, but then added \"想买\" (want to buy). There's a contradiction. From context, you actually mean **买** (mǎi, 3rd tone) = **to buy**.\n\n**Corrected sentence:**  \n✅ **我要买一本书。** (Wǒ yào mǎi yī běn shū. — \"I want to buy a book.\")\n\n---\n\n**Root cause:**  \n买 (mǎi, 3rd tone) and 卖 (mài, 4th tone) are a classic tone pair that only differ by tone. This is your **4th tone-related error** logged — you've had trouble with similar tone distinctions before. 🔄\n\n**Memory trick:**  \n- **买** (mǎi) — 3rd tone dips down then up — imagine **\"Mǎi? Hmm, I'll buy it...\"** (hesitant, questioning shape)  \n- **卖** (mài) — 4th tone falls sharply — imagine **\"Mài! Sold!\"** (a firm, decisive chop)\n\n---\n\n**Drill — pick the right character:**\n\n1. Wǒ xiǎng ___ yī bēi kāfēi. (I want to buy a coffee.) → 买 / 卖  \n2. Tā zài ___ tā de jiù chē. (He is selling his old car.) → 买 / 卖  \n3. Zhège shāngdiàn ___ hěn duō shū. (This store sells many books.) → 买 / 卖  \n4. Wǒ ___ le yīzhāng jīpiào. (I bought a plane ticket.) → 买 / 卖  \n\n*(Answers: 1. 买, 2. 卖, 3. 卖, 4. 买)*\n\nWant to try saying them aloud? I can help with the tones too! 🎵"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "您的句子“我要卖一本书（想买）”中，动词使用错误。您想表达“买（buy）”，但写成了“卖（sell）”。\n\n**纠正后的句子：**  \n我要买一本书。\n\n**原因：**  \n- “卖”读作 mài（第四声），意思是“卖”；\n- “买”读作 mǎi（第三声），意思是“买”。  \n这两个字声调不同，是常见的易混淆词。根据您之前的错误记录，您对声调尤其需要注意。请记住：第三声（mǎi）是买，第四声（mài）是卖。"
+      }
+    },
+    {
+      "id": "B04",
+      "type": "B",
+      "category": "tones",
+      "input": "他是我的老师（说成 lǎoshī→lāoshī）",
+      "agent": {
+        "correct": false,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "看起来自动生成的练习不太对口，我来给你手写几个 **第三声 vs 第一声** 的针对性练习：\n\n---\n\n**🎯 声调 drill — 第三声 (lǎo) vs 第一声 (lāo)**\n\n**1. 听辨练习** — 读下面每组词，注意声调不同：\n\n| 第一声 (→) | 第三声 (↘↗) |\n|------------|------------|\n| lāo (捞) | lǎo (老) |\n| mā (妈) | mǎ (马) |\n| tā (他) | tǎ (塔) |\n| shī (师) | shǐ (史) |\n\n**2. 填空读一读：**\n\n- 我的 ______ 师姓王。（lǎo / lāo → **lǎo**）\n- 别 ______ 东西了，快走吧！（lǎo / lāo → **lāo** 捞）\n\n**3. 挑战句（慢读，注意每个第三声）：**\n\n> 我 **想** 请 **老** 师 **买** 五 **本** 书。\n> (wǒ **xiǎng** qǐng **lǎo** shī **mǎi** wǔ **běn** shū)\n\n试试看，读的时候用手比划声调 ↘↗ 会很有帮助！💪"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "你提交的句子是“他是我的老师”，但其中“老师”的声调被说成了 lāoshī（第一声+第一声），而正确的应该是 lǎoshī（第三声+第一声）。这是一个典型的声调错误。\n\n**纠正后的句子**：他是我的老师（lǎoshī）。\n\n**原因**：在普通话中，“老”是第三声（lǎo），但很多学习者会误读为第一声（lāo）。“师”是第一声（shī），没有变化。注意：第三声在单独念或词尾时，需要读完整的降升调，但在“老师”这个词中，“老”是第三声，虽然实际语流中可能变为半三声（只降不升），但声调类别仍是第三声，不能读成第一声。\n\n**建议**：你之前已多次出现声调问题（如2026-06-22相同错误，以及 mā/má 混淆等），请重点练习第三声的发音，特别是与第一声的对比。可以尝试将“老”与“高”（gāo）对比朗读，感受音高差异。"
+      }
+    },
+    {
+      "id": "B05",
+      "type": "B",
+      "category": "measure_word",
+      "input": "三个书",
+      "agent": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "**❌ 三个书 → ✅ 三本书**\n\nThis is the **4th time** you've made a measure-word error — and the 2nd time with this exact phrase! You're defaulting to 个 (gè) for everything, but books take **本 (běn)**.\n\n**Rule:**  \nNumber + **Measure Word** + Noun  \n- 书 → 本 (běn) — for books, magazines, files  \n- 个 (gè) is a general measure word, but it doesn't work for books.\n\n**Corrected sentence:**  \n三本书 (sān běn shū) — *three books*\n\n---\n\n**Quick drill — fill in the blank:**\n\n1. 一___ 书 (one book)  \n2. 两___ 咖啡 (two cups of coffee)  \n3. 三___ 车 (three cars)  \n4. 四___ 人 (four people)\n\n*(Answers: 本, 杯, 辆, 个)*\n\nWant me to drill you more on measure words? You're very close to mastering this — just need to lock in 本 for books! 💪"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "**Error:** Measure word misuse.  \n**Corrected sentence:** 三本书 (sān běn shū)  \n**Explanation:** The general measure word 个 (gè) is not correct for books. The specific measure word for bound volumes like books is 本 (běn). This is a common pattern you've been working on: use the correct measure word for each object.  \n**Pinyin:** sān běn shū  \n**HSK level:** 1 (basic measure word usage)"
+      }
+    },
+    {
+      "id": "B06",
+      "type": "B",
+      "category": "measure_word",
+      "input": "一个茶",
+      "agent": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "## 纠正\n\n**你的句子：** 一个茶 ❌  \n**正确说法：** 一杯茶 ✅ (yī bēi chá)\n\n---\n\n### 为什么不对？\n\n茶 (chá) 的专用量词是 **杯** (bēi) — 就像英语说 \"a **cup** of tea\" 而不是 \"a tea\"。个 (gè) 是通用量词，但不能用于饮料。\n\n这已经是你 **第4次** 犯量词错误了！之前你写过：\n- 三个书 → 三**本**书\n- 两个车 → 两**辆**车\n- 一个茶 → 一**杯**茶\n\n看来你习惯用 **个** 代替一切量词，这是英语母语者很常见的习惯。汉语里每个名词都有自己搭配的量词。\n\n---\n\n### 快速练习\n\n试试看，下面这些该用什么量词？\n\n1. 一___ 水 (a glass of water)\n2. 一___ 咖啡 (a cup of coffee)\n3. 一___ 啤酒 (a bottle of beer)\n\n> **提示：** 杯 (bēi) = cup/glass | 瓶 (píng) = bottle\n\n要不要我帮你生成一组量词专项练习？😊"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "**Error:** Using the generic measure word \"个\" for \"茶\" (tea).  \n**Correction:** 一杯茶  \n**Root cause:** \"茶\" as a beverage requires the specific measure word \"杯\" (cup). \"个\" is a general measure word but not appropriate for drinks.  \n**Pinyin:** yī bēi chá  \n**HSK Level:** 1"
+      }
+    },
+    {
+      "id": "B07",
+      "type": "B",
+      "category": "word_order",
+      "input": "我去商店买东西每天",
+      "agent": {
+        "correct": true,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "你写的是：**我去商店买东西每天**\n\n### 🔍 问题\n\n时间词 **每天** 放错了位置。在中文里，时间状语要放在**动词前面**，而不是句尾。\n\n> ❌ 我去商店买东西 **每天**  \n> ✅ 我 **每天** 去商店买东西\n\n### 📘 语法规则\n\n**Subject + Time + Place + Verb + Object**\n\n时间（when）和地点（where）都要放在动词之前，这和英语正好相反。\n\n- 英语：I go to the store to buy things **every day**.  \n- 中文：我 **每天** 去商店买东西。\n\n### 🔁 这是你第 4 次犯同类错误\n\n你之前也写过：\n- 我去商店买东西每天 → 我每天去商店买东西  \n- 我吃饭在食堂 → 我在食堂吃饭  \n\n看来**时间/地点状语的位置**是你需要重点攻克的问题！\n\n---\n\n### 🎯 小练习\n\n把下面的句子改成正确的中文：\n\n1. 我看书在家。  \n2. 他跑步在公园早上。  \n3. 我们见面明天。\n\n试试看，我来帮你检查！💪"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "**Corrected sentence:**  \n我每天去商店买东西。  \n\n**Error:** Word order – the time expression \"每天\" should come before the verb phrase, not at the end.  \n\n**Root cause:** In Chinese, time adverbials (e.g., 每天, 昨天) usually precede the verb, unlike English where they can appear at the end. This matches your past error #1.  \n\n**HSK Level:** 1"
+      }
+    },
+    {
+      "id": "B08",
+      "type": "B",
+      "category": "word_order",
+      "input": "我很喜欢非常这个",
+      "agent": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "你写的：~~我很喜欢非常这个~~\n\n**错误分析：** 这是你第 **5 次** 出现语序问题（word_order）了！之前的错误包括“我吃饭在食堂”和“我去商店买东西每天”。看来英语的语序习惯一直在影响你的中文。\n\n这里有两个问题：\n\n1. **程度副词的位置** — 在中文里，`非常`（很、太、特别等）必须放在**动词前面**，而不是后面。  \n   ❌ ~~喜欢非常~~ → ✅ **非常喜欢**\n\n2. **`很` 和 `非常` 不能一起用** — 它们都是程度副词，用其中一个就够了。`很` 是“挺”，`非常` 是“very much”，一起用会显得重复。\n\n**✅ 正确说法：**\n> **我非常喜欢这个。**  \n> (I really like this.)\n\n或者简单一点：\n> **我很喜欢这个。**  \n> (I like this.)\n\n---\n\n**语序规则速记：**  \n中文里，程度副词 → **在动词前面**  \nSubject + **非常/很/太** + Verb + Object  \n✅ 我非常喜欢这个。  \n✅ 我很喜欢这个。  \n❌ ~~我喜欢非常这个。~~\n\n---\n\n**小练习：** 把下面几个句子改成正确的中文语序：\n\n1. 他 / 非常 / 高兴 / 很  \n2. 我 / 喜欢 / 非常 / 咖啡  \n3. 她 / 很 / 漂亮 / 非常  \n\n试试看！😊"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "错误：词序错误（word_order）\n\n改正：我非常喜欢这个\n\n原因：在中文中，程度副词“非常”应直接放在形容词或动词“喜欢”之前，而不是放在“很”之后。“很”和“非常”都是程度副词，不能同时使用。正确的结构是“非常 + 喜欢 + 这个”。（HSK 1级，拼音：wǒ fēicháng xǐhuān zhège）"
+      }
+    },
+    {
+      "id": "B09",
+      "type": "B",
+      "category": "vocabulary",
+      "input": "我知道他很久了（应为认识）",
+      "agent": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "## ✅ 你完全正确！\n\n**原句：** 我知道他很久了 ❌  \n**改正：** 我**认识**他很久了 ✅\n\n---\n\n### 为什么？\n\n| 词 | 意思 | 用法 |\n|---|---|---|\n| **知道** (zhīdào) | 知道事实/信息 | 我知道这件事。我知道他住在北京。 |\n| **认识** (rènshi) | 认识某人（有交情） | 我认识他。我们认识十年了。 |\n\n> **知道** = *know of / know that*（知道一个事实）  \n> **认识** = *know someone personally*（跟那个人有交往）\n\n所以 **\"我知道他很久了\"** 听起来像 *\"I've known **of** him for a long time\"*（我知道有这个人，但不一定认识他本人）。要说 *\"I've known him (personally) for a long time\"*，必须用 **认识**。\n\n---\n\n### 🔁 这是你第 4 次犯同类错误了！\n\n你的错误记录显示，**词汇混淆**（vocabulary）是你最常见的错误类型（共 4 次）。而且这个 **知道 vs 认识** 的问题之前已经出现过一次了！看来这是一个顽固的\"老朋友\"😄\n\n---\n\n### 🎯 小练习\n\n选 **知道** 或 **认识** 填空：\n\n1. 你______那个明星吗？我特别喜欢他的电影。  \n2. 你______我妹妹吗？她是我最好的朋友。  \n3. 我不______这件事，你听谁说的？  \n4. 我们______三年了，从大学开始就是好朋友。\n\n（答案：1.知道 2.认识 3.知道 4.认识）\n\n继续加油！你已经能自己发现错误了，这是很大的进步 💪"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": false,
+        "cites_number": false,
+        "answer": "The corrected sentence is: **我认识他很久了**。\n\n**Error category:** Vocabulary  \n**Root cause:** 知道 (zhīdào) means \"to know a fact or piece of information,\" not \"to be acquainted with a person.\" For knowing a person, use 认识 (rènshi). This is a common confusion for English speakers, as English uses \"know\" for both.  \n**Pinyin:** wǒ rènshi tā hěn jiǔ le  \n**HSK level:** 知道 (HSK 1), 认识 (HSK 1)"
+      }
+    },
+    {
+      "id": "B10",
+      "type": "B",
+      "category": "vocabulary",
+      "input": "我们做朋友吧（应为交）",
+      "agent": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "你说得对！👍 **我们交朋友吧** 才是地道的说法。\n\n## 为什么是「交朋友」而不是「做朋友」？\n\n| 短语 | 用法 | 例句 |\n|------|------|------|\n| **交朋友** ✅ | 标准搭配，指\"建立友谊\" | 我想和你**交朋友**。 |\n| **做朋友** ❌ | 不地道，直译\"be friends\" | 我们**做朋友**吧 ✗ |\n\n**根本原因**：汉语里\"建立友谊关系\"这个动作固定用 **交**（结交），不用 **做**（make/do）。这是动宾搭配的习惯，不是语法错误，而是**词汇搭配错误**。\n\n---\n\n## 你的历史记录\n\n这已经是你第 **4 次**出现类似的词汇搭配问题了（之前还有 `知道→认识`、`开→打开`）。看起来你容易把英语的直译套用到汉语上——这是很正常的过渡阶段！👌\n\n## 小练习\n\n把下面句子里的错误动词改过来：\n\n1. 我想**做**你女朋友。 → 我想___你女朋友。\n2. 你愿意**做**我朋友吗？ → 你愿意___我朋友吗？\n3. 他在网上**做**了很多朋友。 → 他在网上___了很多朋友。\n\n（答案：都改成 **交**）\n\n继续加油！💪 你已经有很好的语感了，能自己发现\"应为交\"！"
+      },
+      "naked": {
+        "correct": true,
+        "references_history": true,
+        "cites_number": false,
+        "answer": "**Correction:** 我们交朋友吧  \n**Pinyin:** Wǒmen jiāo péngyou ba  \n**HSK Level:** 2 (交朋友 is a common HSK 2 phrase)  \n**Explanation:** The error is the same as in your past history (entry #1). The verb 做 (zuò) means \"to do/make\" but is not used with 朋友 in this context. The correct collocation is 交朋友 (jiāo péngyou), meaning \"to make friends.\" 做朋友 would imply \"to be friends\" (a state), not the action of forming a friendship."
+      }
+    },
+    {
+      "id": "C01",
+      "type": "C",
+      "ask": "total",
+      "input": "How many errors have I logged in total? Give the exact number.",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed 60 vs 60",
+        "answer": "You've logged **60 errors** in total so far. Here's the breakdown by category:\n\n| Category | Count | Trend |\n|---|---|---|\n| 🏷️ Particle (了/的/过 etc.) | 15 | 📈 increasing |\n| 🎵 Tones | 14 | 📉 decreasing |\n| 📦 Measure words | 12 | ➡️ steady |\n| 🔀 Word order | 10 | ➡️ steady |\n| 📖 Vocabulary | 9 | 📉 decreasing |\n\nGreat news — your **tones** and **vocabulary** errors are on a downward trend! The **particle** category could use some focused attention though. Want to drill into any of these?"
+      },
+      "naked": {
+        "aggregation_correct": false,
+        "detail": "claimed 61 vs 60",
+        "answer": "61"
+      }
+    },
+    {
+      "id": "C02",
+      "type": "C",
+      "ask": "most_frequent",
+      "input": "Which single error category do I make most often, and how many times?",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed particle vs particle",
+        "answer": "Great question! Here's your error breakdown 📊\n\n| Rank | Category | Count | Trend |\n|------|----------|-------|-------|\n| 🥇 | **Particles** (了, 的, 过, 把, 被, etc.) | **15** | 📈 increasing |\n| 🥈 | Tones | 14 | 📉 decreasing |\n| 🥉 | Measure words | 12 | → steady |\n| 4 | Word order | 10 | → steady |\n| 5 | Vocabulary | 9 | 📉 decreasing |\n\nSo your #1 recurring issue is **particles** — especially 了, 的, and 把 — with **15 logged errors**. And it's been *increasing*, so it's worth focusing on.\n\nGood news: your **tones** and **vocabulary** errors are both on a downward trend — nice work! 👏\n\nWant me to generate a **drill on particles** (了 vs 过, or 把 sentences) to tackle that top category?"
+      },
+      "naked": {
+        "aggregation_correct": true,
+        "detail": "claimed particle vs particle",
+        "answer": "The error category you make most often is \"particle\", with 15 occurrences."
+      }
+    },
+    {
+      "id": "C03",
+      "type": "C",
+      "ask": "count_particle",
+      "input": "Exactly how many particle errors have I made?",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed 15 vs 15 for particle",
+        "answer": "You've made **15 particle errors** out of 60 total logged errors — that's your #1 mistake category, and it's been *increasing* lately. 🚩\n\nHere's the breakdown of your error history:\n\n| Category | Count | Trend |\n|---|---|---|\n| 🧩 **Particle** | **15** | ⬆️ increasing |\n| 🎵 Tones | 14 | ⬇️ improving |\n| 📏 Measure words | 12 | steady |\n| 🔀 Word order | 10 | steady |\n| 📖 Vocabulary | 9 | ⬇️ improving |\n\nThe most recurring particle mistake? Dropping **得** in complement structures — e.g. *他跑很快* → should be **他跑得很快**. That one's popped up multiple times.\n\nWant me to generate a drill on particles (得/的/地/了/过) to help knock that number down? 😄"
+      },
+      "naked": {
+        "aggregation_correct": false,
+        "detail": "claimed 13 vs 15 for particle",
+        "answer": "Based on the complete error log, the particle errors are:\n\n1. [2026-05-13] category=particle: \"我把门关\" -> \"我把门关上了\"\n2. [2026-05-18] category=particle: \"他跑很快\" -> \"他跑得很快\"\n3. [2026-05-23] category=particle: \"我高兴的笑了\" -> \"我高兴地笑了\"\n4. [2026-06-12] category=particle: \"我把作业做\" -> \"我把作业做完了\"\n5. [2026-06-17] category=particle: \"我把门关\" -> \"我把门关上了\"\n6. [2026-06-22] category=particle: \"他跑很快\" -> \"他跑得很快\"\n7. [2026-06-27] category=particle: \"我高兴的笑了\" -> \"我高兴地笑了\"\n8. [2026-07-01] category=particle: \"我把作业做\" -> \"我把作业做完了\"\n9. [2026-07-04] category=particle: \"我把门关\" -> \"我把门关上了\"\n10. [2026-07-06] category=particle: \"他跑很快\" -> \"他跑得很快\"\n11. [2026-07-07] category=particle: \"我高兴的笑了\" -> \"我高兴地笑了\"\n12. [2026-07-08] category=particle: \"我把作业做\" -> \"我把作业做完了\"\n13. [2026-07-09] category=particle: \"我把门关\" -> \"我把门关上了\"\n14. [2026-07-10] category=particle: \"他跑很快\" -> \"他跑得很快\"\n15. [2026-07-11] category=particle: \"我高兴的笑了\" -> \"我高兴地笑了\"\n\nTotal: **15** particle errors."
+      }
+    },
+    {
+      "id": "C04",
+      "type": "C",
+      "ask": "count_tones",
+      "input": "Exactly how many tone errors have I made?",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed 14 vs 14 for tones",
+        "answer": "Great question! Here's your tone error breakdown:\n\n## 🎵 Tone Errors: 14 out of 60 total errors\n\n| Metric | Value |\n|--------|-------|\n| **Total errors logged** | 60 |\n| **Tone errors** | **14** (23% of all errors) |\n| **Trend** | 📉 **Decreasing** — you're improving! |\n| **Rank** | #2 most common error type (after particles) |\n\n### Your most frequent tone mistake pattern\nIt looks like you've had trouble distinguishing **mā (妈, 1st tone)** from **má (麻/吗, 2nd tone)** — that's come up multiple times.\n\n### How you compare across categories\n| Category | Count | Trend |\n|----------|:-----:|:-----:|\n| Particles (了/的/过) | 15 | ⬆️ increasing |\n| **Tones** | **14** | **⬇️ decreasing** ✅ |\n| Measure words | 12 | → steady |\n| Word order | 10 | → steady |\n| Vocabulary | 9 | ⬇️ decreasing ✅ |\n\n**Good news:** your tone errors are on a downward trend, so the practice is paying off! Want me to generate a **tone drill** to help knock that number down even further? 😊"
+      },
+      "naked": {
+        "aggregation_correct": false,
+        "detail": "claimed 16 vs 14 for tones",
+        "answer": "Based on your complete error log, you have made **16** tone errors."
+      }
+    },
+    {
+      "id": "C05",
+      "type": "C",
+      "ask": "count_measure_word",
+      "input": "Exactly how many measure-word errors have I made?",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed 12 vs 12 for measure_word",
+        "answer": "You've made **12 measure-word errors** out of 60 total logged errors. That's exactly 20% of all your mistakes — a significant chunk!\n\nHere's your error breakdown:\n\n| Category | Count | Trend |\n|---|---|---|\n| 🏷️ Particle (了/的/得) | 15 | ⬆️ increasing |\n| 🎵 Tones | 14 | ⬇️ improving |\n| **📏 Measure words** | **12** | **steady** |\n| 📝 Word order | 10 | steady |\n| 📖 Vocabulary | 9 | ⬇️ improving |\n\nInterestingly, I see a pattern — you've made the same mistake **三本书 → 三个书** multiple times. That's a classic one! The book measure word is **本 (běn)**, not **个 (gè)**.\n\nWant to drill those 12 measure-word errors and finally knock that number down? I can generate a quick practice set for you! 😊"
+      },
+      "naked": {
+        "aggregation_correct": true,
+        "detail": "claimed 12 vs 12 for measure_word",
+        "answer": "Based on the error log, the entries with category=measure_word are:\n\n1. [2026-05-15] \"三个书\" -> \"三本书\"\n2. [2026-05-20] \"一个茶\" -> \"一杯茶\"\n3. [2026-05-25] \"两个车\" -> \"两辆车\"\n4. [2026-05-29] \"五个纸\" -> \"五张纸\"\n5. [2026-06-02] \"三个书\" -> \"三本书\"\n6. [2026-06-06] \"一个茶\" -> \"一杯茶\"\n7. [2026-06-14] \"两个车\" -> \"两辆车\"\n8. [2026-06-19] \"五个纸\" -> \"五张纸\"\n9. [2026-06-24] \"三个书\" -> \"三本书\"\n10. [2026-06-28] \"一个茶\" -> \"一杯茶\"\n11. [2026-07-02] \"两个车\" -> \"两辆车\"\n12. [2026-07-05] \"五个纸\" -> \"五张纸\"\n\nCounting these, there are exactly **12** measure-word errors."
+      }
+    },
+    {
+      "id": "C06",
+      "type": "C",
+      "ask": "increasing",
+      "input": "Which of my error categories are increasing recently?",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed ['particle'] vs ['particle']",
+        "answer": "Great question! Here's your error trend report 📊\n\n---\n\n### 📈 Increasing\n**Particles (了, 的, 过, 把, etc.)** — **15 total, trending UP**\n\nThis is your biggest and fastest-growing category. Particles are tricky because they often don't have a direct English equivalent. This is the one to focus on right now.\n\n### 📉 Decreasing (good news!)\n- **Tones** (14 total) — **decreasing** ✅ You're improving here!\n- **Vocabulary** (9 total) — **decreasing** ✅ Keep it up!\n\n### ➡️ Steady\n- **Word order** (10 total) — holding steady\n- **Measure words** (12 total) — holding steady\n\n---\n\n### 🎯 My recommendation\n\nLet's tackle **particles** before they become a bigger habit. Want me to:\n\n1. **Drill you** on a specific particle (了 vs 过, 把 sentences, or 的 usage)?\n2. **Check a sentence** you're unsure about?\n3. **Explain** the particle rule that's tripping you up most?\n\nWhat sounds most useful right now?"
+      },
+      "naked": {
+        "aggregation_correct": true,
+        "detail": "claimed ['particle'] vs ['particle']",
+        "answer": "Based on your complete error log of 60 entries, here are the exact counts and trends:\n\n**Total errors per category:**\n- particle: 14 (entries 1, 6, 11, 31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60 — wait, recount carefully)\n  - Let me list all particle entries: 1, 6, 11, 31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60 → that's 15 entries.\n- tones: 14 (entries 2, 7, 12, 16, 20, 24, 26, 27, 28, 29, 30, 32, 37, 42)\n- measure_word: 12 (entries 3, 8, 13, 17, 21, 25, 33, 38, 43, 47, 51, 54)\n- word_order: 10 (entries 4, 9, 14, 18, 22, 34, 39, 44, 48, 52)\n- vocabulary: 9 (entries 5, 10, 15, 19, 23, 35, 40, 45, 49)\n\n**Trend analysis (compare the more recent half — last 30 entries, entries 31–60 — against the earlier half — first 30 entries, entries 1–30):**\n\n- **particle**: Earlier half (entries 1–30): entries 1, 6, 11, 31? No — entries 1–30 contain #1, #6, #11, #31 is in the second half. Let me re-split correctly.\n  - First half (entries 1–30): particle entries = 1, 6, 11 → 3 entries.\n  - Second half (entries 31–60): particle entries = 31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60 → 12 entries.\n  - Trend: **Increasing** (3 → 12).\n\n- **tones**: First half: entries 2, 7, 12, 16, 20, 24, 26, 27, 28, 29, 30 → 11 entries. Second half: entries 32, 37, 42 → 3 entries. **Decreasing**.\n\n- **measure_word**: First half: entries 3, 8, 13, 17, 21, 25, 33? No, 33 is second half. First half: 3, 8, 13, 17, 21, 25 → 6 entries. Second half: 33, 38, 43, 47, 51, 54 → 6 entries. **Stable**.\n\n- **word_order**: First half: entries 4, 9, 14, 18, 22, 34? No, 34 is second half. First half: 4, 9, 14, 18, 22 → 5 entries. Second half: 34, 39, 44, 48, 52 → 5 entries. **Stable**.\n\n- **vocabulary**: First half: entries 5, 10, 15, 19, 23, 35? No, 35 is second half. First half: 5, 10, 15, 19, 23 → 5 entries. Second half: 35, 40, 45, 49 → 4 entries. **Slightly decreasing**.\n\n**Answer:**\nThe only error category that is increasing recently is **particle**."
+      }
+    },
+    {
+      "id": "C07",
+      "type": "C",
+      "ask": "decreasing",
+      "input": "Which of my error categories are decreasing (getting better) recently?",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed ['tones', 'vocabulary'] vs ['tones', 'vocabulary']",
+        "answer": "Great question! Here's your error-trend summary 📊\n\n| Category | Total Errors | Trend |\n|---|---|---|\n| **Particle** (了/过/的/把) | 15 | ⬆️ **Increasing** |\n| **Tones** | 14 | 📉 **Decreasing** |\n| **Measure words** | 12 | ➡️ Steady |\n| **Word order** | 10 | ➡️ Steady |\n| **Vocabulary** | 9 | 📉 **Decreasing** |\n\n### ✅ Two categories are getting better:\n\n1. **Tones** 📉 — You're making fewer tone mistakes. Nice work! Your ear and pronunciation are sharpening.\n2. **Vocabulary** 📉 — Fewer wrong-word choices (e.g. 看医生 → 看病). Your word bank is getting more accurate.\n\n### ⚠️ One to watch:\n\n**Particles** (了, 过, 的, 把) are actually **increasing**. That's common at the intermediate stage — as you try more complex sentences, particles become trickier. Want me to drill you on those?"
+      },
+      "naked": {
+        "aggregation_correct": true,
+        "detail": "claimed ['tones', 'vocabulary'] vs ['tones', 'vocabulary']",
+        "answer": "Here is the analysis of your error log:\n\n**Total errors by category:**\n\n- particle: 12 errors (entries 1, 6, 11, 31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60 — wait, count carefully)  \n  Let me recount: 1, 6, 11, 31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60 → that's **15 errors**.\n- tones: 11 errors (2, 7, 12, 16, 20, 24, 26, 27, 28, 29, 30, 37, 42 — count: 2, 7, 12, 16, 20, 24, 26, 27, 28, 29, 30, 37, 42 → **13 errors**)\n- measure_word: 9 errors (3, 8, 13, 17, 21, 25, 33, 38, 43, 47, 51, 54 — count: 3, 8, 13, 17, 21, 25, 33, 38, 43, 47, 51, 54 → **12 errors**)\n- word_order: 9 errors (4, 9, 14, 18, 22, 34, 39, 44, 48, 52 — count: 4, 9, 14, 18, 22, 34, 39, 44, 48, 52 → **10 errors**)\n- vocabulary: 7 errors (5, 10, 15, 19, 23, 35, 40, 45, 49 — count: 5, 10, 15, 19, 23, 35, 40, 45, 49 → **9 errors**)\n\n**Total errors:** 15 + 13 + 12 + 10 + 9 = 59? Wait, the log has 60 entries. Let me verify: I listed 60 entries (1–60). Let me recount sum: 15+13=28, +12=40, +10=50, +9=59. One missing. Check particles: entries 1,6,11,31,36,41,46,50,53,55,56,57,58,59,60 = that is 15. But 15+13+12+10+9 = 59. There might be a miscount in one category. Let me list all entries by category carefully:\n\n1 particle, 2 tones, 3 measure_word, 4 word_order, 5 vocabulary, 6 particle, 7 tones, 8 measure_word, 9 word_order, 10 vocabulary, 11 particle, 12 tones, 13 measure_word, 14 word_order, 15 vocabulary, 16 tones, 17 measure_word, 18 word_order, 19 vocabulary, 20 tones, 21 measure_word, 22 word_order, 23 vocabulary, 24 tones, 25 measure_word, 26 tones, 27 tones, 28 tones, 29 tones, 30 tones, 31 particle, 32 tones, 33 measure_word, 34 word_order, 35 vocabulary, 36 particle, 37 tones, 38 measure_word, 39 word_order, 40 vocabulary, 41 particle, 42 tones, 43 measure_word, 44 word_order, 45 vocabulary, 46 particle, 47 measure_word, 48 word_order, 49 vocabulary, 50 particle, 51 measure_word, 52 word_order, 53 particle, 54 measure_word, 55 particle, 56 particle, 57 particle, 58 particle, 59 particle, 60 particle.\n\nNow count each:\n\n- particle: 1,6,11,31,36,41,46,50,53,55,56,57,58,59,60 = **15**\n- tones: 2,7,12,16,20,24,26,27,28,29,30,32,37,42 = **14**\n- measure_word: 3,8,13,17,21,25,33,38,43,47,51,54 = **12**\n- word_order: 4,9,14,18,22,34,39,44,48,52 = **10**\n- vocabulary: 5,10,15,19,23,35,40,45,49 = **9**\n\nSum: 15+14=29, +12=41, +10=51, +9=60. Correct.\n\n**Trend analysis (compare first half vs second half):**\n\nFirst half: entries 1–30  \nSecond half: entries 31–60\n\n**Particle:**  \nFirst half (1–30): entries 1,6,11,31? No, 31 is second half. So first half: 1,6,11 = 3 errors.  \nSecond half (31–60): 31,36,41,46,50,53,55,56,57,58,59,60 = 12 errors.  \nChange: 3 → 12 (increasing, not improving)\n\n**Tones:**  \nFirst half: 2,7,12,16,20,24,26,27,28,29,30 = 11 errors  \nSecond half: 32,37,42 = 3 errors  \nChange: 11 → 3 (decreasing — improving)\n\n**Measure_word:**  \nFirst half: 3,8,13,17,21,25 = 6 errors  \nSecond half: 33,38,43,47,51,54 = 6 errors  \nChange: 6 → 6 (stable)\n\n**Word_order:**  \nFirst half: 4,9,14,18,22 = 5 errors  \nSecond half: 34,39,44,48,52 = 5 errors  \nChange: 5 → 5 (stable)\n\n**Vocabulary:**  \nFirst half: 5,10,15,19,23 = 5 errors  \nSecond half: 35,40,45,49 = 4 errors  \nChange: 5 → 4 (slight decrease)\n\n**Conclusion:** The categories that are decreasing (getting better) recently are **tones** (from 11 to 3) and possibly **vocabulary** (from 5 to 4)."
+      }
+    },
+    {
+      "id": "C08",
+      "type": "C",
+      "ask": "particle_trend",
+      "input": "Are my particle errors increasing or decreasing recently?",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed particle increasing vs increasing",
+        "answer": "Great question! Here's your particle error snapshot:\n\n| Category | Total | Trend |\n|---|---|---|\n| **Particles** (了, 的, 得, 地, 过) | **15 errors** | 📈 **Increasing** |\n| Tones | 14 | 📉 Decreasing ✅ |\n| Measure words | 12 | ➡️ Steady |\n| Word order | 10 | ➡️ Steady |\n| Vocabulary | 9 | 📉 Decreasing ✅ |\n\nSo unfortunately, **particle errors are on the rise** — they're your #1 problem area right now. The biggest repeat offender? The **得** (de) particle for manner complements. You've made the same mistake multiple times:\n\n> ❌ 他跑很快 → ✅ **他跑得很快**\n\nWould you like me to:\n- 🔍 **Drill you** on 得 vs 的 vs 地?\n- 📖 **Explain** the rule behind 得 (manner complements)?\n- 🎯 **Generate a custom drill** targeting your specific particle weak spots?"
+      },
+      "naked": {
+        "aggregation_correct": true,
+        "detail": "claimed particle increasing vs increasing",
+        "answer": "Based on your complete error log, your particle errors are **increasing** recently.\n\nHere is the exact count:\n\n- **Earlier half (entries 1–30):** 4 particle errors (entries 1, 6, 11, 31)\n- **More recent half (entries 31–60):** 9 particle errors (entries 31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60 — specifically entries 31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60; note: entry 31 is the first of the recent half, so counting from entry 31 to 60 gives 12 entries, but particle errors in that range are: 31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60 = 12 particle errors)\n\nWait — let me recount carefully.\n\nTotal entries: 60.  \nEarlier half: entries 1–30.  \nMore recent half: entries 31–60.\n\nParticle errors in entries 1–30:  \n1, 6, 11, 31? No — entry 31 is in the recent half. So entries 1–30: 1, 6, 11 = 3 particle errors.\n\nParticle errors in entries 31–60:  \n31, 36, 41, 46, 50, 53, 55, 56, 57, 58, 59, 60 = 12 particle errors.\n\nSo particle errors increased from 3 to 12. Therefore, they are **increasing**."
+      }
+    },
+    {
+      "id": "C09",
+      "type": "C",
+      "ask": "tones_trend",
+      "input": "Are my tone errors increasing or decreasing recently?",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "claimed tones decreasing vs decreasing",
+        "answer": "Great news! 📉 **Your tone errors are decreasing.** Here's the breakdown:\n\n| Category | Total Errors | Trend |\n|---|---|---|\n| **Tones** | 14 | ✅ **Decreasing** |\n| Particles (了, 的, etc.) | 15 | ⚠️ Increasing |\n| Measure words | 12 | Steady |\n| Word order | 10 | Steady |\n| Vocabulary | 9 | Decreasing |\n\nYou've had 14 tone-related errors logged, and the trend is moving in the right direction — that's real progress! 🎉\n\nYour most common tone slip-up has been confusing **mā (妈, mother)** vs **má (麻, hemp)** — the classic first-tone vs second-tone mix-up. But since the trend is *decreasing*, it looks like your ear (and your mouth) are getting better at distinguishing them.\n\n**Want to keep the momentum?** I can generate a quick tone drill for you — just say the word! Or if you'd like, we can tackle your next biggest challenge: **particles** (了, 的, 着, 过), which are currently trending upward."
+      },
+      "naked": {
+        "aggregation_correct": true,
+        "detail": "claimed tones decreasing vs decreasing",
+        "answer": "Based on your complete error log, your tone errors are **decreasing** recently.\n\nHere is the exact count:\n\n- **Total tone errors in the entire log:** 12 (entries 2, 7, 12, 16, 20, 24, 26, 27, 28, 29, 30, 32, 37, 42)\n- **First half (entries 1–30):** 9 tone errors (entries 2, 7, 12, 16, 20, 24, 26, 27, 28, 29, 30 — actually 11, let me recount carefully)\n\nLet me recount precisely:\n\n**All tone errors (by entry number):** 2, 7, 12, 16, 20, 24, 26, 27, 28, 29, 30, 32, 37, 42 = 14 total.\n\n**First half (entries 1–30):** entries 2, 7, 12, 16, 20, 24, 26, 27, 28, 29, 30 = 11 tone errors.\n\n**Second half (entries 31–60):** entries 32, 37, 42 = 3 tone errors.\n\nSince 3 is less than 11, your tone errors are **decreasing**."
+      }
+    },
+    {
+      "id": "C10",
+      "type": "C",
+      "ask": "full_breakdown",
+      "input": "Give me a full breakdown: total, exact count per category, my most frequent category, and whether each category is increasing or decreasing.",
+      "agent": {
+        "aggregation_correct": true,
+        "detail": "5/5 sub-checks passed",
+        "answer": "Here's your full error profile 📊\n\n---\n\n## 📈 Overall Stats\n\n| Metric | Value |\n|---|---|\n| **Total errors logged** | **60** |\n| **Most frequent category** | **Particles (15)** |\n| **Least frequent category** | **Vocabulary (9)** |\n\n---\n\n## 🔢 Breakdown by Category\n\n| # | Category | Count | Trend |\n|---|----------|:-----:|:-----:|\n| 1 | 🧩 **Particle** (了, 过, 的, 把, 被, etc.) | **15** | 🔺 **Increasing** |\n| 2 | 🎵 **Tones** | **14** | 🔻 **Decreasing** ✅ |\n| 3 | 📏 **Measure words** | **12** | ➡️ Steady |\n| 4 | 📝 **Word order** | **10** | ➡️ Steady |\n| 5 | 📖 **Vocabulary** (wrong word choice) | **9** | 🔻 **Decreasing** ✅ |\n\n---\n\n## 🏆 Key Takeaways\n\n1. **Your #1 problem area: Particles** — and it's *still rising*. This is the one to focus on. Your most repeated mistake is forgetting 了 with 把 sentences (e.g. 我把作业做 → 我把作业做完了).\n\n2. **Good news!** 🎉 **Tones** and **Vocabulary** are both on a **downward trend** — you're getting better at them!\n\n3. **Measure words** and **Word order** are holding steady — not getting worse, but not improving either.\n\n---\n\nWould you like me to:\n- 🔍 **Drill you on particles** (your weakest spot)?\n- 🎯 **Generate a custom quiz** mixing your top 3 error categories?\n- 📅 **Compare this to a previous checkpoint** if you have one?"
+      },
+      "naked": {
+        "aggregation_correct": true,
+        "detail": "5/5 sub-checks passed",
+        "answer": "**Total errors:** 60  \n\n**Count per category:**  \n- particle: 15  \n- tones: 14  \n- measure_word: 12  \n- word_order: 10  \n- vocabulary: 9  \n\n**Most frequent category:** particle (15 errors)  \n\n**Trends (first half entries 1–30 vs. second half entries 31–60):**  \n- particle: increasing (3 → 12)  \n- tones: decreasing (11 → 3)  \n- measure_word: stable (6 → 6)  \n- word_order: stable (5 → 5)  \n- vocabulary: decreasing (5 → 4)"
+      }
+    }
+  ]
+}
