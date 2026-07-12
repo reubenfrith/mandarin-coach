@@ -9,15 +9,28 @@ LangSmith trace per turn.
 The model is ChatLiteLLM (via OpenRouter), so every graph run is traced by
 LangSmith when LANGSMITH_TRACING is set.
 """
+import asyncio
+import os
+from collections import namedtuple
+
 from langchain.agents import create_agent
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.checkpoint.memory import MemorySaver
 from pydantic import BaseModel, Field
 
 import memory
-from config import get_llm
+from config import DEFAULT_MODEL, FALLBACK_MODEL, get_llm
 from prompts import AGENT_SYSTEM_PROMPT, ERROR_EXTRACTION_PROMPT
 from tools import make_tools
+
+# Hard ceiling on a whole agent turn (which may chain several LLM + tool calls).
+# Generous enough for a legit multi-tool reasoning turn, but bounded so a hung
+# provider can't strand the user — on breach we fall back to the fast model.
+AGENT_TURN_TIMEOUT = float(os.environ.get("AGENT_TURN_TIMEOUT", "180"))
+
+# A built coach: the primary (reasoning) graph plus a fast fallback graph. Each has
+# its own checkpointer so a partially-run primary turn can't corrupt fallback state.
+CoachAgent = namedtuple("CoachAgent", ["primary", "fallback"])
 
 VALID_CATEGORIES = {
     "grammar", "word_order", "measure_word", "particle", "vocabulary", "tones"
@@ -39,27 +52,58 @@ def answer_text(content) -> str:
     return ""
 
 
-def build_agent(user_id: str, profile_note: str = ""):
-    """Build a LangGraph tool-calling agent for one user, with conversation memory.
+def _build_graph(user_id: str, prompt: str, model_key: str):
+    """One LangGraph tool-calling graph on `model_key`, with its own checkpointer."""
+    return create_agent(
+        get_llm(model_key, streaming=False),
+        make_tools(user_id),
+        system_prompt=prompt,
+        checkpointer=MemorySaver(),
+    )
 
-    The MemorySaver checkpointer keeps per-conversation state keyed by thread_id,
-    so each turn only needs the new message (LangGraph reloads the history).
+
+def build_agent(user_id: str, profile_note: str = "") -> CoachAgent:
+    """Build the coach for one user: a primary (reasoning) graph plus a fast fallback.
+
+    Each graph's MemorySaver checkpointer keeps per-conversation state keyed by
+    thread_id, so each turn only needs the new message (LangGraph reloads history).
     """
-    tools = make_tools(user_id)
-    llm = get_llm(streaming=False)
     prompt = AGENT_SYSTEM_PROMPT + (f"\n\n{profile_note}" if profile_note else "")
-    return create_agent(llm, tools, system_prompt=prompt, checkpointer=MemorySaver())
+    return CoachAgent(
+        primary=_build_graph(user_id, prompt, DEFAULT_MODEL),
+        fallback=_build_graph(user_id, prompt, FALLBACK_MODEL),
+    )
 
 
-async def run_agent(graph, user_input: str, thread_id: str, callbacks=None) -> str:
-    """Invoke the LangGraph agent for one turn and return the final answer text."""
+async def _invoke(graph, user_input: str, config) -> str:
+    result = await asyncio.wait_for(
+        graph.ainvoke({"messages": [HumanMessage(content=user_input)]}, config=config),
+        timeout=AGENT_TURN_TIMEOUT,
+    )
+    return answer_text(result["messages"][-1].content) or "(no response)"
+
+
+async def run_agent(agent: CoachAgent, user_input: str, thread_id: str, callbacks=None) -> str:
+    """Run one turn on the primary graph; on stall/error fall back to the fast model.
+
+    The whole turn is bounded by AGENT_TURN_TIMEOUT because litellm's own request
+    timeout does not reliably interrupt a hung streaming connection (observed: a
+    deepseek call ran 34 minutes past a 600s timeout). The fallback guarantees the
+    user always gets a response.
+    """
     config = {"configurable": {"thread_id": thread_id}}
     if callbacks:
         config["callbacks"] = callbacks
-    result = await graph.ainvoke(
-        {"messages": [HumanMessage(content=user_input)]}, config=config
-    )
-    return answer_text(result["messages"][-1].content) or "(no response)"
+    try:
+        return await _invoke(agent.primary, user_input, config)
+    except Exception as e:  # noqa: BLE001 — timeout OR any provider error → fall back
+        print(f"[run_agent] primary ({DEFAULT_MODEL}) failed: {type(e).__name__}: {e}; "
+              f"falling back to {FALLBACK_MODEL}")
+    try:
+        return await _invoke(agent.fallback, user_input, config)
+    except Exception as e:  # noqa: BLE001 — both models down
+        print(f"[run_agent] fallback ({FALLBACK_MODEL}) also failed: {type(e).__name__}: {e}")
+        return "Sorry — I'm having trouble reaching the model right now. Please try again in a moment."
 
 
 # --------------------------------------------------------------------------- #

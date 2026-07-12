@@ -13,6 +13,11 @@ import os
 
 from langchain_litellm import ChatLiteLLM
 
+# Route LangSmith traces to a named project instead of "default". setdefault so an
+# explicit env var (or the eval harness, which sets its own) still wins. config is
+# imported by every app module, so this runs before the first traced LLM call.
+os.environ.setdefault("LANGSMITH_PROJECT", "mandarin-coach")
+
 # The three Chinese-native candidates for the Task 6 model bake-off.
 # Keys are the short names used everywhere else in the app / eval harness.
 MODELS = {
@@ -22,6 +27,14 @@ MODELS = {
 }
 
 DEFAULT_MODEL = "deepseek"
+# Fast, reliable non-reasoning model used as the fallback when the primary stalls
+# or errors (see agent.run_agent). deepseek is a reasoning model and occasionally
+# hangs many minutes on OpenRouter, so we need a guaranteed escape hatch.
+FALLBACK_MODEL = "glm"
+# Per-call ceiling handed to litellm (best-effort — litellm does not always honour
+# it on a hung streaming connection, which is why agent.run_agent ALSO wraps the
+# whole turn in an asyncio.wait_for hard timeout).
+REQUEST_TIMEOUT = float(os.environ.get("REQUEST_TIMEOUT", "90"))
 
 
 def get_llm(
@@ -29,11 +42,13 @@ def get_llm(
     *,
     temperature: float = 0.2,
     streaming: bool = True,
+    timeout: float = REQUEST_TIMEOUT,
 ) -> ChatLiteLLM:
     """Return a ChatLiteLLM bound to one of the candidate models.
 
     `model_key` is a short name from MODELS ("deepseek" / "glm" / "qwen"), which
     lets the eval harness swap models by key without touching the rest of the app.
+    `timeout` caps each request so a stalled provider can't hang a call forever.
     """
     if model_key not in MODELS:
         raise ValueError(
@@ -47,4 +62,5 @@ def get_llm(
         model=MODELS[model_key],
         temperature=temperature,
         streaming=streaming,
+        request_timeout=timeout,
     )

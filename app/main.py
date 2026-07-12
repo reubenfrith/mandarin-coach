@@ -77,9 +77,9 @@ async def on_chat_start():
     user_id = app_user.identifier if app_user else "local_user"
 
     profile_note = await onboard_if_new(user_id)
-    graph = build_agent(user_id, profile_note)
+    agent = build_agent(user_id, profile_note)
     cl.user_session.set("user_id", user_id)
-    cl.user_session.set("graph", graph)
+    cl.user_session.set("agent", agent)
     cl.user_session.set("thread_id", uuid.uuid4().hex)
 
     stats = memory.error_stats(user_id)
@@ -96,13 +96,13 @@ async def on_chat_start():
 
 @cl.on_message
 async def on_message(message: cl.Message):
-    graph = cl.user_session.get("graph")
+    agent = cl.user_session.get("agent")
     thread_id = cl.user_session.get("thread_id")
     user_id = cl.user_session.get("user_id")
 
     # Chainlit's LangChain callback renders each LangGraph tool call as a step.
     cb = cl.LangchainCallbackHandler()
-    answer = await run_agent(graph, message.content, thread_id, callbacks=[cb])
+    answer = await run_agent(agent, message.content, thread_id, callbacks=[cb])
     await cl.Message(content=answer).send()
 
     logged = await extract_and_log_error(user_id, message.content, answer)
