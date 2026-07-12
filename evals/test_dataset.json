@@ -1,0 +1,5333 @@
+{
+  "meta": {
+    "description": "Head-to-head eval set: agent vs naked-LLM control arm.",
+    "counts": {
+      "type_a": 40,
+      "type_b": 10,
+      "type_c": 10,
+      "total": 60
+    }
+  },
+  "type_a": [
+    {
+      "id": "A01",
+      "source": "grammar_rule",
+      "input": "我把书看。",
+      "expected_correction": "我把书看完了。",
+      "category": "grammar",
+      "expected_rule_id": "gr_ba_disposal",
+      "rule_name": "把 (bǎ) disposal construction",
+      "reference_explanation": "The 把 construction moves the object before the verb to emphasise what is DONE TO that object: Subject + 把 + Object + Verb + (result/complement). The verb must be transitive and must carry something extra after it (a complement, 了, a result), because 把 stresses the disposal or effect on the object."
+    },
+    {
+      "id": "A02",
+      "source": "grammar_rule",
+      "input": "她把书被他借走了。",
+      "expected_correction": "书被他借走了。",
+      "category": "grammar",
+      "expected_rule_id": "gr_bei_passive",
+      "rule_name": "被 (bèi) passive construction",
+      "reference_explanation": "被 marks the passive: Receiver + 被 + (Agent) + Verb + (extra). The subject is the thing acted UPON. The agent after 被 is optional. Like 把, the verb usually needs a complement or 了 after it."
+    },
+    {
+      "id": "A03",
+      "source": "grammar_rule",
+      "input": "以前我每天喝了咖啡。",
+      "expected_correction": "以前我每天喝咖啡。",
+      "category": "particle",
+      "expected_rule_id": "gr_le_completion",
+      "rule_name": "了 (le) as completed action",
+      "reference_explanation": "Verb + 了 marks that an action is completed or actualised, especially with a quantified or specific object: 我买了三本书. It is about completion of a specific event, not past tense in general."
+    },
+    {
+      "id": "A04",
+      "source": "grammar_rule",
+      "input": "我今年二十岁。（when reporting a birthday just passed）",
+      "expected_correction": "我今年二十岁了。",
+      "category": "particle",
+      "expected_rule_id": "gr_le_change",
+      "rule_name": "了 (le) as change of state (sentence-final)",
+      "reference_explanation": "Sentence-final 了 signals a new situation or change of state: 我饿了 (I'm hungry now), 天黑了 (it's gotten dark). It reports that something is now different from before."
+    },
+    {
+      "id": "A05",
+      "source": "grammar_rule",
+      "input": "我吃了日本菜，很喜欢。（meaning: I have tried Japanese food）",
+      "expected_correction": "我吃过日本菜，很喜欢。",
+      "category": "particle",
+      "expected_rule_id": "gr_guo_experience",
+      "rule_name": "过 (guò) experiential aspect",
+      "reference_explanation": "Verb + 过 says an experience has happened at least once in the past: 我去过中国 (I have been to China). It emphasises past experience, not a specific completed event."
+    },
+    {
+      "id": "A06",
+      "source": "grammar_rule",
+      "input": "你怎么来了这里？（asking by what means）",
+      "expected_correction": "你是怎么来的？",
+      "category": "grammar",
+      "expected_rule_id": "gr_shi_de",
+      "rule_name": "是……的 (shì...de) emphasis construction",
+      "reference_explanation": "For a completed action, 是……的 emphasises a circumstance — when, where, how, or with whom: 我是昨天来的 (it was yesterday that I came). 是 goes before the emphasised element; 的 comes at the end."
+    },
+    {
+      "id": "A07",
+      "source": "grammar_rule",
+      "input": "我有三书。",
+      "expected_correction": "我有三本书。",
+      "category": "measure_word",
+      "expected_rule_id": "gr_measure_words",
+      "rule_name": "Measure words (量词)",
+      "reference_explanation": "Chinese requires a measure word between a number/demonstrative and a noun: Number + Measure Word + Noun. Different nouns take different measure words (本 for books, 个 for general items, 张 for flat things, 杯 for cups)."
+    },
+    {
+      "id": "A08",
+      "source": "grammar_rule",
+      "input": "我在知道答案。",
+      "expected_correction": "我知道答案。",
+      "category": "grammar",
+      "expected_rule_id": "gr_zai_progressive",
+      "rule_name": "在/正在 (zài/zhèngzài) progressive aspect",
+      "reference_explanation": "在 or 正在 before the verb marks an action in progress: 我在看书 (I am reading). 呢 can be added at the end for emphasis. This describes ongoing actions, not states."
+    },
+    {
+      "id": "A09",
+      "source": "grammar_rule",
+      "input": "他写汉字得很漂亮。",
+      "expected_correction": "他写汉字写得很漂亮。",
+      "category": "particle",
+      "expected_rule_id": "gr_de_complement",
+      "rule_name": "得 (de) degree/manner complement",
+      "reference_explanation": "Verb + 得 + complement describes how well or to what degree an action is done: 他跑得很快 (he runs fast). If the verb has an object, repeat the verb: 他说汉语说得很好."
+    },
+    {
+      "id": "A10",
+      "source": "grammar_rule",
+      "input": "他高兴的笑了。",
+      "expected_correction": "他高兴地笑了。",
+      "category": "particle",
+      "expected_rule_id": "gr_de_di_de",
+      "rule_name": "的 / 得 / 地 (de) distinction",
+      "reference_explanation": "All read 'de' but differ: 的 links a modifier to a noun (我的书), 地 links an adverbial to a verb (慢慢地走), 得 links a verb to a complement of degree/result (走得慢)."
+    },
+    {
+      "id": "A11",
+      "source": "grammar_rule",
+      "input": "今天比昨天很热。",
+      "expected_correction": "今天比昨天热。",
+      "category": "grammar",
+      "expected_rule_id": "gr_bi_comparison",
+      "rule_name": "比 (bǐ) comparison",
+      "reference_explanation": "A + 比 + B + Adjective states A is more [adj] than B: 他比我高. Do NOT use 很/非常 with the adjective; use 更 or a concrete amount (高一点儿, 高得多)."
+    },
+    {
+      "id": "A12",
+      "source": "grammar_rule",
+      "input": "我去中国明年。",
+      "expected_correction": "我明年去中国。",
+      "category": "word_order",
+      "expected_rule_id": "gr_time_before_place",
+      "rule_name": "Word order: time and place before the verb",
+      "reference_explanation": "Chinese puts time-when and place adverbials BEFORE the verb, not after: Subject + Time + Place + Verb + Object. 我明天在家看书, not 我看书在家明天."
+    },
+    {
+      "id": "A13",
+      "source": "grammar_rule",
+      "input": "我三个小时看书了。",
+      "expected_correction": "我看书看了三个小时。",
+      "category": "word_order",
+      "expected_rule_id": "gr_duration_complement",
+      "rule_name": "Duration complement (time how long)",
+      "reference_explanation": "Duration goes AFTER the verb: Verb + Duration. With an object, repeat the verb or place duration between verb and object: 我学汉语学了两年 / 我学了两年汉语."
+    },
+    {
+      "id": "A14",
+      "source": "grammar_rule",
+      "input": "我要二杯咖啡。",
+      "expected_correction": "我要两杯咖啡。",
+      "category": "word_order",
+      "expected_rule_id": "gr_liang_er",
+      "rule_name": "两 (liǎng) vs 二 (èr)",
+      "reference_explanation": "Use 两 before a measure word to mean 'two of something' (两个人); use 二 for the number itself, counting, and ordinals (第二, 二十)."
+    },
+    {
+      "id": "A15",
+      "source": "grammar_rule",
+      "input": "这个一点儿贵。",
+      "expected_correction": "这个有点儿贵。",
+      "category": "word_order",
+      "expected_rule_id": "gr_youdianr_yidianr",
+      "rule_name": "有点儿 (yǒudiǎnr) vs 一点儿 (yìdiǎnr)",
+      "reference_explanation": "有点儿 + Adjective goes before the adjective and implies something undesirable (有点儿贵 = a bit too expensive). Adjective + 一点儿 goes after and means 'a little more' as a comparison (便宜一点儿 = a little cheaper)."
+    },
+    {
+      "id": "A16",
+      "source": "grammar_rule",
+      "input": "我能说三种语言。",
+      "expected_correction": "我会说三种语言。",
+      "category": "grammar",
+      "expected_rule_id": "gr_hui_neng_keyi",
+      "rule_name": "会 / 能 / 可以 (huì/néng/kěyǐ) modals",
+      "reference_explanation": "会 = a learned ability (会说汉语); 能 = physical capability or possibility in the moment (今天不能来); 可以 = permission (这里可以抽烟吗). They overlap but the core sense differs."
+    },
+    {
+      "id": "A17",
+      "source": "grammar_rule",
+      "input": "他昨天很晚就睡觉。",
+      "expected_correction": "他昨天很晚才睡觉。",
+      "category": "grammar",
+      "expected_rule_id": "gr_jiu_cai",
+      "rule_name": "就 (jiù) vs 才 (cái)",
+      "reference_explanation": "就 suggests something happens sooner/easily than expected (他七点就来了 = as early as 7); 才 suggests later/harder than expected (他九点才来 = not until 9). Note 就 often takes 了; 才 usually does not."
+    },
+    {
+      "id": "A18",
+      "source": "grammar_rule",
+      "input": "我不听懂老师的话。",
+      "expected_correction": "我没听懂老师的话。",
+      "category": "grammar",
+      "expected_rule_id": "gr_resultative",
+      "rule_name": "Resultative complements (看完, 听懂)",
+      "reference_explanation": "A second verb/adjective attaches to the main verb to show the RESULT: 看完 (finish reading), 听懂 (understand by listening), 写错 (write wrongly). Negate with 没 (没看完), not 不."
+    },
+    {
+      "id": "A19",
+      "source": "grammar_rule",
+      "input": "他跑来进教室。",
+      "expected_correction": "他跑进教室来。",
+      "category": "grammar",
+      "expected_rule_id": "gr_directional",
+      "rule_name": "Directional complements (进来, 出去)",
+      "reference_explanation": "来/去 and directional verbs (上下进出回过) attach to a verb to show direction relative to the speaker: 进来 (come in), 拿出去 (take out). A place object goes before 来/去: 回家来."
+    },
+    {
+      "id": "A20",
+      "source": "grammar_rule",
+      "input": "因为下雨，我没去。（acceptable, but learners often force English single-conjunction）",
+      "expected_correction": "因为下雨，所以我没去。",
+      "category": "grammar",
+      "expected_rule_id": "gr_yinwei_suoyi",
+      "rule_name": "因为……所以…… (yīnwèi...suǒyǐ) cause and result",
+      "reference_explanation": "Paired conjunctions are common in Chinese: 因为 (because) in the first clause, 所以 (so) in the second. Using both is natural, unlike English which uses only one."
+    },
+    {
+      "id": "A21",
+      "source": "grammar_rule",
+      "input": "虽然很累，我很开心。",
+      "expected_correction": "虽然很累，但是我很开心。",
+      "category": "grammar",
+      "expected_rule_id": "gr_suiran_danshi",
+      "rule_name": "虽然……但是…… (suīrán...dànshì) although",
+      "reference_explanation": "虽然 (although) pairs with 但是/可是 (but) in the following clause. Both are used together in Chinese."
+    },
+    {
+      "id": "A22",
+      "source": "grammar_rule",
+      "input": "你想去北京或者上海？",
+      "expected_correction": "你想去北京还是上海？",
+      "category": "grammar",
+      "expected_rule_id": "gr_haishi_huozhe",
+      "rule_name": "还是 (háishì) vs 或者 (huòzhě) — 'or'",
+      "reference_explanation": "还是 is 'or' in questions offering a choice (你喝茶还是咖啡？); 或者 is 'or' in statements (我喝茶或者咖啡都行)."
+    },
+    {
+      "id": "A23",
+      "source": "grammar_rule",
+      "input": "我在这儿住了三年。（meaning: and still live here）",
+      "expected_correction": "我在这儿住了三年了。",
+      "category": "particle",
+      "expected_rule_id": "gr_double_le",
+      "rule_name": "Verb + 了 + object + 了 (ongoing up to now)",
+      "reference_explanation": "Two 了 with a duration mean an action has been going on and continues: 我学了两年汉语了 (I have been studying Chinese for two years and still am). The sentence-final 了 adds the 'up to now, still true' sense."
+    },
+    {
+      "id": "A24",
+      "source": "grammar_rule",
+      "input": "我是学生，你吗？",
+      "expected_correction": "我是学生，你呢？",
+      "category": "particle",
+      "expected_rule_id": "gr_ne_question",
+      "rule_name": "呢 (ne) follow-up question",
+      "reference_explanation": "呢 turns a noun/pronoun into a 'what about...?' follow-up question when a topic is already established: 我很好，你呢？(I'm fine, and you?)."
+    },
+    {
+      "id": "A25",
+      "source": "error_pattern",
+      "input": "她把书被他借走了。",
+      "expected_correction": "书被他借走了。",
+      "expected_correction_alternatives": "书被他借走了。 / 她把书借给了他。",
+      "category": "grammar",
+      "expected_rule_id": null,
+      "rule_name": "Mixing 把 and 被 in one clause",
+      "reference_explanation": "把 = subject acts on object; 被 = subject is acted upon. Choose one based on which noun is the topic."
+    },
+    {
+      "id": "A26",
+      "source": "error_pattern",
+      "input": "小时候我每天喝了牛奶。",
+      "expected_correction": "小时候我每天喝牛奶。",
+      "expected_correction_alternatives": "小时候我每天喝牛奶。",
+      "category": "particle",
+      "expected_rule_id": null,
+      "rule_name": "Treating 了 as a general past-tense marker",
+      "reference_explanation": "了 marks completion of a specific event, not past tense. Habitual past takes no 了."
+    },
+    {
+      "id": "A27",
+      "source": "error_pattern",
+      "input": "我买了三书。",
+      "expected_correction": "我买了三本书。",
+      "expected_correction_alternatives": "我买了三本书。",
+      "category": "measure_word",
+      "expected_rule_id": null,
+      "rule_name": "Omitting the measure word",
+      "reference_explanation": "Number/demonstrative + Measure Word + Noun is obligatory in Chinese."
+    },
+    {
+      "id": "A28",
+      "source": "error_pattern",
+      "input": "三个书、两个纸",
+      "expected_correction": "三本书、两张纸",
+      "expected_correction_alternatives": "三本书、两张纸",
+      "category": "measure_word",
+      "expected_rule_id": null,
+      "rule_name": "Overusing 个 as a default measure word",
+      "reference_explanation": "个 is general but many nouns need a specific measure word (本 books, 张 flat items, 只 animals)."
+    },
+    {
+      "id": "A29",
+      "source": "error_pattern",
+      "input": "他比我很高。",
+      "expected_correction": "他比我高。",
+      "expected_correction_alternatives": "他比我高。 / 他比我高得多。",
+      "category": "grammar",
+      "expected_rule_id": null,
+      "rule_name": "Using 很/非常 in a 比 comparison",
+      "reference_explanation": "For degree in a 比 sentence use 更, or a quantity like 一点儿 / 得多."
+    },
+    {
+      "id": "A30",
+      "source": "error_pattern",
+      "input": "我去中国明年。",
+      "expected_correction": "我明年去中国。",
+      "expected_correction_alternatives": "我明年去中国。",
+      "category": "word_order",
+      "expected_rule_id": null,
+      "rule_name": "English word order for time and place",
+      "reference_explanation": "Chinese: Subject + Time + Place + Verb + Object."
+    },
+    {
+      "id": "A31",
+      "source": "error_pattern",
+      "input": "他跑的很快。",
+      "expected_correction": "他跑得很快。",
+      "expected_correction_alternatives": "他跑得很快。",
+      "category": "particle",
+      "expected_rule_id": null,
+      "rule_name": "Writing 的 for all three 'de'",
+      "reference_explanation": "的 (noun modifier), 地 (adverb + verb), 得 (verb + degree complement)."
+    },
+    {
+      "id": "A32",
+      "source": "error_pattern",
+      "input": "虽然很贵，我还是买了。",
+      "expected_correction": "虽然很贵，但是我还是买了。",
+      "expected_correction_alternatives": "虽然很贵，但是我还是买了。",
+      "category": "grammar",
+      "expected_rule_id": null,
+      "rule_name": "Dropping the second half of a paired conjunction",
+      "reference_explanation": "Chinese commonly keeps both: 虽然……但是, 因为……所以, 不但……而且."
+    },
+    {
+      "id": "A33",
+      "source": "error_pattern",
+      "input": "我去了法国，很漂亮。（meaning: I have been to France）",
+      "expected_correction": "我去过法国，很漂亮。",
+      "expected_correction_alternatives": "我去过法国，很漂亮。",
+      "category": "particle",
+      "expected_rule_id": null,
+      "rule_name": "Using 了 where experiential 过 is meant",
+      "reference_explanation": "过 = have ever experienced; 了 = a specific completed event."
+    },
+    {
+      "id": "A34",
+      "source": "error_pattern",
+      "input": "请把门开。",
+      "expected_correction": "请把门打开。",
+      "expected_correction_alternatives": "请把门打开。",
+      "category": "grammar",
+      "expected_rule_id": null,
+      "rule_name": "把 sentence with a bare verb",
+      "reference_explanation": "把 + Object + Verb + (complement/了/result). A bare verb is ungrammatical."
+    },
+    {
+      "id": "A35",
+      "source": "error_pattern",
+      "input": "我能开车，我学了很久。",
+      "expected_correction": "我会开车，我学了很久。",
+      "expected_correction_alternatives": "我会开车，我学了很久。",
+      "category": "grammar",
+      "expected_rule_id": null,
+      "rule_name": "Using 能 for a learned skill",
+      "reference_explanation": "会 = acquired skill; 能 = capability/possibility right now; 可以 = permission."
+    },
+    {
+      "id": "A36",
+      "source": "error_pattern",
+      "input": "我两个小时看了书。",
+      "expected_correction": "我看书看了两个小时。",
+      "expected_correction_alternatives": "我看书看了两个小时。",
+      "category": "word_order",
+      "expected_rule_id": null,
+      "rule_name": "Placing duration before the verb",
+      "reference_explanation": "Duration (how long) goes AFTER the verb; repeat the verb if there is an object."
+    },
+    {
+      "id": "A37",
+      "source": "error_pattern",
+      "input": "你要茶或者咖啡？",
+      "expected_correction": "你要茶还是咖啡？",
+      "expected_correction_alternatives": "你要茶还是咖啡？",
+      "category": "grammar",
+      "expected_rule_id": null,
+      "rule_name": "Using 或者 in a choice question",
+      "reference_explanation": "还是 = 'or' in choice questions; 或者 = 'or' in statements."
+    },
+    {
+      "id": "A38",
+      "source": "error_pattern",
+      "input": "我不看懂这本书。",
+      "expected_correction": "我没看懂这本书。",
+      "expected_correction_alternatives": "我没看懂这本书。",
+      "category": "grammar",
+      "expected_rule_id": null,
+      "rule_name": "Negating a completed/resultative verb with 不",
+      "reference_explanation": "没 negates completion/result and past events; 不 negates habits, willingness, and present/future."
+    },
+    {
+      "id": "A39",
+      "source": "error_pattern",
+      "input": "她是很高。",
+      "expected_correction": "她很高。",
+      "expected_correction_alternatives": "她很高。",
+      "category": "grammar",
+      "expected_rule_id": null,
+      "rule_name": "Inserting 是 before a predicate adjective",
+      "reference_explanation": "Adjectives are predicates on their own; use 很 (often bleached) not 是."
+    },
+    {
+      "id": "A40",
+      "source": "error_pattern",
+      "input": "我很好，你吗？",
+      "expected_correction": "我很好，你呢？",
+      "expected_correction_alternatives": "我很好，你呢？",
+      "category": "particle",
+      "expected_rule_id": null,
+      "rule_name": "Using 吗 for a 'what about you' follow-up",
+      "reference_explanation": "呢 asks 'what about X?' when the topic is already set; 吗 makes a yes/no question."
+    }
+  ],
+  "type_b": [
+    {
+      "id": "B01",
+      "category": "particle",
+      "seed": [
+        {
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "category": "particle",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 40
+        },
+        {
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "category": "particle",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 37
+        },
+        {
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "category": "particle",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 34
+        },
+        {
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "category": "particle",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 31
+        }
+      ],
+      "input": "我把门关",
+      "expected_correction": "我把门关上了",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B02",
+      "category": "particle",
+      "seed": [
+        {
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "category": "particle",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "category": "particle",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 17
+        },
+        {
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "category": "particle",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 14
+        },
+        {
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "category": "particle",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        }
+      ],
+      "input": "他跑很快",
+      "expected_correction": "他跑得很快",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B03",
+      "category": "tones",
+      "seed": [
+        {
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "category": "tones",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 40
+        },
+        {
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "category": "tones",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "category": "tones",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "category": "tones",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        }
+      ],
+      "input": "我要卖一本书（想买）",
+      "expected_correction": "我要买一本书",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B04",
+      "category": "tones",
+      "seed": [
+        {
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "category": "tones",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 20
+        },
+        {
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "category": "tones",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 17
+        },
+        {
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "category": "tones",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 14
+        },
+        {
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "category": "tones",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 11
+        }
+      ],
+      "input": "他是我的老师（说成 lǎoshī→lāoshī）",
+      "expected_correction": "他是我的老师",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B05",
+      "category": "measure_word",
+      "seed": [
+        {
+          "original": "三个书",
+          "correction": "三本书",
+          "category": "measure_word",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "category": "measure_word",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 37
+        },
+        {
+          "original": "两个车",
+          "correction": "两辆车",
+          "category": "measure_word",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 34
+        },
+        {
+          "original": "五个纸",
+          "correction": "五张纸",
+          "category": "measure_word",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 31
+        }
+      ],
+      "input": "三个书",
+      "expected_correction": "三本书",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B06",
+      "category": "measure_word",
+      "seed": [
+        {
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "category": "measure_word",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 20
+        },
+        {
+          "original": "两个车",
+          "correction": "两辆车",
+          "category": "measure_word",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 17
+        },
+        {
+          "original": "五个纸",
+          "correction": "五张纸",
+          "category": "measure_word",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "original": "三个书",
+          "correction": "三本书",
+          "category": "measure_word",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 11
+        }
+      ],
+      "input": "一个茶",
+      "expected_correction": "一杯茶",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B07",
+      "category": "word_order",
+      "seed": [
+        {
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "category": "word_order",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 40
+        },
+        {
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "category": "word_order",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 37
+        },
+        {
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "category": "word_order",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 34
+        },
+        {
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "category": "word_order",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 31
+        }
+      ],
+      "input": "我去商店买东西每天",
+      "expected_correction": "我每天去商店买东西",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B08",
+      "category": "word_order",
+      "seed": [
+        {
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "category": "word_order",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 20
+        },
+        {
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "category": "word_order",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "category": "word_order",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 14
+        },
+        {
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "category": "word_order",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 11
+        }
+      ],
+      "input": "我很喜欢非常这个",
+      "expected_correction": "我非常喜欢这个",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B09",
+      "category": "vocabulary",
+      "seed": [
+        {
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "category": "vocabulary",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 40
+        },
+        {
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "category": "vocabulary",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 37
+        },
+        {
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "category": "vocabulary",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 34
+        },
+        {
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "category": "vocabulary",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 31
+        }
+      ],
+      "input": "我知道他很久了（应为认识）",
+      "expected_correction": "我认识他很久了",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    },
+    {
+      "id": "B10",
+      "category": "vocabulary",
+      "seed": [
+        {
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "category": "vocabulary",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 20
+        },
+        {
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "category": "vocabulary",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 17
+        },
+        {
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "category": "vocabulary",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 14
+        },
+        {
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "category": "vocabulary",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 11
+        }
+      ],
+      "input": "我们做朋友吧（应为交）",
+      "expected_correction": "我们交朋友吧",
+      "seeded_count": 4,
+      "expected_min_count": 5
+    }
+  ],
+  "type_c": [
+    {
+      "id": "C01",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "total",
+      "input": "How many errors have I logged in total? Give the exact number.",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C02",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "most_frequent",
+      "input": "Which single error category do I make most often, and how many times?",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C03",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "count_particle",
+      "input": "Exactly how many particle errors have I made?",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C04",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "count_tones",
+      "input": "Exactly how many tone errors have I made?",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C05",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "count_measure_word",
+      "input": "Exactly how many measure-word errors have I made?",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C06",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "increasing",
+      "input": "Which of my error categories are increasing recently?",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C07",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "decreasing",
+      "input": "Which of my error categories are decreasing (getting better) recently?",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C08",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "particle_trend",
+      "input": "Are my particle errors increasing or decreasing recently?",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C09",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "tones_trend",
+      "input": "Are my tone errors increasing or decreasing recently?",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "C10",
+      "seed": [
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 60
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 59
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 58
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 57
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 56
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 55
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 54
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 53
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 52
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 51
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 50
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 49
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 48
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 47
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 46
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 45
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 44
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 43
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 42
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 41
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 40
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 39
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 38
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 37
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 36
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 35
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 34
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 33
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 32
+        },
+        {
+          "category": "tones",
+          "original": "我problem说不清楚声调 mā/má",
+          "correction": "我妈妈很忙",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 31
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 30
+        },
+        {
+          "category": "tones",
+          "original": "请wèn一下（读成 wén）",
+          "correction": "请问一下",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 29
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 28
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 27
+        },
+        {
+          "category": "vocabulary",
+          "original": "我们做朋友吧（应为交）",
+          "correction": "我们交朋友吧",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 26
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 25
+        },
+        {
+          "category": "tones",
+          "original": "我要卖一本书（想买）",
+          "correction": "我要买一本书",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 24
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 23
+        },
+        {
+          "category": "word_order",
+          "original": "他昨天不去了学校",
+          "correction": "他昨天没去学校",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 22
+        },
+        {
+          "category": "vocabulary",
+          "original": "我要开我的电脑（应为打开）",
+          "correction": "我要打开我的电脑",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 21
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 20
+        },
+        {
+          "category": "tones",
+          "original": "他是我的老师（说成 lǎoshī→lāoshī）",
+          "correction": "他是我的老师",
+          "explanation": "Tone or pinyin confusion between similar syllables.",
+          "days_ago": 19
+        },
+        {
+          "category": "measure_word",
+          "original": "三个书",
+          "correction": "三本书",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 18
+        },
+        {
+          "category": "word_order",
+          "original": "我吃饭在食堂",
+          "correction": "我在食堂吃饭",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 17
+        },
+        {
+          "category": "vocabulary",
+          "original": "我看医生（应为看病）",
+          "correction": "我去看病",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 16
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 15
+        },
+        {
+          "category": "measure_word",
+          "original": "一个茶",
+          "correction": "一杯茶",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 14
+        },
+        {
+          "category": "word_order",
+          "original": "我去商店买东西每天",
+          "correction": "我每天去商店买东西",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 13
+        },
+        {
+          "category": "vocabulary",
+          "original": "我知道他很久了（应为认识）",
+          "correction": "我认识他很久了",
+          "explanation": "Wrong word choice for the intended meaning.",
+          "days_ago": 12
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 11
+        },
+        {
+          "category": "measure_word",
+          "original": "两个车",
+          "correction": "两辆车",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 10
+        },
+        {
+          "category": "word_order",
+          "original": "我很喜欢非常这个",
+          "correction": "我非常喜欢这个",
+          "explanation": "Adverbial/time phrase in the wrong position.",
+          "days_ago": 9
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 8
+        },
+        {
+          "category": "measure_word",
+          "original": "五个纸",
+          "correction": "五张纸",
+          "explanation": "Wrong measure word for the noun.",
+          "days_ago": 7
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 6
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 5
+        },
+        {
+          "category": "particle",
+          "original": "我把作业做",
+          "correction": "我把作业做完了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 4
+        },
+        {
+          "category": "particle",
+          "original": "我把门关",
+          "correction": "我把门关上了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 3
+        },
+        {
+          "category": "particle",
+          "original": "他跑很快",
+          "correction": "他跑得很快",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 2
+        },
+        {
+          "category": "particle",
+          "original": "我高兴的笑了",
+          "correction": "我高兴地笑了",
+          "explanation": "Particle/complement misuse (把 / 得 / 地).",
+          "days_ago": 1
+        }
+      ],
+      "ask": "full_breakdown",
+      "input": "Give me a full breakdown: total, exact count per category, my most frequent category, and whether each category is increasing or decreasing.",
+      "truth": {
+        "total": 60,
+        "by_category": {
+          "particle": 15,
+          "tones": 14,
+          "measure_word": 12,
+          "word_order": 10,
+          "vocabulary": 9
+        },
+        "trend": {
+          "particle": "increasing",
+          "tones": "decreasing",
+          "measure_word": "steady",
+          "word_order": "steady",
+          "vocabulary": "decreasing"
+        },
+        "most_frequent": "particle",
+        "increasing": [
+          "particle"
+        ],
+        "decreasing": [
+          "tones",
+          "vocabulary"
+        ]
+      }
+    }
+  ]
+}
