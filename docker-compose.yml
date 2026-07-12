@@ -15,7 +15,10 @@ services:
       - USER_DB_PATH=/var/data/users.db          # user accounts on the durable volume
       - CHAINLIT_AUTH_SECRET=${CHAINLIT_AUTH_SECRET}
     volumes:
-      - chroma-data:/var/data       # persists the ChromaDB corpus + user DB across restarts
+      # Bind-mount a dedicated GCP persistent disk (mounted at /mnt/mandarin-data
+      # on the host) so the ChromaDB corpus + user DB survive VM deletion and can
+      # be snapshotted. Override DATA_DIR for other environments.
+      - ${DATA_DIR:-/mnt/mandarin-data}:/var/data
     restart: unless-stopped
     # No published ports: only Caddy is exposed to the internet.
 
@@ -35,6 +38,5 @@ services:
     restart: unless-stopped
 
 volumes:
-  chroma-data:
   caddy-data:
   caddy-config:

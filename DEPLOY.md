@@ -54,6 +54,31 @@ gcloud compute instances describe mandarin-coach \
 # e.g. 34.129.1.2  ->  hostname 34-129-1-2.nip.io
 ```
 
+## 2b. Create and attach a persistent disk (durable storage)
+
+A dedicated disk keeps the ChromaDB corpus + user accounts independent of the VM,
+so they survive VM deletion and can be snapshotted.
+
+```bash
+gcloud compute disks create mandarin-data --size=10GB --type=pd-balanced
+gcloud compute instances attach-disk mandarin-coach \
+  --disk=mandarin-data --device-name=mandarin-data
+```
+
+On the VM, format (first time only) and mount it at `/mnt/mandarin-data`:
+
+```bash
+DEV=/dev/disk/by-id/google-mandarin-data
+sudo blkid $DEV || sudo mkfs.ext4 -m 0 -F $DEV     # format only if empty
+sudo mkdir -p /mnt/mandarin-data
+sudo mount -o discard,defaults $DEV /mnt/mandarin-data
+echo "UUID=$(sudo blkid -s UUID -o value $DEV) /mnt/mandarin-data ext4 discard,defaults,nofail 0 2" | sudo tee -a /etc/fstab
+```
+
+`docker-compose.yml` bind-mounts `/mnt/mandarin-data` into the container at
+`/var/data` (override with `DATA_DIR` for other environments). Snapshot it with
+`gcloud compute disks snapshot mandarin-data`.
+
 ## 3. SSH in and install Docker
 
 ```bash
@@ -106,8 +131,9 @@ persists on the `chroma-data` volume across restarts.
 
 - **Update after a push:** `git pull && docker compose up -d --build`
 - **Logs:** `docker compose logs -f app`
-- **Persistence:** the `chroma-data` volume survives `compose down`/restarts. To
-  wipe the corpus: `docker compose down -v`.
+- **Persistence:** the ChromaDB corpus + user accounts live on the `/mnt/mandarin-data`
+  persistent disk, which survives VM deletion and `compose down`. Snapshot it with
+  `gcloud compute disks snapshot mandarin-data` for backups.
 - **Cost:** an always-on `e2-small` is roughly USD $13/mo. `gcloud compute
   instances stop mandarin-coach` when idle to pause billing (data is kept).
 - **If nip.io TLS fails** (Let's Encrypt rate limits it occasionally): use
