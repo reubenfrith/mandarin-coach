@@ -21,6 +21,10 @@ slow"). Right-sized to `e2-small` with real vCPUs — not a throttled `e2-micro`
 export PROJECT=your-gcp-project-id
 gcloud config set project $PROJECT
 gcloud config set compute/zone australia-southeast2-a
+
+# One-time: enable the Compute Engine API on the project (the gcloud compute
+# commands below call this API). Skip if it's already enabled.
+gcloud services enable compute.googleapis.com
 ```
 
 ## 1. Firewall — allow HTTP/HTTPS
