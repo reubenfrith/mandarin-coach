@@ -144,12 +144,17 @@ class AggregationClaims(BaseModel):
 
 _AGG_SYS = (
     "You are a precise information extractor. Read a tutoring answer and extract ONLY the "
-    "numerical claims it actually makes about the learner's error statistics. Capture a "
-    "category's count whether it appears in a full breakdown OR is mentioned in prose "
-    "(e.g. 'you've made 15 particle errors' -> particle_count=15). Map synonyms to the right "
-    "field (e.g. 把/了/的/得 -> particle; word choice -> vocabulary). For increasing/decreasing, "
-    "list a category only if the answer explicitly says its trend is rising or falling. "
-    "Do NOT infer, correct, or add anything the answer does not state; leave unstated values null."
+    "numerical claims it actually makes about the learner's error statistics. The answer "
+    "often uses a MARKDOWN TABLE with a Count column and a Trend column, and/or prose. "
+    "Read BOTH. Capture a category's count whether it appears in a table row, a full "
+    "breakdown, OR prose (e.g. 'you've made 15 particle errors' -> particle_count=15; a "
+    "table row '| Particle | 15 | Increasing |' -> particle_count=15 and particle is "
+    "increasing). Map synonyms to the right field (把/了/的/得/地 -> particle; word choice -> "
+    "vocabulary; 量词 -> measure_word). For trend, treat words 'increasing/rising/worse' and "
+    "up-arrows (⬆️ 📈 🔺) as INCREASING, and 'decreasing/falling/improving/better' and "
+    "down-arrows (⬇️ 📉 🔻) as DECREASING; 'steady/stable' or ➡️ is neither. Put each category "
+    "in the increasing or decreasing list according to its stated trend. Do NOT infer counts "
+    "the answer does not give; leave unstated counts null."
 )
 
 

@@ -30,6 +30,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
+import agg_parse
 import memory
 import llm_judge as J
 from agent import answer_text, build_agent
@@ -227,12 +228,10 @@ async def run_type_c(case: dict, shared_uid: str) -> dict:
             agent_run(shared_uid, case["id"], case["input"]),
             naked_run(NAKED_ANALYST_SYS, naked_content),
         )
-        a_claims, n_claims = await asyncio.gather(
-            safe(J.extract_aggregation(a_ans), J.AggregationClaims()),
-            safe(J.extract_aggregation(n_ans), J.AggregationClaims()),
-        )
-        a_ok, a_why = J.score_aggregation(case["ask"], a_claims, case["truth"])
-        n_ok, n_why = J.score_aggregation(case["ask"], n_claims, case["truth"])
+        # Deterministic parse (no LLM): reliable and reproducible, where LLM extraction
+        # was too flaky on emoji markdown tables and collapsed the head-to-head to noise.
+        a_ok, a_why = J.score_aggregation(case["ask"], agg_parse.parse(a_ans, case["ask"]), case["truth"])
+        n_ok, n_why = J.score_aggregation(case["ask"], agg_parse.parse(n_ans, case["ask"]), case["truth"])
         return {
             "id": case["id"], "type": "C", "ask": case["ask"], "input": case["input"],
             "agent": {"aggregation_correct": a_ok, "detail": a_why, "answer": a_ans},
