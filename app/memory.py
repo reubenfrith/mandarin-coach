@@ -17,6 +17,7 @@ app runs without an OpenAI key. Override with EMBEDDING_MODEL=openai|default.
 """
 import json
 import os
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -198,8 +199,18 @@ def query_hsk_vocabulary(text: str, n: int = 3, where: dict | None = None) -> li
 # --------------------------------------------------------------------------- #
 # Personal errors: per-user, growing corpus
 # --------------------------------------------------------------------------- #
+def _safe_ns(user_id: str) -> str:
+    """Turn a username into a valid ChromaDB collection prefix.
+
+    Collection names allow only [a-zA-Z0-9._-]; sanitise anything else so an
+    arbitrary username can't produce an invalid collection name.
+    """
+    safe = re.sub(r"[^a-zA-Z0-9_-]", "_", (user_id or "user").lower())
+    return safe or "user"
+
+
 def personal_errors_collection(user_id: str):
-    return _collection(f"{user_id}_personal_errors")
+    return _collection(f"{_safe_ns(user_id)}_personal_errors")
 
 
 def add_personal_error(
@@ -232,7 +243,7 @@ def add_personal_error(
 
 
 def query_personal_errors(user_id: str, text: str, n: int = 5) -> list:
-    return _query(f"{user_id}_personal_errors", text, n, {"user_id": user_id})
+    return _query(f"{_safe_ns(user_id)}_personal_errors", text, n, {"user_id": user_id})
 
 
 def error_stats(user_id: str) -> dict:

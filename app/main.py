@@ -1,15 +1,17 @@
-"""Chainlit entry point — the coaching agent UI.
+"""Chainlit entry point — the coaching agent UI, with per-user accounts.
 
-Path: browser -> Chainlit -> tool-calling agent (ChatLiteLLM + 5 tools + ChromaDB
-memory) -> OpenRouter. Each tool call is surfaced as a step so the agent's
-reasoning is visible.
+Simple username/password auth (no OAuth). The authenticated username namespaces
+that user's ChromaDB error corpus, so every user has a separate, persistent
+profile. First login auto-creates the account and asks for the learner's level.
 
-Run locally:  uv run chainlit run app/main.py -w
+Path: browser -> login -> Chainlit -> tool-calling agent (ChatLiteLLM + 5 tools +
+per-user ChromaDB memory) -> OpenRouter.
+
+Run locally:  uv run chainlit run app/main.py -w   (set CHAINLIT_AUTH_SECRET first)
 """
 import os
 import sys
 
-# Ensure sibling modules import regardless of working directory.
 sys.path.insert(0, os.path.dirname(__file__))
 
 import chainlit as cl
@@ -17,12 +19,26 @@ from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 
 import memory
+import users
 from agent import build_agent, extract_and_log_error, new_history, run_agent
 
 load_dotenv()
+users.init_db()
 
-# Single-user prototype (OAuth is post-v1). One fixed namespace for the corpus.
-USER_ID = os.environ.get("MANDARIN_USER_ID", "local_user")
+HSK_ACTIONS = [
+    ("HSK 1-2", "HSK 1-2 (beginner)"),
+    ("HSK 3-4", "HSK 3-4 (intermediate)"),
+    ("HSK 5-6", "HSK 5-6 (advanced)"),
+    ("unsure", "Not sure"),
+]
+
+
+@cl.password_auth_callback
+def auth_callback(username: str, password: str):
+    """Validate credentials; auto-create the account on first login."""
+    if users.verify_or_create(username, password):
+        return cl.User(identifier=username.strip().lower(), metadata={"provider": "credentials"})
+    return None
 
 
 @cl.set_starters
@@ -35,14 +51,48 @@ async def starters():
     ]
 
 
+async def onboard_if_new(user_id: str) -> str:
+    """Ask a first-time user for their level; return a profile note for the agent."""
+    profile = users.get_profile(user_id) or {}
+    hsk = profile.get("hsk_level")
+    if not hsk:
+        res = await cl.AskActionMessage(
+            content=f"Welcome, {user_id}! What's your current Mandarin level?",
+            actions=[
+                cl.Action(name=name, payload={"value": name}, label=label)
+                for name, label in HSK_ACTIONS
+            ],
+        ).send()
+        hsk = res.get("payload", {}).get("value") if res else "unsure"
+        users.set_hsk_level(user_id, hsk)
+    if hsk and hsk != "unsure":
+        return f"The learner self-reports their level as {hsk}. Pitch examples and drills accordingly."
+    return ""
+
+
 @cl.on_chat_start
 async def on_chat_start():
-    # Reference data lazy-loads on first query; ensure it's present.
     memory.load_reference_data()
-    llm, tools_by_name = build_agent(USER_ID)
+    app_user = cl.user_session.get("user")
+    user_id = app_user.identifier if app_user else "local_user"
+
+    profile_note = await onboard_if_new(user_id)
+    llm, tools_by_name = build_agent(user_id)
+    cl.user_session.set("user_id", user_id)
     cl.user_session.set("llm", llm)
     cl.user_session.set("tools", tools_by_name)
-    cl.user_session.set("history", new_history())
+    cl.user_session.set("history", new_history(profile_note))
+
+    stats = memory.error_stats(user_id)
+    if stats["total"] > 0:
+        top = next(iter(stats["by_category"]), None)
+        await cl.Message(
+            content=(
+                f"Welcome back, **{user_id}**. You have {stats['total']} logged "
+                f"errors so far — most common: **{top}**. Want a drill, or shall we "
+                f"check a new sentence?"
+            )
+        ).send()
 
 
 @cl.on_message
@@ -50,6 +100,7 @@ async def on_message(message: cl.Message):
     llm = cl.user_session.get("llm")
     tools_by_name = cl.user_session.get("tools")
     history = cl.user_session.get("history")
+    user_id = cl.user_session.get("user_id")
     history.append(HumanMessage(content=message.content))
 
     async def on_tool(name, args, result):
@@ -60,10 +111,7 @@ async def on_message(message: cl.Message):
     answer = await run_agent(llm, tools_by_name, history, on_tool=on_tool)
     await cl.Message(content=answer).send()
 
-    # Post-turn: grow the personal error corpus from real use.
-    logged = await extract_and_log_error(USER_ID, message.content, answer)
+    logged = await extract_and_log_error(user_id, message.content, answer)
     if logged:
         async with cl.Step(name="📝 logged to your error corpus", type="tool") as step:
-            step.output = (
-                f"{logged['category']}: {logged['original']} → {logged['correction']}"
-            )
+            step.output = f"{logged['category']}: {logged['original']} → {logged['correction']}"

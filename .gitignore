@@ -9,6 +9,9 @@ chainlit.md
 
 # CC-CEDICT dictionary cache (downloaded at runtime)
 data/cedict.txt
+
+# Local user account store
+user_data/
 *.pyc
 .chroma/
 chroma_db/

@@ -12,8 +12,10 @@ services:
       - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
       - LANGSMITH_TRACING=true
       - CHROMA_PATH=/var/data/chroma_db
+      - USER_DB_PATH=/var/data/users.db          # user accounts on the durable volume
+      - CHAINLIT_AUTH_SECRET=${CHAINLIT_AUTH_SECRET}
     volumes:
-      - chroma-data:/var/data       # persists the ChromaDB corpus across restarts
+      - chroma-data:/var/data       # persists the ChromaDB corpus + user DB across restarts
     restart: unless-stopped
     # No published ports: only Caddy is exposed to the internet.
 

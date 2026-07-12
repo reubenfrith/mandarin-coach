@@ -98,8 +98,11 @@ def build_agent(user_id: str):
     return llm, {t.name: t for t in tools}
 
 
-def new_history() -> list:
-    return [SystemMessage(content=AGENT_SYSTEM_PROMPT)]
+def new_history(profile_note: str = "") -> list:
+    prompt = AGENT_SYSTEM_PROMPT
+    if profile_note:
+        prompt = f"{prompt}\n\n{profile_note}"
+    return [SystemMessage(content=prompt)]
 
 
 async def run_agent(llm, tools_by_name, history, on_tool=None) -> str:

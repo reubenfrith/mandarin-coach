@@ -6,7 +6,8 @@ This directory contains all application code.
 
 | File | Purpose | Status |
 |---|---|---|
-| `main.py` | Chainlit entry point — chat UI, Google OAuth, `@cl.on_chat_start` onboarding hook | TODO |
+| `main.py` | Chainlit entry point — chat UI, username/password auth, `@cl.on_chat_start` onboarding hook | DONE |
+| `users.py` | SQLite user store — hashed passwords, per-user profiles (HSK level), auto-create on first login | DONE |
 | `agent.py` | Tool-calling agent — explicit loop, tool orchestration, session memory | DONE |
 | `tools.py` | All 5 agent tools: CC-CEDICT lookup, Tavily search, Error Pattern Analyser, Grammar Rule Fetcher, Drill Generator | DONE |
 | `memory.py` | ChromaDB setup — 4 collections, user-namespaced, load/query/write helpers + deterministic error_stats aggregation | DONE |
