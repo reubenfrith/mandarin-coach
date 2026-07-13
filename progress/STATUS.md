@@ -17,7 +17,7 @@ This file is the single source of truth for resuming work. See also `progress/DE
 
 _Original Task 5 pivot context:_ standard RAGAS suite (user request); evaluator judge = gpt-4o-mini; agentic reasoning judges = gpt-4o (user-confirmed deviation). Models under test = deepseek/glm/qwen via OpenRouter.
 
-**LEFT: (1) Loom video (Task 5 deliverable). (2) `docker compose exec app ... load_reference_data(force=True)` on the VM to ship 98 rules to the live app (user runs it; see DEPLOY.md).**
+**LEFT: just the Loom video (Task 5 deliverable).** ✅ VM shipped 2026-07-13: `git pull && docker compose up -d --build` + `load_reference_data(force=True)` → live app now serves 98 rules + the hybrid retriever (reload returned `{grammar_rules:98, error_patterns:16, hsk_vocabulary:22}`; site HTTP 200).
 
 **3 of 3 eval surfaces built** (RAG ✓, agentic ✓, structured-extraction ✓), plus:
 - Root `README.md` Task 5 **results write-up** done (four-surface story + every conclusion's why).
