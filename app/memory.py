@@ -146,11 +146,14 @@ def load_reference_data(force: bool = False) -> dict:
             col = _collection(coll_name)
         if col.count() == 0:
             records = json.loads((DATA_DIR / filename).read_text(encoding="utf-8"))
-            col.add(
-                ids=[r["id"] for r in records],
-                documents=[text_fn(r) for r in records],
-                metadatas=[meta_fn(r) for r in records],
-            )
+            ids = [r["id"] for r in records]
+            docs = [text_fn(r) for r in records]
+            metas = [meta_fn(r) for r in records]
+            # Batch the add: the OpenAI embeddings API rejects >2048 inputs per call,
+            # and hsk_vocabulary is ~5,000 docs. 1000 keeps each request comfortable.
+            BATCH = 1000
+            for i in range(0, len(records), BATCH):
+                col.add(ids=ids[i:i + BATCH], documents=docs[i:i + BATCH], metadatas=metas[i:i + BATCH])
         summary[coll_name] = col.count()
     return summary
 
