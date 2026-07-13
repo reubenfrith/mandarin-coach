@@ -39,7 +39,11 @@ def build_type_a() -> list[dict]:
     target, so expected_rule_id is null and they're excluded from context recall).
     """
     cases: list[dict] = []
-    for r in _load("grammar_rules.json"):
+    # Pinned to the first 24 grammar rules — the original Task 5 A_stateless set.
+    # The corpus was later expanded to 98 rules for the Task 6 retrieval sweep (the
+    # new rules are appended AFTER these 24 in grammar_rules.json), so [:24] keeps
+    # Task 5's frozen 40-case dataset reproducible from this generator unchanged.
+    for r in _load("grammar_rules.json")[:24]:
         cases.append(
             {
                 "id": f"A{len(cases)+1:02d}",

@@ -21,6 +21,16 @@ dependencies = [
     "langgraph>=1.2.9",
 ]
 
+[project.optional-dependencies]
+# Eval-only, heavy dependencies for the Task 6 retrieval sweep. Kept OUT of the
+# default install and the production Docker image (BGE-M3 pulls in torch). Install
+# locally for the sweep with:  uv sync --extra task6
+task6 = [
+    "sentence-transformers",   # BGE-M3 local embeddings (Axis 1 candidate)
+    "rank-bm25",               # BM25 sparse retrieval (Axis 2 hybrid)
+    "jieba",                   # CJK tokenisation so Chinese BM25 doesn't silently fail
+]
+
 [tool.uv]
 # Application project, not an installable package — uv just manages the venv.
 package = false

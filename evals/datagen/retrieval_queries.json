@@ -1,0 +1,321 @@
+{
+  "meta": {
+    "description": "Task 6 retrieval sweep — fresh non-circular queries, each mapped to the grammar rule that best explains its error.",
+    "count": 43,
+    "by_cluster": {
+      "aspect": 5,
+      "questions": 4,
+      "degree": 2,
+      "modals": 2,
+      "comparison": 5,
+      "conjunction": 8,
+      "complement": 5,
+      "coverb": 5,
+      "existential": 3,
+      "adverb": 4
+    }
+  },
+  "queries": [
+    {
+      "id": "R01",
+      "query": "小时候我常常去了公园。",
+      "expected_rule_id": "gr_le_completion",
+      "cluster": "aspect",
+      "note": "了 wrongly attached to a habitual action"
+    },
+    {
+      "id": "R02",
+      "query": "你看，外面下雪，我们别出去了。",
+      "expected_rule_id": "gr_le_change",
+      "cluster": "aspect",
+      "note": "missing change-of-state 了 on 下雪(了)"
+    },
+    {
+      "id": "R03",
+      "query": "昨天我没去上班了。",
+      "expected_rule_id": "gr_le_negation_drop",
+      "cluster": "aspect",
+      "note": "没 + verb should drop the 了"
+    },
+    {
+      "id": "R04",
+      "query": "他站看电视。",
+      "expected_rule_id": "gr_zhe_durative",
+      "cluster": "aspect",
+      "note": "missing durative 着 on the accompanying posture"
+    },
+    {
+      "id": "R05",
+      "query": "电影就要开始。",
+      "expected_rule_id": "gr_yao_le_imminent",
+      "cluster": "aspect",
+      "note": "就要 imminent needs a final 了"
+    },
+    {
+      "id": "R06",
+      "query": "你什么时候来吗？",
+      "expected_rule_id": "gr_ma_question",
+      "cluster": "questions",
+      "note": "吗 added to a question that already has a question word"
+    },
+    {
+      "id": "R07",
+      "query": "你去不去图书馆吗？",
+      "expected_rule_id": "gr_a_not_a",
+      "cluster": "questions",
+      "note": "A-not-A question wrongly combined with 吗"
+    },
+    {
+      "id": "R08",
+      "query": "时间不早了，我们回家吗。",
+      "expected_rule_id": "gr_ba_suggestion",
+      "cluster": "questions",
+      "note": "a suggestion needs 吧, not 吗"
+    },
+    {
+      "id": "R09",
+      "query": "这件衣服太贵。",
+      "expected_rule_id": "gr_tai_le",
+      "cluster": "degree",
+      "note": "太 + adjective needs the framing 了"
+    },
+    {
+      "id": "R10",
+      "query": "我喜欢喝咖啡，你吗？",
+      "expected_rule_id": "gr_ne_question",
+      "cluster": "questions",
+      "note": "follow-up 'what about you' needs 呢, not 吗"
+    },
+    {
+      "id": "R11",
+      "query": "我姐姐能弹钢琴。",
+      "expected_rule_id": "gr_hui_neng_keyi",
+      "cluster": "modals",
+      "note": "能 used for a learned skill where 会 is correct"
+    },
+    {
+      "id": "R12",
+      "query": "你感冒了，多喝热水休息。",
+      "expected_rule_id": "gr_yinggai_should",
+      "cluster": "modals",
+      "note": "advice/obligation missing 应该"
+    },
+    {
+      "id": "R13",
+      "query": "弟弟比哥哥非常高。",
+      "expected_rule_id": "gr_bi_comparison",
+      "cluster": "comparison",
+      "note": "非常 wrongly used with a 比 comparison"
+    },
+    {
+      "id": "R14",
+      "query": "我不比我妹妹高。",
+      "expected_rule_id": "gr_meiyou_comparison",
+      "cluster": "comparison",
+      "note": "不比 used for 'not as ... as' (should be 没有)"
+    },
+    {
+      "id": "R15",
+      "query": "妹妹跟姐姐高。",
+      "expected_rule_id": "gr_gen_yiyang",
+      "cluster": "comparison",
+      "note": "跟 comparison missing 一样"
+    },
+    {
+      "id": "R16",
+      "query": "天气更来更热。",
+      "expected_rule_id": "gr_yuelaiyue",
+      "cluster": "comparison",
+      "note": "calque of 'more and more' instead of 越来越"
+    },
+    {
+      "id": "R17",
+      "query": "这个箱子比那个一点儿重。",
+      "expected_rule_id": "gr_bi_degree_diff",
+      "cluster": "comparison",
+      "note": "amount of difference placed before the adjective"
+    },
+    {
+      "id": "R18",
+      "query": "如果明天不下雨，我们去爬山。",
+      "expected_rule_id": "gr_ruguo_jiu",
+      "cluster": "conjunction",
+      "note": "如果 condition missing the paired 就"
+    },
+    {
+      "id": "R19",
+      "query": "只要有时间，我才会帮你。",
+      "expected_rule_id": "gr_zhiyao_jiu",
+      "cluster": "conjunction",
+      "note": "只要 wrongly paired with 才 (should be 就)"
+    },
+    {
+      "id": "R20",
+      "query": "只有努力学习，就能考上大学。",
+      "expected_rule_id": "gr_zhiyou_cai",
+      "cluster": "conjunction",
+      "note": "只有 wrongly paired with 就 (should be 才)"
+    },
+    {
+      "id": "R21",
+      "query": "我一到北京，然后给你发消息。",
+      "expected_rule_id": "gr_yi_jiu",
+      "cluster": "conjunction",
+      "note": "一…… should pair with 就, not 然后"
+    },
+    {
+      "id": "R22",
+      "query": "这家餐厅的菜不但便宜，好吃。",
+      "expected_rule_id": "gr_budan_erqie",
+      "cluster": "conjunction",
+      "note": "不但 missing the paired 而且/也"
+    },
+    {
+      "id": "R23",
+      "query": "虽然这个工作很难，我很喜欢。",
+      "expected_rule_id": "gr_suiran_danshi",
+      "cluster": "conjunction",
+      "note": "虽然 missing the paired 但是"
+    },
+    {
+      "id": "R24",
+      "query": "这不是我的错，但是你的错。",
+      "expected_rule_id": "gr_bushi_ershi",
+      "cluster": "conjunction",
+      "note": "correction needs 而是, not 但是"
+    },
+    {
+      "id": "R25",
+      "query": "当我小，我住在乡下。",
+      "expected_rule_id": "gr_deshihou",
+      "cluster": "conjunction",
+      "note": "time clause missing the closing 的时候"
+    },
+    {
+      "id": "R26",
+      "query": "字太小了，我不看清楚。",
+      "expected_rule_id": "gr_potential_complement",
+      "cluster": "complement",
+      "note": "should be the infixed potential 看不清楚"
+    },
+    {
+      "id": "R27",
+      "query": "我找了半天，还是没找我的护照。",
+      "expected_rule_id": "gr_dao_resultative",
+      "cluster": "complement",
+      "note": "attainment 到 missing (没找到)"
+    },
+    {
+      "id": "R28",
+      "query": "你说得太小声，我没听。",
+      "expected_rule_id": "gr_jian_perception",
+      "cluster": "complement",
+      "note": "perception result 见 missing (没听见)"
+    },
+    {
+      "id": "R29",
+      "query": "行李还没收拾，我们不能出发。",
+      "expected_rule_id": "gr_hao_completion",
+      "cluster": "complement",
+      "note": "'ready/done' resultative 好 missing (收拾好)"
+    },
+    {
+      "id": "R30",
+      "query": "小狗跑出去了房间。",
+      "expected_rule_id": "gr_directional",
+      "cluster": "complement",
+      "note": "directional 来/去 and place object in wrong order"
+    },
+    {
+      "id": "R31",
+      "query": "我每天晚上打电话我妈妈。",
+      "expected_rule_id": "gr_gei_coverb",
+      "cluster": "coverb",
+      "note": "recipient needs the coverb 给 before the verb"
+    },
+    {
+      "id": "R32",
+      "query": "我昨天去看电影和我的同学。",
+      "expected_rule_id": "gr_gen_he_with",
+      "cluster": "coverb",
+      "note": "'with ...' placed after the verb, English order"
+    },
+    {
+      "id": "R33",
+      "query": "中国人常常吃饭筷子。",
+      "expected_rule_id": "gr_yong_instrument",
+      "cluster": "coverb",
+      "note": "instrument needs 用 before the verb"
+    },
+    {
+      "id": "R34",
+      "query": "我家从地铁站不远。",
+      "expected_rule_id": "gr_li_distance",
+      "cluster": "coverb",
+      "note": "static distance uses 离, not 从"
+    },
+    {
+      "id": "R35",
+      "query": "银行早上九点下午五点营业。",
+      "expected_rule_id": "gr_cong_dao",
+      "cluster": "coverb",
+      "note": "time span needs 从……到"
+    },
+    {
+      "id": "R36",
+      "query": "桌子上是一台电脑。",
+      "expected_rule_id": "gr_you_existential",
+      "cluster": "existential",
+      "note": "introducing existence needs 有, not 是"
+    },
+    {
+      "id": "R37",
+      "query": "我的钥匙有你那里吗？",
+      "expected_rule_id": "gr_zai_location",
+      "cluster": "existential",
+      "note": "location of a specific thing needs 在, not 有"
+    },
+    {
+      "id": "R38",
+      "query": "这个问题是很难。",
+      "expected_rule_id": "gr_shi_identity",
+      "cluster": "existential",
+      "note": "是 wrongly placed before an adjective"
+    },
+    {
+      "id": "R39",
+      "query": "今天的天气好。",
+      "expected_rule_id": "gr_adj_predicate_hen",
+      "cluster": "degree",
+      "note": "bare adjective predicate needs 很"
+    },
+    {
+      "id": "R40",
+      "query": "我弟弟喜欢打篮球也。",
+      "expected_rule_id": "gr_ye_also",
+      "cluster": "adverb",
+      "note": "也 wrongly placed at the end"
+    },
+    {
+      "id": "R41",
+      "query": "都我的同事很友好。",
+      "expected_rule_id": "gr_dou_all",
+      "cluster": "adverb",
+      "note": "都 placed before the subject it quantifies"
+    },
+    {
+      "id": "R42",
+      "query": "他上个星期再来了一次。",
+      "expected_rule_id": "gr_zai_you_again",
+      "cluster": "adverb",
+      "note": "past repetition needs 又, not 再"
+    },
+    {
+      "id": "R43",
+      "query": "我有只五块钱。",
+      "expected_rule_id": "gr_zhi_only",
+      "cluster": "adverb",
+      "note": "只 placed after the verb instead of before"
+    }
+  ]
+}

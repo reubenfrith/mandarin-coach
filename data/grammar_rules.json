@@ -8,7 +8,12 @@
     "common_mistake": "English speakers use 把 with a bare verb and no result (把书看), or use it with intransitive/stative verbs, or combine it with 被 in the same clause.",
     "incorrect_example": "我把书看。",
     "correct_example": "我把书看完了。",
-    "keywords": ["把", "disposal", "object fronting", "complement"]
+    "keywords": [
+      "把",
+      "disposal",
+      "object fronting",
+      "complement"
+    ]
   },
   {
     "id": "gr_bei_passive",
@@ -19,7 +24,12 @@
     "common_mistake": "Combining 被 with 把 in one clause, or leaving the verb bare with no complement.",
     "incorrect_example": "她把书被他借走了。",
     "correct_example": "书被他借走了。",
-    "keywords": ["被", "passive", "agent", "bei"]
+    "keywords": [
+      "被",
+      "passive",
+      "agent",
+      "bei"
+    ]
   },
   {
     "id": "gr_le_completion",
@@ -30,7 +40,13 @@
     "common_mistake": "Treating 了 as a past-tense marker and attaching it to every past action, including habitual or stative ones (以前我是了学生).",
     "incorrect_example": "以前我每天喝了咖啡。",
     "correct_example": "以前我每天喝咖啡。",
-    "keywords": ["了", "le", "completion", "aspect", "past"]
+    "keywords": [
+      "了",
+      "le",
+      "completion",
+      "aspect",
+      "past"
+    ]
   },
   {
     "id": "gr_le_change",
@@ -41,7 +57,12 @@
     "common_mistake": "Omitting sentence-final 了 when reporting a new state, or confusing it with the verbal completion 了.",
     "incorrect_example": "我今年二十岁。（when reporting a birthday just passed）",
     "correct_example": "我今年二十岁了。",
-    "keywords": ["了", "change of state", "new situation", "sentence-final"]
+    "keywords": [
+      "了",
+      "change of state",
+      "new situation",
+      "sentence-final"
+    ]
   },
   {
     "id": "gr_guo_experience",
@@ -52,7 +73,13 @@
     "common_mistake": "Using 了 where experiential 过 is meant, or adding 过 to ongoing/present situations.",
     "incorrect_example": "我吃了日本菜，很喜欢。（meaning: I have tried Japanese food）",
     "correct_example": "我吃过日本菜，很喜欢。",
-    "keywords": ["过", "guo", "experience", "experiential", "past"]
+    "keywords": [
+      "过",
+      "guo",
+      "experience",
+      "experiential",
+      "past"
+    ]
   },
   {
     "id": "gr_shi_de",
@@ -63,7 +90,12 @@
     "common_mistake": "Using 了 instead of 是……的 to highlight the time/place/manner of a known past event.",
     "incorrect_example": "你怎么来了这里？（asking by what means）",
     "correct_example": "你是怎么来的？",
-    "keywords": ["是……的", "shi de", "emphasis", "circumstance"]
+    "keywords": [
+      "是……的",
+      "shi de",
+      "emphasis",
+      "circumstance"
+    ]
   },
   {
     "id": "gr_measure_words",
@@ -74,7 +106,14 @@
     "common_mistake": "Dropping the measure word (三书) or defaulting to 个 for everything (三个书).",
     "incorrect_example": "我有三书。",
     "correct_example": "我有三本书。",
-    "keywords": ["量词", "measure word", "classifier", "本", "个", "张"]
+    "keywords": [
+      "量词",
+      "measure word",
+      "classifier",
+      "本",
+      "个",
+      "张"
+    ]
   },
   {
     "id": "gr_zai_progressive",
@@ -85,7 +124,13 @@
     "common_mistake": "Applying 在……呢 to stative verbs (在知道), or confusing progressive 在 with the locational 在 (to be at).",
     "incorrect_example": "我在知道答案。",
     "correct_example": "我知道答案。",
-    "keywords": ["在", "正在", "progressive", "ongoing", "呢"]
+    "keywords": [
+      "在",
+      "正在",
+      "progressive",
+      "ongoing",
+      "呢"
+    ]
   },
   {
     "id": "gr_de_complement",
@@ -96,7 +141,13 @@
     "common_mistake": "Omitting the repeated verb when there is an object (他说汉语得很好), or confusing 得 with 的/地.",
     "incorrect_example": "他写汉字得很漂亮。",
     "correct_example": "他写汉字写得很漂亮。",
-    "keywords": ["得", "complement", "degree", "manner", "verb repetition"]
+    "keywords": [
+      "得",
+      "complement",
+      "degree",
+      "manner",
+      "verb repetition"
+    ]
   },
   {
     "id": "gr_de_di_de",
@@ -107,7 +158,14 @@
     "common_mistake": "Writing 的 for all three because they sound the same.",
     "incorrect_example": "他高兴的笑了。",
     "correct_example": "他高兴地笑了。",
-    "keywords": ["的", "得", "地", "de", "modifier", "adverbial"]
+    "keywords": [
+      "的",
+      "得",
+      "地",
+      "de",
+      "modifier",
+      "adverbial"
+    ]
   },
   {
     "id": "gr_bi_comparison",
@@ -118,7 +176,12 @@
     "common_mistake": "Inserting 很/非常 before the adjective (他比我很高), a direct calque of 'much taller'.",
     "incorrect_example": "今天比昨天很热。",
     "correct_example": "今天比昨天热。",
-    "keywords": ["比", "comparison", "comparative", "更"]
+    "keywords": [
+      "比",
+      "comparison",
+      "comparative",
+      "更"
+    ]
   },
   {
     "id": "gr_time_before_place",
@@ -129,7 +192,13 @@
     "common_mistake": "Following English order and putting time/place after the verb or object.",
     "incorrect_example": "我去中国明年。",
     "correct_example": "我明年去中国。",
-    "keywords": ["word order", "time", "place", "adverbial", "before verb"]
+    "keywords": [
+      "word order",
+      "time",
+      "place",
+      "adverbial",
+      "before verb"
+    ]
   },
   {
     "id": "gr_duration_complement",
@@ -140,7 +209,12 @@
     "common_mistake": "Placing the duration before the verb like a time-when phrase (我两年学汉语).",
     "incorrect_example": "我三个小时看书了。",
     "correct_example": "我看书看了三个小时。",
-    "keywords": ["duration", "time how long", "after verb", "verb repetition"]
+    "keywords": [
+      "duration",
+      "time how long",
+      "after verb",
+      "verb repetition"
+    ]
   },
   {
     "id": "gr_liang_er",
@@ -151,7 +225,13 @@
     "common_mistake": "Using 二 before a measure word (二个人).",
     "incorrect_example": "我要二杯咖啡。",
     "correct_example": "我要两杯咖啡。",
-    "keywords": ["两", "二", "two", "number", "measure word"]
+    "keywords": [
+      "两",
+      "二",
+      "two",
+      "number",
+      "measure word"
+    ]
   },
   {
     "id": "gr_youdianr_yidianr",
@@ -162,7 +242,12 @@
     "common_mistake": "Swapping them: 一点儿贵 or 有点儿便宜 in the wrong slot.",
     "incorrect_example": "这个一点儿贵。",
     "correct_example": "这个有点儿贵。",
-    "keywords": ["有点儿", "一点儿", "a little", "degree"]
+    "keywords": [
+      "有点儿",
+      "一点儿",
+      "a little",
+      "degree"
+    ]
   },
   {
     "id": "gr_hui_neng_keyi",
@@ -173,7 +258,14 @@
     "common_mistake": "Using 能 for learned skills or 会 for permission.",
     "incorrect_example": "我能说三种语言。",
     "correct_example": "我会说三种语言。",
-    "keywords": ["会", "能", "可以", "modal", "ability", "permission"]
+    "keywords": [
+      "会",
+      "能",
+      "可以",
+      "modal",
+      "ability",
+      "permission"
+    ]
   },
   {
     "id": "gr_jiu_cai",
@@ -184,7 +276,14 @@
     "common_mistake": "Adding 了 after 才, or reversing the earlier/later nuance.",
     "incorrect_example": "他昨天很晚就睡觉。",
     "correct_example": "他昨天很晚才睡觉。",
-    "keywords": ["就", "才", "jiu", "cai", "sooner", "later"]
+    "keywords": [
+      "就",
+      "才",
+      "jiu",
+      "cai",
+      "sooner",
+      "later"
+    ]
   },
   {
     "id": "gr_resultative",
@@ -195,7 +294,13 @@
     "common_mistake": "Expressing the result separately in English style, or negating with 不 (不看完).",
     "incorrect_example": "我不听懂老师的话。",
     "correct_example": "我没听懂老师的话。",
-    "keywords": ["resultative", "complement", "看完", "听懂", "result"]
+    "keywords": [
+      "resultative",
+      "complement",
+      "看完",
+      "听懂",
+      "result"
+    ]
   },
   {
     "id": "gr_directional",
@@ -206,7 +311,13 @@
     "common_mistake": "Wrong order of the place object and 来/去, or omitting the direction.",
     "incorrect_example": "他跑来进教室。",
     "correct_example": "他跑进教室来。",
-    "keywords": ["directional", "complement", "来", "去", "进出"]
+    "keywords": [
+      "directional",
+      "complement",
+      "来",
+      "去",
+      "进出"
+    ]
   },
   {
     "id": "gr_yinwei_suoyi",
@@ -217,7 +328,13 @@
     "common_mistake": "Assuming that using both 'because' and 'so' is wrong, as it would be in English, and dropping 所以.",
     "incorrect_example": "因为下雨，我没去。（acceptable, but learners often force English single-conjunction）",
     "correct_example": "因为下雨，所以我没去。",
-    "keywords": ["因为", "所以", "because", "so", "paired conjunction"]
+    "keywords": [
+      "因为",
+      "所以",
+      "because",
+      "so",
+      "paired conjunction"
+    ]
   },
   {
     "id": "gr_suiran_danshi",
@@ -228,7 +345,13 @@
     "common_mistake": "Dropping 但是 because English uses only 'although'.",
     "incorrect_example": "虽然很累，我很开心。",
     "correct_example": "虽然很累，但是我很开心。",
-    "keywords": ["虽然", "但是", "although", "but", "paired conjunction"]
+    "keywords": [
+      "虽然",
+      "但是",
+      "although",
+      "but",
+      "paired conjunction"
+    ]
   },
   {
     "id": "gr_haishi_huozhe",
@@ -239,7 +362,12 @@
     "common_mistake": "Using 或者 in a choice question or 还是 in a statement.",
     "incorrect_example": "你想去北京或者上海？",
     "correct_example": "你想去北京还是上海？",
-    "keywords": ["还是", "或者", "or", "choice question"]
+    "keywords": [
+      "还是",
+      "或者",
+      "or",
+      "choice question"
+    ]
   },
   {
     "id": "gr_double_le",
@@ -250,7 +378,13 @@
     "common_mistake": "Using one 了 and losing the 'and still continuing' meaning.",
     "incorrect_example": "我在这儿住了三年。（meaning: and still live here）",
     "correct_example": "我在这儿住了三年了。",
-    "keywords": ["了", "double le", "duration", "up to now", "continuing"]
+    "keywords": [
+      "了",
+      "double le",
+      "duration",
+      "up to now",
+      "continuing"
+    ]
   },
   {
     "id": "gr_ne_question",
@@ -261,6 +395,1200 @@
     "common_mistake": "Using 吗 for a follow-up 'what about you' (你吗？), which is ungrammatical here.",
     "incorrect_example": "我是学生，你吗？",
     "correct_example": "我是学生，你呢？",
-    "keywords": ["呢", "ne", "follow-up", "what about", "question"]
+    "keywords": [
+      "呢",
+      "ne",
+      "follow-up",
+      "what about",
+      "question"
+    ]
+  },
+  {
+    "id": "gr_zhe_durative",
+    "name": "着 (zhe) durative / accompanying state",
+    "category": "particle",
+    "hsk_level": 2,
+    "explanation": "Verb + 着 marks a continuing state or a manner accompanying another action (V1着 + V2): 门开着 (the door is open), 他笑着说 (he said, smiling). It describes a persisting state, not a dynamic action in progress (that is 在).",
+    "common_mistake": "Using 着 for a plain ongoing action where 在 is needed, or dropping 着 for an accompanying manner.",
+    "incorrect_example": "我着看电视。",
+    "correct_example": "他站着看书。",
+    "keywords": [
+      "着",
+      "zhe",
+      "durative",
+      "state",
+      "manner"
+    ]
+  },
+  {
+    "id": "gr_yao_le_imminent",
+    "name": "(快)要……了 imminent action",
+    "category": "particle",
+    "hsk_level": 2,
+    "explanation": "要……了 / 快要……了 / 就要……了 says something is about to happen: 火车快要开了 (the train is about to leave). The final 了 is required.",
+    "common_mistake": "Omitting the final 了, or using 会 for an imminent event.",
+    "incorrect_example": "火车要开。",
+    "correct_example": "火车快要开了。",
+    "keywords": [
+      "要……了",
+      "快要",
+      "imminent",
+      "about to"
+    ]
+  },
+  {
+    "id": "gr_mei_guo_negation",
+    "name": "没……过 negating an experience",
+    "category": "particle",
+    "hsk_level": 2,
+    "explanation": "Negate experiential 过 with 没(有) while KEEPING 过: 我没去过中国 (I have never been to China).",
+    "common_mistake": "Negating with 不, or dropping 过 in the negative.",
+    "incorrect_example": "我不吃过日本菜。",
+    "correct_example": "我没吃过日本菜。",
+    "keywords": [
+      "没……过",
+      "negation",
+      "experience",
+      "过"
+    ]
+  },
+  {
+    "id": "gr_le_negation_drop",
+    "name": "没 negates a completed action and drops 了",
+    "category": "particle",
+    "hsk_level": 2,
+    "explanation": "To negate a completed action, use 没(有) before the verb and DROP 了: 我没去 (I didn't go), never 我没去了.",
+    "common_mistake": "Keeping 了 after 没 (没……了).",
+    "incorrect_example": "昨天我没去了。",
+    "correct_example": "昨天我没去。",
+    "keywords": [
+      "没",
+      "了",
+      "negation",
+      "completed",
+      "drop le"
+    ]
+  },
+  {
+    "id": "gr_ma_question",
+    "name": "吗 (ma) yes/no question particle",
+    "category": "particle",
+    "hsk_level": 1,
+    "explanation": "Add 吗 to the end of a statement to make a yes/no question: 你是学生吗？ Do not use it when the sentence already contains a question word.",
+    "common_mistake": "Adding 吗 to a question that already has a question word (哪儿 / 什么 / 谁).",
+    "incorrect_example": "你去哪儿吗？",
+    "correct_example": "你去哪儿？",
+    "keywords": [
+      "吗",
+      "ma",
+      "yes-no question",
+      "particle"
+    ]
+  },
+  {
+    "id": "gr_ba_suggestion",
+    "name": "吧 (ba) suggestion / supposition",
+    "category": "particle",
+    "hsk_level": 2,
+    "explanation": "Sentence-final 吧 softens a statement into a suggestion (我们走吧 let's go) or a supposition seeking confirmation (你是老师吧？ you're a teacher, right?).",
+    "common_mistake": "Using 吗 for a suggestion or a 'right?' supposition where 吧 is natural.",
+    "incorrect_example": "我们走吗，现在很晚了。",
+    "correct_example": "我们走吧，现在很晚了。",
+    "keywords": [
+      "吧",
+      "ba",
+      "suggestion",
+      "supposition"
+    ]
+  },
+  {
+    "id": "gr_de_attributive",
+    "name": "的 (de) attributive / relative clause",
+    "category": "particle",
+    "hsk_level": 2,
+    "explanation": "的 links a modifier — including a whole relative clause — to the noun it describes: 我买的书 (the book I bought), 穿红衣服的人 (the person wearing red). The modifier goes before 的 and before the noun.",
+    "common_mistake": "Dropping 的 in a relative clause, or following English word order.",
+    "incorrect_example": "我买书很有意思。",
+    "correct_example": "我买的书很有意思。",
+    "keywords": [
+      "的",
+      "attributive",
+      "relative clause",
+      "modifier"
+    ]
+  },
+  {
+    "id": "gr_hui_de_certainty",
+    "name": "会……的 future certainty",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "会 + Verb + 的 expresses a confident prediction: 别担心，他会来的 (don't worry, he'll definitely come).",
+    "common_mistake": "Dropping 会 or the framing 的; using 要 for a confident prediction.",
+    "incorrect_example": "别担心，他来。",
+    "correct_example": "别担心，他会来的。",
+    "keywords": [
+      "会……的",
+      "certainty",
+      "prediction",
+      "future"
+    ]
+  },
+  {
+    "id": "gr_xiang_yao_want",
+    "name": "想 vs 要 (to want)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "想 + Verb = would like to / feel like (softer, more polite); 要 + Verb = want to / intend to (stronger, can sound demanding). For a mild wish, prefer 想.",
+    "common_mistake": "Using 要 for a polite wish where 想 is more appropriate.",
+    "incorrect_example": "老师，我要看看您的书，可以吗？",
+    "correct_example": "老师，我想看看您的书，可以吗？",
+    "keywords": [
+      "想",
+      "要",
+      "want",
+      "would like"
+    ]
+  },
+  {
+    "id": "gr_yinggai_should",
+    "name": "应该 (yīnggāi) should / ought to",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "应该 + Verb = should / ought to. It is an auxiliary and goes before the main verb.",
+    "common_mistake": "Placing 应该 at the end like an English tag, or omitting it.",
+    "incorrect_example": "你去看医生应该。",
+    "correct_example": "你应该去看医生。",
+    "keywords": [
+      "应该",
+      "should",
+      "ought",
+      "modal"
+    ]
+  },
+  {
+    "id": "gr_dei_must",
+    "name": "得 (děi) must / have to",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "得(děi) + Verb = must / have to (colloquial). Its negative ('need not') is 不用, NOT 不得.",
+    "common_mistake": "Negating with 不得 to mean 'don't have to'.",
+    "incorrect_example": "现在很晚了，我不得走。",
+    "correct_example": "现在很晚了，我得走了。",
+    "keywords": [
+      "得",
+      "děi",
+      "must",
+      "have to",
+      "不用"
+    ]
+  },
+  {
+    "id": "gr_keneng_maybe",
+    "name": "可能 (kěnéng) possibly / maybe",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "可能 = maybe / possibly; as an adverb it goes before the verb: 他可能来 (he might come).",
+    "common_mistake": "Placing 可能 at the end of the sentence like English 'maybe'.",
+    "incorrect_example": "他来可能。",
+    "correct_example": "他可能来。",
+    "keywords": [
+      "可能",
+      "maybe",
+      "possibly",
+      "adverb"
+    ]
+  },
+  {
+    "id": "gr_a_not_a",
+    "name": "A-not-A question",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "Repeat the verb/adjective in affirmative-negative form for a neutral yes/no question: 你去不去？ 好不好？ Do NOT add 吗.",
+    "common_mistake": "Combining an A-not-A question with 吗.",
+    "incorrect_example": "你去不去吗？",
+    "correct_example": "你去不去？",
+    "keywords": [
+      "A-not-A",
+      "去不去",
+      "question",
+      "是不是"
+    ]
+  },
+  {
+    "id": "gr_qword_in_situ",
+    "name": "Question words stay in place (in-situ)",
+    "category": "word_order",
+    "hsk_level": 2,
+    "explanation": "A question word (什么/谁/哪儿/怎么) occupies the SAME slot the answer would; the sentence is not reordered as in English: 你想吃什么？",
+    "common_mistake": "Fronting the question word English-style.",
+    "incorrect_example": "什么你想吃？",
+    "correct_example": "你想吃什么？",
+    "keywords": [
+      "question word",
+      "in-situ",
+      "什么",
+      "谁",
+      "word order"
+    ]
+  },
+  {
+    "id": "gr_ji_duoshao",
+    "name": "几 vs 多少 (how many)",
+    "category": "grammar",
+    "hsk_level": 1,
+    "explanation": "几 asks about small numbers and takes a measure word (几个人); 多少 asks about larger or unknown quantities and needs no measure word (多少钱).",
+    "common_mistake": "Using 几 for large amounts, or inserting a measure word that is not needed after 多少.",
+    "incorrect_example": "这本书几钱？",
+    "correct_example": "这本书多少钱？",
+    "keywords": [
+      "几",
+      "多少",
+      "how many",
+      "quantity"
+    ]
+  },
+  {
+    "id": "gr_zenmeyang",
+    "name": "怎么样 (zěnmeyàng) how / how about",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "怎么样 asks for an assessment ('how is it?') or makes a suggestion ('how about?'): 天气怎么样？ 这个怎么样？ 怎么 alone asks manner/reason ('how / why').",
+    "common_mistake": "Using 怎么 where 怎么样 (how about / how is it) is meant.",
+    "incorrect_example": "这个周末去爬山，怎么？",
+    "correct_example": "这个周末去爬山，怎么样？",
+    "keywords": [
+      "怎么样",
+      "how",
+      "how about",
+      "assessment"
+    ]
+  },
+  {
+    "id": "gr_meiyou_comparison",
+    "name": "A 没有 B (那么) + adj — not as ... as",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "A + 没有 + B + (那么/这么) + Adjective = A is not as [adj] as B: 我没有他高. This, not 不比, is the normal way to say 'not as ... as'.",
+    "common_mistake": "Using 不比 (which means 'not necessarily more than') to mean 'not as ... as'.",
+    "incorrect_example": "我不比他高。",
+    "correct_example": "我没有他高。",
+    "keywords": [
+      "没有",
+      "comparison",
+      "not as as",
+      "比"
+    ]
+  },
+  {
+    "id": "gr_gen_yiyang",
+    "name": "A 跟/和 B 一样 — the same as",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "A + 跟/和 + B + 一样 (+ Adjective) states A is the same as B, or equally [adj]: 我的书跟你的一样 / 他跟我一样高.",
+    "common_mistake": "Dropping 一样, or omitting the connective 跟/和.",
+    "incorrect_example": "我的手机跟你的。",
+    "correct_example": "我的手机跟你的一样。",
+    "keywords": [
+      "跟……一样",
+      "和",
+      "same as",
+      "equal"
+    ]
+  },
+  {
+    "id": "gr_yuelaiyue",
+    "name": "越来越 (yuèláiyuè) more and more",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "越来越 + Adjective/Verb = more and more: 天气越来越冷 (the weather is getting colder and colder).",
+    "common_mistake": "Calquing English with 更来更 or repeated 比.",
+    "incorrect_example": "天气更来更冷。",
+    "correct_example": "天气越来越冷。",
+    "keywords": [
+      "越来越",
+      "more and more",
+      "increasingly"
+    ]
+  },
+  {
+    "id": "gr_yue_yue",
+    "name": "越 A 越 B — the more ... the more",
+    "category": "grammar",
+    "hsk_level": 4,
+    "explanation": "越 + Verb1 + 越 + Verb2/Adj = the more A, the more B: 雨越下越大 / 你越说越快.",
+    "common_mistake": "Using 更 twice, or English 'the more ... the more' word order.",
+    "incorrect_example": "你更说更快。",
+    "correct_example": "你越说越快。",
+    "keywords": [
+      "越……越",
+      "the more the more"
+    ]
+  },
+  {
+    "id": "gr_bi_degree_diff",
+    "name": "比 + adj + amount of difference",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "With 比, the amount of difference goes AFTER the adjective: 他比我高一点儿 / 高得多 / 高两公分.",
+    "common_mistake": "Placing the amount before the adjective, or using 很/非常.",
+    "incorrect_example": "他比我一点儿高。",
+    "correct_example": "他比我高一点儿。",
+    "keywords": [
+      "比",
+      "degree of difference",
+      "一点儿",
+      "得多"
+    ]
+  },
+  {
+    "id": "gr_ruguo_jiu",
+    "name": "如果……就…… (if ... then)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "如果 (+的话) in the condition clause pairs with 就 in the result clause: 如果你有时间，就来我家.",
+    "common_mistake": "Dropping 就 in the result clause.",
+    "incorrect_example": "如果你有时间，来我家。",
+    "correct_example": "如果你有时间，就来我家。",
+    "keywords": [
+      "如果……就",
+      "if then",
+      "condition"
+    ]
+  },
+  {
+    "id": "gr_zhiyao_jiu",
+    "name": "只要……就…… (as long as)",
+    "category": "grammar",
+    "hsk_level": 4,
+    "explanation": "只要 states a sufficient condition and pairs with 就: 只要努力，就能成功 (as long as you work hard, you'll succeed).",
+    "common_mistake": "Pairing 只要 with 才 (that belongs to 只有).",
+    "incorrect_example": "只要努力，才能成功。",
+    "correct_example": "只要努力，就能成功。",
+    "keywords": [
+      "只要……就",
+      "as long as",
+      "sufficient condition"
+    ]
+  },
+  {
+    "id": "gr_zhiyou_cai",
+    "name": "只有……才…… (only if)",
+    "category": "grammar",
+    "hsk_level": 4,
+    "explanation": "只有 states a necessary condition and pairs with 才: 只有努力，才能成功 (only by working hard can you succeed).",
+    "common_mistake": "Pairing 只有 with 就 (that belongs to 只要).",
+    "incorrect_example": "只有努力，就能成功。",
+    "correct_example": "只有努力，才能成功。",
+    "keywords": [
+      "只有……才",
+      "only if",
+      "necessary condition"
+    ]
+  },
+  {
+    "id": "gr_budan_erqie",
+    "name": "不但……而且…… (not only ... but also)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "不但 in the first clause pairs with 而且 (often + 也/还) in the second: 他不但会说英语，而且会说法语.",
+    "common_mistake": "Dropping 而且/也/还 in the second clause.",
+    "incorrect_example": "他不但会说英语，会说法语。",
+    "correct_example": "他不但会说英语，而且会说法语。",
+    "keywords": [
+      "不但……而且",
+      "not only but also"
+    ]
+  },
+  {
+    "id": "gr_yi_jiu",
+    "name": "一……就…… (as soon as)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "一 + Event1 + 就 + Event2 = as soon as A, then B: 我一到家就给你打电话.",
+    "common_mistake": "Using 然后 for the immediate second event, or dropping 就.",
+    "incorrect_example": "我一到家，然后给你打电话。",
+    "correct_example": "我一到家就给你打电话。",
+    "keywords": [
+      "一……就",
+      "as soon as"
+    ]
+  },
+  {
+    "id": "gr_chule_yiwai",
+    "name": "除了……以外 (besides / except)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "除了……(以外) pairs with 都 (except: everyone else) or 还/也 (besides: in addition): 除了他以外，我们都去了 / 除了英语，我还会说中文.",
+    "common_mistake": "Dropping the paired 都/还/也 in the main clause.",
+    "incorrect_example": "除了他，我们去了。",
+    "correct_example": "除了他以外，我们都去了。",
+    "keywords": [
+      "除了……以外",
+      "besides",
+      "except",
+      "都",
+      "还"
+    ]
+  },
+  {
+    "id": "gr_you_you",
+    "name": "又……又…… (both ... and)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "又 + Adj1 + 又 + Adj2 links two simultaneous qualities: 这个菜又便宜又好吃.",
+    "common_mistake": "Using 和 to join two predicate adjectives.",
+    "incorrect_example": "这个菜便宜和好吃。",
+    "correct_example": "这个菜又便宜又好吃。",
+    "keywords": [
+      "又……又",
+      "both and",
+      "simultaneous qualities"
+    ]
+  },
+  {
+    "id": "gr_yibian_yibian",
+    "name": "一边……一边…… (doing two things at once)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "一边 + V1 + 一边 + V2 = do two actions simultaneously: 他一边吃饭一边看电视.",
+    "common_mistake": "Using 和 to join two simultaneous actions.",
+    "incorrect_example": "他吃饭和看电视。",
+    "correct_example": "他一边吃饭一边看电视。",
+    "keywords": [
+      "一边……一边",
+      "at the same time",
+      "simultaneous actions"
+    ]
+  },
+  {
+    "id": "gr_xian_ranhou",
+    "name": "先……然后…… (first ... then)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "先 marks the first action, 然后(再) the next: 我们先吃饭，然后看电影.",
+    "common_mistake": "Reversing 先/然后 or omitting 先.",
+    "incorrect_example": "我们然后看电影先吃饭。",
+    "correct_example": "我们先吃饭，然后看电影。",
+    "keywords": [
+      "先……然后",
+      "first then",
+      "sequence"
+    ]
+  },
+  {
+    "id": "gr_bushi_ershi",
+    "name": "不是……而是…… (not A but B)",
+    "category": "grammar",
+    "hsk_level": 4,
+    "explanation": "不是 A 而是 B corrects a wrong assumption: 这不是茶，而是咖啡.",
+    "common_mistake": "Using 但是 instead of 而是 for a correction.",
+    "incorrect_example": "这不是茶，但是咖啡。",
+    "correct_example": "这不是茶，而是咖啡。",
+    "keywords": [
+      "不是……而是",
+      "not but",
+      "correction"
+    ]
+  },
+  {
+    "id": "gr_wulun_dou",
+    "name": "无论/不管……都…… (no matter)",
+    "category": "grammar",
+    "hsk_level": 4,
+    "explanation": "无论/不管 + a choice/question word pairs with 都/也 in the main clause: 不管天气怎么样，我都去.",
+    "common_mistake": "Dropping 都/也, or using 虽然.",
+    "incorrect_example": "不管天气怎么样，我去。",
+    "correct_example": "不管天气怎么样，我都去。",
+    "keywords": [
+      "无论",
+      "不管……都",
+      "no matter",
+      "regardless"
+    ]
+  },
+  {
+    "id": "gr_deshihou",
+    "name": "……的时候 (when / while)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "A time clause is closed by 的时候 at its END, before the main clause: 我小的时候，住在北京 (when I was young, I lived in Beijing).",
+    "common_mistake": "Using an English-style front 'when' without 的时候.",
+    "incorrect_example": "当我小，我住在北京。",
+    "correct_example": "我小的时候，住在北京。",
+    "keywords": [
+      "的时候",
+      "when",
+      "while",
+      "time clause"
+    ]
+  },
+  {
+    "id": "gr_yiqian_yihou",
+    "name": "以前 / 以后 clause order",
+    "category": "word_order",
+    "hsk_level": 2,
+    "explanation": "以前 (before) and 以后 (after) come AFTER the event they refer to: 下课以后 (after class), 睡觉以前 (before sleeping).",
+    "common_mistake": "Following English order and putting 以前/以后 first.",
+    "incorrect_example": "以后下课，我回家。",
+    "correct_example": "下课以后，我回家。",
+    "keywords": [
+      "以前",
+      "以后",
+      "before",
+      "after",
+      "time order"
+    ]
+  },
+  {
+    "id": "gr_potential_complement",
+    "name": "Potential complement 得/不 (听得懂 / 听不懂)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "Insert 得 (can) or 不 (cannot) between a verb and its result complement for ability/possibility: 听得懂 (can understand) / 看不清楚 (cannot see clearly).",
+    "common_mistake": "Using 不 + Verb + complement (不看清楚) instead of the infixed 看不清楚.",
+    "incorrect_example": "这个字太小，我不看清楚。",
+    "correct_example": "这个字太小，我看不清楚。",
+    "keywords": [
+      "potential complement",
+      "得",
+      "不",
+      "听不懂",
+      "看得懂"
+    ]
+  },
+  {
+    "id": "gr_dao_resultative",
+    "name": "到 as a resultative (找到 / 看到)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "到 attaches to a verb to mark that its goal was attained: 找到 (find), 看到 (catch sight of), 买到 (manage to buy).",
+    "common_mistake": "Omitting 到, so successful attainment is not expressed.",
+    "incorrect_example": "我找钥匙了，在这儿。",
+    "correct_example": "我找到钥匙了。",
+    "keywords": [
+      "到",
+      "resultative",
+      "attainment",
+      "找到",
+      "看到"
+    ]
+  },
+  {
+    "id": "gr_jian_perception",
+    "name": "见 for involuntary perception (看见 / 听见)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "见 attaches to perception verbs to mark the result of perceiving: 看见 (see), 听见 (hear) — the perception actually registered.",
+    "common_mistake": "Using bare 看/听 when the perceptual result is meant.",
+    "incorrect_example": "我听了一个奇怪的声音。",
+    "correct_example": "我听见了一个奇怪的声音。",
+    "keywords": [
+      "见",
+      "看见",
+      "听见",
+      "perception",
+      "resultative"
+    ]
+  },
+  {
+    "id": "gr_gei_resultative",
+    "name": "Verb + 给 + recipient (送给 / 还给)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "给 after certain verbs marks transfer to a recipient: 送给他一本书 (give him a book), 还给我 (return to me).",
+    "common_mistake": "Omitting 给 or misordering the recipient.",
+    "incorrect_example": "我送他一本书给。",
+    "correct_example": "我送给他一本书。",
+    "keywords": [
+      "给",
+      "transfer",
+      "送给",
+      "还给",
+      "recipient"
+    ]
+  },
+  {
+    "id": "gr_degree_extreme",
+    "name": "极了 / 死了 extreme degree",
+    "category": "particle",
+    "hsk_level": 3,
+    "explanation": "Adjective + 极了/死了/坏了 = extremely (colloquial), and takes 了: 好极了 (great), 累死了 (dead tired).",
+    "common_mistake": "Combining with 很, or omitting 了.",
+    "incorrect_example": "今天很热极。",
+    "correct_example": "今天热极了。",
+    "keywords": [
+      "极了",
+      "死了",
+      "extreme",
+      "degree"
+    ]
+  },
+  {
+    "id": "gr_hao_completion",
+    "name": "好 as a resultative (做好 / 准备好)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "好 as a complement marks that an action is done properly / is ready: 做好了 (done), 准备好 (ready), 坐好 (sit properly).",
+    "common_mistake": "Omitting 好 when 'ready / done properly' is meant.",
+    "incorrect_example": "我准备了，我们走吧。",
+    "correct_example": "我准备好了，我们走吧。",
+    "keywords": [
+      "好",
+      "resultative",
+      "ready",
+      "准备好",
+      "做好"
+    ]
+  },
+  {
+    "id": "gr_qilai_inchoative",
+    "name": "起来 — inception / 'seem' / recall",
+    "category": "grammar",
+    "hsk_level": 4,
+    "explanation": "起来 extends beyond 'up': it marks the start of an action (下起雨来 it started raining), a judgement (看起来 it looks..., 说起来 speaking of...), or recall (想起来 to recall).",
+    "common_mistake": "Reading 起来 only literally as 'up' and omitting it for these senses.",
+    "incorrect_example": "我突然想那个词了。",
+    "correct_example": "我突然想起来那个词了。",
+    "keywords": [
+      "起来",
+      "inchoative",
+      "想起来",
+      "看起来",
+      "recall"
+    ]
+  },
+  {
+    "id": "gr_xiaqu_continue",
+    "name": "下去 — continue an action",
+    "category": "grammar",
+    "hsk_level": 4,
+    "explanation": "Verb + 下去 = keep doing / continue: 说下去 (go on speaking), 坚持下去 (keep it up).",
+    "common_mistake": "Using 下来 for 'continue', or 继续 awkwardly without the complement.",
+    "incorrect_example": "老师让我们继续读下来。",
+    "correct_example": "老师让我们读下去。",
+    "keywords": [
+      "下去",
+      "continue",
+      "keep doing"
+    ]
+  },
+  {
+    "id": "gr_cong_dao",
+    "name": "从……到…… (from ... to)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "从 A 到 B spans time or space: 我从九点到五点工作 / 从北京到上海.",
+    "common_mistake": "Using 到 alone, or following English word order with the times after the verb.",
+    "incorrect_example": "我工作九点到五点。",
+    "correct_example": "我从九点到五点工作。",
+    "keywords": [
+      "从……到",
+      "from to",
+      "span"
+    ]
+  },
+  {
+    "id": "gr_li_distance",
+    "name": "离 (lí) distance from",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "A + 离 + B + 远/近 states the distance between two points: 我家离学校很近.",
+    "common_mistake": "Using 从 for a static distance.",
+    "incorrect_example": "我家从学校很近。",
+    "correct_example": "我家离学校很近。",
+    "keywords": [
+      "离",
+      "distance",
+      "far",
+      "near"
+    ]
+  },
+  {
+    "id": "gr_dui_regarding",
+    "name": "对 (duì) toward / regarding",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "对 + object introduces the target of an attitude or effect: 他对我很好 (he's good to me), 运动对身体好 (exercise is good for the body).",
+    "common_mistake": "Using 给 or 跟 where 对 (toward/regarding) is needed.",
+    "incorrect_example": "他给我很好。",
+    "correct_example": "他对我很好。",
+    "keywords": [
+      "对",
+      "toward",
+      "regarding",
+      "attitude"
+    ]
+  },
+  {
+    "id": "gr_gei_coverb",
+    "name": "给 (gěi) + recipient + verb (for / to)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "给 + recipient + Verb marks who an action is done for/to: 我给你打电话 (I'll call you), 给妈妈做饭.",
+    "common_mistake": "Omitting 给, or following English order (verb before recipient) where the coverb is expected.",
+    "incorrect_example": "我打电话你。",
+    "correct_example": "我给你打电话。",
+    "keywords": [
+      "给",
+      "for",
+      "to",
+      "coverb",
+      "打电话"
+    ]
+  },
+  {
+    "id": "gr_gen_he_with",
+    "name": "跟/和 (gēn/hé) + person (with)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "跟/和 + person + Verb means doing something with someone: 我跟朋友去看电影.",
+    "common_mistake": "Putting 'with ...' at the end English-style, or using 用.",
+    "incorrect_example": "我去看电影跟朋友。",
+    "correct_example": "我跟朋友去看电影。",
+    "keywords": [
+      "跟",
+      "和",
+      "with",
+      "together",
+      "coverb"
+    ]
+  },
+  {
+    "id": "gr_wang_xiang_direction",
+    "name": "往/向 (wǎng/xiàng) toward a direction",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "往/向 + direction + Verb points the action a way: 往前走 (walk forward), 向右拐 (turn right).",
+    "common_mistake": "Using 到/去 for a bare direction of motion.",
+    "incorrect_example": "一直去前走。",
+    "correct_example": "一直往前走。",
+    "keywords": [
+      "往",
+      "向",
+      "toward",
+      "direction"
+    ]
+  },
+  {
+    "id": "gr_weile_purpose",
+    "name": "为了 (wèile) in order to",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "为了 + purpose, then the main clause: 为了找到好工作，我在学中文.",
+    "common_mistake": "Placing the purpose at the end, or using 因为 (because) for a purpose.",
+    "incorrect_example": "我学中文因为找到好工作。",
+    "correct_example": "为了找到好工作，我在学中文。",
+    "keywords": [
+      "为了",
+      "in order to",
+      "purpose"
+    ]
+  },
+  {
+    "id": "gr_yong_instrument",
+    "name": "用 (yòng) + tool + verb (by means of)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "用 + instrument + Verb says what is used to do something: 用筷子吃饭 (eat with chopsticks), 用中文写.",
+    "common_mistake": "Following English 'with ...' order and putting the tool after the verb.",
+    "incorrect_example": "我吃饭筷子。",
+    "correct_example": "我用筷子吃饭。",
+    "keywords": [
+      "用",
+      "with",
+      "instrument",
+      "by means of"
+    ]
+  },
+  {
+    "id": "gr_zai_location_verb",
+    "name": "在 + place + verb (do at a location)",
+    "category": "word_order",
+    "hsk_level": 1,
+    "explanation": "The location coverb 在 + place goes BEFORE the verb: 我在图书馆学习.",
+    "common_mistake": "Following English order and putting the place after the verb.",
+    "incorrect_example": "我学习在图书馆。",
+    "correct_example": "我在图书馆学习。",
+    "keywords": [
+      "在",
+      "location",
+      "coverb",
+      "before verb"
+    ]
+  },
+  {
+    "id": "gr_you_existential",
+    "name": "有 (yǒu) existential — there is/are",
+    "category": "grammar",
+    "hsk_level": 1,
+    "explanation": "Place + 有 + Noun introduces the existence of something: 桌子上有一本书 (there's a book on the table).",
+    "common_mistake": "Using 是 or 在 to introduce a newly-mentioned existing thing.",
+    "incorrect_example": "桌子上是一本书。",
+    "correct_example": "桌子上有一本书。",
+    "keywords": [
+      "有",
+      "existential",
+      "there is",
+      "location"
+    ]
+  },
+  {
+    "id": "gr_shi_identity",
+    "name": "是 (shì) identity — no 是 before an adjective",
+    "category": "grammar",
+    "hsk_level": 1,
+    "explanation": "是 equates two nouns (A 是 B): 他是老师. It is NOT used before an adjective predicate — use 很 there instead.",
+    "common_mistake": "Inserting 是 before an adjective (他是高 / 他是很忙).",
+    "incorrect_example": "他是很忙。",
+    "correct_example": "他很忙。",
+    "keywords": [
+      "是",
+      "identity",
+      "copula",
+      "no 是 before adjective"
+    ]
+  },
+  {
+    "id": "gr_zai_location",
+    "name": "在 (zài) to be located at",
+    "category": "grammar",
+    "hsk_level": 1,
+    "explanation": "A specific/known thing + 在 + Place states where it is: 我的手机在桌子上 / 爸爸在家.",
+    "common_mistake": "Using 有 or 是 for the location of a specific known thing.",
+    "incorrect_example": "我的手机有桌子上。",
+    "correct_example": "我的手机在桌子上。",
+    "keywords": [
+      "在",
+      "located",
+      "location",
+      "at"
+    ]
+  },
+  {
+    "id": "gr_duo_approx",
+    "name": "Number + 多 approximation",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "多 after a round number means '-odd / more than': 三十多岁 (thirty-odd), 一百多块.",
+    "common_mistake": "Putting 多 before the number, or omitting it for 'more than'.",
+    "incorrect_example": "他多三十岁。",
+    "correct_example": "他三十多岁。",
+    "keywords": [
+      "多",
+      "approximation",
+      "more than",
+      "-odd"
+    ]
+  },
+  {
+    "id": "gr_ban_half",
+    "name": "半 (bàn) half",
+    "category": "measure_word",
+    "hsk_level": 2,
+    "explanation": "半 before a measure word = half (半个小时); after Number+MW = 'and a half' (一个半小时).",
+    "common_mistake": "Putting the number after 半, or wrong slot for 'and a half'.",
+    "incorrect_example": "我等了半个一小时。",
+    "correct_example": "我等了一个半小时。",
+    "keywords": [
+      "半",
+      "half",
+      "一个半"
+    ]
+  },
+  {
+    "id": "gr_di_ordinal",
+    "name": "第 (dì) ordinal numbers",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "第 + Number (+ Measure Word) forms an ordinal: 第一次 (the first time), 第三个.",
+    "common_mistake": "Omitting 第 for an ordinal (using a bare cardinal).",
+    "incorrect_example": "这是我一次来中国。",
+    "correct_example": "这是我第一次来中国。",
+    "keywords": [
+      "第",
+      "ordinal",
+      "第一",
+      "第三"
+    ]
+  },
+  {
+    "id": "gr_mei_every",
+    "name": "每 (měi) + measure word (every)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "每 + MW + Noun = every; the main clause usually takes 都: 每个学生都喜欢老师.",
+    "common_mistake": "Omitting the measure word after 每, or dropping 都.",
+    "incorrect_example": "每学生喜欢老师。",
+    "correct_example": "每个学生都喜欢老师。",
+    "keywords": [
+      "每",
+      "every",
+      "都",
+      "each"
+    ]
+  },
+  {
+    "id": "gr_xie_some",
+    "name": "些 / 一些 / 这些 (some, plural)",
+    "category": "measure_word",
+    "hsk_level": 1,
+    "explanation": "些 marks an unspecified plural amount: 一些书, 这些人. It replaces number+MW and takes no measure word of its own.",
+    "common_mistake": "Adding a measure word after 些 (一些个) or a number before it.",
+    "incorrect_example": "我买了一些个苹果。",
+    "correct_example": "我买了一些苹果。",
+    "keywords": [
+      "些",
+      "一些",
+      "这些",
+      "some",
+      "plural"
+    ]
+  },
+  {
+    "id": "gr_reduplicated_mw",
+    "name": "Reduplicated measure word (天天 / 个个) — every one",
+    "category": "measure_word",
+    "hsk_level": 4,
+    "explanation": "Reduplicating a measure word means 'every single one': 天天 (every day), 个个 (every one), 条条.",
+    "common_mistake": "Combining with 每 (每天天) or misforming the reduplication.",
+    "incorrect_example": "他每天天学习。",
+    "correct_example": "他天天学习。",
+    "keywords": [
+      "reduplicated measure word",
+      "天天",
+      "个个",
+      "every"
+    ]
+  },
+  {
+    "id": "gr_date_order",
+    "name": "Dates: year–month–day order",
+    "category": "word_order",
+    "hsk_level": 1,
+    "explanation": "Dates run big-to-small: 年 + 月 + 日/号: 2026年7月13号.",
+    "common_mistake": "Using English small-to-big order.",
+    "incorrect_example": "我的生日是13号7月。",
+    "correct_example": "我的生日是7月13号。",
+    "keywords": [
+      "年",
+      "月",
+      "日",
+      "号",
+      "date order"
+    ]
+  },
+  {
+    "id": "gr_time_telling",
+    "name": "Telling the clock (点 / 分 / 半 / 刻)",
+    "category": "word_order",
+    "hsk_level": 1,
+    "explanation": "Clock time uses 点 (o'clock), 分 (minute), 半 (half past), 刻 (quarter): 两点半 / 三点一刻. Use 两 (not 二) for 2 o'clock.",
+    "common_mistake": "Using 二 for 2 o'clock, or 小时 (duration) for clock time.",
+    "incorrect_example": "现在是二点半。",
+    "correct_example": "现在是两点半。",
+    "keywords": [
+      "点",
+      "分",
+      "半",
+      "刻",
+      "telling time",
+      "clock"
+    ]
+  },
+  {
+    "id": "gr_money_spoken",
+    "name": "Spoken money (块 / 毛 / 分)",
+    "category": "measure_word",
+    "hsk_level": 1,
+    "explanation": "In speech, money uses 块 (=元), 毛 (=角), 分, big unit first: 三块五 (3.5 yuan), 十块二毛.",
+    "common_mistake": "Using written 元/角 in speech, or reversing the unit order.",
+    "incorrect_example": "这个五毛三块。",
+    "correct_example": "这个三块五。",
+    "keywords": [
+      "块",
+      "毛",
+      "分",
+      "money",
+      "price"
+    ]
+  },
+  {
+    "id": "gr_adj_predicate_hen",
+    "name": "Adjective predicate takes 很, not 是",
+    "category": "grammar",
+    "hsk_level": 1,
+    "explanation": "An adjective predicate needs a degree adverb (usually a bland 很) and NO 是: 他很高. A bare adjective (他高) implies comparison/contrast.",
+    "common_mistake": "Using 是 before the adjective, or leaving a neutral statement with a bare adjective.",
+    "incorrect_example": "今天天气好。",
+    "correct_example": "今天天气很好。",
+    "keywords": [
+      "adjective predicate",
+      "很",
+      "no 是",
+      "degree"
+    ]
+  },
+  {
+    "id": "gr_ye_also",
+    "name": "也 (yě) also — before the verb",
+    "category": "word_order",
+    "hsk_level": 1,
+    "explanation": "也 (also/too) goes before the verb or adjective, never at the end: 我也去.",
+    "common_mistake": "Placing 也 at the end like English 'too'.",
+    "incorrect_example": "我去也。",
+    "correct_example": "我也去。",
+    "keywords": [
+      "也",
+      "also",
+      "too",
+      "before verb"
+    ]
+  },
+  {
+    "id": "gr_dou_all",
+    "name": "都 (dōu) all/both — before the verb, scope to its left",
+    "category": "word_order",
+    "hsk_level": 1,
+    "explanation": "都 goes before the verb and refers to something already mentioned to its LEFT: 我们都是学生.",
+    "common_mistake": "Placing 都 before the subject it quantifies, or after the verb.",
+    "incorrect_example": "都我们喜欢中国菜。",
+    "correct_example": "我们都喜欢中国菜。",
+    "keywords": [
+      "都",
+      "all",
+      "both",
+      "scope",
+      "before verb"
+    ]
+  },
+  {
+    "id": "gr_hai_still",
+    "name": "还 (hái) still / in addition — before the verb",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "还 before the verb means still / yet / in addition: 他还在睡觉 (still sleeping), 我还要一个 (I want one more).",
+    "common_mistake": "Using 又/再 for 'still', or placing 还 at the end.",
+    "incorrect_example": "他在睡觉还。",
+    "correct_example": "他还在睡觉。",
+    "keywords": [
+      "还",
+      "still",
+      "yet",
+      "in addition"
+    ]
+  },
+  {
+    "id": "gr_zai_you_again",
+    "name": "再 vs 又 (again: future vs past)",
+    "category": "grammar",
+    "hsk_level": 3,
+    "explanation": "再 = again for a future/unrealised repetition (再来一次); 又 = again for a past/realised one (他又迟到了).",
+    "common_mistake": "Swapping them — 再 for a completed repetition or 又 for a future one.",
+    "incorrect_example": "他昨天再迟到了。",
+    "correct_example": "他昨天又迟到了。",
+    "keywords": [
+      "再",
+      "又",
+      "again",
+      "future",
+      "past"
+    ]
+  },
+  {
+    "id": "gr_zhi_only",
+    "name": "只 (zhǐ) only — before the verb",
+    "category": "word_order",
+    "hsk_level": 2,
+    "explanation": "只 (only) goes before the verb: 我只有十块钱 / 他只喜欢你.",
+    "common_mistake": "Placing 只 after the verb, or using 就 for 'only'.",
+    "incorrect_example": "我有只两个。",
+    "correct_example": "我只有两个。",
+    "keywords": [
+      "只",
+      "only",
+      "before verb"
+    ]
+  },
+  {
+    "id": "gr_tai_le",
+    "name": "太……了 (too / so)",
+    "category": "particle",
+    "hsk_level": 1,
+    "explanation": "太 + Adjective + 了 = too / so (excess or exclamation): 太贵了 / 太好了.",
+    "common_mistake": "Omitting 了 after 太, or replacing 太 with 很.",
+    "incorrect_example": "这个太贵。",
+    "correct_example": "这个太贵了。",
+    "keywords": [
+      "太……了",
+      "too",
+      "so",
+      "excess"
+    ]
+  },
+  {
+    "id": "gr_frequency_adverb",
+    "name": "常常 / 经常 frequency — before the verb",
+    "category": "word_order",
+    "hsk_level": 2,
+    "explanation": "Frequency adverbs (常常/经常/有时候) go before the verb: 我常常去那儿.",
+    "common_mistake": "Placing the frequency adverb after the verb or at the end.",
+    "incorrect_example": "我去常常那儿。",
+    "correct_example": "我常常去那儿。",
+    "keywords": [
+      "常常",
+      "经常",
+      "frequency",
+      "adverb",
+      "before verb"
+    ]
+  },
+  {
+    "id": "gr_verb_reduplication",
+    "name": "Verb reduplication (看看 / 休息休息)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "Reduplicating a verb softens it to 'a little / give it a try': one-syllable AA (看看) or A一A (看一看); two-syllable ABAB (休息休息), NOT AABB.",
+    "common_mistake": "Reduplicating a two-syllable verb as AABB (休休息息).",
+    "incorrect_example": "我们休休息息吧。",
+    "correct_example": "我们休息休息吧。",
+    "keywords": [
+      "verb reduplication",
+      "看看",
+      "休息休息",
+      "tentative",
+      "ABAB"
+    ]
+  },
+  {
+    "id": "gr_yixia",
+    "name": "Verb + 一下 (do briefly / once)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "Verb + 一下 softens an action to 'briefly / just once', like reduplication: 看一下, 等一下.",
+    "common_mistake": "Placing 一下 before the verb.",
+    "incorrect_example": "请你一下等我。",
+    "correct_example": "请你等一下。",
+    "keywords": [
+      "一下",
+      "briefly",
+      "once",
+      "soften"
+    ]
+  },
+  {
+    "id": "gr_lai_qu_purpose",
+    "name": "来/去 + verb phrase (come/go to do)",
+    "category": "grammar",
+    "hsk_level": 2,
+    "explanation": "来/去 + (place) + Verb phrase expresses the purpose of coming or going: 我去商店买东西 (I'm going to the shop to buy things).",
+    "common_mistake": "Inserting 为了 / an English 'to' marker between the motion and the purpose verb.",
+    "incorrect_example": "我去为了买东西商店。",
+    "correct_example": "我去商店买东西。",
+    "keywords": [
+      "来",
+      "去",
+      "purpose",
+      "come go to do"
+    ]
   }
 ]

@@ -1,0 +1,1730 @@
+{
+  "queries": 43,
+  "configs": [
+    {
+      "config": "baseline",
+      "n": 43,
+      "recall@1": 0.488,
+      "recall@3": 0.744,
+      "recall@5": 0.837,
+      "mrr": 0.628,
+      "latency_ms": {
+        "mean": 328.6,
+        "p50": 310.4,
+        "p95": 437.0
+      }
+    },
+    {
+      "config": "bge_m3",
+      "n": 43,
+      "recall@1": 0.465,
+      "recall@3": 0.698,
+      "recall@5": 0.744,
+      "mrr": 0.612,
+      "latency_ms": {
+        "mean": 93.0,
+        "p50": 27.3,
+        "p95": 375.7
+      }
+    },
+    {
+      "config": "hybrid",
+      "n": 43,
+      "recall@1": 0.558,
+      "recall@3": 0.767,
+      "recall@5": 0.884,
+      "mrr": 0.698,
+      "latency_ms": {
+        "mean": 345.5,
+        "p50": 318.6,
+        "p95": 456.3
+      }
+    }
+  ],
+  "skipped": {},
+  "detail": {
+    "baseline": [
+      {
+        "id": "R01",
+        "cluster": "aspect",
+        "query": "小时候我常常去了公园。",
+        "expected_rule_id": "gr_le_completion",
+        "rank": 13,
+        "top3": [
+          "gr_frequency_adverb",
+          "gr_deshihou",
+          "gr_zai_location_verb"
+        ],
+        "latency_ms": 744.3
+      },
+      {
+        "id": "R02",
+        "cluster": "aspect",
+        "query": "你看，外面下雪，我们别出去了。",
+        "expected_rule_id": "gr_le_change",
+        "rank": 15,
+        "top3": [
+          "gr_chule_yiwai",
+          "gr_dei_must",
+          "gr_xiaqu_continue"
+        ],
+        "latency_ms": 437.0
+      },
+      {
+        "id": "R03",
+        "cluster": "aspect",
+        "query": "昨天我没去上班了。",
+        "expected_rule_id": "gr_le_negation_drop",
+        "rank": 1,
+        "top3": [
+          "gr_le_negation_drop",
+          "gr_le_completion",
+          "gr_shi_de"
+        ],
+        "latency_ms": 289.7
+      },
+      {
+        "id": "R04",
+        "cluster": "aspect",
+        "query": "他站看电视。",
+        "expected_rule_id": "gr_zhe_durative",
+        "rank": 2,
+        "top3": [
+          "gr_yibian_yibian",
+          "gr_zhe_durative",
+          "gr_jian_perception"
+        ],
+        "latency_ms": 305.0
+      },
+      {
+        "id": "R05",
+        "cluster": "aspect",
+        "query": "电影就要开始。",
+        "expected_rule_id": "gr_yao_le_imminent",
+        "rank": 1,
+        "top3": [
+          "gr_yao_le_imminent",
+          "gr_xian_ranhou",
+          "gr_yi_jiu"
+        ],
+        "latency_ms": 314.6
+      },
+      {
+        "id": "R06",
+        "cluster": "questions",
+        "query": "你什么时候来吗？",
+        "expected_rule_id": "gr_ma_question",
+        "rank": 4,
+        "top3": [
+          "gr_ruguo_jiu",
+          "gr_shi_de",
+          "gr_cong_dao"
+        ],
+        "latency_ms": 210.4
+      },
+      {
+        "id": "R07",
+        "cluster": "questions",
+        "query": "你去不去图书馆吗？",
+        "expected_rule_id": "gr_a_not_a",
+        "rank": 1,
+        "top3": [
+          "gr_a_not_a",
+          "gr_zai_location_verb",
+          "gr_ma_question"
+        ],
+        "latency_ms": 287.9
+      },
+      {
+        "id": "R08",
+        "cluster": "questions",
+        "query": "时间不早了，我们回家吗。",
+        "expected_rule_id": "gr_ba_suggestion",
+        "rank": 4,
+        "top3": [
+          "gr_jiu_cai",
+          "gr_ruguo_jiu",
+          "gr_yi_jiu"
+        ],
+        "latency_ms": 215.7
+      },
+      {
+        "id": "R09",
+        "cluster": "degree",
+        "query": "这件衣服太贵。",
+        "expected_rule_id": "gr_tai_le",
+        "rank": 1,
+        "top3": [
+          "gr_tai_le",
+          "gr_youdianr_yidianr",
+          "gr_de_attributive"
+        ],
+        "latency_ms": 287.0
+      },
+      {
+        "id": "R10",
+        "cluster": "questions",
+        "query": "我喜欢喝咖啡，你吗？",
+        "expected_rule_id": "gr_ne_question",
+        "rank": 3,
+        "top3": [
+          "gr_bushi_ershi",
+          "gr_haishi_huozhe",
+          "gr_ne_question"
+        ],
+        "latency_ms": 421.5
+      },
+      {
+        "id": "R11",
+        "cluster": "modals",
+        "query": "我姐姐能弹钢琴。",
+        "expected_rule_id": "gr_hui_neng_keyi",
+        "rank": 1,
+        "top3": [
+          "gr_hui_neng_keyi",
+          "gr_suiran_danshi",
+          "gr_zhiyao_jiu"
+        ],
+        "latency_ms": 410.3
+      },
+      {
+        "id": "R12",
+        "cluster": "modals",
+        "query": "你感冒了，多喝热水休息。",
+        "expected_rule_id": "gr_yinggai_should",
+        "rank": 7,
+        "top3": [
+          "gr_verb_reduplication",
+          "gr_hai_still",
+          "gr_degree_extreme"
+        ],
+        "latency_ms": 308.5
+      },
+      {
+        "id": "R13",
+        "cluster": "comparison",
+        "query": "弟弟比哥哥非常高。",
+        "expected_rule_id": "gr_bi_comparison",
+        "rank": 1,
+        "top3": [
+          "gr_bi_comparison",
+          "gr_bi_degree_diff",
+          "gr_adj_predicate_hen"
+        ],
+        "latency_ms": 346.3
+      },
+      {
+        "id": "R14",
+        "cluster": "comparison",
+        "query": "我不比我妹妹高。",
+        "expected_rule_id": "gr_meiyou_comparison",
+        "rank": 1,
+        "top3": [
+          "gr_meiyou_comparison",
+          "gr_bi_comparison",
+          "gr_bi_degree_diff"
+        ],
+        "latency_ms": 324.5
+      },
+      {
+        "id": "R15",
+        "cluster": "comparison",
+        "query": "妹妹跟姐姐高。",
+        "expected_rule_id": "gr_gen_yiyang",
+        "rank": 5,
+        "top3": [
+          "gr_bi_comparison",
+          "gr_bi_degree_diff",
+          "gr_gen_he_with"
+        ],
+        "latency_ms": 303.7
+      },
+      {
+        "id": "R16",
+        "cluster": "comparison",
+        "query": "天气更来更热。",
+        "expected_rule_id": "gr_yuelaiyue",
+        "rank": 1,
+        "top3": [
+          "gr_yuelaiyue",
+          "gr_yue_yue",
+          "gr_bi_comparison"
+        ],
+        "latency_ms": 319.1
+      },
+      {
+        "id": "R17",
+        "cluster": "comparison",
+        "query": "这个箱子比那个一点儿重。",
+        "expected_rule_id": "gr_bi_degree_diff",
+        "rank": 3,
+        "top3": [
+          "gr_youdianr_yidianr",
+          "gr_bi_comparison",
+          "gr_bi_degree_diff"
+        ],
+        "latency_ms": 331.9
+      },
+      {
+        "id": "R18",
+        "cluster": "conjunction",
+        "query": "如果明天不下雨，我们去爬山。",
+        "expected_rule_id": "gr_ruguo_jiu",
+        "rank": 3,
+        "top3": [
+          "gr_xiaqu_continue",
+          "gr_adj_predicate_hen",
+          "gr_ruguo_jiu"
+        ],
+        "latency_ms": 247.5
+      },
+      {
+        "id": "R19",
+        "cluster": "conjunction",
+        "query": "只要有时间，我才会帮你。",
+        "expected_rule_id": "gr_zhiyao_jiu",
+        "rank": 2,
+        "top3": [
+          "gr_ruguo_jiu",
+          "gr_zhiyao_jiu",
+          "gr_yi_jiu"
+        ],
+        "latency_ms": 217.8
+      },
+      {
+        "id": "R20",
+        "cluster": "conjunction",
+        "query": "只有努力学习，就能考上大学。",
+        "expected_rule_id": "gr_zhiyou_cai",
+        "rank": 1,
+        "top3": [
+          "gr_zhiyou_cai",
+          "gr_zhiyao_jiu",
+          "gr_weile_purpose"
+        ],
+        "latency_ms": 305.6
+      },
+      {
+        "id": "R21",
+        "cluster": "conjunction",
+        "query": "我一到北京，然后给你发消息。",
+        "expected_rule_id": "gr_yi_jiu",
+        "rank": 1,
+        "top3": [
+          "gr_yi_jiu",
+          "gr_ruguo_jiu",
+          "gr_gei_coverb"
+        ],
+        "latency_ms": 280.0
+      },
+      {
+        "id": "R22",
+        "cluster": "conjunction",
+        "query": "这家餐厅的菜不但便宜，好吃。",
+        "expected_rule_id": "gr_budan_erqie",
+        "rank": 3,
+        "top3": [
+          "gr_you_you",
+          "gr_youdianr_yidianr",
+          "gr_budan_erqie"
+        ],
+        "latency_ms": 359.4
+      },
+      {
+        "id": "R23",
+        "cluster": "conjunction",
+        "query": "虽然这个工作很难，我很喜欢。",
+        "expected_rule_id": "gr_suiran_danshi",
+        "rank": 1,
+        "top3": [
+          "gr_suiran_danshi",
+          "gr_weile_purpose",
+          "gr_adj_predicate_hen"
+        ],
+        "latency_ms": 314.6
+      },
+      {
+        "id": "R24",
+        "cluster": "conjunction",
+        "query": "这不是我的错，但是你的错。",
+        "expected_rule_id": "gr_bushi_ershi",
+        "rank": 1,
+        "top3": [
+          "gr_bushi_ershi",
+          "gr_budan_erqie",
+          "gr_meiyou_comparison"
+        ],
+        "latency_ms": 322.7
+      },
+      {
+        "id": "R25",
+        "cluster": "conjunction",
+        "query": "当我小，我住在乡下。",
+        "expected_rule_id": "gr_deshihou",
+        "rank": 1,
+        "top3": [
+          "gr_deshihou",
+          "gr_zai_location",
+          "gr_yi_jiu"
+        ],
+        "latency_ms": 421.1
+      },
+      {
+        "id": "R26",
+        "cluster": "complement",
+        "query": "字太小了，我不看清楚。",
+        "expected_rule_id": "gr_potential_complement",
+        "rank": 1,
+        "top3": [
+          "gr_potential_complement",
+          "gr_tai_le",
+          "gr_yixia"
+        ],
+        "latency_ms": 359.9
+      },
+      {
+        "id": "R27",
+        "cluster": "complement",
+        "query": "我找了半天，还是没找我的护照。",
+        "expected_rule_id": "gr_dao_resultative",
+        "rank": 2,
+        "top3": [
+          "gr_ban_half",
+          "gr_dao_resultative",
+          "gr_time_telling"
+        ],
+        "latency_ms": 305.0
+      },
+      {
+        "id": "R28",
+        "cluster": "complement",
+        "query": "你说得太小声，我没听。",
+        "expected_rule_id": "gr_jian_perception",
+        "rank": 8,
+        "top3": [
+          "gr_potential_complement",
+          "gr_ne_question",
+          "gr_resultative"
+        ],
+        "latency_ms": 323.2
+      },
+      {
+        "id": "R29",
+        "cluster": "complement",
+        "query": "行李还没收拾，我们不能出发。",
+        "expected_rule_id": "gr_hao_completion",
+        "rank": 33,
+        "top3": [
+          "gr_le_negation_drop",
+          "gr_chule_yiwai",
+          "gr_yao_le_imminent"
+        ],
+        "latency_ms": 310.4
+      },
+      {
+        "id": "R30",
+        "cluster": "complement",
+        "query": "小狗跑出去了房间。",
+        "expected_rule_id": "gr_directional",
+        "rank": 3,
+        "top3": [
+          "gr_yao_le_imminent",
+          "gr_deshihou",
+          "gr_directional"
+        ],
+        "latency_ms": 296.3
+      },
+      {
+        "id": "R31",
+        "cluster": "coverb",
+        "query": "我每天晚上打电话我妈妈。",
+        "expected_rule_id": "gr_gei_coverb",
+        "rank": 2,
+        "top3": [
+          "gr_yi_jiu",
+          "gr_gei_coverb",
+          "gr_frequency_adverb"
+        ],
+        "latency_ms": 307.7
+      },
+      {
+        "id": "R32",
+        "cluster": "coverb",
+        "query": "我昨天去看电影和我的同学。",
+        "expected_rule_id": "gr_gen_he_with",
+        "rank": 1,
+        "top3": [
+          "gr_gen_he_with",
+          "gr_xian_ranhou",
+          "gr_le_completion"
+        ],
+        "latency_ms": 293.8
+      },
+      {
+        "id": "R33",
+        "cluster": "coverb",
+        "query": "中国人常常吃饭筷子。",
+        "expected_rule_id": "gr_yong_instrument",
+        "rank": 1,
+        "top3": [
+          "gr_yong_instrument",
+          "gr_frequency_adverb",
+          "gr_qword_in_situ"
+        ],
+        "latency_ms": 266.0
+      },
+      {
+        "id": "R34",
+        "cluster": "coverb",
+        "query": "我家从地铁站不远。",
+        "expected_rule_id": "gr_li_distance",
+        "rank": 1,
+        "top3": [
+          "gr_li_distance",
+          "gr_cong_dao",
+          "gr_yi_jiu"
+        ],
+        "latency_ms": 313.5
+      },
+      {
+        "id": "R35",
+        "cluster": "coverb",
+        "query": "银行早上九点下午五点营业。",
+        "expected_rule_id": "gr_cong_dao",
+        "rank": 1,
+        "top3": [
+          "gr_cong_dao",
+          "gr_time_telling",
+          "gr_jiu_cai"
+        ],
+        "latency_ms": 284.3
+      },
+      {
+        "id": "R36",
+        "cluster": "existential",
+        "query": "桌子上是一台电脑。",
+        "expected_rule_id": "gr_you_existential",
+        "rank": 2,
+        "top3": [
+          "gr_zai_location",
+          "gr_you_existential",
+          "gr_yibian_yibian"
+        ],
+        "latency_ms": 444.2
+      },
+      {
+        "id": "R37",
+        "cluster": "existential",
+        "query": "我的钥匙有你那里吗？",
+        "expected_rule_id": "gr_zai_location",
+        "rank": 5,
+        "top3": [
+          "gr_dao_resultative",
+          "gr_you_existential",
+          "gr_ruguo_jiu"
+        ],
+        "latency_ms": 312.9
+      },
+      {
+        "id": "R38",
+        "cluster": "existential",
+        "query": "这个问题是很难。",
+        "expected_rule_id": "gr_shi_identity",
+        "rank": 11,
+        "top3": [
+          "gr_adj_predicate_hen",
+          "gr_tai_le",
+          "gr_li_distance"
+        ],
+        "latency_ms": 383.3
+      },
+      {
+        "id": "R39",
+        "cluster": "degree",
+        "query": "今天的天气好。",
+        "expected_rule_id": "gr_adj_predicate_hen",
+        "rank": 1,
+        "top3": [
+          "gr_adj_predicate_hen",
+          "gr_hao_completion",
+          "gr_zenmeyang"
+        ],
+        "latency_ms": 302.8
+      },
+      {
+        "id": "R40",
+        "cluster": "adverb",
+        "query": "我弟弟喜欢打篮球也。",
+        "expected_rule_id": "gr_ye_also",
+        "rank": 3,
+        "top3": [
+          "gr_budan_erqie",
+          "gr_bi_comparison",
+          "gr_ye_also"
+        ],
+        "latency_ms": 305.8
+      },
+      {
+        "id": "R41",
+        "cluster": "adverb",
+        "query": "都我的同事很友好。",
+        "expected_rule_id": "gr_dou_all",
+        "rank": 12,
+        "top3": [
+          "gr_gen_yiyang",
+          "gr_gen_he_with",
+          "gr_chule_yiwai"
+        ],
+        "latency_ms": 380.7
+      },
+      {
+        "id": "R42",
+        "cluster": "adverb",
+        "query": "他上个星期再来了一次。",
+        "expected_rule_id": "gr_zai_you_again",
+        "rank": 1,
+        "top3": [
+          "gr_zai_you_again",
+          "gr_hai_still",
+          "gr_you_you"
+        ],
+        "latency_ms": 313.0
+      },
+      {
+        "id": "R43",
+        "cluster": "adverb",
+        "query": "我有只五块钱。",
+        "expected_rule_id": "gr_zhi_only",
+        "rank": 1,
+        "top3": [
+          "gr_zhi_only",
+          "gr_money_spoken",
+          "gr_youdianr_yidianr"
+        ],
+        "latency_ms": 298.9
+      }
+    ],
+    "bge_m3": [
+      {
+        "id": "R01",
+        "cluster": "aspect",
+        "query": "小时候我常常去了公园。",
+        "expected_rule_id": "gr_le_completion",
+        "rank": 11,
+        "top3": [
+          "gr_frequency_adverb",
+          "gr_deshihou",
+          "gr_zai_location_verb"
+        ],
+        "latency_ms": 978.4
+      },
+      {
+        "id": "R02",
+        "cluster": "aspect",
+        "query": "你看，外面下雪，我们别出去了。",
+        "expected_rule_id": "gr_le_change",
+        "rank": 44,
+        "top3": [
+          "gr_ba_suggestion",
+          "gr_yuelaiyue",
+          "gr_yao_le_imminent"
+        ],
+        "latency_ms": 187.2
+      },
+      {
+        "id": "R03",
+        "cluster": "aspect",
+        "query": "昨天我没去上班了。",
+        "expected_rule_id": "gr_le_negation_drop",
+        "rank": 1,
+        "top3": [
+          "gr_le_negation_drop",
+          "gr_mei_guo_negation",
+          "gr_cong_dao"
+        ],
+        "latency_ms": 372.6
+      },
+      {
+        "id": "R04",
+        "cluster": "aspect",
+        "query": "他站看电视。",
+        "expected_rule_id": "gr_zhe_durative",
+        "rank": 2,
+        "top3": [
+          "gr_yibian_yibian",
+          "gr_zhe_durative",
+          "gr_zai_location"
+        ],
+        "latency_ms": 375.7
+      },
+      {
+        "id": "R05",
+        "cluster": "aspect",
+        "query": "电影就要开始。",
+        "expected_rule_id": "gr_yao_le_imminent",
+        "rank": 1,
+        "top3": [
+          "gr_yao_le_imminent",
+          "gr_gen_he_with",
+          "gr_qilai_inchoative"
+        ],
+        "latency_ms": 23.7
+      },
+      {
+        "id": "R06",
+        "cluster": "questions",
+        "query": "你什么时候来吗？",
+        "expected_rule_id": "gr_ma_question",
+        "rank": 8,
+        "top3": [
+          "gr_date_order",
+          "gr_hui_de_certainty",
+          "gr_yi_jiu"
+        ],
+        "latency_ms": 24.1
+      },
+      {
+        "id": "R07",
+        "cluster": "questions",
+        "query": "你去不去图书馆吗？",
+        "expected_rule_id": "gr_a_not_a",
+        "rank": 6,
+        "top3": [
+          "gr_zai_location_verb",
+          "gr_lai_qu_purpose",
+          "gr_xiang_yao_want"
+        ],
+        "latency_ms": 370.5
+      },
+      {
+        "id": "R08",
+        "cluster": "questions",
+        "query": "时间不早了，我们回家吗。",
+        "expected_rule_id": "gr_ba_suggestion",
+        "rank": 1,
+        "top3": [
+          "gr_ba_suggestion",
+          "gr_time_telling",
+          "gr_cong_dao"
+        ],
+        "latency_ms": 393.6
+      },
+      {
+        "id": "R09",
+        "cluster": "degree",
+        "query": "这件衣服太贵。",
+        "expected_rule_id": "gr_tai_le",
+        "rank": 1,
+        "top3": [
+          "gr_tai_le",
+          "gr_youdianr_yidianr",
+          "gr_money_spoken"
+        ],
+        "latency_ms": 26.2
+      },
+      {
+        "id": "R10",
+        "cluster": "questions",
+        "query": "我喜欢喝咖啡，你吗？",
+        "expected_rule_id": "gr_ne_question",
+        "rank": 14,
+        "top3": [
+          "gr_bushi_ershi",
+          "gr_haishi_huozhe",
+          "gr_liang_er"
+        ],
+        "latency_ms": 25.4
+      },
+      {
+        "id": "R11",
+        "cluster": "modals",
+        "query": "我姐姐能弹钢琴。",
+        "expected_rule_id": "gr_hui_neng_keyi",
+        "rank": 1,
+        "top3": [
+          "gr_hui_neng_keyi",
+          "gr_potential_complement",
+          "gr_resultative"
+        ],
+        "latency_ms": 25.5
+      },
+      {
+        "id": "R12",
+        "cluster": "modals",
+        "query": "你感冒了，多喝热水休息。",
+        "expected_rule_id": "gr_yinggai_should",
+        "rank": 6,
+        "top3": [
+          "gr_qilai_inchoative",
+          "gr_verb_reduplication",
+          "gr_xiang_yao_want"
+        ],
+        "latency_ms": 27.7
+      },
+      {
+        "id": "R13",
+        "cluster": "comparison",
+        "query": "弟弟比哥哥非常高。",
+        "expected_rule_id": "gr_bi_comparison",
+        "rank": 1,
+        "top3": [
+          "gr_bi_comparison",
+          "gr_bi_degree_diff",
+          "gr_meiyou_comparison"
+        ],
+        "latency_ms": 27.4
+      },
+      {
+        "id": "R14",
+        "cluster": "comparison",
+        "query": "我不比我妹妹高。",
+        "expected_rule_id": "gr_meiyou_comparison",
+        "rank": 1,
+        "top3": [
+          "gr_meiyou_comparison",
+          "gr_bi_comparison",
+          "gr_bi_degree_diff"
+        ],
+        "latency_ms": 27.3
+      },
+      {
+        "id": "R15",
+        "cluster": "comparison",
+        "query": "妹妹跟姐姐高。",
+        "expected_rule_id": "gr_gen_yiyang",
+        "rank": 3,
+        "top3": [
+          "gr_bi_comparison",
+          "gr_bi_degree_diff",
+          "gr_gen_yiyang"
+        ],
+        "latency_ms": 26.0
+      },
+      {
+        "id": "R16",
+        "cluster": "comparison",
+        "query": "天气更来更热。",
+        "expected_rule_id": "gr_yuelaiyue",
+        "rank": 1,
+        "top3": [
+          "gr_yuelaiyue",
+          "gr_yue_yue",
+          "gr_bi_comparison"
+        ],
+        "latency_ms": 27.0
+      },
+      {
+        "id": "R17",
+        "cluster": "comparison",
+        "query": "这个箱子比那个一点儿重。",
+        "expected_rule_id": "gr_bi_degree_diff",
+        "rank": 4,
+        "top3": [
+          "gr_youdianr_yidianr",
+          "gr_duo_approx",
+          "gr_xie_some"
+        ],
+        "latency_ms": 27.9
+      },
+      {
+        "id": "R18",
+        "cluster": "conjunction",
+        "query": "如果明天不下雨，我们去爬山。",
+        "expected_rule_id": "gr_ruguo_jiu",
+        "rank": 6,
+        "top3": [
+          "gr_qilai_inchoative",
+          "gr_wulun_dou",
+          "gr_zenmeyang"
+        ],
+        "latency_ms": 27.7
+      },
+      {
+        "id": "R19",
+        "cluster": "conjunction",
+        "query": "只要有时间，我才会帮你。",
+        "expected_rule_id": "gr_zhiyao_jiu",
+        "rank": 2,
+        "top3": [
+          "gr_ruguo_jiu",
+          "gr_zhiyao_jiu",
+          "gr_yi_jiu"
+        ],
+        "latency_ms": 371.5
+      },
+      {
+        "id": "R20",
+        "cluster": "conjunction",
+        "query": "只有努力学习，就能考上大学。",
+        "expected_rule_id": "gr_zhiyou_cai",
+        "rank": 1,
+        "top3": [
+          "gr_zhiyou_cai",
+          "gr_zhiyao_jiu",
+          "gr_weile_purpose"
+        ],
+        "latency_ms": 28.1
+      },
+      {
+        "id": "R21",
+        "cluster": "conjunction",
+        "query": "我一到北京，然后给你发消息。",
+        "expected_rule_id": "gr_yi_jiu",
+        "rank": 1,
+        "top3": [
+          "gr_yi_jiu",
+          "gr_deshihou",
+          "gr_cong_dao"
+        ],
+        "latency_ms": 27.9
+      },
+      {
+        "id": "R22",
+        "cluster": "conjunction",
+        "query": "这家餐厅的菜不但便宜，好吃。",
+        "expected_rule_id": "gr_budan_erqie",
+        "rank": 13,
+        "top3": [
+          "gr_you_you",
+          "gr_lai_qu_purpose",
+          "gr_zai_location"
+        ],
+        "latency_ms": 27.9
+      },
+      {
+        "id": "R23",
+        "cluster": "conjunction",
+        "query": "虽然这个工作很难，我很喜欢。",
+        "expected_rule_id": "gr_suiran_danshi",
+        "rank": 2,
+        "top3": [
+          "gr_weile_purpose",
+          "gr_suiran_danshi",
+          "gr_xiang_yao_want"
+        ],
+        "latency_ms": 25.4
+      },
+      {
+        "id": "R24",
+        "cluster": "conjunction",
+        "query": "这不是我的错，但是你的错。",
+        "expected_rule_id": "gr_bushi_ershi",
+        "rank": 1,
+        "top3": [
+          "gr_bushi_ershi",
+          "gr_shi_identity",
+          "gr_meiyou_comparison"
+        ],
+        "latency_ms": 26.3
+      },
+      {
+        "id": "R25",
+        "cluster": "conjunction",
+        "query": "当我小，我住在乡下。",
+        "expected_rule_id": "gr_deshihou",
+        "rank": 1,
+        "top3": [
+          "gr_deshihou",
+          "gr_zai_location",
+          "gr_li_distance"
+        ],
+        "latency_ms": 26.4
+      },
+      {
+        "id": "R26",
+        "cluster": "complement",
+        "query": "字太小了，我不看清楚。",
+        "expected_rule_id": "gr_potential_complement",
+        "rank": 1,
+        "top3": [
+          "gr_potential_complement",
+          "gr_date_order",
+          "gr_resultative"
+        ],
+        "latency_ms": 27.5
+      },
+      {
+        "id": "R27",
+        "cluster": "complement",
+        "query": "我找了半天，还是没找我的护照。",
+        "expected_rule_id": "gr_dao_resultative",
+        "rank": 1,
+        "top3": [
+          "gr_dao_resultative",
+          "gr_zai_location",
+          "gr_le_negation_drop"
+        ],
+        "latency_ms": 21.0
+      },
+      {
+        "id": "R28",
+        "cluster": "complement",
+        "query": "你说得太小声，我没听。",
+        "expected_rule_id": "gr_jian_perception",
+        "rank": 3,
+        "top3": [
+          "gr_resultative",
+          "gr_potential_complement",
+          "gr_jian_perception"
+        ],
+        "latency_ms": 27.7
+      },
+      {
+        "id": "R29",
+        "cluster": "complement",
+        "query": "行李还没收拾，我们不能出发。",
+        "expected_rule_id": "gr_hao_completion",
+        "rank": 7,
+        "top3": [
+          "gr_yao_le_imminent",
+          "gr_le_negation_drop",
+          "gr_dei_must"
+        ],
+        "latency_ms": 26.5
+      },
+      {
+        "id": "R30",
+        "cluster": "complement",
+        "query": "小狗跑出去了房间。",
+        "expected_rule_id": "gr_directional",
+        "rank": 1,
+        "top3": [
+          "gr_directional",
+          "gr_yao_le_imminent",
+          "gr_yi_jiu"
+        ],
+        "latency_ms": 28.0
+      },
+      {
+        "id": "R31",
+        "cluster": "coverb",
+        "query": "我每天晚上打电话我妈妈。",
+        "expected_rule_id": "gr_gei_coverb",
+        "rank": 2,
+        "top3": [
+          "gr_yi_jiu",
+          "gr_gei_coverb",
+          "gr_zai_location"
+        ],
+        "latency_ms": 27.1
+      },
+      {
+        "id": "R32",
+        "cluster": "coverb",
+        "query": "我昨天去看电影和我的同学。",
+        "expected_rule_id": "gr_gen_he_with",
+        "rank": 1,
+        "top3": [
+          "gr_gen_he_with",
+          "gr_resultative",
+          "gr_le_completion"
+        ],
+        "latency_ms": 25.8
+      },
+      {
+        "id": "R33",
+        "cluster": "coverb",
+        "query": "中国人常常吃饭筷子。",
+        "expected_rule_id": "gr_yong_instrument",
+        "rank": 1,
+        "top3": [
+          "gr_yong_instrument",
+          "gr_zai_location",
+          "gr_guo_experience"
+        ],
+        "latency_ms": 27.5
+      },
+      {
+        "id": "R34",
+        "cluster": "coverb",
+        "query": "我家从地铁站不远。",
+        "expected_rule_id": "gr_li_distance",
+        "rank": 1,
+        "top3": [
+          "gr_li_distance",
+          "gr_zai_location",
+          "gr_cong_dao"
+        ],
+        "latency_ms": 25.8
+      },
+      {
+        "id": "R35",
+        "cluster": "coverb",
+        "query": "银行早上九点下午五点营业。",
+        "expected_rule_id": "gr_cong_dao",
+        "rank": 2,
+        "top3": [
+          "gr_time_telling",
+          "gr_cong_dao",
+          "gr_money_spoken"
+        ],
+        "latency_ms": 28.0
+      },
+      {
+        "id": "R36",
+        "cluster": "existential",
+        "query": "桌子上是一台电脑。",
+        "expected_rule_id": "gr_you_existential",
+        "rank": 2,
+        "top3": [
+          "gr_zai_location",
+          "gr_you_existential",
+          "gr_yong_instrument"
+        ],
+        "latency_ms": 28.0
+      },
+      {
+        "id": "R37",
+        "cluster": "existential",
+        "query": "我的钥匙有你那里吗？",
+        "expected_rule_id": "gr_zai_location",
+        "rank": 2,
+        "top3": [
+          "gr_dao_resultative",
+          "gr_zai_location",
+          "gr_gei_coverb"
+        ],
+        "latency_ms": 26.1
+      },
+      {
+        "id": "R38",
+        "cluster": "existential",
+        "query": "这个问题是很难。",
+        "expected_rule_id": "gr_shi_identity",
+        "rank": 10,
+        "top3": [
+          "gr_duo_approx",
+          "gr_potential_complement",
+          "gr_xiang_yao_want"
+        ],
+        "latency_ms": 23.9
+      },
+      {
+        "id": "R39",
+        "cluster": "degree",
+        "query": "今天的天气好。",
+        "expected_rule_id": "gr_adj_predicate_hen",
+        "rank": 1,
+        "top3": [
+          "gr_adj_predicate_hen",
+          "gr_wulun_dou",
+          "gr_zenmeyang"
+        ],
+        "latency_ms": 23.5
+      },
+      {
+        "id": "R40",
+        "cluster": "adverb",
+        "query": "我弟弟喜欢打篮球也。",
+        "expected_rule_id": "gr_ye_also",
+        "rank": 55,
+        "top3": [
+          "gr_yibian_yibian",
+          "gr_gen_yiyang",
+          "gr_dui_regarding"
+        ],
+        "latency_ms": 27.2
+      },
+      {
+        "id": "R41",
+        "cluster": "adverb",
+        "query": "都我的同事很友好。",
+        "expected_rule_id": "gr_dou_all",
+        "rank": 4,
+        "top3": [
+          "gr_gen_he_with",
+          "gr_dui_regarding",
+          "gr_hui_de_certainty"
+        ],
+        "latency_ms": 27.5
+      },
+      {
+        "id": "R42",
+        "cluster": "adverb",
+        "query": "他上个星期再来了一次。",
+        "expected_rule_id": "gr_zai_you_again",
+        "rank": 1,
+        "top3": [
+          "gr_zai_you_again",
+          "gr_hui_de_certainty",
+          "gr_hai_still"
+        ],
+        "latency_ms": 25.6
+      },
+      {
+        "id": "R43",
+        "cluster": "adverb",
+        "query": "我有只五块钱。",
+        "expected_rule_id": "gr_zhi_only",
+        "rank": 2,
+        "top3": [
+          "gr_money_spoken",
+          "gr_zhi_only",
+          "gr_youdianr_yidianr"
+        ],
+        "latency_ms": 25.8
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "R01",
+        "cluster": "aspect",
+        "query": "小时候我常常去了公园。",
+        "expected_rule_id": "gr_le_completion",
+        "rank": 6,
+        "top3": [
+          "gr_frequency_adverb",
+          "gr_ye_also",
+          "gr_wulun_dou"
+        ],
+        "latency_ms": 436.8
+      },
+      {
+        "id": "R02",
+        "cluster": "aspect",
+        "query": "你看，外面下雪，我们别出去了。",
+        "expected_rule_id": "gr_le_change",
+        "rank": 23,
+        "top3": [
+          "gr_chule_yiwai",
+          "gr_ba_suggestion",
+          "gr_dei_must"
+        ],
+        "latency_ms": 412.2
+      },
+      {
+        "id": "R03",
+        "cluster": "aspect",
+        "query": "昨天我没去上班了。",
+        "expected_rule_id": "gr_le_negation_drop",
+        "rank": 1,
+        "top3": [
+          "gr_le_negation_drop",
+          "gr_mei_guo_negation",
+          "gr_jiu_cai"
+        ],
+        "latency_ms": 344.4
+      },
+      {
+        "id": "R04",
+        "cluster": "aspect",
+        "query": "他站看电视。",
+        "expected_rule_id": "gr_zhe_durative",
+        "rank": 2,
+        "top3": [
+          "gr_yibian_yibian",
+          "gr_zhe_durative",
+          "gr_hai_still"
+        ],
+        "latency_ms": 294.3
+      },
+      {
+        "id": "R05",
+        "cluster": "aspect",
+        "query": "电影就要开始。",
+        "expected_rule_id": "gr_yao_le_imminent",
+        "rank": 2,
+        "top3": [
+          "gr_xian_ranhou",
+          "gr_yao_le_imminent",
+          "gr_gen_he_with"
+        ],
+        "latency_ms": 281.0
+      },
+      {
+        "id": "R06",
+        "cluster": "questions",
+        "query": "你什么时候来吗？",
+        "expected_rule_id": "gr_ma_question",
+        "rank": 1,
+        "top3": [
+          "gr_ma_question",
+          "gr_shi_de",
+          "gr_ruguo_jiu"
+        ],
+        "latency_ms": 258.7
+      },
+      {
+        "id": "R07",
+        "cluster": "questions",
+        "query": "你去不去图书馆吗？",
+        "expected_rule_id": "gr_a_not_a",
+        "rank": 1,
+        "top3": [
+          "gr_a_not_a",
+          "gr_ma_question",
+          "gr_zai_location_verb"
+        ],
+        "latency_ms": 430.1
+      },
+      {
+        "id": "R08",
+        "cluster": "questions",
+        "query": "时间不早了，我们回家吗。",
+        "expected_rule_id": "gr_ba_suggestion",
+        "rank": 2,
+        "top3": [
+          "gr_ruguo_jiu",
+          "gr_ba_suggestion",
+          "gr_yiqian_yihou"
+        ],
+        "latency_ms": 317.3
+      },
+      {
+        "id": "R09",
+        "cluster": "degree",
+        "query": "这件衣服太贵。",
+        "expected_rule_id": "gr_tai_le",
+        "rank": 1,
+        "top3": [
+          "gr_tai_le",
+          "gr_degree_extreme",
+          "gr_zhi_only"
+        ],
+        "latency_ms": 302.9
+      },
+      {
+        "id": "R10",
+        "cluster": "questions",
+        "query": "我喜欢喝咖啡，你吗？",
+        "expected_rule_id": "gr_ne_question",
+        "rank": 1,
+        "top3": [
+          "gr_ne_question",
+          "gr_haishi_huozhe",
+          "gr_ma_question"
+        ],
+        "latency_ms": 294.7
+      },
+      {
+        "id": "R11",
+        "cluster": "modals",
+        "query": "我姐姐能弹钢琴。",
+        "expected_rule_id": "gr_hui_neng_keyi",
+        "rank": 1,
+        "top3": [
+          "gr_hui_neng_keyi",
+          "gr_zhiyao_jiu",
+          "gr_zhiyou_cai"
+        ],
+        "latency_ms": 311.0
+      },
+      {
+        "id": "R12",
+        "cluster": "modals",
+        "query": "你感冒了，多喝热水休息。",
+        "expected_rule_id": "gr_yinggai_should",
+        "rank": 9,
+        "top3": [
+          "gr_verb_reduplication",
+          "gr_ruguo_jiu",
+          "gr_le_completion"
+        ],
+        "latency_ms": 345.9
+      },
+      {
+        "id": "R13",
+        "cluster": "comparison",
+        "query": "弟弟比哥哥非常高。",
+        "expected_rule_id": "gr_bi_comparison",
+        "rank": 1,
+        "top3": [
+          "gr_bi_comparison",
+          "gr_bi_degree_diff",
+          "gr_adj_predicate_hen"
+        ],
+        "latency_ms": 294.4
+      },
+      {
+        "id": "R14",
+        "cluster": "comparison",
+        "query": "我不比我妹妹高。",
+        "expected_rule_id": "gr_meiyou_comparison",
+        "rank": 1,
+        "top3": [
+          "gr_meiyou_comparison",
+          "gr_bi_degree_diff",
+          "gr_bi_comparison"
+        ],
+        "latency_ms": 358.8
+      },
+      {
+        "id": "R15",
+        "cluster": "comparison",
+        "query": "妹妹跟姐姐高。",
+        "expected_rule_id": "gr_gen_yiyang",
+        "rank": 4,
+        "top3": [
+          "gr_bi_comparison",
+          "gr_bi_degree_diff",
+          "gr_gen_he_with"
+        ],
+        "latency_ms": 287.6
+      },
+      {
+        "id": "R16",
+        "cluster": "comparison",
+        "query": "天气更来更热。",
+        "expected_rule_id": "gr_yuelaiyue",
+        "rank": 1,
+        "top3": [
+          "gr_yuelaiyue",
+          "gr_bi_comparison",
+          "gr_yue_yue"
+        ],
+        "latency_ms": 382.7
+      },
+      {
+        "id": "R17",
+        "cluster": "comparison",
+        "query": "这个箱子比那个一点儿重。",
+        "expected_rule_id": "gr_bi_degree_diff",
+        "rank": 2,
+        "top3": [
+          "gr_youdianr_yidianr",
+          "gr_bi_degree_diff",
+          "gr_bi_comparison"
+        ],
+        "latency_ms": 327.3
+      },
+      {
+        "id": "R18",
+        "cluster": "conjunction",
+        "query": "如果明天不下雨，我们去爬山。",
+        "expected_rule_id": "gr_ruguo_jiu",
+        "rank": 1,
+        "top3": [
+          "gr_ruguo_jiu",
+          "gr_time_before_place",
+          "gr_xiaqu_continue"
+        ],
+        "latency_ms": 312.5
+      },
+      {
+        "id": "R19",
+        "cluster": "conjunction",
+        "query": "只要有时间，我才会帮你。",
+        "expected_rule_id": "gr_zhiyao_jiu",
+        "rank": 2,
+        "top3": [
+          "gr_ruguo_jiu",
+          "gr_zhiyao_jiu",
+          "gr_zhiyou_cai"
+        ],
+        "latency_ms": 263.3
+      },
+      {
+        "id": "R20",
+        "cluster": "conjunction",
+        "query": "只有努力学习，就能考上大学。",
+        "expected_rule_id": "gr_zhiyou_cai",
+        "rank": 1,
+        "top3": [
+          "gr_zhiyou_cai",
+          "gr_zhiyao_jiu",
+          "gr_zhi_only"
+        ],
+        "latency_ms": 303.5
+      },
+      {
+        "id": "R21",
+        "cluster": "conjunction",
+        "query": "我一到北京，然后给你发消息。",
+        "expected_rule_id": "gr_yi_jiu",
+        "rank": 1,
+        "top3": [
+          "gr_yi_jiu",
+          "gr_gei_coverb",
+          "gr_gei_resultative"
+        ],
+        "latency_ms": 291.5
+      },
+      {
+        "id": "R22",
+        "cluster": "conjunction",
+        "query": "这家餐厅的菜不但便宜，好吃。",
+        "expected_rule_id": "gr_budan_erqie",
+        "rank": 2,
+        "top3": [
+          "gr_you_you",
+          "gr_budan_erqie",
+          "gr_youdianr_yidianr"
+        ],
+        "latency_ms": 311.2
+      },
+      {
+        "id": "R23",
+        "cluster": "conjunction",
+        "query": "虽然这个工作很难，我很喜欢。",
+        "expected_rule_id": "gr_suiran_danshi",
+        "rank": 1,
+        "top3": [
+          "gr_suiran_danshi",
+          "gr_weile_purpose",
+          "gr_cong_dao"
+        ],
+        "latency_ms": 343.8
+      },
+      {
+        "id": "R24",
+        "cluster": "conjunction",
+        "query": "这不是我的错，但是你的错。",
+        "expected_rule_id": "gr_bushi_ershi",
+        "rank": 1,
+        "top3": [
+          "gr_bushi_ershi",
+          "gr_suiran_danshi",
+          "gr_deshihou"
+        ],
+        "latency_ms": 315.0
+      },
+      {
+        "id": "R25",
+        "cluster": "conjunction",
+        "query": "当我小，我住在乡下。",
+        "expected_rule_id": "gr_deshihou",
+        "rank": 1,
+        "top3": [
+          "gr_deshihou",
+          "gr_zai_location",
+          "gr_zai_location_verb"
+        ],
+        "latency_ms": 371.0
+      },
+      {
+        "id": "R26",
+        "cluster": "complement",
+        "query": "字太小了，我不看清楚。",
+        "expected_rule_id": "gr_potential_complement",
+        "rank": 1,
+        "top3": [
+          "gr_potential_complement",
+          "gr_resultative",
+          "gr_tai_le"
+        ],
+        "latency_ms": 437.7
+      },
+      {
+        "id": "R27",
+        "cluster": "complement",
+        "query": "我找了半天，还是没找我的护照。",
+        "expected_rule_id": "gr_dao_resultative",
+        "rank": 1,
+        "top3": [
+          "gr_dao_resultative",
+          "gr_dei_must",
+          "gr_le_negation_drop"
+        ],
+        "latency_ms": 408.9
+      },
+      {
+        "id": "R28",
+        "cluster": "complement",
+        "query": "你说得太小声，我没听。",
+        "expected_rule_id": "gr_jian_perception",
+        "rank": 4,
+        "top3": [
+          "gr_tai_le",
+          "gr_potential_complement",
+          "gr_le_negation_drop"
+        ],
+        "latency_ms": 307.4
+      },
+      {
+        "id": "R29",
+        "cluster": "complement",
+        "query": "行李还没收拾，我们不能出发。",
+        "expected_rule_id": "gr_hao_completion",
+        "rank": 14,
+        "top3": [
+          "gr_chule_yiwai",
+          "gr_le_negation_drop",
+          "gr_mei_guo_negation"
+        ],
+        "latency_ms": 320.8
+      },
+      {
+        "id": "R30",
+        "cluster": "complement",
+        "query": "小狗跑出去了房间。",
+        "expected_rule_id": "gr_directional",
+        "rank": 23,
+        "top3": [
+          "gr_yao_le_imminent",
+          "gr_tai_le",
+          "gr_le_negation_drop"
+        ],
+        "latency_ms": 451.0
+      },
+      {
+        "id": "R31",
+        "cluster": "coverb",
+        "query": "我每天晚上打电话我妈妈。",
+        "expected_rule_id": "gr_gei_coverb",
+        "rank": 2,
+        "top3": [
+          "gr_yi_jiu",
+          "gr_gei_coverb",
+          "gr_frequency_adverb"
+        ],
+        "latency_ms": 456.3
+      },
+      {
+        "id": "R32",
+        "cluster": "coverb",
+        "query": "我昨天去看电影和我的同学。",
+        "expected_rule_id": "gr_gen_he_with",
+        "rank": 1,
+        "top3": [
+          "gr_gen_he_with",
+          "gr_xian_ranhou",
+          "gr_gen_yiyang"
+        ],
+        "latency_ms": 310.9
+      },
+      {
+        "id": "R33",
+        "cluster": "coverb",
+        "query": "中国人常常吃饭筷子。",
+        "expected_rule_id": "gr_yong_instrument",
+        "rank": 1,
+        "top3": [
+          "gr_yong_instrument",
+          "gr_frequency_adverb",
+          "gr_yibian_yibian"
+        ],
+        "latency_ms": 404.4
+      },
+      {
+        "id": "R34",
+        "cluster": "coverb",
+        "query": "我家从地铁站不远。",
+        "expected_rule_id": "gr_li_distance",
+        "rank": 1,
+        "top3": [
+          "gr_li_distance",
+          "gr_cong_dao",
+          "gr_ruguo_jiu"
+        ],
+        "latency_ms": 387.1
+      },
+      {
+        "id": "R35",
+        "cluster": "coverb",
+        "query": "银行早上九点下午五点营业。",
+        "expected_rule_id": "gr_cong_dao",
+        "rank": 1,
+        "top3": [
+          "gr_cong_dao",
+          "gr_jiu_cai",
+          "gr_yixia"
+        ],
+        "latency_ms": 319.8
+      },
+      {
+        "id": "R36",
+        "cluster": "existential",
+        "query": "桌子上是一台电脑。",
+        "expected_rule_id": "gr_you_existential",
+        "rank": 2,
+        "top3": [
+          "gr_zai_location",
+          "gr_you_existential",
+          "gr_time_telling"
+        ],
+        "latency_ms": 445.5
+      },
+      {
+        "id": "R37",
+        "cluster": "existential",
+        "query": "我的钥匙有你那里吗？",
+        "expected_rule_id": "gr_zai_location",
+        "rank": 4,
+        "top3": [
+          "gr_ma_question",
+          "gr_ne_question",
+          "gr_dao_resultative"
+        ],
+        "latency_ms": 248.3
+      },
+      {
+        "id": "R38",
+        "cluster": "existential",
+        "query": "这个问题是很难。",
+        "expected_rule_id": "gr_shi_identity",
+        "rank": 3,
+        "top3": [
+          "gr_adj_predicate_hen",
+          "gr_tai_le",
+          "gr_shi_identity"
+        ],
+        "latency_ms": 262.1
+      },
+      {
+        "id": "R39",
+        "cluster": "degree",
+        "query": "今天的天气好。",
+        "expected_rule_id": "gr_adj_predicate_hen",
+        "rank": 4,
+        "top3": [
+          "gr_hao_completion",
+          "gr_wulun_dou",
+          "gr_yuelaiyue"
+        ],
+        "latency_ms": 464.7
+      },
+      {
+        "id": "R40",
+        "cluster": "adverb",
+        "query": "我弟弟喜欢打篮球也。",
+        "expected_rule_id": "gr_ye_also",
+        "rank": 1,
+        "top3": [
+          "gr_ye_also",
+          "gr_budan_erqie",
+          "gr_dou_all"
+        ],
+        "latency_ms": 309.4
+      },
+      {
+        "id": "R41",
+        "cluster": "adverb",
+        "query": "都我的同事很友好。",
+        "expected_rule_id": "gr_dou_all",
+        "rank": 4,
+        "top3": [
+          "gr_gen_yiyang",
+          "gr_chule_yiwai",
+          "gr_mei_every"
+        ],
+        "latency_ms": 527.7
+      },
+      {
+        "id": "R42",
+        "cluster": "adverb",
+        "query": "他上个星期再来了一次。",
+        "expected_rule_id": "gr_zai_you_again",
+        "rank": 1,
+        "top3": [
+          "gr_zai_you_again",
+          "gr_chule_yiwai",
+          "gr_double_le"
+        ],
+        "latency_ms": 318.6
+      },
+      {
+        "id": "R43",
+        "cluster": "adverb",
+        "query": "我有只五块钱。",
+        "expected_rule_id": "gr_zhi_only",
+        "rank": 1,
+        "top3": [
+          "gr_zhi_only",
+          "gr_ji_duoshao",
+          "gr_measure_words"
+        ],
+        "latency_ms": 283.4
+      }
+    ]
+  }
+}

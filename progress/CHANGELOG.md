@@ -3,6 +3,37 @@
 Session-level record of what changed and why. Deeper rationale lives in `DECISIONS.md`;
 current state in `STATUS.md`.
 
+## 2026-07-13 — Task 6 retrieval sweep (advanced retriever + embedding swap)
+
+Built the Task 6 retrieval half. First finding: the Task 5 "retrieval is saturated at
+recall@1=1.0" story was **circular** — each A_stateless query is a rule's own
+`incorrect_example`, which `_grammar_text` embeds verbatim inside the target doc, so it
+measured lexical overlap, not semantics. Fix (non-gaming):
+- **Corpus 24→98 genuine grammar rules** (`data/grammar_rules.json`), dense with real
+  near-neighbours (aspect particles, 有/是/在, 再/又, 只要/只有, complements, degree adverbs).
+- **43 fresh non-circular queries** (`evals/datagen/retrieval_queries.json` + builder) — new
+  vocab, mapped by construction to the best-fit rule. Baseline drops to recall@1 0.49 (real headroom).
+- Pinned `generate_dataset.py` type-A to the first 24 rules so Task 5's frozen 40-case dataset
+  still reproduces exactly (verified: git diff empty).
+
+**Sweep result** (`evals/surfaces/retrieval_sweep.py`, deterministic exact rule-id match + latency):
+- **Hybrid (BM25 jieba + dense, RRF) WINS quality** — recall@1 0.49→0.56, recall@3 0.74→0.77,
+  MRR 0.63→0.70. Mechanism = Chinese particle exact-match (the Task 3 hypothesis), and it's NOT the
+  circularity bug (queries are fresh; BM25 matches the shared *particle*, not a verbatim sentence).
+  → the "advanced retriever" deliverable.
+- **BGE-M3 = latency/cost trade, quality tie** — recall@1 0.47 (~baseline), but p50 27ms local vs
+  310ms OpenAI network + no API fee. → the "one other change" (embedding swap) deliverable.
+- Qwen3-Embedding-8B NOT run (needs GPU endpoint; documented, not hidden).
+
+**Task 5 re-based on 98 rules** (2A, per user — one consistent corpus, no separate surfaces):
+re-ran RAG surface → ContextRecall 0.93 / ContextRelevance 0.89 / Faithfulness 0.83 / NoiseSens 0.20 /
+AnswerAcc 0.83; deterministic recall@3 1.0, **MRR 1.0→0.95** (2/24 near-neighbour slips over the bigger
+corpus — honest, reported). README Surface 2 updated.
+
+Eval-only heavy deps (sentence-transformers/torch, rank-bm25, jieba) added as `pyproject` `[task6]`
+extra — kept OUT of the prod Docker image. NEXT: model bake-off (deepseek/glm/qwen quality + latency +
+timeout-rate).
+
 ## 2026-07-13 — Extraction guard + README Task 4 / auth alignment
 
 Two things this session, both off the STATUS TODO.
