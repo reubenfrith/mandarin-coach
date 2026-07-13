@@ -96,7 +96,11 @@ def make_tools(user_id: str) -> list:
         out = []
         for h in hits:
             m = h["metadata"]
-            out.append(f"- {m['name']} (HSK {m['hsk_level']}): {h['document']}")
+            # hsk_level 0 = unknown (Chinese Grammar Wiki patterns carry no level) —
+            # omit rather than print a fabricated "HSK 0".
+            lvl = m.get("hsk_level") or 0
+            tag = f" (HSK {lvl})" if lvl else ""
+            out.append(f"- {m['name']}{tag}: {h['document']}")
         return "\n".join(out)
 
     @tool

@@ -1,0 +1,3201 @@
+[
+  {
+    "id": "cgw_advancedUseOfYou",
+    "name": "Advanced Use Of You",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Here we repeat the verb used and place 又 in the middle. The repetition of the verb emphasizes how the action is being repeated again and again. This one is definitely the most advanced usage of 又 here, and you're not going to use it nearly as much as the others.",
+    "structures": [
+      "Subj. ＋Verb + 了 + 又 + Verb，还是 / 就是 ……"
+    ],
+    "correct_example": "这个人我看了又看，还是觉得我不认识他。",
+    "example_en": "I looked at him again and again, but I still think I don't know him.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGF08B6",
+    "keywords": []
+  },
+  {
+    "id": "cgw_advancedYesnoQuestionsWithMa",
+    "name": "Advanced Yesno Questions With Ma",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The question particle 吗 (ma) is a very simple way to convert it into a \"yes/no question,\" and beginners will learn not to use 吗 with other question words, because it's redundant. More advanced students, however, will note that 吗 has some more complicated structures that do involve combining it with question words in order to ask very specific types of confirming questions. Note that the following examples typically contains some kind of \"verb of understanding\" such as 知道 (zhīdào),了解 (liǎojiě), 明白 (míngbai), 认识 (rènshi), etc. Then \"吗\" (ma) can still be added at the end of the question, turning it into a kind of confirmation.",
+    "structures": [
+      "Statement + 吗 ？",
+      "[Question-word Question] + 吗 ？"
+    ],
+    "correct_example": "你知道这是什么东西吗？",
+    "example_en": "Do you know what this thing is?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGI9WXT",
+    "keywords": []
+  },
+  {
+    "id": "cgw_ageWithSui",
+    "name": "Age With Sui",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Use 岁 (suì) to give a person's age, similar to how we say \"years old\" in English. There are a details that work differently from English, however.",
+    "structures": [
+      "Subj. + Number + 岁",
+      "Subj. + Number + 岁 + 半"
+    ],
+    "correct_example": "我20岁。",
+    "example_en": "I am 20 years old.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGQUKJF",
+    "keywords": []
+  },
+  {
+    "id": "cgw_askingAboutDegreeWithDuo",
+    "name": "Asking About Degree With Duo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "How big? How busy? How cold? Ask questions like these regarding the degree of an adjective with 多 (duō). This is just one of the many uses of this word.",
+    "structures": [
+      "Subj. + 多 + Adj. ?"
+    ],
+    "correct_example": "她多高？",
+    "example_en": "How tall is she?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG9LLJU",
+    "keywords": []
+  },
+  {
+    "id": "cgw_auxiliaryVerbYaoAndItsMultipleMeanings",
+    "name": "Auxiliary Verb Yao And Its Multiple Meanings",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You probably already know the basic meaning of 要 (yào) as \"to want.\"  It is actually a quite versatile word, though, and can also take on the meanings of \"to need\" as well as \"will (do something).\"  In every case, context is crucial for figuring out which meaning someone is trying to express.",
+    "structures": [
+      "Subj. + 要 + Noun",
+      "Subj. + 要 + Verb"
+    ],
+    "correct_example": "你要什么？",
+    "example_en": "What do you want?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG95AL1",
+    "keywords": []
+  },
+  {
+    "id": "cgw_basicComparisonsWithBi",
+    "name": "Basic Comparisons With Bi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One of the most common words when comparing things in Chinese is to use 比 (bǐ). 比 (bǐ) has similarities to the English word \"than,\" but it requires a word order that's not so intuitive, so you'll want to practice it quite a bit.",
+    "structures": [
+      "Noun 1 + 比 + Noun 2 + Adj.",
+      "Noun 1 + 比 + Noun 2 + 更 + Adj."
+    ],
+    "correct_example": "小李比小张高。",
+    "example_en": "Xiao Li is taller than Xiao Zhang.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8SI2K",
+    "keywords": []
+  },
+  {
+    "id": "cgw_basicComparisonsWithYiyang",
+    "name": "Basic Comparisons With Yiyang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Along with 比 (bǐ) and 没有 (méiyǒu), 一样 (yīyàng) is another way to make basic comparisons. However, 一样 (yīyàng) is used to express that two things are the same in some way.",
+    "structures": [
+      "Noun 1 + 跟 / 和 + Noun 2 + 一样",
+      "Noun 1 + 跟 / 和 + Noun 2 + 一样 + Adj."
+    ],
+    "correct_example": "我和你一样。",
+    "example_en": "I am the same as you.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGC06N0",
+    "keywords": []
+  },
+  {
+    "id": "cgw_beiziju",
+    "name": "Beiziju",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Bei Sentences, which are called 被字句 (bèizìjù) in Chinese, are a key way to express the passive in modern Mandarin Chinese.  In passive sentences, the object of an action becomes the subject of the sentence, and what would have been the subject of the normal (active voice) sentence, the \"doer\" of the action, becomes secondary, and may or may not be included in the passive sentence.",
+    "structures": [
+      "Subj. + 被 + Doer + Verb Phrase",
+      "Subj. + 被 + Verb Phrase",
+      "Subj. + 没有 + 被 + Doer + Verb Phrase",
+      "Subj. + Adv. + 被 + Doer + Verb Phrase"
+    ],
+    "correct_example": "他被开除了。",
+    "example_en": "He got fired.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGHF9F1",
+    "keywords": []
+  },
+  {
+    "id": "cgw_benlai",
+    "name": "Benlai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If something was originally a certain way, or \"should be\" a certain way, the Chinese words used are often 本来 (běnlái) and 原来 (yuánlái). 本来 (běnlái) is usually an adverb while 原来 (yuánlái) could be either and adjective or an adverb. However, they are used in different ways and different circumstances, so this article will help you distinguish when and where to use them.",
+    "structures": [
+      "Subj. + 本来 + 是 +（不）要 / 会 / 应该 + Verb + 的，但是 / 可是 ...",
+      "Subj. + 本来 + 就...",
+      "Subj. + 本来 + 就 + 很 / 不 + Adj.",
+      "Subj. + 本来 + 就 + 会 / 要 / 得 / 应该 + Verb"
+    ],
+    "correct_example": "我本来是要去的，不过后来不太舒服，就没去。",
+    "example_en": "I was originally going, but I didn't go because I didn't feel very well.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG56QKW",
+    "keywords": []
+  },
+  {
+    "id": "cgw_bieLe",
+    "name": "Bie Le",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You may know how to make negative commands with \"bie,\" but what if someone is already doing it? The pattern 别⋯⋯了 (bié... le) is all you need to tell someone to STOP DOING THAT (which they're already doing).",
+    "structures": [
+      "别 + Verb / Verb Phrase + 了"
+    ],
+    "correct_example": "别说了，我不想听。",
+    "example_en": "Stop talking. I don't want to listen.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGZ8OIF",
+    "keywords": []
+  },
+  {
+    "id": "cgw_bieShuo",
+    "name": "Bie Shuo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "别说 (bié shuō) means something like \"leaving aside\" or \"don't think about,\" and is used in the following way:",
+    "structures": [
+      "别说 + A ， 连  / 就是+ B + 也 / 都 + Verb"
+    ],
+    "correct_example": "别说一百，就是一块钱我也不给你。",
+    "example_en": "Don't think about one hundred, I won't even give you one kuai.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGR6Q2J",
+    "keywords": []
+  },
+  {
+    "id": "cgw_bothWithYou",
+    "name": "Both With You",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When you're getting descriptive, you may find yourself wanting to use multiple adjectives at a time. The character 又 (yòu) can be used to give two qualities to something. Using the double 又 (yòu) structure is like saying that something is \"both… and…\" in English.",
+    "structures": [
+      "Subj. + 又 + Adj. 1 + 又 + Adj. 2"
+    ],
+    "correct_example": "她男朋友又高又帅。",
+    "example_en": "Her boyfriend is both tall and handsome.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGPFUM2",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buBi",
+    "name": "Bu Bi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You might wonder why you have 不比 (bù bǐ) for negative comparisons when you already have 没有 (méiyǒu) for comparisons. The answer is that they're not exactly the same thing! 没有 should be your \"go to word\" for expressing \"not as... as...,\" but there are cases where 不比 (in all of its subtle glory) is a better choice.",
+    "structures": [
+      "Subj. + 不比 + Noun + Adj. / Verb"
+    ],
+    "correct_example": "这个老师不比他的学生聪明。",
+    "example_en": "The teacher is not smarter than his students.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8DVSO",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buDong",
+    "name": "Bu Dong",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Chinese learners often have to express that they don't understand something, especially in the beginning when they start learning. One of the ways to express that is to use the 不懂 (bù dǒng) verb complement.",
+    "structures": [
+      "Subj. +  Verb + 不懂"
+    ],
+    "correct_example": "我看不懂这本书。",
+    "example_en": "I don't understand the book.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8R2V8",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buJin",
+    "name": "Bu Jin",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "We've seen 不但⋯⋯而且 in B1, but other than that there are a number of other structures which can be used to express \"not only...but also.\" 不但 can be substituted with 不仅(bù jǐn) and 不只  (bù zhǐ), all meaning \"not only,\" and can be followed by 而且 (ér qiě) , 还 (hái), or 也 (yě) \nOther than 不但⋯⋯而且 being more common than the others, they are all pretty similar in usage and meaning.",
+    "structures": [
+      "Subj. + 不仅 / 不但 / 不只 + ⋯⋯，而且 / 还 / 也 + ⋯⋯"
+    ],
+    "correct_example": "这篇文章不仅结构清楚，而且思想先进。",
+    "example_en": "This essay is not only written clearly, but is also well-developed.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGJ1VZQ",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buShiErShi",
+    "name": "Bu Shi Er Shi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "不是⋯⋯而是⋯⋯ (bù shì... ér shì) means \"not A, but rather B.\" This is a useful phrase to use in arguments to overturn a point of view and state the opposite.",
+    "structures": [
+      "不是 + A + 而是 + B"
+    ],
+    "correct_example": "我不是不想帮忙而是没有能力帮忙。",
+    "example_en": "It's not that I don't want to help, it's that I can't help.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGAJGJD",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buZhidaoHao",
+    "name": "Bu Zhidao Hao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"不知道⋯⋯好\" (bù zhīdào...hǎo) is an expression used to indicate and emphasize that the speaker does not know how to do something, or at least does not know how to do something well.",
+    "structures": [
+      "Subj. + 不知道 + Verb Phrase + 好"
+    ],
+    "correct_example": "这件事我真的不知道怎么办好。",
+    "example_en": "I really don't know what to do with this.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG0EQQJ",
+    "keywords": []
+  },
+  {
+    "id": "cgw_budanErqie",
+    "name": "Budan Erqie",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"不但⋯⋯，而且⋯⋯\" (bùdàn..., érqiě...) is a very commonly used pattern that indicates \"not only, ... but also....\"",
+    "structures": [
+      "Subj. + 不但 + Adj. / Verb， 而且 + Adj. / Verb",
+      "Subj. + 不但 +  Adj. / Verb， 而且 + Adj. / Verb",
+      "不但 + Subj. 1 + Adj. / Verb， 而且 + Subj. 2 + Adj. / Verb"
+    ],
+    "correct_example": "这种菜不但好吃，而且有营养。",
+    "example_en": "This kind of vegetable is not only delicious, but nutritious as well.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGTYJ3E",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buguan",
+    "name": "Buguan",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "不管 (bùguǎn) is more informal than 无论, but it is used in more or less the same way. As with other constructions, 都 and 也 can be used in the second part of the sentence to emphasize the action or decision will not change.",
+    "structures": [
+      "不管 + Situation + Subj. + (都 / 也) + Result"
+    ],
+    "correct_example": "不管你信不信，反正我信！",
+    "example_en": "It doesn't matter if you believe or not, I believe it anyway.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG0NDS6",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buguo",
+    "name": "Buguo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Instead of just using 可是 or 但是, you can also use the softer and more informal 不过 (búguò).",
+    "structures": [
+      "Clause 1， 不过 + Clause 2"
+    ],
+    "correct_example": "我可以喝白酒，不过只能喝一点。",
+    "example_en": "I can drink baijiu, but only a little.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGA0S4T",
+    "keywords": []
+  },
+  {
+    "id": "cgw_bushi_jiushi",
+    "name": "Bushi jiushi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Pattern indicating there are only 2 possiblities, similar to \"If it's not X then it must be Y\".",
+    "structures": [
+      "不是 + A，就是 + B"
+    ],
+    "correct_example": "他整天不是打游戏就是睡觉。",
+    "example_en": "All day, if he's not playing games, he's sleeping.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGEXR6R",
+    "keywords": []
+  },
+  {
+    "id": "cgw_butDidnt",
+    "name": "But Didnt",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "To say that something bad almost happened (but didn't), you can add the word 差点 (chàdiǎn) before the verb.  You will also hear 差点儿 (chàdiǎnr) in northern China.  There is no difference in meaning between 差点 and 差点儿.",
+    "structures": [
+      "Subj. + 差点(儿) + [Verb Phrase] + 了"
+    ],
+    "correct_example": "我差点忘了。",
+    "example_en": "I almost forgot.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG6ESWW",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buyao",
+    "name": "Buyao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You can use 不要 (bùyào) to command someone: \"don't\" (do something). This is similar to the other negative command \"别 (bié).\"",
+    "structures": [
+      "不要 + Verb"
+    ],
+    "correct_example": "不要走。",
+    "example_en": "Don't leave.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGIVZJU",
+    "keywords": []
+  },
+  {
+    "id": "cgw_chabuduo",
+    "name": "Chabuduo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "差不多 (chàbuduō), translated literally, means \"the difference is not much.\" In practice it means something like \"more or less,\" and is useful for expressing rough approximations.",
+    "structures": [
+      "Subj. + 差不多",
+      "A + 跟 / 和 +  B + 差不多",
+      "差不多 + Adj. / Verb",
+      "差不多 ＋ [Quantity Phrase] / [Time Phrase]"
+    ],
+    "correct_example": "这几个地方都差不多。",
+    "example_en": "These places are all pretty much the same.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG1NAXO",
+    "keywords": []
+  },
+  {
+    "id": "cgw_chahenduo",
+    "name": "Chahenduo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You might be used to thinking of 差不多 (chàbùduō) as a single word, and that's totally OK. But if you want to negate the whole idea of rough equivalency, then you need to think of it as a phrase and use 差很多 (chà hěn duō). Not surprisingly, it's a little less versatile than 差不多 (chàbùduō).",
+    "structures": [
+      "Subj. + 差 很 多",
+      "A + 跟 / 和 +  B + 差很多"
+    ],
+    "correct_example": "这两家店的东西价格差很多。",
+    "example_en": "There is a big difference in price between these two shops.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGQAN74",
+    "keywords": []
+  },
+  {
+    "id": "cgw_chufei",
+    "name": "Chufei",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "除非 (chúfēi) can be used as a conjunction, and means \"unless.\" 否则 (fǒuzé) or 不然 (bùrán) often appear in the following phrase, to form a construction meaning \"unless x, otherwise y\":",
+    "structures": [
+      "y，除非 x",
+      "除非 x ，否则 / 不然 y",
+      "除非 x，才 y"
+    ],
+    "correct_example": "老板不给你加薪，除非你表现很好。",
+    "example_en": "The boss won't give you a raise unless you perform well.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGMD0YY",
+    "keywords": []
+  },
+  {
+    "id": "cgw_chule",
+    "name": "Chule",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Using 除了 (chúle)⋯⋯ 以外 (yǐwài) will help you spruce up your sentences when you want to express \"except,\" \"besides,\" and \"in addition.\"  You may feel that \"except\" has a pretty different meaning form the other two. Well, read on!",
+    "structures": [
+      "除了 + Noun Phrase + (以外) + Noun Phrase + 都 + Verb",
+      "除了 + Noun Phrase + (以外) + Noun Phrase + 也 / 还 + Verb"
+    ],
+    "correct_example": "除了妈妈以外，我们全家都去香港。",
+    "example_en": "Except for mother, the whole family went to Hong Kong.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGHFPGG",
+    "keywords": []
+  },
+  {
+    "id": "cgw_comparingHuiNengKeyi",
+    "name": "Comparing Hui Neng Keyi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "会 (huì), 能 (néng), and 可以 (kěyǐ) are often translated as \"can.\" Sometimes they are explained as: 会 means \"know how to,\" 能 means \"to be able to,\" and 可以 means \"to have permission to.\" Actually, they overlap somewhat.",
+    "structures": [
+      "会／能 + Verb",
+      "可以／能 + Verb",
+      "会 + Verb",
+      "很会／很能 + Verb"
+    ],
+    "correct_example": "他会修电脑。",
+    "example_en": "He knows how to fix computers.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGZL717",
+    "keywords": []
+  },
+  {
+    "id": "cgw_comparisonXiang",
+    "name": "Comparison Xiang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "像  (xiàng) is used to compare a specific characteristic of two things or people, and can be used in the following structure:",
+    "structures": [
+      "Noun 1 + 像 + Noun 2 + 一样 + Adj. / Verb",
+      "Noun 1 + 像 + Noun 2 + 这么 / 那么 + Adj. / Verb",
+      "Noun 1 + 不像 + Noun 2 + 这么 / 那么 + Adj. / Verb",
+      "Noun 1 + 没有 + Noun 2 + 这么 / 那么 + Adj. / Verb"
+    ],
+    "correct_example": "你怎么像我妈一样啰嗦!",
+    "example_en": "Why do you sound as nagging as my mom does!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG1MD4N",
+    "keywords": []
+  },
+  {
+    "id": "cgw_concedingAPointWithShi",
+    "name": "Conceding A Point With Shi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When conceding a point, we often put emphasis on the point we are conceding, and in Chinese there is a way to do that with 是 (shì).",
+    "structures": [
+      "Adj. + 是 + Adj. ， 但是 / 就是 ⋯⋯"
+    ],
+    "correct_example": "好吃是好吃，就是不太健康。",
+    "example_en": "It is tasty, but it's not very healthy.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGT9Y8P",
+    "keywords": []
+  },
+  {
+    "id": "cgw_concedingWithBa",
+    "name": "Conceding With Ba",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The particle 吧 (ba) can also be used to concede a point. That is, 吧 (ba) can be used to accept or agree with something that you're not particularly happy about, the way we might use \"all right\" or \"fine then\" in English.",
+    "structures": [
+      "Statement + 吧"
+    ],
+    "correct_example": "A:太贵了！B:好吧，我们可以看看别的。",
+    "example_en": "A: That's too expensive! B: All right, we can take a look at something else.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGJIP2E",
+    "keywords": []
+  },
+  {
+    "id": "cgw_congDao",
+    "name": "Cong Dao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "从⋯⋯ 到⋯⋯(cóng... dào...) is used in the same way as \"from... to...\" is used in English, and can be used both for times and places.",
+    "structures": [
+      "从 + Time 1 + 到 + Time 2",
+      "从 + Place 1 + 到 + Place 2"
+    ],
+    "correct_example": "从2004年到2008年",
+    "example_en": "from 2004 to 2008",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGGGIW8",
+    "keywords": []
+  },
+  {
+    "id": "cgw_connectingNounsWithShi",
+    "name": "Connecting Nouns With Shi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The verb to be is not used in Chinese the same way as it is in English. In Chinese, 是 (shì) is for connecting nouns, and is generally not used with adjectives.",
+    "structures": [
+      "Noun 1 + 是 + Noun 2"
+    ],
+    "correct_example": "我是学生。",
+    "example_en": "I am a student.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGUN7RX",
+    "keywords": []
+  },
+  {
+    "id": "cgw_continuationWithHai",
+    "name": "Continuation With Hai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you \"still\" need help on how to use 还 (hái), then this is the page for you.",
+    "structures": [
+      "Subj. + 还在 + Verb",
+      "Subj. + 还是 + Verb",
+      "Subj. + 还 + 不 / 没 + Verb + Obj."
+    ],
+    "correct_example": "他还在看书。",
+    "example_en": "He is still reading.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGIRILI",
+    "keywords": []
+  },
+  {
+    "id": "cgw_deBudeliao",
+    "name": "De Budeliao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "得不得了 (de bùdéliǎo) can be used as a complement to suggest a situation is serious, or is likely to result in perhaps terrible consequences. It can be used in a positive sense, such as in English when we say \"I'm terribly happy.\"",
+    "structures": [
+      "Adj. +  得不得了"
+    ],
+    "correct_example": "升职的事情让他高兴得不得了。",
+    "example_en": "The fact that he got promoted made him extremely happy.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGB8BWA",
+    "keywords": []
+  },
+  {
+    "id": "cgw_deShihou",
+    "name": "De Shihou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In English, if we are reflecting on a past time, we often say, \"when I was a child\" or \"when I was in school.\" In Chinese, this can also be expressed by using 的时候 (de shíhou).",
+    "structures": [
+      "(Subj.) + Verb / Adj. + 的 时候, ....",
+      "Time Word + 的 时候, ...."
+    ],
+    "correct_example": "你不在的时候，我会想你。",
+    "example_en": "When you are not here, I'll miss you.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGWN185",
+    "keywords": []
+  },
+  {
+    "id": "cgw_dengDeng",
+    "name": "Deng Deng",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "等等 (děng děng), or simply 等 (děng), is just like saying “and so on” or “etc.” in English, but just a bit more formal.  Both are placed after listing a series of items (generally with a list that exceeds two items).",
+    "structures": [
+      "A1，A2⋯⋯等 / 等等",
+      "A1，A2⋯⋯等 + [Category]"
+    ],
+    "correct_example": "西瓜、菠萝、苹果、葡萄等等都是我喜欢的水果。",
+    "example_en": "Watermelons, pineapples, apples, grapes and so on are all the fruits that I like.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGF763H",
+    "keywords": []
+  },
+  {
+    "id": "cgw_directionalVerbsLaiAndQu",
+    "name": "Directional Verbs Lai And Qu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "来 (lái) and 去 (qù) are both words that help to express direction from the perspective of the speaker. 来 (lái) means \"come\" (towards the speaker), while 去 (qù) means \"go\" (away from the speaker). For example, if you are in China, a local person might ask you: \"When did you come to China?\" using 来 (lái). Another example is if you want to go from China to Japan, your friends might ask you:  “When are you going to Japan?\" using 去 (qù).",
+    "structures": [
+      "来 / 去 + Place"
+    ],
+    "correct_example": "妈妈要去超市。",
+    "example_en": "Mom will go to the supermarket.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGRBKSL",
+    "keywords": []
+  },
+  {
+    "id": "cgw_doerOfActionYou",
+    "name": "Doer Of Action You",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "由 (yóu)  is used to emphasize who is the doer or initiator of an action, a bit like in English where we might say: \"Andy is the one who....\"",
+    "structures": [
+      "Topic + 由 + Person + Verb"
+    ],
+    "correct_example": "这件事由我负责。",
+    "example_en": "I am responsible for this.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGGNXVR",
+    "keywords": []
+  },
+  {
+    "id": "cgw_doingSomethingLessWithShao",
+    "name": "Doing Something Less With Shao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Often heard when scolding or giving advice (like when parents talk to children) is 少 (shǎo), which can mean \"to do less of something.\"",
+    "structures": [
+      "Subj. + 少 + Verb + Obj."
+    ],
+    "correct_example": "废话少说！",
+    "example_en": "Speak less nonsense!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG9B0M8",
+    "keywords": []
+  },
+  {
+    "id": "cgw_doingSomethingMoreWithDuo",
+    "name": "Doing Something More With Duo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In China, you often hear you should do this or that more (eat more, drink more water, wear more warm clothing etc.), and they often use the word 多 (duō). What's not intuitive to learners is that the word 多 should come before the verb.",
+    "structures": [
+      "多 + Verb + Obj."
+    ],
+    "correct_example": "多吃点。",
+    "example_en": "Eat a little more.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGLKGZP",
+    "keywords": []
+  },
+  {
+    "id": "cgw_duima",
+    "name": "Duima",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "As well as yes/no questions, you can also form tag questions with 吗 (ma). Tag questions are quick questions that are tagged on the end of a sentence to ask for confirmation. In English, this is often done with \"right?\" or negatively with \"isn't it?\"",
+    "structures": [
+      "⋯⋯， 好 / 对 / 是 / 可以 +  吗？"
+    ],
+    "correct_example": "这样做，对吗？",
+    "example_en": "Do it like this, right?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGSJYZ2",
+    "keywords": []
+  },
+  {
+    "id": "cgw_duokui",
+    "name": "Duokui",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "多亏(duōkuī) can be translated as \"thanks to\" and is used to express that, due to somebody's help, a negative result has been averted. 了 is often placed after it as it's about something in the past. Note that 多亏(duōkuī) can be placed in the beginning or the middle. You can add in 不然 for an \"otherwise... (this really bad thing would have happened)\" explanation. When the good outcome comes before 多亏, there is no need to add in 才. But if the good outcome comes after 多亏, you need to add in 才 to indicate \"as a result...(the good outcome happened).\"",
+    "structures": [
+      "多亏（了）……",
+      "Good Outcome, 多亏（了）……",
+      "多亏（了）……，不然 Subj. ……",
+      "多亏（了）……，Subj. 才 ……"
+    ],
+    "correct_example": "多亏了大家的帮助！",
+    "example_en": "Thanks to everyone's help!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG44TBS",
+    "keywords": []
+  },
+  {
+    "id": "cgw_duoshaoqian",
+    "name": "Duoshaoqian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Cash is king, even though China is now crazy for mobile payments. Either way, though, mastering how to say quantities of money is vital!",
+    "structures": [
+      "Subj. + 多少钱 ?",
+      "Number + 块 + Number + 毛"
+    ],
+    "correct_example": "多少钱？",
+    "example_en": "How much?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGL6JOE",
+    "keywords": []
+  },
+  {
+    "id": "cgw_emphasizingNegationWithYou",
+    "name": "Emphasizing Negation With You",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One of the many versatile uses of 又 is to emphasize negation, giving your negative sentence a little kick!",
+    "structures": [
+      "又 + 不 / 没 + Verb / Adj."
+    ],
+    "correct_example": "我又不知道，问我干吗？",
+    "example_en": "I definitely don't know. Why ask me?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGD3C4S",
+    "keywords": []
+  },
+  {
+    "id": "cgw_everyDou",
+    "name": "Every Dou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "This grammar point is not about how to use 每 (měi) to mean \"every,\" but rather how to combine question words with 都 (dōu) to make words and phrases like \"everywhere\" or \"everyone.\" You may have learned this same pattern for expressing \"everything,\" but now it's time to extend it.",
+    "structures": [
+      "谁 + 都 + Verb Phrase",
+      "哪儿 / 哪里 + 都 + Verb Phrase",
+      "什么 时候 + 都 + Verb Phrase",
+      "多少 (+ Noun) + 都 + Verb Phrase",
+      "怎么 + 都 + Verb Phrase"
+    ],
+    "correct_example": "谁都喜欢美食。",
+    "example_en": "Everyone likes delicious food.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG13ALM",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAboutToHappenWithLe",
+    "name": "Expressing About To Happen With Le",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Remember that 了 (le) is not only for the past! When something is about to happen, you can also indicate this using 了 (le).  Normally it is paired with a 快 (kuài), 快要(kuàiyào) or a 要 (yào). This is a special form of using 了 to indicate a change of situation.",
+    "structures": [
+      "快+ Verb / Verb Phrase + 了",
+      "快要 + Verb / Verb Phrase + 了",
+      "快 + Adj. + 了",
+      "Subj. + 要 + Verb / Verb Phrase / Adj. + 了"
+    ],
+    "correct_example": "我们快到了。",
+    "example_en": "We're almost there.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGNGEU8",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAboutToWithJiuyao",
+    "name": "Expressing About To With Jiuyao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "就要 (jiùyào) is similar to 快要 (kuàiyào), meaning \"about to.\" They are interchangeable in some cases. But there is a major difference that you need to take a good look at. 快要 (kuài yào) is generally \"about to\" [happen], but 就要 (jiù yào) could be used to mark a more specific time. 要 (yào) here can be omitted. For this one, you wouldn't normally use \"about to\" for this English translation, but the feeling is nevertheless that the impending event is coming up fast.",
+    "structures": [
+      "就要 + Verb Phrase + 了",
+      "还有 + Time Period + 就（要） + Verb Phrase + 了"
+    ],
+    "correct_example": "我就要饿死了。",
+    "example_en": "I'm about to starve to death.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG9B210",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingActionsInProgressWithZai",
+    "name": "Expressing Actions In Progress With Zai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "在 (zài) and 正在 (zhèngzài) can be used as auxiliary verbs to express that an action is ongoing or in progress. This is often the equivalent of present continuous in English, which is how we express that an activity is happening now.",
+    "structures": [
+      "Subj. + 在 + Verb + Obj.",
+      "Subj. + 正在 + Verb + Obj."
+    ],
+    "correct_example": "她在看书。",
+    "example_en": "She is reading.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG846EA",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAfterWithJingguo",
+    "name": "Expressing After With Jingguo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The first way that 经过 is used as a verb is that it means \"to pass by\" or \"to pass through.\" It is like saying \"I went through downtown\" or \"I passed by the shop.\" As a preposition, 经过 means \"to experience something\" or \"going through a time.\" It emphasizes the process of that experience. If it is talking about \"going through a time,\" it is usually talking about the past. As a noun, 经过 refers to the process of something.",
+    "structures": [
+      "经过 + Event / Time，Subj. + Predicate"
+    ],
+    "correct_example": "我每天上班都会经过人民广场。",
+    "example_en": "I pass the People's Square every day on my way to work.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG11DA8",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAgainInTheFutureWithZai",
+    "name": "Expressing Again In The Future With Zai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "While 又 (yòu) is used for \"again\" in the past, 再 (zài) is used for \"again\" in the future. That is, 再 is used when something has happened once and it will happen again.",
+    "structures": [
+      "Subj. + 再 + Verb Phrase"
+    ],
+    "correct_example": "我明天再来。",
+    "example_en": "I'll come again tomorrow.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGIZQJ2",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAgainInThePastWithYou",
+    "name": "Expressing Again In The Past With You",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Whenever you want to express something like \"you did it again!\" in Chinese, you generally want to use 又 (yòu).",
+    "structures": [
+      "又 + Verb + 了",
+      "又 + 是 + Noun",
+      "又 + 要 / 可以 / 能 + Verb Phrase ( + 了)"
+    ],
+    "correct_example": "又下雨了！",
+    "example_en": "It rains again!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGN1JR5",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAgeDifferenceWithDaAndXiao",
+    "name": "Expressing Age Difference With Da And Xiao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "如果你有兄弟姐妹，中国人常常会问你\"他（她）比你小几岁\" or \"他（她）比你大几岁 \"。注意，这里一定不能不用\"年轻\"或者\"老\"。",
+    "structures": [
+      "A + 比 + B + 大 / 小 + number + 岁",
+      "A + 跟 + B + 一样 + 大"
+    ],
+    "correct_example": "我姐姐比我大两岁。",
+    "example_en": "My sister is two years older than me.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGE8810",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAlmostUsingChadianMei",
+    "name": "Expressing Almost Using Chadian Mei",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Logically, 差点没 is not that different from 差点.  In fact, you shouldn't think of it as a single word; think of the 没 as belonging to what follows 差点 and it makes more sense.  Still, it can be a little confusing, and is worth a closer look.",
+    "structures": [
+      "Subj. + 差点 + 没 + Verb Phrase"
+    ],
+    "correct_example": "我差点儿没想起来。",
+    "example_en": "I almost forgot it.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGGOUJB",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAlwaysWithConglai",
+    "name": "Expressing Always With Conglai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Although perhaps more often used in the negative to mean \"never,\" 从来 (cónglái) can be used with 都 (dōu) to mean \"always\" or \"have always (done).\"",
+    "structures": [
+      "Subj. + 从来 + 都 + Predicate"
+    ],
+    "correct_example": "我从来都一个人住，已经习惯了。",
+    "example_en": "I have always lived alone; I'm used to it already.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8KUHG",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAndAlsoWithHai",
+    "name": "Expressing And Also With Hai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In English we use \"and also\" when we want to connect separate and different thoughts. We can do the same thing in Chinese by using 还 (hái).",
+    "structures": [
+      "Subj. + Verb + Obj. 1， 还 + Verb + Obj. 2"
+    ],
+    "correct_example": "她有一个弟弟，还有一个妹妹。",
+    "example_en": "She has a younger brother and also has a younger sister.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGJBZKC",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAndWithHe",
+    "name": "Expressing And With He",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When listing out multiple nouns, 和 (hé) is there to help you out. Just remember that 和 (hé) isn't a word you can use to translate just any usage of the English word \"and.\"",
+    "structures": [
+      "Noun 1 + 和 + Noun 2"
+    ],
+    "correct_example": "你和我",
+    "example_en": "you and I",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGP0KFF",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingAsOneLikesWithJiu",
+    "name": "Expressing As One Likes With Jiu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When we want to express \"to do something as one pleases,\" we can use the \"想 + verb +就 + verb\" form.",
+    "structures": [
+      "想 + Verb (+ Obj.) + 就 + Verb (+ Obj.)",
+      "想 + Verb + Question Word + 就 + Verb + Question Word"
+    ],
+    "correct_example": "你想来就来。",
+    "example_en": "If you want to come, come.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGDUZ55",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingBeGoingToWithYao",
+    "name": "Expressing Be Going To With Yao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The auxiliary verb 要 (yào) has several different meanings, and here we'll tackle the \"be going to\" meaning. You'll use this when you are discussing your plans with someone.",
+    "structures": [
+      "Subj. + Time + 要 + Verb",
+      "Time + Subj. + 要 + Verb"
+    ],
+    "correct_example": "我明天要买一个iPhone。",
+    "example_en": "I am going to buy an iPhone tomorrow.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGVT2KN",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingDifficultWithNan",
+    "name": "Expressing Difficult With Nan",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "难 (nán) is an adjective that means \"difficult.\" When something is \"hard to do\" (as in difficult), the word 难 (nán) can be used before the verb.",
+    "structures": [
+      "Subj. + (很) 难 + Verb",
+      "Subj. + (很) 难 + [Sense Verb]"
+    ],
+    "correct_example": "这句话很难懂。",
+    "example_en": "This sentence is hard to understand.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG35T4H",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingDistanceWithLi",
+    "name": "Expressing Distance With Li",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Are we there yet? One of the ways to express distance is to use 离 (lí). The word order might seem a little tricky at first, but once you get it down, you'll be able to talk about distance with no problem.",
+    "structures": [
+      "Place 1 + 离 + Place 2 + Adv. + 近 / 远",
+      "Place 1 + 离 + Place 2 (+ Adv.) + 近 / 远 + 吗？",
+      "Place 1 + 离 + Place 2 (+ 有) + 多远？"
+    ],
+    "correct_example": "我家离公司很近。",
+    "example_en": "My house is close to my office.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGI96BQ",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingDontNeedToWithBuyong",
+    "name": "Expressing Dont Need To With Buyong",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In Chinese, \"要\" has many meanings, one of which is \"need to\". However, when you want to express  \"don't need to\", you actually use \"不用\", not \"不要\".",
+    "structures": [
+      "Subj. + 不用 + [Verb Phrase]"
+    ],
+    "correct_example": "不用担心。",
+    "example_en": "You don't need to worry.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGECD0E",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingEarlinessWithJiu",
+    "name": "Expressing Earliness With Jiu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Just as 才 (cái) can express lateness, 就 (jiù) can be used to indicate that something happened earlier or sooner than expected.  It can also be used in the near future to indicate something will happen very soon. 早就 means \"long ago,\" and is usually used to express a kind of impatience or surprise on the part of the speaker. It comes before the verb.",
+    "structures": [
+      "Subj. + Time Word + 就 + Verb",
+      "Subj. + Time  Word + 就 + Verb + Obj. + 了"
+    ],
+    "correct_example": "我马上就来。",
+    "example_en": "I'll be there in a second.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGKITRZ",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingEverSinceWithZicong",
+    "name": "Expressing Ever Since With Zicong",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "自从 means \"ever since\" in English, and is used to express the starting point of an action in the past. It can be followed by phrases using the markers 起 and 以后",
+    "structures": [
+      "自从 + [Starting Point]"
+    ],
+    "correct_example": "自从来到湖南，我越来越能吃辣了。",
+    "example_en": "Ever since arriving in Hunan, I've been more and more able to eat spicy food.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGLI7GW",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingEveryWithMei",
+    "name": "Expressing Every With Mei",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In this article we will look at the structure for saying \"every\" in Chinese, which is slightly more involved than just throwing in the word 每 (měi).",
+    "structures": [
+      "每 + Measure Word + Noun + 都"
+    ],
+    "correct_example": "每个菜都好吃。",
+    "example_en": "Every dish is delicious.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGB6L4M",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingExcessivelyWithTai",
+    "name": "Expressing Excessively With Tai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In Chinese, the simplest structure for expressing \"too\" in the sense of \"excessively\" is by using the word 太 (tài). Don't forget to also add 了 (le) after the adjective to keep your Chinese sounding natural.",
+    "structures": [
+      "太 + Adj. + 了"
+    ],
+    "correct_example": "米饭太多了。",
+    "example_en": "There is too much rice.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8HVFN",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingExistenceInAPlaceWithZai",
+    "name": "Expressing Existence In A Place With Zai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The verb 在 (zài) expresses existence in a location, similar to how we say in English, \"to be at\" or \"to be in.\"",
+    "structures": [
+      "Subj. + 在 + Place"
+    ],
+    "correct_example": "我在上海。",
+    "example_en": "I'm in Shanghai.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGLRWT8",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingExperiencesWithGuo",
+    "name": "Expressing Experiences With Guo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The aspect particle 过 (guo) is used to indicate that an action has been experienced in the past.",
+    "structures": [
+      "Subj. + Verb + 过 + Obj.",
+      "Subj. + 没 + Verb + 过 + Obj."
+    ],
+    "correct_example": "你学过中文吗？",
+    "example_en": "Have you ever studied Chinese?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGQGV3P",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingForWithWei",
+    "name": "Expressing For With Wei",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When you work for a company, or do other sorts of physical (and even mental) activities for another party, you're likely to use the Chinese preposition 为 (wèi), which is often translated into English as \"for,\" a translation which is often unnatural or unnecessary, depending on the particular phrase.  The super common Mao-era phrase, 为人民服务 (\"serve the people\"), doesn't need the word \"for\" in English, for example.",
+    "structures": [
+      "为 + [Some Part] + Verb"
+    ],
+    "correct_example": "他为我做了很多事。",
+    "example_en": "He's done a lot for me.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG68RBX",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingHalfWithBan",
+    "name": "Expressing Half With Ban",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The Chinese word 半 (bàn) means \"half.\" That's simple enough, but what can get slightly tricky is the rules for how it combines with measure words.",
+    "structures": [
+      "半 + Measure Word + Noun",
+      "Number + Measure Word + 半 + Noun",
+      "半 + 天 / 年",
+      "Number + 天 / 年 + 半"
+    ],
+    "correct_example": "半个小时",
+    "example_en": "half an hour",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGAC1P9",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingHaveToWithBudebu",
+    "name": "Expressing Have To With Budebu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "不得不 (bùdébù) has a stronger tone than \"必须 (bìxū)\" meaning \"someone cannot help but do something.\"",
+    "structures": [
+      "Subj. + 不得不 + Verb"
+    ],
+    "correct_example": "我感冒的时候一般不吃药，但是这次很严重，我不得不吃药。",
+    "example_en": "I usually don't take medicine when I have cold. But it's very bad this time, and I have to take some pills.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG0C825",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingIfItWereNotForWithYaobushi",
+    "name": "Expressing If It Were Not For With Yaobushi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "要不是 (yàobushì) is almost the same as \"如果不是⋯⋯ \"， and it may followed by \"的话,\" meaning \"if it were not for\" or \"without.\"",
+    "structures": [
+      "要不是 ⋯⋯（的话），⋯⋯"
+    ],
+    "correct_example": "要不是她帮忙，我们不可能这么快找到这个地方。",
+    "example_en": "We couldn't have found this place without her help.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8F7D4",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingIncludingWithBaokuo",
+    "name": "Expressing Including With Baokuo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"包括\" can be used to mean \"including\" in English. It can be used with \"在内一共\" or just \"一共\" to express \"all together\" or \"in total\"",
+    "structures": [
+      "Subj. + 包括 + Obj.1 ( , + Obj.2, Obj.3 ... )",
+      "包括 + Obj. (+ 在内)，一共 ⋯⋯"
+    ],
+    "correct_example": "他说“咱们”，当然包括你。",
+    "example_en": "He said \"us\". That certainly includes you.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG50341",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingItDependsWithKan",
+    "name": "Expressing It Depends With Kan",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Although there are a number of ways to express \"it depends\" in Chinese, the most common ones in spoken Chinese involve the verb 看 (kàn). Some common expressions include:",
+    "structures": [
+      "(这 / 那) + 得看 / 要看 + [What \"It\" Depends On]",
+      "[Unknown Outcome] + 得看 / 要看 + [What \"It\" Depends On]"
+    ],
+    "correct_example": "这得看你的时间。",
+    "example_en": "This depends on when you are available.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG765HD",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingLatenessWithCai",
+    "name": "Expressing Lateness With Cai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One of the ways to express lateness in Chinese is with 才 (cái).",
+    "structures": [
+      "Subj. + Time + 才 + Verb + Obj."
+    ],
+    "correct_example": "我昨天十点才下班。",
+    "example_en": "I got off work at ten o'clock yesterday.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG3WTCJ",
+    "keywords": []
+  },
+  {
+    "id": "cgw_biDuole",
+    "name": "Bi Duole",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you want to up the intensity of your comparisons, you might want to express \"much more.\" You can do this using 多 (duō), but did you know there are actually three different ways to do it?",
+    "structures": [
+      "Noun 1 + 比 + Noun 2 + Adj. + 得多 / 多了 / 很多",
+      "Noun 1 + 比 + Noun 2 + 还 + Adj."
+    ],
+    "correct_example": "上海比我老家贵多了。",
+    "example_en": "It's much more expensive in Shanghai than in my hometown.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG6KUS5",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingMustWithDei",
+    "name": "Expressing Must With Dei",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Learning how to use 得 to mean \"must\" must be done by those wishing to master Chinese!",
+    "structures": [
+      "Subj. + 得 + Verb + Obj."
+    ],
+    "correct_example": "时间不早了，我得回家了。",
+    "example_en": "It's getting late. I have to go home.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGPXLP9",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingNeverWithConglai",
+    "name": "Expressing Never With Conglai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Although it can also work in the positive, 从来 (cónglái) is usually used when you want to express that you never do something (as a habit, or as a rule), or that you have never done something (it's not a part of your life experience). In either usage, 从来 (cónglái) may be shortened to just 从 (cóng) in casual speech.",
+    "structures": [
+      "Subj. + 从来 + 不 + [Verb Phrase]",
+      "Subj. + 从来 + 没(有) + Verb + 过"
+    ],
+    "correct_example": "她从来不喝酒。",
+    "example_en": "She never drinks.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8NM5E",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingNotEvenOne",
+    "name": "Expressing Not Even One",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In English we might want to say something like \"I have absolutely no money, not even one penny.\" That \"not even one\" is the focus of this article.",
+    "structures": [
+      "一 + Measure Word + (Noun) + 也 / 都 + 不 / 没 + Verb",
+      "Topic + Subj. + 一 + Measure Word + (Noun) + 也 / 都 + Verb"
+    ],
+    "correct_example": "我一口都没吃。",
+    "example_en": "I didn't take a single bite.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGUQ861",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingNotOftenWithBuZenme",
+    "name": "Expressing Not Often With Bu Zenme",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You might be tempted to conclude that 不怎么 (bù zěnme) seems to mean \"not how,\" but it actually means \"not often\" when used together with a verb.",
+    "structures": [
+      "Subj. + 不怎么 + Verb"
+    ],
+    "correct_example": "他不怎么喜欢说话。",
+    "example_en": "He doesn't like talking too much.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG5BOGP",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingNotOnlyButAlsoWithBujin",
+    "name": "Expressing Not Only But Also With Bujin",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "There are a few ways to express \"not only ... but also\" in Chinese. One of them is:",
+    "structures": [
+      "Noun + 不仅 + A，而且 + B"
+    ],
+    "correct_example": "他不仅很帅，而且很聪明。",
+    "example_en": "He is not only handsome, but also intelligent.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGEM2VR",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingNotVeryWithBuTai",
+    "name": "Expressing Not Very With Bu Tai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You may be familiar with using 太 (tài) to express \"too,\" such as when something is \"too expensive\" or \"too hot.\" 不太 (bù tài) is a similar pattern for the negative, which just means \"not very\" or \"not so\" (literally \"not too\").  Note that this pattern does not normally use 了 (le).",
+    "structures": [
+      "Subj. + 不太 + Adj.",
+      "Subj. + 不太 + Verb"
+    ],
+    "correct_example": "我家不太大。",
+    "example_en": "My house is not too big.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGUNMHU",
+    "keywords": []
+  },
+  {
+    "id": "cgw_buZenme",
+    "name": "Bu Zenme",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When you use 不怎么 (bù zěnme) before an adjective, it means \"not very.\" This structure is similar to how English speakers may say something is \"not very good.\"",
+    "structures": [
+      "Subj. + 不怎么 + Adj."
+    ],
+    "correct_example": "我觉得这个菜不怎么好吃。",
+    "example_en": "I think this food isn't very tasty.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGVYIZT",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingOnTheBasisOfWithPing",
+    "name": "Expressing On The Basis Of With Ping",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "凭 is a  preposition that means \"on the basis of\" or \"by virtue of.\" Usually the subject of a sentence with 凭 is a person.",
+    "structures": [
+      "凭 + Noun / Noun Phrase",
+      "凭 + Verb Phrase / Subj.-Predicate",
+      "Subj. + 凭什么 + Verb Phrase",
+      "凭着 + Noun / Noun Phrase"
+    ],
+    "correct_example": "凭护照，外国人可以买火车票。",
+    "example_en": "With the help of a passport, foreigners can buy train tickets.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGGB3IV",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingOngoingDurationWithDoubleLe",
+    "name": "Expressing Ongoing Duration With Double Le",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The 了 (le) particle is used in many different ways. In this article, we will explore how to use the double 了 (le) to express the duration of an activity that is ongoing.",
+    "structures": [
+      "Subj. + Verb + 了 + Duration + 了",
+      "Subj. + Verb + Obj. + Verb + 了 + Duration + 了"
+    ],
+    "correct_example": "你睡了一天了。",
+    "example_en": "You have been sleeping for the whole day.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG69RR8",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingOnlyWithZhi",
+    "name": "Expressing Only With Zhi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "There are a number of different ways to express \"only\" in Chinese, but 只 (zhǐ) is the most basic one you need to learn first. It's an adverb, so it normally comes before verbs.",
+    "structures": [
+      "只 + Verb",
+      "只 + 会 / 能 + Verb"
+    ],
+    "correct_example": "我只有一个哥哥。",
+    "example_en": "I only have one older brother.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGN8C8R",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingOrWithHaishiAndHuozhe",
+    "name": "Expressing Or With Haishi And Huozhe",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Both 还是 (háishì) and  或者 (huòzhě) mean “or” and are used to present a choice.  However, 还是 is normally used when asking a question, and 或者 is mostly for declarative sentences.",
+    "structures": [
+      "Subj. + Verb + Option A + 还是 + Option B",
+      "Option 1 + 或者 + Option 2",
+      "或者 A，或者 B"
+    ],
+    "correct_example": "她喜欢你还是他？",
+    "example_en": "Does she like you or him?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGQJ5IC",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingQuiteWithTing",
+    "name": "Expressing Quite With Ting",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "挺 can be used before an adjective to mean \"quite,\" or \"rather,\" or \"pretty,\" as in \"pretty good.\"",
+    "structures": [
+      "挺 + Adj. + 的",
+      "挺 + Verb + Obj. + 的"
+    ],
+    "correct_example": "这件衣服大小挺合适的。",
+    "example_en": "The size of this piece of clothes is quite suitable.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGDF1F7",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingRatherWithBijiao",
+    "name": "Expressing Rather With Bijiao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "It's rather nice to be able to read an article on how to use 比较 to mean \"rather.\" And here it is!",
+    "structures": [
+      "Subj. + 比较 + Adj."
+    ],
+    "correct_example": "她比较聪明。",
+    "example_en": "She is rather intelligent.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG72HKP",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingSmallQuantityWithJiu",
+    "name": "Expressing Small Quantity With Jiu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "就 (jiù) is often translated simply as \"just\" or \"only,\" but there are some nuances to how it is used.",
+    "structures": [
+      "就 + [Single Subject] + Verb",
+      "Subj. + 就 + Verb-Obj.",
+      "Subj. + 就 + Number + Measure Word + Noun"
+    ],
+    "correct_example": "这件事就我一个人知道。",
+    "example_en": "I'm the only person that knows about this.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGPW8PP",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingThatsAllWithEryi",
+    "name": "Expressing Thats All With Eryi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "而已 expresses that something is merely what it is. It is like saying \"it's only a test, that's all.\" 而已 is put at the end of the sentence to emphasis that something is just what it is.",
+    "structures": [
+      "Subj. + Verb + Obj. + 而已"
+    ],
+    "correct_example": "他只是开个玩笑而已，不要当真。",
+    "example_en": "He's just making a joke, that's all, don't take it seriously",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG6TB4J",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingTheMoreTheMoreWithYueYue",
+    "name": "Expressing The More The More With Yue Yue",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "More than just throwing anything you want after two 越s, there are a number of specific patterns you will notice if you want to go beyond using the simpler 越来越.",
+    "structures": [
+      "Subj. + 越 + Verb + 越 + Adj.",
+      "Subj. +  越 + Verb 1 + 越 + Verb 2",
+      "Subj. 1 + 越 + Verb，Subj. 2 + 越 + Adj.",
+      "Subj. 1 + 越 + Verb 1，Subj. 2 + 越 + Verb 2",
+      "Subj. + 越 + Verb + 越 + 想 + Verb"
+    ],
+    "correct_example": "他越跑越快。",
+    "example_en": "The more he runs, the faster he gets.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGB44F6",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingTheSelfevidentWithMa",
+    "name": "Expressing The Selfevident With Ma",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The particle 嘛 (ma) is a sentence-final particle identical in pronunciation to the simple \"yes/no question\" particle 吗 (ma) you learned back in the day, but with a rather different function.  It can be used when the speaker feels what he is saying is obvious (from his point of view).",
+    "structures": [
+      "Statement + 嘛",
+      "Topic + 嘛， + Statement"
+    ],
+    "correct_example": "你的妹妹很漂亮嘛。",
+    "example_en": "Your sister is pretty.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGVMC4B",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingThenWithName",
+    "name": "Expressing Then With Name",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When expressing \"Then...,\" you can use \"那么\" (nàme) or \"那\" (nà) in order to begin a judgment or result from previous context. An example of this in English would be \"Then, what should we do?\"",
+    "structures": [
+      "Context ，那么 + Result / Decision"
+    ],
+    "correct_example": "大家都同意这个方案，那么，我们就开始实施吧。",
+    "example_en": "Everyone agrees on this plan, so we'll start to implement it.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGX298Z",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingTowardsWithXiang",
+    "name": "Expressing Towards With Xiang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "向 (xiàng) is a preposition that means \"towards,\" and is used often when expressing or referring to a certain point.",
+    "structures": [
+      "向 + Direction / Person + Verb"
+    ],
+    "correct_example": "向东走。",
+    "example_en": "Walk towards east.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGQXARS",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingWhenWithShi",
+    "name": "Expressing When With Shi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "By now you should now how to express \"when\" using \"的时候\" (de shíhou). But there's also a slightly shorter, more formal way to do it: simply use 时 (shí) all by itself. (No 的!)",
+    "structures": [
+      "(Subj. +) Verb / Adj. + 时⋯⋯"
+    ],
+    "correct_example": "考试时不要说话。",
+    "example_en": "When you take a test, don't talk.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGGL59D",
+    "keywords": []
+  },
+  {
+    "id": "cgw_expressingWillWithHui",
+    "name": "Expressing Will With Hui",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "会 (huì) has multiple uses, but in this context, it is being used to express the possibility of an action happening in the future.",
+    "structures": [
+      "Subj. + 会 + Verb + Obj.",
+      "Subj. + 不 + 会 + Verb + Obj."
+    ],
+    "correct_example": "明天你会来吗？",
+    "example_en": "Will you come tomorrow?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGW9737",
+    "keywords": []
+  },
+  {
+    "id": "cgw_fenzhi",
+    "name": "Fenzhi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "分之 (fēnzhī) is used to form a fraction in Chinese. When expressing a fraction, the denominator is always said before the numerator. This pattern is also the way percentages are expressed in Chinese.",
+    "structures": [
+      "Denominator + 分之 + Numerator",
+      "A + 是 / 占 (+ B) + 的 + Denominator + 分之 + Numerator"
+    ],
+    "correct_example": "蛋糕还有八分之一。",
+    "example_en": ".",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG84RE9",
+    "keywords": []
+  },
+  {
+    "id": "cgw_gangcai",
+    "name": "Gangcai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In order to say that something \"just now\" occurred, use the time noun 刚才 (gāngcái). It can be placed in front of the verb or the subject of a statement.",
+    "structures": [
+      "刚才 + Verb"
+    ],
+    "correct_example": "你刚才说什么了？",
+    "example_en": "What did you just say?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGQ1KOY",
+    "keywords": []
+  },
+  {
+    "id": "cgw_ganggang",
+    "name": "Ganggang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "For events that happened in the immediate past, in English we use the word \"just.\" For example, if you pass a turn you were supposed to make, you might say, \"I just passed it!\" In Chinese, \"just\" can be expressed with 刚 (gāng) or 刚刚 (gānggāng).",
+    "structures": [
+      "Subj. + 刚 + Verb",
+      "Subj. + 刚刚 + Verb",
+      "Subj. + 刚 + Verb (+ Obj.)  + Duration"
+    ],
+    "correct_example": "我们刚知道。",
+    "example_en": "We just found out.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGQJJYO",
+    "keywords": []
+  },
+  {
+    "id": "cgw_gengBuyongShuo",
+    "name": "Geng Buyong Shuo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "更不用说 (gèng bùyòng shuō) means \"let alone,\" and is used in the same way as the English, where we might say: \"he can't even boil an egg, let alone prepare a banquet\"",
+    "structures": [
+      "连 + A + 都 / 也 + Verb， 更不用说 + B + 了"
+    ],
+    "correct_example": "他都不会煮鸡蛋，更不用说做一大桌子的菜了。",
+    "example_en": "He can't boil an egg, let alone prepare a banquet.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGHOI8S",
+    "keywords": []
+  },
+  {
+    "id": "cgw_geng",
+    "name": "Geng",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "To express \"even more,\" (as in \"even more expensive,\" \"even more ridiculous,\" \"even more badass\"), you can use 更 (gèng). 更 (gèng) generally comes before adjectives.",
+    "structures": [
+      "更 + Adj.",
+      "A 比 B + 更 + Adj."
+    ],
+    "correct_example": "这两个银行哪个更近？",
+    "example_en": "Between these two banks, which one is closer?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG4NIPB",
+    "keywords": []
+  },
+  {
+    "id": "cgw_gen_guobuqu",
+    "name": "Gen guobuqu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Pattern indicating that a person is made to intentionally feel uncomfortable.\n    It is used in spoken language, and requires a person-word (ex 我) between 跟 and 过不去.\n    和 can also be used instead of 跟.",
+    "structures": [
+      "跟 ... 过不去"
+    ],
+    "correct_example": "别人迟到领导不批评，为什么专门批评我呢？这不是跟我过不去吗？",
+    "example_en": "Other people show up late and the boss doesn't criticize them, why does he just criticize me? He's intentionally picking on me, isn't he?",
+    "source_url": "",
+    "keywords": []
+  },
+  {
+    "id": "cgw_guanyu",
+    "name": "Guanyu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "关于 (guānyú) usually points to a range or scope, acting like the English word \"about.\" It can be used in a few ways, often marking a topic of a statement, or modifying a noun.",
+    "structures": [
+      "关于 + Obj.，Subj.  ⋯⋯",
+      "关于 + Modifier + 的 + Noun"
+    ],
+    "correct_example": "关于中国历史，我知道的不多。",
+    "example_en": "As for Chinese history, I don't know a lot.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG49889",
+    "keywords": []
+  },
+  {
+    "id": "cgw_haishiBa",
+    "name": "Haishi Ba",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One of the ways to use 还是 (háishì) is to have it mean \"you had better,\" similar to how in English we may say \"I think you had better start on your homework.\" 吧 is often placed after this structure, as it's a suggestion. When the part after 还是 is a negative verb phrase, it's OK to drop the 吧 at the end.",
+    "structures": [
+      "Subj. + 还是 + [Verb Phrase] + 吧"
+    ],
+    "correct_example": "我们还是明天去吧。",
+    "example_en": "We'd better go tomorrow.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGWAR65",
+    "keywords": []
+  },
+  {
+    "id": "cgw_haiyou",
+    "name": "Haiyou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"还有\" (háiyǒu) is used to express \"in addition...\" or \"and also...\" in a conversation. It is introducing new information to the topic the speaker is talking about, as an afterthought. While it's not the most challenging grammar structure, an important thing to keep in mind is that 还有 normally starts a completely new sentence or clause.",
+    "structures": [
+      "[Clause ]，+  还有 ，+ [Clause 2]"
+    ],
+    "correct_example": "你需要吃点药。还有，要多休息。",
+    "example_en": "You need to take some medicine. Also, you should get more rest.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGHQRI1",
+    "keywords": []
+  },
+  {
+    "id": "cgw_haoBuRongyi",
+    "name": "Hao Bu Rongyi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "好不容易 (hǎo bù róngyì) means \"very difficult\" or \"really not easy.\" It is often used where the speaker wants to comment on the result of their hard work, something like \"It was really hard for me do to do x, but then I realized y.\"",
+    "structures": [
+      "Subj. + 好容易 / 好不容易 + 才 + Verb，[Result Sentence]",
+      "Verb / [Verb Phrase] + 好容易 / 好不容易"
+    ],
+    "correct_example": "我们好不容易才做完这个项目，结果合同取消了。",
+    "example_en": "With great difficulty, we finally finished this project. As a result, the contract is up.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG81QV3",
+    "keywords": []
+  },
+  {
+    "id": "cgw_haoxiang",
+    "name": "Haoxiang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "To express \"seems,\" the word 好像 (hǎoxiàng) can be used.",
+    "structures": [
+      "Subj. + 好像 + [Observation]"
+    ],
+    "correct_example": "他们好像要结婚了。",
+    "example_en": "They seem to be getting married.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG3ROPY",
+    "keywords": []
+  },
+  {
+    "id": "cgw_hekuang",
+    "name": "Hekuang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "何况 (hékuàng) can mean \"let alone\" or \"all the more.\" It can be used in the following structure:",
+    "structures": [
+      "Subj. + 连 + A + 都 + (不 / 没) + Verb， 何况 + B + 呢？",
+      "Subj. + (都) + A， 何况 + B！"
+    ],
+    "correct_example": "我连一万块钱都有，何况一千呢？",
+    "example_en": "I have 10000 yuan, and you're saying I don't even have 1000?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG3ZS9G",
+    "keywords": []
+  },
+  {
+    "id": "cgw_houlai",
+    "name": "Houlai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"⋯⋯, 后来⋯⋯\" (..., hòulái...) is used to sequence past events in the same way that \"Afterward...\" is in English. Something very important to note is that 后来 can only be used with two events that have already occurred.",
+    "structures": [
+      "Past Event 1 + 后来 + Past Event 2"
+    ],
+    "correct_example": "开始他不同意，但后来他同意了。",
+    "example_en": "At first he didn't agree, but then he did later.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGY0UDC",
+    "keywords": []
+  },
+  {
+    "id": "cgw_huozhe",
+    "name": "Huozhe",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One easy way to give two options is to precede each one with 或者 (huòzhě).",
+    "structures": [
+      "或者 A，或者 B"
+    ],
+    "correct_example": "只有一块蛋糕，或者你吃或者我吃。",
+    "example_en": "There's only one piece of cake. Either you eat it, or I eat it.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGYXI5X",
+    "keywords": []
+  },
+  {
+    "id": "cgw_huxiang",
+    "name": "Huxiang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When some action is mutual, you can use the word 互相 (hùxiāng). The word \"mutual\" feels formal in English, but in Chinese even everyday phrases such as \"learn from each other\" use the word 互相, which expresses this \"each other\" aspect.",
+    "structures": [
+      "互相 + Verb"
+    ],
+    "correct_example": "互相帮助",
+    "example_en": "Help each other",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGF00B7",
+    "keywords": []
+  },
+  {
+    "id": "cgw_indicatingANumberInExcess",
+    "name": "Indicating A Number In Excess",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "A number in excess of a certain amount is expressed by adding \"多\" (duō) to the end of a number. This is usually translated as \"more than...\" in English.",
+    "structures": [
+      "Number + 多 + Measure word + (Noun)"
+    ],
+    "correct_example": "他的妈妈已经五十多岁了。",
+    "example_en": "His mother is already more than fifty years old.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG004ZK",
+    "keywords": []
+  },
+  {
+    "id": "cgw_indicatingTheWholeWithQuan",
+    "name": "Indicating The Whole With Quan",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One of the uses of 全 (quán) is to indicate the entirety of something. It could be used for something like a whole household, an entire country, the whole world, etc.",
+    "structures": [
+      "全 + Noun + 都  + Verb",
+      "Subj. + 全 + 都 + Verb  / Adj.",
+      "Subj. + 全都 + 不 / 没 + Verb / Adj.",
+      "Subj.＋不 / 没＋全都＋Verb / Adj."
+    ],
+    "correct_example": "我们全家都去旅游了。",
+    "example_en": "The entire family went traveling.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGCPDSR",
+    "keywords": []
+  },
+  {
+    "id": "cgw_intensifyingWithDuo",
+    "name": "Intensifying With Duo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One way to intensify a sentence is to make it an exclamation. To do this, you can use 多 (duō).",
+    "structures": [
+      "Subj. + 多 + Adj."
+    ],
+    "correct_example": "你女儿多聪明啊！",
+    "example_en": "Your daughter is so smart!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGGH7RR",
+    "keywords": []
+  },
+  {
+    "id": "cgw_jiaruJiu",
+    "name": "Jiaru Jiu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"假如⋯⋯，就⋯⋯\" (jiǎrú..., jiù...) is yet another way to express \"If..., then...\" in Chinese, but it is much more formal than 要是 or 如果 are (in both written and spoken Chinese).",
+    "structures": [
+      "假如 + Statement + 就 + Result"
+    ],
+    "correct_example": "假如你的成绩再好一点儿，你就能申请北大了。",
+    "example_en": "If your grades come up a little more, then you can apply to Beijing University.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGHNDX4",
+    "keywords": []
+  },
+  {
+    "id": "cgw_jiashiJiu",
+    "name": "Jiashi Jiu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"假使⋯⋯，就⋯⋯\" (jiáshǐ..., jiù...) is another way to phrase \"If..., then...\" in Chinese, with this pattern being one of the most formal.",
+    "structures": [
+      "假使 + Statement + 就 + Result"
+    ],
+    "correct_example": "假使明天下雨，我就不去上班了。",
+    "example_en": "If it rains tomorrow, then I'm not going to work.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGVRGW2",
+    "keywords": []
+  },
+  {
+    "id": "cgw_jieguo",
+    "name": "Jieguo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "结果 (jiéguǒ) can be used as a conjunction or adverb, meaning \"as a result\" or \"consequently.\" It comes at the beginning of the sentence and is typically used to introduce a negative or undesirable result.",
+    "structures": [
+      "Situation，结果 + Result / Ending"
+    ],
+    "correct_example": "她穿得太少了，结果第二天就感冒了。",
+    "example_en": "She didn't wear enough, as a result, she had a cold the next day.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG6B21A",
+    "keywords": []
+  },
+  {
+    "id": "cgw_jihu",
+    "name": "Jihu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "几乎 (jīhū) means 'nearly', 'almost' or 'practically', and is used to emphasize that someone or something 'almost' meets a certain standard or is close to doing something.",
+    "structures": [
+      "几乎 + Subj. + 都 + Verb / Adj.",
+      "Subj. + 几乎 + Predicate",
+      "Subj. + 几乎 + 不 / 没 + Predicate"
+    ],
+    "correct_example": "几乎每个人都有手机。",
+    "example_en": "Almost everyone has a cell phone.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGVA70K",
+    "keywords": []
+  },
+  {
+    "id": "cgw_jinguan",
+    "name": "Jinguan",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "尽管 (jǐnguǎn)  means \"although,\" and is a little stronger than 虽然, perhaps more like \"even though.\"",
+    "structures": [
+      "尽管 A，还是 / 仍然 B"
+    ],
+    "correct_example": "尽管领导今天不来，可我们还是不能偷懒。",
+    "example_en": "Even though the leaders aren't coming today, we still can't be lazy.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGW863F",
+    "keywords": []
+  },
+  {
+    "id": "cgw_jiran",
+    "name": "Jiran",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "既然 (jìrán) means \"since,\" and is often followed by 就 to mean \"since...then....\" It is used like this:",
+    "structures": [
+      "既然＋Fact, 那 / 就 / 那就＋Suggestion / Inference",
+      "既然 + Fact,   （那 +）rhetorical question"
+    ],
+    "correct_example": "你既然不想说，那就别说了。",
+    "example_en": "Since you don't want to speak, just don't say it.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGG4BX9",
+    "keywords": []
+  },
+  {
+    "id": "cgw_jiushi",
+    "name": "Jiushi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "As an adverb, 就 (jiù) can be placed before the predicate to add emphasis. It often has an intense or provocative feel to it, like how we sometimes say in English \"it's just not right!,\" or other similar phrases. It often appears as 就是.",
+    "structures": [
+      "就 + 是 + Noun",
+      "就（是）+ Verb"
+    ],
+    "correct_example": "你就是个笨蛋！",
+    "example_en": "You're exactly a moron!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGY21RK",
+    "keywords": []
+  },
+  {
+    "id": "cgw_jiushiYe",
+    "name": "Jiushi Ye",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "就是 (jiùshì) is one of the many \"even ifs.\" Like 即使 , 就算 and 哪怕 it is used to introduce a hypothetical statement, which can then disregarded with 也.",
+    "structures": [
+      "就是 + Hypothetical Statement + 也 + Action"
+    ],
+    "correct_example": "就是这台电脑价格上万，我也会买。",
+    "example_en": "Even if this computer's price is over 10,000 yuan, I'm still going to buy it.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGF1TQ2",
+    "keywords": []
+  },
+  {
+    "id": "cgw_kanqilai",
+    "name": "Kanqilai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One of the most common ways to express \"it looks like\" is to use 看起来 (kànqǐlái). This is what we would use if we wanted to express something like, \"she looks tired.\"",
+    "structures": [
+      "Subj. + 看起来 + Adj."
+    ],
+    "correct_example": "这个看起来很漂亮。",
+    "example_en": "This looks very pretty.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG9K0F8",
+    "keywords": []
+  },
+  {
+    "id": "cgw_keshi",
+    "name": "Keshi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Using \"but\" in Chinese is really simple to learn. It involves the two words 可是 (kěshì) and 但是 (dànshì). Make no \"buts\" about it; you'll understand it in no time!",
+    "structures": [
+      "Statement， 可是 / 但是 + [Contrary Statement]"
+    ],
+    "correct_example": "我喜欢他，可是他不喜欢我。",
+    "example_en": "I like him, but he doesn't like me.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGUD81S",
+    "keywords": []
+  },
+  {
+    "id": "cgw_keyi",
+    "name": "Keyi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "可以 (kěyǐ) is an auxiliary verb primarily used for expressing permission. It's often translated as \"can,\" but in order to not get it confused with other words, it's best to think of it as \"may\" to emphasize the permission aspect.",
+    "structures": [
+      "Subj. + 可以 + Verb + Obj.",
+      "Subj. + 不 + 可以 + Verb + Obj."
+    ],
+    "correct_example": "我可以进来吗？",
+    "example_en": "May I come in?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG6SPYK",
+    "keywords": []
+  },
+  {
+    "id": "cgw_kongpa",
+    "name": "Kongpa",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "恐怕 (kǒngpà) can be used to express \"I'm afraid that,\" or \"I'm concerned that,\" or even \"I'm worried that,\" followed by some sort of reason. It doesn't need to be something you're literally afraid of; it may be that you're just trying to soften the blow of some bad news, as in, \"I'm afraid that I'm too busy washing my hair tomorrow night to come over and see the 2000 pictures of your trip to ComicCon.\"",
+    "structures": [
+      "(Reason,) 恐怕 + Fact / Conclusion"
+    ],
+    "correct_example": "明天我很忙，恐怕没有时间。",
+    "example_en": "I'm busy tomorrow, I'm afraid I don't have time.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGD4BA3",
+    "keywords": []
+  },
+  {
+    "id": "cgw_laoshi",
+    "name": "Laoshi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "We have a few ways to say \"always\" in Chinese, and one of them is to use the word 老是 (lǎoshi).",
+    "structures": [
+      "老是 + Verb",
+      "老是 ( + Adv.) + Adj."
+    ],
+    "correct_example": "不要老是笑话别人。",
+    "example_en": "Don't laugh at other people all the time.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGII66E",
+    "keywords": []
+  },
+  {
+    "id": "cgw_leYidianr",
+    "name": "Le Yidianr",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "了一点儿 (le yīdiǎnr), can be added after an adjective to mean \"a little bit too.\" It is softer in tone than using 太, and so is often used when the speaker doesn't want to insult the listener by speaking too directly.",
+    "structures": [
+      "Adj. + 了（一）点儿"
+    ],
+    "correct_example": "这把椅子稍微硬了点儿，我坐得有点难受。",
+    "example_en": "This chair is a little too hard. I'm having a hard time sitting in it.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGEHTV5",
+    "keywords": []
+  },
+  {
+    "id": "cgw_lingWai",
+    "name": "Ling Wai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "另外 (lìng wài) can be used to express \"in addition,\" often with 还 used in the following phrase.",
+    "structures": [
+      "⋯⋯， 另外，⋯⋯",
+      "另外 ＋ [Verb Phrase]",
+      "另外 ＋ 一 + Measure Word + Noun",
+      "另外 + [Plural Noun]"
+    ],
+    "correct_example": "希望你不要再迟到了。另外，你应该穿得正式一点。",
+    "example_en": "I hope you won't be late again. In addition, you should also dress a little more formally.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG2KQZI",
+    "keywords": []
+  },
+  {
+    "id": "cgw_measureWordGe",
+    "name": "Measure Word Ge",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "个 (gè) is the most commonly used measure word. It can be used in a pinch for any noun if you can't think of a more precise measure word. (Although you might not sound quite as smart, you'll still get your point across). Also, for many nouns, 个 (gè) is the only correct measure word.",
+    "structures": [
+      "Number + 个 + Noun",
+      "Verb + 个 + Noun"
+    ],
+    "correct_example": "一个人",
+    "example_en": "one person",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGI0T9S",
+    "keywords": []
+  },
+  {
+    "id": "cgw_measureWordsInQuantityQuestions",
+    "name": "Measure Words In Quantity Questions",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Quantity questions are phrases for asking questions like \"how much?\" or \"how many?\"  You'll need to use the question word 几 (jǐ) with measure words for this.",
+    "structures": [
+      "Subj. + Verb + 几 + Measure Word + Noun？",
+      "Subj. + Verb + 多少 + Measure Word + Noun ？"
+    ],
+    "correct_example": "他有几个孩子？",
+    "example_en": "How many kids does he have?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGL9KQM",
+    "keywords": []
+  },
+  {
+    "id": "cgw_measureWordsWithThisAndThat",
+    "name": "Measure Words With This And That",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In English, when you refer to \"this table\" or \"that girl\" you only need two words: \"this\" or \"that\" plus the noun you're referring to.  In Chinese, though, you also need a measure word in the middle between the two.  In the very beginning you can get away with using 个 (gè) for everything, but pretty soon you're going to have to start using other measure words in these simple phrases.",
+    "structures": [
+      "这 / 那 + Measure Word + Noun"
+    ],
+    "correct_example": "那个人",
+    "example_en": "that person",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGZC42B",
+    "keywords": []
+  },
+  {
+    "id": "cgw_meiBanfa",
+    "name": "Mei Banfa",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you are trying to express that something is impossible, you can use the phrase 没办法 (méi bànfǎ). 没办法 (méi bànfǎ) essentially means \"there is no way,\" and whule it works just fine by itself, it can also come before verbs.",
+    "structures": [
+      "Subj. + 没办法 + Verb + Obj."
+    ],
+    "correct_example": "今天太忙了，中午没办法出去吃饭。",
+    "example_en": "It's too busy today. There's no way to go out for lunch.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGI2KHC",
+    "keywords": []
+  },
+  {
+    "id": "cgw_meiDou",
+    "name": "Mei Dou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "每⋯⋯都⋯⋯ (měi... dōu...) is a pattern used to express \"every time,\" even though the phrase 每次 (měi cì) may not be explicitly used.",
+    "structures": [
+      "每 + Verb + Number + Measure Word + Noun + 都 + Verb"
+    ],
+    "correct_example": "他每遇到一个问题都要记下来。",
+    "example_en": "Every time he comes across a problem, he needs to write it down.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGXHQEF",
+    "keywords": []
+  },
+  {
+    "id": "cgw_meiyou",
+    "name": "Meiyou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The verb 有 (yǒu) is negated differently from ordinary verbs. Rather than placing 不 (bù) before it as with other verbs, you must use 没 (méi) to negate the verb 有 (yǒu). 没有 (méiyǒu) can be shortened to 没 (méi) without altering its meaning.",
+    "structures": [
+      "没 + 有 (+ Obj.)"
+    ],
+    "correct_example": "我没有问题。",
+    "example_en": "I don't have any questions.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGPNV3Q",
+    "keywords": []
+  },
+  {
+    "id": "cgw_moderatingPositiveAdjectivesWithHai",
+    "name": "Moderating Positive Adjectives With Hai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Whenever you want to imply that something is \"good,\" but also kind of \"meh,\" you can use 还 (hái) in front of the \"good\" adjective.",
+    "structures": [
+      "Subj. + 还 + 好 / 可以 / 行 / 不错"
+    ],
+    "correct_example": "我还好。",
+    "example_en": "I'm OK.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGAY164",
+    "keywords": []
+  },
+  {
+    "id": "cgw_nameZheme",
+    "name": "Name Zheme",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In  English, the words \"that\" and \"so\" are often used to increase the extent of an adjective (ex. \"he is so tall\" or \"this food is so good\"). In Chinese, 那么 (nàme) and 这么 (zhème) serve the same function.",
+    "structures": [
+      "Subj. + 那么 / 这么 + Adj."
+    ],
+    "correct_example": "你说得这么快，我怎么能听懂？",
+    "example_en": "You speak so fast. How could I understand you?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGNKKP6",
+    "keywords": []
+  },
+  {
+    "id": "cgw_nanguai",
+    "name": "Nanguai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "难怪 (nánguài) can be used to express that the speaker finds something unsurprising. It can be used alone or in a variety of different structures, as shown below.  怪不得 (guàibude) is another way to express exactly the same thing, in a slightly more informal way. 难怪 (nánguài) when used as a verb can be translated as \"hard to blame.\" This is usually directed at a person, and it is similar to how in English we may say \"He's always sleepy, but you can't blame him because he works a night shift.\"",
+    "structures": [
+      "难怪 / 怪不得 + ([Observation])",
+      "难怪 / 怪不得 + [Observation]，原来 + [Reason]",
+      "(这也 +) 难怪 + [Specific Person/People]"
+    ],
+    "correct_example": "难怪！",
+    "example_en": "No wonder!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGFPV2C",
+    "keywords": []
+  },
+  {
+    "id": "cgw_ningke",
+    "name": "Ningke",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "宁可 (nìngkě) is used where the speaker wants to compare two unfavorable options, and choose a \"unfavorable option\" over a \"most unfavorable option.\"",
+    "structures": [
+      "宁可……，也不……",
+      "宁可 ……，也要 ……"
+    ],
+    "correct_example": "我宁可没有男朋友，也不要随便找一个男朋友。",
+    "example_en": "I'd rather have no boyfriend than find a random one.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGF3F2Y",
+    "keywords": []
+  },
+  {
+    "id": "cgw_oClock",
+    "name": "O Clock",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Time in Chinese, just like in English, is expressed by stating the hour first, and then the minute (big to small).",
+    "structures": [
+      "(Date and/or time of day +) x 点",
+      "x 点 + 半"
+    ],
+    "correct_example": "九点",
+    "example_en": "9 o'clock",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGN6BBU",
+    "keywords": []
+  },
+  {
+    "id": "cgw_ordinalNumbersWithDi",
+    "name": "Ordinal Numbers With Di",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "We use ordinal numbers to express things like \"number one\" or \"second,\" so mastering them in Chinese is important. Fortunately, they are also very easy to learn by just adding the prefix 第 (dì).",
+    "structures": [
+      "第 + Number",
+      "第 + Number + Measure Word + Noun"
+    ],
+    "correct_example": "我是第一个到公司的人。",
+    "example_en": "I'm the first person that came to the office.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGK904U",
+    "keywords": []
+  },
+  {
+    "id": "cgw_positiveAdjectivesWithJile",
+    "name": "Positive Adjectives With Jile",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Just as 死了 (sǐle) can be used to intensify negative adjectives, 极了 (jíle) can be used to intensify positive adjectives. This is used in spoken, colloquial Chinese. 极 means \"extreme\" or \"utmost,\" so using this grammar pattern takes your positive adjectives to the extreme!",
+    "structures": [
+      "Subj. + Positive Adj. + 极了"
+    ],
+    "correct_example": "她好看极了。",
+    "example_en": "She is very pretty.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGVME5V",
+    "keywords": []
+  },
+  {
+    "id": "cgw_qilai",
+    "name": "Qilai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "起来 (qǐlái) comes up very frequently in Chinese and can be used both literally and figuratively. This is a little like the usage of \"up\" in English which can be used literally, as in \"stand up,\" or figuratively, as in \"add up.\"",
+    "structures": [
+      "Verb + 起来",
+      "Verb / Adj. + 起来 +了",
+      "Subj. + Verb + 起来 + Adj."
+    ],
+    "correct_example": "请大家站起来。",
+    "example_en": "Everyone, please stand up.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGBPXOB",
+    "keywords": []
+  },
+  {
+    "id": "cgw_questionsWithNe",
+    "name": "Questions With Ne",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The particle 呢 (ne) can be used to ask reciprocal questions, also known as \"bounce back\" questions. 呢 (ne) can also be used to form simple questions asking \"what about...?\" or \"how about...?\"",
+    "structures": [
+      "Topic + 呢 ？",
+      "[Missing Person / Thing] + 呢 ？"
+    ],
+    "correct_example": "这个很好，那个呢？",
+    "example_en": "This one is good. What about that one?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGMJHZO",
+    "keywords": []
+  },
+  {
+    "id": "cgw_reduplicationOfVerbs",
+    "name": "Reduplication Of Verbs",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One of the fun things about Chinese is that when speaking, you can repeat a verb to express \"a little bit\" or \"briefly.\" This is called reduplication. It creates a casual tone, and a sense that whatever the action is, it's not going to take long.",
+    "structures": [
+      "Subj. + Verb + Verb"
+    ],
+    "correct_example": "你看看。",
+    "example_en": "Take a little look.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGYC77J",
+    "keywords": []
+  },
+  {
+    "id": "cgw_referringToAllUsingSuoyou",
+    "name": "Referring To All Using Suoyou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In this grammar structure, we learn about a way to say \"all\" that is, well, a bit more epic. Sort of like how we might say \"all the king's men\" or \"all the money in the world.\"",
+    "structures": [
+      "所有的 + Noun + 都 + Verb / Adj."
+    ],
+    "correct_example": "我爱吃所有的中国菜。",
+    "example_en": "I love eating all the Chinese food.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGOWBSL",
+    "keywords": []
+  },
+  {
+    "id": "cgw_renhe",
+    "name": "Renhe",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "任何 (rènhé) is a modifier that means means \"any,\" \"whichever,\" or \"whatsoever.\" It is also like the English phrases \"any and all\" or \"no matter what.\"",
+    "structures": [
+      "任何 + Noun"
+    ],
+    "correct_example": "这是我们俩的秘密，跟任何人都不要说。",
+    "example_en": "This is our secret. Don't tell it to anyone.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGP8DXU",
+    "keywords": []
+  },
+  {
+    "id": "cgw_resultComplementWanForFinishing",
+    "name": "Result Complement Wan For Finishing",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "On its own, 完 (wán) means \"to finish\" or \"to complete.\" Using it in this grammar structure, it expresses the idea of doing some action to completion.",
+    "structures": [
+      "Subj. + Verb + 完 (+ 了) + Obj."
+    ],
+    "correct_example": "我说完了。",
+    "example_en": "I am finished talking.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGNQUC1",
+    "keywords": []
+  },
+  {
+    "id": "cgw_resultComplementsDaoAndJian",
+    "name": "Result Complements Dao And Jian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Two of the most common result complements in Chinese are 到 (dào) and 见 (jiàn). On this page we're only going to be talking about verbs related to the senses (\"see,\" \"hear,\" etc.), and for this usage, the two are interchangeable.",
+    "structures": [
+      "Subj. + Verb + 到 + Obj.",
+      "Subj. + Verb + 见 + Obj.",
+      "Subj. + 没 + Verb + 到 / 见 + Obj."
+    ],
+    "correct_example": "你看到那个帅哥了吗？",
+    "example_en": "Did you see that handsome guy?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGWNGEP",
+    "keywords": []
+  },
+  {
+    "id": "cgw_reviewOptionsBa",
+    "name": "Review Options Ba",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When 吧 (ba) is used twice in a sentence, it is used to list two options that the speaker is debating. It gives the sentence an indecisive feel, as though the speaker doesn't know which one to choose. This construction often has a negative connotation, since the options usually are not ideal.",
+    "structures": [
+      "[Option 1] + 吧，[Evaluation]； [Option 2] + 吧， [Evaluation]"
+    ],
+    "correct_example": "去上海吧，太远；去北京吧，人太多。",
+    "example_en": "Going to Shanghai is too far away, going to Beijing has too many people.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGELOTT",
+    "keywords": []
+  },
+  {
+    "id": "cgw_ruguoDehua",
+    "name": "Ruguo Dehua",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"如果⋯⋯的话，⋯⋯\" (rúguǒ... dehuà, ...) is a pattern commonly used in Chinese to express \"if.\" An easy way to remember the pattern's format is that in the full form, the condition is \"sandwiched\" between 如果 and 的话. \"就\" is often optional.",
+    "structures": [
+      "如果 ⋯⋯ 的话 ，(就) ⋯⋯",
+      "⋯⋯ (的话) ，(就) ⋯⋯"
+    ],
+    "correct_example": "如果明天下雨的话，我们就不去了。",
+    "example_en": "If it rains tomorrow, we won't go.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGN4VUU",
+    "keywords": []
+  },
+  {
+    "id": "cgw_sequencingWithXianAndZai",
+    "name": "Sequencing With Xian And Zai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The word 再 (zài) actually has a lot of uses, beyond just \"again.\"  \"先⋯⋯， 再⋯⋯\" (xiān..., zài...) is a pattern used for sequencing events, much like \"First..., then...\" in English. This pattern can also include \"然后\" (ránhòu) meaning \"and after that.\"",
+    "structures": [
+      "先 + [Verb Phrase 1] + 再 + [Verb Phrase 2]",
+      "先 + [Verb Phrase] + 再说"
+    ],
+    "correct_example": "先洗手再吃。",
+    "example_en": "Wash your hands, and then eat.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGLJM55",
+    "keywords": []
+  },
+  {
+    "id": "cgw_shenmeDe",
+    "name": "Shenme De",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "什么的(shénme de) is an informal way to express \"etc.,\" and is used to end a list of items when it is obvious to the listener what class of things the speaker is talking about. 什么的 can also be used after a single item if it is obvious enough what might follow.",
+    "structures": [
+      "Noun 1, Noun 2 (+ Noun 3) + 什么的"
+    ],
+    "correct_example": "我奶奶不吃肉，只吃蔬菜、豆腐什么的。",
+    "example_en": "My grandma doesn't eat meat. She only eats vegetables, tofu, and so on.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGDIDAC",
+    "keywords": []
+  },
+  {
+    "id": "cgw_shenmeDou",
+    "name": "Shenme Dou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "什么……都 (shénme... dōu) is a pattern often used to express \"all\" or \"everything.\" Because it's not just one word, though, it can be a little tricky to get the hang of at first.",
+    "structures": [
+      "Topic (+ Subj.) + 什么 + 都 / 也 + Verb / Adj.",
+      "什么 + Noun + 都 + Verb",
+      "什么 + Noun + 都 / 也 + 不 + Verb",
+      "什么 + Noun + 都 / 也 + 没 (有) + Verb"
+    ],
+    "correct_example": "我觉得这里的菜什么都好吃。",
+    "example_en": "I think everything is delicious here.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGAQV6C",
+    "keywords": []
+  },
+  {
+    "id": "cgw_siLe",
+    "name": "Si Le",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In English, you might use the expression \"you scared me to death!\" In Chinese,  死了 (sǐ le) is used similarly to intensify an adjective with an unpleasant connotation.",
+    "structures": [
+      "(Subj. +) Negative Adj. + 死了"
+    ],
+    "correct_example": "我饿死了。",
+    "example_en": "I'm starving!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGLEVUV",
+    "keywords": []
+  },
+  {
+    "id": "cgw_specialCasesOfZaiFollowingVerbs",
+    "name": "Special Cases Of Zai Following Verbs",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When used to indicate locations of actions, 在 (zài) is usually placed after the subject and before the verb. There are certain cases, however, when 在 (zài) goes after the verb.",
+    "structures": [
+      "Subj. + [Special Verb] + 在 + Location"
+    ],
+    "correct_example": "你住在上海吗？",
+    "example_en": "Do you live in Shanghai?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG90DXK",
+    "keywords": []
+  },
+  {
+    "id": "cgw_standardNegationWithBu",
+    "name": "Standard Negation With Bu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "不 (bù) is generally used to negate a verb in the present or future, or to talk about what you do not do, as a habit. So expressing things like \"I don't want to go\" or \"I'm not going\" or \"I don't eat meat\" would be typical uses of 不 (bù).",
+    "structures": [
+      "Subj. + 不 + Verb + Obj.",
+      "Subj. + 不 + Adj."
+    ],
+    "correct_example": "他们不是坏孩子。",
+    "example_en": "They are not bad kids.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGIPYFV",
+    "keywords": []
+  },
+  {
+    "id": "cgw_structureOfDates",
+    "name": "Structure Of Dates",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Dates in Chinese follow the order \"year, month, day.\" This is in keeping with the \"from big to small\" trend which pervades many facets of Chinese culture.",
+    "structures": [
+      "x 年 + y 月 + z 日",
+      "x 年 + y 月 + z 号"
+    ],
+    "correct_example": "1868年1月18号",
+    "example_en": "January 18, 1868",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGT3KF6",
+    "keywords": []
+  },
+  {
+    "id": "cgw_structureOfTimesAdvanced",
+    "name": "Structure Of Times Advanced",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you already know the basics of how to tell time in Chinese, you may want to get a little more specific or sophisticated, using words like 分 (fēn) and 刻 (kè).",
+    "structures": [
+      "x 点 y 分",
+      "x 点 零 y 分",
+      "x 点 y 刻",
+      "差 + Minutes + 分 + Hour + 点",
+      "Hour + 点 + 差 + Minutes + 分"
+    ],
+    "correct_example": "一点四十分",
+    "example_en": "1:40",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGDTO07",
+    "keywords": []
+  },
+  {
+    "id": "cgw_suggestionsWithBa",
+    "name": "Suggestions With Ba",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The particle 吧 (ba) has a number of different uses. Here we'll talk about the simplest way to use 吧 (ba): making suggestions.",
+    "structures": [
+      "Command + 吧"
+    ],
+    "correct_example": "我们走吧。",
+    "example_en": "Let's go.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGMPZ6D",
+    "keywords": []
+  },
+  {
+    "id": "cgw_suiranDanshi",
+    "name": "Suiran Danshi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The grammar pattern \"虽然⋯⋯ 但是⋯⋯\" (suīrán... dànshì...) is one of the most common used patterns in Chinese, especially in written Chinese. You can think of it as meaning \"although,\" but unlike in English, you still need to follow it with a \"but\" word in Chinese.",
+    "structures": [
+      "虽然 + Subj. + 但是 + Contrary Reaction"
+    ],
+    "correct_example": "虽然他是美国人，但是他还没去过华盛顿。",
+    "example_en": "Although he's American, he still hasn't been to Washington D.C.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGXI560",
+    "keywords": []
+  },
+  {
+    "id": "cgw_tagQuestionsWithBu",
+    "name": "Tag Questions With Bu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In the same way you can tag questions with 吗 (ma), tag questions can also be formed using 不 (bù). This is done by putting an affirmative-negative question at the end of a sentence.",
+    "structures": [
+      "Verb + 不 + Verb"
+    ],
+    "correct_example": "你会说中文，对不对？",
+    "example_en": "You speak Chinese, right?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG4D8XB",
+    "keywords": []
+  },
+  {
+    "id": "cgw_theAllAdverbDou",
+    "name": "The All Adverb Dou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The adverb 都 (dōu) is used to express \"all\" in Chinese. It's common to use 都 (dōu) in a variety of sentences where it would seem unnecessary in English.",
+    "structures": [
+      "Subj. + 都 + [Verb Phrase]"
+    ],
+    "correct_example": "你们都认识John吗？",
+    "example_en": "Do you all know John?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG9YK09",
+    "keywords": []
+  },
+  {
+    "id": "cgw_theAlsoAdverbYe",
+    "name": "The Also Adverb Ye",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The English adverb \"too\" or \"also\" is expressed in Chinese as 也 (yě). In Chinese, it always needs to come before the verb (or adjective).",
+    "structures": [
+      "Subj. + 也 + Verb / [Verb Phrase]",
+      "Subj. + 也 (+ Adv.) + Adj."
+    ],
+    "correct_example": "我也喜欢。",
+    "example_en": "I also like it.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGG25MD",
+    "keywords": []
+  },
+  {
+    "id": "cgw_usingCaiForSmallNumbers",
+    "name": "Using Cai For Small Numbers",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The character 才 (cái) can be used to emphasize that a number is small, or less than expected.",
+    "structures": [
+      "才 + (Verb) + Number + Measure Word + Noun"
+    ],
+    "correct_example": "你才二十岁？",
+    "example_en": "You're only twenty?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGYW5RS",
+    "keywords": []
+  },
+  {
+    "id": "cgw_usingDuiWithVerbs",
+    "name": "Using Dui With Verbs",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When using 对 (duì) as a preposition, it is used to indicate \"to\" or \"towards\" an object or target. As with all prepositions, some care should be taken when using this particle, as usage of 对 doesn't always totally \"make sense\" or correspond to English at all.",
+    "structures": [
+      "对 + Obj. + Verb",
+      "对 + Person + 来说"
+    ],
+    "correct_example": "宝宝对我笑了。",
+    "example_en": "The baby smiled at me.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8ICO9",
+    "keywords": []
+  },
+  {
+    "id": "cgw_usingGenToMeanWith",
+    "name": "Using Gen To Mean With",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Using 跟 (gēn) to express \"with\" is so simple and helpful, after studying it briefly, it will always be with you! 跟 (gēn) is a very common word that will help complete many other sentence structures.",
+    "structures": [
+      "Subj. + 跟 + Person + Verb + Obj.",
+      "Subj. + 跟 + Person + 一起 + Verb + Obj."
+    ],
+    "correct_example": "我昨天跟朋友去海滩了。",
+    "example_en": "I went to the beach with friends yesterday.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGSZ0HP",
+    "keywords": []
+  },
+  {
+    "id": "cgw_usingHaoToMeanEasy",
+    "name": "Using Hao To Mean Easy",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Of course 好 (hǎo) means \"good.\" But it can also be used to express that something is \"easy to do\" or \"good to do.\" And it is quite... easy to do! All you need to do is place a 好 (hǎo) before a verb.",
+    "structures": [
+      "好 + Verb",
+      "Subj. + (很) 好 + Verb"
+    ],
+    "correct_example": "这个词的意思很好懂。",
+    "example_en": "The meaning of this word is easy to understand.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGJQU93",
+    "keywords": []
+  },
+  {
+    "id": "cgw_usingLaiToConnectTwoVerbPhrases",
+    "name": "Using Lai To Connect Two Verb Phrases",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The word 来 (lái) can be used to connect two verb phrases, relating the actions to each other. It can be translated as \"in order to\" or \"so that\" and it can help in explaining reasoning.",
+    "structures": [
+      "通过 / 用 + Agent + 来 + Verb Phrase"
+    ],
+    "correct_example": "用这种方法来赚钱，真丢人。",
+    "example_en": "Using this method to earn money is shameful.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGBZ578",
+    "keywords": []
+  },
+  {
+    "id": "cgw_usingYeAndDouTogether",
+    "name": "Using Ye And Dou Together",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you are trying to draw similarities amongst a group, you will want to pair two key words together. You will want to use 也 (yě) first followed by 都 (dōu) to express that a group of people have something in common.",
+    "structures": [
+      "Subj. + 也 + 都 + Verb / Adj."
+    ],
+    "correct_example": "他们也都是法国人。",
+    "example_en": "They are also all French people.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG8GSXY",
+    "keywords": []
+  },
+  {
+    "id": "cgw_usingZheWhenVerbingAway",
+    "name": "Using Zhe When Verbing Away",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "A repeated verb followed by the particle 着 (zhe) is used to show that an action has be repeated for a period of time, and as a result a new situation has arisen which the speaker wishes to comment on.",
+    "structures": [
+      "Verb + 着 + Verb + 着 + 就 + Comment + 了"
+    ],
+    "correct_example": "说着说着我就发现自己也糊涂了。",
+    "example_en": "I was talking and talking, and then I confused myself.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG7AUNJ",
+    "keywords": []
+  },
+  {
+    "id": "cgw_verbsFollowedByGei",
+    "name": "Verbs Followed By Gei",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Although it's standard practice to put a word or phrase that modifies a verb before the verb, there are, of course, exceptions. 给 (gěi) is one of those exceptions; it sometimes comes before the verb, and sometimes after. This article is about when it comes after.",
+    "structures": [
+      "Subj. + Verb + 给 + [Recipient] + Obj.",
+      "Subj. + 把 + Obj. + Verb + 给 + Somebody"
+    ],
+    "correct_example": "他送给了我一束花。",
+    "example_en": "He gave me a bouquet of flowers.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGMMHTQ",
+    "keywords": []
+  },
+  {
+    "id": "cgw_wantingToDoSomethingWithYao",
+    "name": "Wanting To Do Something With Yao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The auxiliary verb 要 (yào) has several different meanings, and here we'll tackle the \"want to\" meaning. To express \"wanting to do\" something, use 要 (yào) before the verb.",
+    "structures": [
+      "Subj. + 要 + Verb + Obj."
+    ],
+    "correct_example": "他要学中文。",
+    "example_en": "He wants to study Chinese.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGXVEAR",
+    "keywords": []
+  },
+  {
+    "id": "cgw_weile",
+    "name": "Weile",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "为了 (wèile) is most often used to indicate the purpose of an action, or the person that will benefit from some act of kindness.  In the \"purpose\" sense, it corresponds pretty well to \"in order to\" or \"for the purpose of\" in English.",
+    "structures": [
+      "为了+ [Purpose]，Subject + Predicate",
+      "⋯⋯是 + 为了 + Purpose / Reason"
+    ],
+    "correct_example": "为了钱，他出卖了朋友。",
+    "example_en": "He betrayed his friends for money.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGQGJXT",
+    "keywords": []
+  },
+  {
+    "id": "cgw_wulun",
+    "name": "Wulun",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "无论 (wúlùn)  means \"no matter,\" and is generally used in the first part of the sentence. As with many other constructions, 都 and 也 can be used in the second part of the sentence to emphasize the action or decision will not change. It is more formal than 不管.",
+    "structures": [
+      "无论 + Circumstances + 都 / 也 + Inevitable Result"
+    ],
+    "correct_example": "无论怎么样，他都会放弃，别高估他。",
+    "example_en": "No matter what it's like, he will give up. Don't overestimate him.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG6ZI8L",
+    "keywords": []
+  },
+  {
+    "id": "cgw_xiang",
+    "name": "Xiang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you want to express something that you \"would like to do,\" 想 (xiǎng) will be a very helpful auxiliary verb to know. Although similar to 要 (yào), 想 (xiǎng) will give you another more tactful option when you want to articulate a desire.",
+    "structures": [
+      "Subj. + 想 + Verb (+ Obj.)",
+      "Subj. + 不 + 想 + Verb + Obj."
+    ],
+    "correct_example": "你想去吗？",
+    "example_en": "Would you like to go?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGT97VF",
+    "keywords": []
+  },
+  {
+    "id": "cgw_xiaqu",
+    "name": "Xiaqu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "下去 (xiàqù) is one of the most often heard result complements. 下去 can be used as a result complement to talk about things continuing or carrying on. Think of it as a figurative way of \"keeping the ball rolling\" (downhill).",
+    "structures": [
+      "Subj. + Verb + 下去",
+      "Subj. + Verb + 不 + 下去"
+    ],
+    "correct_example": "这个故事太无聊了，我听不下去了。",
+    "example_en": "This story is too boring, I can't keep listening to it.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG1PTJX",
+    "keywords": []
+  },
+  {
+    "id": "cgw_xingkui",
+    "name": "Xingkui",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "幸亏 (xìngkuī), 幸好 (xìnghǎo), and 还好 (háihǎo) mean \"fortunately\" or \"luckily.\" They can be used to express that something has happened by chance, and has thereby enabled you to avoid some difficulty or bad luck. It is often followed with 不然 (which precedes the bad thing that could have happened).",
+    "structures": [
+      "幸亏 / 幸好 + [Lucky Incident]",
+      "幸亏 / 幸好 + [Lucky Incident]， 不然 ……",
+      "还好 + [Lucky Incident]， 不然……"
+    ],
+    "correct_example": "幸亏我们走得早，不然就迟到了。",
+    "example_en": "Luckily, we left early, otherwise we could have been late.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGOB1BF",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yaoWoShuo",
+    "name": "Yao Wo Shuo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "“要我说” (yào wǒ shuō) is another, more colloquial way to say \"in my opinion\" or \"the way I see it.\" It is generally used to express a person's perspective or opinion about a matter.",
+    "structures": [
+      "要我说， Opinion"
+    ],
+    "correct_example": "要我说，这件事先不要告诉爸妈。",
+    "example_en": "The way I see it, this is something we shouldn't tell Mom and Dad.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGITYYM",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yaobu",
+    "name": "Yaobu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "要不 (yàobù) can have a number of meanings, ranging from \"either/or\" to \"how about.\"",
+    "structures": [
+      "要不 + Option A，要不 + Option B",
+      "Reason / Situation，要不 + Option B",
+      "Statement， 要不 + Result"
+    ],
+    "correct_example": "要不你去，要不他去。",
+    "example_en": "Either you go or he goes.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGDFQP7",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yaome",
+    "name": "Yaome",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You can give a series of alternatives by using 要么 (yàome). The structure is pretty versatile, as you can put a wide variety of things after each 要么:",
+    "structures": [
+      "Situation，要么 + Option B",
+      "要么 + Option A，要么 + Option B"
+    ],
+    "correct_example": "老板今天不在，要么你们明天再来吧。",
+    "example_en": "The boss isn't here today. How about if you all come back tomorrow?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG30A60",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yiFangmian",
+    "name": "Yi Fangmian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "When talking about various aspects of a situation, \"一方面⋯⋯， (另)一方面⋯⋯\" (yī fāngmiàn..., (lìng) yī fāngmiàn...) can be used in a similar way that \"On one hand..., on the other hand...\" is in English.",
+    "structures": [
+      "一 方面 + Aspect 1， (另) 一 方面 + Aspect 2"
+    ],
+    "correct_example": "我们一方面要让客户满意，另一方面又不能让公司有损失。",
+    "example_en": "One one hand, we need to make our clients satisfied, but on the other hand, we can't cause the company any loss.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGCWHNF",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yibian",
+    "name": "Yibian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "以便 (yǐbiàn)  is a formal way to say \"in order to\" or \"to facilitate,\" and is generally used to show that an outcome is the result of a particular action.",
+    "structures": [
+      "[Action] +  以便 + [Outcome]"
+    ],
+    "correct_example": "我国提倡垃圾分类，以便回收再利用。",
+    "example_en": "My country advocates a garbage classification to help with reusing and recycling.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGXU2H4",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yibianYibian",
+    "name": "Yibian Yibian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Multitasking is everywhere in the modern world (what else are you doing while you read this?), but you if can focus for just a minute, you can learn a way to express simultaneous tasks in Chinese! This can be done with 一边 (yībiān).",
+    "structures": [
+      "Subj. + 一边 + Verb（，）+ 一边 + Verb"
+    ],
+    "correct_example": "不要一边吃东西，一边说话。",
+    "example_en": "Don't speak while eating.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG2ZC5S",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yidianrYeBu",
+    "name": "Yidianr Ye Bu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Sometimes we may want to say something is \"not even the least bit [adjective].\" For example, we might say in English: \"I am not at all hungry.\"  In Chinese, we can use 一点也不 (yīdiǎnr yě bù) or 一点都不 (yīdiǎnr dōu bù) to express \"not at all [adjective].\"",
+    "structures": [
+      "Subj. + 一点也 / 都 + 不 + Adj.",
+      "Subj. + 一点也 / 都 + 不 + Verb",
+      "Subj. + 一点都 / 也 + 没 + Verb"
+    ],
+    "correct_example": "你一点也不性感。",
+    "example_en": "You're not even a little bit sexy.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGRURCZ",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yihou",
+    "name": "Yihou",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you are trying to explain what you did after a certain event, you might want to use \"以后\" (yǐhòu) or \"之后\" (zhīhòu). After all, they do both mean \"after,\" right? Well, it turns out that there are a few rules that you need to be aware of before you use them.",
+    "structures": [
+      "Subj. + Special Time + 以后／之后 + Action",
+      "以后，Comment",
+      "Subj. + Event， 之后 + Action"
+    ],
+    "correct_example": "下过雨以后/之后空气会好很多。",
+    "example_en": "After it rains, the air will be a lot better.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGC3SCN",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yijingLe",
+    "name": "Yijing Le",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Pattern used to express something has already happened.",
+    "structures": [
+      "已经 + Verb / [Verb Phrase] + 了",
+      "已经 + (很 +) Adj. + 了",
+      "已经 + Time + 了"
+    ],
+    "correct_example": "他们已经走了。",
+    "example_en": "They've already left.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGNXI27",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yilai",
+    "name": "Yilai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "There are a few ways to express \"ever since\" in Chinese. In English, we would say something like \"ever since I came to Shanghai, my Chinese has improved a lot.\" In this article, we will first take a look at using 以来 (yǐlái) to mean \"ever since.\" We will also take a quick look at using \"ever since\" with 来 (lái), which is similar but used in a somewhat different way.",
+    "structures": [
+      "Time or Event + 以来",
+      "自 / 从 / 自从 + Time or Event + 以来",
+      "Time Interval + 来"
+    ],
+    "correct_example": "上大学以来，我一直没逃过课。",
+    "example_en": "Since I was in college, I haven't skipped a class.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGNEMXP",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yimian",
+    "name": "Yimian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "一面 (yìmiàn)  is a more formal than 一边, but is used in the same way to express two simultaneous actions. It is used in the following way:",
+    "structures": [
+      "一面 + Verb +  一面 + Verb"
+    ],
+    "correct_example": "他喜欢一面吃东西，一面看电影。",
+    "example_en": "He likes to eat and watch movies at the same time.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG1QB4K",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yinggai",
+    "name": "Yinggai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "应该 (yīnggāi) translates to the English word \"should,\" and is an essential word to know for your conversaitonal Chinese. You should definitely get comfortable using 应该 (yīnggāi) right away!",
+    "structures": [
+      "Subj. + 应该 + Verb + Obj.",
+      "Subj. + 不 + 应该 + Verb + Obj."
+    ],
+    "correct_example": "在中国，你应该喝白酒。",
+    "example_en": "In China, you should drink baijiu.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGV01X9",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yinweiSuoyi",
+    "name": "Yinwei Suoyi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "You will often come across 因为……所以…… (yīnwèi... suǒyǐ...) in both written and spoken Chinese. This pattern will give your Chinese a clear logical structure, and can help make you more persuasive.",
+    "structures": [
+      "Result, 因为 + Reason",
+      "Reason, 所以 + Result",
+      "因为 + Cause, 所以 + Effect"
+    ],
+    "correct_example": "他学得很快，因为他很聪明。",
+    "example_en": "He learns fast because he is smart.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGTDUJO",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yiqi",
+    "name": "Yiqi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you want to express that you are doing something together with someone else, 一起 (yīqǐ) is your word!",
+    "structures": [
+      "Subj. + 一起 + Verb + Obj."
+    ],
+    "correct_example": "我们一起吃晚饭吧。",
+    "example_en": "Let's eat dinner together.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGNVE15",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yiqian",
+    "name": "Yiqian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "To talk about things that previously occurred, you can use the word 以前 (yǐqián). You can use this structure to talk about actions that happened at some unspecified time in the past.",
+    "structures": [
+      "以前 + Subj. + Verb + Obj.",
+      "Subj. + 以前 + Verb + Obj."
+    ],
+    "correct_example": "以前我不会说中文。",
+    "example_en": "Before, I could not speak Chinese.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGVCWLU",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yiwei",
+    "name": "Yiwei",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In English, the verb \"to think\" can imply that the belief is incorrect, e.g. in \"I thought it was legal here.\" Chinese has a specific verb for this kind of mistaken belief: 以为 (yǐwéi). Literally these two characters mean \"take to be,\" i.e. someone takes one thing to be something else.",
+    "structures": [
+      "Subj. + 以为 ⋯⋯"
+    ],
+    "correct_example": "我以为他是英国人。",
+    "example_en": "I thought he is British.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGRBC43",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yixia",
+    "name": "Yixia",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "After briefly reading this article, you will know how to use 一下 (yīxià) to express a brief action!",
+    "structures": [
+      "Subj. + Verb + 一下 + Obj."
+    ],
+    "correct_example": "请你等一下。",
+    "example_en": "Please wait a little bit.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGWCESP",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yixie",
+    "name": "Yixie",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In order to express \"some\" or \"a few,\" you can use 一些 (yīxiē). To use it in this way, 一些 (yīxiē) is placed before the noun it modifies. 一些 (yīxiē) can modify the subject or the object.",
+    "structures": [
+      "一些 + Noun"
+    ],
+    "correct_example": "妈妈去超市买了一些水果。",
+    "example_en": "Mom went to the supermarket and bought some fruit.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGWVZ0T",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yizhi",
+    "name": "Yizhi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "一直 (yīzhí) literally means \"straight.\"  Used as an adverb, 一直 (yīzhí) can also be used to express that you have been doing something all along, have been continuously doing something since a certain time, or that something will continuously happen in the future.",
+    "structures": [
+      "Subj. + 一直 + Predicate"
+    ],
+    "correct_example": "我一直在学习中文。",
+    "example_en": "I've been studying Chinese all along.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGP000J",
+    "keywords": []
+  },
+  {
+    "id": "cgw_youde",
+    "name": "Youde",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "To refer to just certain members of group, you can use 有的 (yǒude). This usage is normally translated as \"some\" in English. It is often used multiple times in one sentence to refer to different groups.",
+    "structures": [
+      "有的 + (Subj.) + Predicate， 有的 + (Subj.) + Predicate"
+    ],
+    "correct_example": "外国人有的很有钱，有的没钱。",
+    "example_en": "Some foreigners are rich, but some aren't.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG4NDHB",
+    "keywords": []
+  },
+  {
+    "id": "cgw_youyidian",
+    "name": "Youyidian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "At times you may want to politely diss something using the phrase \"a little too.\"  For example, if you are getting lunch with a friend who wants to be seated outside, you might say, \"It is a little too hot\" to suggest you sit inside. In a case like this, you can use 有一点 (yǒuyīdiǎn) or 有点 (yǒudiǎn). The two are interchangeable.",
+    "structures": [
+      "Subj. + 有一点(儿) + Adj.",
+      "Subj. + 有点(儿) + Adj."
+    ],
+    "correct_example": "我有一点饿。",
+    "example_en": "I'm a little hungry.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGPM3MY",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yuanlai",
+    "name": "Yuanlai",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "原来 (yuánlái) means \"originally\" (similar to 本来) or \"former.\" It can also mean \"all along,\" and can be used to indicate a sudden realization of something previously unknown, a bit like \"so it's been like that all along, how could I not have realized?\"",
+    "structures": [
+      "原来 + 的 + Noun",
+      "Subj. + 原来 + [Verb Phrase]",
+      "原来 + [New Information]"
+    ],
+    "correct_example": "你原来的发型很可爱。",
+    "example_en": "Your original hairstyle was very cute.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGTKXFR",
+    "keywords": []
+  },
+  {
+    "id": "cgw_yuelaiyue",
+    "name": "Yuelaiyue",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "越来越 (yuèláiyuè) is used frequently in Chinese to express that some quality or state is increasing with time, or in tune with another factor.  There are two forms of this pattern, the \"simple\" one (using 来), and the more complex one (which uses two different adjectives/verbs).",
+    "structures": [
+      "Subj. + 越来越 + Adj. + 了",
+      "Subj. + 越来越 + Verb + 了"
+    ],
+    "correct_example": "天气越来越冷了。",
+    "example_en": "The weather is getting colder and colder.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG7UE4H",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zaishuo",
+    "name": "Zaishuo",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "\"再说⋯⋯\" (zàishuō...) is used in a similar way as \"In addition\" or \"Moreover,\" in that it is adding on additional information or reasons to the topic at hand.",
+    "structures": [
+      "Clause 1，再说 + Clause 2"
+    ],
+    "correct_example": "我还不想结婚，因为年纪太小了。再说，也没有遇到合适的人。",
+    "example_en": "I don't want to get married yet because I'm too young. And besides, I haven't met the right one.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGATDLX",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zaiyebu",
+    "name": "Zaiyebu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Sometimes you may do something or experience something that you never ever want to do again. How do we express that in Chinese? One of the ways is to use 再也不 (zàiyěbù)!",
+    "structures": [
+      "Subj. + 再也不 + Verb + Obj. + 了",
+      "Subj. + 再也没 + Verb + 过＋Obj."
+    ],
+    "correct_example": "我再也不想看到你了！",
+    "example_en": "I never want to see you again!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG7R8US",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zenme",
+    "name": "Zenme",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "怎么 (zěnme) means \"how\" in Chinese, and it's not hard to use at all: just put it before a verb.",
+    "structures": [
+      "Subj. + 怎么 + Verb + Obj.",
+      "Topic + 怎么 + Verb"
+    ],
+    "correct_example": "你们怎么学中文？",
+    "example_en": "How do you study Chinese?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGH2MNO",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zhen",
+    "name": "Zhen",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "As an adverb, the word 真 (zhēn) means \"really\" or \"truly.\"",
+    "structures": [
+      "真 + Adj.",
+      "真 + Verb"
+    ],
+    "correct_example": "你女朋友真漂亮！",
+    "example_en": "Your girlfriend is really pretty!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGC885D",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zhenghao",
+    "name": "Zhenghao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "正好 (zhènghǎo) can be used as an adjective or adverb to help express a coincidence, and it could be related to size, volume, quantity, degree, time, etc. This is similar to how we say in English “Oh, this shirt I grabbed was just the right size.\" or something like that. When used with a noun, use 正好 right after it. When used with a verb, the 正好 goes right before it. You can also use 正好 along with 得. This is usually a clause of its own.",
+    "structures": [
+      "Subj. + 正好",
+      "正好 + Verb",
+      "Verb + 得 + 正好"
+    ],
+    "correct_example": "这件衣服的大小正好。",
+    "example_en": "The size of these clothes is just right.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGUD25J",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zheyang",
+    "name": "Zheyang",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "这样 (zhèyàng) is used at the beginning of a phrase to express \"this way\" or \"in this way.\"",
+    "structures": [
+      "Condition, 这样 + Result / Purpose",
+      "（如果是 + ）这样的话，……"
+    ],
+    "correct_example": "我们还是坐地铁吧，这样更方便。",
+    "example_en": "We'd better take the metro. It's more convenient this way.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG1F4D1",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zhiSuoyiShiYinwei",
+    "name": "Zhi Suoyi Shi Yinwei",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "之所以⋯⋯是因为 (zhī suǒyǐ... shì yīnwèi) can be translated as “the reason why... is because” and can be used if the speaker wishes to state the effect before the cause.  It's normally used in somewhat formal speech.",
+    "structures": [
+      "Subj.+ 之所以 + Effect + 是因为 + Cause"
+    ],
+    "correct_example": "他之所以去希腊是因为想进一步了解西方文明。",
+    "example_en": "The reason he went to Greece was because he wanted to further understand Western culture.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGTPGXK",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zhileide",
+    "name": "Zhileide",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "之类的 (zhīlèide) can be translated as \"and so on\" or \"and stuff like that.\" As in English, this grammar point is used to continue a list without explicitly mentioning further items within it.",
+    "structures": [
+      "像 + [Items] + 之类的",
+      "[Items] + 之类的 + Noun"
+    ],
+    "correct_example": "越来越多的人不吃快餐，像KFC之类的。",
+    "example_en": "More and more people don't eat fast food, like KFC and stuff like that.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGPY23Z",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zhiqian",
+    "name": "Zhiqian",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "Before and after can be expressed using 之前 (zhīqián) and 之后 (zhīhòu). They are in relatively the same vein as 以前/以后, except that these two are adverbs, while 之前/之后 are prepositions. Don't forget that these two are talking about before and after in terms of time.",
+    "structures": [
+      "Event + 之前 / 之后"
+    ],
+    "correct_example": "下班之前，经理给我们开了一个会议。",
+    "example_en": "Before I got off work, the manager assembled a meeting with us.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGTD3L3",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zhiyi",
+    "name": "Zhiyi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "In order to express \"one of the...\" in Chinese, \"之一\" (zhī yī) can be used at the end of the sentence.",
+    "structures": [
+      "[Noun Phrase] + 之一"
+    ],
+    "correct_example": "她是我的好朋友之一。",
+    "example_en": "She is one of my best friends.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGMT1M1",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zhongyu",
+    "name": "Zhongyu",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "终于(zhōngyú) 表示经过很长时间的等待最后实现了愿望，通常都是说话人期待发生的事情，含喜悦、满意的感情色彩。",
+    "structures": [
+      "Subj. + 终于 + Verb Phrase + 了"
+    ],
+    "correct_example": "你终于到了！",
+    "example_en": "You finally arrived!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG700A5",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zongshi",
+    "name": "Zongshi",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "If you are trying to describe a daily routine, a habit, or just something that consistently happens, you can use the word 总是 (zǒngshì). 总是 (zǒngshì) means \"always,\" and like other adverbs, comes before the verb in a sentence.",
+    "structures": [
+      "Subj. + 总是 + Verb",
+      "总是 + Adv. + Adj."
+    ],
+    "correct_example": "他总是迟到。",
+    "example_en": "He is always late.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGXJPJS",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zongsuan",
+    "name": "Zongsuan",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "One pair of confusing adverbs is 总算 (zǒngsuàn) and 终于 (zhōngyú). They both can be translated as \"finally\" or \"in the end,\" but they subtly different in tone.",
+    "structures": [
+      "Subj. + 总算 / 终于 + Verb"
+    ],
+    "correct_example": "你总算来了！",
+    "example_en": "You finally came!",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASGT8AUA",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zui",
+    "name": "Zui",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "The most common way to form a superlative (best, worst, biggest, smallest, etc.) in Chinese is to use 最 (zuì) before an adjective (and a few select verbs).",
+    "structures": [
+      "最 + Adj.",
+      "最 + Adj. (+ 了)",
+      "最 + [Psychological Verb] + Obj. (+ 了)"
+    ],
+    "correct_example": "哪个老师最好？",
+    "example_en": "Which teacher is the best?",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG3544U",
+    "keywords": []
+  },
+  {
+    "id": "cgw_zuihao",
+    "name": "Zuihao",
+    "category": "grammar",
+    "hsk_level": 0,
+    "explanation": "最好 can be used to express \"had better\"",
+    "structures": [
+      "Subj. + 最好 + [Verb Phrase]",
+      "Subj. + 最好 + 别 / 不要 + [Verb Phrase]"
+    ],
+    "correct_example": "你最好先休息一下。",
+    "example_en": "You'd better take some rest first.",
+    "source_url": "https://resources.allsetlearning.com/chinese/grammar/ASG35CD7",
+    "keywords": []
+  }
+]

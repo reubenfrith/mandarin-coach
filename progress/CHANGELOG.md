@@ -3,6 +3,26 @@
 Session-level record of what changed and why. Deeper rationale lives in `DECISIONS.md`;
 current state in `STATUS.md`.
 
+## 2026-07-13 — Reference-corpus expansion (full HSK + Chinese Grammar Wiki)
+
+Two open-source ingests, both attributed, both keeping the evals valid.
+
+**HSK vocabulary 22 → 4,991** (`data/hsk_vocab.json` via new `build_hsk_vocab.py`) from
+drkameleon/complete-hsk-vocabulary (MIT; CC-CEDICT glosses), old HSK 1–6 standard, curated
+examples preserved. Payoff: `dictionary_lookup` now grounds HSK level for ~5k words, not 22.
+Fixed `load_reference_data` to batch `col.add` (OpenAI embeddings reject >2048 inputs/call).
+
+**Grammar +217 Chinese Grammar Wiki points** (`data/grammar_patterns.json`) ingested via
+chanind/cn-grammar-matcher (matcher MIT; content © AllSet Learning / Chinese Grammar Wiki,
+CC BY-NC-SA, non-commercial use, attributed). Per advisor guidance, kept in a **separate
+`grammar_patterns` collection** so the 98-rule `grammar_rules` every eval depends on is
+untouched; `grammar_rule_fetcher` (via `query_grammar_rules_hybrid`) now **unions both**
+collections (BM25+dense RRF over the union). The Task 6 sweep is **frozen** (measured on the
+curated 98 only) — the single-gold-id queries would collide with CGW near-duplicates, so
+re-running would mismeasure; technique selection (hybrid>dense) is corpus-size-independent.
+No fabricated HSK levels: CGW points carry `hsk_level=0` (unknown) and the fetcher omits the
+"(HSK …)" tag rather than printing a guess. README Task 3 + data/README.md credit both sources.
+
 ## 2026-07-13 — Task 6.2 model bake-off (keep/drop-deepseek RESOLVED)
 
 `evals/surfaces/model_bakeoff.py` → `results/model_bakeoff.{md,json}`. 12 grounded-correction
