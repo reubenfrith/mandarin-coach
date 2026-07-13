@@ -32,6 +32,17 @@ AGENT_TURN_TIMEOUT = float(os.environ.get("AGENT_TURN_TIMEOUT", "180"))
 # its own checkpointer so a partially-run primary turn can't corrupt fallback state.
 CoachAgent = namedtuple("CoachAgent", ["primary", "fallback"])
 
+# Post-turn extraction guard (see progress/DECISIONS.md #13). The OpenRouter models
+# intermittently return had_error=True with correction/category/explanation dropped
+# together, or malformed JSON that raises — provider-side non-determinism, not a
+# capability limit. Either would silently poison the error corpus, so the extraction
+# call is retried a bounded number of times and only a complete record is ever logged.
+EXTRACTION_MAX_ATTEMPTS = int(os.environ.get("EXTRACTION_MAX_ATTEMPTS", "3"))
+# Per-attempt hard bound: the default extraction model can hang (DECISIONS #4) and
+# litellm's own timeout does not reliably interrupt it, so each attempt is wrapped so
+# the retry loop can't compound a hang across this post-turn write.
+EXTRACTION_TIMEOUT = float(os.environ.get("EXTRACTION_TIMEOUT", "60"))
+
 VALID_CATEGORIES = {
     "grammar", "word_order", "measure_word", "particle", "vocabulary", "tones"
 }
@@ -153,25 +164,65 @@ def _has_chinese(text: str) -> bool:
     return any("一" <= c <= "鿿" for c in text)
 
 
-async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str):
-    """Extract the learner's error (if any) and log it so the corpus grows from use."""
-    if not _has_chinese(user_input):
-        return None
-    try:
-        structured = get_llm(streaming=False).with_structured_output(ErrorExtraction)
-        rec: ErrorExtraction = await structured.ainvoke(
+def _record_complete(rec: ErrorExtraction) -> bool:
+    """True only for a record safe to log: an error with BOTH the original and its
+    correction present. `had_error=True` with an empty correction is exactly the
+    field-drop failure mode (DECISIONS #13) — logging it would poison the corpus, so
+    it counts as incomplete and drives a retry."""
+    return bool(rec.had_error and rec.original.strip() and rec.correction.strip())
+
+
+async def _extract_record(
+    user_input: str, agent_answer: str, model: str | None = None
+) -> ErrorExtraction:
+    """One structured-extraction call, bounded by EXTRACTION_TIMEOUT. Raises on a hung
+    provider (timeout) or malformed output (e.g. null string fields); callers decide
+    whether to retry. Shared by the production guard and the eval sibling below."""
+    llm = get_llm(model, streaming=False) if model else get_llm(streaming=False)
+    structured = llm.with_structured_output(ErrorExtraction)
+    return await asyncio.wait_for(
+        structured.ainvoke(
             [
                 SystemMessage(content=ERROR_EXTRACTION_PROMPT),
                 HumanMessage(
                     content=f"Learner input:\n{user_input}\n\nCoach reply:\n{agent_answer}"
                 ),
             ]
-        )
-    except Exception:
+        ),
+        timeout=EXTRACTION_TIMEOUT,
+    )
+
+
+async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str):
+    """Extract the learner's error (if any) and log it so the corpus grows from use.
+
+    Guarded against the documented structured-output flakiness (DECISIONS #13):
+      * a `had_error=True` record whose correction was dropped, or a call that raises
+        (malformed JSON / hung provider), is retried up to EXTRACTION_MAX_ATTEMPTS;
+      * a confident `had_error=False` is trusted immediately — a correct sentence is a
+        valid result, not a failure, so there is nothing to retry or log;
+      * if no complete record is ever obtained, NOTHING is logged. This preserves the
+        original fail-safe: the corpus only ever gains full, usable records.
+    """
+    if not _has_chinese(user_input):
         return None
 
-    if not rec.had_error or not rec.original.strip():
-        return None
+    rec: ErrorExtraction | None = None
+    for _ in range(EXTRACTION_MAX_ATTEMPTS):
+        try:
+            candidate = await _extract_record(user_input, agent_answer)
+        except Exception:  # noqa: BLE001 — timeout/hang OR malformed output → retry
+            continue
+        if not candidate.had_error:
+            return None  # confident clean sentence — nothing to log, no point retrying
+        rec = candidate  # remember the latest error record in case none is ever complete
+        if _record_complete(candidate):
+            break  # full record — stop retrying
+        # else: fields were dropped this attempt — try again for a complete one
+
+    if rec is None or not _record_complete(rec):
+        return None  # never got a loggable record — fail safe (protect the corpus)
+
     category = rec.category if rec.category in VALID_CATEGORIES else "grammar"
     memory.add_personal_error(
         user_id, rec.original, rec.correction, category, rec.explanation
@@ -185,26 +236,21 @@ async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str
 
 async def extract_error_record(user_input: str, agent_answer: str, model: str | None = None):
     """Eval-only sibling of `extract_and_log_error`: run the SAME extraction prompt +
-    schema and return the raw `ErrorExtraction`, with **no side effects**.
+    schema for ONE call and return the raw `ErrorExtraction`, with **no side effects**
+    and **no retry guard**.
 
-    Differences from the production path, all deliberate:
+    Kept un-guarded on purpose: the extraction eval surface measures the *raw* provider
+    reliability (field-drop / malformed-JSON rate), so it must see a single unguarded
+    call. Differences from the production path, all deliberate:
       * no `memory.add_personal_error` write (eval must not mutate a corpus);
       * no `_has_chinese` guard (the eval applies that pure check itself so the
         guard's auto-negatives are scored deterministically and separately from
         the LLM's own had_error judgment);
+      * no retry loop (production retries; the eval measures the pre-guard baseline);
       * the extraction model is overridable (production defaults to deepseek, which
         hangs on OpenRouter — evals pin `glm` for reproducibility, see DECISIONS #4).
 
     Returns the validated `ErrorExtraction` (never None) so the caller sees the
     real `had_error`/`category` even when the record would not be logged.
     """
-    llm = get_llm(model, streaming=False) if model else get_llm(streaming=False)
-    structured = llm.with_structured_output(ErrorExtraction)
-    return await structured.ainvoke(
-        [
-            SystemMessage(content=ERROR_EXTRACTION_PROMPT),
-            HumanMessage(
-                content=f"Learner input:\n{user_input}\n\nCoach reply:\n{agent_answer}"
-            ),
-        ]
-    )
+    return await _extract_record(user_input, agent_answer, model)

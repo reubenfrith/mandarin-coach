@@ -3,6 +3,26 @@
 Session-level record of what changed and why. Deeper rationale lives in `DECISIONS.md`;
 current state in `STATUS.md`.
 
+## 2026-07-13 — Extraction guard + README Task 4 / auth alignment
+
+Two things this session, both off the STATUS TODO.
+
+**1. Extraction guard (STATUS TODO #2, DECISIONS #13).** Wrapped `extract_and_log_error`
+(`app/agent.py`) in a retry / field-validation / fail-safe loop that directly addresses the
+Task 5 finding (glm returns `had_error=True` with `correction`/`category`/`explanation`
+dropped, or malformed JSON that raises — provider-side non-determinism, not a capability
+limit). Behaviour:
+- retry up to `EXTRACTION_MAX_ATTEMPTS` (default 3) on a dropped-field record OR a raising call;
+- trust a confident `had_error=False` immediately (a correct sentence is a valid result — no retry);
+- log ONLY a complete record (`had_error AND original AND correction`); if none is ever obtained, log nothing (fail-safe, unchanged from before);
+- each attempt bounded by `asyncio.wait_for(EXTRACTION_TIMEOUT=60s)` so the retry loop can't compound a provider hang (DECISIONS #4 — litellm's own timeout doesn't reliably interrupt one).
+- Factored the single call into `_extract_record` (shared with the eval sibling). `extract_error_record` stays **un-guarded on purpose** — the extraction surface measures the *raw* pre-guard reliability. Model config left as-is (deepseek default) per user.
+- Verified by `tests/test_extraction_guard.py` (NEW) — 14 deterministic checks, no network (stubs `_extract_record` + `memory.add_personal_error`). All pass.
+
+**2. README Task 4 + auth alignment.** Wrote the Task 4 Prototype section (was a placeholder)
+documenting the live deployed app, and corrected four stale Google-OAuth references to the
+username/password auth the app actually ships. Committed `a37b810`.
+
 ## 2026-07-13 — Structured-extraction surface (Task 5, third of three)
 
 Built the last eval surface: `extract_and_log_error`, the hidden post-turn call that

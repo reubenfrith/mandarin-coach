@@ -56,7 +56,7 @@ This file is the single source of truth for resuming work. See also `progress/DE
 ## TODO (in priority order)
 
 1. **Loom video** — the last Task 5 deliverable. Walk through: the head-to-head design + the four surfaces, the deterministic-cross-check methodology, and the headline results (C_scale 10/10 vs 7/10; extraction precision 1.00 + the glm reliability finding).
-2. **Optional app fix (cheap, do before the Task 6 bake-off):** wrap `extract_and_log_error` with a **retry-on-incomplete / field-validation guard** (and consider extraction at temp 0) — addresses the extraction surface's finding and makes the model bake-off fairer. See DECISIONS #13.
+2. ✅ **DONE — extraction guard** (`app/agent.py`): `extract_and_log_error` now retries on a dropped-field/raising call (`EXTRACTION_MAX_ATTEMPTS=3`), trusts `had_error=False` immediately, logs only a complete record (else fail-safe), each attempt bounded by `EXTRACTION_TIMEOUT=60s`. Eval sibling `extract_error_record` left un-guarded (measures raw baseline). Verified by `tests/test_extraction_guard.py` (14 checks, no network). Model config unchanged (deepseek default). See DECISIONS #13 + CHANGELOG.
 3. **Task 6** (Advanced Retrieval, separate task) — NOT built.
    - Retrieval sweep: baseline OpenAI embed vs Qwen3-Embedding-8B vs BGE-M3 vs hybrid BM25+semantic vs +rerank. Metric: ContextRecall@3/@6 + deterministic recall + latency. NB retrieval is already 1.0 on exact rule-id recall — judge the sweep on harder cases + latency.
    - Model bake-off: deepseek/glm/qwen with quality + **latency + timeout-rate** columns → where the **keep/drop-deepseek** decision gets made (see DECISIONS #4; the extraction finding is an input).
