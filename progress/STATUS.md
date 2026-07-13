@@ -8,7 +8,16 @@ This file is the single source of truth for resuming work. See also `progress/DE
 
 ## Where we are
 
-**Task 5: Evaluation Harness (15 pts) — CODE COMPLETE + WRITTEN UP + committed/pushed to `main` (commit `cdb588e`).** Pivoted from bespoke metrics to the **standard RAGAS suite** (user's explicit request). Evaluator judge = **OpenAI gpt-4o-mini**; the two agentic reasoning judges use **gpt-4o** (deviation kept — user confirmed). Models under test = deepseek (default, hangs) / glm (reproducible) / qwen via OpenRouter.
+**Tasks 4, 5, 6, 7 all written up + committed/pushed to `main`. Only the Loom video + a one-command VM corpus reload remain.**
+- **Task 4 (Prototype):** written (was empty) — live app, stack, honest deviations. Auth references corrected OAuth→username/password.
+- **Task 5 (Eval Harness):** 4 surfaces (RAG/agentic/extraction/head-to-head); Surface 2 re-based on 98 rules. Extraction guard shipped + tested.
+- **Task 6 (Advanced Retrieval):** DONE both halves. Retrieval sweep → **hybrid (BM25+dense RRF) adopted AND wired into production** `grammar_rule_fetcher` (recall@1 0.49→0.56); BGE-M3 = latency/cost trade (not adopted). Model bake-off → **keep deepseek default + guard, glm fallback, drop qwen** (quality ties; deepseek best typical latency; timeout tail handled by the guard).
+- **Task 7 (Next Steps):** written — 10 evidence-anchored items (file upload, deploy 98-rule corpus, rerank/multi-query, Qwen-8B on GPU, topic guardrail, undo-log, deeper personalisation, scale corpora, voice).
+- **Task 3 data table** corrected to actual v1 seed sizes (98/22/16, was ~150/~5000/~80).
+
+_Original Task 5 pivot context:_ standard RAGAS suite (user request); evaluator judge = gpt-4o-mini; agentic reasoning judges = gpt-4o (user-confirmed deviation). Models under test = deepseek/glm/qwen via OpenRouter.
+
+**LEFT: (1) Loom video (Task 5 deliverable). (2) `docker compose exec app ... load_reference_data(force=True)` on the VM to ship 98 rules to the live app (user runs it; see DEPLOY.md).**
 
 **3 of 3 eval surfaces built** (RAG ✓, agentic ✓, structured-extraction ✓), plus:
 - Root `README.md` Task 5 **results write-up** done (four-surface story + every conclusion's why).

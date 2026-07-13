@@ -930,4 +930,26 @@ Reading the table with the reasons behind each row:
 
 ## Task 7: Next Steps
 
-*To be completed*
+These are not a generic wishlist — each item is anchored to a specific finding from the build or the eval harness, and is ordered by value-to-effort.
+
+### Close the two known scope gaps (highest priority — they are named in Tasks 3–4)
+
+1. **User file upload (.txt / Anki).** Task 3 frames upload as the primary "own personal data, uploaded" mechanism, but v1 ships without the parse-and-ingest handler (flagged honestly in Task 4). The `{user_id}_personal_errors` write path, embedding, and retrieval already exist — this is a Chainlit `@cl.action_callback` that chunks each record and calls `memory.add_personal_error`, not new infrastructure. **Highest-value gap because it is an explicit requirement.**
+2. **Deploy the 98-rule corpus.** The live VM still serves the original 24-rule corpus (the persistent-disk collection does not auto-upgrade); a one-command `force=True` reload on the VM ships the Task 6 expansion (see `DEPLOY.md`). Cheap, and it makes the running app match the repo.
+
+### Retrieval — finish the axes the sweep left open
+
+3. **The two un-run Axis-2 arms: cross-encoder reranking (BGE-reranker-v2-m3) and multi-query.** The Task 6 sweep adopted hybrid but scoped out these two. Reranking is the natural next lift on the hard near-neighbour cases (的/得/地, 有/是/在) where hybrid still misses at rank 1; multi-query is the recall-oriented arm for vague queries. Both plug into the same `retrieval_sweep.py` harness.
+4. **Qwen3-Embedding-8B on a GPU endpoint.** The one Axis-1 candidate that could not run locally. Worth measuring once a GPU endpoint is available, to complete the all-Qwen-pipeline comparison the model roster was chosen to enable.
+
+### Reliability & correctness — from the eval findings
+
+5. **A larger DeepSeek reliability sample, or a streaming-level hang detector.** The bake-off's timeout-rate (0/12) is too small to quantify the intermittent 30-min hang. Either run a reliability-only batch, or add a first-token-timeout watchdog so the fallback triggers in seconds rather than at the 180 s turn bound.
+6. **Topic-adherence guardrail.** Task 5 Surface 3 found a real gap: the agent fulfils off-domain requests (recipe, sports) as long as it can add a Mandarin twist (only ~2/4 probes declined). Add an explicit on-topic classifier or a system-prompt guardrail, then re-run the 4-probe adherence check.
+7. **Ship the extraction guard's benefit end-to-end.** The retry/validation guard now protects the corpus writer; a natural follow-up is a lightweight **user-facing undo** on auto-logged errors (Task 4 deviation: v1 auto-logs with a visible step but no dismiss), closing the "human review" loop the design envisioned.
+
+### Product depth
+
+8. **Deeper personalisation at small scale.** B_small showed the agent references history 7/10 but cites a *specific count* 0/10 at N≈5 — it personalises qualitatively but not numerically until scale. Feeding `error_stats()` counts into the correction prompt (not just the drill path) would let it say "your 4th 把 error" earlier.
+9. **Scale the reference corpora.** Load the full HSK 1–6 word lists (~5,000) and a larger grammar/error corpus into the existing collections (`data/load_data.py` re-embeds whatever the JSON holds) — a data step, not a code change, now that the hybrid retriever is proven to hold up as the corpus grows.
+10. **Voice / pronunciation (post-v1, from Task 2 scope).** Tone and pronunciation correction is the deliberate v1 exclusion; it is the largest true feature expansion and the one that most directly extends the spoken-fluency thesis beyond text.
