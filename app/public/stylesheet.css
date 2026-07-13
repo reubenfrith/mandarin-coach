@@ -116,11 +116,11 @@ pre code {
   padding: 0;
 }
 
-/* ---- Hide Chainlit branding: the "Built with Chainlit" watermark and the
- *      login-screen / header logo (<img class="logo" alt="logo">) ---- */
+/* ---- Hide Chainlit branding + the header Readme button ---- */
 .watermark,
 img.logo,
-img[alt="logo"] {
+img[alt="logo"],
+#readme-button {
   display: none !important;
 }
 
