@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to use Mandarin Coach 汉语教练</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+    --sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", system-ui, -apple-system, sans-serif;
+    --mono: "SF Mono", ui-monospace, Menlo, monospace;
+
+    --bg: #fbf6ed;
+    --card: #fffdf8;
+    --fg: #211d18;
+    --muted: #6f6455;
+    --primary: #c8102e;
+    --primary-soft: rgba(200, 16, 46, 0.08);
+    --gold: #b0801f;
+    --gold-line: rgba(176, 128, 31, 0.35);
+    --border: #e6dcc7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17120f;
+      --card: #211a16;
+      --fg: #ece2d1;
+      --muted: #a9997f;
+      --primary: #ef5346;
+      --primary-soft: rgba(226, 59, 46, 0.14);
+      --gold: #d9ae52;
+      --gold-line: rgba(217, 174, 82, 0.32);
+      --border: #352b23;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 760px; margin: 0 auto; padding: 28px 22px 72px; }
+
+  a { color: var(--primary); }
+  .back {
+    display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none; color: var(--muted);
+    font-size: 0.86rem; font-weight: 500;
+    padding: 7px 12px; border: 1px solid var(--border);
+    border-radius: 999px; background: var(--card);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .back:hover { color: var(--primary); border-color: var(--primary); }
+
+  .hero { margin: 30px 0 8px; }
+  .eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold); margin: 0 0 10px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.15;
+    margin: 0; color: var(--primary); text-wrap: balance;
+  }
+  .lede { color: var(--muted); font-size: 1.05rem; margin: 14px 0 0; max-width: 60ch; }
+
+  section { margin-top: 42px; }
+  h2 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: 1.4rem; margin: 0 0 4px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--gold-line);
+  }
+  h2 .zh { color: var(--gold); font-weight: 600; font-size: 0.95rem; margin-left: 8px; }
+  p { margin: 14px 0; }
+
+  .hanzi { font-family: var(--serif); }
+  .pinyin { font-family: var(--mono); font-size: 0.86em; color: var(--muted); }
+  code {
+    font-family: var(--mono); font-size: 0.88em;
+    background: var(--primary-soft); color: var(--primary);
+    padding: 1px 6px; border-radius: 5px;
+  }
+
+  /* HSK table */
+  .table-wrap { overflow-x: auto; margin-top: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--gold); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  td.lvl { font-weight: 700; color: var(--primary); font-family: var(--serif); }
+
+  /* Feature cards */
+  .cards { display: grid; gap: 14px; margin-top: 18px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 3px solid var(--gold); border-radius: 4px 12px 12px 4px;
+    padding: 16px 18px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 1.05rem; font-family: var(--serif); }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .card .try {
+    display: inline-block; margin-top: 10px; font-size: 0.82rem;
+    color: var(--primary); background: var(--primary-soft);
+    border: 1px solid var(--gold-line); border-radius: 999px; padding: 3px 11px;
+  }
+  .card .try .hanzi { color: inherit; }
+
+  ul.tips { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.tips li { padding-left: 24px; position: relative; color: var(--fg); }
+  ul.tips li::before {
+    content: "印"; position: absolute; left: 0; top: 0;
+    font-family: var(--serif); color: var(--primary); font-size: 0.9em;
+  }
+
+  footer { margin-top: 52px; padding-top: 18px; border-top: 1px solid var(--gold-line);
+    color: var(--muted); font-size: 0.82rem; }
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="back" href="/">&larr; Back to the coach</a>
+
+  <div class="hero">
+    <p class="eyebrow">Mandarin Coach · 汉语教练</p>
+    <h1>How to use your coach</h1>
+    <p class="lede">A personal Mandarin tutor that checks your Chinese, explains <em>why</em> a mistake is wrong in plain English, and remembers the errors you keep making so it can drill you on exactly those.</p>
+  </div>
+
+  <section>
+    <h2>What it is</h2>
+    <p>Most tools mark an answer wrong and move on. Mandarin Coach diagnoses the <strong>root cause</strong>, grounds the explanation in a real grammar rule, and logs the mistake to <em>your</em> private error history. It's built for self-directed learners around the <strong>HSK 2–4</strong> plateau — people who can already hold a slow conversation but keep tripping on the same handful of patterns.</p>
+  </section>
+
+  <section>
+    <h2>What is HSK?<span class="zh">汉语水平考试</span></h2>
+    <p>HSK (<span class="hanzi">汉语水平考试</span>, <span class="pinyin">Hànyǔ Shuǐpíng Kǎoshì</span>) is the standard scale for Chinese proficiency, from Level 1 (beginner) to Level 6 (advanced). It's a handy shorthand for "how much Chinese do I know." This coach uses the classic HSK 1–6 standard and knows all ~5,000 words in it.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Level</th><th>New words</th><th>Cumulative</th><th>Roughly means</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="lvl">HSK 1</td><td class="num">150</td><td class="num">150</td><td>Absolute beginner — survival phrases</td></tr>
+          <tr><td class="lvl">HSK 2</td><td class="num">150</td><td class="num">300</td><td>Basic everyday exchanges</td></tr>
+          <tr><td class="lvl">HSK 3</td><td class="num">300</td><td class="num">600</td><td>Lower-intermediate — daily life, simple opinions</td></tr>
+          <tr><td class="lvl">HSK 4</td><td class="num">600</td><td class="num">1,200</td><td>Intermediate — real conversations, some abstract topics</td></tr>
+          <tr><td class="lvl">HSK 5</td><td class="num">1,300</td><td class="num">2,500</td><td>Upper-intermediate — newspapers, films</td></tr>
+          <tr><td class="lvl">HSK 6</td><td class="num">2,500</td><td class="num">5,000</td><td>Advanced — near-fluent</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>You don't need to know your exact level. When you first sign in, the coach asks you to pick the closest band (HSK 1–2, 3–4, or 5–6) and your biggest struggle, then adapts from there. Look up any word and it tells you that word's HSK level too.</p>
+  </section>
+
+  <section>
+    <h2>What you can do</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Check a sentence</h3>
+        <p>Type any Chinese sentence. The coach spots the error, gives the corrected version, and explains the underlying rule — not just "wrong," but why.</p>
+        <span class="try">Try: <span class="hanzi">她把书被他借走了</span></span>
+      </div>
+      <div class="card">
+        <h3>Ask a grammar question</h3>
+        <p>Ask about anything that confuses you and get a plain-English explanation with examples. It pulls the actual rule from its grammar library (and real-world usage from the web when useful).</p>
+        <span class="try">Try: “What's the difference between <span class="hanzi">了</span> and <span class="hanzi">过</span>?”</span>
+      </div>
+      <div class="card">
+        <h3>Look up a word</h3>
+        <p>Get the pinyin, meaning, HSK level, and example sentences for any word — checked against a dictionary, so the tones and level are correct, never guessed.</p>
+        <span class="try">Try: “What does <span class="hanzi">顺便</span> mean?”</span>
+      </div>
+      <div class="card">
+        <h3>“Drill me” — your targeted practice</h3>
+        <p>The signature feature. Ask to be drilled and the coach builds 3–5 exercises aimed at your actual weak spots — a specific pattern, tones, or whatever you keep getting wrong — with answers included.</p>
+        <span class="try">Try: “Drill me on my weak points” &nbsp;·&nbsp; “Drill me on <span class="hanzi">把</span>”</span>
+      </div>
+      <div class="card">
+        <h3>“What am I getting wrong?”</h3>
+        <p>A longitudinal read of your mistakes: which error categories come up most, and whether each is improving or still persisting — so you know where to focus next.</p>
+        <span class="try">Try: “What am I getting wrong?”</span>
+      </div>
+    </div>
+    <p style="margin-top:18px;">The four buttons on the welcome screen — <em>Check this sentence</em>, <em>了 vs 过</em>, <em>Drill me on 把</em>, and <em>What am I getting wrong?</em> — are quick shortcuts to these.</p>
+  </section>
+
+  <section>
+    <h2>How it remembers you</h2>
+    <p>Every correction is saved to your own private error log. Over time the coach can say things like <em>“this is your 4th <span class="hanzi">把</span>-structure error”</em> and show whether it's getting better or worse. That longitudinal memory — the thing a once-a-week tutor or a generic app can't give you — is the whole point. Your history is tied to your login and kept separate from everyone else's.</p>
+  </section>
+
+  <section>
+    <h2>Tips</h2>
+    <ul class="tips">
+      <li>Switch between light and dark with the ☀️ / 🌙 button in the top-right header.</li>
+      <li>Be specific — paste the exact sentence you're unsure about rather than describing it.</li>
+      <li>Ask “why?” The coach is built to explain root causes, not just hand you the fix.</li>
+      <li>Write in Chinese or English — it reads both, and replies in English with Chinese examples.</li>
+      <li>Come back regularly. The more you use it, the sharper its picture of your weak spots becomes.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Mandarin Coach · 汉语教练 — your personal Mandarin coach. <a href="/">Return to the app &rarr;</a>
+  </footer>
+</div>
+</body>
+</html>

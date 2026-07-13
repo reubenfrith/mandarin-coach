@@ -175,5 +175,13 @@ default_avatar_file_url = ""
 #     url = "https://github.com/Chainlit/chainlit/issues"
 #     target = "_blank" (default)  # Optional: "_self", "_parent", "_top".
 
+# "Guide" link → the themed how-to page served from public/help.html.
+[[UI.header_links]]
+    name = "guide"
+    display_name = "Guide"
+    icon_url = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='22'%20height='22'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23f3e2c2'%20stroke-width='1.7'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M2%204h6a3%203%200%200%201%203%203v13a2.5%202.5%200%200%200-2.5-2.5H2z'/%3E%3Cpath%20d='M22%204h-6a3%203%200%200%200-3%203v13a2.5%202.5%200%200%201%202.5-2.5H22z'/%3E%3C/svg%3E"
+    url = "/public/help.html"
+    target = "_blank"
+
 [meta]
 generated_by = "2.11.1"
