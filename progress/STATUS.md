@@ -1,6 +1,6 @@
 # Mandarin Coach — Progress Status
 
-_Last updated: 2026-07-12. Cert due ~2026-07-16. App is LIVE at https://34-129-227-111.nip.io (GCP VM, Docker, LangGraph, auth, persistent disk)._
+_Last updated: 2026-07-13. Cert due ~2026-07-16. App is LIVE at https://34-129-227-111.nip.io (GCP VM, Docker, LangGraph, auth, persistent disk)._
 
 This file is the single source of truth for resuming work. See also `progress/DECISIONS.md` for the non-obvious gotchas and `progress/CHANGELOG.md` for the per-session record of what changed and why.
 
@@ -8,9 +8,14 @@ This file is the single source of truth for resuming work. See also `progress/DE
 
 ## Where we are
 
-Working on **Task 5: Evaluation Harness** (15 pts). Pivoted from bespoke metrics to the **standard RAGAS suite** (user's explicit request). Evaluator judge = **OpenAI gpt-4o-mini**. Models under test = deepseek (default) / glm / qwen via OpenRouter.
+**Task 5: Evaluation Harness (15 pts) — CODE COMPLETE + WRITTEN UP + committed/pushed to `main` (commit `cdb588e`).** Pivoted from bespoke metrics to the **standard RAGAS suite** (user's explicit request). Evaluator judge = **OpenAI gpt-4o-mini**; the two agentic reasoning judges use **gpt-4o** (deviation kept — user confirmed). Models under test = deepseek (default, hangs) / glm (reproducible) / qwen via OpenRouter.
 
-Three eval surfaces planned; **3 of 3 built** (RAG ✓, agentic ✓, structured-extraction ✓).
+**3 of 3 eval surfaces built** (RAG ✓, agentic ✓, structured-extraction ✓), plus:
+- Root `README.md` Task 5 **results write-up** done (four-surface story + every conclusion's why).
+- `evals/` **restructured** into `lib/` (shared), `datagen/` (builders + data), `surfaces/` (5 runnable evals), `results/`; paths centralized in `lib/_env.py`.
+- Case types **renamed** A/B/C → `A_stateless` / `B_small` / `C_scale` everywhere (IDs like `A01` and `--types` letters kept).
+
+**Left on Task 5:** just the **Loom video** (walkthrough of the harness + findings). Everything else is Task 6 / Task 7 / a small optional app fix — see TODO.
 
 ---
 
@@ -41,14 +46,21 @@ Three eval surfaces planned; **3 of 3 built** (RAG ✓, agentic ✓, structured-
 
 ---
 
+## DONE this session (all on `main`, commit `cdb588e`)
+
+- ✅ **RAGAS agentic surface** (`evals/surfaces/ragas_agentic.py`) — DECISIONS #9–#12. gpt-4o reasoning-judge deviation **kept (user confirmed)**.
+- ✅ **Structured-extraction surface** (`evals/surfaces/extraction_eval.py` + `datagen/generate_extraction_dataset.py`) — DECISIONS #13. Finding: perfect precision; glm structured-output unreliable (run-variable field-drop + null-JSON) → needs a retry/validation guard, not a model swap.
+- ✅ **Root README Task 5 write-up** (four surfaces, results, every why).
+- ✅ **evals/ restructure** (`lib`/`datagen`/`surfaces`/`results`, paths centralized in `lib/_env.py`) + **A/B/C → A_stateless/B_small/C_scale rename**.
+
 ## TODO (in priority order)
 
-1. **RAGAS agentic-metric surface** (task #8) — ✅ BUILT (`evals/surfaces/ragas_agentic.py`). See DECISIONS #9–#12 for the metric gotchas that shaped it. ⚠️ **Deviates from the gpt-4o-mini judge**: the two multi-turn reasoning judges use **gpt-4o** (gpt-4o-mini's goal verdict coin-flips) — flag to user.
-2. **Structured-extraction surface** — ✅ BUILT (`evals/surfaces/extraction_eval.py` + `generate_extraction_dataset.py`). See DECISIONS #13. Headline finding: perfect precision, but glm's structured output is unreliable (run-variable field-drop + null-JSON) — needs a retry/validation guard around the extraction call; carry into Task 6.
+1. **Loom video** — the last Task 5 deliverable. Walk through: the head-to-head design + the four surfaces, the deterministic-cross-check methodology, and the headline results (C_scale 10/10 vs 7/10; extraction precision 1.00 + the glm reliability finding).
+2. **Optional app fix (cheap, do before the Task 6 bake-off):** wrap `extract_and_log_error` with a **retry-on-incomplete / field-validation guard** (and consider extraction at temp 0) — addresses the extraction surface's finding and makes the model bake-off fairer. See DECISIONS #13.
 3. **Task 6** (Advanced Retrieval, separate task) — NOT built.
-   - Retrieval sweep: baseline OpenAI embed vs Qwen3-Embedding-8B vs BGE-M3 vs hybrid BM25+semantic vs +rerank. Metric: ContextRecall@3/@6 + deterministic recall + latency.
-   - Model bake-off: deepseek/glm/qwen with quality + **latency + timeout-rate** columns → this is where the **keep/drop-deepseek** decision gets made (see DECISIONS).
-4. **README Task 5 write-up** + Loom video + Task 7. Deferred UX: mode chat profiles, model selection in UI.
+   - Retrieval sweep: baseline OpenAI embed vs Qwen3-Embedding-8B vs BGE-M3 vs hybrid BM25+semantic vs +rerank. Metric: ContextRecall@3/@6 + deterministic recall + latency. NB retrieval is already 1.0 on exact rule-id recall — judge the sweep on harder cases + latency.
+   - Model bake-off: deepseek/glm/qwen with quality + **latency + timeout-rate** columns → where the **keep/drop-deepseek** decision gets made (see DECISIONS #4; the extraction finding is an input).
+4. **Task 7** + deferred UX: mode chat profiles, model selection in UI.
 
 ---
 
