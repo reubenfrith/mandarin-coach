@@ -1,0 +1,141 @@
+/* Mandarin Coach — Imperial Red & Gold. Bold, unmistakably Chinese.
+ * Palette + fonts live in public/theme.json; this file adds the visual identity:
+ *   · a vermilion top header band with a gold rule
+ *   · a calligraphic 汉语教练 splash on the empty welcome screen
+ *   · red-and-gold message cards, starter cards, and composer
+ * Selectors verified against Chainlit 2.11's DOM: #header, #welcome-screen,
+ * #starters, #message-composer, .ai-message, [data-step-type="user_message"],
+ * .watermark, and the Tailwind .bg-background / .bg-accent surfaces.
+ * Colours reference the theme.json HSL vars so light/dark both work. */
+
+/* ---- Headings: calligraphic serif ---- */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  letter-spacing: 0.01em;
+}
+
+/* ---- Top header: bold vermilion band with a gold rule ---- */
+#header {
+  background: linear-gradient(180deg, hsl(4 74% 44%), hsl(2 70% 36%)) !important;
+  border-bottom: 3px solid hsl(var(--ring)) !important;
+  box-shadow: 0 2px 12px hsl(0 0% 0% / 0.28);
+}
+#header,
+#header button,
+#header a,
+#header svg,
+#header span {
+  color: hsl(42 68% 86%) !important;
+}
+#header button:hover {
+  background: hsl(0 0% 100% / 0.14) !important;
+}
+
+/* ---- Welcome splash: English title with Chinese, in imperial red + gold ---- */
+#welcome-screen::before {
+  content: "Mandarin Coach\A汉语教练";
+  white-space: pre-line;
+  display: block;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 6.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: hsl(var(--primary));
+}
+#welcome-screen::after {
+  content: "YOUR PERSONAL MANDARIN COACH";
+  display: block;
+  text-align: center;
+  letter-spacing: 0.26em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: hsl(var(--ring));
+  margin: 0.4rem 0 1.6rem;
+}
+
+/* ---- Starter prompts: red-bordered gold cards ---- */
+#starters button,
+#starters a {
+  border: 1.5px solid hsl(var(--primary) / 0.5) !important;
+  background: hsl(var(--accent)) !important;
+  border-radius: var(--radius) !important;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+#starters button:hover,
+#starters a:hover {
+  border-color: hsl(var(--primary)) !important;
+  background: hsl(var(--primary) / 0.1) !important;
+  transform: translateY(-1px);
+}
+
+/* ---- Assistant messages: gold left seal-bar ---- */
+.ai-message {
+  border-left: 3px solid hsl(var(--ring) / 0.55);
+  padding-left: 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ---- User messages: red-envelope (红包) bubble ---- */
+[data-step-type="user_message"] .bg-accent,
+[data-step-type="user_message"] .bg-secondary {
+  background: linear-gradient(135deg, hsl(4 70% 48%), hsl(0 66% 41%)) !important;
+  color: hsl(42 70% 92%) !important;
+  border: 1px solid hsl(var(--ring) / 0.6) !important;
+}
+
+/* ---- Composer: gold border to frame the input ---- */
+#message-composer {
+  border: 1.5px solid hsl(var(--ring) / 0.5) !important;
+  border-radius: var(--radius) !important;
+}
+
+/* ---- Markdown niceties: gold links, seal-bar quotes, warm code ---- */
+[class*="markdown"] a {
+  color: hsl(var(--ring));
+  text-decoration-color: hsl(var(--ring) / 0.5);
+}
+[class*="markdown"] a:hover {
+  text-decoration-color: hsl(var(--ring));
+}
+blockquote {
+  border-left: 3px solid hsl(var(--primary));
+  background: hsl(var(--muted) / 0.5);
+  padding: 0.5rem 0.9rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+code {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  border-radius: 0.35rem;
+  padding: 0.08em 0.35em;
+}
+pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* ---- Hide Chainlit branding: the "Built with Chainlit" watermark and the
+ *      login-screen / header logo (<img class="logo" alt="logo">) ---- */
+.watermark,
+img.logo,
+img[alt="logo"] {
+  display: none !important;
+}
+
+/* ---- Gold-tinted scrollbars ---- */
+* {
+  scrollbar-color: hsl(var(--ring) / 0.6) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: hsl(var(--ring) / 0.5);
+  border-radius: 6px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--ring) / 0.8);
+}

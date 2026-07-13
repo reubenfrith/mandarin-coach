@@ -3,8 +3,12 @@
 venv/
 __pycache__/
 
-# Chainlit auto-generated boilerplate (config + translations + welcome page)
-.chainlit/
+# Chainlit boilerplate: ignore translations + cache, but TRACK config.toml
+# (it now carries our theme name + custom_css, so it must deploy via git).
+.chainlit/*
+!.chainlit/config.toml
+app/.chainlit/*
+!app/.chainlit/config.toml
 chainlit.md
 
 # CC-CEDICT dictionary cache (downloaded at runtime)
