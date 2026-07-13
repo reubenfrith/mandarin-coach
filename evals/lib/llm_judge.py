@@ -14,7 +14,7 @@ The judge model is configurable via JUDGE_MODEL. Because both arms use the same
 model under test, a same-model judge cannot systematically favour one arm over the
 other on identity grounds — the comparison stays fair.
 """
-import _env  # noqa: F401
+from lib import _env  # noqa: F401
 
 import os
 import re
@@ -64,7 +64,7 @@ def canon_category(s: str | None) -> str | None:
 
 
 # --------------------------------------------------------------------------- #
-# 1. Correction Accuracy (Type A/B/C) — subjective judge
+# 1. Correction Accuracy (A_stateless/B_small/C_scale) — subjective judge
 # --------------------------------------------------------------------------- #
 class CorrectionVerdict(BaseModel):
     identifies_error: bool = Field(default=False, description="Does the answer correctly identify the grammatical error in the learner's sentence?")
@@ -94,7 +94,7 @@ async def judge_correction(learner_input: str, reference: str, answer: str) -> C
 
 
 # --------------------------------------------------------------------------- #
-# 2. Personalisation (Type B/C) — subjective judge
+# 2. Personalisation (B_small/C_scale) — subjective judge
 # --------------------------------------------------------------------------- #
 class PersonalisationVerdict(BaseModel):
     references_history: bool = Field(default=False, description="Does the answer explicitly reference the learner's PAST error history (e.g. 'you've made this mistake before', 'this is recurring')?")
@@ -117,7 +117,7 @@ async def judge_personalisation(answer: str) -> PersonalisationVerdict:
 
 
 # --------------------------------------------------------------------------- #
-# 3. Aggregation — EXTRACT claims, then check in Python (Type C)
+# 3. Aggregation — EXTRACT claims, then check in Python (C_scale)
 # --------------------------------------------------------------------------- #
 class AggregationClaims(BaseModel):
     # Explicit named scalar fields (the category set is fixed and known). This is the
@@ -208,7 +208,7 @@ def score_aggregation(ask: str, claims: AggregationClaims, truth: dict) -> tuple
 
 
 # --------------------------------------------------------------------------- #
-# 4. Factual grounding — extract pinyin/HSK claims, check vs corpus (Type A/B/C)
+# 4. Factual grounding — extract pinyin/HSK claims, check vs corpus (A_stateless/B_small/C_scale)
 # --------------------------------------------------------------------------- #
 class GroundingClaims(BaseModel):
     # Flat parallel lists, aligned by index. Use "" / 0 when a value is not stated.

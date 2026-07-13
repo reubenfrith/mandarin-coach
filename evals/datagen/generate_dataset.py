@@ -1,28 +1,30 @@
 """Build evals/test_dataset.json — the 60-case head-to-head dataset (Task 5).
 
 Design decision (deviates from the original "generate with Claude" plan, and is
-stronger for it): Type A cases are **derived from the reference corpus**, not
+stronger for it): A_stateless cases are **derived from the reference corpus**, not
 LLM-generated. Every grammar rule and error pattern already ships a hand-authored
 (incorrect -> correct) pair plus an id and category. Deriving from them gives:
   - ground-truth correction labels we trust (no need to hand-verify a generator), and
   - a ground-truth retrieval target (expected_rule_id) for RAGAS context recall,
     by construction, for the 24 grammar-rule cases.
 
-Type B/C are built from seed_data (deterministic), with expected answers frozen
+B_small/C_scale are built from seed_data (deterministic), with expected answers frozen
 into the JSON so the dataset is the single source of truth and the run is reproducible.
 
-Run:  uv run python evals/generate_dataset.py
+Run:  uv run python evals/datagen/generate_dataset.py
 """
-import _env  # noqa: F401  — loads .env, isolates ChromaDB, adds app/ to path
+import pathlib
+import sys
 
-import json
-from pathlib import Path
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))  # evals/ on path
+from lib import _env  # noqa: E402,F401  — bootstrap: .env, app path, chroma, ragas shim
 
-from seed_data import EXAMPLES, EXPLANATIONS, build_typec_corpus
+import json  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data"
-OUT = ROOT / "evals" / "test_dataset.json"
+from datagen.seed_data import EXAMPLES, EXPLANATIONS, build_typec_corpus  # noqa: E402
+
+DATA = _env.APP_DATA
+OUT = _env.DATAGEN / "test_dataset.json"
 
 
 def _load(name: str) -> list[dict]:
@@ -65,7 +67,7 @@ def build_type_a() -> list[dict]:
                 "reference_explanation": p["note"],
             }
         )
-    assert len(cases) == 40, f"expected 40 Type A cases, got {len(cases)}"
+    assert len(cases) == 40, f"expected 40 A_stateless cases, got {len(cases)}"
     return cases
 
 
@@ -107,7 +109,7 @@ def build_type_b() -> list[dict]:
                     "expected_min_count": len(seed) + 1,
                 }
             )
-    assert len(cases) == 10, f"expected 10 Type B cases, got {len(cases)}"
+    assert len(cases) == 10, f"expected 10 B_small cases, got {len(cases)}"
     return cases
 
 
@@ -174,7 +176,7 @@ def build_type_c() -> list[dict]:
                 "truth": truth,
             }
         )
-    assert len(cases) == 10, f"expected 10 Type C cases, got {len(cases)}"
+    assert len(cases) == 10, f"expected 10 C_scale cases, got {len(cases)}"
     return cases
 
 
@@ -182,19 +184,19 @@ def main():
     dataset = {
         "meta": {
             "description": "Head-to-head eval set: agent vs naked-LLM control arm.",
-            "counts": {"type_a": 40, "type_b": 10, "type_c": 10, "total": 60},
+            "counts": {"A_stateless": 40, "B_small": 10, "C_scale": 10, "total": 60},
         },
-        "type_a": build_type_a(),
-        "type_b": build_type_b(),
-        "type_c": build_type_c(),
+        "A_stateless": build_type_a(),
+        "B_small": build_type_b(),
+        "C_scale": build_type_c(),
     }
     OUT.write_text(json.dumps(dataset, ensure_ascii=False, indent=2))
-    a, b, c = len(dataset["type_a"]), len(dataset["type_b"]), len(dataset["type_c"])
-    rag = sum(1 for x in dataset["type_a"] if x["expected_rule_id"])
+    a, b, c = len(dataset["A_stateless"]), len(dataset["B_small"]), len(dataset["C_scale"])
+    rag = sum(1 for x in dataset["A_stateless"] if x["expected_rule_id"])
     print(f"Wrote {OUT}")
-    print(f"  Type A: {a}  ({rag} with expected_rule_id for RAGAS context recall)")
-    print(f"  Type B: {b}  (small-scale memory)")
-    print(f"  Type C: {c}  (at-scale aggregation over {len(dataset['type_c'][0]['seed'])} records)")
+    print(f"  A_stateless: {a}  ({rag} with expected_rule_id for RAGAS context recall)")
+    print(f"  B_small:     {b}  (small-scale memory)")
+    print(f"  C_scale:     {c}  (at-scale aggregation over {len(dataset['C_scale'][0]['seed'])} records)")
 
 
 if __name__ == "__main__":

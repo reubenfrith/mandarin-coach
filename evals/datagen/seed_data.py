@@ -1,6 +1,6 @@
-"""Realistic per-category error examples + a Type C corpus builder.
+"""Realistic per-category error examples + a C_scale corpus builder.
 
-The Type C corpus is deliberately shaped so the correct answer requires genuine
+The C_scale corpus is deliberately shaped so the correct answer requires genuine
 cross-record computation, not eyeballing: 60 mixed-category records where one
 category (particle) is clearly *increasing* in the recent half, one (tones) is
 clearly *decreasing*, and the rest are steady. A model that just skims will get

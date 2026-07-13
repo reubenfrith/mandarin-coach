@@ -2,13 +2,13 @@
   "meta": {
     "description": "Head-to-head eval set: agent vs naked-LLM control arm.",
     "counts": {
-      "type_a": 40,
-      "type_b": 10,
-      "type_c": 10,
+      "A_stateless": 40,
+      "B_small": 10,
+      "C_scale": 10,
       "total": 60
     }
   },
-  "type_a": [
+  "A_stateless": [
     {
       "id": "A01",
       "source": "grammar_rule",
@@ -426,7 +426,7 @@
       "reference_explanation": "呢 asks 'what about X?' when the topic is already set; 吗 makes a yes/no question."
     }
   ],
-  "type_b": [
+  "B_small": [
     {
       "id": "B01",
       "category": "particle",
@@ -808,7 +808,7 @@
       "expected_min_count": 5
     }
   ],
-  "type_c": [
+  "C_scale": [
     {
       "id": "C01",
       "seed": [

@@ -1,4 +1,4 @@
-# Type C Preflight — Thesis Discrimination Check
+# C_scale Preflight — Thesis Discrimination Check
 
 **Date:** 2026-07-12 · **Model:** deepseek (DeepSeek V4) · **Embeddings:** OpenAI text-embedding-3-small
 

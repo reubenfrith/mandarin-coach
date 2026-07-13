@@ -83,6 +83,31 @@ async def _invoke(graph, user_input: str, config) -> str:
     return answer_text(result["messages"][-1].content) or "(no response)"
 
 
+async def invoke_with_trace(graph, user_input: str, thread_id: str, callbacks=None):
+    """Run one turn on a SINGLE graph and return (final_text, raw_message_list).
+
+    Eval-only companion to `run_agent`. `run_agent` returns just the final text and
+    silently swaps to the fallback graph on a stall — both are wrong for evaluating
+    the agent's tool-use: the RAGAS agentic metrics need the full LangGraph message
+    trace (HumanMessage / AIMessage[tool_calls] / ToolMessage), and the trace must
+    come from ONE known model (clean provenance), not whichever graph happened to
+    answer. So this invokes the graph you hand it directly, still bounded by
+    AGENT_TURN_TIMEOUT so a hung provider degrades one case instead of the run.
+
+    Returns the raw *langchain* messages; converting them to `ragas.messages` lives
+    in the eval harness so the live app never imports ragas.
+    """
+    config = {"configurable": {"thread_id": thread_id}}
+    if callbacks:
+        config["callbacks"] = callbacks
+    result = await asyncio.wait_for(
+        graph.ainvoke({"messages": [HumanMessage(content=user_input)]}, config=config),
+        timeout=AGENT_TURN_TIMEOUT,
+    )
+    messages = result["messages"]
+    return (answer_text(messages[-1].content) or "(no response)"), messages
+
+
 async def run_agent(agent: CoachAgent, user_input: str, thread_id: str, callbacks=None) -> str:
     """Run one turn on the primary graph; on stall/error fall back to the fast model.
 
@@ -156,3 +181,30 @@ async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str
         "original": rec.original,
         "correction": rec.correction,
     }
+
+
+async def extract_error_record(user_input: str, agent_answer: str, model: str | None = None):
+    """Eval-only sibling of `extract_and_log_error`: run the SAME extraction prompt +
+    schema and return the raw `ErrorExtraction`, with **no side effects**.
+
+    Differences from the production path, all deliberate:
+      * no `memory.add_personal_error` write (eval must not mutate a corpus);
+      * no `_has_chinese` guard (the eval applies that pure check itself so the
+        guard's auto-negatives are scored deterministically and separately from
+        the LLM's own had_error judgment);
+      * the extraction model is overridable (production defaults to deepseek, which
+        hangs on OpenRouter — evals pin `glm` for reproducibility, see DECISIONS #4).
+
+    Returns the validated `ErrorExtraction` (never None) so the caller sees the
+    real `had_error`/`category` even when the record would not be logged.
+    """
+    llm = get_llm(model, streaming=False) if model else get_llm(streaming=False)
+    structured = llm.with_structured_output(ErrorExtraction)
+    return await structured.ainvoke(
+        [
+            SystemMessage(content=ERROR_EXTRACTION_PROMPT),
+            HumanMessage(
+                content=f"Learner input:\n{user_input}\n\nCoach reply:\n{agent_answer}"
+            ),
+        ]
+    )

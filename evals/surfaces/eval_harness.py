@@ -6,10 +6,10 @@ Runs every case through TWO systems and scores them side by side:
              for memory cases the learner's raw records handed straight into context.
 
 Metrics
-  Type A  correction accuracy (judge, both arms) · retrieval recall@3 + MRR (agent's
+  A_stateless  correction accuracy (judge, both arms) · retrieval recall@3 + MRR (agent's
           retriever, deterministic vs expected_rule_id) · factual grounding (both)
-  Type B  correction accuracy · personalisation (judge, both) · grounding
-  Type C  aggregation accuracy (extract-then-check vs frozen truth, both) — decisive
+  B_small  correction accuracy · personalisation (judge, both) · grounding
+  C_scale  aggregation accuracy (extract-then-check vs frozen truth, both) — decisive
 
 Retrieval note: with exact rule-id ground truth we measure context recall/MRR
 deterministically (retriever returns the rule's id), which is stronger and cheaper
@@ -17,30 +17,32 @@ than RAGAS's LLM-approximated relevance and is exactly the retriever-level signa
 Task 6 will vary.
 
 Run:   uv run python evals/eval_harness.py            # full 60-case run
-       uv run python evals/eval_harness.py --limit 2  # cheap smoke run per type
+       uv run python evals/surfaces/eval_harness.py --limit 2  # cheap smoke run per type
 """
-import _env  # noqa: F401
+import pathlib
+import sys
 
-import argparse
-import asyncio
-import json
-import os
-from collections import defaultdict
-from datetime import datetime, timedelta, timezone
-from pathlib import Path
-from types import SimpleNamespace
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))  # evals/ on path
+from lib import _env  # noqa: E402,F401  — bootstrap: .env, app path, chroma, ragas shim
 
-import agg_parse
-import memory
-import llm_judge as J
-from agent import answer_text, build_agent
-from config import DEFAULT_MODEL, get_llm
-from langchain_core.messages import HumanMessage, SystemMessage
-from pypinyin import Style, pinyin
+import argparse  # noqa: E402
+import asyncio  # noqa: E402
+import json  # noqa: E402
+import os  # noqa: E402
+from collections import defaultdict  # noqa: E402
+from datetime import datetime, timedelta, timezone  # noqa: E402
+from types import SimpleNamespace  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent.parent
-DATASET = ROOT / "evals" / "test_dataset.json"
-RESULTS_DIR = ROOT / "evals" / "results"
+from agent import answer_text, build_agent  # noqa: E402
+from config import DEFAULT_MODEL, get_llm  # noqa: E402
+from langchain_core.messages import HumanMessage, SystemMessage  # noqa: E402
+from lib import agg_parse  # noqa: E402
+from lib import llm_judge as J  # noqa: E402
+import memory  # noqa: E402
+from pypinyin import Style, pinyin  # noqa: E402
+
+DATASET = _env.DATAGEN / "test_dataset.json"
+RESULTS_DIR = _env.RESULTS
 
 SEM = asyncio.Semaphore(int(os.environ.get("EVAL_CONCURRENCY", "5")))
 
@@ -185,7 +187,7 @@ async def run_type_a(case: dict) -> dict:
             safe(J.extract_grounding(n_ans), J.GroundingClaims()),
         )
         row = {
-            "id": case["id"], "type": "A", "input": case["input"],
+            "id": case["id"], "type": "A_stateless", "input": case["input"],
             "agent": {"correct": a_corr.correct_fix, "misleading": getattr(a_corr, "misleading", None), "grounding": grounding_check(a_gr_c), "answer": a_ans},
             "naked": {"correct": n_corr.correct_fix, "misleading": getattr(n_corr, "misleading", None), "grounding": grounding_check(n_gr_c), "answer": n_ans},
         }
@@ -214,7 +216,7 @@ async def run_type_b(case: dict) -> dict:
             safe(J.judge_personalisation(n_ans), FB_PERS),
         )
         return {
-            "id": case["id"], "type": "B", "category": case["category"], "input": case["input"],
+            "id": case["id"], "type": "B_small", "category": case["category"], "input": case["input"],
             "agent": {"correct": a_corr.correct_fix, "references_history": a_pers.references_history, "cites_number": a_pers.cites_number, "answer": a_ans},
             "naked": {"correct": n_corr.correct_fix, "references_history": n_pers.references_history, "cites_number": n_pers.cites_number, "answer": n_ans},
         }
@@ -233,7 +235,7 @@ async def run_type_c(case: dict, shared_uid: str) -> dict:
         a_ok, a_why = J.score_aggregation(case["ask"], agg_parse.parse(a_ans, case["ask"]), case["truth"])
         n_ok, n_why = J.score_aggregation(case["ask"], agg_parse.parse(n_ans, case["ask"]), case["truth"])
         return {
-            "id": case["id"], "type": "C", "ask": case["ask"], "input": case["input"],
+            "id": case["id"], "type": "C_scale", "ask": case["ask"], "input": case["input"],
             "agent": {"aggregation_correct": a_ok, "detail": a_why, "answer": a_ans},
             "naked": {"aggregation_correct": n_ok, "detail": n_why, "answer": n_ans},
         }
@@ -254,9 +256,9 @@ def _rate(rows_, arm, key):
 
 
 def summarise(rows: list[dict]) -> dict:
-    a = [r for r in rows if r["type"] == "A"]
-    b = [r for r in rows if r["type"] == "B"]
-    c = [r for r in rows if r["type"] == "C"]
+    a = [r for r in rows if r["type"] == "A_stateless"]
+    b = [r for r in rows if r["type"] == "B_small"]
+    c = [r for r in rows if r["type"] == "C_scale"]
     s: dict = {}
 
     def grounding_rate(rows_, arm):
@@ -265,7 +267,7 @@ def summarise(rows: list[dict]) -> dict:
         return (round(cor / tot, 2), cor, tot) if tot else (None, 0, 0)
 
     if a:
-        s["A"] = {
+        s["A_stateless"] = {
             "n": len(a),
             "correct_agent": _rate(a, "agent", "correct"),
             "correct_naked": _rate(a, "naked", "correct"),
@@ -275,7 +277,7 @@ def summarise(rows: list[dict]) -> dict:
             "grounding_naked": grounding_rate(a, "naked"),
         }
     if b:
-        s["B"] = {
+        s["B_small"] = {
             "n": len(b),
             "correct_agent": _rate(b, "agent", "correct"),
             "correct_naked": _rate(b, "naked", "correct"),
@@ -285,7 +287,7 @@ def summarise(rows: list[dict]) -> dict:
             "cites_number_naked": _rate(b, "naked", "cites_number"),
         }
     if c:
-        s["C"] = {
+        s["C_scale"] = {
             "n": len(c),
             "aggregation_agent": f"{sum(r['agent']['aggregation_correct'] for r in c)}/{len(c)}",
             "aggregation_naked": f"{sum(r['naked']['aggregation_correct'] for r in c)}/{len(c)}",
@@ -295,35 +297,35 @@ def summarise(rows: list[dict]) -> dict:
 
 def render_markdown(summary: dict, rows: list[dict], stamp: str) -> str:
     L = [f"# Eval Results — Agent vs Naked LLM\n", f"Model: **{DEFAULT_MODEL}** · Judge: **{J.JUDGE_MODEL}** · {stamp}\n"]
-    if "A" in summary:
-        s = summary["A"]
+    if "A_stateless" in summary:
+        s = summary["A_stateless"]
         L += [
-            f"## Type A — Stateless correction (n={s['n']}; parity expected; agent wins grounding)\n",
+            f"## A_stateless — Stateless correction (n={s['n']}; parity expected; agent wins grounding)\n",
             "| Metric | Agent | Naked |", "|---|---|---|",
             f"| Correction accuracy (correct fix) | {s['correct_agent']} | {s['correct_naked']} |",
             f"| Retrieval recall@3 | {s['retrieval_recall@3']} | — |",
             f"| Retrieval MRR | {s['retrieval_mrr']} | — |",
             f"| Factual grounding (correct/checked) | {s['grounding_agent'][0]} ({s['grounding_agent'][1]}/{s['grounding_agent'][2]}) | {s['grounding_naked'][0]} ({s['grounding_naked'][1]}/{s['grounding_naked'][2]}) |\n",
         ]
-    if "B" in summary:
-        s = summary["B"]
+    if "B_small" in summary:
+        s = summary["B_small"]
         L += [
-            f"## Type B — Memory-informed, small scale (n={s['n']}; fair-baseline sanity check)\n",
+            f"## B_small — Memory-informed, small scale (n={s['n']}; fair-baseline sanity check)\n",
             "| Metric | Agent | Naked |", "|---|---|---|",
             f"| Correction accuracy (correct fix) | {s['correct_agent']} | {s['correct_naked']} |",
             f"| References error history | {s['references_history_agent']} | {s['references_history_naked']} |",
             f"| Cites a specific count | {s['cites_number_agent']} | {s['cites_number_naked']} |\n",
         ]
-    if "C" in summary:
-        s = summary["C"]
+    if "C_scale" in summary:
+        s = summary["C_scale"]
         L += [
-            "## Type C — At-scale aggregation (the decisive metric)\n",
+            "## C_scale — At-scale aggregation (the decisive metric)\n",
             "| Metric | Agent | Naked |", "|---|---|---|",
             f"| Aggregation accuracy | {s['aggregation_agent']} | {s['aggregation_naked']} |\n",
-            "### Per-question (Type C)\n",
+            "### Per-question (C_scale)\n",
             "| Case | Question | Agent | Naked |", "|---|---|---|---|",
         ]
-        for r in [r for r in rows if r["type"] == "C"]:
+        for r in [r for r in rows if r["type"] == "C_scale"]:
             L.append(f"| {r['id']} | {r['ask']} | {'✅' if r['agent']['aggregation_correct'] else '❌'} | {'✅' if r['naked']['aggregation_correct'] else '❌'} |")
         L.append("")
     return "\n".join(L)
@@ -335,24 +337,24 @@ def render_markdown(summary: dict, rows: list[dict], stamp: str) -> str:
 async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None, help="cap cases per type (cheap smoke run)")
-    ap.add_argument("--types", default="ABC", help="which types to run, e.g. 'C'")
+    ap.add_argument("--types", default="ABC", help="which types to run by first letter, e.g. 'C' (A=stateless, B=small, C=scale)")
     args = ap.parse_args()
 
     print(f"Loading reference data into eval ChromaDB ({memory.embedding_name()} embeddings)...")
     memory.load_reference_data()
     global _HSK_MAP
-    _HSK_MAP = {v["word"]: v["hsk_level"] for v in json.loads((ROOT / "data" / "hsk_vocab.json").read_text())}
+    _HSK_MAP = {v["word"]: v["hsk_level"] for v in json.loads((_env.APP_DATA / "hsk_vocab.json").read_text())}
 
     data = json.loads(DATASET.read_text())
     lim = args.limit
 
     tasks = []
     if "A" in args.types:
-        tasks += [run_type_a(c) for c in data["type_a"][:lim]]
+        tasks += [run_type_a(c) for c in data["A_stateless"][:lim]]
     if "B" in args.types:
-        tasks += [run_type_b(c) for c in data["type_b"][:lim]]
+        tasks += [run_type_b(c) for c in data["B_small"][:lim]]
     if "C" in args.types:
-        c_cases = data["type_c"][:lim]
+        c_cases = data["C_scale"][:lim]
         if c_cases:
             shared = "eval_c_shared"
             seed_user(shared, c_cases[0]["seed"])  # identical corpus across C cases

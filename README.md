@@ -640,36 +640,163 @@ The evaluation dataset must test the capability that actually differentiates thi
 
 **Three test case types:**
 
-**Type A — Stateless correction (40 pairs)**  
+**A_stateless — Stateless correction (40 pairs)**  
 A Mandarin sentence with a known error is submitted with no prior error history. The agent should identify the error, retrieve the relevant grammar rule, and return a correct explanation. These test retrieval quality and LLM reasoning. *Expected result: near-parity with the naked LLM on correction accuracy — this is the honest concession — but the agent wins on factual grounding (see below).*
 
-**Type B — Memory-informed correction at small scale (10 sequences, N≈5 seeded errors)**  
+**B_small — Memory-informed correction at small scale (10 sequences, N≈5 seeded errors)**  
 Each sequence pre-seeds the user's `personal_errors` collection with 3–5 historical error records of the same category, then submits a new sentence with the same error type. The expected output must explicitly reference the user's history (e.g., "this is your fourth 把 error") and/or personalise the drill. *Expected result: the naked LLM with records in context also passes here — five items is trivial to count. This is deliberately included to prove the harness is fair, not rigged.*
 
-**Type C — Memory-informed correction at scale (10 sequences, N≈50–100 seeded errors)**  
-Identical structure to Type B, but the corpus is seeded with 50–100 mixed-category error records before the query, which asks for a count or trend ("how many 把 errors, and is it getting worse?"). *Expected result: this is where the thesis is proven or falsified. Deterministic aggregation over ChromaDB returns exact counts and trends; the naked LLM — even with all records in context — miscounts, mis-orders the trend, or overflows its budget. If the naked LLM passes Type C too, the differentiation is thinner than claimed and the prose is toned down accordingly.*
+**C_scale — Memory-informed correction at scale (10 sequences, N≈50–100 seeded errors)**  
+Identical structure to B_small, but the corpus is seeded with 50–100 mixed-category error records before the query, which asks for a count or trend ("how many 把 errors, and is it getting worse?"). *Expected result: this is where the thesis is proven or falsified. Deterministic aggregation over ChromaDB returns exact counts and trends; the naked LLM — even with all records in context — miscounts, mis-orders the trend, or overflows its budget. If the naked LLM passes C_scale too, the differentiation is thinner than claimed and the prose is toned down accordingly.*
 
 | Test type | # Cases | What it tests | Naked-LLM expectation |
 |---|---|---|---|
-| Type A — Stateless correction | 40 | Rule retrieval, correction accuracy, factual grounding | Parity on correction; loses on grounding |
-| Type B — Memory-informed, small scale | 10 | Personalisation with N≈5 history | Parity (fair-baseline sanity check) |
-| Type C — Memory-informed, at scale | 10 | Aggregation/trending over N≈50–100 | Fails — the core differentiator |
+| A_stateless — Stateless correction | 40 | Rule retrieval, correction accuracy, factual grounding | Parity on correction; loses on grounding |
+| B_small — Memory-informed, small scale | 10 | Personalisation with N≈5 history | Parity (fair-baseline sanity check) |
+| C_scale — Memory-informed, at scale | 10 | Aggregation/trending over N≈50–100 | Fails — the core differentiator |
 | **Total** | **60** | | |
 
 **Metrics:**
 
 | Metric | Tool | Applies to | Why |
 |---|---|---|---|
-| Context Precision | RAGAS | Type A | Was the retrieved grammar rule relevant? |
-| Context Recall | RAGAS | Type A | Was the right rule retrieved at all? |
+| Context Precision | RAGAS | A_stateless | Was the retrieved grammar rule relevant? |
+| Context Recall | RAGAS | A_stateless | Was the right rule retrieved at all? |
 | Correction Accuracy | LLM-as-Judge | A, B, C | Is the correction linguistically correct? (expected parity) |
 | **Factual-Grounding Accuracy** | Exact match vs CC-CEDICT / HSK ground truth | A, B, C | Are pinyin, tone marks, and HSK level correct? (agent should win) |
 | Personalisation Score | LLM-as-Judge | B, C | Does the response explicitly use the error history? |
 | **Aggregation Accuracy** | Exact match vs known seeded counts | C only | Is the reported count/trend numerically correct? (the decisive metric) |
 
-Every metric is reported for **both** the agent and the naked-LLM control arm, side by side. The differentiation argument is whatever that table shows — and the strength of the prose in Task 2 will be set by the actual Type C result, not chosen in advance.
+Every metric is reported for **both** the agent and the naked-LLM control arm, side by side. The differentiation argument is whatever that table shows — and the strength of the prose in Task 2 will be set by the actual C_scale result, not chosen in advance.
 
-*Implementation to be completed in Task 4 build phase.*
+---
+
+### Results — what was actually built, and what it showed
+
+The plan above was executed, but with one deliberate change of direction that you requested during the build: the single six-metric table was rebuilt on the **standard RAGAS suite** rather than fully bespoke scorers. That rebuild grew the harness from one blended table into **four separate evaluation surfaces**. The reason for keeping them separate is important: each surface exercises a *different subsystem* of the application (retrieval, tool-use, generation, and the hidden corpus-writer), and a single blended score would hide *which* subsystem a good or bad number actually belongs to. When a number moves, we need to know whether retrieval, the agent loop, the generator, or the extractor moved it — so they are measured independently.
+
+Every surface writes two artifacts: a human-readable `.md` summary and a `.json` file shaped as `{summary, rows}`, where `rows` contains **one entry per case with the model's verbatim answer stored alongside every score**. Nothing is a black box — every headline number below is a plain function of the raw rows and can be re-derived in a single command. The index and copy-paste verification recipes live in [`evals/results/README.md`](evals/results/README.md).
+
+| Surface | Subsystem it isolates | Files | Cases |
+|---|---|---|---|
+| Head-to-head | The whole agent vs the naked-LLM control arm | `results/head_to_head.{md,json}` | 60 |
+| RAGAS RAG | The retriever → grounding chain | `results/ragas_rag.{md,json}` | 40 |
+| RAGAS agentic | Tool-use over the full LangGraph trace | `results/ragas_agentic.{md,json}` | 60 |
+| Structured extraction | The hidden post-turn corpus-writer | `results/extraction.{md,json}` | 34 + 17 |
+
+Two provider realities shaped every run and should be stated up front, because they explain several choices below. First, **DeepSeek (the intended default generation model) intermittently hangs for 30+ minutes on OpenRouter**, so all *reproducible* eval generation is run on **GLM** instead; the keep-or-drop decision on DeepSeek is deferred to Task 6, where latency and timeout-rate are measured directly. Second, **constrained-integer "1–5" score fields come back garbled to their minimum on these OpenRouter models**, so every metric is a boolean or an exact extract-then-check rather than a 1–5 judge rating — a judge that reliably answers "yes/no" is worth more than one that unreliably answers "3 or 4".
+
+#### Surface 1 — Head-to-head: does the agent actually beat a naked LLM?
+
+This is the surface that tests the central claim of the project. Every case runs through the full agent and through a naked-LLM control arm given every fair advantage (the same model, a best-effort prompt, and for memory cases the user's raw error records handed straight into its context).
+
+| Metric | Agent | Naked LLM | What it means |
+|---|---|---|---|
+| A_stateless — correct fix | **36/37** | 32/39 | On the sentences each arm's judge could score, the agent corrected 97% vs the naked LLM's 82% |
+| A_stateless — materially misleading claim | **0** | 1 | The agent made no actively wrong grammar claims; the naked LLM made one |
+| A_stateless — retrieval recall@3 / MRR | **1.0 / 1.0** | n/a | Every case with a ground-truth rule retrieved the right rule in the top 3 |
+| A_stateless — factual grounding (pinyin/HSK correct) | 12/16 (0.75) | 24/30 (0.80) | Near-parity; the agent volunteered *fewer* grounding claims |
+| B_small — correct fix (small-scale memory) | 9/10 | 10/10 | Parity, as designed — five history items are trivial to handle |
+| B_small — references the user's history | **7/10** | 4/10 | The agent personalises more often |
+| B_small — cites a specific count | 0/10 | 0/10 | Neither cites exact numbers at small scale |
+| **C_scale — aggregation at scale (the differentiator)** | **10/10** | 7/10 | The agent counts and trends exactly; the naked LLM miscounts |
+
+Reading the table with the reasons behind each row:
+
+- **The denominators in A_stateless differ (37 vs 39) on purpose, not by accident.** A handful of judge calls returned no parseable verdict for one arm's answer; rather than silently scoring an unjudged answer as "wrong" (which would penalise an arm for a *judge* failure), those cases are excluded from that arm's denominator. Three agent answers and one naked answer were dropped this way. This keeps the correction-accuracy rate honest at the cost of unequal denominators, which is the correct trade.
+
+- **The agent won on correction accuracy, which was more than the plan predicted.** The design honestly expected parity here, because stateless correction is something any capable LLM can do. The agent came out ahead (97% vs 82%) because it retrieves the actual grammar rule before answering, so its corrections are anchored in a source rather than generated from the model's memory — and, tellingly, it produced zero materially misleading claims while the naked arm produced one.
+
+- **Factual grounding did *not* become the agent's win, and the honest reason is worth stating.** The design predicted the agent would win on grounding because it can call `dictionary_lookup`. In practice the agent volunteered far fewer explicit pinyin/HSK claims (16 vs 30) and scored slightly lower on them (0.75 vs 0.80). The likely cause is behavioural: the agent leans on its retrieved rule and its structured correction and simply *asserts fewer* checkable pinyin/HSK facts, whereas the naked LLM volunteers more of them and happens to get about 80% right. The conclusion is therefore corrected by the data: grounding is near-parity, and it is **not** where the differentiation lives. That honesty matters more than defending the original prediction.
+
+- **C_scale is where the thesis holds.** The agent scored a perfect 10/10 on at-scale aggregation against the naked LLM's 7/10. The reason the agent is exact is structural rather than lucky: it computes counts and trends deterministically over ChromaDB, so it behaves as an oracle on this task, while the naked LLM — even with every record in context — has to *count in its head* and drifts. One caveat is reported rather than hidden: the naked arm's C_scale score is run-variable (a re-run has produced 6/6), because it depends on the model's counting noise on that run. The stable, defensible claim is the *structural* one: the agent is an exact aggregator by construction and the naked LLM is not, so the agent's 10/10 is repeatable in a way the naked arm's score never is.
+
+#### Surface 2 — RAGAS RAG metrics: is retrieval and grounding sound?
+
+This surface runs the six standard RAGAS RAG metrics over the retriever→grounding chain for the 40 A_stateless cases (LLM judge = gpt-4o-mini, generation = GLM).
+
+| RAGAS metric | Score | Interpretation |
+|---|---|---|
+| Context Recall | 0.90 | Did retrieval surface the information needed to answer? |
+| Context Relevance | 0.84 | How much of what was retrieved was on-point? |
+| Faithfulness | 0.84 | Are the answer's claims supported by the retrieved context? |
+| Response Groundedness | 0.98 | Is the response anchored in the retrieved context rather than free-floating? |
+| Noise Sensitivity | 0.23 | How often irrelevant retrieved chunks corrupt the answer (lower is better) |
+| Answer Accuracy | 0.83 | Overall answer correctness per the judge |
+| **Deterministic recall@3 / MRR** | **1.0 / 1.0** | Exact rule-id match against the retriever's output |
+
+The single most important thing this surface shows is the **gap between RAGAS's LLM-approximated Context Recall (0.90) and the deterministic recall@3 (1.0)**, and the reason for the gap is the whole methodological point. RAGAS's Context Recall is computed by an LLM judging whether retrieved text "covers" the reference, which is an approximation and undercounts when the wording differs. Our A_stateless cases, by contrast, carry a ground-truth `expected_rule_id`, so we can check retrieval by **exact id match** — which is not an approximation at all. Retrieval genuinely returned the correct rule in the top 3 on 100% of cases; the 0.90 is the judge being conservative, not the retriever missing. This is why the deterministic number is treated as the authority and the RAGAS number as a cross-check, not the other way round — and it is exactly the retriever-level signal Task 6 will vary when it sweeps embedding models.
+
+#### Surface 3 — RAGAS agentic metrics: is the tool-use correct?
+
+This surface runs the standard RAGAS agentic metrics over the full LangGraph tool-call trace for all 60 cases. The two multi-turn reasoning judges use **gpt-4o** (a deliberate deviation explained in "What went wrong" below).
+
+| Metric | A | B | C | Overall | Why it reads this way |
+|---|---|---|---|---|---|
+| Tool Call Accuracy (exact-set) | 0.55 | 0.10 | 1.00 | 0.55 | An *exact tool-set* match — it scores 0 if the agent calls any tool beyond the reference set |
+| **Required-tool recall (deterministic)** | 1.00 | 0.95 | 1.00 | **0.992** | Did the agent call the tools it genuinely needed? |
+| Extra-tool rate | 0.45 | 0.90 | 0.00 | — | How often it calls *additional* sanctioned tools (e.g. offering a drill) |
+| Agent Goal Accuracy (completion) | 0.80 | 0.80 | 0.80 | 0.80 | Did it complete the user's goal? |
+
+The headline here is that **the low Tool Call Accuracy is a measurement artifact, not an agent failure, and the deterministic required-tool recall of 0.992 is the number that actually matters.** RAGAS's `ToolCallAccuracy` is an exact-set comparison: if the reference says "call A and B" and the agent calls "A, B, and a drill generator", the agent scores **zero** for that case despite doing everything right and more. The agent is *designed* to proactively offer drills, so it frequently calls extra (sanctioned) tools, which tanks the exact-set metric — hence the very high extra-tool rate on Types A and B. The honest signal is therefore the deterministic **required-tool recall**, which asks only "did it call the tools it needed?" and comes out at 0.992. The single dip (B_small at 0.95) is one tones case where the agent reached for `dictionary_lookup` instead of `grammar_rule_fetcher` — a linguistically reasonable choice, not an error.
+
+Two further points, each with its reason:
+
+- **Agent Goal Accuracy measures completion, not correctness, so its 0.80 on C_scale is judge noise rather than a real gap.** On C_scale the agent's deterministic aggregation correctness is 1.00, but the goal-accuracy judge scored completion at 0.80. Because the deterministic correctness is provably perfect on those same cases, the 0.20 shortfall is the judge under-crediting complete answers, not the agent getting anything wrong. This is why `agg_parse` (the deterministic parser) remains the correctness authority on C_scale and the judge is read only as a completion signal.
+
+- **Topic adherence is weak, and this is reported as a genuine finding rather than smoothed over.** Only 2 of 4 off-domain probes were declined; the agent will fulfil a recipe or sports-fact request as long as it can add a Mandarin twist, and on one probe it even reached for web search. This is a real guardrail gap worth flagging for a future iteration. (RAGAS's own `TopicAdherenceScore` was too unstable to headline — it oscillated between 0.0 and 0.67 on a clearly on-topic question even on gpt-4o — so adherence is reported via a focused binary judge over the four probes, with the raw RAGAS number kept in the JSON for completeness.)
+
+#### Surface 4 — Structured extraction: is the hidden corpus-writer trustworthy?
+
+The application silently runs `extract_and_log_error` after every turn to mine the learner's mistake into a structured record and append it to their error corpus. No user ever sees its output, but a wrong record poisons the very B_small/C_scale memory the other surfaces depend on — so this surface is what *justifies trusting the other three*. It is scored on the effective logging predicate the production code actually uses (`has_chinese AND had_error AND original`), across 34 positive cases and 17 negatives.
+
+| Metric | Result | Why |
+|---|---|---|
+| had_error precision | **1.00** | Not a single clean sentence, question, or English message was ever logged as an error — a false positive is the dangerous case, because it silently corrupts the corpus |
+| had_error recall / F1 | 0.97 / 0.985 | The one recurring miss is a debatable single-clause sentence |
+| Category accuracy (specific golds) | 0.50 | Low — but almost entirely due to *empty* fields, not wrong ones (see below) |
+| Correction validity (logged) | 0.64 | Same story: the gap is empty corrections, not invalid ones |
+| Correction validity *when non-empty* | **0.95** | When the model does emit a correction, it is nearly always valid |
+
+The precision result is the reassuring one: the guardrail against corpus poisoning is perfect. The interesting result — and the one that took real investigation to get right — is **why** category accuracy and correction validity look low. The cause is **not** that GLM produces *wrong* categories or corrections; it is that GLM's structured output is **unreliable**, intermittently returning `had_error=True` with the `correction`, `category`, and `explanation` fields all left *empty* together (and occasionally emitting malformed JSON with `null` string fields). When it does fill those fields, they are almost always right (correction 0.95 valid; only two genuine category mismatches in the whole set).
+
+This conclusion was hardened by ruling out the alternatives rather than asserting it, because the first draft of the finding was wrong and the correction matters:
+
+- **It is not a capability limit.** The correct fix is literally present in the coach reply the extractor reads, and for the very same inputs the model returns a complete, correct record on a later call — so it *can* produce the fields; it just doesn't do so reliably.
+- **It is not the structured-output method.** The drop reproduces on both the `json_mode` and `function_calling` extraction paths.
+- **It is not sampling temperature.** It persists at temperature 0 — GLM returned different outputs for the *same input* at temp 0 — which means this is provider-side non-determinism, not a temperature the app can tune away.
+
+The actionable conclusion, therefore, is that the fix is a **retry-on-incomplete / field-validation guard around the extraction call** — not a model swap and not merely lowering temperature. This is a concrete input to the Task 6 model decision. (One data-quality note handled here rather than hidden: six reference-corpus inputs carried English editorial parentheticals such as "（meaning: I have tried…）". These were *excluded* rather than stripped, because the "error" in them only exists relative to an intended meaning a learner would never actually type — stripping the annotation would relabel a perfectly grammatical sentence as a mistake and unfairly penalise the extractor.)
+
+### What went wrong along the way, and how each was handled
+
+The value of an eval harness is partly in the traps it survives, so these are recorded rather than hidden. Each was found empirically during the build and each conclusion carries its reason.
+
+- **1–5 judge scores were unusable, so all metrics became boolean or extractive.** Constrained-integer score fields came back pinned to their minimum on the OpenRouter models, whereas boolean and named-scalar fields are reliable. A judge that answers "yes/no" dependably is more informative than one that answers "3" unreliably, so every metric is a boolean or an exact extract-then-check.
+- **DeepSeek hangs, so GLM is used for reproducible generation.** DeepSeek intermittently stalls for 30+ minutes on OpenRouter, which makes repeatable runs impossible; GLM generates reliably. The keep-or-drop decision is deferred to Task 6 where latency and timeout-rate are measured head-to-head rather than guessed.
+- **`AgentGoalAccuracyWithReference` is unusable, so the `WithoutReference` variant is used.** Its compare-outcome prompt rated semantically identical outcomes ("total is 60" vs "the total number of logged errors is 60") as *different*, scoring ~0 everywhere on both gpt-4o-mini and gpt-4o — so it is a prompt defect, not a judge-strength issue. The `WithoutReference` variant is reliable, but it measures **completion, not correctness**, which is why the deterministic parser remains the correctness authority on C_scale.
+- **The agentic reasoning judges use gpt-4o, a deliberate deviation from the gpt-4o-mini used elsewhere.** gpt-4o-mini's goal verdict coin-flipped on complete multi-part answers (verified as [1,1,0,0,1] on a real trace); gpt-4o was stable. The deviation is scoped to the two multi-turn reasoning judges only and is overridable via `RAGAS_AGENTIC_EVALUATOR`.
+- **An early deterministic deflection check was wrong and was replaced after reading the actual answers.** A first attempt inferred "off-topic deflection" from the presence of Chinese plus a redirect, but the coach *fulfils* off-domain requests while sprinkling Mandarin on top, so that heuristic read every answer as a redirect and falsely reported 3/4 deflected. Reading the real answers showed the true number is ~2/4, which is the corrected (and less flattering) finding now reported.
+- **The extraction finding itself was initially over-stated and then corrected.** The first draft asserted a GLM capability limit and recommended dropping DeepSeek; investigating the cause (dumping the omitted `explanation` field, retrying the same inputs, testing `function_calling`, testing temperature 0) showed it is run-variable provider non-determinism, so the recommendation became a retry/validation guard instead. This is the harness catching its own premature conclusion, which is the behaviour you want from an eval process.
+
+### Why these results can be trusted
+
+The single design principle running through every surface is that **each LLM-judged metric is paired with a deterministic cross-check that can be recomputed independently, and where the two disagree the deterministic number is the authority.** This is what turns "an LLM said it's good" into a defensible measurement.
+
+- RAGAS Context Recall (0.90, LLM-approximated) is anchored by exact rule-id recall@3 (1.0, deterministic).
+- RAGAS Tool Call Accuracy (0.55, exact-set) is anchored by required-tool recall (0.992, deterministic).
+- Agent Goal Accuracy on C_scale (0.80, judge completion) is anchored by `agg_parse` aggregation correctness (1.00, deterministic).
+- Correction validity in the extraction surface (LLM judge) is anchored by exact-match against the gold correction first, with the judge used only on the residue.
+
+On top of that, the whole comparison is a head-to-head against a fair — not strawman — baseline, every raw answer is stored for inspection, and each headline number is a plain function of the stored rows with a copy-paste recipe to reproduce it in [`evals/results/README.md`](evals/results/README.md). Where an LLM judge proved unfit, it was demoted in favour of the deterministic signal and the demotion was documented, because showing that a metric was assessed and found unfit is itself part of an honest methodology.
+
+### What this sets up for Task 6
+
+The evaluation did its job of surfacing the decisions Task 6 now has to make with evidence rather than intuition:
+
+- **Retrieval is already perfect on exact rule-id recall (1.0)**, so the Task 6 embedding sweep must be judged on the harder cases and on latency, not on whether it can find an obvious rule — the baseline is already at the ceiling on the easy metric.
+- **The keep-or-drop DeepSeek decision now has real inputs**: DeepSeek's hangs (a reliability cost) on one side, and GLM's structured-output non-determinism in the extraction surface (a correctness cost that a guard can mitigate) on the other. Task 6's bake-off adds the missing latency and timeout-rate columns to settle it.
+- **The extraction surface produced a concrete, cheap product fix** — a retry-on-incomplete guard around `extract_and_log_error` — that should land before the bake-off so the model comparison is measured on a corpus-writer that fails safe.
 
 ---
 

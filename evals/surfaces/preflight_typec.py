@@ -1,4 +1,4 @@
-"""Type C thesis preflight — the ONE check that decides the whole head-to-head.
+"""C_scale thesis preflight — the ONE check that decides the whole head-to-head.
 
 Seeds ~60 mixed-category error records for an isolated eval user, then asks a hard
 aggregation question two ways:
@@ -9,19 +9,23 @@ aggregation question two ways:
   2. Through a naked-LLM control arm given ALL 60 records in context plus a strong
      counting prompt (the fair baseline).
 
-Prints ground truth vs both answers so we can see, on day one, whether Type C
-discriminates. Run:  uv run python evals/preflight_typec.py
+Prints ground truth vs both answers so we can see, on day one, whether C_scale
+discriminates. Run:  uv run python evals/surfaces/preflight_typec.py
 """
-import _env  # noqa: F401  — MUST be first: loads .env, isolates ChromaDB, adds app/ to path
+import pathlib
+import sys
 
-import asyncio
-from datetime import datetime, timedelta, timezone
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))  # evals/ on path
+from lib import _env  # noqa: E402,F401  — bootstrap: .env, app path, chroma, ragas shim
 
-import memory
-from agent import answer_text, build_agent
-from config import DEFAULT_MODEL, get_llm
-from langchain_core.messages import HumanMessage, SystemMessage
-from seed_data import TYPEC_EXPECTED, build_typec_corpus
+import asyncio  # noqa: E402
+from datetime import datetime, timedelta, timezone  # noqa: E402
+
+import memory  # noqa: E402
+from agent import answer_text, build_agent  # noqa: E402
+from config import DEFAULT_MODEL, get_llm  # noqa: E402
+from datagen.seed_data import TYPEC_EXPECTED, build_typec_corpus  # noqa: E402
+from langchain_core.messages import HumanMessage, SystemMessage  # noqa: E402
 
 USER = "eval_typec_preflight"
 

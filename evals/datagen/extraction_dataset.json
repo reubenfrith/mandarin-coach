@@ -1,0 +1,528 @@
+{
+  "meta": {
+    "description": "Ground truth for the structured-extraction surface (extract_and_log_error): had_error detection, category, correction validity.",
+    "counts": {
+      "positives": 34,
+      "positives_specific_category": 16,
+      "negatives": 17,
+      "negatives_correct_sentence": 10,
+      "negatives_question": 4,
+      "negatives_non_chinese": 3
+    },
+    "agent_model_for_negative_replies": "glm"
+  },
+  "positives": [
+    {
+      "id": "A01",
+      "kind": "positive",
+      "input": "我把书看。",
+      "coach_reply": "**❌ 我把书看。** → **✅ 我把书看完了。** (or another complement)\n\n---\n\n### What's wrong?\n\nYou've used the **把 (bǎ) construction**, which is great — but it has a strict rule:\n\n> **Subject + 把 + Object + Verb + [something extra]**\n\nThe verb in a 把 sentence **cannot be bare**. It needs a complement, a result, or 了 to show what happened *to* the object. Just saying 看 feels unfinished — it's like saying \"I took the book and... looked at it... and then what?\"\n\n### Fixes (choose one)\n\n| What you mean | Correct sentence |\n|---|---|\n| I finished reading the book. | 我把书**看完了**。 |\n| I read the book (and it's done). | 我把书**看了**。 |\n| I read the book twice. | 我把书**看了两遍**。 |\n| I read the book (and understood it). | 我把书**看懂了**。 |\n\n### Root cause\n\nEnglish doesn't have the 把 construction, so you naturally translated \"I read the book\" → 我把书看. But 把 is about **disposal/effect** — you need to say *what happened* to the book (finished it, understood it, read it twice, etc.).\n\n---\n\n### Quick drill\n\nFill in the blank with a suitable complement:\n\n1. 我把作业做______了。 (finished)\n2. 他把门打______了。 (opened)\n3. 我把手机______了。 (lost)\n\n*(Answers: 做完, 开, 丢)*\n\nWant me to generate more drills on the 把 construction? 😊",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "我把书看完了。",
+      "gold_correction_alternatives": "我把书看完了。"
+    },
+    {
+      "id": "A02",
+      "kind": "positive",
+      "input": "她把书被他借走了。",
+      "coach_reply": "你的句子 **她把书被他借走了** 混合了 **把** 和 **被** 两种结构，这在中文里是不正确的。一个句子只能选择其中一种结构。\n\n---\n\n### ❌ 错误\n**她把书被他借走了。**\n\n### ✅ 正确说法（两种选择）\n\n**选项一（被字句 – 强调书被借走）：**\n> **书被他借走了。**\n> *（书是受事者，他是动作的执行者。）*\n\n**选项二（把字句 – 强调他借走了书）：**\n> **他把书借走了。**\n> *（他是主语，书是宾语，强调他对书做了什么。）*\n\n如果你想表达“她”是受影响的一方（她的书被他借走了），可以说：\n> **她的书被他借走了。**\n\n---\n\n### 🧠 根本原因\n\n**把** 和 **被** 不能出现在同一个简单句里，因为它们的功能是相反的：\n- **把** → 主语是动作的执行者（主动处置）\n- **被** → 主语是动作的承受者（被动）\n\n把两者放在一起就像英文说 *\"She by him the book borrowed\"* 一样矛盾。\n\n---\n\n### 🎯 小练习\n\n把下面的句子改成正确的 **把字句** 或 **被字句**：\n\n1. 我 / 吃 / 苹果 → （把字句）\n2. 蛋糕 / 他 / 吃 → （被字句）\n3. 她 / 拿 / 我的笔 → （把字句）\n\n试试看！😊",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "书被他借走了。",
+      "gold_correction_alternatives": "书被他借走了。"
+    },
+    {
+      "id": "A03",
+      "kind": "positive",
+      "input": "以前我每天喝了咖啡。",
+      "coach_reply": "你的句子：~~以前我每天喝了咖啡。~~\n\n**❌ 错误：** 了 (le) 用错了地方。\n\n**✅ 正确：** 以前我每天喝咖啡。\n\n---\n\n### 为什么？\n\n了 (le) 表示 **一个具体动作的完成**（\"I finished drinking that coffee\"），而你的句子说的是 **过去的习惯**（\"I used to drink coffee every day\"）。习惯性的、反复发生的动作，即使发生在过去，**也不加** 了。\n\n| 错误 ❌ | 正确 ✅ | 意思 |\n|---|---|---|\n| 以前我每天**喝了**咖啡。 | 以前我每天**喝**咖啡。 | I used to drink coffee every day. |\n| 去年我常常**去了**公园。 | 去年我常常**去**公园。 | Last year I often went to the park. |\n\n**简单规则：** 以前 / 每天 / 常常 + 动词 → **不加** 了。\n\n---\n\n### 小练习\n\n把下面的句子改成正确的：\n\n1. 以前我每天抽了烟。\n2. 小时候我常常看了动画片。\n3. 去年我每个周末打了篮球。\n\n试试看！😊",
+      "gold_had_error": true,
+      "gold_category": "particle",
+      "specific_gold": true,
+      "gold_correction": "以前我每天喝咖啡。",
+      "gold_correction_alternatives": "以前我每天喝咖啡。"
+    },
+    {
+      "id": "A07",
+      "kind": "positive",
+      "input": "我有三书。",
+      "coach_reply": "你写的是：**我有三书。**\n\n### 问题\n\n中文里，数字不能直接放在名词前面——**必须用量词 (measure word)**。\n\n- ❌ 我有**三书**。\n- ✅ 我有**三本书**。\n\n**本** 是书的专用量词（一本书、两本书、三本书……）。\n\n### 根因\n\n英语说 *three books*，不需要量词，所以学习者很容易直接把“三”放在“书”前面。但中文的结构是：\n\n> **数字 + 量词 + 名词**\n> 三 + 本 + 书\n\n### 小练习\n\n把下面的短语补上正确的量词：\n\n1. 一 ___ 书  \n2. 两 ___ 猫 (cat)  \n3. 五 ___ 苹果 (apple)  \n4. 这 ___ 人 (this person)\n\n*(提示：书用 **本**，猫和人都用 **个**，苹果用 **个**)*\n\n试试看，然后告诉我你的答案！😊",
+      "gold_had_error": true,
+      "gold_category": "measure_word",
+      "specific_gold": true,
+      "gold_correction": "我有三本书。",
+      "gold_correction_alternatives": "我有三本书。"
+    },
+    {
+      "id": "A08",
+      "kind": "positive",
+      "input": "我在知道答案。",
+      "coach_reply": "你写的句子是：\n\n❌ **我在知道答案。**\n\n这个句子有一个很常见的错误。\n\n---\n\n### 问题出在哪里？\n\n**在** (zài) 表示动作正在进行（相当于英语的 *-ing*），但 **知道** (zhīdào) 是一个**状态动词**（stative verb），不是动作。你不能说 \"I am knowing the answer\" —— 中文也一样，不能说\"在知道\"。\n\n✅ **我知道答案。** — 简单直接，就对了。\n\n---\n\n### 对比一下：\n\n| 正确用法 | 说明 |\n|-----------|------|\n| 我在**看**书。 | 看是动作 → 可以用在 |\n| 我在**吃**饭。 | 吃是动作 → 可以用在 |\n| 我在**知道**答案。❌ | 知道是状态 → 不可以用在 |\n| 我**知道**答案。✅ | 去掉在，就对了 |\n\n---\n\n### 小练习（drill）\n\n试试看下面这些句子，哪些需要去掉\"在\"？\n\n1. 我在___等他。（等 / 知道）\n2. 我在___这件事。（做 / 知道）\n3. 我在___中文。（学 / 知道）\n\n答案：1. 等（动作）→ 我在等他。2. 知道（状态）→ 我知道这件事。3. 学（动作）→ 我在学中文。\n\n---\n\n**总结：** 知道、喜欢、爱、想（think）、认识 —— 这些状态动词前面**不能加\"在\"**。记住这个规律，以后就不会错啦！😊\n\n有什么问题继续问我！",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "我知道答案。",
+      "gold_correction_alternatives": "我知道答案。"
+    },
+    {
+      "id": "A09",
+      "kind": "positive",
+      "input": "他写汉字得很漂亮。",
+      "coach_reply": "你的句子几乎对了，但有一个关键的语法问题。😊\n\n**错误：** 他写汉字**得**很漂亮。\n\n**问题：** 动词带宾语时，不能直接 `动词 + 宾语 + 得 + 补语`。你需要**重复动词**，或者把宾语提前。\n\n**正确说法：**\n- ✅ **他写汉字写得很漂亮。**（重复动词）\n- ✅ **他汉字写得很漂亮。**（宾语提前）\n\n**为什么？**\n这是 **\"得\" 的程度补语** 规则：\n- 动词没有宾语 → `动词 + 得 + 补语` ✅（他跑得很快。）\n- 动词有宾语 → `动词 + 宾语 + 动词 + 得 + 补语` ✅（他说汉语说得很好。）\n- ❌ 不能直接 `动词 + 宾语 + 得 + 补语`（他写汉字得很漂亮 ✘）\n\n---\n\n**小练习：** 把下面句子改成正确的形式：\n\n1. 他做饭很好吃。 → 他做饭______很好吃。\n2. 她唱歌很好听。 → 她唱歌______很好听。\n\n（答案：1. 他做饭**做得**很好吃。2. 她唱歌**唱得**很好听。）\n\n继续加油！💪 你离地道中文又近了一步。",
+      "gold_had_error": true,
+      "gold_category": "particle",
+      "specific_gold": true,
+      "gold_correction": "他写汉字写得很漂亮。",
+      "gold_correction_alternatives": "他写汉字写得很漂亮。"
+    },
+    {
+      "id": "A10",
+      "kind": "positive",
+      "input": "他高兴的笑了。",
+      "coach_reply": "**Corrected sentence:**  \n他**高兴地**笑了。  \n(Tā gāoxìng de xiào le.)\n\n**What's wrong:**  \n的 (de) is used to link a modifier to a **noun** (e.g. 高兴的笑声 \"a happy laugh\").  \n地 (de) is used to link an adverbial to a **verb** (e.g. 高兴地笑 \"to laugh happily\").  \n\nSince 笑 (laugh/smile) is a **verb**, you need **地**, not 的. This is a very common mix-up for English speakers because all three *de*'s (的, 地, 得) sound identical.\n\n**Quick drill:** Fill in the blank with 的, 地, or 得.\n\n1. 她开心____跳了起来。 (She jumped up happily.)  \n2. 这是我最喜欢____书。 (This is my favourite book.)  \n3. 他跑____很快。 (He runs very fast.)\n\nLet me know if you'd like the answers or more practice! 😊",
+      "gold_had_error": true,
+      "gold_category": "particle",
+      "specific_gold": true,
+      "gold_correction": "他高兴地笑了。",
+      "gold_correction_alternatives": "他高兴地笑了。"
+    },
+    {
+      "id": "A11",
+      "kind": "positive",
+      "input": "今天比昨天很热。",
+      "coach_reply": "**❌ 今天比昨天很热。**\n**✅ 今天比昨天热。**\n\n---\n\n### Why it's wrong\n\nIn a **比 (bǐ)** comparison, you **cannot** use 很 (very) before the adjective. The structure is:\n\n> **A + 比 + B + Adjective** (no 很/非常)\n\nThis is a very common mistake for English speakers because we'd say \"today is **much** hotter than yesterday\" — so it feels natural to add 很. But in Chinese, the 比 structure already carries the comparative meaning, so the adjective stands alone.\n\nIf you want to emphasise the degree, use **更** (even more) or **多了** (much more):\n\n- 今天比昨天**更**热。 *(Today is even hotter than yesterday.)*\n- 今天比昨天热**多了**。 *(Today is much hotter than yesterday.)*\n\n---\n\n### Quick drill\n\nFill in the blanks with the correct form (no 很!):\n\n1. 他 ______ 我高。 (bǐ)\n2. 这个手机 ______ 那个贵。 (bǐ)\n3. 她比我 ______ 漂亮。 (gèng)\n\nWant me to check your answers? 😊",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "今天比昨天热。",
+      "gold_correction_alternatives": "今天比昨天热。"
+    },
+    {
+      "id": "A12",
+      "kind": "positive",
+      "input": "我去中国明年。",
+      "coach_reply": "**❌ 我去中国明年。**\n**✅ 我明年去中国。**\n\n---\n\n### Why is it wrong?\n\nIn Chinese, **time expressions** (like 明年 \"next year\") go **before the verb** — not at the end of the sentence like in English.\n\n| English word order | ❌ Chinese (copying English) | ✅ Correct Chinese |\n|---|---|---|\n| I go to China **next year**. | 我去中国**明年**。 | 我**明年**去中国。 |\n\nThe general rule is:\n\n> **Subject + Time + Place + Verb + Object**\n\nSo: **我 + 明年 + 去 + 中国**\n\n---\n\n### Quick drill\n\nTranslate these into correct Chinese:\n\n1. I eat breakfast at 7 o'clock.  \n2. She goes to work tomorrow.  \n3. We study Chinese this afternoon.\n\nGive it a try! 😊",
+      "gold_had_error": true,
+      "gold_category": "word_order",
+      "specific_gold": true,
+      "gold_correction": "我明年去中国。",
+      "gold_correction_alternatives": "我明年去中国。"
+    },
+    {
+      "id": "A13",
+      "kind": "positive",
+      "input": "我三个小时看书了。",
+      "coach_reply": "Great question! Your sentence **我三个小时看书了** has a very common word-order issue.\n\n---\n\n### ❌ Your sentence\n我三个小时看书了。\n\n### ✅ Corrected versions\n**我看书看了三个小时。**  \n(I read for three hours — neutral statement)\n\n**我看了三个小时的书。**  \n(I read for three hours — more natural in speech)\n\n**我看书看了三个小时了。**  \n(I've been reading for three hours **and am still reading** — ongoing)\n\n---\n\n### 🔍 Root Cause\n\nIn English, you say *\"I read for three hours\"* — the duration comes **before** the verb. But in Chinese, **duration (how long) goes AFTER the verb**, not before it.\n\n| English pattern | ❌ Wrong Chinese | ✅ Right Chinese |\n|---|---|---|\n| I **for three hours** read | 我**三个小时**看书 | 我看书**看了三个小时** |\n\nThink of it this way:\n- **Time-when** (e.g. \"tomorrow\", \"at 3pm\") → **before** the verb ✅  \n  *我明天看书。*\n- **Duration** (e.g. \"for three hours\") → **after** the verb ✅  \n  *我看书看了三个小时。*\n\n---\n\n### 🎯 Quick Drill\n\nFill in the blanks with the correct word order:\n\n1. 他游泳 ______ (for two hours).  \n2. 我 ______ 睡觉 (at 10pm).  \n3. 她学中文 ______ (for one year).  \n4. 我们 ______ 去公园 (tomorrow).  \n5. 你打电话 ______ (for 30 minutes).\n\n*(Answers: 1. 游了两个小时 / 游泳游了两个小时 2. 十点 3. 学了一年 / 学中文学了一年 4. 明天 5. 打了三十分钟 / 打电话打了三十分钟)*\n\nWant me to drill you more on this pattern? 😊",
+      "gold_had_error": true,
+      "gold_category": "word_order",
+      "specific_gold": true,
+      "gold_correction": "我看书看了三个小时。",
+      "gold_correction_alternatives": "我看书看了三个小时。"
+    },
+    {
+      "id": "A14",
+      "kind": "positive",
+      "input": "我要二杯咖啡。",
+      "coach_reply": "你写的是：**我要二杯咖啡。**\n\n### ❌ 错误\n\n在中文里，表示数量“两个”的时候，**量词前面要用“两 (liǎng)”，不能用“二 (èr)”**。\n\n- **二** → 用于数字本身、序号、电话号码等（如：第二、十二、一二三）\n- **两** → 用于量词前面，表示数量（如：两个人、两本书、两杯咖啡）\n\n### ✅ 正确句子\n\n**我要两杯咖啡。**\n(Wǒ yào liǎng bēi kāfēi.)\n\n### 🧠 根因\n\n英语里 \"two\" 只有一个形式，但中文把 **\"二\"（数字/序号）** 和 **\"两\"（数量）** 分开了。这是英语母语者很常见的混淆点。\n\n---\n\n### 🎯 小练习\n\n把下面的“二”改成“两”，或者反过来：\n\n1. 我有 __ 个朋友。\n2. 现在是 __ 点。\n3. 这是第 __ 次。\n4. 我要 __ 瓶水。\n\n（答案：1. 两  2. 两  3. 二  4. 两）\n\n继续加油！💪 下次想写什么？",
+      "gold_had_error": true,
+      "gold_category": "word_order",
+      "specific_gold": true,
+      "gold_correction": "我要两杯咖啡。",
+      "gold_correction_alternatives": "我要两杯咖啡。"
+    },
+    {
+      "id": "A15",
+      "kind": "positive",
+      "input": "这个一点儿贵。",
+      "coach_reply": "你的句子 **“这个一点儿贵”** 不太对。问题出在 **一点儿** 和 **有点儿** 的用法上。\n\n---\n\n### ❌ 错误\n**这个一点儿贵。**\n\n### ✅ 正确\n**这个有点儿贵。**  \n(This is a little expensive.)\n\n---\n\n### 📘 为什么？\n\n| 词 | 位置 | 意思 |\n|---|---|---|\n| **有点儿** (yǒudiǎnr) | **放在形容词前面** | \"有点儿 + Adj\" = 有一点儿……（通常带点不满意的语气） |\n| **一点儿** (yìdiǎnr) | **放在形容词后面** | \"Adj + 一点儿\" = 更……一点（比较时用） |\n\n所以：\n- **这个有点儿贵。** ✅ → \"This is a bit expensive.\"（陈述事实，带点\"太贵了\"的感觉）\n- **这个贵一点儿。** ✅ → \"This one is a bit more expensive.\"（跟别的比较）\n\n你的句子 **“这个一点儿贵”** 把 **有点儿** 和 **一点儿** 的位置搞反了，这是英语母语者很常见的错误 😊\n\n---\n\n### 🎯 小练习\n\n把下面的句子改成正确的：\n\n1. 这个 **一点儿小**。 → ________  \n2. 那个 **有点儿便宜**。 → ________  \n3. 请说慢 **有点儿**。 → ________  \n\n（答案：1. 这个有点儿小。 2. 那个便宜一点儿。 3. 请说慢一点儿。）\n\n加油！💪 有什么问题尽管问！",
+      "gold_had_error": true,
+      "gold_category": "word_order",
+      "specific_gold": true,
+      "gold_correction": "这个有点儿贵。",
+      "gold_correction_alternatives": "这个有点儿贵。"
+    },
+    {
+      "id": "A16",
+      "kind": "positive",
+      "input": "我能说三种语言。",
+      "coach_reply": "你的句子很接近正确！不过有一个细微但重要的区别。\n\n**你的句子：** 我能说三种语言。\n**更自然的说法：** **我会说三种语言。**\n\n---\n\n### 为什么？\n\n| 词 | 核心意思 | 例子 |\n|---|---|---|\n| **会** | 学会的技能 (learned ability) | 我会说汉语。我会游泳。 |\n| **能** | 身体能力 / 客观可能性 (physical capability / possibility) | 我今天不能来。我能吃两碗饭。 |\n\n说语言是一种**学会的技能**，所以用 **会** 更自然。\n\n> 我能说三种语言 → 听起来像 \"I am physically capable of speaking three languages (right now, maybe with effort)\"\n> 我会说三种语言 → \"I know how to speak three languages\" ✅\n\n---\n\n### 小练习\n\n把下面的句子改成正确的：\n\n1. 我 **能** 开车。（开车 = drive a car → learned skill）\n2. 他 **能** 弹钢琴。（弹钢琴 = play piano → learned skill）\n\n*(答案：1. 我会开车。2. 他会弹钢琴。)*\n\n---\n\n**总结：** 你的句子语法完全没问题，很多人也这么说。但如果你用 **会**，听起来更地道！👍 你还会说什么语言？",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "我会说三种语言。",
+      "gold_correction_alternatives": "我会说三种语言。"
+    },
+    {
+      "id": "A17",
+      "kind": "positive",
+      "input": "他昨天很晚就睡觉。",
+      "coach_reply": "Great sentence — the meaning is clear, but there's one small word-choice issue that makes it sound unnatural to a native ear.\n\n---\n\n### ❌ Issue: 就 vs 才\n\nYou wrote:\n> 他昨天很晚**就**睡觉。\n\n**就** (jiù) means \"as early as\" — it implies something happened **earlier than expected**. But 很晚 (very late) is the opposite of early, so 就 clashes with the meaning.\n\nYou need **才** (cái), which means \"not until\" — it implies something happened **later than expected**.\n\n### ✅ Corrected sentence:\n\n> **他昨天很晚才睡觉。**\n> *(Tā zuótiān hěn wǎn cái shuìjiào.)*\n> \"He didn't go to sleep until very late yesterday.\"\n\nYou could also add 了 at the end for completion (他昨天很晚才睡觉了), but it's fine without it.\n\n---\n\n### 🧠 Root cause\n\n**就** = \"as early as\" (earlier than expected)  \n**才** = \"not until\" (later than expected)\n\nEnglish speakers often mix them up because English doesn't have this exact contrast. Think of it as a pair of opposites:\n\n| Word | Nuance | Example |\n|------|--------|---------|\n| 就 | **early** / sooner than expected | 他**七点就**来了 — He came **as early as** 7. |\n| 才 | **late** / later than expected | 他**十点才**来 — He didn't come **until** 10. |\n\n---\n\n### 🎯 Quick drill\n\nFill in the blank with **就** or **才**:\n\n1. 他早上六点______起床了。(He got up as early as 6am.)\n2. 我晚上十二点______睡觉。(I don't go to sleep until midnight.)\n3. 她三岁______会弹钢琴了。(She could play piano as early as age 3.)\n4. 他昨天很晚______回家。(He didn't come home until very late yesterday.)\n\nTry them out and I'll check your answers! 😊",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "他昨天很晚才睡觉。",
+      "gold_correction_alternatives": "他昨天很晚才睡觉。"
+    },
+    {
+      "id": "A18",
+      "kind": "positive",
+      "input": "我不听懂老师的话。",
+      "coach_reply": "**错误：** 不 + 听懂 ❌\n\n**正确：** 我没听懂老师的话。✅\n\n**原因：**  \n`听懂` 是一个 **结果补语** (resultative complement) — 听 (listen) + 懂 (understand) = \"to understand by listening\"。结果补语在否定时要用 **没**（表示\"没达到那个结果\"），不能用 **不**。\n\n- ❌ 我不听懂老师的话。  \n- ✅ 我没听懂老师的话。  \n\n**对比一下：**\n| 否定词 | 用法 | 例子 |\n|--------|------|------|\n| 不 | 否定习惯/意愿/一般事实 | 我不听老师的话。(I don't listen to the teacher.) |\n| 没 | 否定已完成动作的结果 | 我没听懂老师的话。(I didn't catch what the teacher said.) |\n\n---\n\n**小练习：** 把下面的句子改成正确的否定形式：\n\n1. 我不看完那本书。 → ________  \n2. 我不找到钥匙。 → ________  \n3. 我不记住这个词。 → ________  \n\n（答案：我没看完那本书。 / 我没找到钥匙。 / 我没记住这个词。）\n\nKeep it up! 😊 下次用 **没** + 结果补语就对了。",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "我没听懂老师的话。",
+      "gold_correction_alternatives": "我没听懂老师的话。"
+    },
+    {
+      "id": "A19",
+      "kind": "positive",
+      "input": "他跑来进教室。",
+      "coach_reply": "你的句子是：**他跑来进教室。**\n\n---\n\n### ❌ 问题出在哪里？\n\n你写的是 **「跑来 + 进教室」**，把两个方向成分拼在了一起。在汉语里，**趋向补语**（方向补语）有固定的结构：\n\n> **V + 进/出/上/下/回/过 + 地方 + 来/去**\n\n所以正确的说法是：\n\n> ✅ **他跑进教室来。**\n> (He ran into the classroom — towards the speaker.)\n\n或者，如果方向不强调「朝说话人」：\n\n> ✅ **他跑进教室。**\n> (He ran into the classroom.)\n\n你的版本 **「跑来进教室」** 相当于把 `跑来`（已经带了 `来`）和 `进` 硬拼在一起，这不符合汉语的复合趋向补语规则。\n\n---\n\n### 📘 规则速记\n\n| 错误 ❌ | 正确 ✅ |\n|---|---|\n| 跑来进教室 | 跑进教室来 |\n| 走上楼去 | 走上楼去 ✅（这个是对的） |\n| 飞过来中国 | 飞回中国来 / 飞到中国来 |\n\n**关键点**：地方宾语必须放在 **进/出/上/下/回/过** 和 **来/去** 之间。\n\n---\n\n### 🎯 小练习\n\n把下面错误的句子改成正确的：\n\n1. 他走回来宿舍。 → ?\n2. 她跳下去水。 → ?\n3. 我跑上来楼。 → ?\n\n试试看，我帮你检查！",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "他跑进教室来。",
+      "gold_correction_alternatives": "他跑进教室来。"
+    },
+    {
+      "id": "A21",
+      "kind": "positive",
+      "input": "虽然很累，我很开心。",
+      "coach_reply": "你的句子意思很清楚，但有一个**常见的语法小问题**。😊\n\n## 问题\n\n**虽然……但是……** 是固定搭配。中文里，`虽然`（although）后面通常需要 `但是` 或 `可是`（but）来呼应。英语只用 \"although\" 就够了，但中文习惯两个一起用。\n\n❌ **虽然很累，我很开心。**  \n✅ **虽然很累，但是我很开心。**\n\n## 为什么？\n\n| 英语 | 中文 |\n|------|------|\n| Although I'm tired, **I'm** happy. | 虽然很累，**但是**我很开心。 |\n\n英语只用一个连词（although），中文却需要一对（虽然……但是……）。这是英语母语者最常犯的错误之一！\n\n## 小练习\n\n把下面的句子补充完整：\n\n1. 虽然下雨了，______我还是想去公园。\n2. 虽然这道菜很辣，______他吃得津津有味。\n3. 虽然中文很难，______我觉得很有意思。\n\n*(答案：但是/可是)*\n\n继续加油！你的意思表达得很清楚，这个细节改过来就更地道了。💪",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "虽然很累，但是我很开心。",
+      "gold_correction_alternatives": "虽然很累，但是我很开心。"
+    },
+    {
+      "id": "A22",
+      "kind": "positive",
+      "input": "你想去北京或者上海？",
+      "coach_reply": "你的句子意思很清楚，但有一个小问题 👇\n\n**原句：** 你想去北京**或者**上海？\n**改正：** 你想去北京**还是**上海？\n\n**原因：**\n- **还是 (háishì)** = \"or\" 用在**问句**里提供选择（A 还是 B？）\n- **或者 (huòzhě)** = \"or\" 用在**陈述句**里（我喝茶或者咖啡都行）\n\n这是英语母语者很常见的混淆，因为英语里两种都用 \"or\"。但在中文里，问选择性问题必须用 **还是**。\n\n---\n\n**小练习：** 选词填空（还是 / 或者）\n\n1. 你想吃米饭 ______ 面条？\n2. 我可以坐地铁 ______ 打车去，都方便。\n3. 你明天 ______ 后天来？\n\n（答案在下面👇）\n\n.\n\n.\n\n.\n\n**答案：** 1. 还是  2. 或者  3. 还是\n\n继续加油！💪 有什么其他句子想让我看看吗？",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "你想去北京还是上海？",
+      "gold_correction_alternatives": "你想去北京还是上海？"
+    },
+    {
+      "id": "A24",
+      "kind": "positive",
+      "input": "我是学生，你吗？",
+      "coach_reply": "你的句子很好，只是有一个小问题！😊\n\n**错误：** 你吗？❌  \n**正确：** 你呢？✅\n\n**原因：**  \n- **吗 (ma)** 是 yes/no 疑问词，用来问\"是/不是\"的问题。  \n- **呢 (ne)** 用来问\"那……呢？\"（what about…?），在上下文已经清楚的时候，用来反问对方。\n\n所以：\n> 我是学生，**你吗？** ❌  \n> 我是学生，**你呢？** ✅  \n> *I'm a student, and you?*\n\n---\n\n**小练习：** 把下面句子里的\"你吗\"改成\"你呢\"：\n\n1. 我很好，你吗？ → 我很好，**你呢**？  \n2. 我喜欢喝茶，你吗？ → 我喜欢喝茶，**你呢**？  \n3. 我是美国人，你吗？ → 我是美国人，**你呢**？\n\n加油！你已经会问问题了，现在只要记住用 **\"你呢\"** 而不是 **\"你吗\"** 就好啦！🎉",
+      "gold_had_error": true,
+      "gold_category": "particle",
+      "specific_gold": true,
+      "gold_correction": "我是学生，你呢？",
+      "gold_correction_alternatives": "我是学生，你呢？"
+    },
+    {
+      "id": "A25",
+      "kind": "positive",
+      "input": "她把书被他借走了。",
+      "coach_reply": "你的句子是：\n\n❌ **她把书被他借走了。**\n\n---\n\n### 问题出在哪里？\n\n你把 **把** 和 **被** 两个结构塞进了同一个句子里。这在中文里是不行的——它们表达的是完全不同的视角：\n\n| 结构 | 视角 | 例子 |\n|------|------|------|\n| **把** | 主动（主语做事） | 他把书借走了。 |\n| **被** | 被动（主语被影响） | 书被他借走了。 |\n\n你的句子同时用了 **把**（主动处置）和 **被**（被动标记），语法上冲突了。\n\n---\n\n### 改正方案\n\n你有两个正确的说法，选一个就好：\n\n**1. 用 被（被动）—— 强调书被影响了：**\n> ✅ **书被他借走了。**\n> (The book was borrowed away by him.)\n\n**2. 用 把（主动）—— 强调他做了什么：**\n> ✅ **他把书借走了。**\n> (He borrowed the book away.)\n\n如果你想表达\"她\"是受影响的人，可以说：\n> ✅ **她的书被他借走了。**\n> (Her book was borrowed away by him.)\n\n---\n\n### 核心规则\n\n> **把** 和 **被** 不能在同一个分句里同时使用。它们是互斥的视角——**把** = 主动处置，**被** = 被动标记。选一个就好。\n\n---\n\n### 小练习\n\n把下面的句子改成正确的（用 **把** 或 **被**，但不能都用）：\n\n1. 我把他被他打了。\n2. 她把蛋糕被我吃了。\n\n试试看！😊",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "书被他借走了。",
+      "gold_correction_alternatives": "书被他借走了。 / 她把书借给了他。"
+    },
+    {
+      "id": "A26",
+      "kind": "positive",
+      "input": "小时候我每天喝了牛奶。",
+      "coach_reply": "**❌ 小时候我每天喝了牛奶。**\n\n**✅ 小时候我每天喝牛奶。**\n\n---\n\n### Why is it wrong?\n\nThe particle **了** marks a **single, completed action** — it's not a general past-tense marker. When you say **每天** (every day), you're describing a **habitual/repeated action** in the past, not one specific completed event. In English, you'd say \"I drank milk every day\" — but in Chinese, habitual actions don't take 了.\n\n| Wrong ✅ | Right ✅ |\n|---|---|\n| 我每天**喝了**咖啡。 | 我每天**喝**咖啡。 |\n| 以前他**去了**公园。 | 以前他**去**公园。 |\n| 小时候我每天**喝了**牛奶。 | 小时候我每天**喝**牛奶。 |\n\n---\n\n### Quick Drill\n\nFill in the blanks with **了** or **leave blank (✗)**:\n\n1. 昨天我 _____ 喝 _____ 三杯咖啡。  \n2. 以前我每天早上 _____ 喝 _____ 一杯咖啡。  \n3. 上个月我 _____ 去 _____ 一次北京。  \n4. 小时候我 _____ 去 _____ 奶奶家过周末。\n\n*(Answers: 1. 喝了  2. ✗  3. 去了  4. ✗)*\n\nGreat first sentence — keep them coming! 🚀",
+      "gold_had_error": true,
+      "gold_category": "particle",
+      "specific_gold": true,
+      "gold_correction": "小时候我每天喝牛奶。",
+      "gold_correction_alternatives": "小时候我每天喝牛奶。"
+    },
+    {
+      "id": "A27",
+      "kind": "positive",
+      "input": "我买了三书。",
+      "coach_reply": "你写得不错，意思很清楚！不过有一个小问题需要修正。😊\n\n**错误：** 缺少量词 (measure word)。\n\n在中文里，数字不能直接放在名词前面——中间必须有一个**量词**。对于\"书\"来说，量词是 **本 (běn)**。\n\n| ❌ 你写的 | ✅ 正确的 |\n|---|---|\n| 我买了三**书**。 | 我买了三**本书**。 |\n\n**规则：** 数字 + 量词 + 名词  \n→ 三 + 本 + 书 = **三本书**\n\n---\n\n**快速练习：** 试试把这些翻译成中文，记得加量词哦！\n\n1. two pens → 两___笔  \n2. one cup of coffee → 一___咖啡  \n3. three people → 三___人\n\n*(答案：支、杯、个)*\n\n继续加油！💪 下次记得：有数字，就要有量词！",
+      "gold_had_error": true,
+      "gold_category": "measure_word",
+      "specific_gold": true,
+      "gold_correction": "我买了三本书。",
+      "gold_correction_alternatives": "我买了三本书。"
+    },
+    {
+      "id": "A28",
+      "kind": "positive",
+      "input": "三个书、两个纸",
+      "coach_reply": "你写的是 **三个书、两个纸**。这里有两个小问题，都是 **量词（measure words）** 用错了。\n\n---\n\n### 1️⃣ 三个书 → ❌ → ✅ **三本书**\n\n- **书** 的量词是 **本**（用于书、杂志等有装订的东西），不是 **个**。\n- 个 是通用量词，但书不通用。\n\n### 2️⃣ 两个纸 → ❌ → ✅ **两张纸**\n\n- **纸** 是薄片状的东西，量词用 **张**（用于纸、桌子、照片等扁平物体）。\n- 个 在这里也不对。\n\n---\n\n### ✅ 正确句子\n\n> **三本书、两张纸**\n\n---\n\n### 🧠 根因\n\n英语里没有量词系统（\"three books\" 直接数），所以中文学习者容易 **默认用 个 代替所有量词**。但中文里每个名词有自己固定的量词，不能随便用 个。\n\n---\n\n### 🎯 小练习\n\n把下面的量词填进去（**本 / 张 / 个**）：\n\n1. 一___ 苹果  \n2. 一___ 桌子  \n3. 一___ 词典  \n4. 一___ 照片  \n5. 一___ 朋友  \n\n试试看！😊",
+      "gold_had_error": true,
+      "gold_category": "measure_word",
+      "specific_gold": true,
+      "gold_correction": "三本书、两张纸",
+      "gold_correction_alternatives": "三本书、两张纸"
+    },
+    {
+      "id": "A29",
+      "kind": "positive",
+      "input": "他比我很高。",
+      "coach_reply": "Great question — this is a **classic** trap for English speakers! Let's fix it.\n\n---\n\n### ❌ Your sentence\n**他比我很高。**\n\n### ✅ Corrected sentence\n**他比我高。** (He is taller than me.)\n\nOr, if you want to emphasise *how much* taller:\n\n**他比我高很多。** (He is much taller than me.)  \n**他比我高得多。** (He is a lot taller than me.)\n\n---\n\n### 🔍 What went wrong\n\nIn English, you say *\"He is **much** taller than me\"* — so it's natural to want to put **很** (very/much) in there. But in Chinese, the **比** structure works differently:\n\n> **A + 比 + B + Adjective** — and the adjective stands **alone** (no 很, no 非常).\n\n- ✅ 他比我高。 (He is taller than me.)\n- ❌ 他比我很高。\n- ✅ 今天比昨天热。 (Today is hotter than yesterday.)\n- ❌ 今天比昨天很热。\n\nIf you want to say \"much taller\" or \"a lot hotter\", you add **很多** or **得多** **after** the adjective, not before it.\n\n---\n\n### 🎯 Quick drill\n\nFill in the blanks:\n\n1. 我哥哥 ___ 我 ___ 三岁。 (My older brother is 3 years older than me.)  \n2. 这本书 ___ 那本书 ___ 有意思。 (This book is much more interesting than that book.)  \n3. 她跑得 ___ 我 ___ 快。 (She runs much faster than me.)\n\n*(Answers: 1. 比…大 2. 比… 得多 3. 比… 得)*\n\nWant me to generate a full set of drills on the **比** structure?",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "他比我高。",
+      "gold_correction_alternatives": "他比我高。 / 他比我高得多。"
+    },
+    {
+      "id": "A30",
+      "kind": "positive",
+      "input": "我去中国明年。",
+      "coach_reply": "**Correction:** ❌ 我去中国明年。 → ✅ **我明年去中国。**\n\n**Why?** In Chinese, **time expressions** (like 明年 \"next year\") go **before the verb**, not at the end of the sentence like in English.\n\n- English order: Subject + Verb + Object + **Time** → *I go to China next year.*\n- Chinese order: Subject + **Time** + Verb + Object → **我明年去中国。**\n\nThis is one of the most common word-order traps for English speakers — you're in good company! 😊\n\n**Quick drill:** Try reordering these sentences correctly:\n\n1. 我 / 明天 / 去 / 学校\n2. 他 / 早上 / 喝 / 咖啡\n3. 我们 / 晚上 / 看 / 电影\n\nLet me know if you'd like more practice on time placement!",
+      "gold_had_error": true,
+      "gold_category": "word_order",
+      "specific_gold": true,
+      "gold_correction": "我明年去中国。",
+      "gold_correction_alternatives": "我明年去中国。"
+    },
+    {
+      "id": "A31",
+      "kind": "positive",
+      "input": "他跑的很快。",
+      "coach_reply": "**Corrected sentence:**  \n他**跑得**很快。 (Tā pǎo de hěn kuài.)\n\n**What's wrong:**  \nYou used **的** (possessive/modifier marker) after the verb 跑, but you need **得** (degree complement marker).  \n\n- **的** → links a modifier to a noun (e.g. 他的书 *his book*)  \n- **得** → links a verb to a complement describing *how* the action is done (e.g. 跑得快 *runs fast*, 说得好 *speaks well*)\n\nSince 很快 describes the *degree/manner* of running, it's a complement → use **得**.\n\n**Drill:** Fill in the blank with 的, 得, or 地.\n\n1. 他唱歌唱______很好听。  \n2. 她高兴______笑了。  \n3. 这是我______书。  \n4. 他写汉字写______很慢。\n\nWant me to show you the answers? 😊",
+      "gold_had_error": true,
+      "gold_category": "particle",
+      "specific_gold": true,
+      "gold_correction": "他跑得很快。",
+      "gold_correction_alternatives": "他跑得很快。"
+    },
+    {
+      "id": "A32",
+      "kind": "positive",
+      "input": "虽然很贵，我还是买了。",
+      "coach_reply": "你的句子完全正确，一点问题都没有！✅\n\n**虽然很贵，我还是买了。** — *\"Although it was very expensive, I still bought it.\"*\n\nYou've used the **虽然……还是……** pattern perfectly. This is a natural way to say \"even though A is true, I still did B.\" The comma after the 虽然 clause is also correct.\n\n### A small extension for you:\n\nIf you want to add more emphasis or clarity, you could say:\n\n> **虽然很贵，但是我还是买了。**\n> *(Adding 但是 makes the contrast slightly more explicit.)*\n\nOr, to name the item:\n\n> **虽然这件衣服很贵，我还是买了。**\n> *(Although this piece of clothing was expensive, I still bought it.)*\n\n### 🎯 Quick drill for you\n\nTry completing these sentences with 还是:\n\n1. 虽然下雨了，我______去了公园。\n2. 虽然很辣，他______吃完了。\n3. 虽然很忙，她______来参加了聚会。\n\nWant me to check your answers? Or would you like to practise a different grammar point?",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "虽然很贵，但是我还是买了。",
+      "gold_correction_alternatives": "虽然很贵，但是我还是买了。"
+    },
+    {
+      "id": "A34",
+      "kind": "positive",
+      "input": "请把门开。",
+      "coach_reply": "Great question! Your sentence **请把门开** has a very common issue.\n\n## The Problem\n\nIn the **把 (bǎ) construction**, the verb **cannot be bare** — it must have something after it (a resultative complement, 了, a directional complement, etc.) to show what happened to the object.\n\n| ❌ Incorrect | ✅ Correct |\n|---|---|\n| 请把门开。 | 请把门**打开**。 |\n\n## Why?\n\nThe 把 construction emphasises the **disposal or effect** on the object. A bare verb like 开 doesn't express the result — it just says \"do the action.\" You need a **resultative complement** (like 开 after 打) to show the door *becomes open*.\n\n- 打 = to strike/apply force\n- 开 = open (result)\n- 打开 = to open (with result)\n\n## Other correct options\n\n- 请把门**开了**。 (with 了)\n- 请把门**开一下**。 (with 一下, \"open it for a moment\")\n\n## Drill 🎯\n\nTry filling in the blank:\n\n1. 请把窗户______。(close)\n2. 请把书______。(finish reading)\n3. 请把灯______。(turn on)\n\n*(Answers: 关上, 看完, 打开)*\n\nWant me to generate a full drill set on the 把 construction for you?",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "请把门打开。",
+      "gold_correction_alternatives": "请把门打开。"
+    },
+    {
+      "id": "A35",
+      "kind": "positive",
+      "input": "我能开车，我学了很久。",
+      "coach_reply": "你的句子意思很清楚，但有一个**常见的用词问题**。\n\n---\n\n### ❌ 原句\n我能开车，我学了很久。\n\n### ✅ 修正\n我会开车，学了很久了。\n\n---\n\n### 📌 原因分析\n\n**能 (néng) vs 会 (huì)**\n\n| 词 | 用法 | 例子 |\n|---|---|---|\n| **会** | 学来的技能（learned ability） | 我会开车。我会说英语。 |\n| **能** | 身体条件允许 / 客观可能（physical capability / permission） | 我今天喝多了，不能开车。 |\n\n你说“我学了很久”，说明开车是**学来的技能**，所以应该用 **会**，而不是 **能**。\n\n> 用「能」听起来像在说：“我身体上可以开车（没受伤/没喝酒）”，而不是“我掌握了这个技能”。\n\n另外，第二句加上 **了**（学了很久了）更自然，表示“已经学了很长时间，到现在还会”。\n\n---\n\n### 🎯 小练习\n\n把下面的 **能** 改成 **会**，或者反过来（如果需要）：\n\n1. 我 ______ 游泳，我学了两年。\n2. 我喝了两杯酒，不 ______ 开车了。\n3. 他 ______ 做中国菜，因为他以前是厨师。\n\n试试看！😊",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "我会开车，我学了很久。",
+      "gold_correction_alternatives": "我会开车，我学了很久。"
+    },
+    {
+      "id": "A36",
+      "kind": "positive",
+      "input": "我两个小时看了书。",
+      "coach_reply": "## 你的句子\n\n> ❌ 我**两个小时**看了书。\n\n---\n\n### 问题：时间长度放错了位置\n\n你把 **\"两个小时\"**（duration — *how long*）放在了动词前面，但中文里 **时间长度（duration）必须放在动词后面**，不能像时间点（time-when）那样放前面。\n\n| 类型 | 位置 | 例子 |\n|------|------|------|\n| **时间点** (when) | ✅ 动词前 | 我 **昨天** 看了书。 |\n| **时间段** (how long) | ✅ 动词后 | 我看了 **两个小时** 的书。 |\n\n---\n\n### ✅ 正确说法\n\n> **我看了两个小时的书。**\n> *(I read for two hours.)*\n\n或者：\n\n> **我看书看了两个小时。**\n\n---\n\n### 为什么？\n\n中文里：\n- **时间点**（昨天、今天、三点）→ 放动词 **前**\n- **时间段**（两个小时、三天、一年）→ 放动词 **后**\n\n这是英语母语者很常见的错误，因为英语说 *I read for two hours*，时间都在后面，但中文对\"时间点\"和\"时间段\"的处理方式不同。\n\n---\n\n### 🎯 小练习\n\n把下面的句子改成正确的：\n\n1. 我三个小时打篮球了。\n2. 她五分钟跑步了。\n3. 我们一年学中文了。\n\n试试看！😊",
+      "gold_had_error": true,
+      "gold_category": "word_order",
+      "specific_gold": true,
+      "gold_correction": "我看书看了两个小时。",
+      "gold_correction_alternatives": "我看书看了两个小时。"
+    },
+    {
+      "id": "A37",
+      "kind": "positive",
+      "input": "你要茶或者咖啡？",
+      "coach_reply": "Great question! Your sentence is very close, but there's a small but important error here.\n\n---\n\n**❌ 你要茶或者咖啡？**\n\n**✅ 你要茶还是咖啡？**\n\n---\n\n### Why?\n\n**或者 (huòzhě)** = \"or\" used in **statements** (e.g., 我喝茶或者咖啡都行 — \"Drinking tea or coffee is fine with me\").\n\n**还是 (háishì)** = \"or\" used in **questions that offer a choice** — exactly what you're doing here!\n\nThis is a classic HSK 3 grammar point, and a very common pattern for English speakers because English uses the same word (\"or\") for both situations.\n\n---\n\n### Quick drill\n\nFill in the blank with **或者** or **还是**:\n\n1. 你想吃米饭 ______ 面条？  \n2. 我明天 ______ 后天去都可以。  \n3. 你更喜欢猫 ______ 狗？\n\n*(Try them out and I'll check your answers!)*",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "你要茶还是咖啡？",
+      "gold_correction_alternatives": "你要茶还是咖啡？"
+    },
+    {
+      "id": "A38",
+      "kind": "positive",
+      "input": "我不看懂这本书。",
+      "coach_reply": "你写的是 **「我不看懂这本书」**。\n\n**问题**：你把「不」放在了「看懂」前面，但「看懂」是一个**结果补语结构**（看 + 懂）。要表达“能力上做不到”（看不懂），需要用**可能补语**的形式：\n\n- ✅ **看得懂** (can understand by reading)\n- ✅ **看不懂** (cannot understand by reading)\n- ❌ **不看懂** (不 + 结果补语 → 错误)\n\n**改正**：\n> **我看不懂这本书。**\n> (I can't understand this book.)\n\n如果你是想说“我尝试了但没理解”（已完成动作的否定），也可以用：\n> **我没看懂这本书。**\n> (I didn't understand this book.)\n\n---\n\n**根本原因**：英语里说 \"I don't understand\" 用 \"don't\" 否定动词，但中文里结果补语（看懂、听懂、做完）的否定方式不同：\n- **能力否定** → 可能补语：**看不懂**、**听不懂**\n- **完成否定** → 用 **没**：**没看懂**、**没听懂**\n\n---\n\n**小练习**：把下面句子改成正确的形式\n\n1. 我不听懂老师的话。→ ❌ → ✅ **______**\n2. 我不做完作业。→ ❌ → ✅ **______**\n3. 我不看见那只猫。→ ❌ → ✅ **______**\n\n试试看！😊",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "我没看懂这本书。",
+      "gold_correction_alternatives": "我没看懂这本书。"
+    },
+    {
+      "id": "A39",
+      "kind": "positive",
+      "input": "她是很高。",
+      "coach_reply": "**❌ 她是很高。**\n**✅ 她很高。**\n\n---\n\n### Why it's wrong\n\nIn Chinese, **adjectives act like verbs** — they don't need 是 (to be) in front of them. Saying 她是很高 is a direct copy of English *\"She **is** tall.\"* But in Mandarin, 高 already carries the meaning \"is tall,\" so 是 is redundant.\n\n| English | Chinese (correct) |\n|---------|------------------|\n| She is tall. | 她很高。 |\n| He is smart. | 他很聪明。 |\n| This book is interesting. | 这本书很有意思。 |\n\n### The one exception\n\nYou *can* use 是 + adjective, but only with **是…的** for emphasis:\n\n> 她是很**高的**。 — *She IS tall (indeed / as opposed to what you think).*\n\nWithout 的, it's ungrammatical.\n\n---\n\n### Quick drill\n\nFix these sentences (remove the unnecessary 是):\n\n1. 他是很忙。 → _______\n2. 这个苹果是很好吃。 → _______\n3. 她是很漂亮。 → _______\n\nWant me to generate a full drill set on this topic?",
+      "gold_had_error": true,
+      "gold_category": "grammar",
+      "specific_gold": false,
+      "gold_correction": "她很高。",
+      "gold_correction_alternatives": "她很高。"
+    },
+    {
+      "id": "A40",
+      "kind": "positive",
+      "input": "我很好，你吗？",
+      "coach_reply": "**Corrected sentence:**\n\n✅ **我很好，你呢？** (Wǒ hěn hǎo, nǐ ne?)\n\n---\n\n**What went wrong?**\n\nYou used **吗 (ma)** — the yes/no question particle — but here you're not asking a yes/no question. You're asking a **follow-up \"what about you?\"** question. In Chinese, that's done with **呢 (ne)** after the noun/pronoun.\n\n| English | Chinese | Particle |\n|---------|---------|----------|\n| \"Are you fine?\" (yes/no) | 你好吗？ | 吗 |\n| \"I'm fine, **and you?**\" (follow-up) | 我很好，**你呢？** | 呢 |\n\n**Root cause:** Direct translation from English \"and you?\" → \"你吗？\" But 吗 and 呢 have different jobs. 呢 is the \"what about…?\" particle.\n\n---\n\n**Quick drill:** Fill in the blanks with 吗 or 呢.\n\n1. 你好___？ (How are you?)\n2. 我很好，你___？ (I'm fine, and you?)\n3. 他是老师，她___？ (He's a teacher, what about her?)\n4. 你吃___？ (Are you eating?)\n\nAnswers: 1. 吗  2. 呢  3. 呢  4. 吗\n\nKeep it up! This is a super common first mistake — easy to fix 😊",
+      "gold_had_error": true,
+      "gold_category": "particle",
+      "specific_gold": true,
+      "gold_correction": "我很好，你呢？",
+      "gold_correction_alternatives": "我很好，你呢？"
+    }
+  ],
+  "negatives": [
+    {
+      "id": "NNC01",
+      "kind": "non_chinese",
+      "input": "How do I say 'thank you' in Mandarin?",
+      "coach_reply": "",
+      "gold_had_error": false,
+      "guard_should_skip": true
+    },
+    {
+      "id": "NNC02",
+      "kind": "non_chinese",
+      "input": "Can you explain what tones are for a beginner?",
+      "coach_reply": "",
+      "gold_had_error": false,
+      "guard_should_skip": true
+    },
+    {
+      "id": "NNC03",
+      "kind": "non_chinese",
+      "input": "Give me three tips for memorising new vocabulary.",
+      "coach_reply": "",
+      "gold_had_error": false,
+      "guard_should_skip": true
+    },
+    {
+      "id": "NCS01",
+      "kind": "correct_sentence",
+      "input": "我把书看完了。",
+      "coach_reply": "✅ **Correct!** \n\n**我把书看完了。** (wǒ bǎ shū kàn wán le) — \"I finished reading the book.\"\n\nThis is a textbook example of the **把 (bǎ) disposal construction** done right:\n\n| Element | What it does |\n|---|---|\n| 我 | Subject |\n| 把书 | Moves the object (书) before the verb to emphasise what was done *to* it |\n| 看 | The verb (read) |\n| 完 | Resultative complement — shows the *result* (finished) |\n| 了 | Marks completion |\n\nThe key rule: **把 always needs something extra after the verb** — a resultative complement (like 完), a direction complement, or 了. A bare verb like ❌ 我把书看 is incomplete.\n\n---\n\n### Small extension to try:\n\nCan you adapt this pattern to say **\"I finished writing the homework\"**? \n\nHint: use 写 + 完, and 作业 (zuòyè, homework) as the object. Give it a shot! 🎯",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS02",
+      "kind": "correct_sentence",
+      "input": "我吃过日本菜，很喜欢。",
+      "coach_reply": "Your sentence is **correct and natural**! 🎉\n\n**我吃过日本菜，很喜欢。**\n*\"I've had Japanese food, [I] really like [it].\"*\n\nThis is a great example of Chinese **topic-comment** structure. You set up the topic (日本菜) in the first clause, then drop both the subject (我) and the object (日本菜) in the second clause because they're understood from context. This is exactly how native speakers talk — no need for a pronoun like \"it\" as you'd need in English (*\"I really like it\"*).\n\n---\n\n### A small extension to try:\n\nYou could make the sentence even richer by adding a **resultative complement** or a **degree complement**:\n\n| Version | Chinese | Meaning |\n|---|---|---|\n| Add a result | 我吃过日本菜，**很喜欢吃**。 | I've had Japanese food, I really like eating it. |\n| Add degree | 我吃过日本菜，喜欢**得不得了**。 | I've had Japanese food, I like it *so much*. |\n| Add a comparison | 我吃过日本菜，**比中国菜还喜欢**。 | I've had Japanese food, I like it even more than Chinese food. |\n\n---\n\nWant me to generate a quick drill to practise **topic-comment sentences with dropped subjects/objects**? It's a key pattern for sounding more natural in Chinese!",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS03",
+      "kind": "correct_sentence",
+      "input": "他写汉字写得很漂亮。",
+      "coach_reply": "Great news — **your sentence is completely correct!** ✅\n\n**他写汉字写得很漂亮。**\n*tā xiě hànzì xiě de hěn piàoliang.*\n\"He writes Chinese characters beautifully.\"\n\nYou correctly used the **verb-repetition pattern** for a degree/manner complement with an object:\n\n> Subject + **V** + Object + **V** + 得 + Complement\n> 他 + **写** + 汉字 + **写** + 得 + 很漂亮\n\nThis is exactly right. A common mistake English speakers make here is omitting the repeated verb (❌ 他写汉字得很漂亮) or putting 得 directly after the object. You avoided that trap perfectly.\n\n---\n\n### Small extension to push you further:\n\nYou can also use this same pattern with other verbs and objects. Try swapping in different elements:\n\n- 她说英语说得很流利。 → *She speaks English very fluently.*\n- 他做饭做得很好吃。 → *He cooks very deliciously (the food he makes is tasty).*\n\nWant me to generate a few drills so you can practice this **V + Object + V + 得 + Complement** pattern?",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS04",
+      "kind": "correct_sentence",
+      "input": "我看书看了三个小时。",
+      "coach_reply": "Your sentence is **correct**! ✅\n\n> 我看书看了三个小时。\n> *(Wǒ kàn shū kàn le sān ge xiǎoshí.)*\n> \"I read a book for three hours.\"\n\nThis uses the **verb-copying (duration) construction**, which is the standard way to express how long you did something when the verb has an object:\n\n**Pattern:** Subject + **Verb** + Object + **Verb** + 了 + Duration\n\n| Part | Word |\n|------|------|\n| Subject | 我 |\n| Verb 1 | 看 |\n| Object | 书 |\n| Verb 2 | 看 |\n| 了 + Duration | 了三个小时 |\n\nA common English-speaker mistake is to put the duration *before* the verb (❌ 我三个小时看书了), so it's great that you got this right!\n\n---\n\n### Small extension 🌱\n\nIf you want to add the sense that you're **still reading** (and have been for three hours), you can add a final 了:\n\n> 我看书看了**三个小时了**。\n> \"I've been reading for three hours (and still am).\"\n\nWant to practise this pattern a bit more? I can generate a quick drill for you!",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS05",
+      "kind": "correct_sentence",
+      "input": "他昨天很晚才睡觉。",
+      "coach_reply": "Your sentence is **correct**! ✅\n\n**他昨天很晚才睡觉。**\n*\"He didn't go to bed until very late yesterday.\"*\n\nYou used **才** perfectly here — it signals that something happened **later than expected**, which is exactly the right nuance for \"went to bed very late.\" The word order is also spot-on: time adverb (昨天) comes before the verb, as it should in Chinese.\n\n---\n\n### A small extension to try:\n\nSince this is a completed action in the past, you could also add **了** at the end to emphasize the completion/change of state:\n\n> 他昨天很晚才睡觉**了**。\n\nBoth versions are acceptable, but adding 了 can make it sound a bit more natural in conversation when you're reporting what happened.\n\n### Want to practice 就 vs 才?\n\nThese two are a classic source of confusion for English speakers. Would you like a quick drill to lock in the difference? Just say the word! 😊",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS06",
+      "kind": "correct_sentence",
+      "input": "虽然很累，但是我很开心。",
+      "coach_reply": "✅ **This sentence is correct!** Great job!\n\n> **虽然很累，但是我很开心。**\n> *suīrán hěn lèi, dànshì wǒ hěn kāixīn.*\n> \"Although [I'm] very tired, I'm very happy.\"\n\nYou correctly used **both** 虽然 and 但是 together — this is exactly right! In Chinese, paired conjunctions like 虽然……但是…… are used together, unlike English where you'd use only \"although\" **or** \"but,\" never both. Many English speakers drop 但是, so it's great that you kept it.\n\n**Small extension to try:**\n\nYou can also drop the subject in the second clause for a more native feel, since it's understood from context:\n\n> 虽然很累，但是很开心。\n\nOr add a specific context to make it richer:\n\n> 虽然工作很累，但是我很开心，因为我学到了很多东西。\n> *suīrán gōngzuò hěn lèi, dànshì wǒ hěn kāixīn, yīnwèi wǒ xué dào le hěn duō dōngxi.*\n> \"Although work was very tiring, I was very happy, because I learned a lot of things.\"\n\nKeep up the good work! 🎉",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS07",
+      "kind": "correct_sentence",
+      "input": "书被他借走了。",
+      "coach_reply": "Your sentence is **correct**! ✅\n\n**书被他借走了。** — \"The book was borrowed by him.\"\n\nThis is a textbook-perfect **被 (bèi) passive construction**:\n\n| Element | Word | Role |\n|---------|------|------|\n| Receiver | 书 | Subject (thing acted upon) |\n| Passive marker | 被 | Marks the passive |\n| Agent | 他 | Who did the action |\n| Verb + complement | 借走 | \"Borrow away\" (resultative complement) |\n| Particle | 了 | Completion |\n\nEverything lines up with the rule: **Receiver + 被 + Agent + Verb + complement + 了**. The verb 借走 has a resultative complement (走), and 了 marks completion — both required in a proper 被 sentence.\n\n---\n\n### Small extension to try:\n\nSince you've got the basics down, here are two natural variations:\n\n1. **我的书被他借走了。** — \"My book was borrowed by him.\" (Adding a possessor before 书.)\n2. **书被他借走了，我还没看完。** — \"The book was borrowed by him, and I haven't finished reading it yet.\" (Linking with a second clause.)\n\nWant me to generate a few practice drills on 被 sentences to reinforce this?",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS08",
+      "kind": "correct_sentence",
+      "input": "他比我高。",
+      "coach_reply": "✅ **Correct!** 他比我高。 — \"He is taller than me.\"\n\nThis is a textbook-perfect **比 (bǐ)** comparison sentence. The structure is:\n\n> **A + 比 + B + Adjective**\n\nYou avoided the most common English-speaker mistake here: adding 很 or 非常 before the adjective (e.g., ❌ 他比我很高). In a 比 sentence, the adjective stands alone — no intensifier needed. Great job!\n\n---\n\n**Small extension to push yourself:**\n\nTry adding a degree complement to say *how much* taller:\n\n- 他比我**高一点儿**。 — He is a little taller than me.\n- 他比我**高得多**。 — He is much taller than me.\n\nWant me to generate a few practice sentences on 比 comparisons so you can drill this pattern?",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS09",
+      "kind": "correct_sentence",
+      "input": "我去过法国，很漂亮。",
+      "coach_reply": "Your sentence is **correct and natural**! ✅\n\n> 我去过法国，很漂亮。\n\nThis is a classic **topic-comment** construction in Chinese. 法国 (France) is established as the topic in the first clause, and it carries over as the understood subject of 很漂亮 in the second clause. This is exactly how native speakers talk in casual conversation.\n\n### Small extension for clarity\nIf you want to make the subject of the second clause more explicit (especially in writing), you can add **那里** (there):\n\n> 我去过法国，**那里**很漂亮。\n\nThis removes any ambiguity about *what* is beautiful — it's clearly France, not the experience of going there.\n\n### Try going further\nYou could also add more detail, for example:\n\n> 我去过法国，那里很漂亮，**而且吃的也很好吃**。\n> *(I've been to France — it's beautiful, and the food is great too.)*\n\nWould you like to practice describing places you've visited using 过? I can generate a quick drill!",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NCS10",
+      "kind": "correct_sentence",
+      "input": "你要茶还是咖啡？",
+      "coach_reply": "✅ **Your sentence is correct!**\n\n**你要茶还是咖啡？** (Nǐ yào chá háishì kāfēi?)\n*\"Do you want tea or coffee?\"*\n\nYou correctly used **还是 (háishì)** for a choice question — this is exactly right. A common mistake for English speakers is using **或者 (huòzhě)** in questions, but 或者 is only for statements (e.g., 我喝茶或者咖啡都行 — \"I'm fine with tea or coffee\"). You nailed it!\n\n---\n\n**Small extension — try answering the question:**\n\nHere are two natural ways to respond:\n\n1. **我要茶。** — \"I want tea.\"\n2. **我要咖啡，不要茶。** — \"I want coffee, not tea.\"\n\nWant to try making your own choice question with 还是, or shall I generate a quick drill to practice 还是 vs 或者?",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NQ01",
+      "kind": "question",
+      "input": "什么是把字句？可以给我举一个例子吗？",
+      "coach_reply": "## 什么是把字句？\n\n**把字句** (the **把 construction**) is one of the most important and distinctive sentence patterns in Mandarin. It's covered at **HSK 3** level.\n\n### Basic Structure\n\n> **Subject + 把 + Object + Verb + (Result/Complement)**\n\nThe key idea is that **把 moves the object before the verb** to emphasise **what is DONE TO that object** — i.e., the \"disposal\" or effect on it.\n\n---\n\n### Example\n\n**普通句 (normal sentence):**\n> 我吃完了那个苹果。\n> (I finished eating that apple.)\n\n**把字句:**\n> 我**把**那个苹果**吃完了**。\n> (I took that apple and ate it up.)\n\nNotice how the object (那个苹果) moves *before* the verb (吃), and the verb is followed by a **result complement** (完了).\n\n---\n\n### ⚠️ Key Rules\n\n1. **The verb must be transitive** — it needs an object that can be \"disposed of.\"\n2. **The verb can't be bare** — it must carry something extra after it: a complement (完, 到, 在…), a 了, or a result. A bare verb like 把书看 is **incorrect**.\n3. **Don't mix 把 and 被** in the same clause.\n\n| ❌ Incorrect | ✅ Correct |\n|---|---|\n| 我把书看。 | 我把书**看完了**。 |\n| 他把饭吃。 | 他把饭**吃光了**。 |\n\n---\n\n### More Examples\n\n| 把字句 | English |\n|---|---|\n| 我把门关上了。 | I closed the door. |\n| 他把杯子打破了。 | He broke the cup. |\n| 请把书放在桌子上。 | Please put the book on the table. |\n\n---\n\n### Why English speakers struggle with it\n\nEnglish has no equivalent structure. In English we just say \"I ate the apple,\" but in Chinese, if you want to stress the *result* or *outcome* of an action on a specific object, 把 is the natural way to say it. English speakers often either **skip 把 entirely** or use it with a **bare verb** (no complement), which sounds incomplete to native ears.\n\n---\n\nWant me to generate some practice exercises so you can try making 把 sentences yourself? 😊",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NQ02",
+      "kind": "question",
+      "input": "请问「了」和「过」在用法上有什么区别？",
+      "coach_reply": "Great question! This is one of the most common points of confusion for English speakers learning Mandarin. Let me break it down clearly.\n\n---\n\n## 「了」 vs 「过」 — Key Difference\n\n### 过 (guò) — *Experiential* aspect (HSK 2)\n**Verb + 过** means you have **done something at least once** in the past — it's about **experience**, not a specific event.\n\n> 我**去过**中国。  \n> *I have been to China (at some point in my life).*\n\n> 你**吃过**日本菜吗？  \n> *Have you ever tried Japanese food?*\n\nThink of 过 as the English **\"have you ever…?\"** or **\"I have (at some point)…\"**\n\n---\n\n### 了 (le) — *Completed action* aspect\n**Verb + 了** marks a **specific completed action** — something that happened and finished at a particular time.\n\n> 我昨天**去了**中国。  \n> *I went to China yesterday.* (a specific trip, now finished)\n\n> 我**吃了**日本菜，很好吃。  \n> *I ate Japanese food (just now / on that occasion), it was delicious.*\n\nThink of 了 as marking **\"it happened / it's done.\"**\n\n---\n\n## Side-by-side Comparison\n\n| | 过 (experience) | 了 (completed action) |\n|---|---|---|\n| **Meaning** | \"Have you ever…?\" / \"I have (at some point)…\" | \"It happened / it's done\" |\n| **Time** | Unspecific, any time in life | A specific moment, now finished |\n| **Example** | 我**看过**这部电影。 *(I've seen this movie before.)* | 我昨天**看了**这部电影。 *(I watched this movie yesterday.)* |\n\n---\n\n## Common Mistake\n\nEnglish speakers often use 了 where 过 is needed:\n\n> ❌ 我**吃了**日本菜，很喜欢。 *(intended: \"I've tried Japanese food, I like it.\")*  \n> ✅ 我**吃过**日本菜，很喜欢。\n\nHere, you're talking about **experience** (you've tried it at some point), not one specific meal — so 过 is correct.\n\n---\n\nWant me to generate a short drill so you can practice choosing between 了 and 过? Just say the word! 😊",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NQ03",
+      "kind": "question",
+      "input": "量词一般应该怎么用？我经常搞不清楚。",
+      "coach_reply": "## 📝 练习题\n\n试试下面这几道题，把答案发给我，我来帮你批改！\n\n1. 请填入正确的量词：我有一 ____ 书。\n2. 选择正确的词语：我要（二 / 两）杯咖啡。\n3. 改正下面的句子：桌上有三张个苹果。\n4. 请填入正确的量词：他买了那一 ____ 桌子。\n5. 选择正确的词语：请给我（二 / 两）个面包。\n\n把你的答案发过来吧！😊",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    },
+    {
+      "id": "NQ04",
+      "kind": "question",
+      "input": "你能推荐几个练习中文语法的好方法吗？",
+      "coach_reply": "Great news — your sentence is grammatically correct and natural! 👏\n\n**你能推荐几个练习中文语法的好方法吗？**\n*\"Can you recommend a few good methods for practising Chinese grammar?\"*\n\nSince we don't have any error history yet, here are some of the best methods I'd recommend for an intermediate learner:\n\n---\n\n### 🎯 5 Great Ways to Practise Chinese Grammar\n\n1. **Pattern Drills (句型练习)**\n   Pick one structure (e.g. 把 sentences, 了 vs. 过) and write 5 sentences using it in different contexts. Repetition builds muscle memory.\n\n2. **Sentence Rewriting (改写句子)**\n   Take a sentence you already know and rewrite it using a different grammar pattern. For example, turn *我吃了饭* into a 把 sentence: *我把饭吃了*. This forces you to understand the nuance.\n\n3. **Error Correction (改错)**\n   Write sentences freely, then have me check them. Over time, I'll track your recurring mistakes and drill you on exactly what you need.\n\n4. **Shadowing with Grammar Focus (跟读)**\n   Listen to native content (podcasts, dramas) and repeat sentences aloud, paying attention to where particles like 了、的、得 appear. This builds an intuitive feel for grammar.\n\n5. **Targeted Drills with Me**\n   I can generate 3–5 focused exercises on any topic you want — just ask! For example: *\"Drill me on measure words\"* or *\"Give me 把 sentence practice.\"*\n\n---\n\n### 🚀 Want to get started right now?\n\nI can generate a drill on any of these common trouble spots:\n\n- **把 sentences** (the notorious \"disposal\" construction)\n- **了 vs. 过** (completed action vs. experienced action)\n- **Measure words (量词)**\n- **是…的 structure** (emphasis on time/place/manner)\n- **比较 sentences** (比 / 没有 / 不如)\n\nJust tell me which topic interests you, and I'll create some exercises for you! 😊",
+      "gold_had_error": false,
+      "guard_should_skip": false
+    }
+  ]
+}

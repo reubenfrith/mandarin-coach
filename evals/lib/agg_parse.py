@@ -1,4 +1,4 @@
-"""Deterministic parser for Type C aggregation answers.
+"""Deterministic parser for C_scale aggregation answers.
 
 Why not an LLM extractor: on emoji-laden markdown tables the OpenRouter models
 (glm/qwen/deepseek) extract inconsistently and sometimes return prose instead of
@@ -11,7 +11,7 @@ parse(answer) -> AggregationClaims, so it drops straight into score_aggregation(
 """
 import re
 
-from llm_judge import AggregationClaims
+from lib.llm_judge import AggregationClaims
 
 # English category name is always present in these answers (Chinese appears only as
 # parenthetical examples). Match on the English name; 'particle' etc. are unambiguous.

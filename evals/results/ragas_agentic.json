@@ -1,0 +1,1005 @@
+{
+  "summary": {
+    "agent_model": "glm",
+    "agentic_evaluator": "gpt-4o",
+    "n_failed": 0,
+    "by_type": {
+      "A_stateless": {
+        "n": 40,
+        "tool_call_accuracy": 0.55,
+        "required_recall": 1.0,
+        "extra_tool_rate": 0.45,
+        "agent_goal_accuracy": 0.8
+      },
+      "B_small": {
+        "n": 10,
+        "tool_call_accuracy": 0.1,
+        "required_recall": 0.95,
+        "extra_tool_rate": 0.9,
+        "agent_goal_accuracy": 0.8
+      },
+      "C_scale": {
+        "n": 10,
+        "tool_call_accuracy": 1.0,
+        "required_recall": 1.0,
+        "extra_tool_rate": 0.0,
+        "agent_goal_accuracy": 0.8
+      }
+    },
+    "overall": {
+      "tool_call_accuracy": 0.55,
+      "required_recall": 0.9916666666666667,
+      "agent_goal_accuracy": 0.8
+    },
+    "completion_vs_correctness_C": {
+      "aga_completion_mean": 0.8,
+      "deterministic_correct_mean": 1.0
+    },
+    "off_topic_deflection": {
+      "n_probes": 4,
+      "n_deflected": 2,
+      "n_used_web_search": 1,
+      "ragas_adherence_mean_UNSTABLE": 0.5166666666005
+    }
+  },
+  "rows": [
+    {
+      "id": "A01",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good attempt at using 把! But this sentence is missing something important. Let me break it down:\n\n## ❌ Your sentence: 我把书看。\n## ✅ Corrected: 我把书看完了。 (Wǒ bǎ shū kàn wán le.) — \"I finished reading the book.\"\n\n## Why it's wrong\n\nThe **把 (bǎ) construction** follows this pattern:\n\n> **Subject + 把 + Object + Verb + (result/complement/了)**\n\nThe key rule is that the verb **cannot be bare** — it must carry something extra after it (a complement like 完, a result, or 了). This is because 把 emphasizes **what happened to the object** — the *disposal* or *effect*. A bare verb like 看 doesn't tell us the outcome.\n\n| ❌ Wrong | ✅ Right |\n|---|---|\n| 我把书看。 | 我把书看完了。 |\n| 我把饭吃。 | 我把饭吃完了。 |\n| 他把作业做。 | 他把作业做好了。 |\n\n## Root cause\nThis is a very common English-speaker mistake. In English, \"I read the book\" works fine with a simple verb + object. But in Chinese, once you use 把, you're saying *\"here's what I DID to the book\"* — so you need to state the **result** (finished reading it, read it through, etc.).\n\n> 💡 If you just want to say \"I'm reading the book\" without emphasizing a result, you don't need 把 at all — simply say: **我在看书。**\n\nWould you like some practice drills on this? I can generate a few 把 sentences for you to try!"
+    },
+    {
+      "id": "A02",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Practice Drill\n\nFill in the blank with **把** or **被**:\n\n1. 他 _____ 那台电脑修好了。\n2. 那台电脑 _____ 他修好了。\n3. 妈妈 _____ 我的房间打扫得干干净净。\n4. 我的房间 _____ 妈妈打扫得干干净净。\n\n**Tip:** Ask yourself — is the subject the *doer* (use 把) or the *receiver* (use 被)? Try these and let me know your answers! 😊"
+    },
+    {
+      "id": "A03",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 以前我每天喝了咖啡。\n✅ **以前我每天喝咖啡。**\n\n## What's wrong\n\nYou used **了 (le)** to mark the past tense — but **了 is not a past-tense marker**. It marks **completion of a specific event** (e.g., 我买了一杯咖啡 = \"I bought a cup of coffee\" — one completed action).\n\nHere, **每天 (every day)** signals a **habitual, repeated action** in the past. Repeated/habitual actions don't use 了, because no single event is being \"completed.\" Chinese simply uses the bare verb, and the time word 以前 (before/in the past) carries the past meaning.\n\n### Quick contrast:\n| Sentence | Meaning | Why |\n|---|---|---|\n| 以前我每天**喝**咖啡。 | I used to drink coffee every day. | Habitual past → bare verb |\n| 我今天早上**喝了**咖啡。 | I drank coffee this morning. | One completed event → 了 |\n\n## Root cause\n\nThis is one of the most common English-speaker mistakes: **mapping English past tense directly onto 了**. In English, \"I drank coffee every day\" and \"I drank coffee this morning\" both use the past tense. In Chinese, the distinction is about **aspect** (completed vs. habitual), not tense.\n\n---\n\nWant to practice telling apart when to use 了 and when to leave it off? I can generate a quick drill for you!"
+    },
+    {
+      "id": "A04",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Great sentence to bring up! There's a subtle but important fix here.\n\n## Corrected Sentence\n\n> **我今年二十岁了。**\n\n## What's Missing: Sentence-Final 了 (le)\n\nYour sentence **我今年二十岁** is perfectly fine if you're *simply stating your age* (e.g., filling out a form, answering \"How old are you?\").\n\nBut you specified the context: **a birthday just passed**. That means you're reporting a **change of state** — you *were* 19, and now you *are* 20. In Chinese, sentence-final **了** signals exactly this: a new situation that's different from before.\n\n| Context | Chinese | Why |\n|---|---|---|\n| Just stating your age | 我今年二十岁。 | Neutral statement of fact |\n| Birthday just passed / \"I just turned 20\" | 我今年二十岁了。 | 了 = change of state, \"now I'm 20\" |\n\n### Root Cause\nEnglish speakers often drop sentence-final **了** because English doesn't have an equivalent particle. In English, \"I'm 20\" works for both situations — the context does the work. In Chinese, **了** is what carries that \"newly changed\" meaning.\n\n### Quick Extension\nYou could also say it even more explicitly:\n\n> **我刚过完生日，今年二十岁了。**\n> *(I just had my birthday; I'm 20 now.)*\n\nWant a quick drill on sentence-final **了** to lock this in?"
+    },
+    {
+      "id": "A05",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Quick Drill — 了 vs 过\n\nTry these (answers below):\n\n1. 我______（了/过）日本菜，很喜欢。\n2. 我______（去）北京两次，第一次是2019年。\n3. Translate: *\"I have been studying Chinese for three years (and still am).\"*\n4. 他______（学）一年中文，但已经放弃了。 → *He studied Chinese for a year but has given up.*\n5. 我在这儿住了三年。 → *I've lived here for three years (and still do).* — Is this correct? If not, fix it.\n\n<details>\n<summary>Answers</summary>\n\n1. **过** — experience of trying Japanese food\n2. **去过** — \"have been to Beijing twice\"\n3. **我学了三年汉语了。** — two 了's: completed duration + still ongoing\n4. **学过** — past experience, no longer continuing\n5. Incorrect as written — needs a sentence-final 了: **我在这儿住了三年了。**\n\n</details>\n\nKeep it up — mastering 了 vs 过 early will save you a lot of confusion down the road! 🎯"
+    },
+    {
+      "id": "A06",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good question — this is a very common mix-up! Your sentence is grammatically valid, but it **doesn't mean what you intend**.\n\n## What you said vs. what you meant\n\n| | Sentence | Meaning |\n|---|---|---|\n| ❌ Your version | 你怎么来了这里？ | *\"How come you came here?\"* (asking **why** — expressing surprise) |\n| ✅ Corrected | 你是怎么来的？ | *\"How did you get here?\"* (asking **by what means**) |\n\n## Root cause: **怎么 + 了 vs. 是……的 construction**\n\nWhen you say **怎么……了**, Chinese hears it as asking about the **reason** — like \"How come?\" or \"Why?\" in English. The 了 here signals a change of state, giving it a tone of surprise: *\"How come you showed up here?\"*\n\nWhen you want to ask **by what means** someone did something (especially for a **completed action** like arriving somewhere), Chinese uses the **是……的** construction. The pattern emphasises the *circumstance* (how, when, where, with whom) of a known past event:\n\n> **是** + [emphasised element] + **的**\n\nSo for \"How did you get here?\":\n\n> 你**是**怎么**来**的？ → *By what means did you come?*\n\nYou can also emphasise other details with the same pattern:\n- 你是**什么时候**来的？ — *When did you come?*\n- 你是**从哪儿**来的？ — *Where did you come from?*\n- 你是**跟谁**来的？ — *Who did you come with?*\n\n---\n\nWant some practice drilling the **是……的** construction? I can generate a few exercises for you!"
+    },
+    {
+      "id": "A07",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Practice Drills\n\nTry these — fill in the blanks or translate:\n\n1. **填空:** 我有三___书。\n2. **选择正确的词:** 我要___杯咖啡。 (两 / 二)\n3. **填空:** 他有两___票。 (ticket)\n4. **翻译成中文:** \"I want two cups of tea.\"\n\nGive them a shot and I'll check your answers! 😊"
+    },
+    {
+      "id": "A08",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Practice Drill\n\nTry these to lock in the pattern:\n\n1. **Fill in the blank** — use 在 or leave blank (Ø):\n   - 他______知道那个消息。\n   - 他______跑步，别打扰他。\n\n2. **Correct the mistake:**\n   - 我在喜欢这个电影。\n\n3. **Choose the correct sentence:**\n   - A. 我在看书呢。\n   - B. 我在认识他。\n\n<details><summary>Answers (click to reveal)</summary>\n\n1. 他**Ø**知道那个消息。 / 他**在**跑步，别打扰他。\n2. 我**喜欢**这个电影。（喜欢 is stative — no 在）\n3. **A** is correct. 看书 is an action; 认识 is stative.\n\n</details>\n\nGive these a try, and let me know if you have any questions! 😊"
+    },
+    {
+      "id": "A09",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Here are 5 quick drills to practice:\n\n1. **Fill in the blank:** 他说汉语______。\n2. **Fix the error:** 她做菜得很好。\n3. **Complete the sentence with 得:** 她唱中文歌______。\n4. **Translate to Chinese:** He plays basketball very well.\n5. **Which is correct?** a) 她做饭得很好。 b) 她做饭做得很好。\n\nGive them a try and I'll check your answers! 😊"
+    },
+    {
+      "id": "A10",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Practice Drill\n\nFill in the blank with **的**, **地**, or **得**:\n\n1. 这是妈妈______包。\n2. 她高兴______跳了起来。\n3. 他跑______非常快。\n4. 他写汉字写______很漂亮。\n5. 漂亮______女孩在唱歌。\n\n**Hint:** Ask yourself — is the word before the blank modifying a **noun**, a **verb**, or introducing a **complement**?\n\nGive it a try and I'll check your answers! 😊"
+    },
+    {
+      "id": "A11",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "### 📝 Quick Drill — Fill in the blanks with 比 + adjective (no 很!)\n\n1. 今天30度，昨天25度。虽然今天比昨天（　　），但是我不觉得热。 *(clue: 热)*\n2. 我的汉语水平比他的（　　），但是他说得比我流利。 *(clue: 高)*\n3. 这件衣服比那件（　　），但是那件更漂亮。 *(clue: 贵)*\n4. 他比我（　　），但是他跑得比我快。 *(clue: 矮)*\n5. 今天比昨天（　　），但是我还是穿了一件外套。 *(clue: 暖和)*\n\nTry filling these in — just the adjective, no 很! — and I'll check your answers. 😊"
+    },
+    {
+      "id": "A12",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Corrected Sentence\n\n✅ **我明年去中国。**\n(Wǒ míngnián qù Zhōngguó.)\n\n## What Went Wrong\n\nYou wrote **我去中国明年**, which follows English word order: *Subject + Verb + Object + Time*. \n\nIn Chinese, **time expressions go *before* the verb**, not at the end of the sentence. The correct structure is:\n\n> **Subject + Time + Verb + Object**\n> 我 + 明年 + 去 + 中国\n\nThis is one of the most common mistakes for English speakers, because in English we naturally say \"I'm going to China *next year*\" — tacking the time on at the end. In Chinese, you need to flip that around.\n\n### Quick Formula\n| English order | Chinese order |\n|---|---|\n| I go to China **next year**. | 我**明年**去中国。 |\n| Subject + Verb + Object + **Time** | Subject + **Time** + Verb + Object |\n\nThis applies to all time words: 今天, 明天, 现在, 下个星期, etc.\n\n---\n\nWant to practice this pattern? I can generate a few quick drills for you! 🎯"
+    },
+    {
+      "id": "A13",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good attempt! There's a word-order issue with the **duration complement**. Let me break it down.\n\n## ❌ Your sentence\n> 我三个小时看书了。\n\n## ✅ Corrected\n> **我看了三个小时书了。** (or **我看书看了三个小时了。**)\n> *Wǒ kàn le sān ge xiǎoshí shū le.*\n\n**Meaning:** \"I've been reading for three hours (and still am).\"\n\n---\n\n## 🔍 Root Cause\n\nIn English, we put the duration right after the subject (\"I **for three hours** read\"), which feels like a time-when phrase. But in Mandarin, **duration always goes AFTER the verb**, not before it.\n\nHere's the pattern:\n\n| Pattern | Example |\n|---|---|\n| **Verb + 了 + Duration + Object + 了** | 我看了三个小时书了 |\n| **Verb + Object + Verb + 了 + Duration + 了** | 我看书看了三个小时了 |\n\nThe **first 了** marks the action as started/completed, and the **final 了** adds the sense of \"up to now, still going.\" If you just want to say you *finished* reading for three hours (not still reading), drop the final 了:\n\n> 我看了三个小时书。 — \"I read for three hours.\"\n\n---\n\n## ⚠️ Key takeaway\nPlacing a duration before the verb (我三个小时看书) makes it sound like a *time-when* phrase (\"At 3 o'clock I read\"), which is not what you mean. **Duration follows the verb.**\n\n---\n\nWant to practice this pattern? I can generate a quick drill for you!"
+    },
+    {
+      "id": "A14",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Quick Drill: 二 vs 两\n\nTry filling these in before checking the answers below:\n\n1. 我买了______本书。\n2. 这是第______个学生。\n3. 改正错误：我有二张桌子。\n4. 他有______个孩子。\n5. 十______ (twelve)\n\n<details>\n<summary>Answers (click to reveal)</summary>\n\n1. **两**本书 — measure word 本 follows, so use 两\n2. **二** — ordinal number (第 = ordinal marker), so use 二\n3. 我有**两**张桌子 — measure word 张 follows, so use 两\n4. **两**个孩子 — measure word 个 follows, so use 两\n5. 十**二** — compound number, so use 二\n\n</details>\n\nKeep it up — this is one of those small rules that makes a big difference in sounding natural! ☕"
+    },
+    {
+      "id": "A15",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Practice Drill\n\nTry these — fill in or correct as needed:\n\n1. 这件衣服______贵，我不想买。\n2. 这个苹果一点儿小。 *(correct it)*\n3. 这个包比那个包便宜______。\n4. 今天比昨天______。 A. 很热  B. 热  C. 有点儿热\n5. 他比我很高。 *(correct it)*\n\n**Quick rule of thumb:** If you're *complaining* about something, use **有点儿 + adjective**. If you're *asking for a little more/less* of something, use **adjective + 一点儿**.\n\nGive the drill a shot and I'll check your answers! 😊"
+    },
+    {
+      "id": "A16",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Practice Drill — 会 / 能 / 可以\n\nFill in the blanks with 会, 能, or 可以:\n\n1. 我妹妹今年五岁，已经______自己穿衣服了。\n2. 我的手机没电了，不______打电话了。\n3. 老师，我______用一下你的词典吗？\n4. 今天天气很好，我们______去公园散步。\n5. 他从小在中国长大，______说一口流利的中文。\n\n*(Answers: 1.会 2.能 3.可以 4.能 5.会)*\n\nGive them a try — and feel free to send more sentences! 😊"
+    },
+    {
+      "id": "A17",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Practice Drills — 就 vs 才\n\nFill in the blanks with **就** or **才**:\n\n1. 他每天早上7点______起床，今天却7点半才起。\n2. 他昨天很晚______睡觉，因为工作太多了。\n3. 我花了两个小时______写完作业，别人只花了一个小时。\n4. 他八点______到，我九点______到，他比我早了一个小时。\n5. 他学习很努力，只用了三个月______学会了中文，而别人通常要一年。\n\nTry answering, and I'll check your work! 🎯"
+    },
+    {
+      "id": "A18",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 我**不**听懂老师的话。\n✅ 我**没**听懂老师的话。\n\n*(Wǒ méi tīngdǒng lǎoshī de huà.)* — \"I didn't understand what the teacher said.\"\n\n## Why?\n\n**听懂** is a **resultative complement** verb: 听 + 懂. The second part (懂) expresses the *result* of the action (听). In Mandarin, you negate **achieved results** with **没**, not 不.\n\nThink of it this way:\n- **不** negates *intent or habit* — \"I don't (want to) listen\"\n- **没** negates *completion/achievement* — \"I didn't (manage to) understand\"\n\nSo **不听懂** sounds like \"I don't listen-and-understand,\" which doesn't make sense. You need **没听懂** = \"I listened but didn't achieve understanding.\"\n\nThis is a very common English-speaker mistake because English uses \"don't\" for both, but Mandarin splits them: **不** for volition, **没** for results.\n\n---\n\nWant to practice this pattern? I can generate a quick drill on negating resultative complements (听懂, 看完, 做对, etc.). Just say the word! 😊"
+    },
+    {
+      "id": "A19",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 他跑来进教室。\n✅ **他跑进教室来。** (or simply **他跑进教室了。**)\n\n## What went wrong\n\nThis is a **directional complement** word-order error. In Mandarin, directional complements like 进来 (come in) are built as:\n\n> **Verb + direction verb (进) + place object (教室) + 来/去**\n\nSo the structure is: 跑 + 进 + 教室 + 来\n\nYou split **进** and **来** apart and put them in the wrong order relative to the place object. Think of it this way:\n\n- **进** tells you *what direction* (entering)\n- **教室** tells you *which place*\n- **来** tells you *relative to the speaker* (toward here)\n\nThey must appear in that exact order: **跑进教室来**.\n\nA common English-speaker instinct is to say \"ran come-in classroom\" (跑来进教室), but Mandarin requires the direction verb (进) to come **before** the place, and 来/去 to come **after** it.\n\n## Quick pattern\n\n| Structure | Example |\n|---|---|\n| Verb + 进 + place + 来 | 走进教室来 (walk into the classroom, toward speaker) |\n| Verb + 进 + place + 去 | 跑进教室去 (run into the classroom, away from speaker) |\n| Verb + 进 + place (+ 了) | 跑进教室了 (ran into the classroom — neutral) |\n\n---\n\nWant some practice drills on directional complements to lock this in? I can generate a few!"
+    },
+    {
+      "id": "A20",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Great observation! You've spotted one of the most common English-speaker habits in Mandarin.\n\n## The Sentence\n\n> **因为下雨，我没去。** — *acceptable, but not the most natural*\n\n> ✅ **因为下雨，所以我没去。** — *fully natural*\n\n## Root Cause: Chinese Uses **Paired Conjunctions**\n\nIn English, you pick **one** conjunction: *\"Because it rained, I didn't go\"* or *\"It rained, so I didn't go.\"* Using both sounds wrong — *\"Because it rained, so I didn't go\"* is a classic ESL error.\n\nChinese works the **opposite** way. Paired conjunctions are the norm:\n\n| Chinese Pair | English Equivalent |\n|---|---|\n| **因为…所以…** | because…so… |\n| **虽然…但是…** | although…but… |\n| **不但…而且…** | not only…but also… |\n\nDropping the second half (所以, 但是, etc.) isn't *wrong* — native speakers sometimes do it in casual speech — but it sounds slightly clipped or incomplete. For learners, the safe and natural choice is to **use both halves**.\n\n## The Trap\n\nEnglish speakers hear \"because…so\" and their brain screams *\"redundant!\"* — so they drop 所以. This is the same instinct that leads to:\n\n- ❌ 虽然很累，我很开心。 → ✅ **虽然**很累，**但是**我很开心。\n- ❌ 因为便宜，我买了。 → ✅ **因为**便宜，**所以**我买了。\n\n## Want to Practise?\n\nI can generate a quick drill on paired conjunctions so this becomes second nature. Just say the word! 🔧"
+    },
+    {
+      "id": "A21",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good try! The sentence is **almost** correct, but it's missing a key word. Here's the fix:\n\n**Corrected:** 虽然很累，**但是**我很开心。\n\n---\n\n### What went wrong?\n\nIn English, you say **\"Although I'm tired, I'm happy\"** — only one conjunction. But in Mandarin, **虽然 (although)** and **但是/可是** pair together. You need **both**:\n\n| Clause 1 | Clause 2 |\n|---|---|\n| 虽然…… | **但是**…… |\n\nThis is a very common English-speaker habit — dropping the second conjunction because it feels \"redundant.\" But in Chinese, paired conjunctions are the norm (the same applies to 因为……所以…… — \"because… so…\").\n\n### Quick tip\n- **虽然……但是……** = Although… but… ✅\n- **虽然……** (alone) = Although… ❌ (feels incomplete to a native ear)\n\n---\n\nWould you like a short drill to practise this pattern? I can generate a few exercises!"
+    },
+    {
+      "id": "A22",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 你想去北京**或者**上海？\n✅ 你想去北京**还是**上海？\n\n**你想去北京还是上海？** — \"Do you want to go to Beijing or Shanghai?\"\n\n## Why?\n\nThe issue is **或者 (huòzhě) vs. 还是 (háishì)** — both mean \"or,\" but they're used in different sentence types:\n\n| Word | Used in | Example |\n|------|---------|---------|\n| **还是** (háishì) | **Questions** offering a choice | 你喝茶还是咖啡？ |\n| **或者** (huòzhě) | **Statements** (declarative sentences) | 我喝茶或者咖啡都行。 |\n\nSince your sentence is a **question** asking the listener to choose between Beijing and Shanghai, you need **还是**, not 或者.\n\n> **Root cause:** In English, \"or\" works in both questions and statements, so it's natural to reach for one Chinese word for both. But Mandarin splits them: questions get 还是, statements get 或者.\n\n## Quick contrast\n\n- **Question:** 你想喝茶**还是**咖啡？\n- **Statement:** 我喝茶**或者**咖啡都行。\n\nWant me to generate a short drill to practice this distinction?"
+    },
+    {
+      "id": "A23",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "You're very close! The sentence just needs **one more 了** at the end:\n\n✅ **我在这儿住了三年了。**\n\n### What's the difference?\n\n| Sentence | Meaning |\n|---|---|\n| 我在这儿住了三年。 | I lived here for three years (but may have moved away). |\n| 我在这儿住了三年了。 | I've been living here for three years **and still do**. |\n\n### Root cause\n\nIn Mandarin, the pattern **Verb + 了 + Duration + 了** (two 了's) expresses an action that started in the past and **is still ongoing**. The first 了 marks the start of the action; the **sentence-final 了** adds the \"up to now, still true\" sense.\n\nWith only one 了, the sentence sounds completed — like you *used to* live here for three years but don't anymore. That second 了 is what carries the \"and I'm still here\" meaning.\n\nThis is a very common English-speaker mistake, since English uses the present perfect (\"I have lived…\") for both meanings, and there's no equivalent of the double-了 in English.\n\nWant some practice drills on this pattern?"
+    },
+    {
+      "id": "A24",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "### Quick Drill — 呢 vs 吗\n\n1. **Fill in the blank:** A: 我今年20岁。 B: 你____？\n2. **Choose 呢 or 吗:** (a) 你要喝水____？ (b) 我要喝水，你____？\n3. **Correct or not?** A: 我喜欢跑步。 B: 我呢？ ✅ or ❌?\n\n<details>\n<summary>Answers (click to reveal)</summary>\n\n1. **呢** — follow-up \"what about you?\"\n2. (a) **吗** — yes/no question. (b) **呢** — follow-up.\n3. ✅ Correct! \"我呢？\" = \"What about me?\" — perfectly natural.\n</details>\n\nKeep it up — you're very close! 😊"
+    },
+    {
+      "id": "A25",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Here's a quick drill to practice — try these before checking the answers:\n\n1. 他 ______ 我的手机摔坏了。 → (把 or 被?)\n2. 我的手机 ______ 他摔坏了。 → (把 or 被?)\n3. 蛋糕 ______ 弟弟吃光了。 → (把 or 被?)\n\n**Answers:** 1. 把 2. 被 3. 被\n\nNotice the pattern: when the **doer** is the subject, use **把**; when the **receiver** is the subject, use **被**. Keep at it! 💪"
+    },
+    {
+      "id": "A26",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good sentence to bring up — this is one of the **most common mistakes** English speakers make in Mandarin!\n\n## Corrected sentence\n\n> **小时候我每天喝牛奶。**\n> *(xiǎo shí hou wǒ měi tiān hē niú nǎi)*\n> \"When I was little, I drank milk every day.\"\n\n## What went wrong\n\nYou wrote **每天喝了牛奶** — the **了 (le)** is the problem here.\n\nIn English, \"drank\" = past tense, so it feels natural to add a past marker. But **了 is NOT a past-tense marker** — it marks that a **specific, completed action** happened (e.g. 我今天早上喝了牛奶 = \"I drank milk this morning\" — one completed event).\n\n**每天 (every day)** describes a **habitual, repeated action**, not a single completed event. For habitual past actions, you simply use the bare verb with no aspect particle:\n\n| ✅ Correct | ❌ Incorrect |\n|---|---|\n| 以前我每天喝咖啡。 | 以前我每天喝了咖啡。 |\n| 小时候我每天喝牛奶。 | 小时候我每天喝了牛奶。 |\n\n### Quick rule of thumb\n- **Specific completed event** → use 了: 我昨天喝了牛奶。\n- **Habitual/repeated past action** → no 了: 我小时候每天喝牛奶。\n\n---\n\nWant a few practice sentences to drill this distinction? I can generate some! 🎯"
+    },
+    {
+      "id": "A27",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 我买了三书。\n✅ **我买了三本书。** (Wǒ mǎile sān běn shū.)\n\n## What went wrong\n\nYou're missing a **measure word (量词)**. In Chinese, you can't put a number directly in front of a noun — you need a measure word in between:\n\n> **Number + Measure Word + Noun**\n\nFor books, the measure word is **本 (běn)**, so it's **三本书** (\"three books\"), not 三书.\n\nThis is a very common English-speaker mistake because English lets you say \"three books\" with no extra word in between. Think of it like how English says \"three **pieces** of paper\" — Chinese does this for *every* noun.\n\n## Quick reference: common measure words\n\n| Measure Word | Pinyin | Used for |\n|---|---|---|\n| 本 | běn | books, magazines |\n| 个 | gè | general catch-all (people, things) |\n| 张 | zhāng | flat things (tickets, paper, tables) |\n| 杯 | bēi | cups/glasses |\n| 只 | zhī | animals, one of a pair |\n\n---\n\nWant to practice? I can generate a quick drill on measure words to help lock this in! 📚"
+    },
+    {
+      "id": "A28",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "dictionary_lookup",
+        "dictionary_lookup",
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "dictionary_lookup",
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## 📝 Quick Drill — Try these!\n\n1. **一___书** — which measure word?\n2. **一___纸** — which measure word?\n3. **Correct the mistake:** 他有三椅子 (tā yǒu sān yǐzi)\n4. **Choose:** 我买了___张桌子 — A. 二  B. 两\n5. **Choose:** 教室里有___个学生 — A. 二  B. 两\n\nGive them a shot and I'll check your answers! The key takeaway: **don't default to 个** — learn the specific measure word for each noun. 📚"
+    },
+    {
+      "id": "A29",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 他比我很高。\n✅ **他比我高。** (tā bǐ wǒ gāo) — \"He is taller than me.\"\n\nIf you want to say \"much taller,\" use:\n✅ **他比我高得多。** (tā bǐ wǒ gāo de duō) or **他比我高很多。** (tā bǐ wǒ gāo hěn duō)\n\n## Why it's wrong\n\nIn a **比 (bǐ)** comparison, the adjective comes directly after 比 + B — **no 很/非常** before it. This is a very common English-speaker mistake, because in English we say \"much taller,\" and 很 feels like it should translate \"much.\" But in Chinese, 很 here is a degree adverb that doesn't belong in a 比 sentence.\n\n| Structure | Example |\n|---|---|\n| A 比 B + Adj | 他比我高 |\n| A 比 B + Adj + 得多 / 很多 | 他比我高得多 (much taller) |\n\nThink of it this way: **比 already implies \"more than,\"** so you just state the adjective plainly. To add intensity, use **得多** or **很多** at the end — not 很 before the adjective.\n\n---\n\nWant to practice this? I can generate a quick drill on 比 comparisons!"
+    },
+    {
+      "id": "A30",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 我去中国明年。\n✅ **我明年去中国。**\n\n## What went wrong\n\nThis is a classic **word-order** error. In English, you say \"I'm going to China **next year**\" — the time goes at the end. But in Chinese, **time-when expressions go *before* the verb**, not after it:\n\n| English order | Chinese order |\n|---|---|\n| Subject + Verb + Object + **Time** | Subject + **Time** + Verb + Object |\n\nSo the pattern is:\n\n> **我 + 明年 + 去 + 中国**\n> (I + next year + go to + China)\n\nThis is one of the most common mistakes for English speakers, so don't worry — you're in good company! Just remember: **time comes early in Chinese, right after the subject.**\n\n### Quick contrast to keep in mind:\n- **Time-when** (when something happens) → *before* the verb: 我**明天**去。\n- **Duration** (how long something lasts) → *after* the verb: 我学了**两年**。\n\nWant some practice drills on this? I can generate a few sentences for you to try!"
+    },
+    {
+      "id": "A31",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "### 📝 Quick Drill: 的 / 得 / 地\n\nFill in each blank with **的**, **得**, or **地**:\n\n1. 她唱______歌很好听。\n2. 他高兴______跳了起来。\n3. 他跑______非常快。\n4. 这是妈妈______书。\n5. 他写汉字写______很漂亮。\n\nGive them a try and I'll check your answers! 😊"
+    },
+    {
+      "id": "A32",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Your sentence is **correct**! ✅\n\n**虽然很贵，我还是买了。**\n*Suīrán hěn guì, wǒ háishì mǎi le.*\n\"Although it was expensive, I still bought it.\"\n\nThis is a natural and common construction. Here, **还是** is functioning as an adverb meaning **\"still\"** (not the \"or\" meaning used in questions). The structure is:\n\n> **虽然** [clause], [subject] **还是** [verb] — \"Although X, [subject] still Y.\"\n\nThis is slightly different from the more textbook-taught **虽然……但是……** pattern, but both are perfectly natural. The difference is subtle:\n\n| Pattern | Nuance |\n|---|---|\n| 虽然很贵，**但是**我买了。 | \"Although expensive, **but** I bought it.\" (neutral contrast) |\n| 虽然很贵，我**还是**买了。 | \"Although expensive, I **still** bought it.\" (emphasizes persistence despite the obstacle) |\n\nYour version with 还是 adds a nice sense of \"despite that, I went ahead and did it anyway.\"\n\n---\n\n**Small extension — try this one:**\n\n> 虽然下雨了，我们___去爬山了。\n\nCan you fill in the blank? (Hint: think about what word conveys \"still went ahead and did it.\")"
+    },
+    {
+      "id": "A33",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 我去了法国，很漂亮。\n✅ **我去过法国，很漂亮。**\n\n## What went wrong\n\nYou used **了 (le)**, which marks a **specific completed action** — \"I went to France\" (and came back). But your intended meaning is **\"I have been to France\"** — i.e., you're talking about a **past experience**, not a specific trip.\n\nFor that, Mandarin uses **过 (guò)**, the **experiential aspect marker**:\n\n| Particle | Meaning | Example |\n|----------|---------|---------|\n| 了 (le) | Completed action (specific event) | 我去了法国 — \"I went to France\" (one specific trip) |\n| 过 (guò) | Past experience (at least once) | 我去过法国 — \"I have been to France\" (life experience) |\n\nThis is a very common English-speaker mistake — English \"have been to\" looks like a perfect tense, so learners reach for 了, but the *experiential* meaning maps to 过.\n\n## Quick tip\n\nThink of 过 as **\"have ever ___\"**:\n- 你**去过**中国吗？ = Have you **ever been to** China?\n- 我**吃过**北京烤鸭。 = I **have tried** Peking duck.\n\nWant some practice drills on 了 vs 过? I can generate a few!"
+    },
+    {
+      "id": "A34",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Here's a quick drill to practise. Give them a try and I'll check your answers!\n\n1. **Fill in the blank:** 我把作业______了。 *(topic: finishing homework)*\n2. **Correct this sentence:** 我把那本书看。\n3. **Choose the right negation:** A. 我不把电影看懂。 / B. 我没把电影看懂。\n4. **Complete the sentence:** 她______房间______干净了。 *(topic: cleaning the room)*\n5. **Translate to a correct 把 sentence:** \"I broke the cup.\"\n\nTake a shot at these and I'll give you feedback! 🎯"
+    },
+    {
+      "id": "A35",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good news — your sentence is **correct**! 🎉\n\n> **我能开车，我学了很久。**\n> *\"I can drive; I learned for a long time.\"*\n\n**Why it works:**\n- **能** correctly expresses ability (\"can drive\").\n- **学了很久** uses the pattern **Verb + 了 + Duration**, which is exactly right for expressing \"did something for a long time\" (completed action). The duration 很久 comes after the verb, as it should.\n\n**One small nuance to be aware of:**\n\nIf you wanted to say *\"I have been learning for a long time (and I'm still learning)\"*, you'd add a sentence-final **了**:\n\n> 我学了很久**了**。\n\nThe second **了** adds the sense of \"up to now, and still continuing.\" Without it, the sentence reads as completed — which fits your meaning here (you finished learning, and now you can drive). So your version is perfect for what you're saying!\n\n**Extension — try connecting the two clauses more explicitly:**\n\n> 我学了很久，**所以**我能开车。\n> *\"I learned for a long time, so I can drive.\"*\n\nAdding **所以** (so/therefore) makes the cause-and-effect relationship clearer. Want to try writing a similar sentence with a different verb and duration?"
+    },
+    {
+      "id": "A36",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n❌ 我两个小时看了书。\n✅ **我看了两个小时书。** (or **我看书看了两个小时。**)\n\n## What went wrong\n\nYou placed the duration (**两个小时**) *before* the verb, which makes it look like a **time-when** phrase (like \"at two o'clock\"). In Chinese, **duration** (how long) must come *after* the verb, not before it.\n\n### The rule: Duration Complement\n\n| Pattern | Example |\n|---|---|\n| **Verb + 了 + Duration + Object** | 我看了两个小时书 |\n| **Verb + Object + Verb + 了 + Duration** | 我看书看了两个小时 |\n\nBoth are correct and natural. The first is more common in speech; the second emphasizes the action a bit more.\n\n### Quick contrast\n\n- **Time-when** (when?) → *before* the verb: 我**两个小时前**看了书。 = \"I read a book **two hours ago**.\"\n- **Duration** (how long?) → *after* the verb: 我看了**两个小时**书。 = \"I read a book **for two hours**.\"\n\nThis is a very common English-speaker mistake because in English, \"for two hours\" can go either before or after the verb. In Chinese, the position is fixed!\n\n---\n\nWant to practice this? I can generate a few drills on duration complements to help lock it in. Just say the word! 😊"
+    },
+    {
+      "id": "A37",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good sentence to bring up! There's one key fix:\n\n**Corrected:** 你要茶**还是**咖啡？\n\n### What's wrong?\n\nYou used **或者 (huòzhě)**, which means \"or\" — but only in **statements**, not in questions. In a **question offering a choice**, you must use **还是 (háishì)**.\n\n| Context | Word | Example |\n|---|---|---|\n| **Question** (offering a choice) | **还是** | 你喝茶**还是**咖啡？ |\n| **Statement** (listing options) | **或者** | 我喝茶**或者**咖啡都行。 |\n\n### Root cause\n\nIn English, \"or\" works in both questions and statements, so it's natural to reach for one Chinese word for both. But Mandarin splits them: **还是** for questions, **或者** for statements.\n\n---\n\nWant a quick drill to lock in the difference? I can generate a few practice sentences for you!"
+    },
+    {
+      "id": "A38",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Here are some drills to practice. Note: there's an important distinction between **看不懂** (can't understand — ability) and **没看懂** (didn't understand — past event). Focus on the **potential complement** pattern:\n\n### Drill: Potential Complements\n\nTranslate these into Chinese using the **verb + 不 + complement** pattern:\n\n1. \"I can't finish eating this.\" → (吃 + 不 + 完)\n2. \"She can't hear clearly.\" → (听 + 不 + 清楚)\n3. \"We can't find it.\" → (找 + 不 + 到)\n4. \"I can't do this well.\" → (做 + 不 + 好)\n\n**Answers:** 1. 吃不完 2. 听不清楚 3. 找不到 4. 做不好\n\nGive them a try, and let me know if you'd like more practice! 😊"
+    },
+    {
+      "id": "A39",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Quick Drill\n\nTry these four — fill in **是** or **很**:\n\n1. 他______高。\n2. 她______漂亮。\n3. 这辆车______新的，不是旧的。\n4. 改错：今天比昨天很热。\n\n<details>\n<summary>🔑 Answers (click to reveal)</summary>\n\n1. 他**很**高。 *(adjective → use 很)*\n2. 她**很**漂亮。 *(adjective → use 很)*\n3. 这辆车**是**新的，不是旧的。 *(linking to a noun phrase \"新的\" → use 是)*\n4. 今天比昨天热。 *(in 比 comparisons, drop 很 — use 更 or nothing)*\n\n</details>\n\nKeep at it — this pattern clicks fast once you practice it a few times! 🎯"
+    },
+    {
+      "id": "A40",
+      "type": "A_stateless",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good news — your sentence is almost perfect! Just one small fix:\n\n✅ **我很好，你呢？**\n\n### What's wrong?\nYou used **吗 (ma)**, which is a yes/no question particle (it turns a statement into a question expecting a yes/no answer). But here you're asking a **follow-up** question — \"What about *you*?\" — and for that, Mandarin uses **呢 (ne)**.\n\n| Particle | Use | Example |\n|----------|-----|---------|\n| **吗 (ma)** | Yes/no questions | 你好吗？ |\n| **呢 (ne)** | Follow-up \"what about…?\" | 我很好，你**呢**？ |\n\nThis is a super common mix-up for English speakers, since English uses \"and you?\" for both situations. Just remember: **吗 = yes/no**, **呢 = what about…?**\n\nSince this is your first submission, no error history yet — but I'll be tracking from here on! 😊\n\nWant a quick drill to practice 吗 vs 呢?"
+    },
+    {
+      "id": "B01",
+      "type": "B_small",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Correction\n\n✅ **我把门关上了。** (Wǒ bǎ mén guān shàng le.)\n> \"I closed the door.\"\n\n## What went wrong\n\nYour sentence **我把门关** is missing the **resultative complement + 了** that every 把 sentence requires. The 把 construction doesn't just say *what* you did — it emphasises the **result or effect** on the object. A bare verb like 关 with nothing after it feels incomplete to a native ear.\n\nYou need **关上** (close shut) + **了** (completed action) to show the door is now closed.\n\n| ❌ Wrong | ✅ Right |\n|---|---|\n| 我把门关。 | 我把门关上了。 |\n| 我把作业做。 | 我把作业做完了。 |\n\n## This is a recurring pattern for you 🔁\n\nThis is the **2nd time** you've made this exact mistake — and all 4 of your logged errors are in the **particle/complement** category. The pattern is clear: you're remembering to use 把 but forgetting that the verb needs a \"tail\" (complement + 了) to finish the sentence.\n\n**Rule of thumb:** After 把 + Object, the verb can **never** stand alone. Always ask yourself: *What was the result?* Then attach it:\n- 关 → 关**上**了 (shut)\n- 做 → 做**完**了 (finished)\n- 看 → 看**完**了 (finished reading)\n\nWant me to generate a quick drill to lock this in?"
+    },
+    {
+      "id": "B02",
+      "type": "B_small",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Quick rule of thumb\n\n| Particle | Use when… | Example |\n|----------|-----------|---------|\n| **的** (de) | Modifier → **Noun** | 我**的**书 (my book) |\n| **地** (de) | Adverb → **Verb** | 慢慢**地**走 (walk slowly) |\n| **得** (de) | Verb → **Complement** (how/degree) | 跑**得**快 (run fast) |\n\n## 📝 Practice drill\n\nFill in the correct \"de\" particle (的 / 地 / 得):\n\n1. 她开心（　）跳了起来。\n2. 这朵花（　）颜色非常鲜艳。\n3. 他跑（　）太快了，我跟不上。\n4. 妹妹认真（　）写作业。\n5. 妈妈做菜做（　）很好吃。\n\nGive it a try! I'll check your answers. 💪"
+    },
+    {
+      "id": "B03",
+      "type": "B_small",
+      "tool_sequence": [
+        "dictionary_lookup",
+        "dictionary_lookup",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 0.5,
+      "extra_tools": [
+        "dictionary_lookup",
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## 📝 Practice Drills\n\n1. **Fill in the blank:** 我今天想去商店______一些水果。\n2. **Choose the tone:** 这个商店在**卖**衣服。 → A. mǎi  B. mài\n3. **Correct the sentence:** 他昨天卖了一本书，但今天想买回来。 *(Hint: if he wants to buy it back today, what did he do yesterday?)*\n4. **Complete the sentence:** 这家店______的东西很便宜，所以很多人来______。\n\n<details>\n<summary>Answers (click to reveal)</summary>\n\n1. **买** (mǎi) — you go to a store to *buy* fruit\n2. **B. mài** — the store is *selling* clothes\n3. 他昨天**买**了一本书，但今天想卖回来。 *(He bought it yesterday, wants to sell it back)*\n4. 这家店**卖**的东西很便宜，所以很多人来**买**。 *(The store sells cheap things, so many people come to buy)*\n</details>\n\nKeep an eye on those tones — you're already catching your own mistakes, which is a great sign! 🎯"
+    },
+    {
+      "id": "B04",
+      "type": "B_small",
+      "tool_sequence": [
+        "dictionary_lookup",
+        "error_pattern_analyser",
+        "grammar_rule_fetcher",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "dictionary_lookup",
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "### 🎤 Tone Drill: Third Tone vs. First Tone\n\nTry these exercises — for each one, identify whether the syllable is **1st tone (flat & high)** or **3rd tone (dip & rise)**:\n\n**Exercise 1 — Fill in the correct pinyin with tone mark:**\n| English | Pinyin |\n|---|---|\n| a. mother | ma ___ |\n| b. horse | ma ___ |\n| c. soup | tang ___ |\n| d. to lie down | tang ___ |\n| e. book | shu ___ |\n| f. mouse | shu ___ |\n\n**Exercise 2 — Pick the right word:**\n1. Wǒ xǐhuān hē **(tāng / tǎng)**. — *I like to drink soup.*\n2. Zhè shì yī běn **(shū / shǔ)**. — *This is a book.*\n3. Lǎoshī shuō wǒmen yào fàng **(shū / shǔ)** jià. — *The teacher said we have summer vacation.*\n\n**Exercise 3 — Identify the tone (1st or 3rd):**\n1. 听 (tīng) → ?\n2. 挺 (tǐng) → ?\n3. 妈 (mā) → ?\n4. 马 (mǎ) → ?\n\n💡 **Tip:** When practicing, physically **drop your chin** for third tones — it helps build the muscle memory so you don't flatten them. Give the drill a try and let me know your answers!"
+    },
+    {
+      "id": "B05",
+      "type": "B_small",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## 📝 Practice Drills\n\nTry these — fill in or correct:\n\n1. 我买了三______书。\n2. 桌子上有______个苹果。 *(两 or 二?)*\n3. Correct the mistake: 请给我二杯水。\n4. 教室里有五______学生。\n5. 这是第______次来中国。 *(两 or 二?)*\n\n**Tip:** Instead of memorising measure words alone, learn them *together with the noun* — treat \"一本书\" as one unit, just like you'd learn \"a cup of tea\" as a chunk in English. That way the right measure word comes automatically!\n\nGive the drills a try and I'll check your answers! 😊"
+    },
+    {
+      "id": "B06",
+      "type": "B_small",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "dictionary_lookup",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "dictionary_lookup",
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## 📝 Practice Drill\n\nTry these — fill in or correct the measure word:\n\n1. 我有一____书。 *(Hint: books)*\n2. 我要二杯咖啡。 → ❓ *(Hint: \"two\" before a measure word)*\n3. 教室里有三____桌子。 *(Hint: flat things like tables)*\n4. Which is correct? A. 二个人 B. 两个人\n5. Which is correct? A. 三个书 B. 三本书 C. 三本的书\n\n**Answers:** 1. 本 2. 我要**两**杯咖啡 3. 张 4. B 5. B\n\nWant to try answering them first before checking? This is your most frequent error type, so nailing these will make a big difference in how natural you sound! 💪"
+    },
+    {
+      "id": "B07",
+      "type": "B_small",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## 📝 Practice Drill\n\nTry these — they mix time-when, place, and duration to make sure you've got the distinction down:\n\n1. **Rearrange:** 明年 / 去 / 我 / 中国 → ?\n2. **Translate:** \"He studies Chinese in the library every day.\"\n3. **Correct the mistake:** 我看书在家。\n4. **Translate:** \"She waited for the bus for thirty minutes.\" *(Hint: duration goes AFTER the verb!)*\n5. **Fill in:** 我______学中文。(上海 / 去年) → ?\n\nGive them a shot and I'll check your answers! 💪"
+    },
+    {
+      "id": "B08",
+      "type": "B_small",
+      "tool_sequence": [
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Here are 5 practice sentences. Translate each into Chinese, paying attention to where the adverbs/time/place go:\n\n1. \"I will study in the library tomorrow.\"\n2. \"She runs home from school in the afternoon.\"\n3. \"They will travel to China next year.\"\n4. \"Bring the book into the classroom now.\"\n5. \"He walks in the park in the morning.\"\n\n**Key rule to remember:** Time, place, and degree adverbs all go **before the verb**. Try translating these and send me your answers — I'll check them! 💪"
+    },
+    {
+      "id": "B09",
+      "type": "B_small",
+      "tool_sequence": [
+        "dictionary_lookup",
+        "dictionary_lookup",
+        "grammar_rule_fetcher",
+        "error_pattern_analyser",
+        "drill_generator"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "dictionary_lookup",
+        "drill_generator"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "## Quick Drill: 知道 vs 认识\n\nFill in the blank with **知道** or **认识**:\n\n1. 你______这道题的答案吗？\n2. 我______你的朋友小王，他是我的同学。\n3. 他______很多中国历史故事。\n4. 你______这位老师吗？他教过我。\n5. 我不______他为什么没来上课。\n\n**Rule of thumb:** If you could replace \"know\" with \"be aware of\" → **知道**. If you could replace it with \"be acquainted with\" → **认识**.\n\nGive it a try and I'll check your answers! 😊"
+    },
+    {
+      "id": "B10",
+      "type": "B_small",
+      "tool_sequence": [
+        "dictionary_lookup",
+        "dictionary_lookup",
+        "grammar_rule_fetcher",
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 0.0,
+      "required_recall": 1.0,
+      "extra_tools": [
+        "dictionary_lookup"
+      ],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": null,
+      "final_answer": "Good catch — you've already spotted the fix! Here's the corrected sentence:\n\n✅ **我们交朋友吧** (Wǒmen jiāo péngyou ba) — \"Let's be friends.\"\n\n### Why 交 and not 做?\n\n- **交朋友** (jiāo péngyou) is the fixed collocation for \"to make friends.\" 交 here means \"to form/establish (a relationship).\"\n- **做朋友** (zuò péngyou) *can* be understood, but it's not the natural way to say \"let's be friends.\" 做 emphasizes \"to act as / to be,\" so it sounds more like \"let's play the role of friends\" rather than \"let's form a friendship.\"\n\n### Your error pattern\n\nThis is your **4th vocabulary/collocation error** — and they all share the same root cause: **using a general-purpose verb where Chinese requires a specific collocation.** Your history shows:\n\n| You said | Should be | Pattern |\n|---|---|---|\n| 做朋友 | **交**朋友 | specific verb for \"making\" friends |\n| 知道他很久 | **认识**他很久 | specific verb for \"knowing a person\" |\n| 开电脑 | **打开**电脑 | specific verb for \"turning on\" a device |\n\nEnglish lets you use one broad verb (\"make,\" \"know,\" \"open\") in many contexts. Chinese is more picky — each noun often demands its own verb. Want me to generate a quick drill on these verb-noun collocations to help lock them in?"
+    },
+    {
+      "id": "C01",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "You've logged **60 errors** in total. Here's the breakdown by category:\n\n| Category | Count | Trend |\n|---|---|---|\n| **Particles** (了, 得, etc.) | 15 | 📈 increasing |\n| **Tones** | 14 | 📉 decreasing |\n| **Measure words** | 12 | ➡️ steady |\n| **Word order** | 10 | ➡️ steady |\n| **Vocabulary** | 9 | 📉 decreasing |\n\n**Good news:** Your tones and vocabulary errors are trending *down* — that's real progress! 🎉\n\n**Watch out:** Particle errors (like missing 得 in 他跑得很快) are your #1 issue and still climbing. That's the area to focus on next. Would you like me to generate a drill on particles to help turn that trend around?"
+    },
+    {
+      "id": "C02",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Here's your error breakdown:\n\n| Rank | Category | Count | Trend |\n|------|----------|-------|-------|\n| 🥇 | **Particles** (了, 过, 呢, etc.) | **15** | 📈 Increasing |\n| 🥈 | Tones | 14 | 📉 Decreasing |\n| 🥉 | Measure words | 12 | ➡️ Steady |\n| 4 | Word order | 10 | ➡️ Steady |\n| 5 | Vocabulary | 9 | 📉 Decreasing |\n\n**Your #1 error category is particles — 15 times and trending upward.** This is the one to focus on. Particles like 了, 过, 呢, and 的 are tricky because they don't map cleanly to anything in English, so it's easy to drop them or use the wrong one.\n\nThe good news: your **tones** and **vocabulary** errors are both decreasing — that's real progress! 🎉\n\nWould you like me to generate a set of drills focused on particles so you can start turning that trend around?"
+    },
+    {
+      "id": "C03",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 0.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Here's the breakdown of your particle errors:\n\n## Your Particle Error Stats\n\n| Stat | Value |\n|------|-------|\n| **Total particle errors** | **15** |\n| **Total errors (all categories)** | 60 |\n| **Particle as % of all errors** | 25% |\n| **Trend** | 📈 **Increasing** — this is your #1 growing problem area |\n\nParticle errors are now your **most frequent** error type, having overtaken tones (which are thankfully decreasing — nice work there!).\n\n## Your Most Common Particle Mistake\n\nYour recurring pattern is **omitting the structural particle 得 (de)** in complement of degree constructions:\n\n> ❌ 他跑很快 → ✅ 他跑得很快\n\nThis has shown up **at least 3 times** in your history — you keep dropping 得 when linking a verb to a descriptive complement (answering \"how?\" about an action).\n\n## Other Categories at a Glance\n- **Tones**: 14 (decreasing ✅)\n- **Measure words**: 12 (steady)\n- **Word order**: 10 (steady)\n- **Vocabulary**: 9 (decreasing ✅)\n\n---\n\nSince particle errors are increasing, would you like me to generate a short drill to help you nail down 得 and other particles? It could help turn this trend around! 💪"
+    },
+    {
+      "id": "C04",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Here's the full picture of your tone errors:\n\n## Your Tone Error Stats\n\n- **Total tone errors: 14** (out of 60 total errors logged)\n- That makes tones your **2nd most common error category** (behind particles at 15).\n- 📉 **Good news:** Your tone errors are **decreasing** over time — you're improving!\n\n## Recurring Pattern\n\nYour most repeated tone mistake involves confusing **mā (1st tone) vs. má (2nd tone)**, particularly in sentences like:\n\n> 我妈妈很忙 (Wǒ māma hěn máng)\n\nThis showed up **3 times** in your history, so it's worth nailing down.\n\n## Your Overall Error Breakdown\n\n| Category | Count | Trend |\n|---|---|---|\n| Particles (了/的/得 etc.) | 15 | 📈 increasing |\n| Tones | 14 | 📉 decreasing ✅ |\n| Measure words | 12 | ➡️ steady |\n| Word order | 10 | ➡️ steady |\n| Vocabulary | 9 | 📉 decreasing |\n\nYou're making real progress on tones! Would you like me to generate a short drill to practice those tricky **1st vs. 2nd tone** distinctions and keep that downward trend going?"
+    },
+    {
+      "id": "C05",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Here's the breakdown of your measure-word errors:\n\n### 📊 Your Measure-Word Stats\n- **Total measure-word errors: 12** (out of 60 total errors logged)\n- That's **20%** of all your mistakes — your **3rd most common error category**.\n- Trend: **Steady** — meaning this hasn't been improving or getting worse over time.\n\n### 🔁 Your Most Frequent Measure-Word Mistake\nYou've made the same error **three times**:\n\n> ❌ 两个车 → ✅ 两辆车\n\nYou're using the generic **个 (gè)** instead of the correct measure word **辆 (liàng)** for vehicles.\n\n### Why This Happens\n**个** is the \"default\" measure word learners reach for when they don't know the specific one. But in Mandarin, each noun category has its own measure word — **辆** is used for wheeled vehicles (cars, buses, bikes), while **个** is for people and general items.\n\n---\n\nWould you like me to generate a short drill to practice measure words and help bring that number down? I can target vehicles and other commonly-mistaken categories! 🚗"
+    },
+    {
+      "id": "C06",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Here's a snapshot of your error trends based on your logged history (60 errors total):\n\n| Category | Count | Trend |\n|---|---|---|\n| **Particles** (了, 过, etc.) | 15 | 📈 Increasing |\n| **Tones** | 14 | 📉 Decreasing |\n| **Measure words** | 12 | ➡️ Steady |\n| **Word order** | 10 | ➡️ Steady |\n| **Vocabulary** | 9 | 📉 Decreasing |\n\n### Key Takeaways\n\n1. **Particles are your biggest growing problem.** This is the only category trending *up*, and it's already your most frequent error type. This likely means you're running into trouble with **了 vs. 过**, **得/地/的**, or sentence-final particles as you tackle more complex sentences.\n\n2. **Great news on tones and vocabulary!** Both are trending *down*, which means your pronunciation and word recall are improving. Keep it up!\n\n3. **Measure words are steady but recurring.** I noticed you've made the same mistake — **两个车 → 两辆车** — three times. That's worth drilling to break the habit.\n\n### Want to work on it?\n\nI can generate targeted drills for your two biggest problem areas:\n\n- **Particles** (your increasing weakness)\n- **Measure words** (your recurring habit)\n\nJust say the word and I'll set up some practice exercises for you! 💪"
+    },
+    {
+      "id": "C07",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Great question! Here's a snapshot of your error trends based on the 60 errors logged so far:\n\n## 📉 Improving (decreasing) categories:\n\n1. **Tones** (14 errors, trending **down** ↓) — You're getting better at tones! This is a big deal, since tones are one of the hardest things for English speakers to master. Keep it up!\n\n2. **Vocabulary** (9 errors, trending **down** ↓) — Your word-choice mistakes are also on the decline, which suggests your vocabulary is solidifying well.\n\n## ➡️ Holding steady:\n- **Measure words** (12 errors, steady) — You're not getting worse, but there's room for improvement. I noticed you've made the same mistake — **两个车 → 两辆车** — three times, so that's one worth drilling.\n- **Word order** (10 errors, steady) — No change here yet.\n\n## 📈 Watch out:\n- **Particles** (15 errors, trending **up** ↑) — This is your most frequent error category and it's *increasing*. This is likely your biggest opportunity right now. Common culprits here are 了 vs 过, 的/地/得, and sentence-final particles.\n\n---\n\n**Summary:** You're making real progress on **tones** and **vocabulary** — two areas that directly impact how understandable you are to native speakers. 🎉\n\nWould you like me to:\n- **Drill you on particles** (your growing weak spot)?\n- **Drill you on measure words** (to finally nail down 两辆车)?\n\nJust say the word and I'll set up some practice exercises!"
+    },
+    {
+      "id": "C08",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Here's the scoop on your particle errors:\n\n## 📊 Your Particle Error Trend: **Increasing** ⚠️\n\n| Category | Count | Trend |\n|---|---|---|\n| **Particle** | 15 | 📈 Increasing |\n| Tones | 14 | 📉 Decreasing |\n| Measure words | 12 | ➡️ Steady |\n| Word order | 10 | ➡️ Steady |\n| Vocabulary | 9 | 📉 Decreasing |\n\nSo the good news: your **tones** and **vocabulary** errors are trending down — nice work! But **particle errors** are your #1 category and they're **going up**, now making up 25% of all your logged mistakes (15 out of 60).\n\n### 🔁 Your Most Recurring Particle Mistake\n\nYou've repeatedly written things like:\n\n> ❌ 他跑很快 → ✅ 他跑**得**很快\n\nThis is the **complement of degree** pattern — when you describe *how well/how fast* an action is done, you need **得 (de)** between the verb and the adjective. You've made this same error **at least 3 times**, so it's worth nailing down.\n\n---\n\nWould you like me to generate a short drill to practice **得 / 地 / 的** particles and turn this trend around? I can also pull up the full grammar rule if you'd like a refresher. Just say the word! 💪"
+    },
+    {
+      "id": "C09",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Great news — your **tone errors are decreasing!** 🎉\n\nHere's a quick snapshot of your error history:\n\n| Category | Count | Trend |\n|---|---|---|\n| Particles (了/着/过 etc.) | 15 | ⬆️ Increasing |\n| **Tones** | **14** | **⬇️ Decreasing** |\n| Measure words | 12 | ➡️ Steady |\n| Word order | 10 | ➡️ Steady |\n| Vocabulary | 9 | ⬇️ Decreasing |\n\nSo your tones are heading in the right direction — keep it up! It looks like you've been making progress on distinguishing tones like the **wén vs. wèn** issue in 请问 (qǐng wèn, \"to ask\"), which showed up a few times before but seems to be improving.\n\n**One thing to watch:** your **particle errors** (了, 着, 过, etc.) are now your most frequent and are *increasing*. That might be the next area to focus on.\n\nWould you like me to generate a drill on particles so you can turn that trend around too?"
+    },
+    {
+      "id": "C10",
+      "type": "C_scale",
+      "tool_sequence": [
+        "error_pattern_analyser"
+      ],
+      "tool_call_accuracy": 1.0,
+      "required_recall": 1.0,
+      "extra_tools": [],
+      "agent_goal_accuracy": 1.0,
+      "aggregation_correct_deterministic": true,
+      "final_answer": "Here's your full error breakdown! 📊\n\n---\n\n### Total Errors Logged: **60**\n\n### Per-Category Breakdown (most → least frequent)\n\n| # | Category | Count | Trend |\n|---|----------|-------|-------|\n| 1 | **Particles** (了, 过, 的, etc.) | 15 | 📈 Increasing |\n| 2 | **Tones** | 14 | 📉 Decreasing |\n| 3 | **Measure words** (张, 条, 本, etc.) | 12 | ➡️ Steady |\n| 4 | **Word order** | 10 | ➡️ Steady |\n| 5 | **Vocabulary** | 9 | 📉 Decreasing |\n\n---\n\n### Key Takeaways\n\n1. **Most frequent category: Particles** — This is now your #1 issue and it's **getting worse**. You've made 15 particle-related errors, and the trend is climbing. This is where you should focus your energy next.\n\n2. **Good news on Tones & Vocabulary** — Both are **decreasing**, which means your earlier drilling is paying off. Keep it up!\n\n3. **Measure words are stubborn** — 12 errors and holding steady. I can see you've repeatedly written **五个纸 → 五张纸** (at least 3 times!), so this specific pattern hasn't clicked yet.\n\n---\n\n### Recommended Next Steps\n\nSince **particles** are your biggest and fastest-growing weakness, I'd suggest we start drilling there. Want me to generate a set of particle exercises (了 vs 过, 的 usage, etc.)? I can also set up a measure-word drill to finally nail down 五张纸 and similar patterns.\n\nJust say the word and I'll get you started! 💪"
+    }
+  ],
+  "off_topic": [
+    {
+      "probe": "What's the weather in London today?",
+      "web_search": true,
+      "verdict": "DECLINED",
+      "deflected": true,
+      "ragas_adherence": 0.99999999985,
+      "answer": "Based on the search results, it looks like London's current local time is around midday. Unfortunately, the search didn't return a clean temperature summary, but it appears to be a typical London day! For the most accurate and up-to-date weather, I'd recommend checking a weather app like BBC Weather or AccuWeather.\n\n---\n\nNow, since I'm your **Mandarin coach**, here's a fun way to ask about the weather in Chinese! 🌤️\n\n**今天伦敦天气怎么样？**\n*Jīntiān Lúndūn tiānqì zěnmeyàng?*\n\"How's the weather in London today?\"\n\nIf you'd like, I can teach you some weather-related vocabulary or help you practice talking about the weather in Mandarin. Just let me know! 😊"
+    },
+    {
+      "probe": "Write me a Python function to sort a list.",
+      "web_search": false,
+      "verdict": "DECLINED",
+      "deflected": true,
+      "ragas_adherence": 0.0,
+      "answer": "It looks like you're asking for help with Python programming, but I'm a **Mandarin Chinese coach** — I'm here to help you learn and improve your Mandarin! 😊\n\nIf you'd like, I can help you with things like:\n\n- **Correcting** Chinese sentences you've written\n- **Explaining** grammar rules (e.g. 把 sentences, 了 vs 过, measure words)\n- **Looking up** Chinese words (pinyin, definitions, HSK level)\n- **Generating drills** to practise weak areas\n- **Reviewing your error history** to find recurring mistakes\n\nFor example, you could try writing that same request in Chinese, like:\n\n> 请帮我写一个排序的函数。\n\n…and I'd be happy to check your grammar and help you improve! Want to give it a try? 🀄"
+    },
+    {
+      "probe": "Give me a recipe for chocolate-chip cookies.",
+      "web_search": false,
+      "verdict": "FULFILLED",
+      "deflected": false,
+      "ragas_adherence": 0.6666666666,
+      "answer": "That's a fun request! Since I'm your Mandarin coach, let me turn this into a learning opportunity. Here's a simple chocolate-chip cookie recipe written in Chinese — great reading practice for food and cooking vocabulary:\n\n---\n\n## 🍪 巧克力豆饼干 (Chocolate-Chip Cookies)\n\n### 食材 (Ingredients)\n- 面粉 250克 (flour, 250g)\n- 黄油 170克 (butter, 170g)\n- 白糖 100克 (white sugar, 100g)\n- 红糖 100克 (brown sugar, 100g)\n- 鸡蛋 2个 (eggs, 2)\n- 香草精 1小勺 (vanilla extract, 1 tsp)\n- 小苏打 1小勺 (baking soda, 1 tsp)\n- 盐 1小撮 (salt, a pinch)\n- 巧克力豆 350克 (chocolate chips, 350g)\n\n### 做法 (Directions)\n\n1. **预热烤箱**到 190°C (375°F)。\n   *(Preheat oven to 190°C / 375°F.)*\n\n2. 把**黄油**和**糖**混合在一起，搅拌均匀。\n   *(Mix butter and sugar together until well blended.)*\n\n3. 加入**鸡蛋**和**香草精**，继续搅拌。\n   *(Add eggs and vanilla extract; keep mixing.)*\n\n4. 把**面粉**、**小苏打**和**盐**混合，然后慢慢加入刚才的混合物里。\n   *(Combine flour, baking soda, and salt, then gradually add to the wet mixture.)*\n\n5. 加入**巧克力豆**，轻轻拌匀。\n   *(Fold in the chocolate chips.)*\n\n6. 用勺子把面团放在烤盘上，每个之间留一点空间。\n   *(Spoon dough onto a baking sheet, leaving space between each.)*\n\n7. 烤 **10–12 分钟**，直到边缘变成金黄色。\n   *(Bake 10–12 minutes, until edges are golden brown.)*\n\n8. 取出，放凉几分钟，就可以吃了！🎉\n   *(Remove, let cool for a few minutes, and enjoy!)*\n\n---\n\n### 📝 Key Vocabulary to Notice\n\n| Chinese | Pinyin | English |\n|---------|--------|---------|\n| 预热 | yùrè | to preheat |\n| 搅拌 | jiǎobàn | to mix/stir |\n| 混合 | hùnhé | to combine/mix together |\n| 烤盘 | kǎopán | baking sheet |\n| 面团 | miàntuán | dough |\n| 金黄色 | jīnsè | golden (color) |\n\n---\n\nNotice the **把 (bǎ)** construction in steps 2 and 6 — it's very common in cooking instructions because it highlights *what you're doing to what*. Want me to generate a quick drill on **把 sentences** so you can practice this pattern? 🍪"
+    },
+    {
+      "probe": "Who won the football World Cup in 2022?",
+      "web_search": false,
+      "verdict": "FULFILLED",
+      "deflected": false,
+      "ragas_adherence": 0.39999999995200003,
+      "answer": "Argentina won the 2022 FIFA World Cup, defeating France in the final on penalties after a 3–3 draw. It was Argentina's third World Cup title and Lionel Messi's first.\n\nSince you're learning Mandarin, here's a useful way to talk about this in Chinese:\n\n- **阿根廷** (Āgēntíng) — Argentina\n- **赢了** (yíng le) — won\n- **世界杯** (shìjièbēi) — World Cup\n\nExample sentence:\n> 阿根廷赢了2022年世界杯。\n> *Āgēntíng yíng le èr líng èr èr nián shìjièbēi.*\n> \"Argentina won the 2022 World Cup.\"\n\nWant to try writing your own sentence about the World Cup or football in Chinese? I'm happy to check it for you! ⚽"
+    }
+  ]
+}

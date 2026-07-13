@@ -1,9 +1,14 @@
-"""Shared eval bootstrap.
+"""Shared eval bootstrap + the single source of truth for eval paths.
 
 Import this FIRST in every eval script — before importing any app module —
 because it (1) loads secrets from .env, (2) redirects ChromaDB to an isolated
-eval directory so eval seeding never touches the real user corpus, and (3) puts
-app/ on sys.path (the app modules import each other flatly, e.g. `import memory`).
+eval directory so eval seeding never touches the real user corpus, (3) puts app/
+on sys.path (the app modules import each other flatly, e.g. `import memory`), and
+(4) applies the RAGAS import shim.
+
+It also exports the folder paths every script needs (`EVALS`, `DATAGEN`,
+`RESULTS`, `APP_DATA`) so no script recomputes them from `__file__` — move a file
+between subfolders and nothing else has to change.
 """
 import os
 import sys
@@ -11,12 +16,18 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-ROOT = Path(__file__).resolve().parent.parent
+# This file lives at evals/lib/_env.py → parents[1] = evals/, parents[2] = repo root.
+EVALS = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
+DATAGEN = EVALS / "datagen"      # generators + seed data + frozen test datasets
+RESULTS = EVALS / "results"      # every surface writes its output here
+APP_DATA = ROOT / "data"         # the app's reference corpus (grammar_rules.json, ...)
+
 load_dotenv(ROOT / ".env")
 
 # Isolate every eval ChromaDB write from the real /var/data (or local) corpus.
 # Must be set before `import memory`, which reads CHROMA_PATH at module load.
-EVAL_CHROMA = ROOT / "evals" / ".eval_chroma"
+EVAL_CHROMA = EVALS / ".eval_chroma"
 os.environ["CHROMA_PATH"] = str(EVAL_CHROMA)
 
 # Send eval-run traces to their own LangSmith project so the many judge/agent calls

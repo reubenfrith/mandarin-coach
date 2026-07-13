@@ -1,6 +1,6 @@
 """RAG-metric surface — the grammar_rule_fetcher retrieval→grounding chain.
 
-Standard RAGAS metrics (collections API, judged by gpt-4o-mini) over the Type A
+Standard RAGAS metrics (collections API, judged by gpt-4o-mini) over the A_stateless
 cases, evaluating the retriever + a grounded generation in isolation (no agent
 tool-selection variance):
 
@@ -12,21 +12,24 @@ tool-selection variance):
   AnswerAccuracy       is the answer correct vs the reference correction?
 
 Reported ALONGSIDE a deterministic recall@k / MRR computed by exact rule-id match
-(Type A cases carry a ground-truth `expected_rule_id`). The deterministic number
+(A_stateless cases carry a ground-truth `expected_rule_id`). The deterministic number
 validates RAGAS's LLM-judged ContextRecall — a strength to show, not a duplicate.
 
-  uv run python evals/ragas_rag.py            # all Type A cases
-  uv run python evals/ragas_rag.py --limit 8  # cheap review slice
+  uv run python evals/ragas_rag.py            # all A_stateless cases
+  uv run python evals/surfaces/ragas_rag.py --limit 8  # cheap review slice
 """
-import _env  # noqa: F401  — MUST be first: .env, chroma isolation, ragas vertexai shim
+import pathlib
+import sys
 
-import argparse
-import asyncio
-import json
-import os
-from pathlib import Path
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))  # evals/ on path
+from lib import _env  # noqa: E402,F401  — bootstrap: .env, chroma isolation, ragas shim
 
-from langchain_openai import ChatOpenAI
+import argparse  # noqa: E402
+import asyncio  # noqa: E402
+import json  # noqa: E402
+import os  # noqa: E402
+
+from langchain_openai import ChatOpenAI  # noqa: E402
 from ragas.dataset_schema import SingleTurnSample
 from ragas.llms import LangchainLLMWrapper
 from ragas.metrics import (
@@ -43,9 +46,8 @@ from agent import answer_text
 from config import get_llm
 from langchain_core.messages import HumanMessage, SystemMessage
 
-ROOT = Path(__file__).resolve().parent.parent
-DATASET = ROOT / "evals" / "test_dataset.json"
-RESULTS = ROOT / "evals" / "results"
+DATASET = _env.DATAGEN / "test_dataset.json"
+RESULTS = _env.RESULTS
 EVALUATOR_MODEL = os.environ.get("RAGAS_EVALUATOR", "gpt-4o-mini")
 # Generation model for the grounded answer. Defaults to glm (fast, non-reasoning):
 # the RAG surface measures the retriever + grounding, not the model (that is Task 6's
@@ -182,7 +184,7 @@ def render_md(summary: dict) -> str:
     lines = [
         "# RAG-metric surface — grammar_rule_fetcher",
         f"\nEvaluator: **{EVALUATOR_MODEL}** · generation: **{GEN_MODEL}** · retrieval depth k={K} · "
-        f"{summary['n_cases']} Type A cases ({summary['n_with_rule_id']} with a ground-truth rule id"
+        f"{summary['n_cases']} A_stateless cases ({summary['n_with_rule_id']} with a ground-truth rule id"
         + (f"; {summary['n_generation_failed']} generation timeouts, scored on retrieval only"
            if summary.get('n_generation_failed') else "") + ").\n",
         "## RAGAS metrics (0–1, higher is better)",
@@ -212,10 +214,10 @@ def render_md(summary: dict) -> str:
 
 async def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--limit", type=int, default=None, help="only first N Type A cases")
+    ap.add_argument("--limit", type=int, default=None, help="only first N A_stateless cases")
     args = ap.parse_args()
 
-    data = json.loads(DATASET.read_text())["type_a"]
+    data = json.loads(DATASET.read_text())["A_stateless"]
     if args.limit:
         data = data[: args.limit]
 

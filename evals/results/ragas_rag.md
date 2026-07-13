@@ -1,6 +1,6 @@
 # RAG-metric surface — grammar_rule_fetcher
 
-Evaluator: **gpt-4o-mini** · generation: **glm** · retrieval depth k=3 · 40 Type A cases (24 with a ground-truth rule id).
+Evaluator: **gpt-4o-mini** · generation: **glm** · retrieval depth k=3 · 40 A_stateless cases (24 with a ground-truth rule id).
 
 ## RAGAS metrics (0–1, higher is better)
 | Metric | Mean | Measures |
