@@ -5,7 +5,7 @@ user namespace without the LLM having to supply a user id. The agent selects
 among these based on intent — that selection is what makes this an agent rather
 than a chatbot.
 
-  1. grammar_rule_fetcher   — RAG over grammar_rules (internal)
+  1. grammar_rule_fetcher   — hybrid BM25+dense RAG over grammar_rules (internal)
   2. error_pattern_analyser — personal error history + deterministic stats (internal)
   3. drill_generator        — LLM-generated targeted exercises (internal LLM call)
   4. dictionary_lookup      — grounded pinyin/definition/HSK (external CC-CEDICT + pypinyin)
@@ -88,7 +88,9 @@ def make_tools(user_id: str) -> list:
         """Fetch Mandarin grammar rules relevant to a sentence or grammar question.
         Use this to explain WHY something is wrong or to answer a grammar question,
         e.g. the 把 construction, 了 vs 过, measure words."""
-        hits = memory.query_grammar_rules(query, n=3)
+        # Hybrid BM25+dense (RRF) — the Task 6 advanced retriever; degrades to
+        # dense automatically if the optional BM25 deps are unavailable.
+        hits = memory.query_grammar_rules_hybrid(query, n=3)
         if not hits:
             return "No matching grammar rule found."
         out = []

@@ -19,16 +19,16 @@ dependencies = [
     "python-dotenv",
     "pypinyin>=0.55.0",
     "langgraph>=1.2.9",
+    "rank-bm25",               # BM25 sparse retrieval for the hybrid grammar retriever (Task 6)
+    "jieba",                   # CJK tokenisation so Chinese BM25 doesn't silently fail
 ]
 
 [project.optional-dependencies]
-# Eval-only, heavy dependencies for the Task 6 retrieval sweep. Kept OUT of the
-# default install and the production Docker image (BGE-M3 pulls in torch). Install
-# locally for the sweep with:  uv sync --extra task6
+# Eval-only heavy dependency for the Task 6 embedding sweep (BGE-M3 pulls in torch).
+# Kept OUT of the default install and the production image. Install for the sweep with:
+#   uv sync --extra task6
 task6 = [
-    "sentence-transformers",   # BGE-M3 local embeddings (Axis 1 candidate)
-    "rank-bm25",               # BM25 sparse retrieval (Axis 2 hybrid)
-    "jieba",                   # CJK tokenisation so Chinese BM25 doesn't silently fail
+    "sentence-transformers",   # BGE-M3 local embeddings (Axis 1 candidate — NOT adopted in prod)
 ]
 
 [tool.uv]

@@ -188,6 +188,73 @@ def query_grammar_rules(text: str, n: int = 3, where: dict | None = None) -> lis
     return _query("grammar_rules", text, n, where)
 
 
+# --------------------------------------------------------------------------- #
+# Hybrid retrieval (BM25 + dense, RRF) — the Task 6 advanced retriever.
+# Chinese grammatical particles (把/了/过/就/才) are exact-match signals that
+# define the error type; BM25 catches them where dense similarity underweights
+# them. Fused with dense by Reciprocal Rank Fusion (rank-only, so the two
+# incompatible score scales never have to be reconciled). Sweep result: recall@1
+# 0.49→0.56 on non-circular queries (see evals/results/retrieval_sweep.md).
+# --------------------------------------------------------------------------- #
+_RRF_K = 60
+_bm25_grammar = None  # cached index over the (static) grammar_rules collection
+
+
+def _grammar_bm25():
+    """Lazily build + cache a jieba-tokenised BM25 index over grammar_rules.
+    Returns None if the collection is empty or the optional deps are unavailable
+    (callers then fall back to dense-only)."""
+    global _bm25_grammar
+    if _bm25_grammar is not None:
+        return _bm25_grammar or None
+    try:
+        import jieba
+        from rank_bm25 import BM25Okapi
+
+        col = _collection("grammar_rules")
+        if col.count() == 0:
+            return None
+        data = col.get(include=["documents"])
+        ids, docs = data["ids"], data["documents"]
+        tok = lambda s: [t for t in jieba.cut(s) if t.strip()]  # noqa: E731
+        _bm25_grammar = {"bm25": BM25Okapi([tok(d) for d in docs]), "ids": ids, "tok": tok}
+        return _bm25_grammar
+    except Exception:  # noqa: BLE001 — deps missing / build failed → caller uses dense
+        _bm25_grammar = {}  # sentinel: tried and failed, don't retry every call
+        return None
+
+
+def query_grammar_rules_hybrid(text: str, n: int = 3) -> list:
+    """Hybrid BM25+dense retrieval with RRF fusion. Falls back to dense-only if the
+    BM25 index is unavailable, so the app never breaks on a missing optional dep."""
+    col = _collection("grammar_rules")
+    total = col.count()
+    if total == 0:
+        return []
+    idx = _grammar_bm25()
+    if idx is None:
+        return query_grammar_rules(text, n)  # graceful degradation → dense only
+
+    dense = col.query(query_texts=[text], n_results=total)
+    dense_ids = dense["ids"][0]
+    scores = idx["bm25"].get_scores(idx["tok"](text))
+    bm25_ids = [idx["ids"][i] for i in sorted(range(len(scores)), key=lambda i: -scores[i])]
+
+    rrf: dict[str, float] = {}
+    for ranklist in (dense_ids, bm25_ids):
+        for pos, doc_id in enumerate(ranklist):
+            rrf[doc_id] = rrf.get(doc_id, 0.0) + 1.0 / (_RRF_K + pos + 1)
+    top = sorted(rrf, key=lambda d: -rrf[d])[:n]
+
+    got = col.get(ids=top, include=["documents", "metadatas"])
+    by_id = {got["ids"][i]: (got["documents"][i], got["metadatas"][i]) for i in range(len(got["ids"]))}
+    out = []
+    for doc_id in top:
+        doc, meta = by_id.get(doc_id, ("", {}))
+        out.append({"id": doc_id, "document": doc, "metadata": meta, "distance": None})
+    return out
+
+
 def query_error_patterns(text: str, n: int = 3, where: dict | None = None) -> list:
     return _query("error_patterns", text, n, where)
 

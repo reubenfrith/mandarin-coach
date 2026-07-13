@@ -900,7 +900,7 @@ On that non-circular set the baseline is emphatically **not** saturated — reca
 
 #### Decision
 
-**Adopt the hybrid retriever** (BM25 + dense, RRF) as the advanced production retriever — it is a real, particle-driven quality gain on an honest test. **Keep OpenAI embeddings as the default** for the marginal quality edge, but BGE-M3 is a validated drop-in for a latency- or cost-sensitive (or offline) deployment. Wiring hybrid into the production `grammar_rule_fetcher` adds `rank-bm25` + `jieba` to the image (currently eval-only via the `task6` extra); that is the one implementation cost of banking the win.
+**Adopted the hybrid retriever** (BM25 + dense, RRF) as the advanced production retriever — it is a consistent, particle-driven improvement on an honest test. It is now **wired into production**: `grammar_rule_fetcher` calls `memory.query_grammar_rules_hybrid`, which fuses jieba-tokenised BM25 with the dense ChromaDB ranking via RRF and **degrades automatically to dense-only** if the BM25 deps are ever missing (so the app never breaks). `rank-bm25` + `jieba` are pure-Python and moved into the main dependencies; the dense `query_grammar_rules` is retained unchanged so Task 5's RAG surface stays reproducible. **OpenAI embeddings remain the default** for the marginal quality edge, with BGE-M3 a validated drop-in for a latency-/cost-sensitive or offline deployment (its heavy `torch` dependency stays eval-only in the `task6` extra).
 
 ### 6.2 — Model bake-off
 

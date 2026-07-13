@@ -1893,6 +1893,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "chainlit" },
     { name = "chromadb" },
+    { name = "jieba" },
     { name = "langchain" },
     { name = "langchain-community" },
     { name = "langchain-core" },
@@ -1904,14 +1905,13 @@ dependencies = [
     { name = "pypinyin" },
     { name = "python-dotenv" },
     { name = "ragas" },
+    { name = "rank-bm25" },
     { name = "requests" },
     { name = "tavily-python" },
 ]
 
 [package.optional-dependencies]
 task6 = [
-    { name = "jieba" },
-    { name = "rank-bm25" },
     { name = "sentence-transformers" },
 ]
 
@@ -1919,7 +1919,7 @@ task6 = [
 requires-dist = [
     { name = "chainlit" },
     { name = "chromadb" },
-    { name = "jieba", marker = "extra == 'task6'" },
+    { name = "jieba" },
     { name = "langchain" },
     { name = "langchain-community" },
     { name = "langchain-core" },
@@ -1931,7 +1931,7 @@ requires-dist = [
     { name = "pypinyin", specifier = ">=0.55.0" },
     { name = "python-dotenv" },
     { name = "ragas" },
-    { name = "rank-bm25", marker = "extra == 'task6'" },
+    { name = "rank-bm25" },
     { name = "requests" },
     { name = "sentence-transformers", marker = "extra == 'task6'" },
     { name = "tavily-python" },
