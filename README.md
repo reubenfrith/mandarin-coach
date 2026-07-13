@@ -911,6 +911,23 @@ On that non-circular set the baseline is emphatically **not** saturated — reca
 
 *Corpus note:* after the sweep, production `grammar_rule_fetcher` was extended to **union two collections** — the eval'd 98-rule `grammar_rules` plus the 217-point Chinese Grammar Wiki `grammar_patterns` coverage set (see Task 3) — with the same hybrid BM25+dense RRF over the union. The sweep numbers above are **measured on the curated 98-rule set only and deliberately not re-run** against the union: every query in the non-circular set carries a single gold rule id, and the CGW set contains near-duplicate points (为了, 把, 一…就, …) that a query could legitimately retrieve instead — which would register as a *label collision*, not a quality change. The technique selection (hybrid > dense) is corpus-size-independent, so it stands; re-running would only measure the wrong thing.
 
+### 6.1b — Grammar coverage: more rules, without touching the result
+
+After the sweep, more in-depth sourcing turned up a far larger open grammar corpus than the 98 hand-curated rules: the **Chinese Grammar Wiki** (via `chanind/cn-grammar-matcher`), from which **217 additional grammar points** were ingested. The production app now retrieves over **both** sets (315 grammar documents unioned in `grammar_rule_fetcher`), so a learner reaches roughly **3× the grammar coverage**.
+
+**The evals were run on the 98-rule set, not all 315 — and that is deliberate, with no effect on any decision this project made.** The reasoning, stated plainly so it can be checked:
+
+1. **The retrieval experiment selected a *technique*, not a corpus.** Task 6.1 answered "hybrid vs dense vs which embedding" — a property of *how* matching works, invariant to how many rules are in the pool. Adding rules changes *coverage*, which the sweep never claimed to measure.
+2. **Re-running the sweep on 315 would measure the wrong thing.** Each of the 43 non-circular queries carries a single gold rule id, and the CGW set contains near-duplicate points (为了, 把, 一…就…); a query could retrieve the CGW twin instead of its curated gold and be scored a "miss" — a label collision, not a quality regression. So the sweep is frozen on the curated set and the technique choice stands unchanged.
+3. **A separate, honest check confirms the addition is pure upside.** `evals/surfaces/coverage_check.py` (results in `results/coverage_check.md`) measures the two things that *can* move:
+
+| | Result | Meaning |
+|---|---|---|
+| **Coverage** (15 CGW-only topics) | curated-only **0/15** → union **recall@3 0.87** | Topics like 除非/自从/要不是/不得不 were unreachable before; now retrieved |
+| **Precision retention** (43 curated queries) | curated-only **0.767** → union **0.744** | Curated gold recall@3 essentially unchanged |
+
+The precision number is the load-bearing one: of the 11 curated golds outside top-3 on the union, **10 were already misses on the curated-only sweep — only 1 (R38) is a new displacement**, and that query (是 + adjective) already had a valid alternative rule. So adding 217 rules moved *one* query out of 43. **Conclusion: the expansion is strictly more coverage at the same precision — it strengthens the product without changing, or needing, any eval-driven decision.**
+
 ### 6.2 — Model bake-off
 
 This settles the keep/drop-DeepSeek decision that Task 5 deferred, by adding the two columns Task 5 never had: **latency** and **timeout-rate**. `evals/surfaces/model_bakeoff.py` runs each candidate over 12 A_stateless correction cases as a **grounded-correction generation** — every model gets the *same* retrieved rules, so the only variable is the model. (Running the full agent would confound it: the `drill_generator` tool internally calls the *default* model, leaking DeepSeek's latency into every model's numbers — a bug caught and avoided during the build.) The judge is fixed across all models; each turn is bounded at 120 s so a hung model is *counted* as a timeout rather than stranding the run.

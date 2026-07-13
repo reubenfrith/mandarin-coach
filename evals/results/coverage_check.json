@@ -1,0 +1,300 @@
+{
+  "summary": {
+    "grammar_patterns_count": 217,
+    "coverage": {
+      "n": 15,
+      "recall@1": 0.6,
+      "recall@3": 0.867,
+      "curated_only_recall": 0.0
+    },
+    "precision_retention": {
+      "n": 43,
+      "union_recall@3": 0.744,
+      "curated_only_sweep_recall@3": 0.767,
+      "curated_gold_dropped_from_top3": 11,
+      "drops_already_missed_on_curated_sweep": 10,
+      "new_drops_from_cgw_ingest": [
+        "R38"
+      ]
+    }
+  },
+  "coverage_rows": [
+    {
+      "query": "除非你现在走，否则一定会迟到。",
+      "gold": "cgw_chufei",
+      "label": "unless (除非)",
+      "rank": 2,
+      "top3": [
+        "gr_dei_must",
+        "cgw_chufei",
+        "gr_hui_de_certainty"
+      ]
+    },
+    {
+      "query": "这家餐厅很好吃，不过有点贵。",
+      "gold": "cgw_buguo",
+      "label": "however (不过)",
+      "rank": 2,
+      "top3": [
+        "gr_youdianr_yidianr",
+        "cgw_buguo",
+        "cgw_youyidian"
+      ]
+    },
+    {
+      "query": "多亏你帮忙，我才能按时完成。",
+      "gold": "cgw_duokui",
+      "label": "thanks to (多亏)",
+      "rank": 1,
+      "top3": [
+        "cgw_duokui",
+        "gr_ruguo_jiu",
+        "gr_yi_jiu"
+      ]
+    },
+    {
+      "query": "自从他去了北京，我们就没见过面。",
+      "gold": "cgw_expressingEverSinceWithZicong",
+      "label": "ever since (自从)",
+      "rank": 1,
+      "top3": [
+        "cgw_expressingEverSinceWithZicong",
+        "gr_chule_yiwai",
+        "gr_le_negation_drop"
+      ]
+    },
+    {
+      "query": "我们明天去不去，要看天气怎么样。",
+      "gold": "cgw_expressingItDependsWithKan",
+      "label": "it depends (要看)",
+      "rank": null,
+      "top3": [
+        "gr_wulun_dou",
+        "gr_zenmeyang",
+        "cgw_expressingBeGoingToWithYao"
+      ]
+    },
+    {
+      "query": "路上太堵了，我差点没赶上火车。",
+      "gold": "cgw_expressingAlmostUsingChadianMei",
+      "label": "almost (差点没)",
+      "rank": 2,
+      "top3": [
+        "gr_yao_le_imminent",
+        "cgw_expressingAlmostUsingChadianMei",
+        "cgw_butDidnt"
+      ]
+    },
+    {
+      "query": "要不是你提醒我，我就把这件事忘了。",
+      "gold": "cgw_expressingIfItWereNotForWithYaobushi",
+      "label": "if it weren't for (要不是)",
+      "rank": 1,
+      "top3": [
+        "cgw_expressingIfItWereNotForWithYaobushi",
+        "gr_ruguo_jiu",
+        "gr_yi_jiu"
+      ]
+    },
+    {
+      "query": "因为下大雨，我们不得不取消了比赛。",
+      "gold": "cgw_expressingHaveToWithBudebu",
+      "label": "have no choice but to (不得不)",
+      "rank": 2,
+      "top3": [
+        "gr_yinwei_suoyi",
+        "cgw_expressingHaveToWithBudebu",
+        "gr_chule_yiwai"
+      ]
+    },
+    {
+      "query": "听到这个好消息，她高兴得不得了。",
+      "gold": "cgw_deBudeliao",
+      "label": "extremely (得不得了)",
+      "rank": 1,
+      "top3": [
+        "cgw_deBudeliao",
+        "gr_tai_le",
+        "gr_potential_complement"
+      ]
+    },
+    {
+      "query": "这个套餐的价格包括早餐和晚餐。",
+      "gold": "cgw_expressingIncludingWithBaokuo",
+      "label": "including (包括)",
+      "rank": 1,
+      "top3": [
+        "cgw_expressingIncludingWithBaokuo",
+        "gr_you_you",
+        "gr_yibian_yibian"
+      ]
+    },
+    {
+      "query": "别说孩子，连大人都喜欢看动画片。",
+      "gold": "cgw_bieShuo",
+      "label": "let alone (别说)",
+      "rank": null,
+      "top3": [
+        "gr_dou_all",
+        "gr_mei_every",
+        "gr_gen_he_with"
+      ]
+    },
+    {
+      "query": "我本来打算去旅游，后来改变了主意。",
+      "gold": "cgw_benlai",
+      "label": "originally / was going to (本来)",
+      "rank": 1,
+      "top3": [
+        "cgw_benlai",
+        "cgw_houlai",
+        "gr_lai_qu_purpose"
+      ]
+    },
+    {
+      "query": "他今天特别忙，一口饭也没吃。",
+      "gold": "cgw_expressingNotEvenOne",
+      "label": "not even one (一…也不)",
+      "rank": 1,
+      "top3": [
+        "cgw_expressingNotEvenOne",
+        "cgw_meiBanfa",
+        "gr_chule_yiwai"
+      ]
+    },
+    {
+      "query": "这部电影我不怎么喜欢。",
+      "gold": "cgw_expressingNotOftenWithBuZenme",
+      "label": "not really / not much (不怎么)",
+      "rank": 1,
+      "top3": [
+        "cgw_expressingNotOftenWithBuZenme",
+        "cgw_buZenme",
+        "gr_gen_he_with"
+      ]
+    },
+    {
+      "query": "我们俩的年龄差不多。",
+      "gold": "cgw_chabuduo",
+      "label": "about the same (差不多)",
+      "rank": 1,
+      "top3": [
+        "cgw_chabuduo",
+        "cgw_chahenduo",
+        "gr_gen_yiyang"
+      ]
+    }
+  ],
+  "drops": [
+    {
+      "id": "R01",
+      "gold": "gr_le_completion",
+      "query": "小时候我常常去了公园。",
+      "top3": [
+        "gr_frequency_adverb",
+        "gr_wulun_dou",
+        "gr_ye_also"
+      ]
+    },
+    {
+      "id": "R02",
+      "gold": "gr_le_change",
+      "query": "你看，外面下雪，我们别出去了。",
+      "top3": [
+        "gr_chule_yiwai",
+        "gr_ba_suggestion",
+        "gr_yixia"
+      ]
+    },
+    {
+      "id": "R12",
+      "gold": "gr_yinggai_should",
+      "query": "你感冒了，多喝热水休息。",
+      "top3": [
+        "gr_verb_reduplication",
+        "cgw_zuihao",
+        "cgw_haiyou"
+      ]
+    },
+    {
+      "id": "R15",
+      "gold": "gr_gen_yiyang",
+      "query": "妹妹跟姐姐高。",
+      "top3": [
+        "cgw_expressingAgeDifferenceWithDaAndXiao",
+        "gr_bi_degree_diff",
+        "gr_bi_comparison"
+      ]
+    },
+    {
+      "id": "R28",
+      "gold": "gr_jian_perception",
+      "query": "你说得太小声，我没听。",
+      "top3": [
+        "cgw_leYidianr",
+        "gr_tai_le",
+        "gr_potential_complement"
+      ]
+    },
+    {
+      "id": "R29",
+      "gold": "gr_hao_completion",
+      "query": "行李还没收拾，我们不能出发。",
+      "top3": [
+        "gr_chule_yiwai",
+        "gr_le_negation_drop",
+        "cgw_meiBanfa"
+      ]
+    },
+    {
+      "id": "R30",
+      "gold": "gr_directional",
+      "query": "小狗跑出去了房间。",
+      "top3": [
+        "gr_yao_le_imminent",
+        "gr_le_change",
+        "gr_le_negation_drop"
+      ]
+    },
+    {
+      "id": "R37",
+      "gold": "gr_zai_location",
+      "query": "我的钥匙有你那里吗？",
+      "top3": [
+        "gr_dao_resultative",
+        "gr_ma_question",
+        "gr_ne_question"
+      ]
+    },
+    {
+      "id": "R38",
+      "gold": "gr_shi_identity",
+      "query": "这个问题是很难。",
+      "top3": [
+        "cgw_expressingDifficultWithNan",
+        "gr_adj_predicate_hen",
+        "gr_tai_le"
+      ]
+    },
+    {
+      "id": "R39",
+      "gold": "gr_adj_predicate_hen",
+      "query": "今天的天气好。",
+      "top3": [
+        "gr_wulun_dou",
+        "gr_hao_completion",
+        "gr_yuelaiyue"
+      ]
+    },
+    {
+      "id": "R41",
+      "gold": "gr_dou_all",
+      "query": "都我的同事很友好。",
+      "top3": [
+        "gr_gen_yiyang",
+        "gr_bi_comparison",
+        "gr_chule_yiwai"
+      ]
+    }
+  ]
+}

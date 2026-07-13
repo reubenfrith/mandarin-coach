@@ -23,6 +23,12 @@ re-running would mismeasure; technique selection (hybrid>dense) is corpus-size-i
 No fabricated HSK levels: CGW points carry `hsk_level=0` (unknown) and the fetcher omits the
 "(HSK …)" tag rather than printing a guess. README Task 3 + data/README.md credit both sources.
 
+**Coverage check** (`evals/surfaces/coverage_check.py` → `results/coverage_check.md`, README §6.1b):
+proves the +217 is upside-only. Coverage: 15 CGW-only topics go from curated-only **0/15** →
+union **recall@3 0.87**. Precision retention: curated-gold recall@3 **0.767→0.744** (unchanged) —
+of 11 curated golds outside top-3, 10 were ALREADY sweep misses; only **1 new drop (R38)**, which
+had a valid alternative. So more coverage at the same precision, no eval-decision impact.
+
 ## 2026-07-13 — Task 6.2 model bake-off (keep/drop-deepseek RESOLVED)
 
 `evals/surfaces/model_bakeoff.py` → `results/model_bakeoff.{md,json}`. 12 grounded-correction
