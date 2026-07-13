@@ -904,7 +904,25 @@ On that non-circular set the baseline is emphatically **not** saturated — reca
 
 ### 6.2 — Model bake-off
 
-*In progress — DeepSeek V4 / GLM-5.2 / Qwen3.5 on correction quality + latency + timeout-rate, to settle the keep/drop-DeepSeek decision deferred from Task 5.*
+This settles the keep/drop-DeepSeek decision that Task 5 deferred, by adding the two columns Task 5 never had: **latency** and **timeout-rate**. `evals/surfaces/model_bakeoff.py` runs each candidate over 12 A_stateless correction cases as a **grounded-correction generation** — every model gets the *same* retrieved rules, so the only variable is the model. (Running the full agent would confound it: the `drill_generator` tool internally calls the *default* model, leaking DeepSeek's latency into every model's numbers — a bug caught and avoided during the build.) The judge is fixed across all models; each turn is bounded at 120 s so a hung model is *counted* as a timeout rather than stranding the run.
+
+| Model | correct_fix | misleading | timeout_rate | latency p50 | latency p95 |
+|---|---|---|---|---|---|
+| **DeepSeek V4** | 1.00 (11) | 0 | 0/12 | 6.1 s | **13.4 s** |
+| **GLM-5.2** | 1.00 (12) | 0 | 0/12 | 5.2 s | 35.4 s |
+| **Qwen3.5** | 1.00 (12) | 0 | 0/12 | 11.3 s | 52.6 s |
+
+Reading the table with the reasons behind each row:
+
+- **Quality ties — all three correct 100% of grounded corrections with zero misleading claims.** Given the retrieved rule as context, every one of these strong Chinese-native models fixes the error correctly. So, as the design anticipated, **correction quality is not the differentiator** between them — the decision has to be made on latency and reliability.
+
+- **DeepSeek has the tightest latency distribution** (p50 6.1 s, p95 13.4 s). A calibration probe explains the shape of the others: GLM-5.2 and Qwen3.5 both run as **reasoning models** (they emit thinking blocks), which is why GLM has a good median but a long p95 tail (35 s) and Qwen is slowest across the board (p50 11 s, p95 53 s). DeepSeek V4 Flash answered directly and fastest.
+
+- **Timeout-rate was 0/12 for all three — and this is the one number that must be read with its caveat, not at face value.** DeepSeek did *not* hang during this sample. But the reliability problem it is meant to catch — the intermittent **30+ minute** OpenRouter stall observed during Task 5 (one call ran 34 minutes) — is a *rare catastrophic tail event*, and 12 cases cannot rule out a low-single-digit-percent event. Reporting 0/12 as "DeepSeek is reliable" would be dishonest; the correct statement is "DeepSeek was fast and hang-free in this sample, and its rare hang is a tail this sample size can't measure."
+
+**Decision.** Quality cannot separate the three; DeepSeek has the best typical latency; its rare catastrophic hang is a tail risk rather than a quality defect. Therefore **keep DeepSeek V4 as the production default — but only because the per-turn timeout + GLM-fallback guard (Task 5) neutralises the hang**, converting a possible 30-minute stall into a bounded 180 s fall-back to GLM. **GLM-5.2 remains the fallback** (comparable quality and median latency; its structured-output flakiness is mitigated by the extraction guard). **Qwen3.5 is not adopted** — it is the slowest with no offsetting advantage. The guard, not the model choice, is what makes DeepSeek safe to keep; without it the honest call would be to default to GLM.
+
+*(A larger reliability-only sample could tighten the timeout-rate estimate, but the intermittent hang appears provider-load-dependent and was not reproducible on demand; the guard makes the exact rate non-blocking for the default decision.)*
 
 ---
 

@@ -3,6 +3,25 @@
 Session-level record of what changed and why. Deeper rationale lives in `DECISIONS.md`;
 current state in `STATUS.md`.
 
+## 2026-07-13 — Task 6.2 model bake-off (keep/drop-deepseek RESOLVED)
+
+`evals/surfaces/model_bakeoff.py` → `results/model_bakeoff.{md,json}`. 12 grounded-correction
+cases per model, run SEQUENTIALLY (concurrency=1) for clean per-turn latency, judge=glm fixed.
+
+Design catch during build: first version ran the FULL agent per model, but `drill_generator`
+internally calls `get_llm()` with the DEFAULT model (deepseek) → deepseek's latency/hangs leaked
+into glm's numbers (glm turns showed 44–62s). Rewrote to grounded-correction generation (same
+retrieved rules for every model, only the model varies) so the model is the only variable.
+
+Results: **quality ties** (correct_fix 1.00 for deepseek/glm/qwen, 0 misleading — quality is NOT
+the differentiator). Latency p50/p95: deepseek 6.1/13.4s (tightest), glm 5.2/35.4s (long tail),
+qwen 11.3/52.6s (slowest). Calibration probe: glm & qwen run as REASONING models (emit thinking
+blocks) → the long tails; deepseek answers directly. timeout_rate 0/12 all — deepseek did NOT hang
+in-sample, reported WITH the caveat that 12 cases can't rule out the rare 30-min tail.
+
+**Decision: keep deepseek default + the turn-timeout/glm-fallback guard (the guard is what makes it
+safe), glm stays fallback, drop qwen (slowest, no edge).** Updated agent memory `deepseek-reliability-fallback`.
+
 ## 2026-07-13 — Task 6 retrieval sweep (advanced retriever + embedding swap)
 
 Built the Task 6 retrieval half. First finding: the Task 5 "retrieval is saturated at

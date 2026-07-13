@@ -1,0 +1,454 @@
+{
+  "timeout_s": 120.0,
+  "n_cases": 12,
+  "summaries": [
+    {
+      "model": "deepseek",
+      "n": 12,
+      "completed": 12,
+      "timeouts": 0,
+      "errors": 0,
+      "timeout_rate": 0.0,
+      "correct_fix_rate": 1.0,
+      "misleading_count": 0,
+      "n_judged": 11,
+      "latency_ms": {
+        "mean": 6571.1,
+        "p50": 6111.7,
+        "p95": 13378.8
+      }
+    },
+    {
+      "model": "glm",
+      "n": 12,
+      "completed": 12,
+      "timeouts": 0,
+      "errors": 0,
+      "timeout_rate": 0.0,
+      "correct_fix_rate": 1.0,
+      "misleading_count": 0,
+      "n_judged": 12,
+      "latency_ms": {
+        "mean": 8000.2,
+        "p50": 5214.6,
+        "p95": 35447.3
+      }
+    },
+    {
+      "model": "qwen",
+      "n": 12,
+      "completed": 12,
+      "timeouts": 0,
+      "errors": 0,
+      "timeout_rate": 0.0,
+      "correct_fix_rate": 1.0,
+      "misleading_count": 0,
+      "n_judged": 12,
+      "latency_ms": {
+        "mean": 17468.8,
+        "p50": 11332.4,
+        "p95": 52611.8
+      }
+    }
+  ],
+  "detail": {
+    "deepseek": [
+      {
+        "id": "A01",
+        "status": "ok",
+        "latency_ms": 10018.8,
+        "answer": "Corrected sentence: 我把书看完了。\n\nExplanation: In the 把 construction, the verb cannot be bare—it must be followed by a complement (like 完) or 了 to show the result or effect on the object. Your sentence 我把书看 lacks this, so it's incomplete.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A02",
+        "status": "ok",
+        "latency_ms": 3089.2,
+        "answer": "**Corrected sentence**: 书被他借走了。\n\n**Explanation**: You combined 把 and 被 in the same clause, which is incorrect. Use only 被 to form the passive: the receiver (书) is the subject, followed by 被 + agent + verb.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A03",
+        "status": "ok",
+        "latency_ms": 6111.7,
+        "answer": "(1) Corrected sentence: 以前我每天喝咖啡。  \n(2) Explanation: 了 marks a completed action for a specific event, not habitual actions. Since \"每天\" (every day) describes a past routine, not a single completed event, 了 should be omitted.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A04",
+        "status": "ok",
+        "latency_ms": 3611.3,
+        "answer": "**Corrected sentence:** 我今年二十岁了。  \n**Explanation:** The sentence-final 了 is missing. It is required to signal a change of state—here, that your birthday has just passed and you are now twenty.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A05",
+        "status": "ok",
+        "latency_ms": 4549.5,
+        "answer": "Corrected sentence: 我吃过日本菜，很喜欢。\n\nError: The learner used 了 (completion marker) instead of 过 (experiential aspect). 了 indicates a specific completed action, while 过 is needed to express \"have tried\" as a past experience.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A06",
+        "status": "ok",
+        "latency_ms": 6431.2,
+        "answer": "Corrected sentence: 你是怎么来的？\n\nExplanation: To ask about the means of a completed action (how you came), use the 是……的 construction to emphasize the manner. Using 了 here is incorrect because it marks the action itself, not the circumstance.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A07",
+        "status": "ok",
+        "latency_ms": 5496.0,
+        "answer": "Corrected sentence: 我有三本书。\n\nExplanation: You omitted the required measure word. In Chinese, numbers cannot directly modify nouns — a measure word must go between them. For books, the correct measure word is 本.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A08",
+        "status": "ok",
+        "latency_ms": 9451.5,
+        "answer": "Corrected sentence: 我知道答案。\n\nError: 在 (zài) is used for ongoing actions, but 知道 (to know) is a stative verb describing a state, not an action in progress. So 在知道 is incorrect.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A09",
+        "status": "ok",
+        "latency_ms": 3079.9,
+        "answer": "Corrected sentence: 他写汉字写得很漂亮。\n\nExplanation: When using 得 to describe the manner of an action, if the verb has an object (here 汉字), the verb must be repeated before 得. Your sentence omitted this repetition.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A10",
+        "status": "ok",
+        "latency_ms": 10377.8,
+        "answer": "Corrected sentence: 他高兴地笑了。\n\nExplanation: The error is using 的 instead of 地. 的 is for noun modifiers (e.g., 高兴的笑声 \"happy laughter\"), but here 高兴 modifies the verb 笑, so the adverbial marker 地 is required.",
+        "verdict": null
+      },
+      {
+        "id": "A11",
+        "status": "ok",
+        "latency_ms": 13378.8,
+        "answer": "(1) 今天比昨天热。\n\n(2) The error is inserting 很 before the adjective in a 比 comparison sentence. In Chinese, 比 already indicates a comparison, so the adjective should stand alone without degree adverbs like 很 or 非常. Use 更 for \"even more\" or a specific measure (e.g., 热得多) if needed.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A12",
+        "status": "ok",
+        "latency_ms": 3258.0,
+        "answer": "Corrected: 我明年去中国。\n\nError: The time word \"明年\" is placed after the verb, following English word order. In Chinese, time adverbials come before the verb.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      }
+    ],
+    "glm": [
+      {
+        "id": "A01",
+        "status": "ok",
+        "latency_ms": 4177.2,
+        "answer": "**Corrected sentence:** 我把书看完了。 (or 我把书看了。)\n\n**Explanation:** The 把 construction requires something *after* the verb—a complement, 了, or a result—to show the effect on the object. A bare verb like 看 is not enough. Adding a resultative complement (看完) or 了 fixes the sentence.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A02",
+        "status": "ok",
+        "latency_ms": 4013.9,
+        "answer": "**Corrected sentence:**\n书被他借走了。\n\n**Explanation:**\nYou cannot combine 把 (bǎ) and 被 (bèi) in the same clause. In a passive sentence using 被, the subject must be the thing being acted upon (书 - the book), followed by 被 + the agent (他 - he) + the verb and complement (借走了 - borrowed away).",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A03",
+        "status": "ok",
+        "latency_ms": 35447.3,
+        "answer": "**Corrected sentence:** \n以前我每天喝咖啡。\n\n**Explanation:** \nThe particle \"了\" marks a specific completed action, not general past tense. Because \"每天\" (every day) indicates a habitual action rather than a single completed event, \"了\" should not be used here.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A04",
+        "status": "ok",
+        "latency_ms": 5214.6,
+        "answer": "**Corrected sentence:**\n我今年二十岁了。\n\n**Explanation:**\nSince your birthday just passed, turning twenty represents a change of state. You need to add the sentence-final \"了\" (le) to signal this new situation.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A05",
+        "status": "ok",
+        "latency_ms": 5187.3,
+        "answer": "**Corrected sentence:** \n我吃过日本菜，很喜欢。\n\n**Explanation:** \nYou used 了 (le), which marks a specific completed action, but your intended meaning is about having the *experience* of trying Japanese food. To express past experiences (\"have tried\"), you should use the experiential aspect marker 过 (guò) instead.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A06",
+        "status": "ok",
+        "latency_ms": 8112.3,
+        "answer": "(1) Corrected sentence: 你是怎么来的？\n\n(2) Explanation: To ask about the means or manner of a completed action, you must use the 是……的 (shì...de) emphasis construction, not 了. In this structure, 是 goes before the emphasised element (怎么) and 的 comes at the end of the sentence.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A07",
+        "status": "ok",
+        "latency_ms": 2286.5,
+        "answer": "**Corrected sentence:** \n我有三本书。\n\n**Explanation:** \nIn Chinese, you must use a measure word between a number and a noun. The correct measure word for books is 本 (běn), so \"三\" (three) must be followed by \"本\" before \"书\" (book).",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A08",
+        "status": "ok",
+        "latency_ms": 5896.7,
+        "answer": "**Corrected sentence:**\n我知道答案。\n\n**Explanation:**\n\"知道\" (to know) is a stative verb describing a state, not an action. The progressive aspect marker \"在\" can only be used for ongoing actions, not states.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A09",
+        "status": "ok",
+        "latency_ms": 1651.8,
+        "answer": "(1) 他写汉字写得很漂亮。\n\n(2) When a verb takes an object (写汉字), you must repeat the verb before adding the 得 complement.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A10",
+        "status": "ok",
+        "latency_ms": 6715.4,
+        "answer": "**Corrected sentence:** \n他高兴地笑了。\n\n**Explanation:** \nIn Chinese, \"地\" (de) is used to link an adverbial modifier to a verb (here, 高兴 modifying 笑), whereas \"的\" (de) is used to modify nouns. Since you are describing *how* he laughed, you need to use \"地\" instead of \"的\".",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A11",
+        "status": "ok",
+        "latency_ms": 4666.6,
+        "answer": "**Corrected sentence:**\n今天比昨天热。\n\n**Explanation:**\nIn a \"比\" (bǐ) comparison, you cannot use \"很\" (hěn) directly before the adjective. To say \"much hotter,\" you should either drop \"很\" entirely (as in the corrected sentence) or use \"更\" (gèng) / a concrete amount like \"得多\" (de duō).",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A12",
+        "status": "ok",
+        "latency_ms": 12632.7,
+        "answer": "**Corrected sentence:**\n我明年去中国。\n\n**Explanation:**\nIn Chinese, time adverbials like \"明年\" (next year) must be placed *before* the verb, not after the object. The correct word order is Subject + Time + Verb + Object.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      }
+    ],
+    "qwen": [
+      {
+        "id": "A01",
+        "status": "ok",
+        "latency_ms": 10682.1,
+        "answer": "(1) **Corrected sentence:** 我把书看完了。\n\n(2) **Explanation:** In the **把 (bǎ)** construction, the verb cannot stand alone. It must be followed by something extra (like a result complement such as 完，or the particle 了) to indicate the effect or result of the action on the object.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A02",
+        "status": "ok",
+        "latency_ms": 31928.1,
+        "answer": "(1) 书被他借走了。\n\n(2) You cannot combine **把** and **被** in the same clause. In a **被** passive construction, the receiver of the action (书) must be the subject, followed directly by 被.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A03",
+        "status": "ok",
+        "latency_ms": 19505.9,
+        "answer": "Corrected sentence: 以前我每天喝咖啡。\n\nExplanation: \"了\" marks a completed specific event, not general past tense. Do not use it for habitual past actions (e.g., \"every day\").",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A04",
+        "status": "ok",
+        "latency_ms": 9294.6,
+        "answer": "\n\n**Corrected sentence:** 我今年二十岁了。\n\n**Explanation:** You omitted the sentence-final 了. When reporting a new age, you must use 了 to signal a change of state, indicating that being 20 is a new situation different from before.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A05",
+        "status": "ok",
+        "latency_ms": 11352.3,
+        "answer": "(1) **Corrected sentence:** 我吃过日本菜，很喜欢。\n\n(2) **Explanation:** Use **过** to indicate past experience (having tried something at least once). **了** marks a specific completed action, whereas **过** emphasizes the experience itself, which fits your intended meaning (\"have tried\").",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A06",
+        "status": "ok",
+        "latency_ms": 52611.8,
+        "answer": "Corrected sentence: 你是怎么来的？\n\nExplanation: For completed actions, use the **是……的** construction to emphasize the manner (how), time, or place. Using **了** is incorrect here because the focus is on the details of a past event, not just its completion.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A07",
+        "status": "ok",
+        "latency_ms": 10584.3,
+        "answer": "1. **Corrected sentence:** 我有三本书。\n\n2. **Explanation:** You omitted the measure word. In Chinese, a measure word is required between a number and a noun (Number + Measure Word + Noun). For books, the specific measure word is 本 (běn).",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A08",
+        "status": "ok",
+        "latency_ms": 10130.6,
+        "answer": "(1) **Corrected sentence:** 我知道答案。\n\n(2) **Explanation:** The particle \"在\" marks an action in progress (progressive aspect). However, \"知道\" (to know) is a stative verb, not an ongoing action, so it cannot be used with \"在\".",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A09",
+        "status": "ok",
+        "latency_ms": 10350.3,
+        "answer": "(1) 他写汉字写得很漂亮。\n\n(2) When using **得** to describe how an action is done, if the verb has an object (汉字), you must **repeat the verb** (写) before **得**. You cannot place **得** directly after the object.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A10",
+        "status": "ok",
+        "latency_ms": 11332.4,
+        "answer": "\n\n(1) 他高兴地笑了。\n\n(2) You used the wrong particle. When linking an adverbial modifier (高兴) to a verb (笑) to describe how an action is performed, use 地。的 is used to link a modifier to a noun.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      },
+      {
+        "id": "A11",
+        "status": "ok",
+        "latency_ms": 21991.6,
+        "answer": "1. **Corrected sentence:** 今天比昨天热。\n\n2. **Explanation:** In a 比 comparison sentence, you cannot use degree adverbs like 很 before the adjective. The structure is simply **A + 比 + B + Adjective**. If you want to emphasize the difference, use 更 (more) or a complement like 一点儿 (a little).",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": true
+        }
+      },
+      {
+        "id": "A12",
+        "status": "ok",
+        "latency_ms": 9862.1,
+        "answer": "(1) **Corrected sentence:** 我明年去中国。\n\n(2) **Explanation:** In Chinese, time expressions (like 明年) must come **before the verb**, not at the end of the sentence like in English. The correct structure is Subject + Time + Verb + Object.",
+        "verdict": {
+          "correct_fix": true,
+          "misleading": false,
+          "identifies_error": false
+        }
+      }
+    ]
+  }
+}
