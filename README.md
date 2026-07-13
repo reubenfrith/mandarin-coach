@@ -215,7 +215,7 @@ The embedding model determines retrieval quality — how well the agent finds re
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│              GOOGLE OAUTH (via Chainlit)                     │
+│           USERNAME / PASSWORD AUTH (via Chainlit)            │
 │   Authenticates user — user ID namespaces ChromaDB          │
 │   collections so each user's error corpus is isolated        │
 └───────────────────────────┬─────────────────────────────────┘
@@ -307,10 +307,10 @@ The embedding model determines retrieval quality — how well the agent finds re
 | Tools | 5 tools — see below | The agent selects tools based on intent; having multiple tools is what makes this an agent rather than a chatbot |
 | Embedding Model | OpenAI text-embedding-3-small (baseline) → Qwen3-Embedding-8B (target) | OpenAI used as the starting baseline; Qwen3-Embedding-8B is the current #1 on the MTEB multilingual leaderboard and is Chinese-native from Alibaba — the same ecosystem as our Qwen LLM candidate; BGE-M3 from BAAI tested as the best open-source alternative |
 | Vector Database | ChromaDB | Collections are namespaced per user (e.g. `reuben_personal_errors`) so each user's error corpus is fully isolated; four collection types: `personal_errors`, `grammar_rules`, `hsk_vocabulary`, `error_patterns` |
-| Authentication | Google OAuth via Chainlit | Chainlit's built-in OAuth support authenticates users with their Google account in ~10 lines of code; the authenticated user ID becomes the namespace prefix for all ChromaDB collections, ensuring complete data isolation between users |
+| Authentication | Username/password via Chainlit | Chainlit's built-in `@cl.password_auth_callback` authenticates users in ~10 lines of code (accounts auto-created on first login, salted-hash credentials in a local SQLite store); the authenticated username becomes the namespace prefix for all ChromaDB collections, ensuring complete data isolation between users. *Chosen over the originally-planned Google OAuth for v1: it removes the external OAuth client/redirect-URI setup so the app runs identically on localhost and the VM, while satisfying the same requirement — an authenticated identity that namespaces each user's corpus. OAuth is a drop-in swap post-v1 (same `cl.User` identifier contract).* |
 | Monitoring | LangSmith | Traces every LLM call, tool invocation, and retrieval step; provides latency and cost visibility across sessions |
 | Evaluation Framework | RAGAS + LLM-as-Judge | RAGAS measures retrieval quality (context precision and recall); LLM-as-Judge scores correction accuracy and explanation quality |
-| User Interface | Chainlit | Chat interface deployable in minutes; browser-based and responsive on both desktop and mobile; natively supports OAuth, `@cl.on_chat_start` for onboarding, and starter action buttons so users always have a clear first step |
+| User Interface | Chainlit | Chat interface deployable in minutes; browser-based and responsive on both desktop and mobile; natively supports password auth (`@cl.password_auth_callback`), `@cl.on_chat_start` for onboarding, and starter action buttons so users always have a clear first step |
 | Deployment | GCP Compute Engine (Docker + Caddy) | Always-on VM (no cold starts) in Melbourne region for low latency; Docker Compose runs the app behind Caddy for automatic HTTPS; a persistent Docker volume keeps the ChromaDB corpus across restarts. See `DEPLOY.md`. |
 
 ### Agent Tools
@@ -333,8 +333,8 @@ The agent has five tools and decides which to call based on the user's intent an
 [User opens app in browser]
           │
           ▼
-[Google OAuth login — Chainlit]
-  User ID extracted → namespaces
+[Username/password login — Chainlit]
+  Username extracted → namespaces
   all ChromaDB collections for
   this user (e.g. reuben_*)
           │
@@ -626,7 +626,70 @@ The winning embedding and the winning retrieval technique are selected on correc
 
 ## Task 4: Prototype
 
-*To be completed*
+The prototype is **built and deployed live** — a working end-to-end agent, not a notebook demo. It runs at **https://34-129-227-111.nip.io** on an always-on GCP VM (Docker + Caddy, automatic HTTPS), with the ChromaDB corpus and user accounts on a persistent disk so they survive restarts. Deployment steps are in [`DEPLOY.md`](DEPLOY.md).
+
+### What runs
+
+A browser user logs in, is onboarded on first visit, and then chats with a LangGraph tool-calling agent that corrects Mandarin, explains errors, retrieves grammar rules and the user's own error history, generates drills, and logs each new mistake back to a private per-user corpus.
+
+```
+Browser ─▶ Chainlit UI ─▶ password auth (per-user namespace)
+        ─▶ LangGraph agent (create_agent + MemorySaver, keyed by thread_id)
+        ─▶ ChatLiteLLM ─▶ OpenRouter (DeepSeek V4 default, GLM-5.2 fallback)
+             │
+             ├─ 5 tools (grammar / error-history / drill / dictionary / web)
+             ├─ ChromaDB (3 reference collections + 1 per-user error corpus)
+             └─ LangSmith trace per turn
+        ─▶ post-turn: extract_and_log_error() grows the user's corpus
+```
+
+### Stack, as built
+
+| Layer | Implementation | File |
+|---|---|---|
+| UI + auth | Chainlit chat, `@cl.password_auth_callback`, starter buttons, `@cl.on_chat_start` onboarding | `app/main.py` |
+| Accounts | SQLite, salted-hash credentials, per-user HSK-level profile, auto-create on first login | `app/users.py` |
+| Agent | LangGraph `create_agent` + `MemorySaver` checkpointer (per-conversation memory keyed by `thread_id`) | `app/agent.py` |
+| Model gateway | `ChatLiteLLM` → OpenRouter under one `OPENROUTER_API_KEY`; model swappable by short key | `app/config.py` |
+| Tools | The five agent tools, bound per user via `make_tools(user_id)` | `app/tools.py` |
+| Memory | ChromaDB — 3 reference collections + per-user `{user}_personal_errors`; deterministic `error_stats()` for counts/trends | `app/memory.py` |
+| Reference data | ~150 grammar rules, ~5,000 HSK entries, ~80 error patterns, CC-CEDICT | `data/` |
+| Monitoring | LangSmith, project `mandarin-coach` (evals route to `mandarin-coach-evals`) | `app/config.py` |
+| Deployment | GCP `e2-small` (Melbourne), Docker Compose + Caddy, persistent disk bind-mount | `Dockerfile`, `docker-compose.yml`, `Caddyfile`, `DEPLOY.md` |
+
+### The five tools (as implemented)
+
+All five from the Task 2 design are live; the agent selects among them by intent. The two "external API" tools are `dictionary_lookup` (CC-CEDICT + `pypinyin` for grounded pinyin/HSK) and `web_search` (Tavily). The three internal tools are `grammar_rule_fetcher` (RAG over `grammar_rules`), `error_pattern_analyser` (semantic recall over the user's past errors **plus** deterministic counts/trends via `error_stats()`), and `drill_generator` (an LLM call grounded in the retrieved rule).
+
+### Memory architecture
+
+- **Session memory** — LangGraph's `MemorySaver` checkpointer holds the conversation buffer, keyed by a per-session `thread_id`, so each turn only sends the new message and the graph reloads history.
+- **Long-term memory** — ChromaDB. Three shared reference collections (`grammar_rules`, `hsk_vocabulary`, `error_patterns`) make the app useful on day one; a per-user `{username}_personal_errors` collection compounds over time. Usernames are sanitised into valid collection prefixes so each user's corpus is fully isolated.
+- **Corpus growth** — after every turn, `extract_and_log_error()` runs a structured-output extraction over the learner's input + the coach reply and appends any real mistake (category, original, correction, explanation) to that user's collection. This is the loop that makes the tool sharper with use, and it is the subsystem audited by the Task 5 extraction surface.
+
+### Reliability guard
+
+DeepSeek (the on-paper-strongest model, kept as the default) intermittently hangs for tens of minutes on OpenRouter, and LiteLLM's own request timeout does not reliably interrupt a hung stream. So each turn is wrapped in an `asyncio.wait_for(AGENT_TURN_TIMEOUT=180s)`; on timeout **or** any provider error the turn falls back to the fast GLM graph, and if both are unreachable the user gets a friendly retry message rather than a spinner. Primary and fallback graphs each hold their own checkpointer so a half-run primary turn can't corrupt fallback state.
+
+### Deliberate deviations from the Task 2 / Task 3 design
+
+Recorded honestly, consistent with the rest of this document — each was a scope call made during the build, not an oversight:
+
+- **Auth is username/password, not Google OAuth.** Documented in the Component Decisions table above. Same requirement met (an authenticated identity that namespaces the corpus); OAuth is a drop-in swap post-v1.
+- **Onboarding asks one question (HSK level), not two.** The "biggest struggle" question was dropped because the error corpus surfaces the user's weakest category from real data (`error_stats()`) far more reliably than a self-report — the returning-user summary already leads with "most common: *particle*", so the second question was redundant.
+- **New errors auto-log with a visible step, rather than a Log/Dismiss confirmation.** The design's "human review + auto-log after 5s" step is implemented as a silent write plus a "📝 logged to your error corpus" step in the UI, with no dismiss button. The rationale is friction: the Task 5 extraction surface measured logging **precision at 1.00** (zero clean sentences ever logged as errors), so the guardrail against corpus poisoning is the extractor itself, not a per-turn user click. A dismiss/undo affordance is a low-cost Task 7 add.
+- **The corpus is not pre-seeded with level-appropriate patterns on first login.** It starts empty and grows from use; the three reference collections carry the day-one value instead. (Eval sequences seed the corpus directly for the B_small/C_scale memory tests.)
+- **User file upload (.txt / Anki) is deferred past v1.** Chainlit's spontaneous file upload is enabled at the config level but no parse-and-ingest handler is wired in yet, so the corpus currently grows from live use and eval seeding rather than uploads. This is the clearest Task 3 feature not yet in the running app and is flagged for Task 7.
+
+### Run it locally
+
+```bash
+uv sync
+uv run python data/load_data.py            # embed the reference collections into ChromaDB
+CHAINLIT_AUTH_SECRET=$(uv run chainlit create-secret) \
+  uv run chainlit run app/main.py -w       # http://localhost:8000
+```
+Requires `OPENROUTER_API_KEY` (required) and `OPENAI_API_KEY` (recommended — uses OpenAI embeddings instead of the local fallback model); `TAVILY_API_KEY` and `LANGSMITH_API_KEY` are optional. See `.env.example`.
 
 ---
 
