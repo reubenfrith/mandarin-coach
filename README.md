@@ -64,7 +64,7 @@ The tools in this loop — Duolingo/HelloChinese, Anki, iTalki, YouTube, Google 
 
 ### Evaluation questions
 
-Input–output pairs used to evaluate the application:
+Input–output pairs that seeded the evaluation design:
 
 | # | User input | Expected output |
 |---|---|---|
@@ -78,6 +78,14 @@ Input–output pairs used to evaluate the application:
 | 8 | `What's the difference between 看 and 看看?` | Grammar explanation with examples. No dictionary API call needed. |
 | 9 | `Drill me on tones` | Agent retrieves tone-related errors from memory. Generates tone discrimination exercises. |
 | 10 | `我没有去过中国但是我想去。` | No errors. Agent confirms and offers cultural context or vocabulary expansion. |
+
+How these materialized in the Task 5 harness (expanded to 60 head-to-head cases + 43 retrieval queries + 51 extraction cases):
+
+- Pair 2 is in the test set verbatim; pair 3's error class is covered across the 40 stateless correction cases.
+- Pairs 5, 6, and 9 became the seeded-memory B/C cases — sharpened into deterministically scorable versions like "exactly how many particle errors have I made?", checked against known seeded counts.
+- Pairs 1 and 10 (correct sentences that must not be flagged) became the extraction surface's 17 negative cases — the logging-precision test.
+- Pair 4 (dictionary lookup) is tested via the factual-grounding metric and required-tool recall rather than as a literal prompt.
+- Two are acknowledged gaps: register/style feedback (pair 7) and direct grammar-question answering (pair 8) were not scored by any surface.
 
 ---
 
