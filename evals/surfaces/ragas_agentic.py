@@ -97,7 +97,7 @@ RESULTS = _env.RESULTS
 # The two multi-turn REASONING judges (AgentGoalAccuracy, TopicAdherence) need a stronger
 # model than the RAG surface's gpt-4o-mini: mini's goal-achieved verdict coin-flips on a
 # complete multi-part answer (verified [1,1,0,0,1] on a real trace), while gpt-4o is stable
-# ([1,1,1,1,1]). Documented deviation from the gpt-4o-mini judge (progress/DECISIONS #3) —
+# ([1,1,1,1,1]). Documented deviation from the gpt-4o-mini judge (root README, Task 5) —
 # scoped to these agentic reasoning metrics only; the RAG surface still uses gpt-4o-mini.
 AGENTIC_EVALUATOR = os.environ.get("RAGAS_AGENTIC_EVALUATOR", "gpt-4o")
 # Agent-under-test model. glm (fast, non-reasoning) for a reproducible run: the agentic

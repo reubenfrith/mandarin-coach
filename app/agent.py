@@ -32,7 +32,7 @@ AGENT_TURN_TIMEOUT = float(os.environ.get("AGENT_TURN_TIMEOUT", "180"))
 # its own checkpointer so a partially-run primary turn can't corrupt fallback state.
 CoachAgent = namedtuple("CoachAgent", ["primary", "fallback"])
 
-# Post-turn extraction guard (see progress/DECISIONS.md #13). The OpenRouter models
+# Post-turn extraction guard (see root README, Task 6.3). The OpenRouter models
 # intermittently return had_error=True with correction/category/explanation dropped
 # together, or malformed JSON that raises — provider-side non-determinism, not a
 # capability limit. Either would silently poison the error corpus, so the extraction
