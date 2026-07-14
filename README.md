@@ -454,18 +454,18 @@ Retrieve top-20 by embedding similarity, then rerank to the true top-5 with a cr
 **Technique 3 — Multi-query retrieval.**  
 Generate 3 LLM paraphrases of the query, retrieve for each, merge and dedupe. Justified for our case because query intent varies — "why is this sentence wrong?" and "what is the 把-sentence rule?" retrieve complementary documents. This is the recall-oriented arm and carries the highest latency (3× retrieval + one paraphrase LLM call), so it is measured explicitly on the latency/recall trade-off. Built via LangChain's `MultiQueryRetriever`.
 
-**Comparison table (to be completed in Task 6). Each axis is measured against the same baseline so the winner of each is independently interpretable:**
+**Comparison table — completed in Task 6.** Each axis is measured against the same baseline so the winner of each is independently interpretable. One planned change to the columns, made for a reason documented in Task 5: the judge-scored *Context Precision / Recall / Correction Score* columns were replaced by **deterministic exact-rule-id metrics** (recall@k, MRR), because Task 5 showed every LLM-judged number needs a deterministic anchor — and for retrieval we have one. Measured by `evals/surfaces/retrieval_sweep.py` over 43 non-circular queries; the full reading of these numbers is in §6.1.
 
-| Configuration | Context Precision | Context Recall | Correction Score | Latency (ms) |
-|---|---|---|---|---|
-| **Baseline** — OpenAI embeddings, dense + metadata pre-filter | | | | |
-| *Axis 1:* Qwen3-Embedding-8B (MTEB #1 multilingual) | | | | |
-| *Axis 1:* BGE-M3 (best open-source Chinese embeddings) | | | | |
-| *Axis 2:* Hybrid — BM25 + dense, RRF | | | | |
-| *Axis 2:* Cross-encoder rerank — BGE-reranker-v2-m3 | | | | |
-| *Axis 2:* Multi-query retrieval | | | | |
+| Configuration | recall@1 | recall@3 | recall@5 | MRR | Latency p50 / p95 (ms) |
+|---|---|---|---|---|---|
+| **Baseline** — OpenAI embeddings, dense + metadata pre-filter | 0.49 | 0.74 | 0.84 | 0.63 | 310 / 437 |
+| *Axis 1:* Qwen3-Embedding-8B (MTEB #1 multilingual) | *not run — needs a GPU endpoint; infrastructure constraint reported in §6.1, queued in Task 7* | | | | |
+| *Axis 1:* BGE-M3 (best open-source Chinese embeddings) | 0.47 | 0.70 | 0.74 | 0.61 | **27** / 376 |
+| *Axis 2:* **Hybrid — BM25 + dense, RRF** ✅ adopted | **0.56** | **0.77** | **0.88** | **0.70** | 319 / 456 |
+| *Axis 2:* Cross-encoder rerank — BGE-reranker-v2-m3 | *not run — scoped out of the sweep, queued as Task 7 item 3* | | | | |
+| *Axis 2:* Multi-query retrieval | *not run — scoped out of the sweep, queued as Task 7 item 3* | | | | |
 
-The winning embedding and the winning retrieval technique are selected on correction score (primary) and latency (secondary), then combined into the production pipeline. Task 6's "advanced retriever" deliverable is the Axis 2 winner; the "one other change" deliverable is the Axis 1 embedding swap — both backed by this same eval harness.
+**Outcome** (full reasoning in §6.1): the Axis-2 winner — **hybrid** — improved every quality metric and is wired into the production `grammar_rule_fetcher`. The Axis-1 test showed BGE-M3 is a latency/cost trade (quality within noise, ~11× faster locally, no API fee), not a quality win — so OpenAI embeddings remain the default and BGE-M3 is a validated drop-in for a latency-sensitive deployment. Task 6's "advanced retriever" deliverable is the hybrid; the "change to another piece of the solution" deliverable is delivered by the coverage expansion (§6.1b) and the extraction guard (§6.3).
 
 ---
 
