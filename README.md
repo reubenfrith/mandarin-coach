@@ -74,18 +74,15 @@ Input–output pairs that seeded the evaluation design:
 | 4 | `请帮我找一个关于天气的单词` | Agent calls dictionary API. Returns weather vocabulary with pinyin and example sentences. |
 | 5 | `Drill me on my weak points` | Agent retrieves top 3 error categories from memory. Generates targeted exercises for each. |
 | 6 | `Why do I keep getting 把 wrong?` | Agent retrieves error history. Surfaces how many times and in what context. Explains rule. |
-| 7 | `我明天将去北京` | Grammatically correct but agent notes 将 is formal/written register. Suggests 要 for natural speech. |
-| 8 | `What's the difference between 看 and 看看?` | Grammar explanation with examples. No dictionary API call needed. |
-| 9 | `Drill me on tones` | Agent retrieves tone-related errors from memory. Generates tone discrimination exercises. |
-| 10 | `我没有去过中国但是我想去。` | No errors. Agent confirms and offers cultural context or vocabulary expansion. |
+| 7 | `Drill me on tones` | Agent retrieves tone-related errors from memory. Generates tone discrimination exercises. |
+| 8 | `我没有去过中国但是我想去。` | No errors. Agent confirms and offers cultural context or vocabulary expansion. |
 
-These 10 pairs are design-time examples of what the app must handle — they are **not** the test set itself. The actual Task 5 test suite is far larger (60 head-to-head cases, 43 retrieval queries, 51 extraction cases) and was built to test the same intents in deterministically scorable form. Where each pair ended up:
+These pairs are design-time examples of what the app must handle — they are **not** the test set itself. The actual Task 5 test suite is far larger (60 head-to-head cases, 43 retrieval queries, 51 extraction cases) and was built to test the same intents in deterministically scorable form. Where each pair ended up:
 
 - Pair 2 is in the test set verbatim; pair 3's error class is covered across the 40 stateless correction cases.
-- Pairs 5, 6, and 9 became the seeded-memory B/C cases — sharpened into deterministically scorable versions like "exactly how many particle errors have I made?", checked against known seeded counts.
-- Pairs 1 and 10 (correct sentences that must not be flagged) became the extraction surface's 17 negative cases — the logging-precision test.
+- Pairs 5, 6, and 7 became the seeded-memory B/C cases — sharpened into deterministically scorable versions like "exactly how many particle errors have I made?", checked against known seeded counts.
+- Pairs 1 and 8 (correct sentences that must not be flagged) became the extraction surface's 17 negative cases — the logging-precision test.
 - Pair 4 (dictionary lookup) is tested via the factual-grounding metric and required-tool recall rather than as a literal prompt.
-- Pairs 7 and 8 (register/style feedback, direct grammar-question answering) don't yet have automated scoring — they remain manual checks against the live app and candidates for future eval surfaces.
 
 ---
 
