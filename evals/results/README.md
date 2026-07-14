@@ -13,6 +13,7 @@ is re-derivable from the rows, and every scored answer is inspectable.
 | **RAG (RAGAS)** | Retriever→grounding chain: ContextRecall/Relevance, Faithfulness, ResponseGroundedness, NoiseSensitivity, AnswerAccuracy + deterministic recall@3/MRR | `ragas_rag.md` | `ragas_rag.json` → `rows[].{response,ragas,recall_at_k,mrr,retrieved_ids}` | 40 |
 | **Agentic (RAGAS)** | Tool-use over the LangGraph trace: ToolCallAccuracy + deterministic required-tool recall / extra-tool rate, AgentGoalAccuracy (completion), off-topic deflection | `ragas_agentic.md` | `ragas_agentic.json` → `rows[].{tool_sequence,tool_call_accuracy,required_recall,extra_tools,agent_goal_accuracy,final_answer}` + `off_topic[]` | 60 (+4 probes) |
 | **Extraction** | The hidden post-turn corpus writer (`extract_and_log_error`): had_error precision/recall/F1, category accuracy (specific golds), correction validity — each miss split into omission / malformed-JSON / wrong-value | `extraction.md` | `extraction.json` → `rows[].{outcome,pred_had_error,pred_category,pred_correction,would_log,extraction_errored,category_correct,correction_valid,correction_how}` | 34 pos + 17 neg |
+| **Extraction (guarded)** | Same dataset re-run with the production retry/validation guard active (`--guarded`) — the Task 6.3 before/after pair | `extraction_guarded.md` | `extraction_guarded.json` (same row schema) | 34 pos + 17 neg |
 | **C_scale preflight** | Thesis check: can the agent aggregate at scale | `preflight_typec.md` | — | — |
 
 ## The audit model (why it's verifiable)

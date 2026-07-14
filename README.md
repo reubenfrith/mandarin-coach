@@ -495,7 +495,7 @@ Beyond the engineering items in Task 7, the harness itself has room to grow:
 | 0 | Baseline — dense retrieval, OpenAI embeddings | `results/retrieval_sweep` | recall@1 0.49 · MRR 0.63 (43 non-circular queries) |
 | 1 | **Hybrid retriever** (BM25 + dense, RRF) — the advanced technique, now in production | `results/retrieval_sweep` | recall@1 **0.56** · MRR **0.70**, up on every metric |
 | 2 | **Grammar coverage ×3** (98 → 315 documents) | `results/coverage_check` | unreachable topics 0/15 → recall@3 **0.87**, precision on the original set retained |
-| 3 | **Extraction retry/validation guard** | extraction surface + `tests/test_extraction_guard.py` | closes the measured empty-field failure mode; logging precision stays **1.00** |
+| 3 | **Extraction retry/validation guard** | `results/extraction_guarded` before/after | correction validity 0.64 → **1.00** · category accuracy 0.50 → **0.90** · zero incomplete logs; precision stays 1.00 |
 | 4 | **Model decision** — DeepSeek default behind the fallback guard | `results/model_bakeoff` | quality tied 1.00 across models; DeepSeek tightest latency (p95 13.4 s) |
 
 ### 6.1 Advanced retrieval: hybrid search
@@ -544,8 +544,20 @@ Net: three times the coverage at essentially unchanged precision.
 
 - **Finding (surface 4):** the corpus-writer intermittently emits records with all fields empty — provider-side non-determinism, while logging precision stayed 1.00.
 - **Fix (`app/agent.py`):** `extract_and_log_error` retries a dropped-field or raising call up to 3 times (60 s per attempt), trusts `had_error=False` immediately, and only writes complete records — an incomplete record after all retries is discarded, so the writer fails safe.
-- **Verified:** `tests/test_extraction_guard.py` (14 checks, no network). The eval-side extractor stays unguarded so the surface keeps measuring the raw baseline the guard was built against.
-- Together with 6.2, this is the "change to another piece of the solution" deliverable: the harness isolated which subsystem was weak and why, and the fix closes exactly the measured failure mode.
+- **Measured:** the extraction eval gained a `--guarded` mode that runs the production guard over the identical 51-case dataset (`results/extraction_guarded.{md,json}`), giving a direct before/after:
+
+| Metric | Unguarded baseline | Guarded |
+|---|---|---|
+| Logging precision (clean input never logged) | 1.00 | **1.00** |
+| Incomplete records logged (empty correction) | 12 of 33 | **0 of 24** |
+| Correction validity of logged records | 0.64 | **1.00** |
+| Category accuracy (specific golds) | 0.50 | **0.90** |
+| Real errors logged as complete, usable records | 21/34 (0.62) | **24/34 (0.71)** |
+| had_error recall (any log at all) | 0.97 | 0.71 |
+
+- Reading the recall row: the baseline's 0.97 counted junk — a third of its logged records carried no correction. The guard never logs an incomplete record, so a flaky extraction window now produces a *missed* log (recoverable: a recurring error recurs, and gets logged next time) instead of a *poisoned* record (not recoverable). Recall of usable records went up, and everything entering the corpus is now complete and valid.
+- Also verified structurally by `tests/test_extraction_guard.py` (14 checks, no network); the eval's default mode stays unguarded so the raw-baseline measurement remains reproducible.
+- Together with 6.2, this is the "change to another piece of the solution" deliverable: the harness isolated which subsystem was weak and why, and the fix — measured on the same harness — closes exactly the failure mode it found.
 
 ### 6.4 Model bake-off
 

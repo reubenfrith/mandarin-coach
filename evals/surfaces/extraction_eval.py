@@ -41,7 +41,12 @@ import re  # noqa: E402
 from langchain_core.messages import HumanMessage, SystemMessage  # noqa: E402
 from pydantic import BaseModel, Field  # noqa: E402
 
-from agent import _has_chinese, extract_error_record  # noqa: E402
+from agent import (  # noqa: E402
+    EXTRACTION_MAX_ATTEMPTS,
+    _has_chinese,
+    _record_complete,
+    extract_error_record,
+)
 from config import get_llm  # noqa: E402
 from lib.llm_judge import canon_category  # noqa: E402
 
@@ -51,6 +56,11 @@ RESULTS = _env.RESULTS
 EXTRACT_MODEL = os.environ.get("EXTRACT_MODEL", "glm")   # under test; deepseek hangs (DECISIONS #4)
 JUDGE_MODEL = os.environ.get("JUDGE_MODEL", "glm")       # correction-validity tie-breaker
 CONCURRENCY = int(os.environ.get("EVAL_CONCURRENCY", "4"))
+
+# --guarded: run the production retry/validation guard instead of the raw single
+# call, so the baseline extraction.{md,json} and the guarded extraction_guarded.*
+# results are a before/after pair over the identical dataset (README Task 6.3).
+GUARDED = False
 
 
 # --------------------------------------------------------------------------- #
@@ -115,11 +125,44 @@ async def robust_extract(user_input: str, coach_reply: str):
     return None, True
 
 
+async def guarded_extract(user_input: str, coach_reply: str):
+    """Mirror of the production guard in `extract_and_log_error` (app/agent.py), minus
+    the corpus write: retry a raising or incomplete call up to EXTRACTION_MAX_ATTEMPTS,
+    trust a confident `had_error=False` immediately, and keep the latest error record
+    if no attempt ever completes. Returns (rec | None, errored)."""
+    rec = None
+    errored = False
+    for _ in range(EXTRACTION_MAX_ATTEMPTS):
+        try:
+            candidate = await extract_error_record(user_input, coach_reply, model=EXTRACT_MODEL)
+        except Exception:  # noqa: BLE001 — malformed output / hung provider → retry
+            errored = True
+            continue
+        if not candidate.had_error:
+            return candidate, False  # confident clean verdict — nothing to retry
+        rec = candidate
+        if _record_complete(candidate):
+            break
+    return rec, errored
+
+
+def would_log_pred(user_input: str, rec) -> bool:
+    """The effective logging predicate for the active mode. Baseline: what unguarded
+    production wrote (has_chinese AND had_error AND original). Guarded: production
+    now discards incomplete records, so only a complete record is ever logged."""
+    if rec is None or not _has_chinese(user_input):
+        return False
+    if GUARDED:
+        return _record_complete(rec)
+    return rec.had_error and bool((rec.original or "").strip())
+
+
 # --------------------------------------------------------------------------- #
 # Per-case evaluation
 # --------------------------------------------------------------------------- #
 async def eval_positive(case: dict) -> dict:
-    rec, errored = await robust_extract(case["input"], case["coach_reply"])
+    extract = guarded_extract if GUARDED else robust_extract
+    rec, errored = await extract(case["input"], case["coach_reply"])
     if rec is None:  # production logs nothing → a gold error is MISSED (false negative)
         return {
             "id": case["id"], "kind": "positive", "input": case["input"],
@@ -131,7 +174,7 @@ async def eval_positive(case: dict) -> dict:
             "correction_valid": None, "correction_how": None,
         }
     # Effective logging predicate = what production actually writes to the corpus.
-    would_log = _has_chinese(case["input"]) and rec.had_error and bool((rec.original or "").strip())
+    would_log = would_log_pred(case["input"], rec)
 
     cat_pred = canon_category(rec.category)
     cat_gold = canon_category(case["gold_category"])
@@ -174,7 +217,8 @@ async def eval_negative(case: dict) -> dict:
             "outcome": "TN",
         })
         return row
-    rec, errored = await robust_extract(case["input"], case["coach_reply"])
+    extract = guarded_extract if GUARDED else robust_extract
+    rec, errored = await extract(case["input"], case["coach_reply"])
     if rec is None:  # production logs nothing → a clean input correctly not logged (TN)
         row.update({
             "pred_had_error": None, "pred_category": None, "pred_correction": None,
@@ -182,7 +226,7 @@ async def eval_negative(case: dict) -> dict:
             "outcome": "TN",
         })
         return row
-    would_log = rec.had_error and bool((rec.original or "").strip())
+    would_log = would_log_pred(case["input"], rec)
     row.update({
         "pred_had_error": rec.had_error, "pred_category": rec.category,
         "pred_correction": rec.correction, "would_log": would_log,
@@ -247,6 +291,7 @@ def summarise(rows: list[dict]) -> dict:
         "grammar_gold_logged_n": len(grammar_golds),
         "grammar_gold_refined_to_specific_n": grammar_specific,
         "extract_model": EXTRACT_MODEL, "judge_model": JUDGE_MODEL,
+        "mode": "guarded" if GUARDED else "baseline",
     }
 
 
@@ -260,8 +305,17 @@ def render_md(summary: dict, rows: list[dict]) -> str:
     def pct(x):
         return "—" if x is None else f"{x:.3f}"
 
+    mode_note = (
+        "**Mode: GUARDED** — the production retry/validation guard is active "
+        "(retry incomplete/raising calls ×3, discard anything still incomplete). "
+        "Compare against the baseline `extraction.{md,json}` run over the same dataset."
+        if summary.get("mode") == "guarded"
+        else "**Mode: baseline** — one unguarded call per case (the pre-guard provider behaviour)."
+    )
     lines = [
         "# Structured-extraction eval — `extract_and_log_error`",
+        "",
+        mode_note,
         "",
         f"Extraction model **{summary['extract_model']}** · correction judge **{summary['judge_model']}**. "
         "The hidden post-turn surface that writes the learner's error corpus; measured on "
@@ -350,17 +404,24 @@ def render_md(summary: dict, rows: list[dict]) -> str:
 async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None, help="cap positives+negatives for a cheap slice")
+    ap.add_argument("--guarded", action="store_true",
+                    help="run the production retry/validation guard instead of the raw single call; "
+                         "writes extraction_guarded.{md,json} so the baseline files are untouched")
     ap.add_argument("--from-rows", action="store_true",
                     help="recompute summary + re-render md from the saved rows (no model calls)")
     args = ap.parse_args()
 
+    global GUARDED
+    GUARDED = args.guarded
+    stem = "extraction_guarded" if GUARDED else "extraction"
+
     if args.from_rows:
-        saved = json.loads((RESULTS / "extraction.json").read_text())["rows"]
+        saved = json.loads((RESULTS / f"{stem}.json").read_text())["rows"]
         summary = summarise(saved)
-        (RESULTS / "extraction.json").write_text(
+        (RESULTS / f"{stem}.json").write_text(
             json.dumps({"summary": summary, "rows": saved}, ensure_ascii=False, indent=2))
-        (RESULTS / "extraction.md").write_text(render_md(summary, saved))
-        print(f"Re-aggregated {len(saved)} saved rows → extraction.{{md,json}} (no model calls).")
+        (RESULTS / f"{stem}.md").write_text(render_md(summary, saved))
+        print(f"Re-aggregated {len(saved)} saved rows → {stem}.{{md,json}} (no model calls).")
         return
 
     data = json.loads(DATASET.read_text())
@@ -378,23 +439,24 @@ async def main():
                 print(f"  ! {case['id']} failed: {type(e).__name__}: {e}")
                 return None
 
-    print(f"Extraction surface: {len(positives)} positives + {len(negatives)} negatives "
+    print(f"Extraction surface [{'GUARDED' if GUARDED else 'baseline'}]: "
+          f"{len(positives)} positives + {len(negatives)} negatives "
           f"(model={EXTRACT_MODEL}, concurrency {CONCURRENCY})...")
     tasks = [guarded(eval_positive, c) for c in positives] + [guarded(eval_negative, c) for c in negatives]
     rows = [r for r in await asyncio.gather(*tasks) if r is not None]
 
     summary = summarise(rows)
     RESULTS.mkdir(exist_ok=True)
-    (RESULTS / "extraction.json").write_text(
+    (RESULTS / f"{stem}.json").write_text(
         json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=2)
     )
-    (RESULTS / "extraction.md").write_text(render_md(summary, rows))
+    (RESULTS / f"{stem}.md").write_text(render_md(summary, rows))
 
     cm = summary["confusion_matrix"]
     print(f"\nDone. TP {cm['TP']} FP {cm['FP']} FN {cm['FN']} TN {cm['TN']}")
     print(f"  precision {summary['had_error_precision']}  recall {summary['had_error_recall']}  f1 {summary['had_error_f1']}")
     print(f"  category(specific) {summary['category_accuracy_specific']}  correction {summary['correction_validity']}")
-    print(f"  wrote {RESULTS/'extraction.md'} and .json")
+    print(f"  wrote {RESULTS / (stem + '.md')} and .json")
 
 
 if __name__ == "__main__":
