@@ -79,7 +79,7 @@ Input–output pairs that seeded the evaluation design:
 | 9 | `Drill me on tones` | Agent retrieves tone-related errors from memory. Generates tone discrimination exercises. |
 | 10 | `我没有去过中国但是我想去。` | No errors. Agent confirms and offers cultural context or vocabulary expansion. |
 
-How these materialized in the Task 5 harness (expanded to 60 head-to-head cases + 43 retrieval queries + 51 extraction cases):
+These 10 pairs are design-time examples of what the app must handle — they are **not** the test set itself. The actual Task 5 test suite is far larger (60 head-to-head cases, 43 retrieval queries, 51 extraction cases) and was built to test the same intents in deterministically scorable form. Where each pair ended up:
 
 - Pair 2 is in the test set verbatim; pair 3's error class is covered across the 40 stateless correction cases.
 - Pairs 5, 6, and 9 became the seeded-memory B/C cases — sharpened into deterministically scorable versions like "exactly how many particle errors have I made?", checked against known seeded counts.
