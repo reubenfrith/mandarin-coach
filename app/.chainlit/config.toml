@@ -56,7 +56,10 @@ reaction_on_message_received = false
 
 # Authorize users to spontaneously upload files with messages
 [features.spontaneous_file_upload]
-    enabled = true
+    # Disabled: the app does not yet ingest uploaded files (on_message reads only
+    # message.content). Hidden so the UI doesn't advertise an unimplemented feature.
+    # User file upload (.txt / Anki) is Task 7 item #1.
+    enabled = false
     # Define accepted file types using MIME types
     # Examples:
     # 1. For specific file types:
