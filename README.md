@@ -557,7 +557,7 @@ Net: three times the coverage at essentially unchanged precision.
 
 - Reading the recall row: the baseline's 0.97 counted junk — a third of its logged records carried no correction. The guard never logs an incomplete record, so a flaky extraction window now produces a *missed* log (recoverable: a recurring error recurs, and gets logged next time) instead of a *poisoned* record (not recoverable). Recall of usable records went up, and everything entering the corpus is now complete and valid.
 - Also verified structurally by `tests/test_extraction_guard.py` (14 checks, no network); the eval's default mode stays unguarded so the raw-baseline measurement remains reproducible.
-- Together with 6.2, this is the "change to another piece of the solution" deliverable: the harness isolated which subsystem was weak and why, and the fix — measured on the same harness — closes exactly the failure mode it found.
+- This section, together with 6.2, covers the "change to another piece of the solution" deliverable. The sequence was: the Task 5 extraction eval showed that the corpus writer sometimes produced records with missing fields, a retry and validation step was added around that call, and the same eval was then re-run to confirm the fix worked (incomplete records went from 12 to 0, and correction validity rose from 0.64 to 1.00).
 
 ### 6.4 Model bake-off
 
