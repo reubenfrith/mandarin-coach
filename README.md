@@ -472,6 +472,18 @@ On that footing, three conclusions carried into Task 6:
 2. The DeepSeek decision had real inputs on both sides — hangs (reliability cost) vs GLM's structured-output flakiness (correctness cost) — and needed the latency and timeout columns only a bake-off could add.
 3. The extraction surface produced a concrete product fix — the retry/validation guard — that should land before the bake-off so the corpus-writer fails safe.
 
+### Future evaluation considerations
+
+Beyond the engineering items in Task 7, the harness itself has room to grow:
+
+- **Register and style feedback.** Dropped from the Task 1 pairs because no surface scores it: a small judged set of grammatically-correct-but-unnatural sentences (将 vs 要, written vs spoken register) would measure feedback quality beyond right/wrong.
+- **Grammar-question answering.** Corrections are scored; direct questions ("what's the difference between 看 and 看看?") are not. A QA surface with reference answers over the 315-document grammar corpus would close that.
+- **Drill quality.** `drill_generator` output is currently unscored — a judged check that exercises target the requested error category, are solvable, and ship correct answers.
+- **Multi-session outcomes.** The real product metric is whether tracked errors recur less over time. Simulated learner sessions — error-recurrence rate across N sessions with and without coaching memory — would test the compounding claim directly rather than by proxy.
+- **Union-corpus retrieval golds.** The 6.2 label-collision limitation is fixable: re-label the 43 queries with *sets* of acceptable rule ids (curated gold plus its CGW twins), so the sweep can run against the full 315-document production corpus.
+- **Variance and confidence.** The control arm's C_scale score was run-variable (7/10 one run, 6/6 another); repeating the judged surfaces 3–5× and reporting ranges would turn single-run numbers into intervals.
+- **Human calibration.** A native-speaker review of a sample of judged corrections would calibrate the LLM judges against human ground truth, not only against deterministic proxies.
+
 ---
 
 ## Task 6: Improvements
