@@ -10,7 +10,7 @@
 
 ### Problem Statement
 
-Lower-intermediate self-directed Mandarin learners (roughly HSK 2–4) keep repeating the same specific grammar and word-choice mistakes month after month, and those persistent errors are exactly what force native speakers to slow down, repeat, and rephrase in order to understand them. They can already hold a slow conversation and know the vocabulary and rules in theory, but the same handful of errors resurface unnoticed whether they are typing or speaking, so their progress toward being easily understood stalls.
+Lower-intermediate self-directed Mandarin learners (roughly HSK 2–4) unknowingly keep repeating the same handful of specific grammar and word-choice mistakes month after month — the persistent errors, made identically whether they type or speak, that force native speakers to slow down, repeat, and rephrase to understand them — with no way to see which recurring errors are stalling their progress toward being easily understood.
 
 ### Why This Is a Problem
 
@@ -872,7 +872,11 @@ The evaluation did its job of surfacing the decisions Task 6 now has to make wit
 
 ## Task 6: Advanced Retrieval & Improvements
 
-Task 6 has two halves, each settled with evidence rather than assertion: an **advanced-retriever sweep** (this section) and a **model bake-off** (below). The retriever half delivers the two things the plan promised — an *advanced retriever* (the Axis-2 winner) and *one other change* (the Axis-1 embedding swap) — both measured on the same harness.
+Task 6 has three parts, each settled with evidence rather than assertion, and they map onto the deliverables like this:
+
+- **The advanced retrieval technique** is the hybrid BM25 + dense retriever selected by the sweep in §6.1 and wired into production.
+- **The "change to at least one other piece of the solution"** is delivered twice over, each with the harness as hard evidence: the **grammar-corpus expansion** (§6.1b — topics that previously could not be retrieved at all now come back at recall@3 = 0.87, with precision on the original set retained) and the **extraction retry/validation guard** (§6.3 — a product fix driven directly by the Task 5 extraction surface). The Axis-1 embedding swap (BGE-M3) was *also* measured, but honestly reported as a latency/cost trade rather than a quality win, so it is not claimed as the improvement.
+- **The model bake-off** (§6.2) settles the keep-or-drop DeepSeek decision Task 5 deferred, using the same harness plus the latency and timeout columns it lacked.
 
 ### 6.1 — Retrieval sweep
 
@@ -950,9 +954,30 @@ Reading the table with the reasons behind each row:
 
 *(A larger reliability-only sample could tighten the timeout-rate estimate, but the intermittent hang appears provider-load-dependent and was not reproducible on demand; the guard makes the exact rate non-blocking for the default decision.)*
 
+### 6.3 — The extraction guard: an eval-driven fix to another piece of the solution
+
+The Task 5 extraction surface (Surface 4) found that the hidden corpus-writer — `extract_and_log_error`, the subsystem the entire personalisation loop depends on — had perfect logging precision (1.00) but intermittently returned records with the `correction`, `category`, and `explanation` fields left empty together, traced to provider-side structured-output non-determinism rather than a capability limit, a prompting problem, or temperature (each alternative was ruled out empirically; see Task 5).
+
+That finding dictated a specific fix, which is now implemented in `app/agent.py`: **a retry-on-incomplete / field-validation guard** around the extraction call. It retries a dropped-field or raising call up to `EXTRACTION_MAX_ATTEMPTS=3` times (each attempt bounded by a 60 s timeout), trusts `had_error=False` immediately, and only ever writes a *complete* record to the corpus — an incomplete record after all retries is discarded rather than logged, so the writer fails safe. The change is verified by `tests/test_extraction_guard.py` (14 checks, no network). The eval-side sibling `extract_error_record` is deliberately left un-guarded so the extraction surface keeps measuring the raw baseline the guard was built against.
+
+This is the harness working as designed end-to-end: the eval surface isolated *which* subsystem was weak and *why* (empty fields, not wrong fields — correction validity was 0.95 when non-empty), the diagnosis selected the cheapest correct fix (a guard, not a model swap), and the guard closes the exact failure mode measured. Together with the coverage expansion in §6.1b (0/15 unreachable topics → recall@3 0.87 at unchanged precision on the original query set), it constitutes the "meaningfully improved, harness-evidenced change to another piece of the solution" deliverable.
+
 ---
 
 ## Task 7: Next Steps
+
+### What stays for Demo Day
+
+The load-bearing parts of the current implementation have all earned their place with evidence, and they stay:
+
+- **The hybrid BM25 + dense retriever** — the measured Axis-2 winner (recall@1 0.49 → 0.56, MRR 0.63 → 0.70 on the non-circular query set), wired into production with a dense-only automatic fallback.
+- **The per-user ChromaDB error corpus and deterministic `error_stats()` aggregation** — the structural moat the head-to-head proved (C_scale 10/10 vs the naked LLM's 7/10); this is the product thesis and it held.
+- **The timeout + GLM-fallback reliability guard and the extraction retry/validation guard** — the two guards are what make the DeepSeek-default decision and the silent corpus-writer safe, respectively; both are eval-justified.
+- **The eval harness itself** — the four surfaces plus the deterministic cross-check discipline carry forward as the regression net for every future change; nothing lands at Demo Day without a number from it.
+
+What changes is everything below: the two known scope gaps get closed first, then the open retrieval arms, then the guardrail and personalisation refinements — each anchored to a specific finding from the build or the eval harness, ordered by value-to-effort. The largest *conceptual* change on the horizon is voice/pronunciation (item 10), which extends the same error-intelligence loop beyond text.
+
+### The improvement list
 
 These are not a generic wishlist — each item is anchored to a specific finding from the build or the eval harness, and is ordered by value-to-effort.
 
