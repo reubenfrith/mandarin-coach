@@ -85,7 +85,7 @@ These 10 pairs are design-time examples of what the app must handle — they are
 - Pairs 5, 6, and 9 became the seeded-memory B/C cases — sharpened into deterministically scorable versions like "exactly how many particle errors have I made?", checked against known seeded counts.
 - Pairs 1 and 10 (correct sentences that must not be flagged) became the extraction surface's 17 negative cases — the logging-precision test.
 - Pair 4 (dictionary lookup) is tested via the factual-grounding metric and required-tool recall rather than as a literal prompt.
-- Two are acknowledged gaps: register/style feedback (pair 7) and direct grammar-question answering (pair 8) were not scored by any surface.
+- Pairs 7 and 8 (register/style feedback, direct grammar-question answering) don't yet have automated scoring — they remain manual checks against the live app and candidates for future eval surfaces.
 
 ---
 
