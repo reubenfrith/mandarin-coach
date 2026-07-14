@@ -4,6 +4,33 @@
 **Submission:** Google Form — https://forms.gle/xtM9F38nfRKcdjH97  
 **Project:** Mandarin Learning Coach — Personal Error Intelligence Agent
 
+**🌐 Live app:** https://34-129-227-111.nip.io — deployed end-to-end (auth, agent, persistent per-user corpus)  
+**🎥 Demo video:** *(link added on submission — recording script in `progress/VIDEO_SCRIPT.md`)*
+
+### Rubric map
+
+Every deliverable, and where to find it:
+
+| Rubric deliverable | Section |
+|---|---|
+| Problem, one sentence | [Problem Statement](#problem-statement) |
+| Why it's a problem for this user | [Why This Is a Problem](#why-this-is-a-problem) |
+| How the user solves it today (diagram) | [Current Workflow Diagram](#current-workflow-diagram) |
+| Evaluation input–output pairs | [Evaluation Q&A Pairs](#evaluation-qa-pairs) |
+| Solution, one sentence | [Solution Statement](#solution-statement) |
+| Infrastructure diagram + why each tool | [Infrastructure Diagram](#infrastructure-diagram) · [Component Decisions](#component-decisions) |
+| Agent workflow diagram + explanation | [Agent Workflow Diagram](#agent-workflow-diagram) |
+| Data sources & external APIs | [Data Sources](#data-sources) |
+| Default chunking strategy + why | [Chunking Strategy](#chunking-strategy) |
+| End-to-end prototype, deployed with a front end | [Task 4: Prototype](#task-4-prototype) + live app above |
+| Test data set | [Task 5: Evaluation Harness](#task-5-evaluation-harness) (60 cases + 43 retrieval queries + 51 extraction cases) |
+| Evaluation harness + results | [Results — the four surfaces](#results--what-was-actually-built-and-what-it-showed) |
+| Conclusions about pipeline performance | Per-surface readings + [What this sets up for Task 6](#what-this-sets-up-for-task-6) |
+| Advanced retrieval technique + rationale | [6.1 Retrieval Sweep](#61--retrieval-sweep) |
+| Performance comparison table | [Improvement at a glance](#improvement-at-a-glance) + per-sweep tables |
+| Change to one other piece, harness-evidenced | [6.1b Coverage](#61b--grammar-coverage-more-rules-without-touching-the-result) · [6.3 Extraction Guard](#63--the-extraction-guard-an-eval-driven-fix-to-another-piece-of-the-solution) |
+| Next steps: keep vs change for Demo Day | [Task 7: Next Steps](#task-7-next-steps) |
+
 ---
 
 ## Task 1: Problem, Audience & Scope
@@ -32,39 +59,23 @@ Every tool treats the learner as an average user progressing through a fixed cur
 
 How a self-directed Mandarin learner handles their study today:
 
-```
-[Learner] 
-    │
-    ▼
-Open study tool (Duolingo / textbook / YouTube)
-    │
-    ▼
-Follow generic curriculum ──────────────────────► [Pain point: not adapted to individual]
-    │
-    ▼
-Attempt to write or speak a sentence
-    │
-    ▼
-Error occurs
-    │
-    ├──► App flags wrong answer (Duolingo)
-    ├──► Tutor corrects in session (iTalki) ─────► [Pain point: infrequent, expensive]
-    └──► Native speaker corrects (HelloTalk)
-    │
-    ▼
-Learner notes correction ───────────────────────► [Pain point: notebook or mental note only]
-    │
-    ▼
-Session ends
-    │
-    ▼
-Errors NOT captured anywhere persistent ─────────► [Pain point: lost between sessions]
-    │
-    ▼
-Next session: same curriculum continues
-    │
-    ▼
-Same errors recur ───────────────────────────────► [Pain point: no feedback loop]
+```mermaid
+flowchart TD
+    A(["Learner"]) --> B["Open study tool:<br/>Duolingo / textbook / YouTube"]
+    B --> C["Follow generic curriculum<br/>⚠️ not adapted to the individual"]
+    C --> D["Attempt to write or speak a sentence"]
+    D --> E{"Error occurs"}
+    E --> F["App flags wrong answer<br/>(Duolingo)"]
+    E --> G["Tutor corrects in session (iTalki)<br/>⚠️ infrequent, expensive"]
+    E --> H["Native speaker corrects<br/>(HelloTalk)"]
+    F --> I["Learner notes correction<br/>⚠️ notebook or mental note only"]
+    G --> I
+    H --> I
+    I --> J["Session ends"]
+    J --> K["Errors NOT captured anywhere persistent<br/>⚠️ lost between sessions"]
+    K --> L["Next session:<br/>same generic curriculum continues"]
+    L --> M["Same errors recur<br/>⚠️ no feedback loop"]
+    M --> B
 ```
 
 **Tools the learner interacts with today:**
@@ -201,98 +212,27 @@ The embedding model determines retrieval quality — how well the agent finds re
 
 ### Infrastructure Diagram
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        USER                                  │
-│                   (Browser / Phone)                          │
-└───────────────────────────┬─────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     CHAINLIT UI                              │
-│              Chat interface (browser-based)                  │
-└───────────────────────────┬─────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│           USERNAME / PASSWORD AUTH (via Chainlit)            │
-│   Authenticates user — user ID namespaces ChromaDB          │
-│   collections so each user's error corpus is isolated        │
-└───────────────────────────┬─────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    LITELLM GATEWAY                           │
-│  Routes via OpenRouter to the selected Chinese-native LLM   │
-│      (DeepSeek V4 / GLM-5.2 / Qwen3.5-397B)                  │
-└───────────────────────────┬─────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│               LANGGRAPH AGENT ORCHESTRATION                  │
-│     Manages conversation flow, tool calls, memory           │
-│                                                             │
-│  ┌─────────────────┐          ┌──────────────────────────┐  │
-│  │  Session Memory │          │    Long-Term Memory      │  │
-│  │ (conversation   │          │  (personal error corpus  │  │
-│  │  buffer)        │          │   persists across        │  │
-│  └─────────────────┘          │   sessions)              │  │
-│                               └──────────────────────────┘  │
-└──────┬──────────────────────────────────┬───────────────────┘
-       │                                  │
-       ▼                                  ▼
-┌──────────────────────────────────────────────────────┐
-│                    AGENT TOOLS                        │
-│                                                      │
-│  ┌─────────────┐  ┌──────────────┐                  │
-│  │  CC-CEDICT  │  │    TAVILY    │  External APIs   │
-│  │  Dictionary │  │  Web Search  │                  │
-│  │             │  │              │                  │
-│  │ Word lookup │  │ Real-world   │                  │
-│  │ pinyin, HSK │  │ Chinese text │                  │
-│  │ level       │  │ + context    │                  │
-│  └─────────────┘  └──────────────┘                  │
-│                                                      │
-│  ┌──────────────┐  ┌──────────────┐  ┌───────────┐  │
-│  │    Error     │  │   Grammar    │  │   Drill   │  │
-│  │   Pattern    │  │    Rule      │  │ Generator │  │
-│  │  Analyser   │  │   Fetcher    │  │           │  │
-│  │             │  │              │  │ Targeted  │  │
-│  │ Frequency,  │  │ Full rule +  │  │ exercises │  │
-│  │ trends,     │  │ examples     │  │ from error│  │
-│  │ insights    │  │ from corpus  │  │ category  │  │
-│  └──────┬──────┘  └──────┬───────┘  └─────┬─────┘  │
-└─────────┼────────────────┼────────────────┼─────────┘
-          │                │                │
-          └────────────────┴────────────────┘
-                           │
-                           ▼
-                  ┌────────────────────┐
-                  │     CHROMADB       │
-                  │   Vector Database  │
-                  │                    │
-                  │  personal_errors   │
-                  │  grammar_rules     │
-                  │  hsk_vocabulary    │
-                  │  error_patterns    │
-                  └────────────────────┘
-                                          │
-                                          ▼
-                                 ┌────────────────────┐
-                                 │  OPENAI EMBEDDINGS │
-                                 │  text-embedding-   │
-                                 │  3-small           │
-                                 └────────────────────┘
-
-┌─────────────────────────────────────────────────────────────┐
-│                     LANGSMITH                                │
-│         Monitoring — traces every agent call                 │
-└─────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────┐
-│              GCP COMPUTE ENGINE (Docker + Caddy)             │
-│     Deployment — always-on VM, public HTTPS endpoint         │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    U["👤 User<br/>browser / phone"] --> UI
+    subgraph VM["GCP Compute Engine — Docker + Caddy, automatic HTTPS"]
+        UI["Chainlit UI<br/>chat interface"] --> AUTH["Username/password auth (Chainlit)<br/>user ID namespaces ChromaDB collections"]
+        AUTH --> AGENT
+        subgraph AGENT["LangGraph agent orchestration"]
+            SM["Session memory<br/>(conversation buffer)"]
+            LTM["Long-term memory<br/>(personal error corpus,<br/>persists across sessions)"]
+        end
+        AGENT --> EPA["🔧 Error pattern analyser<br/>frequency, trends, insights"]
+        AGENT --> GRF["🔧 Grammar rule fetcher<br/>full rule + examples"]
+        AGENT --> DG["🔧 Drill generator<br/>targeted exercises from error category"]
+        EPA --> DB[("ChromaDB<br/>personal_errors · grammar_rules<br/>grammar_patterns · hsk_vocabulary · error_patterns")]
+        GRF --> DB
+        DB --- EMB["OpenAI embeddings<br/>text-embedding-3-small"]
+    end
+    AGENT --> GW["LiteLLM gateway → OpenRouter<br/>DeepSeek V4 default · GLM-5.2 fallback"]
+    AGENT --> CED["🔧 CC-CEDICT dictionary (external)<br/>word lookup: pinyin, definition, HSK level"]
+    AGENT --> TAV["🔧 Tavily web search (external)<br/>real-world Chinese text + cultural context"]
+    AGENT -. "traces every LLM call, tool call, retrieval" .-> LS["LangSmith monitoring"]
 ```
 
 ---
@@ -329,142 +269,40 @@ The agent has five tools and decides which to call based on the user's intent an
 
 ### Agent Workflow Diagram
 
-```
-[User opens app in browser]
-          │
-          ▼
-[Username/password login — Chainlit]
-  Username extracted → namespaces
-  all ChromaDB collections for
-  this user (e.g. reuben_*)
-          │
-          ▼
-    ┌─────────────────────────────────────┐
-    │  First-time user or returning?     │
-    └──────┬──────────────────┬──────────┘
-           │                  │
-           ▼                  ▼
-   FIRST-TIME USER      RETURNING USER
-           │                  │
-           ▼                  ▼
-  Agent sends welcome   Agent sends session
-  + asks 2 questions:   summary:
-                        "Welcome back. Since
-  Q1: HSK level?        your last session you
-  [HSK 1-2][HSK 3-4]   made 3 new errors.
-  [HSK 5-6][Beginner]   Most persistent:
-                        aspect markers.
-  Q2: Biggest struggle? Want a drill?"
-  [Tones][Grammar]
-  [Vocabulary][Unsure]
-           │
-           ▼
-  Answers stored in
-  user profile.
-  Error corpus seeded
-  with level-appropriate
-  patterns.
-  3 starter prompts
-  shown as buttons:
-  → "Check this sentence"
-  → "Drill me on tones"
-  → "What is 了 vs 过?"
-           │
-           └──────────────────┐
-                              │
-                              ▼
-[User types input or clicks a starter prompt]
-          │
-          ▼
-[LangChain Agent receives input + user ID]
-          │
-          ▼
-    ┌─────────────────────────────────────┐
-    │   ROUTER: What type of request?    │
-    └──────┬──────────┬───────────┬──────┘
-           │          │           │
-           ▼          ▼           ▼
-     Correction   Drill /      Grammar /
-      Request     Insights     Question
-           │          │           │
-           ▼          │           ▼
-  ┌──────────────────┐│  ┌─────────────────────┐
-  │ TOOL: Grammar    ││  │ TOOL: Grammar Rule  │
-  │ Rule Fetcher     ││  │ Fetcher             │
-  │ Retrieves rule   ││  │ Retrieves rule for  │
-  │ for error type   ││  │ question topic      │
-  └───────┬──────────┘│  └──────────┬──────────┘
-          │           │             │
-          ▼           │             ▼
-  ┌──────────────────┐│  ┌─────────────────────┐
-  │ TOOL: Error      ││  │ TOOL: Tavily Search │
-  │ Pattern Analyser ││  │ (if corpus examples │
-  │ Retrieves similar││  │ insufficient)       │
-  │ past mistakes    ││  │ Fetches real-world  │
-  └───────┬──────────┘│  │ usage examples      │
-          │           │  └──────────┬──────────┘
-          ▼           │             │
-  ┌──────────────────┐│             ▼
-  │ LLM analyses     ││  ┌─────────────────────┐
-  │ sentence using   ││  │ Generate explanation│
-  │ retrieved rule   ││  │ with examples       │
-  │ + error history  ││  └─────────────────────┘
-  └───────┬──────────┘│
-          │           ▼
-          ▼    ┌──────────────────────┐
-  ┌────────────┐│ TOOL: Error Pattern │
-  │ Unknown   ││ Analyser            │
-  │ word?     ││ Top errors by freq  │
-  └─────┬─────┘│ Trend: improving vs │
-        │      │ persisting          │
-        ▼      └──────────┬──────────┘
-  ┌────────────┐          │
-  │ TOOL:      │          ▼
-  │ CC-CEDICT  │ ┌────────────────────┐
-  │ Dictionary │ │ TOOL: Drill        │
-  │ Lookup     │ │ Generator          │
-  │ definition │ │ 3-5 exercises from │
-  │ + pinyin   │ │ top error category │
-  └─────┬──────┘ └──────────┬─────────┘
-        │                   │
-        ▼                   │
-  ┌──────────────────┐      │
-  │ Generate:        │      │
-  │ - Correction     │◄─────┘
-  │ - Root cause     │
-  │   explanation    │
-  │ - Mini drill     │
-  │ - Pattern note   │
-  │   if recurring   │
-  └───────┬──────────┘
-          │
-          ▼
-  ┌──────────────────┐
-  │ TOOL: Error      │
-  │ Pattern Analyser │
-  │ Logs new error   │
-  │ to ChromaDB      │
-  │ (type, count,    │
-  │ context)         │
-  └───────┬──────────┘
-          │
-          ▼
-[Response returned to user in Chainlit]
-          │
-          ▼
-[HUMAN REVIEW STEP]
-  User reads correction and
-  explanation inline.
-  Two optional actions shown:
-  → "Log this error" (confirm)
-  → "Dismiss" (discard — if
-     the agent was wrong)
-  Default: auto-log after 5s
-  so friction is low for most
-  corrections.
-          │
-          ▼
-[LangSmith traces every tool call and LLM step]
+```mermaid
+flowchart TD
+    START(["User opens app in browser"]) --> LOGIN["Username/password login — Chainlit<br/>username namespaces all ChromaDB<br/>collections for this user"]
+    LOGIN --> NEW{"First-time or returning?"}
+    NEW -- "first-time" --> ONB["Welcome + onboarding:<br/>HSK level question, answers stored in profile;<br/>3 starter prompts shown as buttons"]
+    NEW -- "returning" --> SUM["Session summary:<br/>new errors since last session,<br/>most persistent category, drill offer"]
+    ONB --> INPUT["User types input or clicks a starter prompt"]
+    SUM --> INPUT
+    INPUT --> AGENT["LangGraph agent receives input + user ID"]
+    AGENT --> ROUTER{"Router:<br/>request type?"}
+
+    ROUTER -- "correction request" --> GRF1["🔧 Grammar rule fetcher<br/>retrieves rule for the error type"]
+    GRF1 --> EPA1["🔧 Error pattern analyser<br/>retrieves similar past mistakes"]
+    EPA1 --> LLM1["LLM analyses sentence using<br/>retrieved rule + error history"]
+    LLM1 --> UNK{"Unknown word?"}
+    UNK -- "yes" --> DICT["🔧 CC-CEDICT dictionary lookup<br/>definition + pinyin + HSK level"]
+    UNK -- "no" --> GEN
+    DICT --> GEN["Generate: correction · root-cause explanation ·<br/>mini drill · pattern note if recurring"]
+    GEN --> LOG["🔧 Error pattern analyser<br/>logs new error to ChromaDB<br/>(type, count, context)"]
+
+    ROUTER -- "grammar question" --> GRF2["🔧 Grammar rule fetcher<br/>retrieves rule for the topic"]
+    GRF2 --> SUFF{"Corpus examples<br/>sufficient?"}
+    SUFF -- "no" --> WEB["🔧 Tavily web search<br/>real-world usage examples"]
+    SUFF -- "yes" --> EXPL["Generate explanation with examples"]
+    WEB --> EXPL
+
+    ROUTER -- "drill / insights" --> EPA2["🔧 Error pattern analyser<br/>top errors by frequency;<br/>trend: improving vs persisting"]
+    EPA2 --> DRILL["🔧 Drill generator<br/>3–5 exercises from top error category"]
+
+    LOG --> RESP["Response returned to user in Chainlit"]
+    EXPL --> RESP
+    DRILL --> RESP
+    RESP --> REVIEW["👤 HUMAN REVIEW<br/>user reads correction + explanation inline;<br/>'Log this error' / 'Dismiss' actions,<br/>auto-log after 5 s to keep friction low"]
+    REVIEW -.-> TRACE["LangSmith traces every tool call and LLM step"]
 ```
 
 ### How the Application Solves the Problem
@@ -877,6 +715,20 @@ Task 6 has three parts, each settled with evidence rather than assertion, and th
 - **The advanced retrieval technique** is the hybrid BM25 + dense retriever selected by the sweep in §6.1 and wired into production.
 - **The "change to at least one other piece of the solution"** is delivered twice over, each with the harness as hard evidence: the **grammar-corpus expansion** (§6.1b — topics that previously could not be retrieved at all now come back at recall@3 = 0.87, with precision on the original set retained) and the **extraction retry/validation guard** (§6.3 — a product fix driven directly by the Task 5 extraction surface). The Axis-1 embedding swap (BGE-M3) was *also* measured, but honestly reported as a latency/cost trade rather than a quality win, so it is not claimed as the improvement.
 - **The model bake-off** (§6.2) settles the keep-or-drop DeepSeek decision Task 5 deferred, using the same harness plus the latency and timeout columns it lacked.
+
+### Improvement at a glance
+
+The full progression, every step measured on the same harness:
+
+| Step | Change | Evidence | Headline result |
+|---|---|---|---|
+| 0 | Baseline — dense retrieval, OpenAI `text-embedding-3-small` | `results/retrieval_sweep` | recall@1 0.49 · MRR 0.63 (43 non-circular queries) |
+| 1 | **Hybrid retriever** (BM25 + dense, RRF) — the advanced technique, in production | `results/retrieval_sweep` | recall@1 **0.56** · MRR **0.70** — up on every metric |
+| 2 | **Grammar coverage ×3** (98 → 315 docs, CGW union) | `results/coverage_check` | previously unreachable topics 0/15 → recall@3 **0.87**, curated precision retained |
+| 3 | **Extraction retry/validation guard** on the corpus writer | Task 5 extraction surface + `tests/test_extraction_guard.py` | closes the measured empty-field failure mode; logging precision stays **1.00** |
+| 4 | **Model decision** — keep DeepSeek default behind the timeout/fallback guard | `results/model_bakeoff` | quality tied at 1.00 across all three models; DeepSeek tightest latency (p95 13.4 s) |
+
+*(The BGE-M3 embedding swap was also measured: quality within noise of baseline but ~11× faster locally — adopted as a validated drop-in for latency-/cost-sensitive deployments, not claimed as a quality improvement.)*
 
 ### 6.1 — Retrieval sweep
 
