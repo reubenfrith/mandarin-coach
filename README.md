@@ -3,7 +3,7 @@
 **Student:** Reuben Frith  
 **Submission:** Google Form — https://forms.gle/xtM9F38nfRKcdjH97  
 **Live app:** https://34-129-227-111.nip.io — deployed end-to-end (auth, agent, persistent per-user corpus)  
-**Demo video:** *(link added on submission)*
+**Demo video:** https://www.youtube.com/watch?v=IvJwwyUeerg
 
 | Rubric deliverable | Section |
 |---|---|
