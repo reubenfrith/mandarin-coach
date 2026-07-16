@@ -4,7 +4,7 @@ Every rubric line item, mapped to the exact place it is addressed: the write-up
 section in [`README.md`](README.md) and, where the deliverable is code or a data
 artifact, the file and named symbol that implements it. Code locations are given
 as **file → `symbol()`** so they stay greppable across edits (line numbers are a
-convenience, current as of this commit).
+convenience).
 
 - **Repo:** https://github.com/reubenfrith/mandarin-coach
 - **Live app:** https://34-129-227-111.nip.io
