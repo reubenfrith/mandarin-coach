@@ -1,4 +1,4 @@
-# Task 6.2 — Model bake-off
+# Task 6.4 — Model bake-off
 
 12 A_stateless correction cases per model, grounded-correction generation (same retrieved rules for every model). Per-turn timeout 120s; judge = glm (fixed across models). Latency per COMPLETED turn.
 

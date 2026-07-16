@@ -205,7 +205,7 @@ def build_rankers(wanted: list[str], ids, docs):
 def render_md(results: list[dict], skipped: dict, n_queries: int) -> str:
     def fmt(v): return f"{v:.3f}"
     lines = [
-        "# Task 6 — Retrieval sweep",
+        "# Task 6.1 — Retrieval sweep",
         f"\n{n_queries} fresh non-circular queries over the 98-rule grammar corpus. "
         "Deterministic exact gold rule-id match (no LLM judge). Higher recall/MRR is better; "
         "lower latency is better.\n",

@@ -11,7 +11,8 @@ this file is the **map of the folder** — what each file is and how the pieces 
 evals/
   lib/        shared modules, imported not run   (_env.py, llm_judge.py, agg_parse.py)
   datagen/    dataset builders + frozen data     (seed_data.py, generate_*.py, *.json)
-  surfaces/   the 5 runnable evaluations         (preflight_typec, eval_harness, ragas_*, extraction_eval)
+  surfaces/   8 runnable evaluations             Task 5: preflight_typec, eval_harness, ragas_rag, ragas_agentic, extraction_eval
+                                                 Task 6: retrieval_sweep, coverage_check, model_bakeoff
   results/    every surface's output + its own README (verification recipes)
 ```
 
@@ -36,6 +37,8 @@ surfaces/preflight_typec   surfaces/eval_harness   surfaces/ragas_rag   surfaces
    └────────────────────────────┴──────────── results/ ────────────────────┴────────────────────────┘
         (each surface writes a .md summary + a .json with every raw answer)
 ```
+
+The three **Task 6** surfaces (`retrieval_sweep`, `coverage_check`, `model_bakeoff`) sit alongside these — they read the grammar corpus and `datagen/retrieval_queries.json` directly rather than `test_dataset.json`, and write into the same `results/` folder. See [Task 6 tables below](#retrieval-strategies-evaluated-task-61--done).
 
 ## Files by role
 
@@ -65,7 +68,10 @@ surfaces/preflight_typec   surfaces/eval_harness   surfaces/ragas_rag   surfaces
 | `eval_harness.py` | Head-to-head: every case through the full agent **and** a naked-LLM control arm. | `results/head_to_head.{md,json}` |
 | `ragas_rag.py` | RAGAS RAG metrics (ContextRecall/Relevance, Faithfulness, ResponseGroundedness, NoiseSensitivity, AnswerAccuracy) over the retriever→grounding chain; judge = gpt-4o-mini. | `results/ragas_rag.{md,json}` |
 | `ragas_agentic.py` | RAGAS agentic metrics (ToolCallAccuracy, AgentGoalAccuracy) over the full tool-call trace + deterministic tool-recall and off-topic-deflection cross-checks; reasoning judge = **gpt-4o**. | `results/ragas_agentic.{md,json}` |
-| `extraction_eval.py` | The hidden post-turn corpus-writer `extract_and_log_error`: had_error precision/recall/F1, category accuracy, correction validity — each miss split into omission / malformed-JSON / wrong-value. | `results/extraction.{md,json}` |
+| `extraction_eval.py` | The hidden post-turn corpus-writer `extract_and_log_error`: had_error precision/recall/F1, category accuracy, correction validity — each miss split into omission / malformed-JSON / wrong-value. `--guarded` re-runs the same dataset through the production retry/validation guard (Task 6.3). | `results/extraction.{md,json}` · `results/extraction_guarded.{md,json}` |
+| `retrieval_sweep.py` (Task 6.1) | Advanced-retrieval sweep over 43 fresh non-circular queries: baseline dense vs BGE-M3 vs hybrid (BM25+dense, RRF). Deterministic exact rule-id match + wall-clock latency, no LLM judge. | `results/retrieval_sweep.{md,json}` |
+| `coverage_check.py` (Task 6.2) | Effect of unioning the +217 CGW `grammar_patterns` set: coverage on 15 CGW-only topics + precision retention on the 43 curated queries. Deterministic. | `results/coverage_check.{md,json}` |
+| `model_bakeoff.py` (Task 6.4) | DeepSeek V4 / GLM-5.2 / Qwen3.5 head-to-head on grounded corrections: correct-fix, misleading claims, timeout rate, latency p50/p95. Settles the keep/drop-DeepSeek decision. | `results/model_bakeoff.{md,json}` |
 
 **Results** — `results/` holds the output of every surface. **Start at
 [`results/README.md`](results/README.md)**: it indexes all surfaces and gives copy-paste
@@ -91,6 +97,13 @@ uv run python evals/surfaces/ragas_rag.py                                       
 REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=3 uv run python evals/surfaces/ragas_agentic.py   # agentic surface (60)
 REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=4 uv run python evals/surfaces/extraction_eval.py # extraction surface (34+17)
 uv run python evals/surfaces/extraction_eval.py --from-rows                            # re-aggregate saved rows, no model calls
+
+# 3. Task 6 surfaces (retrieval + coverage + model bake-off)
+uv sync --extra task6                                                                  # BM25 (jieba) + BGE-M3 deps
+uv run python evals/surfaces/retrieval_sweep.py --configs baseline,bge_m3,hybrid       # 6.1 retrieval sweep (43 queries)
+uv run python evals/surfaces/coverage_check.py                                         # 6.2 grammar coverage / precision retention
+uv run python evals/surfaces/extraction_eval.py --guarded                              # 6.3 guarded re-run (before/after the guard)
+REQUEST_TIMEOUT=150 uv run python evals/surfaces/model_bakeoff.py                       # 6.4 model bake-off (12 cases × 3 models)
 ```
 
 ## Methodology notes (decisions made during the build)
@@ -130,21 +143,25 @@ uv run python evals/surfaces/extraction_eval.py --from-rows                     
   logged records and intermittently emits malformed JSON (a reliability limit fixable with a
   retry/validation guard, not a model swap — DECISIONS #13).
 
-## Retrieval strategies to evaluate (Task 6)
+## Retrieval strategies evaluated (Task 6.1) — DONE
 
-| Strategy | Status |
-|---|---|
-| Baseline — semantic only (OpenAI text-embedding-3-small) | TODO |
-| Qwen3-Embedding-8B (MTEB #1 multilingual) | TODO |
-| BGE-M3 (best open-source Chinese embeddings) | TODO |
-| Hybrid search — BM25 + semantic | TODO |
-| Semantic + Cohere Rerank | TODO |
-| Multi-query retrieval | TODO |
+43 fresh non-circular queries, deterministic exact rule-id match (see `results/retrieval_sweep.md`).
 
-## Model comparison (Task 6)
-
-| Model | BenchLM Chinese Score | Eval Score | Status |
+| Strategy | recall@1 | MRR | Status |
 |---|---|---|---|
-| DeepSeek V3 | 87 | TBD | TODO |
-| GLM-5 | 81 | TBD | TODO |
-| Qwen3.5-235B | 79 | TBD | TODO |
+| Baseline — dense only (OpenAI text-embedding-3-small) | 0.49 | 0.63 | ✅ run (production default) |
+| BGE-M3 (best open-source Chinese embeddings, local dense) | 0.47 | 0.61 | ✅ run — latency/cost trade, not a quality win |
+| **Hybrid — BM25 (jieba) + dense, RRF** | **0.56** | **0.70** | ✅ run — **winner, adopted in production** |
+| Qwen3-Embedding-8B (MTEB #1 multilingual) | — | — | ⏭ not run — needs a GPU endpoint (Task 7) |
+| Semantic + cross-encoder rerank | — | — | ⏭ not run (Task 7) |
+| Multi-query retrieval | — | — | ⏭ not run (Task 7) |
+
+## Model comparison (Task 6.4) — DONE
+
+12 grounded-correction cases per model, per-turn timeout 120 s (see `results/model_bakeoff.md`). Standings are the July 2026 Chinese-leaderboard positions the roster was shortlisted from (root README → Model selection).
+
+| Model | correct_fix | misleading | timeout rate | latency p95 | Decision |
+|---|---|---|---|---|---|
+| DeepSeek V4 | 1.00 | 0 | 0/12 | **13.4 s** | ✅ keep — default (behind the fallback guard) |
+| GLM-5.2 | 1.00 | 0 | 0/12 | 35.4 s | ✅ keep — fallback |
+| Qwen3.5-397B | 1.00 | 0 | 0/12 | 52.6 s | ✖ drop |

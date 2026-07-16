@@ -1,4 +1,4 @@
-"""Task 6.2 — model bake-off: DeepSeek V4 / GLM-5.2 / Qwen3.5 head to head.
+"""Task 6.4 — model bake-off: DeepSeek V4 / GLM-5.2 / Qwen3.5 head to head.
 
 Settles the keep/drop-DeepSeek decision deferred from Task 5 by adding the two columns
 that decision needs and Task 5 never had: **latency** and **timeout-rate**. Isolates the
@@ -127,7 +127,7 @@ def summarise(model: str, rows: list[dict]) -> dict:
 def render_md(summaries: list[dict], n_cases: int) -> str:
     def f(v): return "—" if v is None else (f"{v:.3f}" if isinstance(v, float) else str(v))
     lines = [
-        "# Task 6.2 — Model bake-off",
+        "# Task 6.4 — Model bake-off",
         f"\n{n_cases} A_stateless correction cases per model, grounded-correction generation "
         f"(same retrieved rules for every model). Per-turn timeout {int(BAKEOFF_TIMEOUT)}s; "
         f"judge = {os.environ.get('JUDGE_MODEL','glm')} (fixed across models). Latency per COMPLETED turn.\n",

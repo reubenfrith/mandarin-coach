@@ -1,4 +1,4 @@
-"""Task 6.1b — grammar coverage check (what the +217 CGW ingest bought).
+"""Task 6.2 — grammar coverage check (what the +217 CGW ingest bought).
 
 Answers one question honestly: after adding the 217 Chinese Grammar Wiki points as a
 separate `grammar_patterns` collection (unioned into `grammar_rule_fetcher`), do we get
@@ -107,7 +107,7 @@ def main():
                                 "new_drops_from_cgw_ingest": new_drops},
     }
     md = [
-        "# Task 6.1b — Grammar coverage check",
+        "# Task 6.2 — Grammar coverage check",
         f"\nAfter unioning the 217-point Chinese Grammar Wiki `grammar_patterns` collection into "
         f"`grammar_rule_fetcher`. Deterministic exact rule-id match over the production union retriever.\n",
         "## Part A — Coverage (15 CGW-only topics, no curated twin)",

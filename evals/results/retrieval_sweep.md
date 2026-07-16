@@ -1,4 +1,4 @@
-# Task 6 — Retrieval sweep
+# Task 6.1 — Retrieval sweep
 
 43 fresh non-circular queries over the 98-rule grammar corpus. Deterministic exact gold rule-id match (no LLM judge). Higher recall/MRR is better; lower latency is better.
 

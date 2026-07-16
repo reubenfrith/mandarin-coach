@@ -1,4 +1,4 @@
-# Task 6.1b — Grammar coverage check
+# Task 6.2 — Grammar coverage check
 
 After unioning the 217-point Chinese Grammar Wiki `grammar_patterns` collection into `grammar_rule_fetcher`. Deterministic exact rule-id match over the production union retriever.
 

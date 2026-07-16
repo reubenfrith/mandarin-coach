@@ -413,6 +413,7 @@ Six standard RAGAS metrics over the 40 A_stateless cases (judge gpt-4o-mini, gen
 | Answer accuracy | 0.83 |
 | **Deterministic recall@3 / MRR** (exact rule-id match) | **1.0 / 0.95** |
 
+- Mapping to the four classic RAGAS metrics: **faithfulness** and **context recall** are reported directly; the rubric's **context precision** is covered by context relevance plus the stronger deterministic recall@3 / MRR (exact rule-id match), and **answer relevancy** by answer accuracy and response groundedness. The newer NVIDIA-family metrics were chosen because the constrained-int RAGAS scorers came back pinned to their minimum on these OpenRouter models (see [What broke along the way](#what-broke-along-the-way)).
 - The A cases carry a ground-truth `expected_rule_id`, so retrieval is also checked by exact id match — and that deterministic number is the authority. The judge's 0.93 context recall is approximation error, not missed retrievals: the right rule was in the top 3 on 100% of cases.
 - MRR slipped 1.0 → 0.95 after the corpus expansion: 2 of 24 cases now rank a near-neighbour first (recall@3 still 1.0).
 - These queries are each rule's own `incorrect_example`, which makes the test partly circular — the reason Task 6 built a separate non-circular query set.
