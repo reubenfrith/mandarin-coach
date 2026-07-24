@@ -8,10 +8,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 WORKDIR /app
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
-    CHROMA_PATH=/var/data/chroma_db \
-    # cwd is /app but the app tree (config + public/theme.json + stylesheet.css)
-    # lives at /app/app; point Chainlit there so it loads them, not defaults.
-    CHAINLIT_APP_ROOT=/app/app
+    CHROMA_PATH=/var/data/chroma_db
 
 # Install dependencies first (cached unless pyproject/uv.lock change).
 # package = false in pyproject, so this installs deps only, no project build.

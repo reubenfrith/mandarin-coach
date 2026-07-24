@@ -37,15 +37,27 @@ FALLBACK_MODEL = "glm"
 REQUEST_TIMEOUT = float(os.environ.get("REQUEST_TIMEOUT", "90"))
 
 # --------------------------------------------------------------------------- #
-# OpenAI Realtime API (voice Conversation Partner).
-# This is a SEPARATE path from the OpenRouter text brain above: speech-to-speech
-# runs directly against OpenAI's Realtime API and needs a real OPENAI_API_KEY that
-# is entitled for Realtime (the same key used for embeddings, but Realtime access
-# must be enabled on it). Slugs verified current as of July 2026; if the
-# session-create call is rejected, its error lists valid model/voice names.
+# Voice Conversation Partner — OpenRouter audio pipeline.
+# OpenRouter has no speech-to-speech realtime API, so voice is a turn-based
+# pipeline on the SAME OPENROUTER_API_KEY as the text brain: STT (transcribe the
+# learner) -> chat LLM (converse) -> TTS (speak the reply). All three go through
+# OpenRouter's OpenAI-compatible audio endpoints. Slugs are overridable; if a slug
+# is rejected, correct it against https://openrouter.ai/models .
 # --------------------------------------------------------------------------- #
-REALTIME_MODEL = os.environ.get("REALTIME_MODEL", "gpt-realtime-2.1")
-REALTIME_VOICE = os.environ.get("REALTIME_VOICE", "marin")
+OPENROUTER_BASE_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
+# The conversation LLM is a MODELS key (see above). glm is fast and non-hanging —
+# the right default for a live back-and-forth (deepseek, a reasoning model, stalls).
+CONVERSATION_MODEL = os.environ.get("CONVERSATION_MODEL", "glm")
+STT_MODEL = os.environ.get("STT_MODEL", "openai/gpt-4o-mini-transcribe")
+TTS_MODEL = os.environ.get("TTS_MODEL", "openai/gpt-4o-mini-tts")
+TTS_VOICE = os.environ.get("TTS_VOICE", "alloy")
+
+
+def openrouter_key() -> str:
+    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+    if not key or key.startswith("#"):
+        raise RuntimeError("OPENROUTER_API_KEY is not set (required for the voice pipeline).")
+    return key
 
 
 def get_llm(

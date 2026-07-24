@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mandarin Coach</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Login -->
+  <section id="login-view" class="view">
+    <div class="card">
+      <h1>Mandarin Coach 🀄</h1>
+      <p class="sub">Text coach + spoken conversation partner. New username? First login creates it.</p>
+      <form id="login-form">
+        <input id="username" name="username" placeholder="username" autocomplete="username" required />
+        <input id="password" name="password" type="password" placeholder="password" autocomplete="current-password" required />
+        <button type="submit">Log in</button>
+      </form>
+      <p id="login-error" class="error" hidden></p>
+    </div>
+  </section>
+
+  <!-- Onboarding: HSK level -->
+  <section id="onboard-view" class="view" hidden>
+    <div class="card">
+      <h2>Welcome! What's your current Mandarin level?</h2>
+      <div class="hsk-options">
+        <button data-hsk="HSK 1-2">HSK 1–2 (beginner)</button>
+        <button data-hsk="HSK 3-4">HSK 3–4 (intermediate)</button>
+        <button data-hsk="HSK 5-6">HSK 5–6 (advanced)</button>
+        <button data-hsk="unsure">Not sure</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main app -->
+  <section id="app-view" class="view" hidden>
+    <header>
+      <span class="brand">Mandarin Coach</span>
+      <nav>
+        <button id="tab-coach" class="tab active">Text coach</button>
+        <button id="tab-voice" class="tab">Voice partner</button>
+      </nav>
+      <span class="spacer"></span>
+      <span id="whoami" class="muted"></span>
+      <button id="logout" class="link">log out</button>
+    </header>
+
+    <p id="welcome" class="welcome" hidden></p>
+
+    <!-- Text coach -->
+    <div id="coach-pane" class="pane">
+      <div id="chat" class="transcript"></div>
+      <form id="chat-form" class="composer">
+        <textarea id="chat-input" rows="1" placeholder="Type Chinese to check, or ask a question…"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <!-- Voice partner -->
+    <div id="voice-pane" class="pane" hidden>
+      <div id="voice-transcript" class="transcript"></div>
+      <div class="composer voice-controls">
+        <button id="record-btn">🎙️ Hold to speak</button>
+        <button id="voice-reset" class="link">reset conversation</button>
+        <span id="voice-status" class="muted">Speak Mandarin; both turns show 汉字 + pīnyīn.</span>
+      </div>
+      <audio id="reply-audio" autoplay></audio>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
