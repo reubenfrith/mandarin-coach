@@ -333,7 +333,11 @@ def add_personal_error(
     category: str,
     explanation: str = "",
     timestamp: str | None = None,
+    source: str = "text",
 ) -> str:
+    """Log one personal error. `source` ("text" | "voice") records which interface the
+    error came from, so voice-sourced errors — logged from imperfect speech-to-text —
+    stay distinguishable and can be filtered or down-weighted later."""
     col = personal_errors_collection(user_id)
     ts = timestamp or datetime.now(timezone.utc).isoformat()
     doc_id = f"{user_id}_err_{col.count() + 1}"
@@ -349,6 +353,7 @@ def add_personal_error(
                 "correction": correction,
                 "explanation": explanation,
                 "timestamp": ts,
+                "source": source,
             }
         ],
     )

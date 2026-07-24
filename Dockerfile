@@ -25,4 +25,5 @@ COPY data/ ./data/
 ENV PATH="/app/.venv/bin:$PATH"
 EXPOSE 8000
 
-CMD ["chainlit", "run", "app/main.py", "--host", "0.0.0.0", "--port", "8000"]
+# Single process: FastAPI (voice UI + APIs) mounting the Chainlit text coach at "/".
+CMD ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]

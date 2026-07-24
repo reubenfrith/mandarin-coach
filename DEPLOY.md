@@ -102,6 +102,7 @@ cd mandarin-coach
 cat > .env <<'EOF'
 OPENROUTER_API_KEY=sk-or-...
 OPENAI_API_KEY=sk-...
+CHAINLIT_AUTH_SECRET=<long-random-string>
 TAVILY_API_KEY=
 LANGSMITH_API_KEY=
 SITE_ADDRESS=34-129-1-2.nip.io
@@ -109,6 +110,17 @@ EOF
 ```
 
 Set `SITE_ADDRESS` to `<dashed-ip>.nip.io` (or your own domain pointed at the IP).
+
+**Voice Conversation Partner.** The container runs `uvicorn app.server:app` — one
+process serving the Chainlit text coach at `/` and the voice partner at `/voice`.
+The voice partner calls the **OpenAI Realtime API**, so `OPENAI_API_KEY` must be a
+real OpenAI key **entitled for Realtime** (it is billed per audio minute; this is
+separate from `OPENROUTER_API_KEY`, which drives the text brain). Audio streams
+browser↔OpenAI directly over WebRTC — only same-origin `/`, `/voice/*`, and
+`/realtime/session` traverse Caddy, which already reverse-proxies them, so no Caddy
+change is needed. If you rely on the **local** embedding fallback (no OpenAI key
+before), note that enabling the key flips embeddings to OpenAI; pin
+`EMBEDDING_MODEL=default` to keep an existing local-embedded corpus consistent.
 
 ## 5. Launch
 
