@@ -111,16 +111,17 @@ EOF
 
 Set `SITE_ADDRESS` to `<dashed-ip>.nip.io` (or your own domain pointed at the IP).
 
-**Voice Conversation Partner.** The container runs `uvicorn app.server:app` — one
-process serving the Chainlit text coach at `/` and the voice partner at `/voice`.
-The voice partner calls the **OpenAI Realtime API**, so `OPENAI_API_KEY` must be a
-real OpenAI key **entitled for Realtime** (it is billed per audio minute; this is
-separate from `OPENROUTER_API_KEY`, which drives the text brain). Audio streams
-browser↔OpenAI directly over WebRTC — only same-origin `/`, `/voice/*`, and
-`/realtime/session` traverse Caddy, which already reverse-proxies them, so no Caddy
-change is needed. If you rely on the **local** embedding fallback (no OpenAI key
-before), note that enabling the key flips embeddings to OpenAI; pin
-`EMBEDDING_MODEL=default` to keep an existing local-embedded corpus consistent.
+**Unified UI + voice.** The container runs `uvicorn app.server:app` — one process
+serving a single custom UI (login + text coach + voice partner) at `/`; it replaces
+the previous Chainlit interface. `CHAINLIT_AUTH_SECRET` is still used, now to sign
+the app's own session cookie. The voice partner is a **turn-based STT→LLM→TTS
+pipeline through OpenRouter**, so it needs no OpenAI key — `OPENROUTER_API_KEY`
+drives both text and voice (audio is billed per OpenRouter's STT/TTS pricing). Audio
+is proxied through the server (small per-turn payloads), so all traffic is
+same-origin and Caddy's existing reverse-proxy needs no change. `OPENAI_API_KEY`
+is now optional (embeddings only); if you rely on the local embedding fallback, note
+that setting it flips embeddings to OpenAI — pin `EMBEDDING_MODEL=default` to keep an
+existing local-embedded corpus consistent.
 
 ## 5. Launch
 

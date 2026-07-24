@@ -1,42 +1,47 @@
-"""Top-level FastAPI entrypoint: the voice Conversation Partner + the Chainlit text coach
-in ONE process.
+"""Top-level FastAPI entrypoint: the unified web app (text coach + voice partner).
 
-Single process on purpose: `memory.py` caches the ChromaDB client as a module-level
-singleton, so one process = one writer for the corpus and the user DB. That dedup only
-holds if this file and `app/main.py` resolve `import memory` to the SAME module object,
-which requires `app/` on `sys.path` and BARE imports everywhere (never `app.memory`).
-The `sys.path.insert` below matches what `main.py` already does, so both entrypoints
-share one module graph.
+Replaces the Chainlit interface entirely with one custom UI, one auth system, and
+one backend process — so there is a single ChromaDB writer and a single user-DB
+owner. BARE imports + `sys.path.insert` keep one shared module graph (memory's
+client/embedding singletons must be one object process-wide).
 
 Run:  uvicorn app.server:app --host 0.0.0.0 --port 8000
-  - text coach:  /            (Chainlit, URL unchanged from before)
-  - voice UI:    /voice
-  - voice APIs:  /voice/login, /voice/log-turn, /voice/pinyin, /realtime/session
+  - UI (login + text coach + voice):  /
+  - APIs:  /api/*  (see web_api.py and voice_api.py)
 """
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))  # BEFORE bare imports — shared module graph
 
+from contextlib import asynccontextmanager
+
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from chainlit.utils import mount_chainlit
 
-import users  # noqa: E402 — must follow the sys.path.insert above
+import memory  # noqa: E402
+import users  # noqa: E402
 from voice_api import router as voice_router  # noqa: E402
+from web_api import router as web_router  # noqa: E402
 
 load_dotenv()
-users.init_db()
 
-_UI_DIR = os.path.join(os.path.dirname(__file__), "voice_ui")
+_UI_DIR = os.path.join(os.path.dirname(__file__), "web_ui")
 
-app = FastAPI(title="Mandarin Coach — voice + text")
 
-# Register the specific voice routes and static UI FIRST, so they win over the
-# Chainlit sub-app, which is mounted at the catch-all root path below.
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    users.init_db()
+    memory.load_reference_data()  # idempotent: only embeds if the collections are empty
+    yield
+
+
+app = FastAPI(title="Mandarin Coach — text + voice", lifespan=lifespan)
+
+# API routes first, so they win over the catch-all static mount below.
+app.include_router(web_router)
 app.include_router(voice_router)
-app.mount("/voice", StaticFiles(directory=_UI_DIR, html=True), name="voice-ui")
 
-# Text coach stays at "/" so its URL is unchanged. Mounted LAST (catch-all).
-mount_chainlit(app=app, target="app/main.py", path="/")
+# The single-page UI at "/" (login, text coach, voice partner). Mounted LAST.
+app.mount("/", StaticFiles(directory=_UI_DIR, html=True), name="ui")
