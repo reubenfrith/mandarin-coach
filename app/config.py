@@ -36,6 +36,17 @@ FALLBACK_MODEL = "glm"
 # whole turn in an asyncio.wait_for hard timeout).
 REQUEST_TIMEOUT = float(os.environ.get("REQUEST_TIMEOUT", "90"))
 
+# --------------------------------------------------------------------------- #
+# OpenAI Realtime API (voice Conversation Partner).
+# This is a SEPARATE path from the OpenRouter text brain above: speech-to-speech
+# runs directly against OpenAI's Realtime API and needs a real OPENAI_API_KEY that
+# is entitled for Realtime (the same key used for embeddings, but Realtime access
+# must be enabled on it). Slugs verified current as of July 2026; if the
+# session-create call is rejected, its error lists valid model/voice names.
+# --------------------------------------------------------------------------- #
+REALTIME_MODEL = os.environ.get("REALTIME_MODEL", "gpt-realtime-2.1")
+REALTIME_VOICE = os.environ.get("REALTIME_VOICE", "marin")
+
 
 def get_llm(
     model_key: str = DEFAULT_MODEL,

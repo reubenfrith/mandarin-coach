@@ -21,6 +21,10 @@ dependencies = [
     "langgraph>=1.2.9",
     "rank-bm25",               # BM25 sparse retrieval for the hybrid grammar retriever (Task 6)
     "jieba",                   # CJK tokenisation so Chinese BM25 doesn't silently fail
+    "fastapi",                 # voice: top-level app mounting Chainlit + voice routes (was transitive)
+    "uvicorn",                 # voice: ASGI server for app.server:app (was transitive via Chainlit)
+    "pyjwt",                   # voice: signs the auth-bridge session cookie (CHAINLIT_AUTH_SECRET)
+    "python-multipart",        # voice: form parsing for /voice/login (was transitive)
 ]
 
 [project.optional-dependencies]

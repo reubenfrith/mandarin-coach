@@ -234,6 +234,64 @@ async def extract_and_log_error(user_id: str, user_input: str, agent_answer: str
     }
 
 
+# Minimum speech-to-text confidence (0–1) for a voice turn to be eligible for
+# logging. Below this the transcript is too likely to be mis-heard to trust as an
+# "error" — logging it would poison the corpus with STT artefacts rather than real
+# learner mistakes. A turn with NO confidence signal at all is logged anyway: the
+# source="voice" tag + the extraction guard remain the protection there.
+VOICE_MIN_STT_CONFIDENCE = float(os.environ.get("VOICE_MIN_STT_CONFIDENCE", "0.6"))
+
+
+async def extract_and_log_error_voice(
+    user_id: str,
+    user_text: str,
+    assistant_text: str,
+    confidence: float | None = None,
+):
+    """Voice sibling of `extract_and_log_error`: same guarded extraction, but the
+    logged record is tagged source="voice" and low-confidence STT turns are skipped.
+
+    Reuses the exact production guard (`_extract_record` + `_record_complete` +
+    EXTRACTION_MAX_ATTEMPTS) so voice logging inherits the same field-drop / hung-
+    provider protection as text. Differences from the text path, both deliberate:
+      * a confidence gate up front — if `confidence` is provided and below
+        VOICE_MIN_STT_CONFIDENCE, nothing is logged (the transcript is probably a
+        mis-hear, not a real error). `confidence=None` means no signal was available,
+        so we do NOT drop the turn — we fall through to the normal guard;
+      * the logged error is tagged source="voice" so it stays distinguishable in the
+        corpus from text-coach errors.
+    """
+    if confidence is not None and confidence < VOICE_MIN_STT_CONFIDENCE:
+        return None
+    if not _has_chinese(user_text):
+        return None
+
+    rec: ErrorExtraction | None = None
+    for _ in range(EXTRACTION_MAX_ATTEMPTS):
+        try:
+            candidate = await _extract_record(user_text, assistant_text)
+        except Exception:  # noqa: BLE001 — timeout/hang OR malformed output → retry
+            continue
+        if not candidate.had_error:
+            return None
+        rec = candidate
+        if _record_complete(candidate):
+            break
+
+    if rec is None or not _record_complete(rec):
+        return None
+
+    category = rec.category if rec.category in VALID_CATEGORIES else "grammar"
+    memory.add_personal_error(
+        user_id, rec.original, rec.correction, category, rec.explanation, source="voice"
+    )
+    return {
+        "category": category,
+        "original": rec.original,
+        "correction": rec.correction,
+    }
+
+
 async def extract_error_record(user_input: str, agent_answer: str, model: str | None = None):
     """Eval-only sibling of `extract_and_log_error`: run the SAME extraction prompt +
     schema for ONE call and return the raw `ErrorExtraction`, with **no side effects**

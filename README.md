@@ -113,7 +113,7 @@ This claim is tested, not assumed: Task 5 runs every eval case through both the 
 
 ### Scope of v1
 
-Text only. Voice, pronunciation, and tone recognition are post-v1: the errors that make an intermediate learner hard to understand out loud — wrong aspect marker, broken 把-structure, wrong measure word — are the same ones they make in writing, and text is where the tool can track and trend them.
+The v1 *text coach* is deliberately text-only: the errors that make an intermediate learner hard to understand out loud — wrong aspect marker, broken 把-structure, wrong measure word — are the same ones they make in writing, and text is where the tool can track and trend them. A separate real-time **voice Conversation Partner** now ships alongside it (see [Voice Conversation Partner](#voice-conversation-partner-voice)); it reuses the same error-intelligence brain and corpus, so spoken practice feeds the same trends. Pronunciation and tone *scoring* remain post-v1.
 
 ### Infrastructure
 
@@ -332,10 +332,32 @@ Browser ─▶ Chainlit UI ─▶ password auth (per-user namespace)
 uv sync
 uv run python data/load_data.py            # embed the reference collections
 CHAINLIT_AUTH_SECRET=$(uv run chainlit create-secret) \
-  uv run chainlit run app/main.py -w       # http://localhost:8000
+  uv run uvicorn app.server:app --reload   # http://localhost:8000
 ```
 
-Requires `OPENROUTER_API_KEY`; `OPENAI_API_KEY` recommended; `TAVILY_API_KEY` and `LANGSMITH_API_KEY` optional. See `.env.example`.
+`app.server` is a FastAPI app that mounts the Chainlit text coach at `/` and the
+voice Conversation Partner at `/voice`, in one process (so there is a single
+ChromaDB writer — see the voice section below). Both share the same login and the
+same per-user error corpus.
+
+Requires `OPENROUTER_API_KEY`; `OPENAI_API_KEY` recommended (and **required, with
+OpenAI Realtime API access, for the voice partner**); `TAVILY_API_KEY` and
+`LANGSMITH_API_KEY` optional. See `.env.example`.
+
+### Voice Conversation Partner (`/voice`)
+
+A real-time, speech-to-speech Mandarin conversation partner on the **OpenAI
+Realtime API** (WebRTC). The learner speaks Mandarin, the AI replies in spoken
+Mandarin, and both turns are shown as 汉字 + pīnyīn. It is a *conversation* surface,
+distinct from the correction-focused text coach, but reuses the same Python brain:
+it gently flags notable mistakes and logs them into the **same per-user error
+corpus** (tagged `source="voice"`, and gated by a speech-to-text confidence check
+so mis-hears don't poison the corpus).
+
+Audio streams **browser ↔ OpenAI directly** over WebRTC; the VM only mints a
+short-lived ephemeral token (`GET /realtime/session`), annotates pīnyīn, and does
+post-turn logging (`POST /voice/log-turn`) — so there is no local audio model and
+no audio proxying. The 5 LangGraph tools are intentionally not used in voice mode.
 
 ---
 
@@ -603,4 +625,4 @@ Ordered by value-to-effort, each anchored to a specific finding:
 5. **Topic-adherence guardrail** — the agent fulfils off-domain requests with a Mandarin twist (2/4 probes declined); add an on-topic classifier and re-run the probe set.
 6. **Undo for auto-logged errors** — closes the human-review loop the Task 2 design sketched, now that the extraction guard makes bad logs rare.
 7. **Numeric personalisation at small scale** — B_small showed history referenced 7/10 but specific counts cited 0/10; feed `error_stats()` into the correction prompt, not just the drill path.
-8. **Voice and pronunciation** — the deliberate v1 exclusion and the largest true feature expansion, extending the same error-intelligence loop beyond text.
+8. **Voice** — ✅ *shipped* as the real-time [Conversation Partner](#voice-conversation-partner-voice) (OpenAI Realtime API), extending the same error-intelligence loop to spoken practice. **Pronunciation and tone scoring** remain the next expansion here: grading *how* something is said, not just what was said, is genuinely beyond the current text-derived error corpus.
