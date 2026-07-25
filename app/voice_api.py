@@ -4,7 +4,8 @@ OpenRouter has no speech-to-speech realtime API, so one spoken turn is:
 
     mic audio ->  STT (OpenRouter /audio/transcriptions, zh)
               ->  chat LLM (CONVERSATION_MODEL via get_llm, CONVERSATION_SYSTEM_PROMPT)
-              ->  TTS (OpenRouter /audio/speech)  ->  audio played in the browser
+              ->  TTS (OpenAI /audio/speech — OpenRouter has no TTS model)
+              ->  audio played in the browser
 
 Audio flows browser -> this server -> OpenRouter (the OpenRouter key must never
 reach the browser, and OpenRouter has no ephemeral tokens). Turn-based payloads
@@ -30,6 +31,7 @@ from config import (
     TTS_MODEL,
     TTS_VOICE,
     get_llm,
+    openai_key,
     openrouter_key,
 )
 from prompts import CONVERSATION_SYSTEM_PROMPT
@@ -45,8 +47,13 @@ _HISTORY_TURNS = 12  # cap: keep the last N messages so the prompt stays bounded
 
 def _openrouter_client() -> OpenAI:
     # OpenRouter's audio endpoints are OpenAI-compatible, so the openai SDK (already a
-    # dependency) drives them by pointing base_url at OpenRouter.
+    # dependency) drives them by pointing base_url at OpenRouter. Used for STT.
     return OpenAI(base_url=OPENROUTER_BASE_URL, api_key=openrouter_key())
+
+
+def _openai_client() -> OpenAI:
+    # TTS goes direct to OpenAI (default base_url) — OpenRouter has no TTS model.
+    return OpenAI(api_key=openai_key())
 
 
 def _system_prompt(user_id: str) -> str:
@@ -88,15 +95,17 @@ async def voice_turn(audio: UploadFile = File(...), user_id: str = Depends(requi
     """Full spoken turn. Returns both transcripts (for the 汉字 view — the browser
     fetches pīnyīn separately) and the reply audio as base64 mp3."""
     audio_bytes = await audio.read()
-    client = _openrouter_client()
 
-    # STT and TTS are blocking HTTP calls; keep them off the event loop.
-    user_text = await asyncio.to_thread(_transcribe, client, audio_bytes, audio.filename or "audio.webm")
+    # STT + TTS are blocking HTTP calls; keep them off the event loop. STT runs on
+    # OpenRouter; TTS on OpenAI direct (OpenRouter has no TTS model).
+    user_text = await asyncio.to_thread(
+        _transcribe, _openrouter_client(), audio_bytes, audio.filename or "audio.webm"
+    )
     if not user_text:
         return {"user_text": "", "assistant_text": "", "audio_b64": None, "logged": None}
 
     assistant_text = await _reply(user_id, user_text)
-    audio_out = await asyncio.to_thread(_synthesize, client, assistant_text)
+    audio_out = await asyncio.to_thread(_synthesize, _openai_client(), assistant_text)
 
     # OpenRouter STT returns no confidence signal, so pass None: the source="voice"
     # tag + the extraction guard remain the corpus-pollution protection.
