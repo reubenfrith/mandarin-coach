@@ -72,15 +72,14 @@ $("logout").addEventListener("click", async () => {
 });
 
 // ---- tabs ----------------------------------------------------------------- //
+const TABS = { pronounce: "pronounce-pane", coach: "coach-pane", voice: "voice-pane" };
 function selectTab(which) {
-  const coach = which === "coach";
-  $("tab-coach").classList.toggle("active", coach);
-  $("tab-voice").classList.toggle("active", !coach);
-  $("coach-pane").hidden = !coach;
-  $("voice-pane").hidden = coach;
+  for (const [name, pane] of Object.entries(TABS)) {
+    $(`tab-${name}`).classList.toggle("active", name === which);
+    $(pane).hidden = name !== which;
+  }
 }
-$("tab-coach").addEventListener("click", () => selectTab("coach"));
-$("tab-voice").addEventListener("click", () => selectTab("voice"));
+Object.keys(TABS).forEach((name) => $(`tab-${name}`).addEventListener("click", () => selectTab(name)));
 
 // ---- shared rendering ----------------------------------------------------- //
 const HANZI = /[一-鿿]/;

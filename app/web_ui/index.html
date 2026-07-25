@@ -39,7 +39,8 @@
     <header>
       <span class="brand">Mandarin Coach</span>
       <nav>
-        <button id="tab-coach" class="tab active">Text coach</button>
+        <button id="tab-pronounce" class="tab active">Pronounce</button>
+        <button id="tab-coach" class="tab">Text coach</button>
         <button id="tab-voice" class="tab">Voice partner</button>
       </nav>
       <span class="spacer"></span>
@@ -49,8 +50,46 @@
 
     <p id="welcome" class="welcome" hidden></p>
 
+    <!-- Pronunciation coach (default) — compose your own sentence, get it corrected, say it -->
+    <div id="pronounce-pane" class="pane">
+      <div class="practice">
+        <div class="practice-step">
+          <label class="step-label">1. Write a sentence in Chinese — your own words.</label>
+          <div class="composer">
+            <textarea id="pron-input" rows="2" placeholder="e.g. 我昨天去了商店"></textarea>
+            <button id="pron-check">Check</button>
+          </div>
+        </div>
+
+        <div id="pron-target-box" class="practice-step" hidden>
+          <label class="step-label">2. Your target — say this out loud.</label>
+          <p id="pron-correction" class="correction"></p>
+          <div id="pron-syllables" class="syllables"></div>
+          <div class="row">
+            <button id="pron-hear" class="secondary">🔊 Hear it</button>
+            <button id="pron-record">● Record</button>
+            <span id="pron-status" class="muted"></span>
+          </div>
+        </div>
+
+        <div id="pron-results" class="practice-step" hidden>
+          <label class="step-label">3. Your tones</label>
+          <div id="pron-score" class="score"></div>
+          <canvas id="pron-canvas" width="640" height="180"></canvas>
+          <p class="muted canvas-legend">
+            <span class="dot red"></span> you &nbsp; <span class="dot grey"></span> target —
+            make your line follow the grey line
+          </p>
+          <div id="pron-result-syllables" class="syllables"></div>
+          <p id="pron-note" class="muted"></p>
+          <div id="pron-logged" class="logged-list"></div>
+        </div>
+      </div>
+      <audio id="pron-ref-audio"></audio>
+    </div>
+
     <!-- Text coach -->
-    <div id="coach-pane" class="pane">
+    <div id="coach-pane" class="pane" hidden>
       <div id="chat" class="transcript"></div>
       <form id="chat-form" class="composer">
         <textarea id="chat-input" rows="1" placeholder="Type Chinese to check, or ask a question…"></textarea>
@@ -71,5 +110,6 @@
   </section>
 
   <script src="app.js"></script>
+  <script src="practice.js"></script>
 </body>
 </html>
