@@ -79,6 +79,22 @@ def _tone_pinyin(text: str) -> str:
     return " ".join(s[0] for s in _pinyin(text, style=Style.TONE))
 
 
+def annotate_tones(text: str) -> list[dict]:
+    """Per-Han-character pinyin + numeric tone, for the pronunciation coach's target.
+
+    Returns e.g. [{"hanzi": "你", "pinyin": "nǐ", "tone": 3}, ...], one entry per Chinese
+    character (non-Han characters are skipped). Tone 5 = neutral. Per-character lookup keeps
+    hanzi↔pinyin alignment exact; tone sandhi is not applied here (a Phase-2 refinement)."""
+    out = []
+    for ch in text:
+        if "一" <= ch <= "鿿":
+            mark = _pinyin(ch, style=Style.TONE)[0][0]
+            num = _pinyin(ch, style=Style.TONE3, neutral_tone_with_five=True)[0][0]
+            m = re.search(r"([1-5])$", num)
+            out.append({"hanzi": ch, "pinyin": mark, "tone": int(m.group(1)) if m else 5})
+    return out
+
+
 # --------------------------------------------------------------------------- #
 # Tool factory
 # --------------------------------------------------------------------------- #
