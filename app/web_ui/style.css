@@ -3,6 +3,11 @@
   --user: #eef4ff; --assistant: #fff3f0; --border: #e2e2e2; --card: #fff;
 }
 * { box-sizing: border-box; }
+/* The views use ID selectors with `display: flex`, which override the UA default
+   `[hidden] { display: none }`. Without this, show()'s hidden toggle has no visual
+   effect and all three views stack (each min-height:100vh) — the login card sits on
+   top and the real view is a full screen below it. Force hidden to actually hide. */
+[hidden] { display: none !important; }
 body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--fg); }
 .view { min-height: 100vh; }
 .muted { color: var(--muted); font-size: 0.85rem; }
