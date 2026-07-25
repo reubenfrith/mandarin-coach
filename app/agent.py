@@ -20,7 +20,7 @@ from pydantic import BaseModel, Field
 
 import memory
 from config import DEFAULT_MODEL, FALLBACK_MODEL, get_llm
-from prompts import AGENT_SYSTEM_PROMPT, ERROR_EXTRACTION_PROMPT
+from prompts import AGENT_SYSTEM_PROMPT, ERROR_EXTRACTION_PROMPT, SENTENCE_CORRECTION_PROMPT
 from tools import make_tools
 
 # Hard ceiling on a whole agent turn (which may chain several LLM + tool calls).
@@ -290,6 +290,37 @@ async def extract_and_log_error_voice(
         "original": rec.original,
         "correction": rec.correction,
     }
+
+
+class SentenceCorrection(BaseModel):
+    """Pass-1 correction of a learner's own sentence (the pronunciation coach)."""
+
+    had_error: bool = Field(description="True if the learner's sentence needed correcting")
+    corrected: str = Field(default="", description="The corrected Chinese sentence (chars only)")
+    category: str = Field(
+        default="grammar",
+        description="One of: grammar, word_order, measure_word, particle, vocabulary, tones",
+    )
+    note: str = Field(default="", description="Brief English explanation of the fix")
+
+
+async def correct_sentence(text: str) -> SentenceCorrection:
+    """Correct the learner's own sentence into a clean target they can then read aloud.
+
+    Bounded by EXTRACTION_TIMEOUT. On any failure it returns the input unchanged
+    (had_error=False) so Pass 1 degrades gracefully rather than blocking practice.
+    """
+    llm = get_llm(streaming=False)
+    structured = llm.with_structured_output(SentenceCorrection)
+    try:
+        return await asyncio.wait_for(
+            structured.ainvoke(
+                [SystemMessage(content=SENTENCE_CORRECTION_PROMPT), HumanMessage(content=text)]
+            ),
+            timeout=EXTRACTION_TIMEOUT,
+        )
+    except Exception:  # noqa: BLE001 — hung/malformed provider → degrade to "as-is"
+        return SentenceCorrection(had_error=False, corrected=text)
 
 
 async def extract_error_record(user_input: str, agent_answer: str, model: str | None = None):

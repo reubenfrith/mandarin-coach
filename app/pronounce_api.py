@@ -8,11 +8,14 @@ per-user corpus as the text coach, tagged category="tones", source="voice".
 All acoustic judgment is the deterministic DSP in tone_analysis.py — no ASR, no ML model.
 """
 import asyncio
+import base64
 
-from fastapi import APIRouter, Depends, File, Form, UploadFile
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 
+import agent
 import memory
 import tone_analysis
+import voice_api
 from tools import annotate_tones
 from web_api import require_user
 
@@ -39,6 +42,51 @@ def _log_tone_error(user_id: str, syl: dict, verdict: dict) -> dict:
     )
     return {"hanzi": syl["hanzi"], "produced_tone": verdict["predicted_tone"],
             "target_tone": syl["tone"], "explanation": explanation}
+
+
+@router.post("/api/pronounce/correct")
+async def correct(
+    text: str = Form(None),
+    audio: UploadFile = File(None),
+    user_id: str = Depends(require_user),
+):
+    """Pass 1: turn the learner's OWN draft (typed, or a spoken draft we transcribe) into a
+    clean corrected sentence — the target they'll read aloud in Pass 2. Here a tidying STT
+    is fine: we only want their words, not to judge pronunciation. Grammar errors are logged
+    into the same corpus as the text coach."""
+    if audio is not None:
+        wav = await audio.read()
+        client = voice_api._openrouter_client()
+        text = await asyncio.to_thread(voice_api._transcribe, client, wav, audio.filename or "draft.wav")
+    text = (text or "").strip()
+    if not text:
+        raise HTTPException(status_code=400, detail="Provide text or audio to correct.")
+
+    result = await agent.correct_sentence(text)
+    corrected = (result.corrected or "").strip() or text
+
+    logged = None
+    if result.had_error and corrected != text:
+        category = result.category if result.category in agent.VALID_CATEGORIES else "grammar"
+        memory.add_personal_error(user_id, text, corrected, category, result.note, source="text")
+        logged = {"category": category, "original": text, "correction": corrected}
+
+    return {
+        "original": text,
+        "corrected": corrected,
+        "had_error": result.had_error,
+        "note": result.note,
+        "syllables": annotate_tones(corrected),  # target tones for Pass 2 + UI
+        "logged": logged,
+    }
+
+
+@router.post("/api/pronounce/reference")
+async def reference(text: str = Form(...), user_id: str = Depends(require_user)):
+    """TTS the target sentence so the learner can hear it before recording."""
+    client = voice_api._openrouter_client()
+    audio_out = await asyncio.to_thread(voice_api._synthesize, client, text)
+    return {"audio_b64": base64.b64encode(audio_out).decode("ascii")}
 
 
 @router.post("/api/pronounce/assess")
