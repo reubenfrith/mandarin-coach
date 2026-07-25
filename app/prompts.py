@@ -50,6 +50,20 @@ CONVERSATION_SYSTEM_PROMPT = (
     "mistake they may not have made."
 )
 
+SENTENCE_CORRECTION_PROMPT = (
+    "You correct a Mandarin learner's sentence into natural, grammatical Mandarin and "
+    "report it as a structured record.\n\n"
+    "Given the learner's Chinese sentence:\n"
+    "  - If it is already correct and natural, set had_error=false and return it unchanged "
+    "in 'corrected'.\n"
+    "  - Otherwise set had_error=true and put the fully corrected sentence in 'corrected' "
+    "(Chinese characters only — no pinyin, no explanation inside the sentence).\n"
+    "Fill 'category' with the single best match for the main problem, exactly one of: "
+    "grammar, word_order, measure_word, particle, vocabulary, tones (use grammar if unsure). "
+    "Put a brief English explanation of the fix in 'note'.\n"
+    "'corrected' must be ONE clean sentence the learner can read aloud."
+)
+
 DRILL_SYSTEM_PROMPT = (
     "You are a Mandarin drill writer. Produce 3-5 short exercises targeting the given "
     "topic. Number each. Give the answer in parentheses after each. Base them on the "
