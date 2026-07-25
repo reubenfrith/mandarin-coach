@@ -84,7 +84,7 @@ async def correct(
 @router.post("/api/pronounce/reference")
 async def reference(text: str = Form(...), user_id: str = Depends(require_user)):
     """TTS the target sentence so the learner can hear it before recording."""
-    client = voice_api._openrouter_client()
+    client = voice_api._openai_client()  # TTS is OpenAI-only (OpenRouter has no TTS model)
     audio_out = await asyncio.to_thread(voice_api._synthesize, client, text)
     return {"audio_b64": base64.b64encode(audio_out).decode("ascii")}
 
