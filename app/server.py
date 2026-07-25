@@ -22,6 +22,7 @@ from fastapi.staticfiles import StaticFiles
 
 import memory  # noqa: E402
 import users  # noqa: E402
+from pronounce_api import router as pronounce_router  # noqa: E402
 from voice_api import router as voice_router  # noqa: E402
 from web_api import router as web_router  # noqa: E402
 
@@ -42,6 +43,7 @@ app = FastAPI(title="Mandarin Coach — text + voice", lifespan=lifespan)
 # API routes first, so they win over the catch-all static mount below.
 app.include_router(web_router)
 app.include_router(voice_router)
+app.include_router(pronounce_router)
 
 # The single-page UI at "/" (login, text coach, voice partner). Mounted LAST.
 app.mount("/", StaticFiles(directory=_UI_DIR, html=True), name="ui")

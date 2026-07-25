@@ -165,7 +165,12 @@ def assess(f0_hz, target_tones) -> dict:
 
     learner = contour_shape(f0_hz)
 
-    if len(target_tones) == 1:
+    if not any(t in TONE_TEMPLATES for t in target_tones):
+        return {"voiced": True, "overall_score": 0, "predicted_tones": [],
+                "per_syllable": [], "learner_shape": [round(x, 4) for x in learner.tolist()],
+                "target_shape": [], "note": "No scorable (T1–T4) tones in the target."}
+
+    if len(target_tones) == 1 and target_tones[0] in TONE_TEMPLATES:
         target = target_tones[0]
         predicted, dists, _ = classify_contour(f0_hz)
         dist = dists.get(target, _rmse(learner, TEMPLATE_SHAPES.get(target, np.zeros(N))))
