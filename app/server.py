@@ -14,9 +14,12 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))  # BEFORE bare imports — shared module graph
 
+from dotenv import load_dotenv
+
+load_dotenv()  # BEFORE bare app imports — they read env at module load (e.g. web_api's _JWT_SECRET)
+
 from contextlib import asynccontextmanager
 
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
@@ -26,13 +29,29 @@ from pronounce_api import router as pronounce_router  # noqa: E402
 from voice_api import router as voice_router  # noqa: E402
 from web_api import router as web_router  # noqa: E402
 
-load_dotenv()
-
 _UI_DIR = os.path.join(os.path.dirname(__file__), "web_ui")
+
+
+class NoCacheStaticFiles(StaticFiles):
+    """Serve UI assets with `Cache-Control: no-cache` so the browser always
+    revalidates against the ETag (fast 304 when unchanged, fresh copy the moment a
+    file changes). StaticFiles' default lets browsers hold a stale index.html/app.js/
+    style.css indefinitely — which silently ships old JS/CSS after a deploy."""
+
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Cache-Control"] = "no-cache"
+        return response
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
+    if not os.environ.get("CHAINLIT_AUTH_SECRET"):
+        raise RuntimeError(
+            "CHAINLIT_AUTH_SECRET is not set. Add it to .env or export it "
+            "(e.g. `uv run chainlit create-secret`). Login cannot mint session "
+            "cookies without it."
+        )
     users.init_db()
     memory.load_reference_data()  # idempotent: only embeds if the collections are empty
     yield
@@ -46,4 +65,4 @@ app.include_router(voice_router)
 app.include_router(pronounce_router)
 
 # The single-page UI at "/" (login, text coach, voice partner). Mounted LAST.
-app.mount("/", StaticFiles(directory=_UI_DIR, html=True), name="ui")
+app.mount("/", NoCacheStaticFiles(directory=_UI_DIR, html=True), name="ui")

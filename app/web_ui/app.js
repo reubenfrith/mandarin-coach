@@ -31,16 +31,31 @@ $("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   $("login-error").hidden = true;
   const body = new URLSearchParams({ username: $("username").value, password: $("password").value });
+  // Time the request out so a stalled/queued connection can never leave the user
+  // staring at a dead button with no feedback (see: browser keep-alive starvation).
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 15000);
   try {
-    const r = await fetch("/api/login", { method: "POST", body, credentials: "include" });
-    if (!r.ok) throw new Error((await r.json()).detail || "login failed");
+    const r = await fetch("/api/login", { method: "POST", body, credentials: "include", signal: ctrl.signal });
+    if (!r.ok) {
+      // The body may be plain text (500/503) — read robustly so we never surface a
+      // cryptic "Unexpected token …is not valid JSON" or hang the user with no message.
+      let msg = `login failed (HTTP ${r.status})`;
+      try { const j = await r.clone().json(); if (j && j.detail) msg = j.detail; }
+      catch { const t = (await r.text().catch(() => "")).trim(); if (t) msg = t; }
+      throw new Error(msg);
+    }
     const data = await r.json();
     $("whoami").textContent = data.user_id;
     if (!data.hsk_level) show("onboard");
     else enterApp();
   } catch (err) {
-    $("login-error").textContent = String(err.message || err);
+    $("login-error").textContent = err.name === "AbortError"
+      ? "Login timed out — the request never got a response. Fully close this tab (or quit Chrome) and reopen; a stale connection may be stuck."
+      : String(err.message || err);
     $("login-error").hidden = false;
+  } finally {
+    clearTimeout(timer);
   }
 });
 
@@ -57,7 +72,11 @@ document.querySelectorAll(".hsk-options button").forEach((b) =>
 async function enterApp() {
   show("app");
   try {
-    const stats = await (await api("/api/stats")).json();
+    // Plain fetch (not api()): this is a non-fatal welcome-stat lookup, so a hiccup
+    // here must never trip api()'s global 401 handler and bounce us back to login.
+    const r = await fetch("/api/stats", { credentials: "include" });
+    if (!r.ok) return;
+    const stats = await r.json();
     if (stats.total > 0) {
       const top = Object.keys(stats.by_category)[0];
       $("welcome").textContent = `Welcome back — ${stats.total} logged errors so far` + (top ? `, most common: ${top}.` : ".");
