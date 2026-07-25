@@ -39,18 +39,34 @@ REQUEST_TIMEOUT = float(os.environ.get("REQUEST_TIMEOUT", "90"))
 # --------------------------------------------------------------------------- #
 # Voice Conversation Partner — OpenRouter audio pipeline.
 # OpenRouter has no speech-to-speech realtime API, so voice is a turn-based
-# pipeline on the SAME OPENROUTER_API_KEY as the text brain: STT (transcribe the
-# learner) -> chat LLM (converse) -> TTS (speak the reply). All three go through
-# OpenRouter's OpenAI-compatible audio endpoints. Slugs are overridable; if a slug
-# is rejected, correct it against https://openrouter.ai/models .
+# pipeline: STT (transcribe the learner) -> chat LLM (converse) -> TTS (speak the
+# reply). STT + chat run on OPENROUTER_API_KEY; TTS runs DIRECT on OPENAI_API_KEY
+# because OpenRouter has no TTS model. Slugs are overridable; if a slug is rejected,
+# correct it against https://openrouter.ai/models (or the OpenAI model list for TTS).
 # --------------------------------------------------------------------------- #
 OPENROUTER_BASE_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
 # The conversation LLM is a MODELS key (see above). glm is fast and non-hanging —
 # the right default for a live back-and-forth (deepseek, a reasoning model, stalls).
 CONVERSATION_MODEL = os.environ.get("CONVERSATION_MODEL", "glm")
+# STT runs through OpenRouter (its /audio/transcriptions is OpenAI-compatible and the
+# slug below is accepted). TTS is different: OpenRouter's model catalogue has NO
+# text-to-speech model, so /audio/speech rejects every OpenAI TTS slug ("model does
+# not exist"). TTS therefore goes DIRECT to OpenAI (needs OPENAI_API_KEY), using
+# OpenAI's native, unprefixed model name.
 STT_MODEL = os.environ.get("STT_MODEL", "openai/gpt-4o-mini-transcribe")
-TTS_MODEL = os.environ.get("TTS_MODEL", "openai/gpt-4o-mini-tts")
+TTS_MODEL = os.environ.get("TTS_MODEL", "gpt-4o-mini-tts")
 TTS_VOICE = os.environ.get("TTS_VOICE", "alloy")
+
+
+def openai_key() -> str:
+    """OpenAI key for the TTS leg of the voice pipeline (OpenRouter has no TTS model)."""
+    key = os.environ.get("OPENAI_API_KEY", "").strip()
+    if not key or key.startswith("#"):
+        raise RuntimeError(
+            "OPENAI_API_KEY is not set (required for voice TTS — OpenRouter has no "
+            "text-to-speech model)."
+        )
+    return key
 
 
 def openrouter_key() -> str:
