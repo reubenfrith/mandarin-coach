@@ -8,7 +8,7 @@
  * so the server never has to decode webm/opus. Reuses `$` and `api` from app.js.
  */
 
-const P = { corrected: "", recording: false, mr: null, chunks: [], stream: null };
+const P = { corrected: "", recording: false, mr: null, chunks: [], stream: null, takeUrl: null };
 
 // ---- WAV encoding (so the server gets clean PCM, per plan decision 1) ------ //
 function floatToWav(samples, sampleRate) {
@@ -108,6 +108,9 @@ $("pron-check").addEventListener("click", async () => {
     renderSyllables($("pron-syllables"), data.syllables);
     $("pron-target-box").hidden = false;
     $("pron-results").hidden = true;
+    // New sentence — drop the previous take so playback can't replay a stale one.
+    if (P.takeUrl) { URL.revokeObjectURL(P.takeUrl); P.takeUrl = null; $("pron-take-audio").removeAttribute("src"); }
+    $("pron-playback").hidden = true;
     $("pron-status").textContent = "Hear it, then record yourself saying it.";
   } catch (e) {
     $("pron-status").textContent = "Error: " + (e.message || e);
@@ -154,11 +157,24 @@ $("pron-record").addEventListener("click", async () => {
   }
 });
 
+// ---- Play back the learner's own last take (in-memory only — never uploaded) - //
+$("pron-playback").addEventListener("click", () => {
+  const a = $("pron-take-audio");
+  if (a.src) { a.currentTime = 0; a.play(); }
+});
+
 async function scoreTake() {
   if (!P.chunks.length) { $("pron-status").textContent = "didn't catch that — record again"; return; }
   $("pron-status").textContent = "scoring…";
+  const rawBlob = new Blob(P.chunks, { type: P.mr.mimeType || "audio/webm" });
+  // Keep just the most recent take so the learner can replay their own voice and hear
+  // the error. Held as an object URL in the browser only; nothing is saved server-side.
+  if (P.takeUrl) URL.revokeObjectURL(P.takeUrl);
+  P.takeUrl = URL.createObjectURL(rawBlob);
+  $("pron-take-audio").src = P.takeUrl;
+  $("pron-playback").hidden = false;
   try {
-    const wav = await blobToWav(new Blob(P.chunks, { type: P.mr.mimeType || "audio/webm" }));
+    const wav = await blobToWav(rawBlob);
     const fd = new FormData();
     fd.append("audio", wav, "take.wav");
     fd.append("target", P.corrected);
