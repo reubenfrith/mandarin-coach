@@ -9,22 +9,25 @@ dependencies = [
     "langchain-community",
     "langchain-core",
     "langchain-openai",
-    "langchain-litellm",       # ChatLiteLLM wrapper so LLM calls are traced by LangSmith
+    "langchain-litellm", # ChatLiteLLM wrapper so LLM calls are traced by LangSmith
     "chromadb",
     "litellm",
     "openai",
     "tavily-python",
-    "requests",                # CC-CEDICT dictionary calls
+    "requests", # CC-CEDICT dictionary calls
     "ragas",
     "python-dotenv",
     "pypinyin>=0.55.0",
     "langgraph>=1.2.9",
-    "rank-bm25",               # BM25 sparse retrieval for the hybrid grammar retriever (Task 6)
-    "jieba",                   # CJK tokenisation so Chinese BM25 doesn't silently fail
-    "fastapi",                 # voice: top-level app mounting Chainlit + voice routes (was transitive)
-    "uvicorn",                 # voice: ASGI server for app.server:app (was transitive via Chainlit)
-    "pyjwt",                   # voice: signs the auth-bridge session cookie (CHAINLIT_AUTH_SECRET)
-    "python-multipart",        # voice: form parsing for /voice/login (was transitive)
+    "rank-bm25", # BM25 sparse retrieval for the hybrid grammar retriever (Task 6)
+    "jieba", # CJK tokenisation so Chinese BM25 doesn't silently fail
+    "fastapi", # voice: top-level app mounting Chainlit + voice routes (was transitive)
+    "uvicorn", # voice: ASGI server for app.server:app (was transitive via Chainlit)
+    "pyjwt", # voice: signs the auth-bridge session cookie (CHAINLIT_AUTH_SECRET)
+    "python-multipart", # voice: form parsing for /voice/login (was transitive)
+    "librosa>=0.11.0",     # pronunciation coach: pYIN pitch extraction + DTW (app/tone_analysis.py)
+    "soundfile>=0.14.0",   # pronunciation coach: decode the browser's WAV audio server-side
+    "numpy>=2.4.6",        # pronunciation coach: contour math (also transitive elsewhere)
 ]
 
 [project.optional-dependencies]
