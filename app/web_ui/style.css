@@ -46,11 +46,23 @@ nav { display: flex; gap: 0.25rem; }
 .turn.assistant { background: var(--assistant); align-self: flex-start; }
 .turn .role { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em; }
 .turn .body { line-height: 1.5; white-space: pre-wrap; }
-.turn .pinyin { color: var(--muted); font-size: 0.95rem; margin-top: 0.25rem; }
 .turn .logged { font-size: 0.75rem; color: var(--accent); margin-top: 0.35rem; }
 
-.voice-controls { justify-content: flex-start; }
-#record-btn.recording { background: #555; }
+/* 汉字 with pīnyīn underneath each character (ruby). Extra line-height so stacked
+   ruby lines never collide when a bubble wraps to multiple rows. */
+.turn .body.ruby { font-size: 1.35rem; line-height: 2.5; white-space: normal; }
+.turn .body.ruby ruby { ruby-position: under; -webkit-ruby-position: under; margin: 0 0.03em; }
+.turn .body.ruby rt { font-size: 0.6em; color: var(--muted); font-weight: 400; letter-spacing: 0.02em; }
+
+/* Voice partner dock — a big hold-to-talk mic */
+.voice-empty { text-align: center; margin: auto; max-width: 32rem; line-height: 1.7; }
+.voice-dock { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem; border-top: 1px solid var(--border); background: var(--card); }
+button.mic { width: 76px; height: 76px; border-radius: 50%; font-size: 1.9rem; padding: 0; display: grid; place-items: center; box-shadow: 0 3px 10px rgba(179,40,45,0.28); user-select: none; touch-action: none; transition: transform 0.08s ease; }
+button.mic:active { transform: scale(0.94); }
+button.mic.recording { animation: mic-pulse 1.1s ease-in-out infinite; }
+@keyframes mic-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(179,40,45,0.5); } 50% { box-shadow: 0 0 0 14px rgba(179,40,45,0); } }
+.voice-meta { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; justify-content: center; }
+kbd { font-family: ui-monospace, Menlo, monospace; font-size: 0.75rem; background: #f0f0f0; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 5px; padding: 0.05rem 0.35rem; color: var(--fg); }
 
 /* Pronunciation coach */
 #pronounce-pane { overflow-y: auto; }

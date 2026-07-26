@@ -20,7 +20,7 @@ from pydantic import BaseModel
 import memory
 import users
 from agent import build_agent, extract_and_log_error, run_agent
-from tools import _tone_pinyin
+from tools import _tone_pinyin, pinyin_segments
 
 router = APIRouter()
 
@@ -136,5 +136,8 @@ async def chat(body: ChatBody, user_id: str = Depends(require_user)):
 
 @router.get("/api/pinyin")
 def pinyin(text: str, user_id: str = Depends(require_user)):
-    """Tone-marked pīnyīn for 汉字 (reuses the dictionary tool's pypinyin helper)."""
-    return {"text": text, "pinyin": _tone_pinyin(text)}
+    """Tone-marked pīnyīn for 汉字 (reuses the dictionary tool's pypinyin helper).
+
+    `segments` aligns pīnyīn to each character for the ruby (character-over-pinyin) view;
+    `pinyin` stays for any caller that just wants the flat string."""
+    return {"text": text, "pinyin": _tone_pinyin(text), "segments": pinyin_segments(text)}

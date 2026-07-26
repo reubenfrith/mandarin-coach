@@ -103,19 +103,41 @@ Object.keys(TABS).forEach((name) => $(`tab-${name}`).addEventListener("click", (
 // ---- shared rendering ----------------------------------------------------- //
 const HANZI = /[一-鿿]/;
 
-function addTurn(container, role, text, { withPinyin = false } = {}) {
+// Render 汉字 with pīnyīn underneath each character, inline, via <ruby>. Built with the
+// DOM (not innerHTML) so model/transcript text can never inject markup. Non-Han runs
+// (punctuation, latin) pass through as plain text so the sentence still reads naturally.
+function renderRuby(bodyEl, segments) {
+  bodyEl.textContent = "";
+  bodyEl.classList.add("ruby");
+  segments.forEach((s) => {
+    if (s.hanzi) {
+      const ruby = document.createElement("ruby");
+      ruby.appendChild(document.createTextNode(s.hanzi));
+      const rt = document.createElement("rt");
+      rt.textContent = s.pinyin || "";
+      ruby.appendChild(rt);
+      bodyEl.appendChild(ruby);
+    } else {
+      bodyEl.appendChild(document.createTextNode(s.text || ""));
+    }
+  });
+}
+
+function addTurn(container, role, text, { withPinyin = false, segments = null } = {}) {
   const turn = document.createElement("div");
   turn.className = `turn ${role}`;
   turn.innerHTML = `<div class="role">${role === "user" ? "you" : "coach"}</div><div class="body"></div>`;
-  turn.querySelector(".body").textContent = text;
+  const body = turn.querySelector(".body");
+  body.textContent = text;
   if (withPinyin && HANZI.test(text)) {
-    const py = document.createElement("div");
-    py.className = "pinyin";
-    py.textContent = "…";
-    turn.appendChild(py);
-    api(`/api/pinyin?text=${encodeURIComponent(text)}`)
-      .then((r) => r.json()).then((d) => (py.textContent = d.pinyin))
-      .catch(() => (py.textContent = ""));
+    if (segments) {
+      renderRuby(body, segments);  // already have alignment (voice turn) — no flicker/fetch
+    } else {
+      // Fallback: fetch the aligned segments, then swap plain text -> ruby.
+      api(`/api/pinyin?text=${encodeURIComponent(text)}`)
+        .then((r) => r.json()).then((d) => d.segments && renderRuby(body, d.segments))
+        .catch(() => {});
+    }
   }
   container.appendChild(turn);
   container.scrollTop = container.scrollHeight;
@@ -157,7 +179,13 @@ $("chat-form").addEventListener("submit", async (e) => {
 let mediaRecorder = null;
 let chunks = [];
 
+// `capturing` guards against a double-start (e.g. mousedown AND spacebar) — it flips
+// synchronously, before the async getUserMedia, so a second trigger is a no-op.
+let capturing = false;
+
 async function startRecording() {
+  if (capturing) return;
+  capturing = true;
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream);
@@ -166,13 +194,16 @@ async function startRecording() {
     mediaRecorder.onstop = () => { stream.getTracks().forEach((t) => t.stop()); sendTurn(); };
     mediaRecorder.start();
     $("record-btn").classList.add("recording");
-    $("voice-status").textContent = "listening…";
+    $("voice-status").textContent = "listening… release to send";
   } catch (err) {
+    capturing = false;
     $("voice-status").textContent = "mic error: " + (err.message || err);
   }
 }
 
 function stopRecording() {
+  if (!capturing) return;
+  capturing = false;
   if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
   $("record-btn").classList.remove("recording");
 }
@@ -187,8 +218,8 @@ async function sendTurn() {
     const r = await api("/api/voice/turn", { method: "POST", body: form });
     const data = await r.json();
     if (!data.user_text) { $("voice-status").textContent = "didn't catch that — try again"; return; }
-    addTurn($("voice-transcript"), "user", data.user_text, { withPinyin: true });
-    const reply = addTurn($("voice-transcript"), "assistant", data.assistant_text, { withPinyin: true });
+    addTurn($("voice-transcript"), "user", data.user_text, { withPinyin: true, segments: data.user_segments });
+    const reply = addTurn($("voice-transcript"), "assistant", data.assistant_text, { withPinyin: true, segments: data.assistant_segments });
     markLogged(reply, data.logged);
     if (data.audio_b64) {
       $("reply-audio").src = "data:audio/mp3;base64," + data.audio_b64;
@@ -206,6 +237,33 @@ rec.addEventListener("mouseup", stopRecording);
 rec.addEventListener("mouseleave", stopRecording);
 rec.addEventListener("touchstart", (e) => { e.preventDefault(); startRecording(); });
 rec.addEventListener("touchend", (e) => { e.preventDefault(); stopRecording(); });
+
+// Hold Space to talk — but only on the Voice tab and never while typing, so the
+// pronounce/coach text fields keep their normal spacebar. preventDefault stays inside
+// the passing branch so it can't swallow spaces anywhere else.
+function typingInField(el) {
+  if (!el) return false;
+  const tag = el.tagName;
+  return tag === "TEXTAREA" || tag === "INPUT" || el.isContentEditable;
+}
+function voiceActive() {
+  return views.app && !views.app.hidden && !$("voice-pane").hidden;
+}
+document.addEventListener("keydown", (e) => {
+  if (e.code !== "Space" || e.repeat) return;
+  if (!voiceActive() || typingInField(e.target)) return;
+  e.preventDefault();
+  startRecording();
+});
+document.addEventListener("keyup", (e) => {
+  if (e.code !== "Space") return;
+  if (!voiceActive()) return;
+  e.preventDefault();
+  stopRecording();
+});
+// If focus leaves the window mid-hold, keyup may never arrive — stop so the mic
+// doesn't stick on. capturing-guarded, so it's a no-op when not recording.
+window.addEventListener("blur", stopRecording);
 
 $("voice-reset").addEventListener("click", async () => {
   await api("/api/voice/reset", { method: "POST" });
