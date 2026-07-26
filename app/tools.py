@@ -79,6 +79,38 @@ def _tone_pinyin(text: str) -> str:
     return " ".join(s[0] for s in _pinyin(text, style=Style.TONE))
 
 
+def pinyin_segments(text: str) -> list[dict]:
+    """Per-character segmentation for ruby display (汉字 with pīnyīn underneath).
+
+    Returns an ordered list where each Han character is one `{"hanzi", "pinyin"}` entry
+    and each run of non-Han characters (punctuation, spaces, latin) is one `{"text"}`
+    entry — so the UI can render `<ruby>` per character while keeping punctuation inline.
+
+    pīnyīn is looked up per maximal Han run (not per isolated character) so pypinyin's
+    word context still applies — e.g. 银行→yín háng, 不行→bù xíng — which per-character
+    lookup would get wrong for polyphones."""
+    is_han = lambda c: "一" <= c <= "鿿"
+    segs: list[dict] = []
+    i, n = 0, len(text)
+    while i < n:
+        if is_han(text[i]):
+            j = i
+            while j < n and is_han(text[j]):
+                j += 1
+            run = text[i:j]
+            marks = _pinyin(run, style=Style.TONE)  # one entry per char, with word context
+            for k, ch in enumerate(run):
+                segs.append({"hanzi": ch, "pinyin": marks[k][0] if k < len(marks) else ""})
+            i = j
+        else:
+            j = i
+            while j < n and not is_han(text[j]):
+                j += 1
+            segs.append({"text": text[i:j]})
+            i = j
+    return segs
+
+
 def annotate_tones(text: str) -> list[dict]:
     """Per-Han-character pinyin + numeric tone, for the pronunciation coach's target.
 

@@ -24,6 +24,7 @@ from openai import OpenAI
 
 import users
 from agent import answer_text, extract_and_log_error_voice
+from tools import pinyin_segments
 from config import (
     CONVERSATION_MODEL,
     OPENROUTER_BASE_URL,
@@ -114,6 +115,10 @@ async def voice_turn(audio: UploadFile = File(...), user_id: str = Depends(requi
     return {
         "user_text": user_text,
         "assistant_text": assistant_text,
+        # Ruby segments up front so the UI renders 汉字-over-pīnyīn immediately (no
+        # second /api/pinyin round-trip per turn, no plain-then-ruby reflow flicker).
+        "user_segments": pinyin_segments(user_text),
+        "assistant_segments": pinyin_segments(assistant_text),
         "audio_b64": base64.b64encode(audio_out).decode("ascii"),
         "logged": logged,
     }

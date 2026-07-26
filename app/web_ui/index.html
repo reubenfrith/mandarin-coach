@@ -101,11 +101,16 @@
 
     <!-- Voice partner -->
     <div id="voice-pane" class="pane" hidden>
-      <div id="voice-transcript" class="transcript"></div>
-      <div class="composer voice-controls">
-        <button id="record-btn">🎙️ Hold to speak</button>
-        <button id="voice-reset" class="link">reset conversation</button>
-        <span id="voice-status" class="muted">Speak Mandarin; both turns show 汉字 + pīnyīn.</span>
+      <div id="voice-transcript" class="transcript">
+        <p class="voice-empty muted">Speak Mandarin. Hold the mic — or press and hold <kbd>Space</kbd> — and talk.
+        Both turns show 汉字 with pīnyīn underneath each character.</p>
+      </div>
+      <div class="voice-dock">
+        <button id="record-btn" class="mic" aria-label="Hold to speak">🎙️</button>
+        <div class="voice-meta">
+          <span id="voice-status" class="muted">Hold the mic or <kbd>Space</kbd> to speak · release to send</span>
+          <button id="voice-reset" class="link">reset conversation</button>
+        </div>
       </div>
       <audio id="reply-audio" autoplay></audio>
     </div>
