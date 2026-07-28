@@ -1,18 +1,18 @@
-"""Voice Conversation Partner — OpenRouter turn-based pipeline.
+"""Voice Conversation Partner — all-OpenAI turn-based pipeline.
 
-OpenRouter has no speech-to-speech realtime API, so one spoken turn is:
+There is no speech-to-speech realtime API here, so one spoken turn is:
 
-    mic audio ->  STT (OpenRouter /audio/transcriptions, zh)
-              ->  chat LLM (CONVERSATION_MODEL via get_llm, CONVERSATION_SYSTEM_PROMPT)
-              ->  TTS (OpenAI /audio/speech — OpenRouter has no TTS model)
+    mic audio ->  STT (OpenAI /audio/transcriptions, auto-detect language)
+              ->  chat LLM (CONVERSATION_MODEL via get_llm — a fast, non-reasoning model)
+              ->  TTS (OpenAI /audio/speech)
               ->  audio played in the browser
 
-Audio flows browser -> this server -> OpenRouter (the OpenRouter key must never
-reach the browser, and OpenRouter has no ephemeral tokens). Turn-based payloads
+Every leg runs direct on OPENAI_API_KEY (see config's pipeline note): keeping voice on
+one fast provider — and off the reasoning chat models — is the latency fix. Audio flows
+browser -> this server -> OpenAI (the key never reaches the browser). Turn-based payloads
 are small and occasional, so proxying them on the small VM is fine.
 
-Reuses the same brain and corpus as the text coach: the reply runs on the same
-OpenRouter models, and notable spoken mistakes are logged via
+Shares the corpus with the text coach: notable spoken mistakes are logged via
 `extract_and_log_error_voice` into the same per-user ChromaDB corpus (source="voice").
 """
 import asyncio
@@ -27,14 +27,12 @@ from agent import answer_text, extract_and_log_error_voice
 from tools import pinyin_segments
 from config import (
     CONVERSATION_MODEL,
-    OPENROUTER_BASE_URL,
     STT_MODEL,
     TTS_MODEL,
     TTS_VOICE,
     VOICE_STT_LANGUAGE,
     get_llm,
     openai_key,
-    openrouter_key,
 )
 from prompts import CONVERSATION_SYSTEM_PROMPT
 from web_api import require_user
@@ -47,14 +45,8 @@ _voice_history: dict = {}
 _HISTORY_TURNS = 12  # cap: keep the last N messages so the prompt stays bounded
 
 
-def _openrouter_client() -> OpenAI:
-    # OpenRouter's audio endpoints are OpenAI-compatible, so the openai SDK (already a
-    # dependency) drives them by pointing base_url at OpenRouter. Used for STT.
-    return OpenAI(base_url=OPENROUTER_BASE_URL, api_key=openrouter_key())
-
-
 def _openai_client() -> OpenAI:
-    # TTS goes direct to OpenAI (default base_url) — OpenRouter has no TTS model.
+    # The whole voice pipeline (STT + TTS) runs direct on OpenAI — see config's pipeline note.
     return OpenAI(api_key=openai_key())
 
 
@@ -108,7 +100,7 @@ async def voice_turn(audio: UploadFile = File(...), user_id: str = Depends(requi
     # Auto-detect the spoken language (VOICE_STT_LANGUAGE is None by default) so an English
     # clarifying question transcribes as English — the signal the intent router reads.
     user_text = await asyncio.to_thread(
-        _transcribe, _openrouter_client(), audio_bytes, audio.filename or "audio.webm",
+        _transcribe, _openai_client(), audio_bytes, audio.filename or "audio.webm",
         VOICE_STT_LANGUAGE,
     )
     if not user_text:
