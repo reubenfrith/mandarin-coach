@@ -11,7 +11,15 @@ https://openrouter.ai/models .
 """
 import os
 
+import litellm
 from langchain_litellm import ChatLiteLLM
+
+# Silence litellm's "Provider List: …" / "Give Feedback" footers. It prints them during
+# its internal cost/token lookup whenever a slug isn't in its built-in cost map — which is
+# every call here, since our OpenRouter slugs are newer than litellm's map. The actual
+# completions succeed; these lines are pure noise. This suppresses only those hints, not
+# real error tracebacks.
+litellm.suppress_debug_info = True
 
 # Route LangSmith traces to a named project instead of "default". setdefault so an
 # explicit env var (or the eval harness, which sets its own) still wins. config is
@@ -54,6 +62,12 @@ CONVERSATION_MODEL = os.environ.get("CONVERSATION_MODEL", "glm")
 # not exist"). TTS therefore goes DIRECT to OpenAI (needs OPENAI_API_KEY), using
 # OpenAI's native, unprefixed model name.
 STT_MODEL = os.environ.get("STT_MODEL", "openai/gpt-4o-mini-transcribe")
+# Voice-coach STT language hint. Empty/unset => auto-detect (omit the hint), so a spoken
+# English clarifying question ("why is that wrong?") transcribes AS English instead of
+# being mangled into Chinese phonetics — the routing signal the voice coach needs. Pass-1
+# pronunciation drafts stay pinned to zh (they're always Chinese). Set to an ISO-639-1
+# code (e.g. "zh") to force a language.
+VOICE_STT_LANGUAGE = os.environ.get("VOICE_STT_LANGUAGE") or None
 TTS_MODEL = os.environ.get("TTS_MODEL", "gpt-4o-mini-tts")
 TTS_VOICE = os.environ.get("TTS_VOICE", "alloy")
 

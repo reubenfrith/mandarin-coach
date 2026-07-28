@@ -31,6 +31,7 @@ from config import (
     STT_MODEL,
     TTS_MODEL,
     TTS_VOICE,
+    VOICE_STT_LANGUAGE,
     get_llm,
     openai_key,
     openrouter_key,
@@ -65,10 +66,15 @@ def _system_prompt(user_id: str) -> str:
     return prompt
 
 
-def _transcribe(client: OpenAI, audio_bytes: bytes, filename: str) -> str:
-    resp = client.audio.transcriptions.create(
-        model=STT_MODEL, file=(filename, audio_bytes), language="zh"
-    )
+def _transcribe(client: OpenAI, audio_bytes: bytes, filename: str, language: str | None = None) -> str:
+    """Transcribe one clip. `language` is an ISO-639-1 hint; pass None to auto-detect
+    (the voice coach does this so an English question isn't forced into Chinese). The
+    caller reads the transcript's script to decide intent — gpt-4o-mini-transcribe has
+    no verbose_json/detected-language field, so the script is our language signal."""
+    kwargs = {"model": STT_MODEL, "file": (filename, audio_bytes)}
+    if language:
+        kwargs["language"] = language
+    resp = client.audio.transcriptions.create(**kwargs)
     return (getattr(resp, "text", "") or "").strip()
 
 
@@ -99,8 +105,11 @@ async def voice_turn(audio: UploadFile = File(...), user_id: str = Depends(requi
 
     # STT + TTS are blocking HTTP calls; keep them off the event loop. STT runs on
     # OpenRouter; TTS on OpenAI direct (OpenRouter has no TTS model).
+    # Auto-detect the spoken language (VOICE_STT_LANGUAGE is None by default) so an English
+    # clarifying question transcribes as English — the signal the intent router reads.
     user_text = await asyncio.to_thread(
-        _transcribe, _openrouter_client(), audio_bytes, audio.filename or "audio.webm"
+        _transcribe, _openrouter_client(), audio_bytes, audio.filename or "audio.webm",
+        VOICE_STT_LANGUAGE,
     )
     if not user_text:
         return {"user_text": "", "assistant_text": "", "audio_b64": None, "logged": None}
