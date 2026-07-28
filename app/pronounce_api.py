@@ -65,7 +65,7 @@ async def correct(
     into the same corpus as the text coach."""
     if audio is not None:
         wav = await audio.read()
-        client = voice_api._openrouter_client()
+        client = voice_api._openai_client()
         # Pass-1 drafts are always Chinese — pin to zh (unlike the voice coach, which
         # auto-detects so it can hear English questions).
         text = await asyncio.to_thread(

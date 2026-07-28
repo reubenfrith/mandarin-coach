@@ -26,12 +26,16 @@ litellm.suppress_debug_info = True
 # imported by every app module, so this runs before the first traced LLM call.
 os.environ.setdefault("LANGSMITH_PROJECT", "mandarin-coach")
 
-# The three Chinese-native candidates for the Task 6 model bake-off.
+# The three Chinese-native candidates for the Task 6 model bake-off (the TEXT coach).
 # Keys are the short names used everywhere else in the app / eval harness.
+# gpt-4o-mini is the odd one out: it routes DIRECT to OpenAI (not OpenRouter) and is
+# the low-latency, NON-reasoning model the voice paths use — a live spoken turn can't
+# afford the ~5s reasoning trace glm/deepseek emit before every reply.
 MODELS = {
     "deepseek": "openrouter/deepseek/deepseek-v4-flash",
     "glm": "openrouter/z-ai/glm-5.2",
     "qwen": "openrouter/qwen/qwen3.5-397b-a17b",
+    "gpt-4o-mini": "openai/gpt-4o-mini",
 }
 
 DEFAULT_MODEL = "deepseek"
@@ -45,23 +49,21 @@ FALLBACK_MODEL = "glm"
 REQUEST_TIMEOUT = float(os.environ.get("REQUEST_TIMEOUT", "90"))
 
 # --------------------------------------------------------------------------- #
-# Voice Conversation Partner — OpenRouter audio pipeline.
-# OpenRouter has no speech-to-speech realtime API, so voice is a turn-based
-# pipeline: STT (transcribe the learner) -> chat LLM (converse) -> TTS (speak the
-# reply). STT + chat run on OPENROUTER_API_KEY; TTS runs DIRECT on OPENAI_API_KEY
-# because OpenRouter has no TTS model. Slugs are overridable; if a slug is rejected,
-# correct it against https://openrouter.ai/models (or the OpenAI model list for TTS).
+# Voice pipeline — all-OpenAI, turn-based (no speech-to-speech realtime API).
+# One spoken turn is STT (transcribe) -> chat LLM (converse) -> TTS (speak). Every
+# leg runs DIRECT on OPENAI_API_KEY: TTS has to (OpenRouter has no TTS model), and
+# STT + chat were moved off OpenRouter too — the OpenRouter proxy hop plus a reasoning
+# chat model (glm/deepseek) made live voice turns sluggish. Keeping voice on one fast
+# provider is the latency fix. The TEXT coach still uses the OpenRouter models above.
 # --------------------------------------------------------------------------- #
 OPENROUTER_BASE_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
-# The conversation LLM is a MODELS key (see above). glm is fast and non-hanging —
-# the right default for a live back-and-forth (deepseek, a reasoning model, stalls).
-CONVERSATION_MODEL = os.environ.get("CONVERSATION_MODEL", "glm")
-# STT runs through OpenRouter (its /audio/transcriptions is OpenAI-compatible and the
-# slug below is accepted). TTS is different: OpenRouter's model catalogue has NO
-# text-to-speech model, so /audio/speech rejects every OpenAI TTS slug ("model does
-# not exist"). TTS therefore goes DIRECT to OpenAI (needs OPENAI_API_KEY), using
-# OpenAI's native, unprefixed model name.
-STT_MODEL = os.environ.get("STT_MODEL", "openai/gpt-4o-mini-transcribe")
+# The voice conversation/coach LLM is a MODELS key. gpt-4o-mini is fast and NON-reasoning
+# — the right default for a live back-and-forth (glm/deepseek emit a ~5s reasoning trace
+# before each reply). Routes direct to OpenAI (see the MODELS note above).
+CONVERSATION_MODEL = os.environ.get("CONVERSATION_MODEL", "gpt-4o-mini")
+# STT goes DIRECT to OpenAI (OPENAI_API_KEY), using OpenAI's native, unprefixed model
+# name. (Both STT and TTS bypass OpenRouter — see the pipeline note above.)
+STT_MODEL = os.environ.get("STT_MODEL", "gpt-4o-mini-transcribe")
 # Voice-coach STT language hint. Empty/unset => auto-detect (omit the hint), so a spoken
 # English clarifying question ("why is that wrong?") transcribes AS English instead of
 # being mangled into Chinese phonetics — the routing signal the voice coach needs. Pass-1

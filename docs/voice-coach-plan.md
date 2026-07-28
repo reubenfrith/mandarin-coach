@@ -60,6 +60,16 @@ made. Today those live in two separate memories, so the handoff is blind. Fix:
 2. **The coach brain is bounded at `AGENT_TURN_TIMEOUT=180s` and chains tool calls** — fine
    for text, unacceptable while someone holds the mic. The voice-coach path needs its own
    tighter budget: shorter timeout, a tool-call ceiling, and/or a faster model.
+   **Update:** the voice pipeline is now all-OpenAI on `gpt-4o-mini` (see below), a fast
+   non-reasoning model — measured STT+chat ~2.3s vs ~7.5s for the old glm chat call alone.
+   So the voice-coach brain (Phase 1) runs on `gpt-4o-mini` too; that + a tool-call ceiling
+   is the latency budget, no reasoning-model timeout to fight.
+
+**Voice provider consolidation (done alongside Phase 0):** all three voice legs — STT, chat,
+TTS — now run direct on OpenAI (`gpt-4o-mini-transcribe` / `gpt-4o-mini` / `gpt-4o-mini-tts`).
+The OpenRouter proxy hop and the reasoning chat model were the latency problem. The TEXT
+coach still uses the OpenRouter reasoning models + tools. `_openrouter_client` was removed
+from `voice_api`.
 
 ## Cheap routing (no classifier call on the common path)
 
