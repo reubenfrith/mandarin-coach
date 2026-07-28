@@ -19,8 +19,13 @@ from langgraph.checkpoint.memory import MemorySaver
 from pydantic import BaseModel, Field
 
 import memory
-from config import DEFAULT_MODEL, FALLBACK_MODEL, get_llm
-from prompts import AGENT_SYSTEM_PROMPT, ERROR_EXTRACTION_PROMPT, SENTENCE_CORRECTION_PROMPT
+from config import CONVERSATION_MODEL, DEFAULT_MODEL, FALLBACK_MODEL, get_llm
+from prompts import (
+    AGENT_SYSTEM_PROMPT,
+    ERROR_EXTRACTION_PROMPT,
+    SENTENCE_CORRECTION_PROMPT,
+    VOICE_COACH_SYSTEM_PROMPT,
+)
 from tools import make_tools
 
 # Hard ceiling on a whole agent turn (which may chain several LLM + tool calls).
@@ -63,13 +68,15 @@ def answer_text(content) -> str:
     return ""
 
 
-def _build_graph(user_id: str, prompt: str, model_key: str):
-    """One LangGraph tool-calling graph on `model_key`, with its own checkpointer."""
+def _build_graph(user_id: str, prompt: str, model_key: str, *, checkpointer=None):
+    """One LangGraph tool-calling graph on `model_key`. With a checkpointer it keeps
+    per-thread state (the text coach); without one it is stateless — each invoke sees
+    only the messages you pass (the voice coach, which injects its own history)."""
     return create_agent(
         get_llm(model_key, streaming=False),
         make_tools(user_id),
         system_prompt=prompt,
-        checkpointer=MemorySaver(),
+        **({"checkpointer": checkpointer} if checkpointer is not None else {}),
     )
 
 
@@ -81,9 +88,57 @@ def build_agent(user_id: str, profile_note: str = "") -> CoachAgent:
     """
     prompt = AGENT_SYSTEM_PROMPT + (f"\n\n{profile_note}" if profile_note else "")
     return CoachAgent(
-        primary=_build_graph(user_id, prompt, DEFAULT_MODEL),
-        fallback=_build_graph(user_id, prompt, FALLBACK_MODEL),
+        primary=_build_graph(user_id, prompt, DEFAULT_MODEL, checkpointer=MemorySaver()),
+        fallback=_build_graph(user_id, prompt, FALLBACK_MODEL, checkpointer=MemorySaver()),
     )
+
+
+# --------------------------------------------------------------------------- #
+# Voice coach (Phase 1) — the agentic brain, bounded for a live spoken turn.
+# Same tools as the text coach, but a fast non-reasoning model, a tight timeout, and
+# a low tool-call ceiling: the learner is holding the mic waiting for audio. It is
+# STATELESS (no checkpointer) — voice_api injects the recent spoken history as the
+# message list, so voice keeps its own context instead of the LangGraph thread's.
+# --------------------------------------------------------------------------- #
+VOICE_COACH_MODEL = os.environ.get("VOICE_COACH_MODEL", CONVERSATION_MODEL)
+VOICE_COACH_TIMEOUT = float(os.environ.get("VOICE_COACH_TIMEOUT", "45"))
+# LangGraph counts every LLM + tool step against this; a spoken answer should resolve
+# in a couple of tool calls, so keep it low to bound worst-case latency.
+VOICE_COACH_RECURSION_LIMIT = int(os.environ.get("VOICE_COACH_RECURSION_LIMIT", "8"))
+
+
+def build_voice_coach(user_id: str, profile_note: str = ""):
+    """A stateless voice-coach graph for one user (see the section note above)."""
+    prompt = VOICE_COACH_SYSTEM_PROMPT + (f"\n\n{profile_note}" if profile_note else "")
+    return _build_graph(user_id, prompt, VOICE_COACH_MODEL)
+
+
+def _split_spoken(full_text: str) -> tuple[str, str]:
+    """VOICE_COACH_SYSTEM_PROMPT asks for `spoken TL;DR` on line 1, detail below. Split
+    into (spoken, full): the first line is read aloud, the whole answer is shown."""
+    text = (full_text or "").strip()
+    if not text:
+        return "……", ""
+    first = text.split("\n", 1)[0].strip()
+    return (first or text), text
+
+
+async def run_voice_coach(graph, history_messages: list, question: str) -> tuple[str, str]:
+    """One bounded voice-coach turn. Injects the recent spoken history as the message
+    list (stateless graph, so only these messages count) and returns (spoken, full).
+    On timeout/error returns a short spoken apology for BOTH so the turn still speaks."""
+    messages = [*history_messages, HumanMessage(content=question)]
+    config = {"recursion_limit": VOICE_COACH_RECURSION_LIMIT}
+    try:
+        result = await asyncio.wait_for(
+            graph.ainvoke({"messages": messages}, config=config),
+            timeout=VOICE_COACH_TIMEOUT,
+        )
+        return _split_spoken(answer_text(result["messages"][-1].content))
+    except Exception as e:  # noqa: BLE001 — timeout OR any provider/tool error → speak an apology
+        print(f"[run_voice_coach] failed: {type(e).__name__}: {e}")
+        msg = "Sorry — I couldn't work that one out just now. Could you ask again?"
+        return msg, msg
 
 
 async def _invoke(graph, user_input: str, config) -> str:
