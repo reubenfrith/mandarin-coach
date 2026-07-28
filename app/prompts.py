@@ -55,8 +55,13 @@ INTENT_CLASSIFIER_PROMPT = (
     "Output 'coach' if the turn is a QUESTION or REQUEST FOR EXPLANATION about the language "
     "or about a correction — e.g. 'why was that wrong?', 'what does X mean?', 'give me another "
     "example', 'explain that grammar', 'how do I say ...?'.\n"
-    "Output 'converse' if the turn is just part of the CONVERSATION — a statement, an answer, "
-    "or a question aimed at the chat partner (e.g. 'and you?', 'what should we talk about?').\n"
+    "ALSO output 'coach' if the learner is speaking Mandarin but SUBSTITUTES ENGLISH WORDS for "
+    "Chinese ones (code-switching, e.g. '昨天我去了 the museum', '我很喜欢 hiking'). Dropping an "
+    "English word into Mandarin almost always means they don't know that word in Chinese and "
+    "want it translated and taught — that is coaching, not conversation.\n"
+    "Output 'converse' if the turn is just part of the CONVERSATION — an all-Mandarin statement, "
+    "an answer, or a question aimed at the chat partner (e.g. 'and you?', 'what should we talk "
+    "about?').\n"
     "When genuinely unsure, choose 'converse'."
 )
 
