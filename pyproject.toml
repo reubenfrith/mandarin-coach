@@ -41,3 +41,15 @@ task6 = [
 [tool.uv]
 # Application project, not an installable package — uv just manages the venv.
 package = false
+
+# Dev-only tooling, installed into the project venv by `uv run` / `uv sync` (not the prod
+# image). Pins the test runner to the project's Python 3.12 (+ librosa etc.) so `uv run
+# pytest` uses THIS env, not a stray system pytest on an interpreter without the deps.
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+# The tests are also standalone scripts; collect only tests/ and let tests/conftest.py do
+# the env + ChromaDB isolation. Quiet output, and treat unraised warnings as-is.
+testpaths = ["tests"]
+addopts = "-q"

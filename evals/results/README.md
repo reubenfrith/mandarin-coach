@@ -14,6 +14,7 @@ is re-derivable from the rows, and every scored answer is inspectable.
 | **Agentic (RAGAS)** | Tool-use over the LangGraph trace: ToolCallAccuracy + deterministic required-tool recall / extra-tool rate, AgentGoalAccuracy (completion), off-topic deflection | `ragas_agentic.md` | `ragas_agentic.json` → `rows[].{tool_sequence,tool_call_accuracy,required_recall,extra_tools,agent_goal_accuracy,final_answer}` + `off_topic[]` | 60 (+4 probes) |
 | **Extraction** | The hidden post-turn corpus writer (`extract_and_log_error`): had_error precision/recall/F1, category accuracy (specific golds), correction validity — each miss split into omission / malformed-JSON / wrong-value | `extraction.md` | `extraction.json` → `rows[].{outcome,pred_had_error,pred_category,pred_correction,would_log,extraction_errored,category_correct,correction_valid,correction_how}` | 34 pos + 17 neg |
 | **Extraction (guarded)** | Same dataset re-run with the production retry/validation guard active (`--guarded`) — the Task 6.3 before/after pair | `extraction_guarded.md` | `extraction_guarded.json` (same row schema) | 34 pos + 17 neg |
+| **Tone auto-logging** | The pronunciation coach's corpus writer (`_log_tone_error`): precision/recall of the wrong-tone log predicate, swept over a confidence-margin gate to set `LOG_MARGIN`. Precision is the headline (a false positive logs a correctly-said syllable). Perturbation-defined synthetic golds → an upper bound on real-L2 precision | `tone_assessment.md` | `tone_assessment.json` → `rows[].{band,target_tone,predicted_tone,dists,margin,score,mismatch,gold_wrong}` + `summary.{baseline,recommended,sweep,by_band_*}` | 40 correct + 40 wrong |
 | **C_scale preflight** | Thesis check: can the agent aggregate at scale | `preflight_typec.md` | — | — |
 
 ## The audit model (why it's verifiable)
@@ -47,6 +48,12 @@ python3 -c "import json; r=json.load(open('evals/results/extraction.json'))['row
 
 # The extraction defect (run-variable: glm drops correction on a chunk of logged records)
 python3 -c "import json; r=json.load(open('evals/results/extraction.json'))['rows']; L=[x for x in r if x['kind']=='positive' and x['would_log']]; print(sum(1 for x in L if not (x['pred_correction'] or '').strip()),'of',len(L),'logged records have an empty correction (varies per run)')"
+
+# Tone auto-logging: baseline precision at margin 0 (log on any mismatch) vs the LOG_MARGIN gate
+python3 -c "import json; s=json.load(open('evals/results/tone_assessment.json'))['summary']; b,r=s['baseline'],s['recommended']; print('margin 0.0  precision',round(b['precision'],3),'FP',b['FP']); print('gate',r['threshold'],'precision',round(r['precision'],3),'recall',round(r['recall'],3),'FP',r['FP'])"
+
+# The false positives the gate removes — re-derived from the rows (all shallow T2/T3 flipping to flat T1)
+python3 -c "import json; r=json.load(open('evals/results/tone_assessment.json'))['rows']; fp=[x for x in r if not x['gold_wrong'] and x.get('mismatch')]; [print(x['id'],'tgt',x['target_tone'],'->',x['predicted_tone'],'margin',x['margin']) for x in sorted(fp,key=lambda x:x['margin'])]"
 ```
 
 ## Read the actual answer for any case
@@ -65,7 +72,12 @@ python3 -c "import json; r=next(x for x in json.load(open('evals/results/head_to
 uv run python evals/surfaces/eval_harness.py                                  # head-to-head (60)
 uv run python evals/surfaces/ragas_rag.py                                     # RAG surface (40)
 REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=3 uv run python evals/surfaces/ragas_agentic.py   # agentic (60 + probes)
+uv run python evals/surfaces/tone_assessment_eval.py                          # tone auto-logging gate (80)
 ```
+
+The tone surface is fully local (pYIN DSP, no model calls) and deterministic — synthesis
+is seeded (`datagen/generate_tone_dataset.py` builds the recipe set; the eval renders it).
+`--from-rows` re-aggregates the saved rows without re-synthesising.
 
 Runs are reproducible: eval generation uses `glm` (deepseek hangs — DECISIONS #4), judges
 run at temperature 0, and the dataset is deterministic (`test_dataset.json`, built by

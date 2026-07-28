@@ -395,7 +395,7 @@ Two provider realities shaped the runs:
 
 ### Results
 
-- The harness has four surfaces, one per subsystem — so when a number moves, it is clear whether retrieval, the agent loop, the generator, or the corpus-writer moved it.
+- The harness has five surfaces, one per subsystem — so when a number moves, it is clear whether retrieval, the agent loop, the generator, the text corpus-writer, or the tone corpus-writer moved it.
 - Every surface writes a `.md` summary plus a `.json` of per-case rows including the model's verbatim answers; each headline number can be recomputed from the rows via [`evals/results/README.md`](evals/results/README.md).
 
 | Surface | Subsystem | Files | Cases |
@@ -403,7 +403,8 @@ Two provider realities shaped the runs:
 | Head-to-head | Whole agent vs control arm | `results/head_to_head.{md,json}` | 60 |
 | RAGAS RAG | Retriever → grounding chain | `results/ragas_rag.{md,json}` | 40 |
 | RAGAS agentic | Tool use over the LangGraph trace | `results/ragas_agentic.{md,json}` | 60 |
-| Structured extraction | The post-turn corpus-writer | `results/extraction.{md,json}` | 34 + 17 |
+| Structured extraction | The post-turn text corpus-writer | `results/extraction.{md,json}` | 34 + 17 |
+| Tone auto-logging | The pronunciation-coach corpus-writer | `results/tone_assessment.{md,json}` | 40 + 40 |
 
 #### Surface 1 — agent vs naked LLM
 
@@ -474,6 +475,19 @@ The app silently mines each turn for the learner's mistake and writes it to thei
 - The low middle numbers have one cause: GLM's structured output intermittently returns `had_error=True` with the `correction`, `category`, and `explanation` fields all empty. When the fields are filled, they are almost always right (0.95).
 - Three alternative explanations were ruled out: not a capability limit (the same inputs succeed on retry), not the structured-output method (reproduces on both `json_mode` and `function_calling`), not temperature (persists at 0). It is provider-side non-determinism.
 - The fix is therefore a retry/validation guard around the extraction call — implemented in 6.3 — not a model swap.
+
+#### Surface 5 — tone auto-logging
+
+The pronunciation coach's Pass 2 writes wrong-tone errors into the *same* corpus, from ground truth (a known target), so — like Surface 4 — a false positive poisons the memory and **precision is the headline**. The predicate: on a single-syllable target, log whenever the DSP's classified tone differs from the target. Measured on 80 labeled synthetic productions (40 correct / 40 wrong, rendered through the real pYIN pipeline), split into a separable `clean` band and a near-boundary `borderline` band:
+
+| | Threshold | Precision | Recall | False positives |
+|---|---|---|---|---|
+| Ungated (log on any mismatch) | 0.000 | 0.833 | 1.00 | **8** |
+| Margin-gated | `LOG_MARGIN` 0.067 | **1.00** | 0.95 | 0 |
+
+- **The ungated predicate was not safe.** It false-positived **8 of 24 borderline-correct productions** — all shallow-but-acceptable T2/T3 readings the classifier flips to a flat T1 — logging a syllable the learner said acceptably as a tone mistake. The pre-existing "we only auto-log unambiguous cases" comment claimed a safety property nothing enforced; this surface found the writer misfiring on realistic near-boundary input.
+- **The fix is a confidence gate, calibrated here.** `assess` now reports a per-syllable *margin* (how much better the wrong tone fits than the target); logging requires margin ≥ `LOG_MARGIN`, set to the midpoint of the empirical gap between the worst false-positive and nearest true-positive margin (0.0651–0.0689). This removes every false positive at a cost of 2 of 40 real errors missed — the right trade when a false log is the expensive one. A gated miss is still shown red in the UI; only the corpus write is suppressed.
+- **Honest scope.** Gold labels are perturbation-defined on clean synthetic voicing, so these are an *upper bound* on real-L2 precision, not a human-accuracy figure — the magnitude of misfiring on real (creakier) L2 audio is unmeasured. Real-recording validation with CREPE is Phase 2.
 
 ### What broke along the way
 

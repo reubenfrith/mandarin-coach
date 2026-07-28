@@ -175,13 +175,18 @@ def assess(f0_hz, target_tones) -> dict:
         predicted, dists, _ = classify_contour(f0_hz)
         dist = dists.get(target, _rmse(learner, TEMPLATE_SHAPES.get(target, np.zeros(N))))
         score = _score(dist)
+        # Confidence of a wrong-tone call: how much better the predicted tone fits than the
+        # target (0 when they agree). The auto-logger gates on this — a small margin is an
+        # ambiguous near-miss we stay silent on. Calibrated in evals/surfaces/tone_assessment_eval.
+        margin = dist - dists.get(predicted, dist)
         return {
             "voiced": True,
             "overall_score": score,
             "predicted_tones": [predicted],
             "per_syllable": [{
                 "index": 0, "target_tone": target, "predicted_tone": predicted,
-                "distance": round(dist, 4), "score": score, "ok": predicted == target,
+                "distance": round(dist, 4), "margin": round(margin, 4),
+                "score": score, "ok": predicted == target,
             }],
             "learner_shape": [round(x, 4) for x in learner.tolist()],
             "target_shape": [round(x, 4) for x in TEMPLATE_SHAPES[target].tolist()],
