@@ -36,7 +36,7 @@ def main():
     memory.load_reference_data = lambda *a, **k: {}
     agent.correct_sentence = fake_correct
     voice_api._openrouter_client = lambda: object()
-    voice_api._transcribe = lambda client, wav, fn: "我是学生的"
+    voice_api._transcribe = lambda client, wav, fn, language=None: "我是学生的"
     voice_api._synthesize = lambda client, text: b"ID3-fake-mp3"
 
     from starlette.testclient import TestClient

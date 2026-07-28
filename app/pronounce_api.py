@@ -66,7 +66,11 @@ async def correct(
     if audio is not None:
         wav = await audio.read()
         client = voice_api._openrouter_client()
-        text = await asyncio.to_thread(voice_api._transcribe, client, wav, audio.filename or "draft.wav")
+        # Pass-1 drafts are always Chinese — pin to zh (unlike the voice coach, which
+        # auto-detects so it can hear English questions).
+        text = await asyncio.to_thread(
+            voice_api._transcribe, client, wav, audio.filename or "draft.wav", "zh"
+        )
     text = (text or "").strip()
     if not text:
         raise HTTPException(status_code=400, detail="Provide text or audio to correct.")
