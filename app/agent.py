@@ -19,10 +19,13 @@ from langgraph.checkpoint.memory import MemorySaver
 from pydantic import BaseModel, Field
 
 import memory
+from typing import Literal
+
 from config import CONVERSATION_MODEL, DEFAULT_MODEL, FALLBACK_MODEL, get_llm
 from prompts import (
     AGENT_SYSTEM_PROMPT,
     ERROR_EXTRACTION_PROMPT,
+    INTENT_CLASSIFIER_PROMPT,
     SENTENCE_CORRECTION_PROMPT,
     VOICE_COACH_SYSTEM_PROMPT,
 )
@@ -121,6 +124,39 @@ def _split_spoken(full_text: str) -> tuple[str, str]:
         return "……", ""
     first = text.split("\n", 1)[0].strip()
     return (first or text), text
+
+
+# Only the AMBIGUOUS (mixed-script) case reaches this LLM call — pure-English and
+# pure-Chinese turns are routed by a zero-latency script heuristic in voice_api. Kept
+# short so it barely adds to turn latency, and biased to 'converse' on any failure.
+VOICE_INTENT_TIMEOUT = float(os.environ.get("VOICE_INTENT_TIMEOUT", "12"))
+
+
+class TurnIntent(BaseModel):
+    """Which voice brain should handle one spoken turn."""
+
+    intent: Literal["converse", "coach"] = Field(
+        description="'coach' for a question/explanation request about the language or a "
+        "correction; 'converse' for ordinary conversation."
+    )
+
+
+async def classify_turn_intent(text: str) -> str:
+    """Classify a mixed-language spoken turn as 'converse' or 'coach'. Uses the fast voice
+    model; on timeout or any error returns 'converse' (precision-first: don't lecture when
+    the learner wanted to chat)."""
+    llm = get_llm(CONVERSATION_MODEL, streaming=False).with_structured_output(TurnIntent)
+    try:
+        result = await asyncio.wait_for(
+            llm.ainvoke(
+                [SystemMessage(content=INTENT_CLASSIFIER_PROMPT), HumanMessage(content=text)]
+            ),
+            timeout=VOICE_INTENT_TIMEOUT,
+        )
+        return result.intent
+    except Exception as e:  # noqa: BLE001 — timeout/malformed → safe default
+        print(f"[classify_turn_intent] failed: {type(e).__name__}: {e}; defaulting to converse")
+        return "converse"
 
 
 async def run_voice_coach(graph, history_messages: list, question: str) -> tuple[str, str]:

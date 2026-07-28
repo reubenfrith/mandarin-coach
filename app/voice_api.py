@@ -17,6 +17,7 @@ Shares the corpus with the text coach: notable spoken mistakes are logged via
 """
 import asyncio
 import base64
+import re
 
 from fastapi import APIRouter, Depends, File, Form, UploadFile
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
@@ -26,6 +27,7 @@ import users
 from agent import (
     answer_text,
     build_voice_coach,
+    classify_turn_intent,
     extract_and_log_error_voice,
     run_voice_coach,
 )
@@ -40,7 +42,7 @@ from config import (
     openai_key,
 )
 from prompts import CONVERSATION_SYSTEM_PROMPT
-from web_api import require_user
+from web_api import _profile_note, require_user
 
 router = APIRouter()
 
@@ -84,8 +86,38 @@ def _openai_client() -> OpenAI:
 
 def _coach_for(user_id: str):
     if user_id not in _voice_coaches:
-        _voice_coaches[user_id] = build_voice_coach(user_id)
+        # Same HSK profile note the text coach gets, so it pitches to the learner's level.
+        _voice_coaches[user_id] = build_voice_coach(user_id, _profile_note(user_id))
     return _voice_coaches[user_id]
+
+
+# A run of >=2 latin letters = an English word (ignores stray "OK"/"app"-style single tokens
+# less, but 2+ letters is a good "this turn is English" signal).
+_LATIN_WORD = re.compile(r"[A-Za-z]{2,}")
+
+
+def _has_han(text: str) -> bool:
+    return any("一" <= c <= "鿿" for c in text)
+
+
+async def _route_intent(user_id: str, text: str, mode: str) -> str:
+    """Decide which brain answers a spoken turn: 'converse' or 'coach'.
+
+    Manual override wins. Otherwise a zero-latency script heuristic handles the clear
+    cases — pure English is a question (coach), pure Mandarin is conversation — and only a
+    genuinely mixed turn costs an LLM classifier call. Biased to 'converse' throughout: a
+    misrouted chat->coach turn (an English lecture when you wanted to talk) is more jarring
+    than the reverse, and the conversation partner still does light inline correction."""
+    if mode in ("converse", "coach"):
+        return mode
+    han, latin = _has_han(text), bool(_LATIN_WORD.search(text))
+    if latin and not han:
+        return "coach"       # clearly English → a learning question
+    if han and not latin:
+        return "converse"    # clearly Mandarin → conversation
+    if not han and not latin:
+        return "converse"    # no real content → don't lecture
+    return await classify_turn_intent(text)  # mixed → let the classifier decide
 
 
 def _system_prompt(user_id: str) -> str:
@@ -139,34 +171,51 @@ async def _coach_reply(user_id: str, question: str) -> tuple[str, str]:
 
 
 @router.post("/api/voice/turn")
-async def voice_turn(audio: UploadFile = File(...), user_id: str = Depends(require_user)):
-    """Full spoken turn. Returns both transcripts (for the 汉字 view — the browser
-    fetches pīnyīn separately) and the reply audio as base64 mp3."""
+async def voice_turn(
+    audio: UploadFile = File(...),
+    mode: str = Form("auto"),
+    user_id: str = Depends(require_user),
+):
+    """Full spoken turn. `mode` is auto|converse|coach (the UI's toggle). Routes the turn to
+    the conversation partner or the voice coach, and returns the transcripts (with ruby
+    segments), the detected intent, what was spoken, and the reply audio as base64 mp3."""
     audio_bytes = await audio.read()
 
-    # STT + TTS are blocking HTTP calls; keep them off the event loop. STT runs on
-    # OpenRouter; TTS on OpenAI direct (OpenRouter has no TTS model).
-    # Auto-detect the spoken language (VOICE_STT_LANGUAGE is None by default) so an English
-    # clarifying question transcribes as English — the signal the intent router reads.
+    # STT is a blocking HTTP call; keep it off the event loop. Auto-detect the language
+    # (VOICE_STT_LANGUAGE is None) so an English question transcribes as English — the
+    # signal _route_intent reads.
     user_text = await asyncio.to_thread(
         _transcribe, _openai_client(), audio_bytes, audio.filename or "audio.webm",
         VOICE_STT_LANGUAGE,
     )
     if not user_text:
-        return {"user_text": "", "assistant_text": "", "audio_b64": None, "logged": None}
+        return {"intent": None, "user_text": "", "assistant_text": "", "spoken_text": "",
+                "audio_b64": None, "logged": None}
 
-    assistant_text = await _reply(user_id, user_text)
-    audio_out = await asyncio.to_thread(_synthesize, _openai_client(), assistant_text)
+    intent = await _route_intent(user_id, user_text, mode)
 
-    # OpenRouter STT returns no confidence signal, so pass None: the source="voice"
-    # tag + the extraction guard remain the corpus-pollution protection.
-    logged = await extract_and_log_error_voice(user_id, user_text, assistant_text, confidence=None)
+    if intent == "coach":
+        # Coach: speak the short TL;DR, show the full explanation. A learning question has
+        # no learner error of its own, so nothing is logged.
+        spoken, assistant_text = await _coach_reply(user_id, user_text)
+        logged = None
+    else:
+        assistant_text = await _reply(user_id, user_text)
+        spoken = assistant_text  # conversation: speak the whole reply
+        # STT gives no confidence signal, so pass None: the source="voice" tag + the
+        # extraction guard remain the corpus-pollution protection.
+        logged = await extract_and_log_error_voice(user_id, user_text, assistant_text, confidence=None)
+
+    audio_out = await asyncio.to_thread(_synthesize, _openai_client(), spoken)
 
     return {
+        "intent": intent,
         "user_text": user_text,
         "assistant_text": assistant_text,
-        # Ruby segments up front so the UI renders 汉字-over-pīnyīn immediately (no
-        # second /api/pinyin round-trip per turn, no plain-then-ruby reflow flicker).
+        "spoken_text": spoken,
+        # Ruby segments up front so the UI renders 汉字-over-pīnyīn immediately (no second
+        # /api/pinyin round-trip per turn, no plain-then-ruby reflow flicker). On an English
+        # coach answer these ruby-annotate only the Chinese example sentences.
         "user_segments": pinyin_segments(user_text),
         "assistant_segments": pinyin_segments(assistant_text),
         "audio_b64": base64.b64encode(audio_out).decode("ascii"),

@@ -123,10 +123,11 @@ function renderRuby(bodyEl, segments) {
   });
 }
 
-function addTurn(container, role, text, { withPinyin = false, segments = null } = {}) {
+function addTurn(container, role, text, { withPinyin = false, segments = null, coach = false } = {}) {
   const turn = document.createElement("div");
-  turn.className = `turn ${role}`;
-  turn.innerHTML = `<div class="role">${role === "user" ? "you" : "coach"}</div><div class="body"></div>`;
+  turn.className = `turn ${role}${coach ? " coach" : ""}`;
+  const label = coach ? "coach · explanation" : role === "user" ? "you" : "coach";
+  turn.innerHTML = `<div class="role">${label}</div><div class="body"></div>`;
   const body = turn.querySelector(".body");
   body.textContent = text;
   if (withPinyin && HANZI.test(text)) {
@@ -178,6 +179,7 @@ $("chat-form").addEventListener("submit", async (e) => {
 // ---- voice partner (hold to speak) ---------------------------------------- //
 let mediaRecorder = null;
 let chunks = [];
+let voiceMode = "auto";  // auto | converse | coach — the response-mode toggle
 
 // `capturing` guards against a double-start (e.g. mousedown AND spacebar) — it flips
 // synchronously, before the async getUserMedia, so a second trigger is a no-op.
@@ -213,13 +215,16 @@ async function sendTurn() {
   const blob = new Blob(chunks, { type: mediaRecorder.mimeType || "audio/webm" });
   const form = new FormData();
   form.append("audio", blob, "turn.webm");
+  form.append("mode", voiceMode);
   $("voice-status").textContent = "thinking…";
   try {
     const r = await api("/api/voice/turn", { method: "POST", body: form });
     const data = await r.json();
     if (!data.user_text) { $("voice-status").textContent = "didn't catch that — try again"; return; }
+    const isCoach = data.intent === "coach";
     addTurn($("voice-transcript"), "user", data.user_text, { withPinyin: true, segments: data.user_segments });
-    const reply = addTurn($("voice-transcript"), "assistant", data.assistant_text, { withPinyin: true, segments: data.assistant_segments });
+    const reply = addTurn($("voice-transcript"), "assistant", data.assistant_text,
+      { withPinyin: true, segments: data.assistant_segments, coach: isCoach });
     markLogged(reply, data.logged);
     if (data.audio_b64) {
       $("reply-audio").src = "data:audio/mp3;base64," + data.audio_b64;
@@ -264,6 +269,19 @@ document.addEventListener("keyup", (e) => {
 // If focus leaves the window mid-hold, keyup may never arrive — stop so the mic
 // doesn't stick on. capturing-guarded, so it's a no-op when not recording.
 window.addEventListener("blur", stopRecording);
+
+// Response-mode toggle: Auto (route by intent) / Chat (always converse) / Coach (always explain).
+const modeGroup = $("voice-mode");
+modeGroup.querySelectorAll("button").forEach((b) => {
+  b.addEventListener("click", () => {
+    voiceMode = b.dataset.mode;
+    modeGroup.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+    $("voice-status").textContent =
+      voiceMode === "coach" ? "coach mode — every turn is explained"
+      : voiceMode === "converse" ? "chat mode — always conversation"
+      : "auto — English questions go to the coach";
+  });
+});
 
 $("voice-reset").addEventListener("click", async () => {
   await api("/api/voice/reset", { method: "POST" });
