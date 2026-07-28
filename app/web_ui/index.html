@@ -102,13 +102,19 @@
     <!-- Voice partner -->
     <div id="voice-pane" class="pane" hidden>
       <div id="voice-transcript" class="transcript">
-        <p class="voice-empty muted">Speak Mandarin. Hold the mic — or press and hold <kbd>Space</kbd> — and talk.
-        Both turns show 汉字 with pīnyīn underneath each character.</p>
+        <p class="voice-empty muted">Speak Mandarin to chat. Ask a question in English — “why was that wrong?” —
+        and the coach explains it. Hold the mic or <kbd>Space</kbd> and talk; both turns show 汉字 with pīnyīn underneath.</p>
       </div>
       <div class="voice-dock">
         <button id="record-btn" class="mic" aria-label="Hold to speak">🎙️</button>
         <div class="voice-meta">
           <span id="voice-status" class="muted">Hold the mic or <kbd>Space</kbd> to speak · release to send</span>
+          <div id="voice-mode" class="seg" role="group" aria-label="Response mode"
+               title="Auto routes English questions to the coach; Chat always converses; Coach always explains.">
+            <button type="button" data-mode="auto" class="on">Auto</button>
+            <button type="button" data-mode="converse">Chat</button>
+            <button type="button" data-mode="coach">Coach</button>
+          </div>
           <button id="voice-reset" class="link">reset conversation</button>
         </div>
       </div>

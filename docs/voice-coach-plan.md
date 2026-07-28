@@ -129,20 +129,26 @@ output, no second call, no structured-output-vs-tools conflict.
 - **Thread the learner's level into the coach** — `_coach_for` builds `build_voice_coach(uid)`
   with no `profile_note`, so unlike the conversation partner it won't pitch to HSK level yet.
 
-**Phase 2 — the router**
-- `TurnIntent` pydantic model + `INTENT_CLASSIFIER_PROMPT`.
-- `voice_api._route_intent(text, detected_lang, mode)` — manual override → heuristic →
-  classifier, biased to converse.
-- `/api/voice/turn`: accept `mode`; branch on intent; run `extract_and_log_error_voice`
-  **only on CONVERSE** turns (a coach question has no learner error to log); response gains
-  `intent`, `spoken_text`, full `assistant_text`.
+**Phase 2 — the router** ✅ DONE
+- `TurnIntent` model + `INTENT_CLASSIFIER_PROMPT` + `agent.classify_turn_intent` (fast model,
+  structured output, defaults to converse on any error). ✅
+- `voice_api._route_intent(user_id, text, mode)` — manual override wins; a zero-latency
+  SCRIPT heuristic routes the clear cases (English→coach, Mandarin→converse); only a mixed
+  turn costs the classifier call. Biased to converse throughout. ✅
+- `/api/voice/turn`: accepts `mode`; branches on intent; logs **only on CONVERSE** turns;
+  response gains `intent`, `spoken_text`, full `assistant_text`. ✅
+- HSK note now threaded into the coach (`_coach_for` → `build_voice_coach(uid, _profile_note)`). ✅
+- Tests (`tests/test_voice_router.py`, 21 checks): heuristic routing + classifier-only-on-mixed
+  + endpoint branch (coach speaks TL;DR / shows full / logs nothing; converse logs; override
+  wins; empty→null intent).
 
-**Phase 3 — frontend** (`app.js`, `index.html`, `style.css`)
-- A 3-way **mode toggle** on the voice pane: Auto (default) / Chat / Coach. Optional
-  power-user modifier (hold Shift+Space = force coach).
-- Style coach replies distinctly (English, a 📘 marker / different bubble); ruby on Chinese
-  examples; auto-play the short spoken TTS; always show the full text.
-- Rename the tab "Voice" → "Coach"? (cosmetic, defer.)
+**Phase 3 — frontend** ✅ DONE (`app.js`, `index.html`, `style.css`)
+- 3-way **mode toggle** on the voice pane: Auto (default) / Chat / Coach, sent as `mode`. ✅
+- Coach replies styled distinctly (accent left-border, "coach · explanation" label, normal
+  line-height for English prose, ruby only on the Chinese examples); the short spoken TTS
+  auto-plays; the full text is shown. ✅
+- Intro copy updated to tell the learner they can ask questions in English.
+- (Power-user Shift+Space and the tab rename remain optional/deferred — cosmetic.)
 
 **Phase 4 — measure** (mirrors the repo's eval-surface discipline)
 - A small labeled transcript→intent set → a router **precision** eval surface under

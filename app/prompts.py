@@ -50,6 +50,16 @@ CONVERSATION_SYSTEM_PROMPT = (
     "mistake they may not have made."
 )
 
+INTENT_CLASSIFIER_PROMPT = (
+    "You route ONE spoken turn from a Mandarin learner to the right responder.\n"
+    "Output 'coach' if the turn is a QUESTION or REQUEST FOR EXPLANATION about the language "
+    "or about a correction — e.g. 'why was that wrong?', 'what does X mean?', 'give me another "
+    "example', 'explain that grammar', 'how do I say ...?'.\n"
+    "Output 'converse' if the turn is just part of the CONVERSATION — a statement, an answer, "
+    "or a question aimed at the chat partner (e.g. 'and you?', 'what should we talk about?').\n"
+    "When genuinely unsure, choose 'converse'."
+)
+
 VOICE_COACH_SYSTEM_PROMPT = (
     "You are a Mandarin coach answering a SPOKEN question from an English-speaking learner "
     "in the middle of a Mandarin conversation. They have just asked a clarifying or learning "
