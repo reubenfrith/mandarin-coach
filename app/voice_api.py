@@ -23,7 +23,12 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from openai import OpenAI
 
 import users
-from agent import answer_text, extract_and_log_error_voice
+from agent import (
+    answer_text,
+    build_voice_coach,
+    extract_and_log_error_voice,
+    run_voice_coach,
+)
 from tools import pinyin_segments
 from config import (
     CONVERSATION_MODEL,
@@ -39,15 +44,48 @@ from web_api import require_user
 
 router = APIRouter()
 
-# Per-user rolling conversation history for voice (separate from the text coach's
-# LangGraph memory — voice deliberately uses no tools and its own prompt).
+# Per-user rolling spoken history — the SINGLE canonical log for the voice session,
+# shared by BOTH brains (conversation partner + voice coach) so a coaching question can
+# see the recast the partner just made, and conversation resumes after a coaching detour.
+# Each entry: {"role": "user"|"assistant", "content": str, "mode": "converse"|"coach"}.
+# Kept separate from the text coach's LangGraph memory (the decision: voice owns its
+# context). The mode tag lets us keep coaching detours from derailing the chat.
 _voice_history: dict = {}
-_HISTORY_TURNS = 12  # cap: keep the last N messages so the prompt stays bounded
+_HISTORY_TURNS = 12  # cap: keep the last N entries so the prompt stays bounded
+
+# One stateless voice-coach graph per user, built lazily (make_tools loads dictionaries,
+# so we don't want to rebuild it every turn).
+_voice_coaches: dict = {}
+
+
+def _history(user_id: str) -> list:
+    return _voice_history.setdefault(user_id, [])
+
+
+def _remember(user_id: str, role: str, content: str, mode: str) -> None:
+    h = _history(user_id)
+    h.append({"role": role, "content": content, "mode": mode})
+    del h[:-_HISTORY_TURNS]
+
+
+def _history_messages(user_id: str) -> list:
+    """The recent spoken turns as LangChain messages, for prompting either brain."""
+    return [
+        HumanMessage(content=t["content"]) if t["role"] == "user"
+        else AIMessage(content=t["content"])
+        for t in _history(user_id)
+    ]
 
 
 def _openai_client() -> OpenAI:
     # The whole voice pipeline (STT + TTS) runs direct on OpenAI — see config's pipeline note.
     return OpenAI(api_key=openai_key())
+
+
+def _coach_for(user_id: str):
+    if user_id not in _voice_coaches:
+        _voice_coaches[user_id] = build_voice_coach(user_id)
+    return _voice_coaches[user_id]
 
 
 def _system_prompt(user_id: str) -> str:
@@ -78,15 +116,26 @@ def _synthesize(client: OpenAI, text: str) -> bytes:
 
 
 async def _reply(user_id: str, user_text: str) -> str:
-    """Run one conversational turn on the OpenRouter chat model with rolling history."""
-    history = _voice_history.setdefault(user_id, [])
-    messages = [SystemMessage(content=_system_prompt(user_id)), *history, HumanMessage(content=user_text)]
+    """One conversational turn on the fast voice model, over the shared spoken history."""
+    messages = [SystemMessage(content=_system_prompt(user_id)),
+                *_history_messages(user_id), HumanMessage(content=user_text)]
     llm = get_llm(CONVERSATION_MODEL, streaming=False)
     resp = await llm.ainvoke(messages)
     answer = answer_text(resp.content) or "……"
-    history.extend([HumanMessage(content=user_text), AIMessage(content=answer)])
-    del history[:-_HISTORY_TURNS]  # keep only the most recent turns
+    _remember(user_id, "user", user_text, "converse")
+    _remember(user_id, "assistant", answer, "converse")
     return answer
+
+
+async def _coach_reply(user_id: str, question: str) -> tuple[str, str]:
+    """One voice-COACH turn. Runs the bounded agentic brain over the same shared history
+    (so it can see the correction being asked about) and returns (spoken, full). Only the
+    short spoken line is written back to history — the full explanation stays in the UI, so
+    a long English answer doesn't bloat the log or drift the next chat turn into English."""
+    spoken, full = await run_voice_coach(_coach_for(user_id), _history_messages(user_id), question)
+    _remember(user_id, "user", question, "coach")
+    _remember(user_id, "assistant", spoken, "coach")
+    return spoken, full
 
 
 @router.post("/api/voice/turn")

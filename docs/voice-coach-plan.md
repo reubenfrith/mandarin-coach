@@ -101,14 +101,33 @@ output, no second call, no structured-output-vs-tools conflict.
 - **Still needs a human check:** noisy real-mic *English* input — clean TTS audio can't
   reproduce the zh-bias mangling the fix targets. Test in-browser before trusting the router.
 
-**Phase 1 — shared history + bounded coach path**
-- Make `_voice_history` canonical and **mode-tagged** (converse vs coach turns).
-- `agent.build_voice_coach(user_id)` — a `create_agent` graph on the coach tools with a new
-  `VOICE_COACH_SYSTEM_PROMPT` (concise, spoken-first-line convention, aware it's answering a
-  spoken question with recent context).
-- `agent.run_voice_coach(agent, history_messages, question)` — invokes with the injected
-  message list, a **tighter timeout + tool-call ceiling**, fast-model fallback; returns
-  `(spoken, full)`.
+**Phase 1 — shared history + bounded coach path** ✅ DONE
+- `_voice_history` is now the canonical, **mode-tagged** spoken log (`{role, content, mode}`),
+  shared by both brains via `_history_messages` / `_remember`. `_reply` refactored onto it. ✅
+- `agent.build_voice_coach(user_id)` — a STATELESS `create_agent` graph (no checkpointer;
+  voice injects its own history) on the coach tools + `VOICE_COACH_SYSTEM_PROMPT`
+  (spoken-first-line convention). `_build_graph` grew an optional `checkpointer` param. ✅
+- `agent.run_voice_coach(graph, history_messages, question)` — injects the message list,
+  bounded by `VOICE_COACH_TIMEOUT=45s` + `recursion_limit=8`, returns `(spoken, full)` via
+  `_split_spoken`; on error speaks a short apology. ✅
+- `voice_api._coach_reply` ties it together: runs the brain over shared history, writes back
+  only the SHORT spoken line (mode=coach) so a long English answer can't bloat/derail chat. ✅
+- Tests (`tests/test_voice_coach.py`, 15 checks) — the crux is proven: a coaching question
+  sees the prior conversation and the correction in it.
+- **Verified end-to-end on real `gpt-4o-mini`:** identified the 的 from injected history,
+  honored the spoken-first-line format. Latency: **~2.1s with no tool call, ~6.6s when
+  `grammar_rule_fetcher` fires** (real corpus loaded). Both within the 45s bound; the ~6.6s
+  is the realistic figure for a grounded coaching answer. Note: gpt-4o-mini's grammar
+  precision is imperfect (a 地/的 slip in one example) — a model-quality caveat, not wiring.
+- NOT yet wired into `/api/voice/turn` — that's Phase 2 (the router decides when to call it).
+
+**Carry into Phase 2 (from an advisor review):**
+- **English-drift is unverified** — the stub test proves the next chat turn *sees* the coach
+  detour, but only an in-browser turn can confirm the partner still replies in *Mandarin*
+  after an English coaching aside. This is the one real risk of the write-back-short-line
+  design; don't mark it done on the stub.
+- **Thread the learner's level into the coach** — `_coach_for` builds `build_voice_coach(uid)`
+  with no `profile_note`, so unlike the conversation partner it won't pitch to HSK level yet.
 
 **Phase 2 — the router**
 - `TurnIntent` pydantic model + `INTENT_CLASSIFIER_PROMPT`.
