@@ -121,5 +121,10 @@ async def main():
     print("\nAll extraction-guard checks passed.")
 
 
+def test_extraction_guard():
+    """pytest entry point — runs the async check sequence (see conftest.py)."""
+    asyncio.run(main())
+
+
 if __name__ == "__main__":
     asyncio.run(main())

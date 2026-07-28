@@ -95,5 +95,10 @@ async def main():
     print("\nAll voice-logging checks passed.")
 
 
+def test_voice_logging():
+    """pytest entry point — runs the async check sequence (see conftest.py)."""
+    asyncio.run(main())
+
+
 if __name__ == "__main__":
     asyncio.run(main())

@@ -96,5 +96,10 @@ def main():
     print("\nAll tone-analysis checks passed.")
 
 
+def test_tone_analysis():
+    """pytest entry point — runs the full check sequence (see conftest.py)."""
+    main()
+
+
 if __name__ == "__main__":
     main()

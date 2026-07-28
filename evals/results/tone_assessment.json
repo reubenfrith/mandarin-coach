@@ -1,0 +1,2337 @@
+{
+  "summary": {
+    "n_cases": 80,
+    "n_correct": 40,
+    "n_wrong": 40,
+    "precision_target": 0.98,
+    "baseline": {
+      "threshold": 0.0,
+      "TP": 40,
+      "FP": 8,
+      "FN": 0,
+      "TN": 32,
+      "precision": 0.8333333333333334,
+      "recall": 1.0,
+      "f1": 0.9090909090909091
+    },
+    "recommended": {
+      "threshold": 0.067,
+      "TP": 38,
+      "FP": 0,
+      "FN": 2,
+      "TN": 40,
+      "precision": 1.0,
+      "recall": 0.95,
+      "f1": 0.9743589743589743
+    },
+    "gate_needed": true,
+    "log_margin": 0.067,
+    "sweep": [
+      {
+        "threshold": 0.0,
+        "TP": 40,
+        "FP": 8,
+        "FN": 0,
+        "TN": 32,
+        "precision": 0.8333333333333334,
+        "recall": 1.0,
+        "f1": 0.9090909090909091
+      },
+      {
+        "threshold": 0.0132,
+        "TP": 40,
+        "FP": 7,
+        "FN": 0,
+        "TN": 33,
+        "precision": 0.851063829787234,
+        "recall": 1.0,
+        "f1": 0.9195402298850576
+      },
+      {
+        "threshold": 0.0186,
+        "TP": 40,
+        "FP": 6,
+        "FN": 0,
+        "TN": 34,
+        "precision": 0.8695652173913043,
+        "recall": 1.0,
+        "f1": 0.9302325581395349
+      },
+      {
+        "threshold": 0.0254,
+        "TP": 40,
+        "FP": 5,
+        "FN": 0,
+        "TN": 35,
+        "precision": 0.8888888888888888,
+        "recall": 1.0,
+        "f1": 0.9411764705882353
+      },
+      {
+        "threshold": 0.0363,
+        "TP": 40,
+        "FP": 4,
+        "FN": 0,
+        "TN": 36,
+        "precision": 0.9090909090909091,
+        "recall": 1.0,
+        "f1": 0.9523809523809523
+      },
+      {
+        "threshold": 0.0459,
+        "TP": 39,
+        "FP": 4,
+        "FN": 1,
+        "TN": 36,
+        "precision": 0.9069767441860465,
+        "recall": 0.975,
+        "f1": 0.9397590361445783
+      },
+      {
+        "threshold": 0.0525,
+        "TP": 38,
+        "FP": 4,
+        "FN": 2,
+        "TN": 36,
+        "precision": 0.9047619047619048,
+        "recall": 0.95,
+        "f1": 0.9268292682926829
+      },
+      {
+        "threshold": 0.0559,
+        "TP": 38,
+        "FP": 3,
+        "FN": 2,
+        "TN": 37,
+        "precision": 0.926829268292683,
+        "recall": 0.95,
+        "f1": 0.9382716049382716
+      },
+      {
+        "threshold": 0.0595,
+        "TP": 38,
+        "FP": 2,
+        "FN": 2,
+        "TN": 38,
+        "precision": 0.95,
+        "recall": 0.95,
+        "f1": 0.9500000000000001
+      },
+      {
+        "threshold": 0.0638,
+        "TP": 38,
+        "FP": 1,
+        "FN": 2,
+        "TN": 39,
+        "precision": 0.9743589743589743,
+        "recall": 0.95,
+        "f1": 0.9620253164556962
+      },
+      {
+        "threshold": 0.067,
+        "TP": 38,
+        "FP": 0,
+        "FN": 2,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.95,
+        "f1": 0.9743589743589743
+      },
+      {
+        "threshold": 0.0716,
+        "TP": 37,
+        "FP": 0,
+        "FN": 3,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.925,
+        "f1": 0.961038961038961
+      },
+      {
+        "threshold": 0.085,
+        "TP": 36,
+        "FP": 0,
+        "FN": 4,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1": 0.9473684210526316
+      },
+      {
+        "threshold": 0.0962,
+        "TP": 35,
+        "FP": 0,
+        "FN": 5,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.875,
+        "f1": 0.9333333333333333
+      },
+      {
+        "threshold": 0.0983,
+        "TP": 34,
+        "FP": 0,
+        "FN": 6,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.85,
+        "f1": 0.9189189189189189
+      },
+      {
+        "threshold": 0.1008,
+        "TP": 33,
+        "FP": 0,
+        "FN": 7,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.825,
+        "f1": 0.9041095890410958
+      },
+      {
+        "threshold": 0.1072,
+        "TP": 32,
+        "FP": 0,
+        "FN": 8,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.888888888888889
+      },
+      {
+        "threshold": 0.1142,
+        "TP": 31,
+        "FP": 0,
+        "FN": 9,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.775,
+        "f1": 0.8732394366197184
+      },
+      {
+        "threshold": 0.1165,
+        "TP": 30,
+        "FP": 0,
+        "FN": 10,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1": 0.8571428571428571
+      },
+      {
+        "threshold": 0.1179,
+        "TP": 29,
+        "FP": 0,
+        "FN": 11,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.725,
+        "f1": 0.8405797101449275
+      },
+      {
+        "threshold": 0.119,
+        "TP": 28,
+        "FP": 0,
+        "FN": 12,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.7,
+        "f1": 0.8235294117647058
+      },
+      {
+        "threshold": 0.1213,
+        "TP": 27,
+        "FP": 0,
+        "FN": 13,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.675,
+        "f1": 0.8059701492537313
+      },
+      {
+        "threshold": 0.1257,
+        "TP": 26,
+        "FP": 0,
+        "FN": 14,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.65,
+        "f1": 0.787878787878788
+      },
+      {
+        "threshold": 0.1285,
+        "TP": 25,
+        "FP": 0,
+        "FN": 15,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.625,
+        "f1": 0.7692307692307693
+      },
+      {
+        "threshold": 0.1339,
+        "TP": 24,
+        "FP": 0,
+        "FN": 16,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.6,
+        "f1": 0.7499999999999999
+      },
+      {
+        "threshold": 0.1403,
+        "TP": 23,
+        "FP": 0,
+        "FN": 17,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.575,
+        "f1": 0.7301587301587301
+      },
+      {
+        "threshold": 0.1599,
+        "TP": 22,
+        "FP": 0,
+        "FN": 18,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.55,
+        "f1": 0.7096774193548387
+      },
+      {
+        "threshold": 0.187,
+        "TP": 20,
+        "FP": 0,
+        "FN": 20,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      {
+        "threshold": 0.198,
+        "TP": 19,
+        "FP": 0,
+        "FN": 21,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.475,
+        "f1": 0.6440677966101694
+      },
+      {
+        "threshold": 0.2049,
+        "TP": 18,
+        "FP": 0,
+        "FN": 22,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.45,
+        "f1": 0.6206896551724138
+      },
+      {
+        "threshold": 0.218,
+        "TP": 17,
+        "FP": 0,
+        "FN": 23,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.425,
+        "f1": 0.5964912280701754
+      },
+      {
+        "threshold": 0.2303,
+        "TP": 16,
+        "FP": 0,
+        "FN": 24,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.4,
+        "f1": 0.5714285714285715
+      },
+      {
+        "threshold": 0.2449,
+        "TP": 15,
+        "FP": 0,
+        "FN": 25,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.375,
+        "f1": 0.5454545454545454
+      },
+      {
+        "threshold": 0.2612,
+        "TP": 14,
+        "FP": 0,
+        "FN": 26,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.35,
+        "f1": 0.5185185185185185
+      },
+      {
+        "threshold": 0.2683,
+        "TP": 13,
+        "FP": 0,
+        "FN": 27,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.325,
+        "f1": 0.4905660377358491
+      },
+      {
+        "threshold": 0.2747,
+        "TP": 12,
+        "FP": 0,
+        "FN": 28,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.3,
+        "f1": 0.4615384615384615
+      },
+      {
+        "threshold": 0.291,
+        "TP": 11,
+        "FP": 0,
+        "FN": 29,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.275,
+        "f1": 0.4313725490196079
+      },
+      {
+        "threshold": 0.3113,
+        "TP": 10,
+        "FP": 0,
+        "FN": 30,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4
+      },
+      {
+        "threshold": 0.3411,
+        "TP": 9,
+        "FP": 0,
+        "FN": 31,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.225,
+        "f1": 0.36734693877551017
+      },
+      {
+        "threshold": 0.3627,
+        "TP": 8,
+        "FP": 0,
+        "FN": 32,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.2,
+        "f1": 0.33333333333333337
+      },
+      {
+        "threshold": 0.3639,
+        "TP": 7,
+        "FP": 0,
+        "FN": 33,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.175,
+        "f1": 0.2978723404255319
+      },
+      {
+        "threshold": 0.3657,
+        "TP": 6,
+        "FP": 0,
+        "FN": 34,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.15,
+        "f1": 0.2608695652173913
+      },
+      {
+        "threshold": 0.381,
+        "TP": 5,
+        "FP": 0,
+        "FN": 35,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.125,
+        "f1": 0.2222222222222222
+      },
+      {
+        "threshold": 0.4002,
+        "TP": 4,
+        "FP": 0,
+        "FN": 36,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.1,
+        "f1": 0.18181818181818182
+      },
+      {
+        "threshold": 0.4054,
+        "TP": 3,
+        "FP": 0,
+        "FN": 37,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.075,
+        "f1": 0.13953488372093023
+      },
+      {
+        "threshold": 0.4203,
+        "TP": 2,
+        "FP": 0,
+        "FN": 38,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.05,
+        "f1": 0.09523809523809523
+      },
+      {
+        "threshold": 0.4392,
+        "TP": 1,
+        "FP": 0,
+        "FN": 39,
+        "TN": 40,
+        "precision": 1.0,
+        "recall": 0.025,
+        "f1": 0.04878048780487806
+      },
+      {
+        "threshold": 0.4542,
+        "TP": 0,
+        "FP": 0,
+        "FN": 40,
+        "TN": 40,
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      }
+    ],
+    "by_band_baseline": {
+      "clean": {
+        "threshold": 0.0,
+        "TP": 24,
+        "FP": 0,
+        "FN": 0,
+        "TN": 16,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "borderline": {
+        "threshold": 0.0,
+        "TP": 16,
+        "FP": 8,
+        "FN": 0,
+        "TN": 16,
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "f1": 0.8
+      }
+    },
+    "by_band_recommended": {
+      "clean": {
+        "threshold": 0.067,
+        "TP": 24,
+        "FP": 0,
+        "FN": 0,
+        "TN": 16,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "borderline": {
+        "threshold": 0.067,
+        "TP": 14,
+        "FP": 0,
+        "FN": 2,
+        "TN": 24,
+        "precision": 1.0,
+        "recall": 0.875,
+        "f1": 0.9333333333333333
+      }
+    },
+    "unvoiced_n": 0
+  },
+  "rows": [
+    {
+      "id": "clean_ok_t1_0",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": false,
+      "note": "faithful T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0144,
+        "2": 0.1472,
+        "3": 0.2097,
+        "4": 0.2644
+      },
+      "margin": 0.0,
+      "score": 94,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t1_1",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": false,
+      "note": "faithful T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0125,
+        "2": 0.1458,
+        "3": 0.2078,
+        "4": 0.266
+      },
+      "margin": 0.0,
+      "score": 95,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t1_2",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": false,
+      "note": "faithful T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0467,
+        "2": 0.1821,
+        "3": 0.2403,
+        "4": 0.2299
+      },
+      "margin": 0.0,
+      "score": 83,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t1_3",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": false,
+      "note": "faithful T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0397,
+        "2": 0.1755,
+        "3": 0.2283,
+        "4": 0.2381
+      },
+      "margin": 0.0,
+      "score": 85,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t2_0",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": false,
+      "note": "faithful T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1235,
+        "2": 0.0184,
+        "3": 0.153,
+        "4": 0.3953
+      },
+      "margin": 0.0,
+      "score": 93,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t2_1",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": false,
+      "note": "faithful T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1604,
+        "2": 0.0238,
+        "3": 0.1432,
+        "4": 0.4332
+      },
+      "margin": 0.0,
+      "score": 91,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t2_2",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": false,
+      "note": "faithful T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1141,
+        "2": 0.0257,
+        "3": 0.1447,
+        "4": 0.3871
+      },
+      "margin": 0.0,
+      "score": 90,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t2_3",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": false,
+      "note": "faithful T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1231,
+        "2": 0.0181,
+        "3": 0.1512,
+        "4": 0.3952
+      },
+      "margin": 0.0,
+      "score": 93,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t3_0",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": false,
+      "note": "faithful T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.2058,
+        "2": 0.1451,
+        "3": 0.0115,
+        "4": 0.4539
+      },
+      "margin": 0.0,
+      "score": 95,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t3_1",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": false,
+      "note": "faithful T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1772,
+        "2": 0.143,
+        "3": 0.0347,
+        "4": 0.4176
+      },
+      "margin": 0.0,
+      "score": 87,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t3_2",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": false,
+      "note": "faithful T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1728,
+        "2": 0.1402,
+        "3": 0.039,
+        "4": 0.4138
+      },
+      "margin": 0.0,
+      "score": 86,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t3_3",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": false,
+      "note": "faithful T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1657,
+        "2": 0.1286,
+        "3": 0.0391,
+        "4": 0.4116
+      },
+      "margin": 0.0,
+      "score": 86,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t4_0",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": false,
+      "note": "faithful T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2555,
+        "2": 0.3921,
+        "3": 0.434,
+        "4": 0.0227
+      },
+      "margin": 0.0,
+      "score": 91,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t4_1",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": false,
+      "note": "faithful T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2582,
+        "2": 0.3953,
+        "3": 0.4341,
+        "4": 0.0192
+      },
+      "margin": 0.0,
+      "score": 93,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t4_2",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": false,
+      "note": "faithful T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2793,
+        "2": 0.4162,
+        "3": 0.4556,
+        "4": 0.0111
+      },
+      "margin": 0.0,
+      "score": 96,
+      "mismatch": false
+    },
+    {
+      "id": "clean_ok_t4_3",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": false,
+      "note": "faithful T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.3048,
+        "2": 0.4418,
+        "3": 0.4791,
+        "4": 0.0324
+      },
+      "margin": 0.0,
+      "score": 88,
+      "mismatch": false
+    },
+    {
+      "id": "clean_wrong_t1_as2_0",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T1 high-level produced as T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1202,
+        "2": 0.0204,
+        "3": 0.1357,
+        "4": 0.3936
+      },
+      "margin": 0.0999,
+      "score": 62,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t1_as2_1",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T1 high-level produced as T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1311,
+        "2": 0.0136,
+        "3": 0.1495,
+        "4": 0.403
+      },
+      "margin": 0.1175,
+      "score": 59,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t1_as3_0",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": true,
+      "note": "target T1 high-level produced as T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1918,
+        "2": 0.1331,
+        "3": 0.0135,
+        "4": 0.4419
+      },
+      "margin": 0.1783,
+      "score": 46,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t1_as3_1",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": true,
+      "note": "target T1 high-level produced as T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1918,
+        "2": 0.1398,
+        "3": 0.0135,
+        "4": 0.4384
+      },
+      "margin": 0.1783,
+      "score": 46,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t1_as4_0",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": true,
+      "note": "target T1 high-level produced as T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2512,
+        "2": 0.3885,
+        "3": 0.426,
+        "4": 0.0247
+      },
+      "margin": 0.2266,
+      "score": 37,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t1_as4_1",
+      "band": "clean",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": true,
+      "note": "target T1 high-level produced as T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2434,
+        "2": 0.3804,
+        "3": 0.4188,
+        "4": 0.0341
+      },
+      "margin": 0.2093,
+      "score": 38,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t2_as1_0",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T2 rising produced as T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0122,
+        "2": 0.1277,
+        "3": 0.1922,
+        "4": 0.2843
+      },
+      "margin": 0.1155,
+      "score": 60,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t2_as1_1",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T2 rising produced as T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0136,
+        "2": 0.1334,
+        "3": 0.2056,
+        "4": 0.2777
+      },
+      "margin": 0.1197,
+      "score": 59,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t2_as3_0",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": true,
+      "note": "target T2 rising produced as T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1869,
+        "2": 0.14,
+        "3": 0.0218,
+        "4": 0.4318
+      },
+      "margin": 0.1183,
+      "score": 57,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t2_as3_1",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": true,
+      "note": "target T2 rising produced as T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.19,
+        "2": 0.1445,
+        "3": 0.0215,
+        "4": 0.4333
+      },
+      "margin": 0.123,
+      "score": 56,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t2_as4_0",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": true,
+      "note": "target T2 rising produced as T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2991,
+        "2": 0.4357,
+        "3": 0.4766,
+        "4": 0.0311
+      },
+      "margin": 0.4046,
+      "score": 18,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t2_as4_1",
+      "band": "clean",
+      "target_tone": 2,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": true,
+      "note": "target T2 rising produced as T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2504,
+        "2": 0.3873,
+        "3": 0.4283,
+        "4": 0.0247
+      },
+      "margin": 0.3625,
+      "score": 21,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t3_as1_0",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T3 dipping produced as T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0137,
+        "2": 0.1471,
+        "3": 0.2092,
+        "4": 0.2644
+      },
+      "margin": 0.1956,
+      "score": 43,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t3_as1_1",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T3 dipping produced as T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0116,
+        "2": 0.1456,
+        "3": 0.212,
+        "4": 0.2653
+      },
+      "margin": 0.2004,
+      "score": 43,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t3_as2_0",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T3 dipping produced as T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1373,
+        "2": 0.0115,
+        "3": 0.1506,
+        "4": 0.4092
+      },
+      "margin": 0.1391,
+      "score": 55,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t3_as2_1",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T3 dipping produced as T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1499,
+        "2": 0.0165,
+        "3": 0.145,
+        "4": 0.4223
+      },
+      "margin": 0.1284,
+      "score": 56,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t3_as4_0",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": true,
+      "note": "target T3 dipping produced as T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2747,
+        "2": 0.4116,
+        "3": 0.4512,
+        "4": 0.007
+      },
+      "margin": 0.4442,
+      "score": 16,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t3_as4_1",
+      "band": "clean",
+      "target_tone": 3,
+      "produced_levels": [
+        5,
+        1
+      ],
+      "gold_wrong": true,
+      "note": "target T3 dipping produced as T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2306,
+        "2": 0.3677,
+        "3": 0.4071,
+        "4": 0.0443
+      },
+      "margin": 0.3628,
+      "score": 20,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t4_as1_0",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T4 falling produced as T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0211,
+        "2": 0.1574,
+        "3": 0.2137,
+        "4": 0.255
+      },
+      "margin": 0.2339,
+      "score": 36,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t4_as1_1",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T4 falling produced as T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.015,
+        "2": 0.1264,
+        "3": 0.1966,
+        "4": 0.2851
+      },
+      "margin": 0.2701,
+      "score": 32,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t4_as2_0",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T4 falling produced as T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1175,
+        "2": 0.025,
+        "3": 0.1454,
+        "4": 0.39
+      },
+      "margin": 0.365,
+      "score": 21,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t4_as2_1",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        3,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "target T4 falling produced as T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1503,
+        "2": 0.016,
+        "3": 0.1499,
+        "4": 0.4223
+      },
+      "margin": 0.4063,
+      "score": 18,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t4_as3_0",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": true,
+      "note": "target T4 falling produced as T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1819,
+        "2": 0.1417,
+        "3": 0.0286,
+        "4": 0.4244
+      },
+      "margin": 0.3957,
+      "score": 18,
+      "mismatch": true
+    },
+    {
+      "id": "clean_wrong_t4_as3_1",
+      "band": "clean",
+      "target_tone": 4,
+      "produced_levels": [
+        2,
+        1,
+        4
+      ],
+      "gold_wrong": true,
+      "note": "target T4 falling produced as T3 dipping",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1971,
+        "2": 0.1426,
+        "3": 0.0096,
+        "4": 0.4437
+      },
+      "margin": 0.4342,
+      "score": 17,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t1_0_0",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        4.3
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0852,
+        "2": 0.2225,
+        "3": 0.2715,
+        "4": 0.1895
+      },
+      "margin": 0.0,
+      "score": 71,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t1_0_1",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        4.3
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0489,
+        "2": 0.1842,
+        "3": 0.2461,
+        "4": 0.2267
+      },
+      "margin": 0.0,
+      "score": 82,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t1_1_0",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        4.8,
+        4.4
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.029,
+        "2": 0.1624,
+        "3": 0.2279,
+        "4": 0.2489
+      },
+      "margin": 0.0,
+      "score": 89,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t1_1_1",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        4.8,
+        4.4
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.076,
+        "2": 0.2107,
+        "3": 0.2463,
+        "4": 0.2084
+      },
+      "margin": 0.0,
+      "score": 74,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t1_2_0",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        4.1
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0713,
+        "2": 0.2083,
+        "3": 0.2596,
+        "4": 0.2032
+      },
+      "margin": 0.0,
+      "score": 75,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t1_2_1",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        5,
+        4.1
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T1 high-level",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0457,
+        "2": 0.1813,
+        "3": 0.2371,
+        "4": 0.2305
+      },
+      "margin": 0.0,
+      "score": 83,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t2_0_0",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        3,
+        4.3
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T2 rising",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0668,
+        "2": 0.076,
+        "3": 0.1525,
+        "4": 0.3387
+      },
+      "margin": 0.0092,
+      "score": 74,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t2_0_1",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        3,
+        4.3
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.0925,
+        "2": 0.0501,
+        "3": 0.1594,
+        "4": 0.3639
+      },
+      "margin": 0.0,
+      "score": 82,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t2_1_0",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        2.8,
+        4.4
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.0943,
+        "2": 0.046,
+        "3": 0.1589,
+        "4": 0.3659
+      },
+      "margin": 0.0,
+      "score": 83,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t2_1_1",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        2.8,
+        4.4
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.117,
+        "2": 0.0241,
+        "3": 0.137,
+        "4": 0.3902
+      },
+      "margin": 0.0,
+      "score": 91,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t2_2_0",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        3.2,
+        4.6
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1102,
+        "2": 0.0302,
+        "3": 0.1428,
+        "4": 0.3831
+      },
+      "margin": 0.0,
+      "score": 89,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t2_2_1",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        3.2,
+        4.6
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T2 rising",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0607,
+        "2": 0.0807,
+        "3": 0.1604,
+        "4": 0.3325
+      },
+      "margin": 0.02,
+      "score": 72,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t3_0_0",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        2.6,
+        1.6,
+        3.2
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T3 dipping",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0906,
+        "2": 0.1649,
+        "3": 0.153,
+        "4": 0.2984
+      },
+      "margin": 0.0625,
+      "score": 54,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t3_0_1",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        2.6,
+        1.6,
+        3.2
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T3 dipping",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0855,
+        "2": 0.147,
+        "3": 0.1421,
+        "4": 0.3114
+      },
+      "margin": 0.0566,
+      "score": 57,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t3_1_0",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        2.8,
+        2.0,
+        3.4
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T3 dipping",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0965,
+        "2": 0.126,
+        "3": 0.1136,
+        "4": 0.338
+      },
+      "margin": 0.0171,
+      "score": 63,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t3_1_1",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        2.8,
+        2.0,
+        3.4
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T3 dipping",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0705,
+        "2": 0.1206,
+        "3": 0.1356,
+        "4": 0.3199
+      },
+      "margin": 0.0651,
+      "score": 58,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t3_2_0",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        2.4,
+        1.5,
+        3.0
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T3 dipping",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0771,
+        "2": 0.1242,
+        "3": 0.1323,
+        "4": 0.3221
+      },
+      "margin": 0.0552,
+      "score": 59,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t3_2_1",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        2.4,
+        1.5,
+        3.0
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T3 dipping",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0904,
+        "2": 0.1274,
+        "3": 0.1211,
+        "4": 0.3315
+      },
+      "margin": 0.0307,
+      "score": 62,
+      "mismatch": true
+    },
+    {
+      "id": "bord_ok_t4_0_0",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        2.2
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.1808,
+        "2": 0.3184,
+        "3": 0.357,
+        "4": 0.0951
+      },
+      "margin": 0.0,
+      "score": 68,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t4_0_1",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        2.2
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.165,
+        "2": 0.3026,
+        "3": 0.3404,
+        "4": 0.111
+      },
+      "margin": 0.0,
+      "score": 64,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t4_1_0",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        4.8,
+        2.4
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.1614,
+        "2": 0.2982,
+        "3": 0.3428,
+        "4": 0.1138
+      },
+      "margin": 0.0,
+      "score": 63,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t4_1_1",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        4.8,
+        2.4
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.164,
+        "2": 0.3012,
+        "3": 0.3438,
+        "4": 0.1112
+      },
+      "margin": 0.0,
+      "score": 64,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t4_2_0",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        2.6
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.1573,
+        "2": 0.2939,
+        "3": 0.3417,
+        "4": 0.1178
+      },
+      "margin": 0.0,
+      "score": 62,
+      "mismatch": false
+    },
+    {
+      "id": "bord_ok_t4_2_1",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        5,
+        2.6
+      ],
+      "gold_wrong": false,
+      "note": "imperfect-but-acceptable T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.1544,
+        "2": 0.2916,
+        "3": 0.3354,
+        "4": 0.1198
+      },
+      "margin": 0.0,
+      "score": 62,
+      "mismatch": false
+    },
+    {
+      "id": "bord_wrong_t1_0_0",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        3.3,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "T1 high-level produced →T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1341,
+        "2": 0.0212,
+        "3": 0.1367,
+        "4": 0.4069
+      },
+      "margin": 0.1129,
+      "score": 58,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t1_0_1",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        3.3,
+        5
+      ],
+      "gold_wrong": true,
+      "note": "T1 high-level produced →T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1065,
+        "2": 0.0376,
+        "3": 0.1448,
+        "4": 0.3782
+      },
+      "margin": 0.0689,
+      "score": 65,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t1_1_0",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        3.6,
+        4.8
+      ],
+      "gold_wrong": true,
+      "note": "T1 high-level produced →T2 shallow-rise",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1071,
+        "2": 0.0329,
+        "3": 0.147,
+        "4": 0.38
+      },
+      "margin": 0.0742,
+      "score": 65,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t1_1_1",
+      "band": "borderline",
+      "target_tone": 1,
+      "produced_levels": [
+        3.6,
+        4.8
+      ],
+      "gold_wrong": true,
+      "note": "T1 high-level produced →T2 shallow-rise",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1008,
+        "2": 0.051,
+        "3": 0.1249,
+        "4": 0.3727
+      },
+      "margin": 0.0498,
+      "score": 67,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t2_0_0",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        3.9,
+        3.9
+      ],
+      "gold_wrong": true,
+      "note": "T2 rising produced →T1 flat, no rise",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0088,
+        "2": 0.1375,
+        "3": 0.2049,
+        "4": 0.2738
+      },
+      "margin": 0.1287,
+      "score": 58,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t2_0_1",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        3.9,
+        3.9
+      ],
+      "gold_wrong": true,
+      "note": "T2 rising produced →T1 flat, no rise",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0511,
+        "2": 0.093,
+        "3": 0.1571,
+        "4": 0.323
+      },
+      "margin": 0.0419,
+      "score": 69,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t2_1_0",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        2.3,
+        1.3,
+        4.0
+      ],
+      "gold_wrong": true,
+      "note": "T2 rising produced →T3 dip",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.184,
+        "2": 0.1202,
+        "3": 0.0244,
+        "4": 0.4384
+      },
+      "margin": 0.0958,
+      "score": 62,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t2_1_1",
+      "band": "borderline",
+      "target_tone": 2,
+      "produced_levels": [
+        2.3,
+        1.3,
+        4.0
+      ],
+      "gold_wrong": true,
+      "note": "T2 rising produced →T3 dip",
+      "voiced": true,
+      "predicted_tone": 3,
+      "dists": {
+        "1": 0.1697,
+        "2": 0.1369,
+        "3": 0.0403,
+        "4": 0.4119
+      },
+      "margin": 0.0966,
+      "score": 58,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t3_0_0",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        4.4,
+        1.4
+      ],
+      "gold_wrong": true,
+      "note": "T3 dipping produced →T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2056,
+        "2": 0.3429,
+        "3": 0.3782,
+        "4": 0.0755
+      },
+      "margin": 0.3027,
+      "score": 22,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t3_0_1",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        4.4,
+        1.4
+      ],
+      "gold_wrong": true,
+      "note": "T3 dipping produced →T4 falling",
+      "voiced": true,
+      "predicted_tone": 4,
+      "dists": {
+        "1": 0.2349,
+        "2": 0.3722,
+        "3": 0.4095,
+        "4": 0.0433
+      },
+      "margin": 0.3663,
+      "score": 19,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t3_1_0",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        2.3,
+        4.7
+      ],
+      "gold_wrong": true,
+      "note": "T3 dipping produced →T2 rising, no dip",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1384,
+        "2": 0.0271,
+        "3": 0.1686,
+        "4": 0.4074
+      },
+      "margin": 0.1415,
+      "score": 51,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t3_1_1",
+      "band": "borderline",
+      "target_tone": 3,
+      "produced_levels": [
+        2.3,
+        4.7
+      ],
+      "gold_wrong": true,
+      "note": "T3 dipping produced →T2 rising, no dip",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.1284,
+        "2": 0.0249,
+        "3": 0.1265,
+        "4": 0.4013
+      },
+      "margin": 0.1016,
+      "score": 60,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t4_0_0",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        4.5,
+        4.5
+      ],
+      "gold_wrong": true,
+      "note": "T4 falling produced →T1 flat, no fall",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0158,
+        "2": 0.1427,
+        "3": 0.1961,
+        "4": 0.2716
+      },
+      "margin": 0.2558,
+      "score": 34,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t4_0_1",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        4.5,
+        4.5
+      ],
+      "gold_wrong": true,
+      "note": "T4 falling produced →T1 flat, no fall",
+      "voiced": true,
+      "predicted_tone": 1,
+      "dists": {
+        "1": 0.0137,
+        "2": 0.1323,
+        "3": 0.1945,
+        "4": 0.2802
+      },
+      "margin": 0.2666,
+      "score": 33,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t4_1_0",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        3.1,
+        4.7
+      ],
+      "gold_wrong": true,
+      "note": "T4 falling produced →T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.0943,
+        "2": 0.0476,
+        "3": 0.1403,
+        "4": 0.3674
+      },
+      "margin": 0.3198,
+      "score": 23,
+      "mismatch": true
+    },
+    {
+      "id": "bord_wrong_t4_1_1",
+      "band": "borderline",
+      "target_tone": 4,
+      "produced_levels": [
+        3.1,
+        4.7
+      ],
+      "gold_wrong": true,
+      "note": "T4 falling produced →T2 rising",
+      "voiced": true,
+      "predicted_tone": 2,
+      "dists": {
+        "1": 0.0734,
+        "2": 0.0671,
+        "3": 0.1516,
+        "4": 0.3463
+      },
+      "margin": 0.2792,
+      "score": 25,
+      "mismatch": true
+    }
+  ]
+}

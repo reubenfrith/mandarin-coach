@@ -22,9 +22,18 @@ from web_api import require_user
 router = APIRouter()
 
 # Below this score a *correctly-labelled* syllable is flagged "weak" for the UI but NOT
-# logged as an error — pre-calibration we only auto-log unambiguous wrong-tone cases, to
-# keep the corpus clean (see plan: eval/calibrate before trusting the threshold).
+# logged as an error (a UI-only nudge, never a corpus write).
 WEAK_SCORE = 60
+
+# Confidence gate on auto-logging a wrong-tone error. `assess` reports a per-syllable
+# `margin` = how much better the predicted (wrong) tone fits than the target; we only log
+# when that margin clears LOG_MARGIN, so an ambiguous near-miss (a shallow-but-real T2/T3
+# that flips to flat T1) never poisons the corpus. Calibrated on the labeled set in
+# evals/surfaces/tone_assessment_eval.py: at margin 0 (log on any mismatch) precision was
+# 0.83 (8/48 borderline logs were false); this gate lifts it to 1.00 at 0.95 recall. The
+# value is the midpoint of the empirical gap between the worst false-positive and the
+# nearest true-positive margin (0.0651–0.0689). Re-run the eval to recalibrate.
+LOG_MARGIN = 0.067
 
 
 def _log_tone_error(user_id: str, syl: dict, verdict: dict) -> dict:
@@ -115,8 +124,11 @@ async def assess(
         v = per[i] if i < len(per) else None
         if v:
             s["predicted_tone"], s["score"], s["ok"] = v["predicted_tone"], v["score"], v["ok"]
+            s["margin"] = v.get("margin")  # wrong-tone confidence; drives the log gate below
             s["weak"] = bool(v["ok"] and v["score"] < WEAK_SCORE)
-            if not v["ok"]:
+            # Log only a CONFIDENT wrong-tone call (calibrated gate) — protects the corpus
+            # from ambiguous near-misses. A flagged-but-unlogged miss still shows in the UI.
+            if not v["ok"] and v.get("margin", 0.0) >= LOG_MARGIN:
                 logged.append(_log_tone_error(user_id, s, v))
         else:
             s["predicted_tone"], s["score"], s["ok"], s["weak"] = None, None, None, False

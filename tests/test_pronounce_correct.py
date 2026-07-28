@@ -76,5 +76,10 @@ def main():
     print("\nAll pronounce-correct checks passed.")
 
 
+def test_pronounce_correct():
+    """pytest entry point — runs the full check sequence (see conftest.py)."""
+    main()
+
+
 if __name__ == "__main__":
     main()

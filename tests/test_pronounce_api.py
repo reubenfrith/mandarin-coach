@@ -81,6 +81,20 @@ def main():
         # It landed in the SAME corpus under category 'tones'.
         stats = c.get("/api/stats").json()
         check("corpus now has a 'tones' error", stats["total"] >= 1 and "tones" in stats["by_category"])
+        tones_before = stats["by_category"]["tones"]
+
+        # THE GATE: a shallow-dip T3 on 好 (hǎo, T3) that the classifier flips to flat T1 —
+        # a wrong LABEL but a low-confidence near-miss (margin < LOG_MARGIN). It must be
+        # flagged not-ok for the UI yet NOT written to the corpus (calibrated in
+        # evals/surfaces/tone_assessment_eval.py). Protects against false-positive logs.
+        r = c.post("/api/pronounce/assess", files={"audio": ("a.wav", wav([2.8, 2.0, 3.4], seed=0), "audio/wav")},
+                   data={"target": "好"}).json()
+        syl = r["syllables"][0]
+        check("borderline T3 flips label (not ok) but low margin", syl["ok"] is False and syl["margin"] < 0.067)
+        check("  ...UI still flags it", syl["predicted_tone"] is not None)
+        check("  ...but the gate suppresses the corpus write", r["logged"] == [])
+        stats2 = c.get("/api/stats").json()
+        check("  ...corpus 'tones' count unchanged", stats2["by_category"].get("tones", 0) == tones_before)
 
         # Multi-syllable 你好 -> whole-melody score, no per-syllable verdict in v1.
         r = c.post("/api/pronounce/assess", files={"audio": ("a.wav", wav([2, 1, 4], seed=3), "audio/wav")},
@@ -90,6 +104,11 @@ def main():
         check("  ...with a Phase-2 note", "Phase 2" in r["note"])
 
     print("\nAll pronounce-API checks passed.")
+
+
+def test_pronounce_api():
+    """pytest entry point — runs the full check sequence (see conftest.py)."""
+    main()
 
 
 if __name__ == "__main__":
