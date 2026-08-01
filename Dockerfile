@@ -1,4 +1,4 @@
-# Mandarin Coach — Chainlit agent app.
+# Mandarin Coach — FastAPI app (custom single-page UI + voice/pronounce/coach APIs).
 # uv-based build; dependencies cached separately from app code.
 FROM python:3.12-slim
 
@@ -22,5 +22,5 @@ COPY data/ ./data/
 ENV PATH="/app/.venv/bin:$PATH"
 EXPOSE 8000
 
-# Single process: FastAPI (voice UI + APIs) mounting the Chainlit text coach at "/".
+# Single process: FastAPI serving the static UI at "/" plus the voice/pronounce/coach APIs.
 CMD ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]
