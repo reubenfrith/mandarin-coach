@@ -130,37 +130,57 @@ can absorb the latency.
   could show a phantom fix/regression. Regenerate the baseline as majority-of-3 before trusting
   any mixed-path delta.
 
-## Implemented: the tuned heuristic (before/after)
+## Implemented: the tuned heuristic
 
 We replaced the two blunt rules with a **fast-path-the-unambiguous** heuristic (`_heuristic_route`
 in `app/voice_api.py`): a plain Mandarin **statement**, a short English aside (≤ 2 words), and an
 empty turn resolve instantly to converse; **Mandarin questions** (吗/什么/为什么/怎么/呢/？…),
-**longer English**, and **mixed script** go to the classifier. Before/after on this surface:
+**longer English**, and **mixed script** go to the classifier.
 
-| Metric | Original router | **Tuned heuristic** | Classify-always (ceiling) |
-|---|---|---|---|
-| Coach precision | 0.72 | **1.00** | 0.95 |
-| Converse→coach misroute | 0.23 | **0.00** | 0.045 |
-| Accuracy | 0.75 | **1.00** | 0.975 |
+**The durable claim (dataset-independent).** Under this router the heuristic *never returns coach* —
+it returns converse or defers to the classifier. So a plain Mandarin statement can no longer be
+force-routed into an English lecture by a blunt rule; **every coach verdict now comes from the
+classifier**, which the classify-always arm showed is reliable on exactly these turns. That is a
+real worst-case improvement, independent of any test set — and it's the claim to lean on.
 
-- **Tuned = 1.00 across 3 runs** (stable — the classifier-resolved turns didn't flip). It even
-  edges out classify-always, because the empty guard catches `？？？` (classify-always's lone regression).
-- **Re-running `--classify-always` against the tuned router now shows fixed 0, regressed 1.** So
-  classifying every turn no longer helps and is strictly *worse* (regresses `？？？`, +0.8 s on every
-  turn). The tuned heuristic **dominates**: equal-or-better accuracy at a fraction of the classifier calls.
-- **Routes 24/40 to the classifier on THIS set, 16/40 on the heuristic** — but the set is adversarially
-  dense with questions/English/mixed. In real traffic plain-Mandarin **statements** dominate, so the
-  heuristic share is much higher and the ~0.8 s call lands only when the surface form is genuinely
-  ambiguous. That is the whole point.
+### The 1.00 is an in-sample FIT, not a generalization estimate
 
-### Caveats on the 1.00
+On this surface the tuned router scores 1.00 (3 runs stable) vs the original router's 0.75. **Do not
+read that as a measured improvement** — two circularities:
+
+- **Train-on-test.** The heuristic's parameters were *fit to these 40 cases*: `_ENGLISH_GLUE_MAX_WORDS
+  = 2` because the glue cases are ≤2 words; `_ZH_QUESTION_MARKERS` contains exactly the markers that
+  catch m11–m15. Scoring fitted rules on the points they were fit to makes 1.00 near-automatic — it
+  shows the rules *can* separate these 40, not that they generalize. (Same "saturates by construction"
+  trap as the pure buckets, one level up: there the labels agreed with the heuristic; here the
+  heuristic was fit to the labels.)
+- **Non-comparable footing.** The set was built adversarial to the *old* router, then the *new* router
+  was fit to it. Before and after aren't measured on equal ground.
+
+So the honest reading is **not** "tuned (1.00) beats classify-always (0.975)". Backwards:
+**classify-always is the *less* circular number** — the classifier's parameters were never fit to
+these 40 — so it's the more trustworthy accuracy estimate. Tuned **matches classify-always within
+noise**, while additionally fitting the one case it missed (`？？？`). Beating it there is *fitting*,
+not winning. (Re-running `--classify-always` vs the tuned router shows fixed 0 / regressed 1 — read as
+"the two agree except on the case the heuristic was fit to", not "tuned dominates".)
+
+**Out-of-sample accuracy is UNKNOWN** until the in-browser mic check below — that is the real
+generalization test. What holds *without* a test set is the structural claim above.
+
+### Other caveats
 
 - **n=40, our labels, incl. the 4 contestable proper-noun turns** (Finding 3): the classifier routes
-  them to converse, matching our labels but *deviating from the deployed prompt*. Under the prompt's
-  own rule (code-switch → coach) those 4 would be FN, dropping accuracy to ~0.90 — but **coach
-  precision stays 1.00 either way** (no FP). So "perfect" rests partly on a labelling choice; resolve
-  the proper-noun policy to make it unconditional.
-- **The classifier-resolved turns are nondeterministic** (temp 0.2); 3× stable here is decent, not proof.
+  them to converse, matching our labels but deviating from the deployed prompt. Under the prompt's own
+  rule those 4 are FN → accuracy ~0.90; **coach precision stays 1.00 either way** (no FP).
+- **Classifier-resolved turns are nondeterministic** (temp 0.2); 3× stable is decent, not proof.
+- **Marker matching over-triggers on some statements** — 几 in 几乎/好几, 怎么 in 不怎么 ("not
+  really…") send a *statement* to the classifier. That's **latency, not a misroute** (the classifier
+  returns converse), which is exactly why imperfect generalization here degrades gracefully instead of
+  jarring — evidence the design is *safe*, not a bug. Tighten the markers only if real traffic shows the
+  latency cost.
+- **Latency mix on THIS set: 24/40 hit the classifier, 16/40 the heuristic** — but the set is
+  adversarially dense with questions/English/mixed. Real traffic skews to plain-Mandarin statements, so
+  the heuristic share is higher; the point is only that the ~0.8 s call lands when the form is ambiguous.
 
 ## Follow-on changes (tracked)
 
