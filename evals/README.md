@@ -11,11 +11,11 @@ this file is the **map of the folder** — what each file is and how the pieces 
 evals/
   lib/        shared modules, imported not run   (_env.py, llm_judge.py, agg_parse.py)
   datagen/    dataset builders + frozen data     (seed_data.py, generate_*.py, *.json)
-  surfaces/   11 runnable evaluations, grouped by the product surface they exercise:
+  surfaces/   12 runnable evaluations, grouped by the product surface they exercise:
     text_coach/     the agent + RAG + tools    preflight_typec, eval_harness, ragas_rag, ragas_agentic,
                                                extraction_eval, retrieval_sweep, coverage_check, model_bakeoff
     voice_coach/    router + coach quality     voice_intent_eval, voice_coach_quality
-    pronunciation/  the tone coach             tone_assessment_eval
+    pronunciation/  tone coach + pīnyīn ruby   tone_assessment_eval, pinyin_eval
   results/    every surface's output + its own README (verification recipes)
   notes/      findings + decision records that span runs (e.g. voice-router-findings.md)
 ```
@@ -65,6 +65,8 @@ The three **Task 6** surfaces (`retrieval_sweep`, `coverage_check`, `model_bakeo
 | `extraction_dataset.json` | Frozen ground truth for the extraction surface. |
 | `generate_voice_coach_dataset.py` | Builds `voice_coach_dataset.json`: 20 hand-authored spoken-coach turns (6 sentence_coach · 6 question · 4 referential · 4 garbled), each with an EXPECTATION rubric the judge scores against. No LLM. |
 | `voice_coach_dataset.json` | Frozen gold set for the voice-coach quality surface. |
+| `generate_pinyin_dataset.py` | Builds `pinyin_dataset.json`: 102 hand-authored pīnyīn golds for the ruby surface, bucketed by phenomenon (一/不 sandhi · grammatical 地/得 · bisyllabic T3 · reduplication · lexical-polyphone control · 3+ T3 and 儿化 carried-but-unscored). Gold authored from ground-truth probes; prints a gold-vs-pypinyin diff as a typo guard. No LLM. |
+| `pinyin_dataset.json` | Frozen gold set for the pīnyīn-accuracy surface. |
 
 ### `surfaces/` — the runnable evaluations (each writes into `results/`)
 
@@ -96,6 +98,7 @@ scope (Tasks 5–6); **voice coach** and **pronunciation** are the product exten
 | File | What it measures | Writes |
 |---|---|---|
 | `tone_assessment_eval.py` | The pronunciation coach's corpus writer (`_log_tone_error`): precision/recall of the wrong-tone log predicate, swept over a confidence-margin gate to set `LOG_MARGIN`. Precision is the headline (a false positive logs a correctly-said syllable). Fully local DSP (pYIN), deterministic. | `results/tone_assessment.{md,json}` |
+| `pinyin_eval.py` | The learner-facing pīnyīn ruby (`pinyin_segments` / `_tone_pinyin`, pypinyin `Style.TONE`): is the tone printed under each hanzi the one to say? Headline = **inconsistency** — pypinyin applies 一/不 sandhi to only 12/36 syllables, scattered within each sub-rule (defect under any convention), and misreads grammatical 地/得 as dì/dé (9/10). Bisyllabic T3 (0/18) is reported as a *coverage gap under the citation-vs-spoken product choice*, not a defect. Quantifies what pypinyin's own `ToneSandhiMixin` recovers (partial: 22/36 sandhi, 0 extra neutral). Control (lexical polyphones) = 12/12 sanity floor. Fully deterministic, no LLM. Findings in [`notes/pinyin-accuracy-findings.md`](notes/pinyin-accuracy-findings.md). | `results/pinyin_accuracy.{md,json}` |
 
 **Results** — `results/` holds the output of every surface. **Start at
 [`results/README.md`](results/README.md)**: it indexes all surfaces and gives copy-paste
@@ -145,6 +148,11 @@ uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py --verify-ju
 # 5. Pronunciation coach (tone auto-logging gate) — fully local DSP, no model calls
 uv run python evals/datagen/generate_tone_dataset.py                                    # build the synthetic tone recipe set
 uv run python evals/surfaces/pronunciation/tone_assessment_eval.py                      # tone log precision/recall + LOG_MARGIN gate (80)
+
+# 6. Pīnyīn ruby accuracy (sandhi / neutral-tone gap) — fully deterministic, no model calls
+uv run python evals/datagen/generate_pinyin_dataset.py                                  # build the 102-case gold set (prints a typo-guard diff)
+uv run python evals/surfaces/pronunciation/pinyin_eval.py                               # 一/不 sandhi consistency + 地/得 + T3 coverage (93 scored)
+uv run python evals/surfaces/pronunciation/pinyin_eval.py --from-rows                   # re-aggregate saved rows, no recompute
 ```
 
 ## Methodology notes (decisions made during the build)
