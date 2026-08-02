@@ -66,3 +66,40 @@ def test_summarise_empty_is_safe():
     assert s["confusion_matrix"] == {"TP": 0, "FP": 0, "FN": 0, "TN": 0}
     assert s["coach_precision"] is None
     assert s["accuracy"] is None
+
+
+def test_head_to_head_fixed_and_regressed():
+    # coach = positive. Router: a02 misrouted (FP), b01 correct (TN). Classify-always: a02 now
+    # correct (TN) = FIXED; b01 now misrouted (FP) = REGRESSED.
+    router = [
+        {"id": "a02", "outcome": "FP", "resolved_by": "heuristic"},
+        {"id": "b01", "outcome": "TN", "resolved_by": "heuristic"},
+        {"id": "c03", "outcome": "TP", "resolved_by": "classifier"},
+    ]
+    ca = [
+        {"id": "a02", "text": "and you?", "bucket": "english", "outcome": "TN", "note": None},
+        {"id": "b01", "text": "…", "bucket": "empty", "outcome": "FP", "note": "no content"},
+        {"id": "c03", "text": "why 把?", "bucket": "mixed", "outcome": "TP", "note": None},
+    ]
+    h = vie.head_to_head(ca, router)
+    assert h["fixed_n"] == 1 and h["fixed"][0]["id"] == "a02"
+    assert h["regressed_n"] == 1 and h["regressed"][0]["id"] == "b01"
+    assert h["both_right"] == 1  # c03
+    assert h["n_compared"] == 3
+
+
+def test_spread_over_runs_reports_band_and_instability():
+    # Two turns, 3 votes each. t1 always coach (gold coach) → always TP. t2 votes
+    # [converse, coach, converse] (gold converse) → run 1 TN, run 2 FP, run 3 TN: unstable.
+    rows = [
+        {"id": "t1", "bucket": "mixed", "gold_intent": "coach", "resolved_by": "classifier",
+         "votes": ["coach", "coach", "coach"], "stable": True},
+        {"id": "t2", "bucket": "mixed", "gold_intent": "converse", "resolved_by": "classifier",
+         "votes": ["converse", "coach", "converse"], "stable": False},
+    ]
+    sp = vie.spread_over_runs(rows, repeats=3)
+    assert sp["n_unstable"] == 1 and sp["unstable_ids"] == ["t2"]
+    # run 2 has an FP (t2), so coach precision dips that run → min < max
+    assert sp["coach_precision"]["min"] < sp["coach_precision"]["max"]
+    # accuracy: runs 1 & 3 perfect (1.0), run 2 has the FP (0.5) → mean between
+    assert sp["accuracy"]["min"] == 0.5 and sp["accuracy"]["max"] == 1.0

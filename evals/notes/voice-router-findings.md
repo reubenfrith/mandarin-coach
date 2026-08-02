@@ -69,54 +69,63 @@ carve-out in the prompt** — not a claim the classifier is already correct.
 
 ---
 
-## Open question: "should we just use the classifier for every turn?"
+## Resolved with data: "should we just use the classifier for every turn?"
 
-Tempting read of Finding 1: the heuristic causes 100% of the errors, so drop it and classify
-everything. **On the current evidence this is not a fair conclusion.**
+We ran the **classify-always arm** — `classify_turn_intent` over **all 40** turns, skipping the
+heuristic, each turn classified 3× (temp 0.2 is nondeterministic). Command:
+`voice_intent_eval.py --classify-always --repeats 3`; results in
+`results/voice_intent_classify_always.md`. Outcome vs the production router:
 
-**Why the evidence doesn't support it.** The eval never ran the classifier on the 30
-heuristic-resolved turns — the English glue and the Mandarin questions. "The classifier would
-fix those" is an untested extrapolation from 10 cases (6 uncontested). It's a *plausible*
-hypothesis (the prompt literally lists "and you?" as converse), but a hypothesis, not a result.
+| Metric | Router (heuristic+classifier) | Classify-always | Δ |
+|---|---|---|---|
+| Coach precision | 0.72 | **0.95** | +0.23 |
+| Converse→coach misroute | 0.23 | **0.045** | −0.18 |
+| Accuracy | 0.75 | **0.975** | +0.23 |
 
-**Why it's probably the wrong design even if it scored well.**
+Per-turn head-to-head: **fixed 10, regressed 1, 0 unstable** across the 3 runs.
 
-- **Latency is the whole reason the heuristic exists.** It resolves 75% of turns with zero LLM
-  round-trip. Classify-always taxes *every* turn — including the overwhelmingly common
-  plain-Mandarin conversation turn — with a classifier call, on a pipeline the plan fought to
-  keep fast (someone is holding a mic).
-- **It could *increase* the jarring failure on the common path.** On plain Mandarin the
-  heuristic is a guaranteed-correct, instant "converse". Handing those to a nondeterministic
-  temp-0.2 LLM introduces a nonzero chance of misrouting normal chat to an English lecture —
-  where today that chance is exactly zero.
-- **The classifier has failure modes the heuristic doesn't** — timeouts / malformed output
-  (it falls back to converse on error). Fine as a tiebreaker; wasteful and riskier as the
-  sole router.
+- It **fixed all 10** heuristic misroutes — the 5 English-glue FPs ("and you?", "me too") *and*
+  the 5 Mandarin-question FNs ("这个词是什么意思？"). So Finding 1's hypothesis (the classifier
+  would handle the turns the heuristic fumbles) is now **supported**, not extrapolated.
+- It **regressed exactly 1**: `z02` = `？？？` (punctuation only), which the classifier reads as a
+  question and sends to coach. The heuristic correctly routes no-content turns to converse.
+- **0 turns were unstable** — every turn voted identically across 3 runs. The temp-0.2
+  nondeterminism worry (Finding 2) was real in principle but did not bite on these 40 turns.
 
-**The better-supported move** is not "nuke the heuristic" but "widen *when the classifier
-fires*": carve short English affirmations/glue out of `Latin→coach`, and escalate Han-only
-turns that look interrogative (吗 / 什么 / 为什么 / 怎么 / 呢 / ？) to the classifier instead of
-auto-converse. That keeps the latency win on the easy ~90% and spends the LLM call only on the
-genuinely ambiguous turns.
+**So on ACCURACY, classify-most clearly wins.** The two blunt script rules (`Latin→coach`,
+`Han→converse`) cost more than they save. The decision is no longer "is the classifier good
+enough" — it is now purely a **latency/cost** question this surface cannot measure.
 
-## How we'll actually settle it — the "classify-always" arm (planned)
+### What the evidence does NOT settle
 
-Add a second arm to `voice_intent_eval` that runs `classify_turn_intent` over **all 40** turns
-(ignoring the heuristic) and compare against the current router. It's ~40 cheap calls and turns
-the hypothesis into evidence. Decision rule:
+- **Latency is unmeasured here.** Classify-always puts an LLM call (temp 0.2) on the critical
+  path of *every* spoken turn, including the overwhelmingly common plain-Mandarin conversation
+  turn the heuristic resolves in ~0 ms. On a mic-held pipeline the plan fought to keep fast,
+  that per-turn cost is the real tradeoff — weigh it before adopting.
+- **Scope: n=40, one dataset, our labels** — including the 4 contestable proper-noun labels
+  (Finding 3), which classify-always also benefits from. But the core result is robust to them:
+  the 10 fixes are all unambiguous, and only `？？？` regresses.
+- **Stability is measured on 3 runs.** More repeats could surface some; 3× identical is decent
+  but not proof of determinism at temp 0.2.
 
-- **classify-always wins big on accuracy AND per-turn latency is tolerable** → reconsider the
-  architecture.
-- **it merely ties a tuned-heuristic path** → latency breaks the tie; keep the heuristic and
-  apply the two targeted fixes above.
+### Recommended design (harness-evidenced)
 
-Because the classifier is nondeterministic, run the arm a few times (or pin `temperature=0`
-for the eval) and report the spread, not a single number.
+Two viable paths; pick on the latency budget:
+
+1. **Classify-most** (if an LLM call per turn is affordable): keep a trivial **empty/no-content
+   guard → converse** (it's the only thing classify-always got wrong), drop the two script
+   rules, classify everything else. Best accuracy.
+2. **Tuned heuristic** (if plain-Mandarin turns must stay LLM-free): apply the two targeted
+   fixes below. They target *exactly* the 10 cases classify-always fixed, so the data predicts
+   they recover most of the gain without taxing every turn — but that's a prediction to verify
+   with its own before/after run, not a measured result.
 
 ## Follow-on changes (tracked, harness-evidenced by this surface)
 
-1. **Heuristic refinement** — short English affirmations → converse; interrogative Han-only
-   turns → classifier. Re-run this surface before/after; the before is `results/voice_intent.md`.
-2. **Proper-noun policy** — decide whether proper nouns stay in conversation; if yes, add the
-   prompt carve-out (Finding 3).
-3. **classify-always arm** — the experiment above, to answer the open question with data.
+1. **Decide the latency budget**, then pick path 1 or 2 above.
+2. **Heuristic refinement (path 2)** — short English affirmations → converse; interrogative
+   Han-only turns (吗/什么/为什么/怎么/呢/？) → classifier; keep the empty guard. Re-run this
+   surface before/after; the before is `results/voice_intent.md`.
+3. **Proper-noun policy** — decide whether proper nouns stay in conversation; if yes, add the
+   prompt carve-out (Finding 3). Affects both paths (the classifier currently keeps them in
+   converse, deviating from its prompt).

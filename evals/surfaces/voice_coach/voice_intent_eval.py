@@ -26,8 +26,15 @@ down PER BUCKET so the heuristic's error and the classifier's error never blur t
 The manual `mode` override (converse|coach short-circuits the router) is deterministic and
 covered by tests/test_voice_router.py; this surface measures the interesting `auto` path.
 
-Run:  EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_intent_eval.py
-      uv run python evals/surfaces/voice_intent_eval.py --from-rows   # re-aggregate, no calls
+`--classify-always` runs the COUNTERFACTUAL arm: skip the heuristic, send every turn to the
+classifier (each `--repeats` times, since temp 0.2 is nondeterministic), and compare against the
+router baseline — which of its misroutes are fixed, which turns regress, and the metric spread
+across runs. Writes results/voice_intent_classify_always.{md,json}. Answers "should we just
+classify everything?" with data; see notes/voice-router-findings.md for the verdict.
+
+Run:  EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_coach/voice_intent_eval.py
+      uv run python evals/surfaces/voice_coach/voice_intent_eval.py --from-rows          # re-aggregate, no calls
+      EVAL_CONCURRENCY=6 uv run python evals/surfaces/voice_coach/voice_intent_eval.py --classify-always --repeats 3
 Prereq: datagen/voice_intent_dataset.json (build with generate_voice_intent_dataset.py).
 """
 import pathlib
@@ -85,6 +92,102 @@ async def eval_case(case: dict) -> dict:
         "outcome": outcome(case["gold_intent"], pred),
         "note": case.get("note"),
         "bucket_mismatch": bucket_mismatch,
+    }
+
+
+# --------------------------------------------------------------------------- #
+# Classify-always arm — the counterfactual: skip the heuristic and send EVERY
+# turn to the LLM classifier. Answers "should we just classify everything?" with
+# data instead of hand-waving. The classifier is nondeterministic (production
+# temp 0.2), so each turn is classified `repeats` times; the majority vote is the
+# pred (ties → converse, matching the router's converse bias) and the per-run
+# votes are kept so the metric SPREAD across runs is reportable, not a single
+# fragile number.
+# --------------------------------------------------------------------------- #
+async def classify_always_case(case: dict, repeats: int) -> dict:
+    text = case["text"]
+    votes = []
+    for _ in range(repeats):
+        votes.append(await voice_api.classify_turn_intent(text))
+    coach_votes = sum(1 for v in votes if v == "coach")
+    majority = "coach" if coach_votes * 2 > repeats else "converse"  # tie → converse (bias)
+    return {
+        "id": case["id"],
+        "text": text,
+        "bucket": case["bucket"],
+        "gold_intent": case["gold_intent"],
+        "pred_intent": majority,
+        "resolved_by": "classifier",
+        "outcome": outcome(case["gold_intent"], majority),
+        "note": case.get("note"),
+        "bucket_mismatch": None,
+        "votes": votes,
+        "coach_votes": coach_votes,
+        "stable": len(set(votes)) == 1,
+    }
+
+
+def spread_over_runs(rows: list[dict], repeats: int) -> dict:
+    """Recompute the headline metrics for each independent run k (using vote k per turn),
+    so the report shows min/mean/max instead of pretending the classifier is deterministic."""
+    per_run = []
+    for k in range(repeats):
+        synth = [
+            {**r, "pred_intent": r["votes"][k], "outcome": outcome(r["gold_intent"], r["votes"][k])}
+            for r in rows if r.get("votes") and len(r["votes"]) > k
+        ]
+        s = summarise(synth)
+        per_run.append({
+            "coach_precision": s["coach_precision"],
+            "misroute": s["converse_to_coach_misroute_rate"],
+            "accuracy": s["accuracy"],
+        })
+
+    def _stat(key):
+        vals = [r[key] for r in per_run if r[key] is not None]
+        if not vals:
+            return None
+        return {"min": min(vals), "mean": sum(vals) / len(vals), "max": max(vals)}
+
+    return {
+        "repeats": repeats,
+        "coach_precision": _stat("coach_precision"),
+        "misroute": _stat("misroute"),
+        "accuracy": _stat("accuracy"),
+        "n_unstable": sum(1 for r in rows if not r.get("stable", True)),
+        "unstable_ids": [r["id"] for r in rows if not r.get("stable", True)],
+    }
+
+
+def head_to_head(ca_rows: list[dict], router_rows: list[dict]) -> dict:
+    """Compare classify-always (majority) against the saved router baseline, per turn. The
+    decisive numbers: which of the router's misroutes does classify-always FIX, and does it
+    REGRESS any turn the router already got right (the cost of taxing every turn with an LLM)."""
+    router_by_id = {r["id"]: r for r in router_rows}
+    ok = lambda o: o in ("TP", "TN")  # noqa: E731
+    fixed, regressed = [], []
+    both_right = both_wrong = 0
+    for ca in ca_rows:
+        rr = router_by_id.get(ca["id"])
+        if rr is None:
+            continue
+        r_ok, c_ok = ok(rr["outcome"]), ok(ca["outcome"])
+        if r_ok and c_ok:
+            both_right += 1
+        elif not r_ok and not c_ok:
+            both_wrong += 1
+        elif not r_ok and c_ok:
+            fixed.append({"id": ca["id"], "text": ca["text"], "bucket": ca["bucket"],
+                          "router": rr["outcome"], "classify_always": ca["outcome"]})
+        else:  # router right, classify-always wrong → a regression the heuristic prevented
+            regressed.append({"id": ca["id"], "text": ca["text"], "bucket": ca["bucket"],
+                              "router_resolved_by": rr["resolved_by"], "outcome": ca["outcome"],
+                              "note": ca.get("note")})
+    return {
+        "n_compared": both_right + both_wrong + len(fixed) + len(regressed),
+        "fixed_n": len(fixed), "regressed_n": len(regressed),
+        "both_right": both_right, "both_wrong": both_wrong,
+        "fixed": fixed, "regressed": regressed,
     }
 
 
@@ -266,12 +369,174 @@ def render_md(summary: dict, rows: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def render_classify_always_md(summary, rows, spread, h2h, router_summary) -> str:
+    cm = summary["confusion_matrix"]
+
+    def pct(x):
+        return "—" if x is None else f"{x:.3f}"
+
+    def band(stat):
+        if not stat:
+            return "—"
+        return f"{stat['mean']:.3f} (min {stat['min']:.3f} / max {stat['max']:.3f})"
+
+    lines = [
+        "# Voice router — classify-always arm",
+        "",
+        f"Counterfactual: skip the script heuristic and send **every** turn to the LLM classifier "
+        f"({summary['model']}). Answers \"should we just classify everything?\". Each of the "
+        f"{summary['n_cases']} turns is classified **{spread['repeats']}×** (classifier temp 0.2 is "
+        "nondeterministic); the majority vote is the pred and the spread across runs is reported.",
+        "",
+        "## Classify-always vs the production router (majority vote)",
+        "",
+        "| Metric | Router (heuristic+classifier) | Classify-always | Δ |",
+        "|---|---|---|---|",
+    ]
+    if router_summary:
+        def delta(a, b):
+            if a is None or b is None:
+                return "—"
+            d = b - a
+            return f"{d:+.3f}"
+        lines += [
+            f"| Coach precision (headline) | {pct(router_summary['coach_precision'])} | "
+            f"{pct(summary['coach_precision'])} | {delta(router_summary['coach_precision'], summary['coach_precision'])} |",
+            f"| Converse→coach misroute | {pct(router_summary['converse_to_coach_misroute_rate'])} | "
+            f"{pct(summary['converse_to_coach_misroute_rate'])} | "
+            f"{delta(router_summary['converse_to_coach_misroute_rate'], summary['converse_to_coach_misroute_rate'])} |",
+            f"| Accuracy | {pct(router_summary['accuracy'])} | {pct(summary['accuracy'])} | "
+            f"{delta(router_summary['accuracy'], summary['accuracy'])} |",
+        ]
+    else:
+        lines.append("| _(router baseline voice_intent.json not found — run the default arm first)_ ||||")
+    lines += [
+        "",
+        f"Classify-always confusion (coach = positive): TP {cm['TP']} FP {cm['FP']} FN {cm['FN']} TN {cm['TN']}.",
+        "",
+        "## Spread across runs (the classifier is nondeterministic)",
+        "",
+        f"- Coach precision: **{band(spread['coach_precision'])}**",
+        f"- Converse→coach misroute: {band(spread['misroute'])}",
+        f"- Accuracy: {band(spread['accuracy'])}",
+        f"- Unstable turns (votes disagreed across the {spread['repeats']} runs): "
+        f"**{spread['n_unstable']}**"
+        + (f" — {', '.join(spread['unstable_ids'])}" if spread["unstable_ids"] else ""),
+        "",
+        "## Head-to-head vs the router (per turn)",
+        "",
+    ]
+    if h2h:
+        lines += [
+            f"- **Fixed** (router misrouted → classify-always correct): **{h2h['fixed_n']}**",
+            f"- **Regressed** (router correct → classify-always misrouted — the cost of taxing "
+            f"every turn with a nondeterministic LLM): **{h2h['regressed_n']}**",
+            f"- Both right: {h2h['both_right']} · both wrong: {h2h['both_wrong']} "
+            f"(of {h2h['n_compared']} compared)",
+            "",
+        ]
+        if h2h["fixed"]:
+            lines += ["### Fixed by classify-always", ""]
+            for r in h2h["fixed"]:
+                lines.append(f"- `{r['id']}` ({r['bucket']}): `{r['text']}` — router {r['router']} → "
+                             f"classify-always {r['classify_always']}")
+            lines.append("")
+        if h2h["regressed"]:
+            lines += ["### Regressed (the heuristic was protecting these)", ""]
+            for r in h2h["regressed"]:
+                note = f" · _{r['note']}_" if r.get("note") else ""
+                lines.append(f"- `{r['id']}` ({r['bucket']}, router path: {r['router_resolved_by']}): "
+                             f"`{r['text']}` → {r['outcome']}{note}")
+            lines.append("")
+    else:
+        lines += ["_(no router baseline to compare against)_", ""]
+    lines += [
+        "## Read this with the latency caveat",
+        "",
+        "This surface measures **accuracy only**. Classify-always also puts an LLM call (temp 0.2, "
+        "nondeterministic) on the critical path of *every* spoken turn — including the plain-Mandarin "
+        "conversation turns the heuristic resolves instantly and with zero misroute risk. Weigh any "
+        "accuracy gain here against that per-turn latency + the regressions above before changing the "
+        "architecture. Full reasoning + decision rule: `notes/voice-router-findings.md`.",
+        "",
+    ]
+    return "\n".join(lines)
+
+
 async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--from-rows", action="store_true",
                     help="recompute summary + re-render md from saved rows (no model calls)")
+    ap.add_argument("--classify-always", action="store_true",
+                    help="run the counterfactual arm: classify EVERY turn (skip the heuristic), "
+                         "compare to the router baseline; writes voice_intent_classify_always.{md,json}")
+    ap.add_argument("--repeats", type=int, default=3,
+                    help="classify-always: times to classify each turn (temp 0.2 is nondeterministic; "
+                         "the spread across runs is reported). Default 3.")
     args = ap.parse_args()
 
+    # ----- classify-always arm ------------------------------------------------ #
+    if args.classify_always:
+        stem = "voice_intent_classify_always"
+        router = None
+        router_path = RESULTS / "voice_intent.json"
+        if router_path.exists():
+            router = json.loads(router_path.read_text())
+
+        if args.from_rows:
+            saved = json.loads((RESULTS / f"{stem}.json").read_text())
+            rows, repeats = saved["rows"], saved.get("spread", {}).get("repeats", args.repeats)
+            summary = summarise(rows)
+            spread = spread_over_runs(rows, repeats)
+            h2h = head_to_head(rows, router["rows"]) if router else None
+            md = render_classify_always_md(summary, rows, spread, h2h,
+                                           router["summary"] if router else None)
+            (RESULTS / f"{stem}.json").write_text(json.dumps(
+                {"summary": summary, "spread": spread, "head_to_head": h2h, "rows": rows},
+                ensure_ascii=False, indent=2))
+            (RESULTS / f"{stem}.md").write_text(md)
+            print(f"Re-aggregated {len(rows)} saved rows → {stem}.{{md,json}} (no model calls).")
+            return
+
+        cases = json.loads(DATASET.read_text())["cases"]
+        sem = asyncio.Semaphore(CONCURRENCY)
+
+        async def guarded_ca(case):
+            async with sem:
+                try:
+                    return await classify_always_case(case, args.repeats)
+                except Exception as e:  # noqa: BLE001
+                    print(f"  ! {case['id']} failed: {type(e).__name__}: {e}")
+                    return None
+
+        print(f"Classify-always arm: {len(cases)} turns × {args.repeats} classifications "
+              f"(classifier={CONVERSATION_MODEL}, concurrency {CONCURRENCY})...")
+        rows = [r for r in await asyncio.gather(*[guarded_ca(c) for c in cases]) if r is not None]
+        order = {c["id"]: i for i, c in enumerate(cases)}
+        rows.sort(key=lambda r: order[r["id"]])
+
+        summary = summarise(rows)
+        spread = spread_over_runs(rows, args.repeats)
+        h2h = head_to_head(rows, router["rows"]) if router else None
+        RESULTS.mkdir(exist_ok=True)
+        (RESULTS / f"{stem}.json").write_text(json.dumps(
+            {"summary": summary, "spread": spread, "head_to_head": h2h, "rows": rows},
+            ensure_ascii=False, indent=2))
+        (RESULTS / f"{stem}.md").write_text(
+            render_classify_always_md(summary, rows, spread, h2h,
+                                      router["summary"] if router else None))
+
+        cm = summary["confusion_matrix"]
+        print(f"\nDone (classify-always). TP {cm['TP']} FP {cm['FP']} FN {cm['FN']} TN {cm['TN']}")
+        print(f"  coach precision {summary['coach_precision']}  misroute "
+              f"{summary['converse_to_coach_misroute_rate']}  accuracy {summary['accuracy']}")
+        if h2h:
+            print(f"  vs router — fixed {h2h['fixed_n']}, regressed {h2h['regressed_n']}, "
+                  f"unstable {spread['n_unstable']}")
+        print(f"  wrote {RESULTS / (stem + '.md')} and .json")
+        return
+
+    # ----- default router arm ------------------------------------------------- #
     if args.from_rows:
         saved = json.loads((RESULTS / "voice_intent.json").read_text())["rows"]
         summary = summarise(saved)

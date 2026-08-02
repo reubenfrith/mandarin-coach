@@ -1,0 +1,897 @@
+{
+  "summary": {
+    "n_cases": 40,
+    "confusion_matrix": {
+      "TP": 18,
+      "FP": 1,
+      "FN": 0,
+      "TN": 21
+    },
+    "coach_precision": 0.9473684210526315,
+    "coach_recall": 1.0,
+    "coach_f1": 0.972972972972973,
+    "converse_precision": 1.0,
+    "converse_recall": 0.9545454545454546,
+    "converse_f1": 0.9767441860465117,
+    "accuracy": 0.975,
+    "converse_to_coach_misroute_rate": 0.045454545454545456,
+    "converse_total": 22,
+    "per_bucket": {
+      "mandarin": {
+        "n": 15,
+        "correct": 15,
+        "accuracy": 1.0,
+        "fp": 0,
+        "fn": 0
+      },
+      "english": {
+        "n": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "fp": 0,
+        "fn": 0
+      },
+      "mixed": {
+        "n": 10,
+        "correct": 10,
+        "accuracy": 1.0,
+        "fp": 0,
+        "fn": 0
+      },
+      "empty": {
+        "n": 3,
+        "correct": 2,
+        "accuracy": 0.6666666666666666,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "resolution": {
+      "heuristic": 0,
+      "classifier": 40
+    },
+    "classifier_only": {
+      "n": 40,
+      "TP": 18,
+      "FP": 1,
+      "FN": 0,
+      "TN": 21,
+      "precision": 0.9473684210526315,
+      "recall": 1.0,
+      "contestable_labels": 22
+    },
+    "bucket_mismatches": [],
+    "model": "gpt-4o-mini"
+  },
+  "spread": {
+    "repeats": 3,
+    "coach_precision": {
+      "min": 0.9473684210526315,
+      "mean": 0.9473684210526315,
+      "max": 0.9473684210526315
+    },
+    "misroute": {
+      "min": 0.045454545454545456,
+      "mean": 0.04545454545454545,
+      "max": 0.045454545454545456
+    },
+    "accuracy": {
+      "min": 0.975,
+      "mean": 0.975,
+      "max": 0.975
+    },
+    "n_unstable": 0,
+    "unstable_ids": []
+  },
+  "head_to_head": {
+    "n_compared": 40,
+    "fixed_n": 10,
+    "regressed_n": 1,
+    "both_right": 29,
+    "both_wrong": 0,
+    "fixed": [
+      {
+        "id": "m11",
+        "text": "这个词是什么意思？",
+        "bucket": "mandarin",
+        "router": "FN",
+        "classify_always": "TP"
+      },
+      {
+        "id": "m12",
+        "text": "这样说对吗？",
+        "bucket": "mandarin",
+        "router": "FN",
+        "classify_always": "TP"
+      },
+      {
+        "id": "m13",
+        "text": "刚才那个句子为什么不对？",
+        "bucket": "mandarin",
+        "router": "FN",
+        "classify_always": "TP"
+      },
+      {
+        "id": "m14",
+        "text": "“把”和“被”有什么区别？",
+        "bucket": "mandarin",
+        "router": "FN",
+        "classify_always": "TP"
+      },
+      {
+        "id": "m15",
+        "text": "再给我一个例子好吗？",
+        "bucket": "mandarin",
+        "router": "FN",
+        "classify_always": "TP"
+      },
+      {
+        "id": "e08",
+        "text": "And you?",
+        "bucket": "english",
+        "router": "FP",
+        "classify_always": "TN"
+      },
+      {
+        "id": "e09",
+        "text": "Yeah, exactly.",
+        "bucket": "english",
+        "router": "FP",
+        "classify_always": "TN"
+      },
+      {
+        "id": "e10",
+        "text": "Haha okay.",
+        "bucket": "english",
+        "router": "FP",
+        "classify_always": "TN"
+      },
+      {
+        "id": "e11",
+        "text": "One sec.",
+        "bucket": "english",
+        "router": "FP",
+        "classify_always": "TN"
+      },
+      {
+        "id": "e12",
+        "text": "Me too!",
+        "bucket": "english",
+        "router": "FP",
+        "classify_always": "TN"
+      }
+    ],
+    "regressed": [
+      {
+        "id": "z02",
+        "text": "？？？",
+        "bucket": "empty",
+        "router_resolved_by": "heuristic",
+        "outcome": "FP",
+        "note": "no content"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "id": "m01",
+      "text": "我昨天去了公园散步。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m02",
+      "text": "我觉得这个周末天气很好。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m03",
+      "text": "我最喜欢的菜是麻婆豆腐。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m04",
+      "text": "你呢？你周末做了什么？",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "question aimed at the chat partner, not a learning question",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m05",
+      "text": "我们下次聊什么好呢？",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m06",
+      "text": "对，我也这么觉得。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m07",
+      "text": "我早上喝了一杯咖啡。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m08",
+      "text": "昨天的电影真的很好看。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m09",
+      "text": "我想多练习一点口语。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m10",
+      "text": "我家有一只很可爱的猫。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "m11",
+      "text": "这个词是什么意思？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "mandarin-but-coach: asks a word's meaning; heuristic sends it to converse",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "m12",
+      "text": "这样说对吗？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "mandarin-but-coach: is this correct?",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "m13",
+      "text": "刚才那个句子为什么不对？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "mandarin-but-coach: why was that wrong?",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "m14",
+      "text": "“把”和“被”有什么区别？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "mandarin-but-coach: grammar contrast question (quotes are full-width Han)",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "m15",
+      "text": "再给我一个例子好吗？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "mandarin-but-coach: give me another example",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "e01",
+      "text": "Why was that sentence wrong?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "e02",
+      "text": "What does that word mean?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "e03",
+      "text": "Can you explain the grammar there?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "e04",
+      "text": "How do I say I miss you in Chinese?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "e05",
+      "text": "Give me another example please.",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "e06",
+      "text": "What's the difference between those two words?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "e07",
+      "text": "Was my tone correct on that?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "e08",
+      "text": "And you?",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "english-but-converse: the classifier prompt itself lists this as converse; heuristic force-routes it to coach",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "e09",
+      "text": "Yeah, exactly.",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "english-but-converse: agreement, not a question",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "e10",
+      "text": "Haha okay.",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "english-but-converse: filler",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "e11",
+      "text": "One sec.",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "english-but-converse: aside",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "e12",
+      "text": "Me too!",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "english-but-converse: agreement",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "z01",
+      "text": "。。。",
+      "bucket": "empty",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "no content",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "z02",
+      "text": "？？？",
+      "bucket": "empty",
+      "gold_intent": "converse",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "FP",
+      "note": "no content",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "z03",
+      "text": "……",
+      "bucket": "empty",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "no content",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "x01",
+      "text": "我想 book 一张机票。",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "code-switch content word (book = 预订)",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "x02",
+      "text": "这个 refund 怎么申请？",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "code-switch content word (refund = 退款)",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "x03",
+      "text": "他这个人很 stubborn。",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "code-switch adjective (stubborn = 固执)",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "x04",
+      "text": "Why did you use 把 here?",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "English question about a Chinese construction",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "x05",
+      "text": "What does 差不多 mean?",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "English question about a Chinese word",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "x06",
+      "text": "What's the difference between 还 and 又?",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "English grammar-contrast question",
+      "bucket_mismatch": null,
+      "votes": [
+        "coach",
+        "coach",
+        "coach"
+      ],
+      "coach_votes": 3,
+      "stable": true
+    },
+    {
+      "id": "x07",
+      "text": "我朋友叫 David。",
+      "bucket": "mixed",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "proper name, not a vocabulary gap",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "x08",
+      "text": "我周末想去 Melbourne 玩。",
+      "bucket": "mixed",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "borderline: place name in a conversational turn",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "x09",
+      "text": "我在追一部 Netflix 的剧。",
+      "bucket": "mixed",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "borderline: brand name in a conversational turn",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    },
+    {
+      "id": "x10",
+      "text": "我们约在 Starbucks 见面吧。",
+      "bucket": "mixed",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "borderline: brand name in a conversational turn",
+      "bucket_mismatch": null,
+      "votes": [
+        "converse",
+        "converse",
+        "converse"
+      ],
+      "coach_votes": 0,
+      "stable": true
+    }
+  ]
+}

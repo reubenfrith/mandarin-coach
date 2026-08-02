@@ -16,6 +16,7 @@ is re-derivable from the rows, and every scored answer is inspectable.
 | **Extraction (guarded)** | Same dataset re-run with the production retry/validation guard active (`--guarded`) — the Task 6.3 before/after pair | `extraction_guarded.md` | `extraction_guarded.json` (same row schema) | 34 pos + 17 neg |
 | **Tone auto-logging** | The pronunciation coach's corpus writer (`_log_tone_error`): precision/recall of the wrong-tone log predicate, swept over a confidence-margin gate to set `LOG_MARGIN`. Precision is the headline (a false positive logs a correctly-said syllable). Perturbation-defined synthetic golds → an upper bound on real-L2 precision | `tone_assessment.md` | `tone_assessment.json` → `rows[].{band,target_tone,predicted_tone,dists,margin,score,mismatch,gold_wrong}` + `summary.{baseline,recommended,sweep,by_band_*}` | 40 correct + 40 wrong |
 | **Voice router intent** | The voice router (`_route_intent`): coach-precision (headline) + converse→coach misroute rate, with per-bucket accuracy separating the zero-latency script heuristic's error from the LLM classifier's. Bucketed by script, labelled by true intent | `voice_intent.md` | `voice_intent.json` → `rows[].{bucket,gold_intent,pred_intent,resolved_by,outcome,note}` + `summary.{per_bucket,classifier_only}` | 40 (18 coach / 22 converse) |
+| **↳ classify-always arm** | Counterfactual (`--classify-always`): classify every turn, skip the heuristic; head-to-head vs the router (fixed/regressed per turn) + metric spread across repeats. Accuracy-only — read with the latency caveat | `voice_intent_classify_always.md` | `voice_intent_classify_always.json` → `rows[].{pred_intent,votes,stable,outcome}` + `head_to_head` + `spread` | 40 × 3 runs |
 | **C_scale preflight** | Thesis check: can the agent aggregate at scale | `preflight_typec.md` | — | — |
 
 ## The audit model (why it's verifiable)
@@ -55,6 +56,9 @@ python3 -c "import json; s=json.load(open('evals/results/tone_assessment.json'))
 
 # Voice router: coach-precision + which stage each error came from (heuristic vs classifier)
 python3 -c "import json; r=json.load(open('evals/results/voice_intent.json'))['rows']; f=lambda o: sum(x['outcome']==o for x in r); tp,fp,fn=f('TP'),f('FP'),f('FN'); print('coach precision',round(tp/(tp+fp),3),'| misroute',round(fp/(fp+f('TN')),3)); [print(' ',x['id'],x['resolved_by'],x['outcome'],repr(x['text'])) for x in r if x['outcome'] in ('FP','FN')]"
+
+# Classify-always counterfactual: fixed vs regressed vs the router, + spread across runs
+python3 -c "import json; d=json.load(open('evals/results/voice_intent_classify_always.json')); h=d['head_to_head']; s=d['spread']; print('fixed',h['fixed_n'],'regressed',h['regressed_n'],'unstable',s['n_unstable']); print('coach precision',s['coach_precision']); [print(' fixed ',x['id'],repr(x['text'])) for x in h['fixed']]; [print(' regressed',x['id'],repr(x['text'])) for x in h['regressed']]"
 
 # The false positives the gate removes — re-derived from the rows (all shallow T2/T3 flipping to flat T1)
 python3 -c "import json; r=json.load(open('evals/results/tone_assessment.json'))['rows']; fp=[x for x in r if not x['gold_wrong'] and x.get('mismatch')]; [print(x['id'],'tgt',x['target_tone'],'->',x['predicted_tone'],'margin',x['margin']) for x in sorted(fp,key=lambda x:x['margin'])]"

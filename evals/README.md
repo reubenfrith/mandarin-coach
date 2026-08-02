@@ -86,7 +86,7 @@ scope (Tasks 5–6); **voice coach** and **pronunciation** are the product exten
 
 | File | What it measures | Writes |
 |---|---|---|
-| `voice_intent_eval.py` (Phase 4) | The voice router `_route_intent`: coach-precision + converse→coach misroute rate over 40 turns bucketed by script but labelled by true intent, so per-bucket accuracy separates the zero-latency heuristic's error from the LLM classifier's. Precision-first on converse. Findings + the classify-always question are written up in [`notes/voice-router-findings.md`](notes/voice-router-findings.md). | `results/voice_intent.{md,json}` |
+| `voice_intent_eval.py` (Phase 4) | The voice router `_route_intent`: coach-precision + converse→coach misroute rate over 40 turns bucketed by script but labelled by true intent, so per-bucket accuracy separates the zero-latency heuristic's error from the LLM classifier's. Precision-first on converse. `--classify-always` runs the counterfactual (classify every turn, vs the router) → `results/voice_intent_classify_always.{md,json}`. Findings + verdict in [`notes/voice-router-findings.md`](notes/voice-router-findings.md). | `results/voice_intent.{md,json}` |
 
 #### `surfaces/pronunciation/` — the tone coach
 
@@ -130,6 +130,7 @@ REQUEST_TIMEOUT=150 uv run python evals/surfaces/text_coach/model_bakeoff.py    
 uv run python evals/datagen/generate_voice_intent_dataset.py                            # build the 40-turn labelled set
 EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_coach/voice_intent_eval.py                    # router precision surface (40 turns)
 uv run python evals/surfaces/voice_coach/voice_intent_eval.py --from-rows                           # re-aggregate saved rows, no model calls
+EVAL_CONCURRENCY=6 uv run python evals/surfaces/voice_coach/voice_intent_eval.py --classify-always --repeats 3   # counterfactual: classify EVERY turn, vs the router
 
 # 5. Pronunciation coach (tone auto-logging gate) — fully local DSP, no model calls
 uv run python evals/datagen/generate_tone_dataset.py                                    # build the synthetic tone recipe set

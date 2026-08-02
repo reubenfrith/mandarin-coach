@@ -176,11 +176,19 @@ output, no second call, no structured-output-vs-tools conflict.
   to be taught the word. So the classifier returning converse there *deviates* from its prompt and our
   label rewards it. If the product wants proper nouns left in conversation, that's a **proper-noun
   carve-out in the prompt**, not evidence the classifier is already right.
-- **Calibration implications (not yet applied), harness-evidenced by this surface:** (1) refine the
-  script heuristic — route short English turns with no question mark / on an affirmation list to
-  converse, and let the classifier see Han-only turns that look interrogative (吗/什么/为什么/怎么/呢/？)
-  rather than blindly routing them to converse; (2) decide the proper-noun policy and, if needed, add
-  the prompt carve-out above. Both tracked as follow-on changes.
+- **Classify-always arm (run — `--classify-always --repeats 3`, `results/voice_intent_classify_always.md`):**
+  the counterfactual of skipping the heuristic and classifying every turn **fixed all 10 heuristic
+  misroutes, regressed only 1** (`？？？`, which the classifier reads as a question), and was **0/40
+  unstable** across 3 runs. Coach precision 0.72→**0.95**, misroute 0.23→**0.045**, accuracy
+  0.75→**0.975**. So on *accuracy* classify-most clearly wins; the decision now hinges on **latency**
+  (an LLM call on every plain-Mandarin turn), which the surface can't measure. Full write-up +
+  decision rule: `evals/notes/voice-router-findings.md`.
+- **Calibration implications (not yet applied), harness-evidenced:** pick on the latency budget —
+  either (1) **classify-most**: keep only a trivial empty→converse guard (the one thing classify-always
+  got wrong), drop the two script rules; or (2) **tuned heuristic**: short English affirmations →
+  converse, interrogative Han-only turns → classifier (these target exactly the 10 fixed cases, so the
+  data predicts they recover most of the gain without taxing every turn — a prediction to verify).
+  Separately, (3) decide the proper-noun policy / prompt carve-out.
 - Wiring tests (`tests/test_voice_router.py`): stub the classifier + both brains; assert manual
   override wins, pure-Chinese skips the classifier, coach path injects history and writes a
   summarised turn back, CONVERSE-only logging.
