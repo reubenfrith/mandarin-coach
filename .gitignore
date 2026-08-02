@@ -9,7 +9,6 @@ __pycache__/
 !.chainlit/config.toml
 app/.chainlit/*
 !app/.chainlit/config.toml
-chainlit.md
 
 # CC-CEDICT dictionary cache (downloaded at runtime)
 data/cedict.txt
