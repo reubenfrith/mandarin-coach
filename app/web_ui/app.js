@@ -117,7 +117,7 @@ $("theme-toggle").addEventListener("click", () => {
 });
 
 // ---- tabs ----------------------------------------------------------------- //
-const TABS = { pronounce: "pronounce-pane", coach: "coach-pane", voice: "voice-pane" };
+const TABS = { pronounce: "pronounce-pane", coach: "coach-pane", voice: "voice-pane", progress: "progress-pane" };
 function selectTab(which) {
   for (const [name, pane] of Object.entries(TABS)) {
     $(`tab-${name}`).classList.toggle("active", name === which);
@@ -128,6 +128,78 @@ function selectTab(which) {
   // Focus the pane's primary input so the learner can type immediately (voice has no field).
   const focusTarget = which === "coach" ? "chat-input" : which === "pronounce" ? "pron-input" : null;
   if (focusTarget) $(focusTarget).focus();
+  if (which === "progress") loadProgress();  // refresh each time it's opened
+}
+
+// ---- progress (errors dashboard) ------------------------------------------ //
+// Fetch the corpus stats + recent errors and render a category breakdown (with trend)
+// plus a recent-corrections list. Rebuilt each time the tab opens so it stays current.
+async function loadProgress() {
+  const body = $("progress-body");
+  body.textContent = "Loading…";
+  let stats, errs;
+  try {
+    stats = await (await api("/api/stats")).json();
+    errs = await (await api("/api/errors?limit=25")).json();
+  } catch { body.textContent = "Couldn't load your progress — try again."; return; }
+  body.textContent = "";
+
+  if (!stats || !stats.total) {
+    const p = document.createElement("p");
+    p.className = "progress-empty muted";
+    p.textContent = "No logged errors yet. Chat with the coach or practise pronunciation, "
+      + "and the recurring mistakes we catch will collect here.";
+    body.appendChild(p);
+    return;
+  }
+
+  const total = document.createElement("div");
+  total.className = "stat-total";
+  total.textContent = `${stats.total} logged ${stats.total === 1 ? "error" : "errors"}`;
+  body.appendChild(total);
+
+  // Category breakdown: a bar per category, with a trend arrow (up = getting worse).
+  const cats = Object.entries(stats.by_category);
+  const max = Math.max(...cats.map(([, c]) => c), 1);
+  const list = document.createElement("div");
+  list.className = "cat-list";
+  cats.forEach(([cat, count]) => {
+    const row = document.createElement("div"); row.className = "cat-row";
+    const name = document.createElement("div"); name.className = "cat-name"; name.textContent = cat.replace(/_/g, " ");
+    const bar = document.createElement("div"); bar.className = "cat-bar";
+    const fill = document.createElement("span"); fill.style.width = `${(count / max) * 100}%`; bar.appendChild(fill);
+    const meta = document.createElement("div"); meta.className = "cat-meta";
+    meta.appendChild(document.createTextNode(`${count} `));
+    const trend = (stats.trend || {})[cat];
+    const t = document.createElement("span");
+    t.className = trend === "increasing" ? "trend-up" : trend === "decreasing" ? "trend-down" : "";
+    t.textContent = trend === "increasing" ? "↑" : trend === "decreasing" ? "↓" : "→";
+    t.title = trend === "increasing" ? "happening more lately" : trend === "decreasing" ? "improving" : "steady";
+    meta.appendChild(t);
+    row.append(name, bar, meta);
+    list.appendChild(row);
+  });
+  body.appendChild(list);
+
+  // Recent corrections.
+  const h = document.createElement("h2"); h.textContent = "Recent corrections"; body.appendChild(h);
+  const errList = document.createElement("div"); errList.className = "err-list";
+  (errs.errors || []).forEach((e) => {
+    const card = document.createElement("div"); card.className = "err-card";
+    const head = document.createElement("div"); head.className = "err-head";
+    const cat = document.createElement("span"); cat.className = "err-cat"; cat.textContent = (e.category || "").replace(/_/g, " ");
+    head.appendChild(cat);
+    if (e.source === "voice") { const b = document.createElement("span"); b.className = "badge-voice"; b.textContent = "voice"; head.appendChild(b); }
+    card.appendChild(head);
+    const fix = document.createElement("p"); fix.className = "err-fix";
+    const wrong = document.createElement("span"); wrong.className = "wrong"; wrong.textContent = e.original || "—";
+    const right = document.createElement("span"); right.className = "right"; right.textContent = e.correction || "—";
+    fix.append(wrong, document.createTextNode("  →  "), right);
+    card.appendChild(fix);
+    if (e.explanation) { const ex = document.createElement("p"); ex.className = "err-note"; ex.textContent = e.explanation; card.appendChild(ex); }
+    errList.appendChild(card);
+  });
+  body.appendChild(errList);
 }
 Object.keys(TABS).forEach((name) => $(`tab-${name}`).addEventListener("click", () => selectTab(name)));
 

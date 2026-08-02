@@ -50,6 +50,7 @@
         <button id="tab-pronounce" class="tab active">Pronounce</button>
         <button id="tab-coach" class="tab">Text coach</button>
         <button id="tab-voice" class="tab">Voice coach</button>
+        <button id="tab-progress" class="tab">Progress</button>
       </nav>
       <span class="spacer"></span>
       <span id="whoami" class="muted"></span>
@@ -140,6 +141,14 @@
         </div>
       </div>
       <audio id="reply-audio" autoplay></audio>
+    </div>
+
+    <!-- Progress: your logged errors over time -->
+    <div id="progress-pane" class="pane" hidden>
+      <div class="progress">
+        <h2>Your progress</h2>
+        <div id="progress-body"></div>
+      </div>
     </div>
   </section>
 

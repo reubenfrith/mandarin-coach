@@ -116,6 +116,12 @@ def stats(user_id: str = Depends(require_user)):
     return memory.error_stats(user_id)
 
 
+@router.get("/api/errors")
+def errors(limit: int = 25, user_id: str = Depends(require_user)):
+    """Recent logged errors (newest first) for the Progress view."""
+    return {"errors": memory.recent_errors(user_id, max(1, min(limit, 100)))}
+
+
 # --------------------------------------------------------------------------- #
 # Text coach
 # --------------------------------------------------------------------------- #
