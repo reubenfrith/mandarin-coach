@@ -89,7 +89,7 @@ scope (Tasks 5–6); **voice coach** and **pronunciation** are the product exten
 | File | What it measures | Writes |
 |---|---|---|
 | `voice_intent_eval.py` (Phase 4) | The voice router `_route_intent`: coach-precision + converse→coach misroute rate over 40 turns bucketed by script but labelled by true intent, so per-bucket accuracy separates the zero-latency heuristic's error from the LLM classifier's. Precision-first on converse. `--classify-always` runs the counterfactual (classify every turn, vs the router) → `results/voice_intent_classify_always.{md,json}`. Findings + verdict in [`notes/voice-router-findings.md`](notes/voice-router-findings.md). | `results/voice_intent.{md,json}` |
-| `voice_coach_quality_eval.py` | The spoken COACH brain `run_voice_coach` (what the router doesn't check): 20 turns across sentence-coach / question / referential / garbled. DETERMINISTIC checks on the spoken-TL;DR format, English-only, speakability; an LLM JUDGE (gpt-4o-mini, not the repo-default glm — glm was unreliable here) on meets-expectation / misleading / noise→ask-to-repeat / history-grounding, scored against per-case rubrics. `--verify-judge <model>` re-scores with a second judge. Findings in [`notes/voice-coach-findings.md`](notes/voice-coach-findings.md). | `results/voice_coach_quality.{md,json}` |
+| `voice_coach_quality_eval.py` | The spoken COACH brain `run_voice_coach` (what the router doesn't check): 20 turns across sentence-coach / question / referential / garbled. DETERMINISTIC checks on the spoken-TL;DR format, English-only, speakability; an LLM JUDGE on meets-expectation / misleading / noise→ask-to-repeat / history-grounding, scored against per-case rubrics. Judge = **gpt-4o** (independent): glm was unreliable and the same-model gpt-4o-mini under-counted misleading on its own outputs — see the note. `--verify-judge <model>` re-scores with a second judge. Findings in [`notes/voice-coach-findings.md`](notes/voice-coach-findings.md). | `results/voice_coach_quality.{md,json}` |
 
 #### `surfaces/pronunciation/` — the tone coach
 
@@ -138,9 +138,9 @@ uv run python evals/surfaces/voice_coach/voice_intent_eval.py --latency 12      
 
 # 4b. Voice coach — spoken explanation quality (what the router doesn't check)
 uv run python evals/datagen/generate_voice_coach_dataset.py                             # build the 20-turn gold set
-EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py             # coach-quality surface (judge = gpt-4o-mini)
+EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py             # coach-quality surface (judge = gpt-4o, independent)
 uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py --from-rows                    # re-aggregate saved rows, no model calls
-uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py --verify-judge qwen            # vet the judge with a second model
+uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py --verify-judge gpt-4o-mini     # cross-check: shows the same-model judge under-counts misleading
 
 # 5. Pronunciation coach (tone auto-logging gate) — fully local DSP, no model calls
 uv run python evals/datagen/generate_tone_dataset.py                                    # build the synthetic tone recipe set

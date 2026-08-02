@@ -2,10 +2,14 @@
   "summary": {
     "n_cases": 20,
     "model": "gpt-4o-mini",
-    "judge_model": "gpt-4o-mini",
-    "meets_expectation_rate": 0.8,
-    "misleading_n": 0,
-    "misleading_ids": [],
+    "judge_model": "gpt-4o",
+    "meets_expectation_rate": 0.85,
+    "misleading_n": 3,
+    "misleading_ids": [
+      "sc05",
+      "g02",
+      "g03"
+    ],
     "english_rate_judge": 1.0,
     "spoken_english_rate": 0.75,
     "spoken_md_free_rate": 1.0,
@@ -13,19 +17,19 @@
     "breakdown_present_rate": 1.0,
     "speakable_rate": 1.0,
     "spoken_wc_p50": 15,
-    "spoken_wc_p95": 30,
-    "spoken_wc_max": 30,
+    "spoken_wc_p95": 20,
+    "spoken_wc_max": 20,
     "noise_ask_repeat_rate": 0.5,
-    "noise_meets_rate": 0.25,
+    "noise_meets_rate": 0.5,
     "referential_meets_rate": 1.0,
-    "referential_wrong_repeat_n": 1,
+    "referential_wrong_repeat_n": 0,
     "per_type": {
       "sentence_coach": {
         "n": 6,
         "meets_expectation": 0.8333333333333334,
-        "misleading_n": 0,
+        "misleading_n": 1,
         "english": 1.0,
-        "asks_to_repeat_n": 3
+        "asks_to_repeat_n": 1
       },
       "question": {
         "n": 6,
@@ -39,12 +43,12 @@
         "meets_expectation": 1.0,
         "misleading_n": 0,
         "english": 1.0,
-        "asks_to_repeat_n": 1
+        "asks_to_repeat_n": 0
       },
       "garbled": {
         "n": 4,
-        "meets_expectation": 0.25,
-        "misleading_n": 0,
+        "meets_expectation": 0.5,
+        "misleading_n": 2,
         "english": 1.0,
         "asks_to_repeat_n": 2
       }
@@ -57,7 +61,7 @@
       "question": "我昨天买东西了在商店",
       "note": "word order — 在+place before the verb",
       "spoken": "You should say \"我昨天在商店买东西了.\"",
-      "full": "You should say \"我昨天在商店买东西了.\"\n\nThe key point here is the word order. In Mandarin, the location usually comes before the action. \n\nFor example:\n1. 我在家吃饭。 (I eat at home.)\n2. 她在学校学习。 (She studies at school.)\n\nNow, try saying a sentence about what you did today, using the correct order!",
+      "full": "You should say \"我昨天在商店买东西了.\"\n\nThe key point here is the word order. In Mandarin, the location usually comes before the action. \n\nFor example:\n1. 我在家吃饭。 (I eat at home.)\n2. 他在学校学习。 (He studies at school.)\n\nNow, try saying a sentence about what you did at home yesterday!",
       "det": {
         "spoken_present": true,
         "spoken_english": false,
@@ -71,7 +75,7 @@
       "misleading": false,
       "explanation_in_english": true,
       "asks_to_repeat": false,
-      "judge_reason": "The coach correctly identifies the word-order error and provides a corrected version, explaining the placement of the location phrase in Mandarin."
+      "judge_reason": "The reply correctly identifies the word-order error, provides a corrected sentence, and explains the rule about location phrases preceding the verb in Mandarin."
     },
     {
       "id": "sc02",
@@ -79,7 +83,7 @@
       "question": "我有三个书",
       "note": "measure word — 本 for books",
       "spoken": "You should say \"我有三本书\" for a more natural expression.",
-      "full": "You should say \"我有三本书\" for a more natural expression.\n\nThe key point here is the use of measure words in Mandarin. \"本\" is the measure word for books, so you need to use it when counting them. \n\nFor example:\n- \"两本书\" (two books)\n- \"五本书\" (five books)\n\nNow, try saying \"我有两本书\" to practice!",
+      "full": "You should say \"我有三本书\" for a more natural expression.\n\nThe key point here is the use of measure words. In Mandarin, when counting objects, you need to use a specific measure word. For books, the correct measure word is \"本\" (běn).\n\nFor example:\n- \"我有一本书\" (I have one book).\n- \"我有两本书\" (I have two books).\n\nNow, try saying \"我有三本书\" to practice!",
       "det": {
         "spoken_present": true,
         "spoken_english": true,
@@ -92,30 +96,30 @@
       "meets_expectation": true,
       "misleading": false,
       "explanation_in_english": true,
-      "asks_to_repeat": true,
-      "judge_reason": "The coach correctly identifies the measure word error and provides the corrected sentence along with an explanation in English."
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly identifies the measure-word error, provides the correct sentence, and explains the use of '本' as the measure word for books."
     },
     {
       "id": "sc03",
       "type": "sentence_coach",
       "question": "我去过北京了",
       "note": "aspect — 过 already marks experience, drop 了",
-      "spoken": "You should say \"我去过北京\" without 了.",
-      "full": "You should say \"我去过北京\" without 了.\n\nThe key point here is that 了 indicates a change of state or completion, which is not needed when using 过 to express past experiences. \n\nExamples: \n1. 我去过上海。 (I have been to Shanghai.)\n2. 我吃过这个。 (I have eaten this.)\n\nNow, try saying \"我去过北京\" again!",
+      "spoken": "You should say \"我去过北京\" without 了 at the end.",
+      "full": "You should say \"我去过北京\" without 了 at the end.\n\nThe key point here is that 过 indicates a completed action in the past, while 了 is used to indicate a change of state or completion of an action. In this case, since you are talking about having been to Beijing, 过 is sufficient.\n\nExamples: \n1. 我吃过这个菜。 (I have eaten this dish.)\n2. 我看过那部电影。 (I have seen that movie.)\n\nDrill: Try saying \"我去过上海\" (I have been to Shanghai) without adding 了.",
       "det": {
         "spoken_present": true,
         "spoken_english": false,
         "spoken_md_free": true,
         "breakdown_present": true,
-        "spoken_word_count": 13,
+        "spoken_word_count": 15,
         "spoken_speakable": true,
         "split_ok": true
       },
       "meets_expectation": true,
       "misleading": false,
       "explanation_in_english": true,
-      "asks_to_repeat": true,
-      "judge_reason": "The coach correctly identifies the redundancy of 了 and explains the difference between 过 and 了, while also asking the learner to repeat the corrected sentence."
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly identifies the redundancy of 了, explains the difference between 过 and 了, and provides examples and a drill for practice."
     },
     {
       "id": "sc04",
@@ -123,7 +127,7 @@
       "question": "他昨天没有去了学校",
       "note": "negation — 没有 does not take 了",
       "spoken": "The correct sentence is: 他昨天没有去学校。",
-      "full": "The correct sentence is: 他昨天没有去学校。\n\nThe key point here is the verb \"去\" (to go). In Mandarin, when using \"没有\" (did not), the verb should be in its base form, not in the past tense. \n\nFor example:\n1. 我昨天没有去商店。 (I did not go to the store yesterday.)\n2. 她上周没有去工作。 (She did not go to work last week.)\n\nNow, try saying a sentence using \"没有\" with a different verb!",
+      "full": "The correct sentence is: 他昨天没有去学校。\n\nThis means \"He didn't go to school yesterday.\"\n\nThe key point here is the verb \"去\" (to go). In Mandarin, when using \"没有\" (did not), you should use the base form of the verb without the past tense marker. \n\nFor example:\n1. 我昨天没有吃饭。 (I didn't eat yesterday.)\n2. 她上周没有来。 (She didn't come last week.)\n\nNow, try saying a sentence using \"没有\" with a different verb!",
       "det": {
         "spoken_present": true,
         "spoken_english": false,
@@ -137,29 +141,29 @@
       "misleading": false,
       "explanation_in_english": true,
       "asks_to_repeat": false,
-      "judge_reason": "The coach correctly identifies the error and provides the correct sentence while explaining the use of 没有 with the base form of the verb."
+      "judge_reason": "The reply correctly identifies the error, provides the correct sentence, and explains the rule about using 没有 with verbs without 了."
     },
     {
       "id": "sc05",
       "type": "sentence_coach",
       "question": "请给我一杯水",
       "note": "control — a correct sentence must not be 'corrected'",
-      "spoken": "\"Please give me a glass of water\" is correct, but a more natural way to say it in Mandarin is \"请给我一杯水。\"",
-      "full": "\"Please give me a glass of water\" is correct, but a more natural way to say it in Mandarin is \"请给我一杯水。\" \n\nThe key point here is the use of \"请\" (please) at the beginning to make the request polite. \n\nFor example:\n- \"请帮我\" (Please help me)\n- \"请告诉我\" (Please tell me)\n\nNow, try saying \"请给我一杯茶\" (Please give me a cup of tea).",
+      "spoken": "Please say \"给我一杯水\" for a more natural request.",
+      "full": "Please say \"给我一杯水\" for a more natural request.\n\nThe key point here is that in Mandarin, you can omit the subject when it's clear who is being referred to. In this case, \"请\" (please) is often placed at the beginning, making the sentence sound more polite and natural. \n\nFor example:\n- \"请给我一杯水。\" (Please give me a glass of water.)\n- \"请帮我一下。\" (Please help me a bit.)\n\nNow, try saying it again: \"请给我一杯水。\"",
       "det": {
         "spoken_present": true,
         "spoken_english": true,
         "spoken_md_free": true,
         "breakdown_present": true,
-        "spoken_word_count": 28,
+        "spoken_word_count": 14,
         "spoken_speakable": true,
         "split_ok": true
       },
       "meets_expectation": false,
-      "misleading": false,
+      "misleading": true,
       "explanation_in_english": true,
       "asks_to_repeat": true,
-      "judge_reason": "The coach incorrectly suggests that the learner's sentence is not natural and offers an alternative, rather than affirming the correctness of the original sentence."
+      "judge_reason": "The reply incorrectly suggests that the learner's sentence is less natural, which is misleading since the original sentence is already correct and natural."
     },
     {
       "id": "sc06",
@@ -167,7 +171,7 @@
       "question": "这个天气比昨天更热多了",
       "note": "comparison — 比 structure, 更 vs 多了",
       "spoken": "The correct sentence is \"这个天气比昨天热多了.\"",
-      "full": "The correct sentence is \"这个天气比昨天热多了.\"\n\nThis means \"The weather is much hotter than yesterday.\"\n\nThe key point here is the structure of comparison. In Mandarin, when comparing two things, you can use \"比\" (bǐ) followed by the adjective. In this case, \"热\" (rè) means \"hot.\" The word \"更\" (gèng) is not needed here because \"热多了\" already conveys the meaning of \"much hotter.\" \n\nFor example:\n1. 这个城市比那个城市大。 (This city is bigger than that city.)\n2. 她比我聪明。 (She is smarter than me.)\n\nNow, try saying \"这个城市比那个城市更大。\" (This city is even bigger than that city.)",
+      "full": "The correct sentence is \"这个天气比昨天热多了.\"\n\nThe key point here is the structure of comparative sentences in Mandarin. When comparing two things, you can use \"比\" (bǐ) followed by the adjective. In this case, \"热\" (rè) means \"hot.\" The phrase \"更热\" (gèng rè) is not necessary because \"热多了\" already implies a significant increase in heat.\n\nFor example:\n1. 这个城市比那个城市大。 (This city is bigger than that city.)\n2. 这本书比那本书有趣。 (This book is more interesting than that book.)\n\nNow, try saying a sentence comparing two things using \"比\" and an adjective!",
       "det": {
         "spoken_present": true,
         "spoken_english": false,
@@ -181,169 +185,15 @@
       "misleading": false,
       "explanation_in_english": true,
       "asks_to_repeat": false,
-      "judge_reason": "The coach correctly identifies the comparison error and explains the structure of the comparison in Mandarin."
+      "judge_reason": "The reply correctly identifies the comparison error, explains the 比 structure, and provides examples."
     },
     {
       "id": "q01",
       "type": "question",
       "question": "What's the difference between 了 and 过?",
       "note": "aspect particles",
-      "spoken": "The main difference is that 了 indicates a completed action or change of state, while 过 indicates an experience or occurrence in the past.",
-      "full": "The main difference is that 了 indicates a completed action or change of state, while 过 indicates an experience or occurrence in the past.\n\n \n\nFor example, in the sentence \"我吃了饭\" (Wǒ chīle fàn), 了 shows that the action of eating is completed. In contrast, \"我去过中国\" (Wǒ qùguò Zhōngguó) uses 过 to express that the speaker has the experience of having gone to China at some point in the past.\n\n \n\nTo practice, try making sentences using both 了 and 过 to describe different actions!",
-      "det": {
-        "spoken_present": true,
-        "spoken_english": true,
-        "spoken_md_free": true,
-        "breakdown_present": true,
-        "spoken_word_count": 24,
-        "spoken_speakable": true,
-        "split_ok": true
-      },
-      "meets_expectation": true,
-      "misleading": false,
-      "explanation_in_english": true,
-      "asks_to_repeat": false,
-      "judge_reason": "The coach correctly explains the difference between 了 and 过, provides appropriate examples, and does not ask the learner to repeat."
-    },
-    {
-      "id": "q02",
-      "type": "question",
-      "question": "When do I use 二 versus 两?",
-      "note": "二 vs 两",
-      "spoken": "You use 二 for counting or in numbers, and 两 when you need to specify a quantity of two for measure words or in certain contexts.",
-      "full": "You use 二 for counting or in numbers, and 两 when you need to specify a quantity of two for measure words or in certain contexts.\n\n \n\nIn Mandarin: \n- 二 (èr) is used in numbers, like 二十 (èr shí) for twenty.\n- 两 (liǎng) is used with measure words, like 两个苹果 (liǎng gè píngguǒ) for two apples.\n\n \n\nPractice saying: 两本书 (liǎng běn shū) for two books, and 二百 (èr bǎi) for two hundred.",
-      "det": {
-        "spoken_present": true,
-        "spoken_english": true,
-        "spoken_md_free": true,
-        "breakdown_present": true,
-        "spoken_word_count": 26,
-        "spoken_speakable": true,
-        "split_ok": true
-      },
-      "meets_expectation": true,
-      "misleading": false,
-      "explanation_in_english": true,
-      "asks_to_repeat": false,
-      "judge_reason": "The coach correctly explains the usage of 两 and 二, provides examples for both, and does so in English."
-    },
-    {
-      "id": "q03",
-      "type": "question",
-      "question": "How do I say 'again' — is it 再 or 又?",
-      "note": "再 vs 又",
-      "spoken": "You can use both 再 and 又, but they have different contexts.",
-      "full": "You can use both 再 and 又, but they have different contexts.\n\n再 is used for actions that will happen again in the future, like \"do it again\" (再做一次). \n\n又 is used for actions that have happened again or are repeated, often in the past, like \"I did it again\" (我又做了).\n\nSo, choose 再 for future actions and 又 for past actions. \n\nFor example:\n- 再来一次 (come again)\n- 我又来了 (I came again)",
-      "det": {
-        "spoken_present": true,
-        "spoken_english": true,
-        "spoken_md_free": true,
-        "breakdown_present": true,
-        "spoken_word_count": 13,
-        "spoken_speakable": true,
-        "split_ok": true
-      },
-      "meets_expectation": true,
-      "misleading": false,
-      "explanation_in_english": true,
-      "asks_to_repeat": false,
-      "judge_reason": "The coach correctly explains the difference between 再 and 又, provides appropriate examples for each, and does so in English."
-    },
-    {
-      "id": "q04",
-      "type": "question",
-      "question": "Why do I need a measure word before a noun?",
-      "note": "measure-word necessity",
-      "spoken": "You need a measure word before a noun in Mandarin because it helps specify the quantity and type of the noun.",
-      "full": "You need a measure word before a noun in Mandarin because it helps specify the quantity and type of the noun. \n\nIn Mandarin, nouns are often accompanied by measure words (or classifiers) when counting or specifying them. This is different from English, where we can just say \"two books\" without a measure word. \n\nFor example:\n- 一本书 (yī běn shū) means \"one book,\" where \"本\" is the measure word for books.\n- 三个苹果 (sān gè píngguǒ) means \"three apples,\" where \"个\" is a general measure word.\n\nThe measure word provides clarity and context about the noun being referred to.",
-      "det": {
-        "spoken_present": true,
-        "spoken_english": true,
-        "spoken_md_free": true,
-        "breakdown_present": true,
-        "spoken_word_count": 21,
-        "spoken_speakable": true,
-        "split_ok": true
-      },
-      "meets_expectation": true,
-      "misleading": false,
-      "explanation_in_english": true,
-      "asks_to_repeat": false,
-      "judge_reason": "The reply correctly explains the necessity of measure words in Mandarin, provides examples, and clarifies the role of the default measure word 个."
-    },
-    {
-      "id": "q05",
-      "type": "question",
-      "question": "What does 把 do in a sentence?",
-      "note": "把 construction",
-      "spoken": "The 把 construction indicates the handling or disposal of an object.",
-      "full": "The 把 construction indicates the handling or disposal of an object.\n\n \n\nIn a 把 sentence, the structure is typically: Subject + 把 + Object + Verb + (Complement). This shows that the subject is doing something to the object. For example, in the sentence \"我把书给你\" (I give the book to you), \"我\" (I) is the subject, \"书\" (book) is the object, and \"给\" (give) is the verb.\n\n \n\nTry creating your own 把 sentence using this structure!",
-      "det": {
-        "spoken_present": true,
-        "spoken_english": true,
-        "spoken_md_free": true,
-        "breakdown_present": true,
-        "spoken_word_count": 11,
-        "spoken_speakable": true,
-        "split_ok": true
-      },
-      "meets_expectation": true,
-      "misleading": false,
-      "explanation_in_english": true,
-      "asks_to_repeat": false,
-      "judge_reason": "The coach correctly explains the 把 construction, provides the expected structure, and gives a relevant example, fulfilling the expectation."
-    },
-    {
-      "id": "q06",
-      "type": "question",
-      "question": "Is 的 the same as 得?",
-      "note": "的 vs 得",
-      "spoken": "No, 的 and 得 are not the same; they serve different grammatical purposes.",
-      "full": "No, 的 and 得 are not the same; they serve different grammatical purposes.\n\n \n\nThe character 的 (de) is primarily used as a possessive particle or to modify nouns, while 得 (de) is used to indicate the degree or result of an action. \n\nFor example:\n\n- 我的书 (wǒ de shū) means \"my book,\" showing possession.\n- 他跑得快 (tā pǎo de kuài) means \"he runs fast,\" indicating the degree of how he runs.\n\nTo practice, try making sentences using both 的 and 得 in different contexts!",
-      "det": {
-        "spoken_present": true,
-        "spoken_english": true,
-        "spoken_md_free": true,
-        "breakdown_present": true,
-        "spoken_word_count": 13,
-        "spoken_speakable": true,
-        "split_ok": true
-      },
-      "meets_expectation": true,
-      "misleading": false,
-      "explanation_in_english": true,
-      "asks_to_repeat": false,
-      "judge_reason": "The coach correctly explains the differences between 的 and 得, provides appropriate examples, and does not mislead the learner."
-    },
-    {
-      "id": "r01",
-      "type": "referential",
-      "question": "wait, why was that wrong?",
-      "note": "resolve 'that' = the word-order recast in history",
-      "spoken": "The correct sentence is \"我昨天去公园\" because in Mandarin, the time expression (like \"昨天\" for \"yesterday\") usually comes before the verb.",
-      "full": "The correct sentence is \"我昨天去公园\" because in Mandarin, the time expression (like \"昨天\" for \"yesterday\") usually comes before the verb. \n\nSo, the structure is: Subject + Time + Verb + Object. \n\nFor example:\n1. 我今天去商店 (I go to the store today).\n2. 她明天回家 (She returns home tomorrow).\n\nTry to remember this order for clarity!",
-      "det": {
-        "spoken_present": true,
-        "spoken_english": true,
-        "spoken_md_free": true,
-        "breakdown_present": true,
-        "spoken_word_count": 30,
-        "spoken_speakable": true,
-        "split_ok": true
-      },
-      "meets_expectation": true,
-      "misleading": false,
-      "explanation_in_english": true,
-      "asks_to_repeat": false,
-      "judge_reason": "The coach correctly explains the placement of the time word in Mandarin sentences and provides a clear structure without asking the learner to repeat."
-    },
-    {
-      "id": "r02",
-      "type": "referential",
-      "question": "can you give me another example like that?",
-      "note": "resolve 'that' = the 杯 measure word from history",
-      "spoken": "You should use \"两杯\" instead of \"两个\" for drinks.",
-      "full": "You should use \"两杯\" instead of \"两个\" for drinks.\n\nIn Mandarin, when referring to cups or glasses, we use the measure word \"杯\" (bēi). \n\nFor example:\n- \"我想要三杯水。\" (I want three cups of water.)\n- \"请给我五杯咖啡。\" (Please give me five cups of coffee.)\n\nDrill: Try saying \"I want four cups of tea.\" in Mandarin.",
+      "spoken": "The difference between 了 and 过 is about the aspect of the action they express.",
+      "full": "The difference between 了 and 过 is about the aspect of the action they express.\n\n了 indicates a completed action or a change of state, while 过 indicates an experience or that something has happened at least once in the past.\n\nFor example:\n- 我吃了午饭 (Wǒ chīle wǔfàn) means \"I have eaten lunch,\" emphasizing that the action is completed.\n- 我去过中国 (Wǒ qùguò Zhōngguó) means \"I have been to China,\" focusing on the experience of having gone there at least once.\n\nA quick drill: Try making sentences using both 了 and 过 to describe your experiences!",
       "det": {
         "spoken_present": true,
         "spoken_english": true,
@@ -357,7 +207,161 @@
       "misleading": false,
       "explanation_in_english": true,
       "asks_to_repeat": false,
-      "judge_reason": "The coach provides a correct example using the measure word 杯 and explains its usage clearly in English."
+      "judge_reason": "The reply correctly explains the difference between 了 and 过, provides examples, and encourages practice, meeting the expectation."
+    },
+    {
+      "id": "q02",
+      "type": "question",
+      "question": "When do I use 二 versus 两?",
+      "note": "二 vs 两",
+      "spoken": "Use \"二\" for counting or in numbers, and \"两\" for two of something.",
+      "full": "Use \"二\" for counting or in numbers, and \"两\" for two of something.\n\n \n\n\"二\" (èr) is used when you are simply stating the number two, like in 21 (二十一). \"两\" (liǎng) is used with measure words, like in 两个苹果 (two apples). \n\nExamples: \n- 二十 (èr shí) means twenty.\n- 两本书 (liǎng běn shū) means two books.\n\nDrill: Try saying \"two people\" in Mandarin.",
+      "det": {
+        "spoken_present": true,
+        "spoken_english": true,
+        "spoken_md_free": true,
+        "breakdown_present": true,
+        "spoken_word_count": 17,
+        "spoken_speakable": true,
+        "split_ok": true
+      },
+      "meets_expectation": true,
+      "misleading": false,
+      "explanation_in_english": true,
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly explains the use of 二 and 两, provides examples, and includes a drill for practice."
+    },
+    {
+      "id": "q03",
+      "type": "question",
+      "question": "How do I say 'again' — is it 再 or 又?",
+      "note": "再 vs 又",
+      "spoken": "It's both 再 and 又, but they are used in different contexts.",
+      "full": "It's both 再 and 又, but they are used in different contexts.\n\n \n\n再 (zài) is used when you want to say \"again\" in the sense of doing something again in the future, like \"I will do it again.\" For example: 我再做一次 (Wǒ zài zuò yīcì) means \"I will do it again.\"\n\n \n\n又 (yòu) is used to indicate a repeated action that has already happened, like \"I did it again.\" For example: 我又去了 (Wǒ yòu qùle) means \"I went again.\"\n\n \n\nSo, use 再 for future actions and 又 for past actions.",
+      "det": {
+        "spoken_present": true,
+        "spoken_english": true,
+        "spoken_md_free": true,
+        "breakdown_present": true,
+        "spoken_word_count": 13,
+        "spoken_speakable": true,
+        "split_ok": true
+      },
+      "meets_expectation": true,
+      "misleading": false,
+      "explanation_in_english": true,
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly explains the difference between 再 and 又, provides examples, and is written in English."
+    },
+    {
+      "id": "q04",
+      "type": "question",
+      "question": "Why do I need a measure word before a noun?",
+      "note": "measure-word necessity",
+      "spoken": "You need a measure word before a noun in Mandarin to specify the quantity and type of the noun.",
+      "full": "You need a measure word before a noun in Mandarin to specify the quantity and type of the noun. \n\nIn Mandarin, nouns are not counted directly; instead, you use a measure word that corresponds to the noun's category. For example, for \"three books,\" you say \"三本书\" (sān běn shū), where \"本\" (běn) is the measure word for books.\n\nThis structure helps clarify the meaning and is essential for grammatical correctness. \n\nHere are a couple of examples:\n- 一个人 (yí gè rén) - \"one person\" (个 is the measure word for people)\n- 两杯水 (liǎng bēi shuǐ) - \"two cups of water\" (杯 is the measure word for cups)\n\nYou can practice by forming sentences with different nouns and their appropriate measure words!",
+      "det": {
+        "spoken_present": true,
+        "spoken_english": true,
+        "spoken_md_free": true,
+        "breakdown_present": true,
+        "spoken_word_count": 19,
+        "spoken_speakable": true,
+        "split_ok": true
+      },
+      "meets_expectation": true,
+      "misleading": false,
+      "explanation_in_english": true,
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly explains the need for measure words in Mandarin, provides examples, and clarifies that different nouns take different measure words."
+    },
+    {
+      "id": "q05",
+      "type": "question",
+      "question": "What does 把 do in a sentence?",
+      "note": "把 construction",
+      "spoken": "The 把 construction indicates the handling or disposal of an object in a sentence.",
+      "full": "The 把 construction indicates the handling or disposal of an object in a sentence.\n\n \n\nIn a 把 sentence, the structure is usually: Subject + 把 + Object + Verb + (Complement). This shows that the subject is doing something to the object. For example, in the sentence \"我把书放在桌子上\" (I put the book on the table), \"我\" (I) is the subject, \"书\" (book) is the object, and \"放\" (put) is the verb.\n\n \n\nAnother example: \"他把门关上了\" (He closed the door). Here, \"门\" (door) is the object, and \"关\" (close) is the verb. \n\n \n\nTry creating your own 把 sentence!",
+      "det": {
+        "spoken_present": true,
+        "spoken_english": true,
+        "spoken_md_free": true,
+        "breakdown_present": true,
+        "spoken_word_count": 14,
+        "spoken_speakable": true,
+        "split_ok": true
+      },
+      "meets_expectation": true,
+      "misleading": false,
+      "explanation_in_english": true,
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly explains the 把 construction, provides the structure, and gives examples, fulfilling the expectation."
+    },
+    {
+      "id": "q06",
+      "type": "question",
+      "question": "Is 的 the same as 得?",
+      "note": "的 vs 得",
+      "spoken": "No, 的 and 得 are not the same; they serve different grammatical functions.",
+      "full": "No, 的 and 得 are not the same; they serve different grammatical functions.\n\n \n\nThe character 的 (de) is primarily used as a possessive particle or to modify nouns, while 得 (de) is used to indicate the degree or result of an action. \n\nFor example: \n\n- 我的书 (wǒ de shū) means \"my book,\" showing possession. \n- 他跑得快 (tā pǎo de kuài) means \"he runs fast,\" indicating the degree of how he runs. \n\nTo practice, try creating sentences using both 的 and 得 in different contexts.",
+      "det": {
+        "spoken_present": true,
+        "spoken_english": true,
+        "spoken_md_free": true,
+        "breakdown_present": true,
+        "spoken_word_count": 13,
+        "spoken_speakable": true,
+        "split_ok": true
+      },
+      "meets_expectation": true,
+      "misleading": false,
+      "explanation_in_english": true,
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly explains the difference between 的 and 得, provides examples, and encourages practice."
+    },
+    {
+      "id": "r01",
+      "type": "referential",
+      "question": "wait, why was that wrong?",
+      "note": "resolve 'that' = the word-order recast in history",
+      "spoken": "The correct sentence is \"我昨天去公园,\" which means \"I went to the park yesterday.\"",
+      "full": "The correct sentence is \"我昨天去公园,\" which means \"I went to the park yesterday.\" \n\nIn Mandarin, the time expression (like \"昨天\" for \"yesterday\") usually comes before the verb. So, you need to place \"昨天\" before \"去\" (to go) to make it sound natural. \n\nHere's the breakdown: \n\n- Correct order: Time + Verb + Object\n- Example: \"我明天去学校\" (I will go to school tomorrow).\n\nTry to remember this structure when forming sentences!",
+      "det": {
+        "spoken_present": true,
+        "spoken_english": true,
+        "spoken_md_free": true,
+        "breakdown_present": true,
+        "spoken_word_count": 20,
+        "spoken_speakable": true,
+        "split_ok": true
+      },
+      "meets_expectation": true,
+      "misleading": false,
+      "explanation_in_english": true,
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly explains the placement of the time word before the verb in Mandarin, using the provided sentence as an example."
+    },
+    {
+      "id": "r02",
+      "type": "referential",
+      "question": "can you give me another example like that?",
+      "note": "resolve 'that' = the 杯 measure word from history",
+      "spoken": "You should use \"两杯\" instead of \"两个\" for drinks.",
+      "full": "You should use \"两杯\" instead of \"两个\" for drinks.\n\nIn Mandarin, when referring to drinks, you use the measure word \"杯\" (bēi) which means \"cup\" or \"glass.\" \n\nFor example, you can say:\n- 一杯水 (yī bēi shuǐ) - one cup of water\n- 三杯咖啡 (sān bēi kāfēi) - three cups of coffee\n\nTry saying \"我想要三杯果汁\" (wǒ xiǎng yào sān bēi guǒzhī) for \"I want three cups of juice.\"",
+      "det": {
+        "spoken_present": true,
+        "spoken_english": true,
+        "spoken_md_free": true,
+        "breakdown_present": true,
+        "spoken_word_count": 15,
+        "spoken_speakable": true,
+        "split_ok": true
+      },
+      "meets_expectation": true,
+      "misleading": false,
+      "explanation_in_english": true,
+      "asks_to_repeat": false,
+      "judge_reason": "The reply provides another example using the measure word 杯, explains its usage, and offers a practice sentence, fulfilling the expectation."
     },
     {
       "id": "r03",
@@ -365,7 +369,7 @@
       "question": "what did you just fix?",
       "note": "resolve 'that' = the 个→本 fix from history",
       "spoken": "I corrected \"这个书\" to \"这本书.\"",
-      "full": "I corrected \"这个书\" to \"这本书.\"\n\n \n\nIn Mandarin, \"这\" means \"this,\" but when referring to books, we use the measure word \"本\" to indicate the quantity. So, \"这本书\" means \"this book.\" \n\nFor example: \n- 这本书很有趣 (This book is very interesting).\n- 这本书是我的 (This book is mine).\n\nTry saying \"这本书\" to get used to the measure word!",
+      "full": "I corrected \"这个书\" to \"这本书.\"\n\n \n\nIn Mandarin, \"这\" means \"this,\" but when referring to books, you need to use \"本\" as a measure word. \"本\" is specifically used for books. \n\nFor example:\n- 这本书 (this book)\n- 那本书 (that book)\n\nHere's a tiny drill: Try saying \"that pen\" in Mandarin.",
       "det": {
         "spoken_present": true,
         "spoken_english": false,
@@ -378,22 +382,22 @@
       "meets_expectation": true,
       "misleading": false,
       "explanation_in_english": true,
-      "asks_to_repeat": true,
-      "judge_reason": "The coach correctly identifies the measure word fix and explains it, but also asks the learner to repeat, which does not meet the expectation."
+      "asks_to_repeat": false,
+      "judge_reason": "The reply correctly explains the measure-word correction from '个' to '本' for books and provides examples, fulfilling the expectation."
     },
     {
       "id": "r04",
       "type": "referential",
       "question": "why?",
       "note": "resolve bare 'why?' = the future-了 removal in history",
-      "spoken": "You don't need \"了\" in this sentence because \"会\" already indicates a future action.",
-      "full": "You don't need \"了\" in this sentence because \"会\" already indicates a future action. \n\nIn Mandarin, \"会\" (huì) means \"will\" or \"be going to,\" and it shows that something will happen in the future. Adding \"了\" suggests a completed action, which doesn't fit here since you're talking about a future plan.\n\nFor example:\n1. 我明天会去商店。 (I will go to the store tomorrow.)\n2. 她下个月会去旅行。 (She will travel next month.)\n\nSo, just say \"我明天会去北京\" for a natural expression of your future plan.",
+      "spoken": "You don't need \"了\" here because \"会\" already indicates a future action.",
+      "full": "You don't need \"了\" here because \"会\" already indicates a future action. \n\nIn Mandarin, \"会\" means \"will\" or \"be going to,\" so it shows that the action is planned for the future. Adding \"了\" suggests a completed action, which doesn't fit with the future tense you're expressing.\n\nFor example:\n- 我明天会去北京。 (I will go to Beijing tomorrow.)\n- 我昨天去了北京。 (I went to Beijing yesterday.)\n\nTry saying: \"我明天会去上海。\" (I will go to Shanghai tomorrow.)",
       "det": {
         "spoken_present": true,
         "spoken_english": true,
         "spoken_md_free": true,
         "breakdown_present": true,
-        "spoken_word_count": 18,
+        "spoken_word_count": 16,
         "spoken_speakable": true,
         "split_ok": true
       },
@@ -401,29 +405,29 @@
       "misleading": false,
       "explanation_in_english": true,
       "asks_to_repeat": false,
-      "judge_reason": "The coach correctly explains why '了' is not needed in the context of a future action, providing a clear rationale and examples."
+      "judge_reason": "The reply correctly explains that '了' is not used with future actions indicated by '会', and provides examples to illustrate the point."
     },
     {
       "id": "g01",
       "type": "garbled",
       "question": "why is the uh the the wor- ",
       "note": "cut-off English question",
-      "spoken": "It seems like your sentence got cut off. Could you please clarify what you want to ask about? Are you looking for an explanation of a specific word or grammar point in Mandarin?",
-      "full": "It seems like your sentence got cut off. Could you please clarify what you want to ask about? Are you looking for an explanation of a specific word or grammar point in Mandarin?",
+      "spoken": "It seems like you might be struggling with a specific word or phrase in Mandarin. Could you clarify what you're asking about? If you have a sentence or a specific word in mind, please share it, and I can help break it down for you!",
+      "full": "It seems like you might be struggling with a specific word or phrase in Mandarin. Could you clarify what you're asking about? If you have a sentence or a specific word in mind, please share it, and I can help break it down for you!",
       "det": {
         "spoken_present": true,
         "spoken_english": true,
         "spoken_md_free": true,
         "breakdown_present": false,
-        "spoken_word_count": 33,
-        "spoken_speakable": true,
+        "spoken_word_count": 45,
+        "spoken_speakable": false,
         "split_ok": true
       },
       "meets_expectation": true,
       "misleading": false,
       "explanation_in_english": true,
       "asks_to_repeat": true,
-      "judge_reason": "The coach correctly identifies that the learner's question is incomplete and asks for clarification, which meets the expectation."
+      "judge_reason": "The coach correctly identifies the learner's turn as incomplete and asks for clarification, meeting the expectation."
     },
     {
       "id": "g02",
@@ -431,7 +435,7 @@
       "question": "我 the 是 was 了 zzz por shh",
       "note": "mixed-noise mis-transcription",
       "spoken": "Your sentence is not correct and doesn't make sense in Mandarin.",
-      "full": "Your sentence is not correct and doesn't make sense in Mandarin. \n\nThe correct way to express something like \"I was\" would be \"我在\" (wǒ zài) or \"我曾经\" (wǒ céngjīng) depending on the context. \n\nThe key point here is that \"是\" (shì) means \"is\" or \"to be,\" and \"了\" (le) is used to indicate a completed action or change of state. In this case, you need to choose the right verb or phrase to convey the past tense.\n\nFor example:\n- \"我在学校\" (wǒ zài xuéxiào) means \"I was at school.\"\n- \"我曾经去过\" (wǒ céngjīng qùguò) means \"I have been.\"\n\nTry to focus on using the correct verbs for the context!",
+      "full": "Your sentence is not correct and doesn't make sense in Mandarin. \n\nThe correct way to express something like \"I was\" would be \"我在\" (wǒ zài) or \"我曾经\" (wǒ céngjīng) depending on the context.\n\nThe key point here is that \"是\" (shì) means \"is\" or \"to be,\" but it doesn't convey the past tense. Instead, you can use \"在\" (zài) for ongoing actions or \"曾经\" (céngjīng) for past experiences.\n\nFor example:\n- 我在学校。 (Wǒ zài xuéxiào.) - I am at school.\n- 我曾经去过中国。 (Wǒ céngjīng qùguò Zhōngguó.) - I have been to China.\n\nTry saying \"我曾经\" followed by what you want to express in the past.",
       "det": {
         "spoken_present": true,
         "spoken_english": true,
@@ -442,54 +446,207 @@
         "split_ok": true
       },
       "meets_expectation": false,
-      "misleading": false,
+      "misleading": true,
       "explanation_in_english": true,
       "asks_to_repeat": false,
-      "judge_reason": "The coach fails to recognize that the learner's turn is unintelligible and instead fabricates a correction, which does not meet the expectation."
+      "judge_reason": "The reply incorrectly attempts to correct the garbled sentence instead of asking the learner to repeat, and it misleadingly suggests '我在' for 'I was,' which is incorrect."
     },
     {
       "id": "g03",
       "type": "garbled",
       "question": "wo qu le de shdjf ne uh",
       "note": "failed romanised STT",
-      "spoken": "Your sentence needs some corrections for clarity and naturalness.",
-      "full": "Your sentence needs some corrections for clarity and naturalness. \n\nThe corrected version is: 我去的地方是... (Wǒ qù de dìfāng shì...) which means \"The place I went to is...\"\n\nThe key point here is the structure of the sentence. In Mandarin, when you want to say where you went, you typically use \"我去的地方是...\" to specify the location. \n\nFor example:\n1. 我去的地方是商店。(Wǒ qù de dìfāng shì shāngdiàn.) - \"The place I went to is the store.\"\n2. 我去的地方是学校。(Wǒ qù de dìfāng shì xuéxiào.) - \"The place I went to is the school.\"\n\nTry forming a sentence using this structure!",
+      "spoken": "Your sentence needs some adjustments for clarity and correctness. A more natural way to say it would be \"我去的地方是...\" (Wǒ qù de dìfāng shì...), meaning \"The place I am going to is...\".",
+      "full": "Your sentence needs some adjustments for clarity and correctness. A more natural way to say it would be \"我去的地方是...\" (Wǒ qù de dìfāng shì...), meaning \"The place I am going to is...\".\n\nThe key point here is the structure of the sentence. In Mandarin, when you want to describe a place you are going to, you typically use \"去\" (qù) followed by \"的地方\" (de dìfāng) to indicate \"the place\". \n\nFor example:\n1. 我去的地方是学校。(Wǒ qù de dìfāng shì xuéxiào.) - The place I am going to is school.\n2. 我去的地方是商店。(Wǒ qù de dìfāng shì shāngdiàn.) - The place I am going to is the store.\n\nTry saying a complete sentence about where you are going!",
       "det": {
         "spoken_present": true,
         "spoken_english": true,
         "spoken_md_free": true,
         "breakdown_present": true,
-        "spoken_word_count": 9,
+        "spoken_word_count": 39,
         "spoken_speakable": true,
         "split_ok": true
       },
       "meets_expectation": false,
-      "misleading": false,
+      "misleading": true,
       "explanation_in_english": true,
       "asks_to_repeat": false,
-      "judge_reason": "The coach does not recognize the learner's unintelligible turn and instead provides a correction, which does not meet the expectation of asking the learner to repeat."
+      "judge_reason": "The reply incorrectly assumes the learner's intent and provides a Mandarin sentence instead of asking for repetition."
     },
     {
       "id": "g04",
       "type": "garbled",
       "question": "and then the ... [inaudible] ... 的 the",
       "note": "mostly-inaudible turn",
-      "spoken": "It seems like your sentence is incomplete, but I can help clarify the use of 的.",
-      "full": "It seems like your sentence is incomplete, but I can help clarify the use of 的. \n\nThe word 的 (de) is a possessive particle in Mandarin that links nouns to describe relationships or attributes. \n\nFor example, in the phrase \"我的书\" (wǒ de shū), it means \"my book.\" Here, 的 connects \"I\" (我) to \"book\" (书) to show possession.\n\nIf you have a specific sentence or context in mind, please share it, and I can help you break it down further!",
+      "spoken": "It seems like your sentence is incomplete or unclear. Could you please provide a complete Mandarin sentence for me to help you with?",
+      "full": "It seems like your sentence is incomplete or unclear. Could you please provide a complete Mandarin sentence for me to help you with?",
       "det": {
         "spoken_present": true,
         "spoken_english": true,
         "spoken_md_free": true,
-        "breakdown_present": true,
-        "spoken_word_count": 17,
+        "breakdown_present": false,
+        "spoken_word_count": 23,
         "spoken_speakable": true,
         "split_ok": true
       },
-      "meets_expectation": false,
+      "meets_expectation": true,
       "misleading": false,
       "explanation_in_english": true,
       "asks_to_repeat": true,
-      "judge_reason": "The coach does not ask the learner to repeat the inaudible part, instead providing an explanation about 的 without addressing the incompleteness of the learner's turn."
+      "judge_reason": "The coach correctly identifies the issue and asks the learner to repeat for clarification."
     }
-  ]
+  ],
+  "judge_verify": {
+    "primary_judge": "gpt-4o",
+    "second_judge": "gpt-4o-mini",
+    "n_compared": 20,
+    "agreement": {
+      "meets_expectation": 0.9,
+      "misleading": 0.9,
+      "asks_to_repeat": 0.9,
+      "explanation_in_english": 1.0
+    },
+    "second_rows": [
+      {
+        "id": "sc01",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "sc02",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": true,
+        "explanation_in_english": true
+      },
+      {
+        "id": "sc03",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "sc04",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "sc05",
+        "meets_expectation": false,
+        "misleading": true,
+        "asks_to_repeat": true,
+        "explanation_in_english": true
+      },
+      {
+        "id": "sc06",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "q01",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "q02",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": true,
+        "explanation_in_english": true
+      },
+      {
+        "id": "q03",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "q04",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "q05",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "q06",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "r01",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "r02",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "r03",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "r04",
+        "meets_expectation": true,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "g01",
+        "meets_expectation": false,
+        "misleading": false,
+        "asks_to_repeat": true,
+        "explanation_in_english": true
+      },
+      {
+        "id": "g02",
+        "meets_expectation": false,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "g03",
+        "meets_expectation": false,
+        "misleading": false,
+        "asks_to_repeat": false,
+        "explanation_in_english": true
+      },
+      {
+        "id": "g04",
+        "meets_expectation": false,
+        "misleading": false,
+        "asks_to_repeat": true,
+        "explanation_in_english": true
+      }
+    ]
+  }
 }
