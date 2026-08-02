@@ -1,0 +1,207 @@
+{
+  "n": 20,
+  "by_type": {
+    "sentence_coach": 6,
+    "question": 6,
+    "referential": 4,
+    "garbled": 4
+  },
+  "cases": [
+    {
+      "id": "sc01",
+      "type": "sentence_coach",
+      "history": [],
+      "question": "我昨天买东西了在商店",
+      "expectation": "Identify the word-order error: the place phrase 在商店 must come BEFORE the verb, not after. Give a corrected version such as 我昨天在商店买东西了, and explain that in Mandarin 在+place goes before the verb.",
+      "note": "word order — 在+place before the verb"
+    },
+    {
+      "id": "sc02",
+      "type": "sentence_coach",
+      "history": [],
+      "question": "我有三个书",
+      "expectation": "Identify the measure-word error: books take 本, not 个. Give the corrected sentence 我有三本书 and name 本 as the measure word for books.",
+      "note": "measure word — 本 for books"
+    },
+    {
+      "id": "sc03",
+      "type": "sentence_coach",
+      "history": [],
+      "question": "我去过北京了",
+      "expectation": "Identify that 了 is redundant/incorrect here: 过 already marks the past experience. Give the corrected 我去过北京 and explain 过 vs 了 (experience vs completed action).",
+      "note": "aspect — 过 already marks experience, drop 了"
+    },
+    {
+      "id": "sc04",
+      "type": "sentence_coach",
+      "history": [],
+      "question": "他昨天没有去了学校",
+      "expectation": "Identify that 了 cannot follow the negation 没有. Give the corrected 他昨天没去学校 (or 他昨天没有去学校) and explain 没(有) negates a past action and drops 了.",
+      "note": "negation — 没有 does not take 了"
+    },
+    {
+      "id": "sc05",
+      "type": "sentence_coach",
+      "history": [],
+      "question": "请给我一杯水",
+      "expectation": "Recognise the sentence is ALREADY correct and natural. Affirm it is right (do NOT invent an error); optionally offer a small extension or praise.",
+      "note": "control — a correct sentence must not be 'corrected'"
+    },
+    {
+      "id": "sc06",
+      "type": "sentence_coach",
+      "history": [],
+      "question": "这个天气比昨天更热多了",
+      "expectation": "Identify the comparison error: 更 and 多了 clash. A natural version is 这个天气比昨天热多了 or 比昨天更热. Explain the 比 comparison structure (比 + noun + adjective, with 多了/一点 for degree, not 更…多了 together).",
+      "note": "comparison — 比 structure, 更 vs 多了"
+    },
+    {
+      "id": "q01",
+      "type": "question",
+      "history": [],
+      "question": "What's the difference between 了 and 过?",
+      "expectation": "Explain 了 marks a completed action while 过 marks a past EXPERIENCE ('have done at some point'). Give an example contrasting them (e.g. 我吃了饭 vs 我吃过日本菜).",
+      "note": "aspect particles"
+    },
+    {
+      "id": "q02",
+      "type": "question",
+      "history": [],
+      "question": "When do I use 二 versus 两?",
+      "expectation": "Explain 两 is used before a measure word (两个人, 两本书) and 二 for counting, numbers and ordinals (第二, 十二, 二楼). Give at least one example of each.",
+      "note": "二 vs 两"
+    },
+    {
+      "id": "q03",
+      "type": "question",
+      "history": [],
+      "question": "How do I say 'again' — is it 再 or 又?",
+      "expectation": "Explain 再 is for a repetition that hasn't happened yet (future/intended: 再说一次) and 又 for one that already happened (又迟到了). Give an example of each.",
+      "note": "再 vs 又"
+    },
+    {
+      "id": "q04",
+      "type": "question",
+      "history": [],
+      "question": "Why do I need a measure word before a noun?",
+      "expectation": "Explain Mandarin requires a measure word between a number/demonstrative and a noun (三本书, 这个人), that 个 is the default, and different nouns take different measure words.",
+      "note": "measure-word necessity"
+    },
+    {
+      "id": "q05",
+      "type": "question",
+      "history": [],
+      "question": "What does 把 do in a sentence?",
+      "expectation": "Explain the 把 construction fronts the object to focus on what is done to it / its disposal, with the structure Subject + 把 + Object + Verb + complement. Give an example (e.g. 我把门关了).",
+      "note": "把 construction"
+    },
+    {
+      "id": "q06",
+      "type": "question",
+      "history": [],
+      "question": "Is 的 the same as 得?",
+      "expectation": "Explain they are different: 的 marks possession/attributes (我的书, 红色的车) while 得 links a verb to a degree/result complement (说得好, 跑得快). Give an example of each.",
+      "note": "的 vs 得"
+    },
+    {
+      "id": "r01",
+      "type": "referential",
+      "history": [
+        {
+          "role": "user",
+          "content": "我去公园昨天"
+        },
+        {
+          "role": "assistant",
+          "content": "小提醒：应该说「我昨天去公园」。"
+        }
+      ],
+      "question": "wait, why was that wrong?",
+      "expectation": "Using the recent correction in the context (我去公园昨天 → 我昨天去公园), explain the time word 昨天 must come before the verb. Must NOT ask the learner to repeat — the sentence is right there in the context.",
+      "note": "resolve 'that' = the word-order recast in history"
+    },
+    {
+      "id": "r02",
+      "type": "referential",
+      "history": [
+        {
+          "role": "user",
+          "content": "我要两个茶"
+        },
+        {
+          "role": "assistant",
+          "content": "应该说「两杯茶」。"
+        }
+      ],
+      "question": "can you give me another example like that?",
+      "expectation": "Give another example using the measure word 杯 from the context (e.g. 一杯咖啡, 三杯牛奶). Should reference the same 杯 pattern; must not ask the learner to repeat.",
+      "note": "resolve 'that' = the 杯 measure word from history"
+    },
+    {
+      "id": "r03",
+      "type": "referential",
+      "history": [
+        {
+          "role": "user",
+          "content": "这个书很有意思"
+        },
+        {
+          "role": "assistant",
+          "content": "应该说「这本书」。"
+        }
+      ],
+      "question": "what did you just fix?",
+      "expectation": "Restate the measure-word fix from the context: 个 → 本 for books (这个书 → 这本书). Must not ask the learner to repeat.",
+      "note": "resolve 'that' = the 个→本 fix from history"
+    },
+    {
+      "id": "r04",
+      "type": "referential",
+      "history": [
+        {
+          "role": "user",
+          "content": "我明天会去了北京"
+        },
+        {
+          "role": "assistant",
+          "content": "去掉「了」：「我明天会去北京」。"
+        }
+      ],
+      "question": "why?",
+      "expectation": "Explain, from the context, that 了 doesn't go with a future action marked by 明天/会 — the corrected sentence drops 了 (我明天会去北京). Must not ask the learner to repeat.",
+      "note": "resolve bare 'why?' = the future-了 removal in history"
+    },
+    {
+      "id": "g01",
+      "type": "garbled",
+      "history": [],
+      "question": "why is the uh the the wor- ",
+      "expectation": "Recognise the turn is cut off / incomplete and ask the learner to repeat or finish the question. Should NOT invent a grammar answer for the fragment.",
+      "note": "cut-off English question"
+    },
+    {
+      "id": "g02",
+      "type": "garbled",
+      "history": [],
+      "question": "我 the 是 was 了 zzz por shh",
+      "expectation": "Recognise the turn is garbled/unintelligible (mixed noise) and ask the learner to repeat. Should NOT fabricate a correction for the noise.",
+      "note": "mixed-noise mis-transcription"
+    },
+    {
+      "id": "g03",
+      "type": "garbled",
+      "history": [],
+      "question": "wo qu le de shdjf ne uh",
+      "expectation": "Recognise the turn is unintelligible (failed romanised transcription) and ask the learner to repeat. Should NOT invent a Mandarin sentence to correct.",
+      "note": "failed romanised STT"
+    },
+    {
+      "id": "g04",
+      "type": "garbled",
+      "history": [],
+      "question": "and then the ... [inaudible] ... 的 the",
+      "expectation": "Recognise most of the turn is inaudible and ask the learner to repeat. Should NOT guess at a full question or correction from the fragments.",
+      "note": "mostly-inaudible turn"
+    }
+  ]
+}

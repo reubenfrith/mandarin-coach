@@ -227,3 +227,50 @@ async def extract_grounding(answer: str) -> GroundingClaims:
     return await _judge(GroundingClaims).ainvoke(
         [SystemMessage(content=_GROUND_SYS), HumanMessage(content=f"Answer:\n{answer}")]
     )
+
+
+# --------------------------------------------------------------------------- #
+# 5. Voice-coach reply quality — subjective judge (voice_coach surface)
+# --------------------------------------------------------------------------- #
+# The voice coach explains grammar aloud to an English speaker mid-practice. Unlike the
+# text coach it has hard behavioural rules the reference-based correction judge doesn't
+# capture: explain in ENGLISH (Chinese only for examples), and — on a garbled/mis-heard
+# turn — ask to repeat rather than inventing a correction. One judge covers all case types
+# by scoring the reply against a per-case EXPECTATION (the case author's rubric), plus two
+# intrinsic booleans (English-ness, asks-to-repeat) that don't need a rubric.
+class VoiceQualityVerdict(BaseModel):
+    # No field defaults: gpt-4o-mini (this surface's judge) uses OpenAI strict JSON-schema
+    # mode, which requires EVERY property in `required` — a default makes it optional and the
+    # schema is rejected. Required + strict also guarantees the model fills each field (which
+    # is exactly what glm failed to do here).
+    meets_expectation: bool = Field(description="Does the reply do what the EXPECTATION describes for this turn (answer the question / correctly break down the sentence / ask to repeat)?")
+    misleading: bool = Field(description="Does the reply make a materially wrong or misleading claim about Mandarin?")
+    explanation_in_english: bool = Field(description="Is the EXPLANATION prose written in English? Chinese used only for the example words/sentences themselves is fine and expected — judge the explanation, not the examples.")
+    asks_to_repeat: bool = Field(description="Does the reply ask the learner to repeat or clarify (rather than answering / correcting)?")
+    reason: str = Field(description="One sentence justification.")
+
+
+_VOICE_SYS = (
+    "You judge a spoken Mandarin COACH's reply. The coach breaks down grammar for an "
+    "English-speaking learner in the middle of a spoken practice session. You are given the "
+    "recent spoken context, the learner's current turn, an EXPECTATION describing what a correct "
+    "reply must do, and the coach's reply. Decide four things: (1) meets_expectation — does the "
+    "reply actually do what the EXPECTATION describes? (2) misleading — does it state anything "
+    "materially wrong about Mandarin? (3) explanation_in_english — is the EXPLANATION written in "
+    "English? (Chinese used only for the example words/sentences is correct and expected; judge "
+    "the explanatory prose, not the examples.) (4) asks_to_repeat — does it ask the learner to "
+    "repeat or clarify instead of answering? Be strict but fair; reward a reply that meets the "
+    "expectation even if its wording differs from any example."
+)
+
+
+async def judge_voice_answer(context: str, question: str, expectation: str, answer: str) -> VoiceQualityVerdict:
+    msg = (
+        f"Recent spoken context:\n{context or '(none)'}\n\n"
+        f"Learner's turn: {question}\n\n"
+        f"EXPECTATION (what a correct reply must do):\n{expectation}\n\n"
+        f"Coach's reply:\n{answer}"
+    )
+    return await _judge(VoiceQualityVerdict).ainvoke(
+        [SystemMessage(content=_VOICE_SYS), HumanMessage(content=msg)]
+    )
