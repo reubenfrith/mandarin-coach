@@ -11,10 +11,10 @@ this file is the **map of the folder** — what each file is and how the pieces 
 evals/
   lib/        shared modules, imported not run   (_env.py, llm_judge.py, agg_parse.py)
   datagen/    dataset builders + frozen data     (seed_data.py, generate_*.py, *.json)
-  surfaces/   10 runnable evaluations, grouped by the product surface they exercise:
+  surfaces/   11 runnable evaluations, grouped by the product surface they exercise:
     text_coach/     the agent + RAG + tools    preflight_typec, eval_harness, ragas_rag, ragas_agentic,
                                                extraction_eval, retrieval_sweep, coverage_check, model_bakeoff
-    voice_coach/    the spoken intent router   voice_intent_eval
+    voice_coach/    router + coach quality     voice_intent_eval, voice_coach_quality
     pronunciation/  the tone coach             tone_assessment_eval
   results/    every surface's output + its own README (verification recipes)
   notes/      findings + decision records that span runs (e.g. voice-router-findings.md)
@@ -63,6 +63,8 @@ The three **Task 6** surfaces (`retrieval_sweep`, `coverage_check`, `model_bakeo
 | `test_dataset.json` | The 60 head-to-head cases: 40 A_stateless (stateless), 10 B_small (small-scale memory), 10 C_scale (at-scale aggregation). |
 | `generate_extraction_dataset.py` | Builds `extraction_dataset.json`: 34 positives (labels from `test_dataset.json`, coach replies reused from `results/head_to_head.json`; 6 corpus inputs with English meaning-annotations excluded as invalid) + 17 negatives (correct-sentence/question with generated realistic replies, non-Chinese guard cases). |
 | `extraction_dataset.json` | Frozen ground truth for the extraction surface. |
+| `generate_voice_coach_dataset.py` | Builds `voice_coach_dataset.json`: 20 hand-authored spoken-coach turns (6 sentence_coach · 6 question · 4 referential · 4 garbled), each with an EXPECTATION rubric the judge scores against. No LLM. |
+| `voice_coach_dataset.json` | Frozen gold set for the voice-coach quality surface. |
 
 ### `surfaces/` — the runnable evaluations (each writes into `results/`)
 
@@ -87,6 +89,7 @@ scope (Tasks 5–6); **voice coach** and **pronunciation** are the product exten
 | File | What it measures | Writes |
 |---|---|---|
 | `voice_intent_eval.py` (Phase 4) | The voice router `_route_intent`: coach-precision + converse→coach misroute rate over 40 turns bucketed by script but labelled by true intent, so per-bucket accuracy separates the zero-latency heuristic's error from the LLM classifier's. Precision-first on converse. `--classify-always` runs the counterfactual (classify every turn, vs the router) → `results/voice_intent_classify_always.{md,json}`. Findings + verdict in [`notes/voice-router-findings.md`](notes/voice-router-findings.md). | `results/voice_intent.{md,json}` |
+| `voice_coach_quality_eval.py` | The spoken COACH brain `run_voice_coach` (what the router doesn't check): 20 turns across sentence-coach / question / referential / garbled. DETERMINISTIC checks on the spoken-TL;DR format, English-only, speakability; an LLM JUDGE (gpt-4o-mini, not the repo-default glm — glm was unreliable here) on meets-expectation / misleading / noise→ask-to-repeat / history-grounding, scored against per-case rubrics. `--verify-judge <model>` re-scores with a second judge. Findings in [`notes/voice-coach-findings.md`](notes/voice-coach-findings.md). | `results/voice_coach_quality.{md,json}` |
 
 #### `surfaces/pronunciation/` — the tone coach
 
@@ -132,6 +135,12 @@ EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_coach/voice_intent_eval.py
 uv run python evals/surfaces/voice_coach/voice_intent_eval.py --from-rows                           # re-aggregate saved rows, no model calls
 EVAL_CONCURRENCY=6 uv run python evals/surfaces/voice_coach/voice_intent_eval.py --classify-always --repeats 3   # counterfactual: classify EVERY turn, vs the router
 uv run python evals/surfaces/voice_coach/voice_intent_eval.py --latency 12                          # marginal cost of one classifier call (classify-most's per-turn tax)
+
+# 4b. Voice coach — spoken explanation quality (what the router doesn't check)
+uv run python evals/datagen/generate_voice_coach_dataset.py                             # build the 20-turn gold set
+EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py             # coach-quality surface (judge = gpt-4o-mini)
+uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py --from-rows                    # re-aggregate saved rows, no model calls
+uv run python evals/surfaces/voice_coach/voice_coach_quality_eval.py --verify-judge qwen            # vet the judge with a second model
 
 # 5. Pronunciation coach (tone auto-logging gate) — fully local DSP, no model calls
 uv run python evals/datagen/generate_tone_dataset.py                                    # build the synthetic tone recipe set
