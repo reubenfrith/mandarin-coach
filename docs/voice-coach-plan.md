@@ -150,12 +150,33 @@ output, no second call, no structured-output-vs-tools conflict.
 - Intro copy updated to tell the learner they can ask questions in English.
 - (Power-user Shift+Space and the tab rename remain optional/deferred — cosmetic.)
 
-**Phase 4 — measure** (mirrors the repo's eval-surface discipline)
-- A small labeled transcript→intent set → a router **precision** eval surface under
-  `evals/surfaces/`, precision-first on CONVERSE. Calibrate the classifier bias / heuristic.
-- Wiring tests (`tests/test_voice_router.py`): stub the classifier + both brains; assert
-  manual override wins, pure-Chinese skips the classifier, coach path injects history and
-  writes a summarised turn back, CONVERSE-only logging.
+**Phase 4 — measure** ✅ DONE
+- Router **precision** surface `evals/surfaces/voice_intent_eval.py` over a 40-turn hand-labelled
+  set (`evals/datagen/voice_intent_dataset.json`, deterministic generator — no LLM, so we're not
+  grading the classifier against LLM-written labels). Coach = positive class, so the jarring
+  converse→coach misroute is a false positive and **coach precision is the headline**
+  (precision-first on converse). Scoring math unit-tested in `tests/test_voice_intent_eval.py`.
+- **The dataset's discriminating move:** bucket by SCRIPT (which fixes the code path) but label
+  by TRUE intent, so each pure bucket carries heuristic-adversarial cases — English glue
+  ("and you?", "me too") the `Latin→coach` rule force-routes to a lecture, and Mandarin questions
+  ("这个词是什么意思？") the `Han→converse` rule sends to chat. Without these the pure buckets
+  would score 1.0 by construction (the retrieval-saturation trap) and only `mixed` would test
+  anything. Per-bucket accuracy is reported so heuristic error and classifier error stay separate.
+- **Result (gpt-4o-mini, `results/voice_intent.md`): coach precision 0.72, converse→coach misroute
+  0.23, accuracy 0.75.** The decisive finding: **100% of the misroutes are the HEURISTIC's, not the
+  classifier's.** The classifier scored 10/10 on the mixed turns — including correctly keeping all
+  four borderline proper-noun turns ("我周末想去 Melbourne 玩") as converse. Every false positive
+  is short English glue the `Latin→coach` rule sends to coach *without ever calling the classifier*;
+  every false negative is a Mandarin question the `Han→converse` rule sends to chat. The precision-
+  first bet holds (the classifier isn't over-coaching); the calibration target is the **heuristic**.
+- **Calibration implication (not yet applied):** refine the script heuristic, not the classifier —
+  e.g. route short English turns with no question mark / on an affirmation list to converse, and
+  let the classifier see Han-only turns that look interrogative (吗/什么/为什么/怎么/呢/？) rather
+  than blindly routing them to converse. Tracked as a follow-on change, harness-evidenced by this
+  surface.
+- Wiring tests (`tests/test_voice_router.py`): stub the classifier + both brains; assert manual
+  override wins, pure-Chinese skips the classifier, coach path injects history and writes a
+  summarised turn back, CONVERSE-only logging.
 
 ## Files touched
 

@@ -11,8 +11,9 @@ this file is the **map of the folder** — what each file is and how the pieces 
 evals/
   lib/        shared modules, imported not run   (_env.py, llm_judge.py, agg_parse.py)
   datagen/    dataset builders + frozen data     (seed_data.py, generate_*.py, *.json)
-  surfaces/   8 runnable evaluations             Task 5: preflight_typec, eval_harness, ragas_rag, ragas_agentic, extraction_eval
+  surfaces/   9 runnable evaluations             Task 5: preflight_typec, eval_harness, ragas_rag, ragas_agentic, extraction_eval
                                                  Task 6: retrieval_sweep, coverage_check, model_bakeoff
+                                                 Voice coach Phase 4: voice_intent_eval
   results/    every surface's output + its own README (verification recipes)
 ```
 
@@ -72,6 +73,7 @@ The three **Task 6** surfaces (`retrieval_sweep`, `coverage_check`, `model_bakeo
 | `retrieval_sweep.py` (Task 6.1) | Advanced-retrieval sweep over 43 fresh non-circular queries: baseline dense vs BGE-M3 vs hybrid (BM25+dense, RRF). Deterministic exact rule-id match + wall-clock latency, no LLM judge. | `results/retrieval_sweep.{md,json}` |
 | `coverage_check.py` (Task 6.2) | Effect of unioning the +217 CGW `grammar_patterns` set: coverage on 15 CGW-only topics + precision retention on the 43 curated queries. Deterministic. | `results/coverage_check.{md,json}` |
 | `model_bakeoff.py` (Task 6.4) | DeepSeek V4 / GLM-5.2 / Qwen3.5 head-to-head on grounded corrections: correct-fix, misleading claims, timeout rate, latency p50/p95. Settles the keep/drop-DeepSeek decision. | `results/model_bakeoff.{md,json}` |
+| `voice_intent_eval.py` (Voice coach Phase 4) | The voice router `_route_intent`: coach-precision + converse→coach misroute rate over 40 turns bucketed by script but labelled by true intent, so per-bucket accuracy separates the zero-latency heuristic's error from the LLM classifier's. Precision-first on converse. | `results/voice_intent.{md,json}` |
 
 **Results** — `results/` holds the output of every surface. **Start at
 [`results/README.md`](results/README.md)**: it indexes all surfaces and gives copy-paste
@@ -104,6 +106,11 @@ uv run python evals/surfaces/retrieval_sweep.py --configs baseline,bge_m3,hybrid
 uv run python evals/surfaces/coverage_check.py                                         # 6.2 grammar coverage / precision retention
 uv run python evals/surfaces/extraction_eval.py --guarded                              # 6.3 guarded re-run (before/after the guard)
 REQUEST_TIMEOUT=150 uv run python evals/surfaces/model_bakeoff.py                       # 6.4 model bake-off (12 cases × 3 models)
+
+# 4. Voice coach Phase 4 (router intent)
+uv run python evals/datagen/generate_voice_intent_dataset.py                            # build the 40-turn labelled set
+EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_intent_eval.py                    # router precision surface (40 turns)
+uv run python evals/surfaces/voice_intent_eval.py --from-rows                           # re-aggregate saved rows, no model calls
 ```
 
 ## Methodology notes (decisions made during the build)

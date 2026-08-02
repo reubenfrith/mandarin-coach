@@ -1,0 +1,507 @@
+{
+  "summary": {
+    "n_cases": 40,
+    "confusion_matrix": {
+      "TP": 13,
+      "FP": 5,
+      "FN": 5,
+      "TN": 17
+    },
+    "coach_precision": 0.7222222222222222,
+    "coach_recall": 0.7222222222222222,
+    "coach_f1": 0.7222222222222222,
+    "converse_precision": 0.7727272727272727,
+    "converse_recall": 0.7727272727272727,
+    "converse_f1": 0.7727272727272727,
+    "accuracy": 0.75,
+    "converse_to_coach_misroute_rate": 0.22727272727272727,
+    "converse_total": 22,
+    "per_bucket": {
+      "mandarin": {
+        "n": 15,
+        "correct": 10,
+        "accuracy": 0.6666666666666666,
+        "fp": 0,
+        "fn": 5
+      },
+      "english": {
+        "n": 12,
+        "correct": 7,
+        "accuracy": 0.5833333333333334,
+        "fp": 5,
+        "fn": 0
+      },
+      "mixed": {
+        "n": 10,
+        "correct": 10,
+        "accuracy": 1.0,
+        "fp": 0,
+        "fn": 0
+      },
+      "empty": {
+        "n": 3,
+        "correct": 3,
+        "accuracy": 1.0,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "resolution": {
+      "heuristic": 30,
+      "classifier": 10
+    },
+    "classifier_only": {
+      "n": 10,
+      "TP": 6,
+      "FP": 0,
+      "FN": 0,
+      "TN": 4,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "bucket_mismatches": [],
+    "model": "gpt-4o-mini"
+  },
+  "rows": [
+    {
+      "id": "m01",
+      "text": "我昨天去了公园散步。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m02",
+      "text": "我觉得这个周末天气很好。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m03",
+      "text": "我最喜欢的菜是麻婆豆腐。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m04",
+      "text": "你呢？你周末做了什么？",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": "question aimed at the chat partner, not a learning question",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m05",
+      "text": "我们下次聊什么好呢？",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m06",
+      "text": "对，我也这么觉得。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m07",
+      "text": "我早上喝了一杯咖啡。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m08",
+      "text": "昨天的电影真的很好看。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m09",
+      "text": "我想多练习一点口语。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m10",
+      "text": "我家有一只很可爱的猫。",
+      "bucket": "mandarin",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m11",
+      "text": "这个词是什么意思？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "FN",
+      "note": "mandarin-but-coach: asks a word's meaning; heuristic sends it to converse",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m12",
+      "text": "这样说对吗？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "FN",
+      "note": "mandarin-but-coach: is this correct?",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m13",
+      "text": "刚才那个句子为什么不对？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "FN",
+      "note": "mandarin-but-coach: why was that wrong?",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m14",
+      "text": "“把”和“被”有什么区别？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "FN",
+      "note": "mandarin-but-coach: grammar contrast question (quotes are full-width Han)",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "m15",
+      "text": "再给我一个例子好吗？",
+      "bucket": "mandarin",
+      "gold_intent": "coach",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "FN",
+      "note": "mandarin-but-coach: give me another example",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e01",
+      "text": "Why was that sentence wrong?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e02",
+      "text": "What does that word mean?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e03",
+      "text": "Can you explain the grammar there?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e04",
+      "text": "How do I say I miss you in Chinese?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e05",
+      "text": "Give me another example please.",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e06",
+      "text": "What's the difference between those two words?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e07",
+      "text": "Was my tone correct on that?",
+      "bucket": "english",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "TP",
+      "note": null,
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e08",
+      "text": "And you?",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "FP",
+      "note": "english-but-converse: the classifier prompt itself lists this as converse; heuristic force-routes it to coach",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e09",
+      "text": "Yeah, exactly.",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "FP",
+      "note": "english-but-converse: agreement, not a question",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e10",
+      "text": "Haha okay.",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "FP",
+      "note": "english-but-converse: filler",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e11",
+      "text": "One sec.",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "FP",
+      "note": "english-but-converse: aside",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "e12",
+      "text": "Me too!",
+      "bucket": "english",
+      "gold_intent": "converse",
+      "pred_intent": "coach",
+      "resolved_by": "heuristic",
+      "outcome": "FP",
+      "note": "english-but-converse: agreement",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "z01",
+      "text": "。。。",
+      "bucket": "empty",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": "no content",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "z02",
+      "text": "？？？",
+      "bucket": "empty",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": "no content",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "z03",
+      "text": "……",
+      "bucket": "empty",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "heuristic",
+      "outcome": "TN",
+      "note": "no content",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x01",
+      "text": "我想 book 一张机票。",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "code-switch content word (book = 预订)",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x02",
+      "text": "这个 refund 怎么申请？",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "code-switch content word (refund = 退款)",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x03",
+      "text": "他这个人很 stubborn。",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "code-switch adjective (stubborn = 固执)",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x04",
+      "text": "Why did you use 把 here?",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "English question about a Chinese construction",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x05",
+      "text": "What does 差不多 mean?",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "English question about a Chinese word",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x06",
+      "text": "What's the difference between 还 and 又?",
+      "bucket": "mixed",
+      "gold_intent": "coach",
+      "pred_intent": "coach",
+      "resolved_by": "classifier",
+      "outcome": "TP",
+      "note": "English grammar-contrast question",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x07",
+      "text": "我朋友叫 David。",
+      "bucket": "mixed",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "proper name, not a vocabulary gap",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x08",
+      "text": "我周末想去 Melbourne 玩。",
+      "bucket": "mixed",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "borderline: place name in a conversational turn",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x09",
+      "text": "我在追一部 Netflix 的剧。",
+      "bucket": "mixed",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "borderline: brand name in a conversational turn",
+      "bucket_mismatch": null
+    },
+    {
+      "id": "x10",
+      "text": "我们约在 Starbucks 见面吧。",
+      "bucket": "mixed",
+      "gold_intent": "converse",
+      "pred_intent": "converse",
+      "resolved_by": "classifier",
+      "outcome": "TN",
+      "note": "borderline: brand name in a conversational turn",
+      "bucket_mismatch": null
+    }
+  ]
+}

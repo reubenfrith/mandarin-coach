@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "n": 40,
+    "n_coach": 18,
+    "n_converse": 22,
+    "by_bucket": {
+      "mandarin": {
+        "coach": 5,
+        "converse": 10
+      },
+      "english": {
+        "coach": 7,
+        "converse": 5
+      },
+      "empty": {
+        "coach": 0,
+        "converse": 3
+      },
+      "mixed": {
+        "coach": 6,
+        "converse": 4
+      }
+    },
+    "positive_class": "coach",
+    "note": "Bucket = script the heuristic sees (decides the code path); gold_intent = true intent. Pure buckets carry heuristic-adversarial cases on purpose. Only the `mixed` bucket calls the LLM classifier; mandarin/english/empty are resolved by the zero-latency heuristic."
+  },
+  "cases": [
+    {
+      "id": "m01",
+      "text": "我昨天去了公园散步。",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m02",
+      "text": "我觉得这个周末天气很好。",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m03",
+      "text": "我最喜欢的菜是麻婆豆腐。",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m04",
+      "text": "你呢？你周末做了什么？",
+      "gold_intent": "converse",
+      "bucket": "mandarin",
+      "note": "question aimed at the chat partner, not a learning question"
+    },
+    {
+      "id": "m05",
+      "text": "我们下次聊什么好呢？",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m06",
+      "text": "对，我也这么觉得。",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m07",
+      "text": "我早上喝了一杯咖啡。",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m08",
+      "text": "昨天的电影真的很好看。",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m09",
+      "text": "我想多练习一点口语。",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m10",
+      "text": "我家有一只很可爱的猫。",
+      "gold_intent": "converse",
+      "bucket": "mandarin"
+    },
+    {
+      "id": "m11",
+      "text": "这个词是什么意思？",
+      "gold_intent": "coach",
+      "bucket": "mandarin",
+      "note": "mandarin-but-coach: asks a word's meaning; heuristic sends it to converse"
+    },
+    {
+      "id": "m12",
+      "text": "这样说对吗？",
+      "gold_intent": "coach",
+      "bucket": "mandarin",
+      "note": "mandarin-but-coach: is this correct?"
+    },
+    {
+      "id": "m13",
+      "text": "刚才那个句子为什么不对？",
+      "gold_intent": "coach",
+      "bucket": "mandarin",
+      "note": "mandarin-but-coach: why was that wrong?"
+    },
+    {
+      "id": "m14",
+      "text": "“把”和“被”有什么区别？",
+      "gold_intent": "coach",
+      "bucket": "mandarin",
+      "note": "mandarin-but-coach: grammar contrast question (quotes are full-width Han)"
+    },
+    {
+      "id": "m15",
+      "text": "再给我一个例子好吗？",
+      "gold_intent": "coach",
+      "bucket": "mandarin",
+      "note": "mandarin-but-coach: give me another example"
+    },
+    {
+      "id": "e01",
+      "text": "Why was that sentence wrong?",
+      "gold_intent": "coach",
+      "bucket": "english"
+    },
+    {
+      "id": "e02",
+      "text": "What does that word mean?",
+      "gold_intent": "coach",
+      "bucket": "english"
+    },
+    {
+      "id": "e03",
+      "text": "Can you explain the grammar there?",
+      "gold_intent": "coach",
+      "bucket": "english"
+    },
+    {
+      "id": "e04",
+      "text": "How do I say I miss you in Chinese?",
+      "gold_intent": "coach",
+      "bucket": "english"
+    },
+    {
+      "id": "e05",
+      "text": "Give me another example please.",
+      "gold_intent": "coach",
+      "bucket": "english"
+    },
+    {
+      "id": "e06",
+      "text": "What's the difference between those two words?",
+      "gold_intent": "coach",
+      "bucket": "english"
+    },
+    {
+      "id": "e07",
+      "text": "Was my tone correct on that?",
+      "gold_intent": "coach",
+      "bucket": "english"
+    },
+    {
+      "id": "e08",
+      "text": "And you?",
+      "gold_intent": "converse",
+      "bucket": "english",
+      "note": "english-but-converse: the classifier prompt itself lists this as converse; heuristic force-routes it to coach"
+    },
+    {
+      "id": "e09",
+      "text": "Yeah, exactly.",
+      "gold_intent": "converse",
+      "bucket": "english",
+      "note": "english-but-converse: agreement, not a question"
+    },
+    {
+      "id": "e10",
+      "text": "Haha okay.",
+      "gold_intent": "converse",
+      "bucket": "english",
+      "note": "english-but-converse: filler"
+    },
+    {
+      "id": "e11",
+      "text": "One sec.",
+      "gold_intent": "converse",
+      "bucket": "english",
+      "note": "english-but-converse: aside"
+    },
+    {
+      "id": "e12",
+      "text": "Me too!",
+      "gold_intent": "converse",
+      "bucket": "english",
+      "note": "english-but-converse: agreement"
+    },
+    {
+      "id": "z01",
+      "text": "。。。",
+      "gold_intent": "converse",
+      "bucket": "empty",
+      "note": "no content"
+    },
+    {
+      "id": "z02",
+      "text": "？？？",
+      "gold_intent": "converse",
+      "bucket": "empty",
+      "note": "no content"
+    },
+    {
+      "id": "z03",
+      "text": "……",
+      "gold_intent": "converse",
+      "bucket": "empty",
+      "note": "no content"
+    },
+    {
+      "id": "x01",
+      "text": "我想 book 一张机票。",
+      "gold_intent": "coach",
+      "bucket": "mixed",
+      "note": "code-switch content word (book = 预订)"
+    },
+    {
+      "id": "x02",
+      "text": "这个 refund 怎么申请？",
+      "gold_intent": "coach",
+      "bucket": "mixed",
+      "note": "code-switch content word (refund = 退款)"
+    },
+    {
+      "id": "x03",
+      "text": "他这个人很 stubborn。",
+      "gold_intent": "coach",
+      "bucket": "mixed",
+      "note": "code-switch adjective (stubborn = 固执)"
+    },
+    {
+      "id": "x04",
+      "text": "Why did you use 把 here?",
+      "gold_intent": "coach",
+      "bucket": "mixed",
+      "note": "English question about a Chinese construction"
+    },
+    {
+      "id": "x05",
+      "text": "What does 差不多 mean?",
+      "gold_intent": "coach",
+      "bucket": "mixed",
+      "note": "English question about a Chinese word"
+    },
+    {
+      "id": "x06",
+      "text": "What's the difference between 还 and 又?",
+      "gold_intent": "coach",
+      "bucket": "mixed",
+      "note": "English grammar-contrast question"
+    },
+    {
+      "id": "x07",
+      "text": "我朋友叫 David。",
+      "gold_intent": "converse",
+      "bucket": "mixed",
+      "note": "proper name, not a vocabulary gap"
+    },
+    {
+      "id": "x08",
+      "text": "我周末想去 Melbourne 玩。",
+      "gold_intent": "converse",
+      "bucket": "mixed",
+      "note": "borderline: place name in a conversational turn"
+    },
+    {
+      "id": "x09",
+      "text": "我在追一部 Netflix 的剧。",
+      "gold_intent": "converse",
+      "bucket": "mixed",
+      "note": "borderline: brand name in a conversational turn"
+    },
+    {
+      "id": "x10",
+      "text": "我们约在 Starbucks 见面吧。",
+      "gold_intent": "converse",
+      "bucket": "mixed",
+      "note": "borderline: brand name in a conversational turn"
+    }
+  ]
+}
