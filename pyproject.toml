@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Personal Mandarin coaching agent — error-intelligence Agentic RAG for lower-intermediate learners"
 requires-python = ">=3.11"
 dependencies = [
-    "chainlit",
     "langchain",
     "langchain-community",
     "langchain-core",

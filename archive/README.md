@@ -16,10 +16,10 @@ Kept for reference only; safe to delete outright.
 | `app-public/` | `app/public/` | Chainlit theme assets (`theme.json`, `stylesheet.css`, `help.html`). The custom UI styles itself in `app/web_ui/style.css`. |
 | `root-public/` | `public/` | Ditto (repo-root copy; was never even copied into the Docker image). |
 
-## Loose ends (not done here)
+## Loose ends
 
-- **`chainlit` is still a dependency** in `pyproject.toml` / `uv.lock`. `app-main.py` was its
-  only importer, so it's now unused, but removing it touches the lockfile and Docker build —
-  left as a separate, deliberate step.
+- **`chainlit` dependency removed.** Dropped from `pyproject.toml` and re-locked
+  (`uv lock` also pruned ~40 transitive-only deps); nothing imported it. Its default
+  `chainlit.md` welcome file and the stale `.chainlit/*` `.gitignore` rules went with it.
 - `CHAINLIT_AUTH_SECRET` is **still live** — the FastAPI app reuses that env var name as its
   JWT signing secret (`app/web_api.py`). It is *not* Chainlit and must stay.
