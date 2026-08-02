@@ -180,15 +180,19 @@ output, no second call, no structured-output-vs-tools conflict.
   the counterfactual of skipping the heuristic and classifying every turn **fixed all 10 heuristic
   misroutes, regressed only 1** (`？？？`, which the classifier reads as a question), and was **0/40
   unstable** across 3 runs. Coach precision 0.72→**0.95**, misroute 0.23→**0.045**, accuracy
-  0.75→**0.975**. So on *accuracy* classify-most clearly wins; the decision now hinges on **latency**
-  (an LLM call on every plain-Mandarin turn), which the surface can't measure. Full write-up +
-  decision rule: `evals/notes/voice-router-findings.md`.
-- **Calibration implications (not yet applied), harness-evidenced:** pick on the latency budget —
-  either (1) **classify-most**: keep only a trivial empty→converse guard (the one thing classify-always
-  got wrong), drop the two script rules; or (2) **tuned heuristic**: short English affirmations →
-  converse, interrogative Han-only turns → classifier (these target exactly the 10 fixed cases, so the
-  data predicts they recover most of the gain without taxing every turn — a prediction to verify).
-  Separately, (3) decide the proper-noun policy / prompt carve-out.
+  0.75→**0.975**. So on *accuracy* classify-most clearly wins.
+- **Latency, measured (`--latency 12`):** `classify_turn_intent` is **~790 ms p50 / ~1.77 s p95** —
+  **~34% of a 2.3 s turn**, added to *every* turn the heuristic resolves in ~0 ms today (and serial,
+  since it runs after STT). That tips the recommended default toward the **tuned heuristic**, not
+  classify-most: trading ~0.8 s on every conversational turn for +0.225 accuracy is a poor deal when a
+  tuned heuristic can likely recover the same 10 fixes while paying the classifier only on ambiguous
+  turns. Full write-up + decision rule: `evals/notes/voice-router-findings.md`.
+- **Calibration follow-ons, harness-evidenced:** (1) **tuned heuristic (default)** — short English
+  affirmations → converse, interrogative Han-only turns → classifier, keep the empty guard (targets
+  exactly the 10 fixed cases; verify before/after); (2) **if classify-most instead** — add the empty
+  guard and switch the classifier's error fallback to the heuristic (not converse); (3) proper-noun
+  policy / prompt carve-out; (4) regenerate the router baseline as majority-of-3 before trusting any
+  mixed-path head-to-head delta.
 - Wiring tests (`tests/test_voice_router.py`): stub the classifier + both brains; assert manual
   override wins, pure-Chinese skips the classifier, coach path injects history and writes a
   summarised turn back, CONVERSE-only logging.

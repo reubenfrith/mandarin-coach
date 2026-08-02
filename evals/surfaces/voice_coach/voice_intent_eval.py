@@ -47,6 +47,7 @@ import argparse  # noqa: E402
 import asyncio  # noqa: E402
 import json  # noqa: E402
 import os  # noqa: E402
+import time  # noqa: E402
 
 import voice_api  # noqa: E402
 from config import CONVERSATION_MODEL  # noqa: E402
@@ -463,10 +464,42 @@ def render_classify_always_md(summary, rows, spread, h2h, router_summary) -> str
     return "\n".join(lines)
 
 
+async def latency_probe(n: int, turn_baseline_s: float) -> dict:
+    """Marginal cost of ONE `classify_turn_intent` call — the extra latency classify-most adds to
+    every turn the heuristic resolves for free today. Timed SEQUENTIALLY (concurrency 1) so the
+    number is per-call, not inflated by eval contention. This is an eval-time estimate, NOT
+    production-under-load, but it converts "hinges on latency" into a number."""
+    cases = json.loads(DATASET.read_text())["cases"]
+    # Sample across buckets so the mix is representative; only the mixed turns actually vary the
+    # classifier's work, but all pay the round-trip.
+    sample = [c["text"] for c in cases[:n]]
+    times = []
+    for text in sample:
+        t0 = time.perf_counter()
+        await voice_api.classify_turn_intent(text)
+        times.append(time.perf_counter() - t0)
+    times.sort()
+    p = lambda q: times[min(len(times) - 1, int(q * len(times)))]  # noqa: E731
+    p50, p95 = p(0.50), p(0.95)
+    return {
+        "n": len(times), "model": CONVERSATION_MODEL,
+        "p50_s": p50, "p95_s": p95, "mean_s": sum(times) / len(times),
+        "min_s": times[0], "max_s": times[-1],
+        "turn_baseline_s": turn_baseline_s,
+        "p50_pct_of_turn": p50 / turn_baseline_s if turn_baseline_s else None,
+    }
+
+
 async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--from-rows", action="store_true",
                     help="recompute summary + re-render md from saved rows (no model calls)")
+    ap.add_argument("--latency", type=int, metavar="N", default=None,
+                    help="marginal-latency probe: time N sequential classify_turn_intent calls "
+                         "(the per-turn cost classify-most adds). Prints p50/p95; makes no other output.")
+    ap.add_argument("--turn-baseline-s", type=float, default=2.3,
+                    help="reference full-turn latency (STT+chat+TTS) for the latency probe's %%-of-turn. "
+                         "Default 2.3s from the voice-coach plan's measured pipeline.")
     ap.add_argument("--classify-always", action="store_true",
                     help="run the counterfactual arm: classify EVERY turn (skip the heuristic), "
                          "compare to the router baseline; writes voice_intent_classify_always.{md,json}")
@@ -474,6 +507,17 @@ async def main():
                     help="classify-always: times to classify each turn (temp 0.2 is nondeterministic; "
                          "the spread across runs is reported). Default 3.")
     args = ap.parse_args()
+
+    # ----- latency probe ------------------------------------------------------ #
+    if args.latency:
+        lat = await latency_probe(args.latency, args.turn_baseline_s)
+        pct = f"{lat['p50_pct_of_turn'] * 100:.0f}%" if lat["p50_pct_of_turn"] is not None else "—"
+        print(f"classify_turn_intent latency ({lat['model']}, {lat['n']} sequential calls):")
+        print(f"  p50 {lat['p50_s'] * 1000:.0f} ms · p95 {lat['p95_s'] * 1000:.0f} ms · "
+              f"mean {lat['mean_s'] * 1000:.0f} ms  (range {lat['min_s'] * 1000:.0f}–{lat['max_s'] * 1000:.0f} ms)")
+        print(f"  p50 ≈ {pct} of a {lat['turn_baseline_s']}s full turn — the per-turn cost "
+              "classify-most adds vs the heuristic's ~0 ms. (eval-time estimate, not under production load)")
+        return
 
     # ----- classify-always arm ------------------------------------------------ #
     if args.classify_always:

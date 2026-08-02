@@ -96,36 +96,65 @@ Per-turn head-to-head: **fixed 10, regressed 1, 0 unstable** across the 3 runs.
 `Han→converse`) cost more than they save. The decision is no longer "is the classifier good
 enough" — it is now purely a **latency/cost** question this surface cannot measure.
 
+### The latency cost, now measured
+
+`--latency 12` (12 sequential `classify_turn_intent` calls, gpt-4o-mini): **p50 ≈ 790 ms, p95
+≈ 1.77 s, mean ≈ 910 ms**. Against the plan's ~2.3 s full-turn baseline that's **~34% of a turn
+(p50)** added to *every* turn classify-most would take over from the heuristic — i.e. ~0.8 s
+tacked onto the plain-Mandarin conversation turns (75% of traffic) that today route in ~0 ms.
+The classifier runs *after* STT (it needs the transcript), so this is serial, not hidden. It's
+an eval-time marginal estimate, not production-under-load — but it's the real order of
+magnitude. Reproduce: `voice_intent_eval.py --latency 12`.
+
+**This tips the default toward the tuned heuristic, not classify-most.** Trading ~0.8 s on
+*every* conversational turn for +0.225 accuracy is a poor deal on a mic-held pipeline, when a
+tuned heuristic can likely recover the same 10 fixes while paying the classifier only on
+genuinely ambiguous turns. Classify-most becomes attractive only if that call is driven down
+(temp 0, a faster/cheaper classifier, or overlapping it with STT/response) or the deployment
+can absorb the latency.
+
 ### What the evidence does NOT settle
 
-- **Latency is unmeasured here.** Classify-always puts an LLM call (temp 0.2) on the critical
-  path of *every* spoken turn, including the overwhelmingly common plain-Mandarin conversation
-  turn the heuristic resolves in ~0 ms. On a mic-held pipeline the plan fought to keep fast,
-  that per-turn cost is the real tradeoff — weigh it before adopting.
 - **Scope: n=40, one dataset, our labels** — including the 4 contestable proper-noun labels
   (Finding 3), which classify-always also benefits from. But the core result is robust to them:
-  the 10 fixes are all unambiguous, and only `？？？` regresses.
+  the 10 fixes are all unambiguous, and only `？？？` regresses (the regression count is what
+  touches those labels, and it stays at 1).
 - **Stability is measured on 3 runs.** More repeats could surface some; 3× identical is decent
   but not proof of determinism at temp 0.2.
+- **The head-to-head is majority-of-3 (classify-always) vs a single temp-0.2 draw (the router
+  baseline in `voice_intent.json`).** It doesn't affect *this* result — every decisive delta is
+  a deterministic heuristic-path turn — but only **heuristic-path deltas are fully trustworthy**.
+  If someone re-runs and a *mixed*-path turn flips in the single-draw baseline, the head-to-head
+  could show a phantom fix/regression. Regenerate the baseline as majority-of-3 before trusting
+  any mixed-path delta.
 
 ### Recommended design (harness-evidenced)
 
-Two viable paths; pick on the latency budget:
-
-1. **Classify-most** (if an LLM call per turn is affordable): keep a trivial **empty/no-content
-   guard → converse** (it's the only thing classify-always got wrong), drop the two script
-   rules, classify everything else. Best accuracy.
-2. **Tuned heuristic** (if plain-Mandarin turns must stay LLM-free): apply the two targeted
-   fixes below. They target *exactly* the 10 cases classify-always fixed, so the data predicts
-   they recover most of the gain without taxing every turn — but that's a prediction to verify
-   with its own before/after run, not a measured result.
+1. **Tuned heuristic — the recommended default.** Apply the two targeted fixes below (short
+   English affirmations → converse; interrogative Han-only turns → classifier), keeping the
+   empty→converse guard. They target *exactly* the 10 cases classify-always fixed, so the data
+   predicts they recover most of the gain while keeping the ~0.8 s classifier call off the 75%
+   of turns that don't need it. Verify with a before/after run (`before` = `voice_intent.md`).
+2. **Classify-most — only if the latency is bought down or affordable.** Keep a trivial
+   **empty/no-content guard → converse** (the one thing classify-always got wrong), drop the two
+   script rules, classify the rest. Best accuracy (0.975), worst per-turn latency.
+   **Critical:** under classify-most the classifier's error/timeout fallback must be the
+   **heuristic**, not `converse`. `classify_turn_intent` currently falls back to converse; today
+   a classifier outage still routes pure-English→coach via the heuristic, but under classify-most
+   an outage would send *everything* to converse — making the coach unreachable for exactly the
+   English-question case that matters most.
 
 ## Follow-on changes (tracked, harness-evidenced by this surface)
 
-1. **Decide the latency budget**, then pick path 1 or 2 above.
-2. **Heuristic refinement (path 2)** — short English affirmations → converse; interrogative
-   Han-only turns (吗/什么/为什么/怎么/呢/？) → classifier; keep the empty guard. Re-run this
-   surface before/after; the before is `results/voice_intent.md`.
+1. **Tuned heuristic (recommended default)** — short English affirmations → converse;
+   interrogative Han-only turns (吗/什么/为什么/怎么/呢/？) → classifier; keep the empty guard.
+   Re-run this surface before/after; the before is `results/voice_intent.md`. This is the
+   latency-preserving path the measured ~0.8 s classifier call points to.
+2. **If going classify-most instead** — add the empty→converse guard and switch
+   `classify_turn_intent`'s error fallback to the heuristic (not converse); consider driving the
+   classifier latency down (temp 0 / faster model / overlap with STT).
 3. **Proper-noun policy** — decide whether proper nouns stay in conversation; if yes, add the
    prompt carve-out (Finding 3). Affects both paths (the classifier currently keeps them in
    converse, deviating from its prompt).
+4. **Before trusting mixed-path head-to-head deltas** — regenerate `voice_intent.json` as
+   majority-of-3 so it denoises the same way the classify-always arm does.

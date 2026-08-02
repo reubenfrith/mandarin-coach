@@ -131,6 +131,7 @@ uv run python evals/datagen/generate_voice_intent_dataset.py                    
 EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_coach/voice_intent_eval.py                    # router precision surface (40 turns)
 uv run python evals/surfaces/voice_coach/voice_intent_eval.py --from-rows                           # re-aggregate saved rows, no model calls
 EVAL_CONCURRENCY=6 uv run python evals/surfaces/voice_coach/voice_intent_eval.py --classify-always --repeats 3   # counterfactual: classify EVERY turn, vs the router
+uv run python evals/surfaces/voice_coach/voice_intent_eval.py --latency 12                          # marginal cost of one classifier call (classify-most's per-turn tax)
 
 # 5. Pronunciation coach (tone auto-logging gate) — fully local DSP, no model calls
 uv run python evals/datagen/generate_tone_dataset.py                                    # build the synthetic tone recipe set
