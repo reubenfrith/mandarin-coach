@@ -97,6 +97,25 @@ $("logout").addEventListener("click", async () => {
   show("login");
 });
 
+// ---- theme (light/dark) --------------------------------------------------- //
+// The <head> script already applied any saved choice before paint; here we just keep
+// the toggle icon in sync and let the user flip + persist it.
+function effectiveTheme() {
+  return document.documentElement.getAttribute("data-theme")
+    || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+}
+function syncThemeIcon() {
+  // Show the action, not the state: a moon when we're light (click → dark), sun when dark.
+  $("theme-toggle").textContent = effectiveTheme() === "dark" ? "☀️" : "🌙";
+}
+syncThemeIcon();
+$("theme-toggle").addEventListener("click", () => {
+  const next = effectiveTheme() === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+  syncThemeIcon();
+});
+
 // ---- tabs ----------------------------------------------------------------- //
 const TABS = { pronounce: "pronounce-pane", coach: "coach-pane", voice: "voice-pane" };
 function selectTab(which) {

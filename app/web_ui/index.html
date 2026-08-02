@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mandarin Coach</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Apply a saved theme before first paint so there's no light->dark flash. No saved
+       choice => leave it to the CSS prefers-color-scheme default. -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
 </head>
 <body>
   <!-- Login -->
@@ -45,6 +53,7 @@
       </nav>
       <span class="spacer"></span>
       <span id="whoami" class="muted"></span>
+      <button id="theme-toggle" class="icon-btn" title="Toggle light / dark" aria-label="Toggle light or dark theme">🌙</button>
       <button id="logout" class="link">log out</button>
     </header>
 
