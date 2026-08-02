@@ -125,6 +125,9 @@ function selectTab(which) {
   }
   $("coach-pinyin").hidden = which !== "coach";  // the pīnyīn switch belongs to the text coach
   updateTopbar();
+  // Focus the pane's primary input so the learner can type immediately (voice has no field).
+  const focusTarget = which === "coach" ? "chat-input" : which === "pronounce" ? "pron-input" : null;
+  if (focusTarget) $(focusTarget).focus();
 }
 Object.keys(TABS).forEach((name) => $(`tab-${name}`).addEventListener("click", () => selectTab(name)));
 
@@ -351,6 +354,31 @@ function renderCoachBody(turn, md) {
   if (showPinyin) rubifyHanzi(body);
 }
 
+// A hover "copy" affordance on a coach reply. Copies the raw Markdown (clean hanzi + text,
+// no ruby interleaving) — what a learner wants when grabbing a corrected sentence or drill.
+// Appended to the turn (not the body), so it survives a pīnyīn re-render of the body.
+function addCopyButton(turn) {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.type = "button";
+  btn.textContent = "copy";
+  btn.addEventListener("click", () => {
+    const text = turn._md || turn.querySelector(".body").innerText || "";
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = "copied ✓";
+      setTimeout(() => { btn.textContent = "copy"; }, 1200);
+    }).catch(() => { btn.textContent = "copy failed"; });
+  });
+  turn.appendChild(btn);
+}
+
+// Grow a textarea to fit its content (capped by the CSS max-height, which then scrolls),
+// so a multi-line message isn't trapped in a one-row slot.
+function autoGrow(el) {
+  el.style.height = "auto";
+  el.style.height = el.scrollHeight + "px";
+}
+
 const chatForm = $("chat-form");
 const chatSend = chatForm.querySelector("button[type=submit]");
 let chatBusy = false;  // guards against a double-submit (Enter + click, or a fast second Enter)
@@ -362,6 +390,7 @@ chatForm.addEventListener("submit", async (e) => {
   const msg = input.value.trim();
   if (!msg) return;
   input.value = "";
+  autoGrow(input);  // collapse the box back to one row after clearing it
   const emptyHint = $("chat").querySelector(".chat-empty");
   if (emptyHint) emptyHint.remove();
   addTurn($("chat"), "user", msg);
@@ -377,6 +406,7 @@ chatForm.addEventListener("submit", async (e) => {
     const data = await r.json();
     renderCoachBody(pending, data.answer);
     markLogged(pending, data.logged);
+    addCopyButton(pending);
   } catch (err) {
     pending.querySelector(".body").textContent = "Error: " + (err.message || err);
   } finally {
@@ -384,7 +414,11 @@ chatForm.addEventListener("submit", async (e) => {
     chatSend.disabled = false;
   }
   $("chat").scrollTop = $("chat").scrollHeight;
+  input.focus();  // keep the learner typing — don't leave focus on the Send button
 });
+
+$("chat-input").addEventListener("input", (e) => autoGrow(e.target));
+$("pron-input").addEventListener("input", (e) => autoGrow(e.target));  // same behaviour on the pronounce composer
 
 // Enter sends; Shift+Enter inserts a newline (standard chat UX). The box is a <textarea>,
 // so without this Enter would just add a line and the user has to reach for the Send button.
