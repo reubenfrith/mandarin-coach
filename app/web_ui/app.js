@@ -84,6 +84,30 @@ async function enterApp() {
     }
   } catch { /* non-fatal */ }
   updateTopbar();
+  restoreChatHistory();  // bring back the text-coach conversation if the server still has it
+}
+
+// Repopulate the text-coach transcript from the server's in-memory history (survives a
+// reload within a server session). Best-effort and idempotent — bails if turns already exist.
+async function restoreChatHistory() {
+  if ($("chat").querySelector(".turn")) return;
+  let data;
+  try { data = await (await api(`/api/chat/history?thread_id=${encodeURIComponent(threadId())}`)).json(); }
+  catch { return; }
+  const msgs = (data && data.messages) || [];
+  if (!msgs.length) return;
+  const empty = $("chat").querySelector(".chat-empty");
+  if (empty) empty.remove();
+  msgs.forEach((m) => {
+    if (m.role === "user") {
+      addTurn($("chat"), "user", m.content);
+    } else {
+      const turn = addTurn($("chat"), "assistant", "");
+      renderCoachBody(turn, m.content);
+      addCopyButton(turn);
+    }
+  });
+  $("chat").scrollTop = $("chat").scrollHeight;
 }
 
 // The top bar holds the welcome stat (left) and, on the Text-coach tab, the pīnyīn switch
