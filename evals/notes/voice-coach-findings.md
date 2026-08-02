@@ -33,40 +33,47 @@ speakable (≤40 words; p95 ≈ 31). Explanation-in-English 1.0.
 
 1. **Noise robustness is the real gap.** On garbled/STT-mangled input the coach *fabricates* a
    correction instead of asking to repeat — e.g. it turned `wo qu le de shdjf ne uh` into
-   "我去了商店 (I went to the store)" and explained 的 from a mostly-`[inaudible]` turn. Garbled
-   meets_expectation was **0.25 in all three gpt-4o-mini runs** (3 of the 4 garbled turns fabricate,
-   every run — stable, not sampling noise, though n=4 is small). This is the one clear, actionable
-   defect.
+   "我去了商店 (I went to the store)" and explained 的 from a mostly-`[inaudible]` turn. The two
+   unambiguous-noise turns (g02, g03) are fabricated **every run under both judges**, and the
+   independent judge flags them **misleading**. Garbled meets_expectation runs **0.25–0.50** depending
+   on how the two borderline fragments (g01, g04) are scored. n=4 is small, but the fabrication on
+   clear noise is stable, not sampling noise. This is the one clear, actionable defect.
 2. **It won't cleanly affirm a correct sentence.** Given the already-correct 请给我一杯水 (the control
    case), it invents a "more natural" change (drop 请) rather than confirming it's right. Reproduced
    across both runs.
 
-Everything else (二/两, 把, measure words, 了/过, the referential recasts) was explained correctly, and
-the reliable judge found **0 misleading claims**.
+Everything else (二/两, 把, measure words, 了/过, the referential recasts) was explained correctly. The
+independent judge flags **3–4 misleading claims** (of 20) — stably the two noise fabrications (g02, g03:
+presenting an invented sentence as "the correct way to say it" is a misleading assertion), plus a
+variable one or two grammar-framing slips (e.g. sc04 calling a Chinese verb "past tense" — Chinese has
+no tense conjugation). Note: the *same-model* gpt-4o-mini judge reported **0** misleading here; that gap
+is the self-preference story below.
 
-## Judge selection: gpt-4o-mini, not the repo-default glm
+## Judge selection: gpt-4o (independent), after two rejections
 
-The first run used the repo default `JUDGE_MODEL=glm` and produced a **misleading** picture:
-`misleading 3/20`, `meets_expectation 0.65`, and it flagged four correct answers (sc04, sc06, q02,
-q04) as failing — with the `reason` field **left empty on every case**. That empty-reason signature is
-the same structured-output unreliability the extraction surface documented for glm (DECISIONS #13);
-the Pydantic serialization warnings during the run confirm glm mangled the JSON.
+This surface went through three judges — the second-to-third step is itself a finding.
 
-Switching the judge to **gpt-4o-mini** (this surface overrides the default; glm stays the default
-elsewhere): reasons are populated and sensible, the four false negatives flip to passes, and the three
-false-positive "misleading" flags disappear. Crucially, **all 20 gpt-4o-mini verdicts match an
-independent manual adjudication** of the coach replies — the strongest available reliability check.
+**1. glm (the repo default) — rejected as unreliable.** The first run used `JUDGE_MODEL=glm` and gave a
+garbled picture: it flagged four *correct* answers (sc04, sc06, q02, q04) as failing with the `reason`
+field **empty on every case** — the same structured-output unreliability the extraction surface
+documented (DECISIONS #13); the Pydantic warnings confirm glm mangled the JSON.
 
-*Self-preference caveat:* the coach is also gpt-4o-mini, so a same-model judge could in principle be
-lenient. Two things bound that here: (1) the gpt-4o-mini judge **failed 5/20 of its own model's
-replies** — including the real defects — which a rubber-stamping judge would not; and (2) every one of
-its 20 verdicts matches an independent manual adjudication. A `--verify-judge qwen` cross-check was
-attempted (different family, Chinese-strong) but qwen stalled on OpenRouter and was abandoned — the same
-reasoning-model hang this repo already documents for the text coach; glm is unfit for the role (it is
-the model under discussion), so manual adjudication is the reliability authority. `--verify-judge` is
-wired for a future run against a fast, reliable non-OpenAI judge.
+**2. gpt-4o-mini — reliable, but it is the coach, and that mattered.** Switching to gpt-4o-mini fixed
+the reliability (reasons populate, the false negatives flip to passes) and its verdicts matched a manual
+adjudication. BUT the coach under test is also gpt-4o-mini, and a `--verify-judge gpt-4o` cross-check on
+identical coach outputs showed the same-model self-preference was **real and one-directional**: agreement
+was 0.90 on meets_expectation and 1.0 on English, but on **misleading** all three disagreements went the
+same way — gpt-4o-mini excused claims (sc04, g02, g03) that the stronger, independent gpt-4o flags.
+The same-model judge reported **0/20 misleading**; the independent judge finds **3–4/20**. Exactly on the
+headline "dangerous error" metric, the same-model judge was lenient on its own outputs.
 
-One required schema change: gpt-4o-mini uses OpenAI **strict** JSON-schema mode, so `VoiceQualityVerdict`
+**3. gpt-4o — adopted.** Stronger than the gpt-4o-mini coach and it graded it *stricter* (found more
+misleading, not fewer), so it is not colluding. It is reliable (no glm-style empty verdicts) and fast
+(unlike qwen, which stalled on OpenRouter — the documented reasoning-model hang). Residual caveat: gpt-4o
+is same-*provider* as the coach; a cross-provider judge would be ideal but the available one (qwen) is
+unusable here. `gpt-4o` was added to `config.MODELS` purely as an eval judge (no live path uses it).
+
+One required schema change: gpt-4o(-mini) use OpenAI **strict** JSON-schema mode, so `VoiceQualityVerdict`
 fields must be required (no Pydantic defaults) — otherwise the schema is rejected.
 
 ## A metric caught wrong during verification
@@ -79,10 +86,11 @@ with a "try saying … next time!" drill, which the judge reads as a repeat requ
 ## Nondeterminism
 
 The coach runs at production temperature (0.2), so the judge-based rates move run to run. Spread across
-**three gpt-4o-mini-judged runs**: meets_expectation **0.75–0.80**, referential **0.75–1.0**. Stable
-across all three: misleading **0/20**, garbled meets **0.25**, and every deterministic check
-(split-valid, English, speakable) at **1.0**. So the headline conclusions — solid format machinery, no
-misleading claims, and a real noise-robustness gap — are not artefacts of a single sample.
+**three gpt-4o-judged runs**: meets_expectation **0.80–0.85**, misleading **3–4/20** (g02 + g03 in every
+run, plus a variable grammar-framing slip), garbled meets **0.50**. Stable across all three: every
+deterministic check (split-valid, English, speakable) at **1.0**. So the headline conclusions — solid
+format machinery, a small-but-real misleading rate driven by noise fabrication, and the noise-robustness
+gap — are not artefacts of a single sample.
 
 ## Recommended product changes (argued by this surface)
 

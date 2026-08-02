@@ -36,6 +36,10 @@ MODELS = {
     "glm": "openrouter/z-ai/glm-5.2",
     "qwen": "openrouter/qwen/qwen3.5-397b-a17b",
     "gpt-4o-mini": "openai/gpt-4o-mini",
+    # Direct-OpenAI, stronger than gpt-4o-mini. Not used by any live coach path — it's here
+    # as an INDEPENDENT eval judge (a stronger, different model grading the gpt-4o-mini coach,
+    # so a same-model self-preference can't inflate a surface's scores).
+    "gpt-4o": "openai/gpt-4o",
 }
 
 DEFAULT_MODEL = "deepseek"

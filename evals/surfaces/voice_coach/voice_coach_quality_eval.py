@@ -48,13 +48,17 @@ from agent import VOICE_COACH_MODEL, build_voice_coach, run_voice_coach  # noqa:
 from langchain_core.messages import AIMessage, HumanMessage  # noqa: E402
 from lib import llm_judge  # noqa: E402
 
-# This surface's judge is gpt-4o-mini, NOT the repo-default glm. glm was tried first and
-# rejected: on these free-form explanations it left the `reason` field empty and produced
-# ~4/20 false negatives (marking correct grammar answers as failing) — the structured-output
-# unreliability the extraction surface also hit. gpt-4o-mini fills the verdict reliably; the
-# self-preference risk (the coach is also gpt-4o-mini) is bounded by `--verify-judge qwen`
-# (a different family) and documented in the write-up. Override with JUDGE_MODEL.
-llm_judge.JUDGE_MODEL = os.environ.get("JUDGE_MODEL", "gpt-4o-mini")
+# This surface's judge is gpt-4o (independent + reliable), chosen after two rejections:
+#   - glm (the repo default) left the `reason` field empty and produced ~4/20 false negatives
+#     — the structured-output unreliability the extraction surface also hit.
+#   - gpt-4o-mini fills verdicts reliably BUT is the same model as the coach under test, and a
+#     gpt-4o cross-check (`--verify-judge gpt-4o`) proved that mattered: gpt-4o-mini excused 3
+#     borderline MISLEADING claims on its own outputs (sc04, g02, g03) that the stronger,
+#     independent gpt-4o flags. Same-model self-preference, exactly on the headline metric.
+# gpt-4o is stronger than the gpt-4o-mini coach and graded it STRICTER, so it isn't colluding
+# (same-provider is the residual caveat; a cross-provider judge — qwen — stalls on OpenRouter).
+# Override with JUDGE_MODEL.
+llm_judge.JUDGE_MODEL = os.environ.get("JUDGE_MODEL", "gpt-4o")
 
 DATASET = _env.DATAGEN / "voice_coach_dataset.json"
 RESULTS = _env.RESULTS
