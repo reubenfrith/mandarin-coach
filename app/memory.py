@@ -364,6 +364,30 @@ def query_personal_errors(user_id: str, text: str, n: int = 5) -> list:
     return _query(f"{_safe_ns(user_id)}_personal_errors", text, n, {"user_id": user_id})
 
 
+def recent_errors(user_id: str, n: int = 20) -> list[dict]:
+    """The most recently logged personal errors (newest first), for the progress view.
+
+    Returns the flat metadata each record carries — original/correction/category/
+    explanation/timestamp/source — so the UI can render the correction and its source.
+    """
+    col = personal_errors_collection(user_id)
+    if col.count() == 0:
+        return []
+    metas = col.get(include=["metadatas"])["metadatas"]
+    metas.sort(key=lambda m: m.get("timestamp", ""), reverse=True)
+    return [
+        {
+            "category": m.get("category", ""),
+            "original": m.get("original", ""),
+            "correction": m.get("correction", ""),
+            "explanation": m.get("explanation", ""),
+            "timestamp": m.get("timestamp", ""),
+            "source": m.get("source", "text"),
+        }
+        for m in metas[:n]
+    ]
+
+
 def error_stats(user_id: str) -> dict:
     """Deterministic aggregation over the full personal-error corpus.
 

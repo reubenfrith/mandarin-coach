@@ -84,12 +84,8 @@ function drawCurves(canvas, learner, target) {
 
 function renderLogged(container, logged) {
   container.innerHTML = "";
-  (logged || []).forEach((l) => {
-    const el = document.createElement("div");
-    el.className = "logged";
-    el.textContent = `📝 logged: ${l.hanzi} — ${l.explanation}`;
-    container.appendChild(el);
-  });
+  // loggedChip is the shared chip defined in app.js (loaded first).
+  (logged || []).forEach((l) => container.appendChild(loggedChip(`logged: ${l.hanzi} — ${l.explanation}`)));
 }
 
 // ---- Pass 1: compose & correct -------------------------------------------- //
@@ -111,7 +107,7 @@ $("pron-check").addEventListener("click", async () => {
     // New sentence — drop the previous take so playback can't replay a stale one.
     if (P.takeUrl) { URL.revokeObjectURL(P.takeUrl); P.takeUrl = null; $("pron-take-audio").removeAttribute("src"); }
     $("pron-playback").hidden = true;
-    $("pron-status").textContent = "Hear it, then record yourself saying it.";
+    $("pron-status").textContent = "Hear it, then hold the mic and say it.";
   } catch (e) {
     $("pron-status").textContent = "Error: " + (e.message || e);
   }
@@ -133,29 +129,38 @@ $("pron-hear").addEventListener("click", async () => {
 });
 
 // ---- Pass 2: record & score ----------------------------------------------- //
-$("pron-record").addEventListener("click", async () => {
-  if (!P.recording) {
-    try {
-      P.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      P.mr = new MediaRecorder(P.stream);
-      P.chunks = [];
-      P.mr.ondataavailable = (e) => e.data.size && P.chunks.push(e.data);
-      P.mr.onstop = () => { P.stream.getTracks().forEach((t) => t.stop()); scoreTake(); };
-      P.mr.start();
-      P.recording = true;
-      $("pron-record").textContent = "⏹ Stop";
-      $("pron-record").classList.add("recording");
-      $("pron-status").textContent = "recording… say your sentence, then Stop.";
-    } catch (e) {
-      $("pron-status").textContent = "mic error: " + (e.message || e);
-    }
-  } else {
+// Hold-to-talk, the same metaphor as the Voice coach's mic: press and hold, say your
+// sentence, release to score. `P.recording` flips synchronously (before the async
+// getUserMedia) so a stray second trigger is a no-op.
+async function startPronRecording() {
+  if (P.recording) return;
+  P.recording = true;
+  try {
+    P.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    P.mr = new MediaRecorder(P.stream);
+    P.chunks = [];
+    P.mr.ondataavailable = (e) => e.data.size && P.chunks.push(e.data);
+    P.mr.onstop = () => { P.stream.getTracks().forEach((t) => t.stop()); scoreTake(); };
+    P.mr.start();
+    $("pron-record").classList.add("recording");
+    $("pron-status").textContent = "recording… release to score.";
+  } catch (e) {
     P.recording = false;
-    $("pron-record").textContent = "● Record";
-    $("pron-record").classList.remove("recording");
-    if (P.mr && P.mr.state !== "inactive") P.mr.stop();
+    $("pron-status").textContent = "mic error: " + (e.message || e);
   }
-});
+}
+function stopPronRecording() {
+  if (!P.recording) return;
+  P.recording = false;
+  $("pron-record").classList.remove("recording");
+  if (P.mr && P.mr.state !== "inactive") P.mr.stop();
+}
+const pronRec = $("pron-record");
+pronRec.addEventListener("mousedown", startPronRecording);
+pronRec.addEventListener("mouseup", stopPronRecording);
+pronRec.addEventListener("mouseleave", stopPronRecording);
+pronRec.addEventListener("touchstart", (e) => { e.preventDefault(); startPronRecording(); });
+pronRec.addEventListener("touchend", (e) => { e.preventDefault(); stopPronRecording(); });
 
 // ---- Play back the learner's own last take (in-memory only — never uploaded) - //
 $("pron-playback").addEventListener("click", () => {

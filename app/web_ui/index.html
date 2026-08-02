@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mandarin Coach</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Apply a saved theme before first paint so there's no light->dark flash. No saved
+       choice => leave it to the CSS prefers-color-scheme default. -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
 </head>
 <body>
   <!-- Login -->
@@ -42,13 +50,23 @@
         <button id="tab-pronounce" class="tab active">Pronounce</button>
         <button id="tab-coach" class="tab">Text coach</button>
         <button id="tab-voice" class="tab">Voice coach</button>
+        <button id="tab-progress" class="tab">Progress</button>
       </nav>
       <span class="spacer"></span>
       <span id="whoami" class="muted"></span>
+      <button id="theme-toggle" class="icon-btn" title="Toggle light / dark" aria-label="Toggle light or dark theme">🌙</button>
       <button id="logout" class="link">log out</button>
     </header>
 
-    <p id="welcome" class="welcome" hidden></p>
+    <!-- Top bar: welcome stat (left) + the pīnyīn switch (right, Text-coach tab only). -->
+    <div id="topbar" class="topbar" hidden>
+      <p id="welcome" class="welcome-text" hidden></p>
+      <button id="coach-pinyin" type="button" class="pinyin-switch on" role="switch" aria-checked="true" hidden
+              title="Show pīnyīn (pronunciation) under the coach's Chinese">
+        <span class="ps-label">拼音 Show pīnyīn</span>
+        <span class="ps-track"><span class="ps-knob"></span></span>
+      </button>
+    </div>
 
     <!-- Pronunciation coach (default) — compose your own sentence, get it corrected, say it -->
     <div id="pronounce-pane" class="pane">
@@ -67,7 +85,7 @@
           <div id="pron-syllables" class="syllables"></div>
           <div class="row">
             <button id="pron-hear" class="secondary">🔊 Hear it</button>
-            <button id="pron-record">● Record</button>
+            <button id="pron-record" class="mic mic-inline" aria-label="Hold to record yourself">🎙️</button>
             <button id="pron-playback" class="secondary" hidden>▶ Hear yourself</button>
             <span id="pron-status" class="muted"></span>
           </div>
@@ -92,7 +110,11 @@
 
     <!-- Text coach -->
     <div id="coach-pane" class="pane" hidden>
-      <div id="chat" class="transcript"></div>
+      <div id="chat" class="transcript">
+        <p class="chat-empty muted">Type a Chinese sentence to get it corrected, or ask a grammar
+        question in English — “why do I need 了 here?”. Press <kbd>Enter</kbd> to send,
+        <kbd>Shift</kbd>+<kbd>Enter</kbd> for a new line.</p>
+      </div>
       <form id="chat-form" class="composer">
         <textarea id="chat-input" rows="1" placeholder="Type Chinese to check, or ask a question…"></textarea>
         <button type="submit">Send</button>
@@ -119,6 +141,14 @@
         </div>
       </div>
       <audio id="reply-audio" autoplay></audio>
+    </div>
+
+    <!-- Progress: your logged errors over time -->
+    <div id="progress-pane" class="pane" hidden>
+      <div class="progress">
+        <h2>Your progress</h2>
+        <div id="progress-body"></div>
+      </div>
     </div>
   </section>
 

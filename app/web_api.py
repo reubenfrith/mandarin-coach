@@ -17,9 +17,11 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
+from langchain_core.messages import AIMessage, HumanMessage
+
 import memory
 import users
-from agent import build_agent, extract_and_log_error, run_agent
+from agent import answer_text, build_agent, extract_and_log_error, run_agent
 from tools import _tone_pinyin, pinyin_segments
 
 router = APIRouter()
@@ -116,6 +118,12 @@ def stats(user_id: str = Depends(require_user)):
     return memory.error_stats(user_id)
 
 
+@router.get("/api/errors")
+def errors(limit: int = 25, user_id: str = Depends(require_user)):
+    """Recent logged errors (newest first) for the Progress view."""
+    return {"errors": memory.recent_errors(user_id, max(1, min(limit, 100)))}
+
+
 # --------------------------------------------------------------------------- #
 # Text coach
 # --------------------------------------------------------------------------- #
@@ -132,6 +140,37 @@ async def chat(body: ChatBody, user_id: str = Depends(require_user)):
     answer = await run_agent(agent, body.message, body.thread_id)
     logged = await extract_and_log_error(user_id, body.message, answer)
     return {"answer": answer, "logged": logged}
+
+
+@router.get("/api/chat/history")
+def chat_history(thread_id: str, user_id: str = Depends(require_user)):
+    """Best-effort restore of a text-coach conversation after a page reload.
+
+    History lives in the primary graph's in-memory checkpointer (keyed by thread_id),
+    so it survives a reload within a server session but not a server restart. If the
+    user's agent isn't built yet (fresh process), there is nothing to restore. We return
+    only the human turns and the final AI answers — tool-call/observation messages and
+    the system prompt are dropped."""
+    agent = _agents.get(user_id)
+    if agent is None:
+        return {"messages": []}
+    config = {"configurable": {"thread_id": thread_id}}
+    try:
+        state = agent.primary.get_state(config)
+    except Exception:  # noqa: BLE001 — unknown thread / no state → nothing to restore
+        return {"messages": []}
+    out = []
+    for m in (getattr(state, "values", None) or {}).get("messages", []):
+        if isinstance(m, HumanMessage):
+            out.append({"role": "user", "content": answer_text(m.content)})
+        elif isinstance(m, AIMessage) and not getattr(m, "tool_calls", None):
+            # Only terminal AI messages are answers; ones carrying tool_calls are the
+            # model's pre-tool narration (some models put text there too) — skip them
+            # so a restore matches what the live turn actually rendered.
+            txt = answer_text(m.content).strip()
+            if txt:
+                out.append({"role": "assistant", "content": txt})
+    return {"messages": out}
 
 
 @router.get("/api/pinyin")

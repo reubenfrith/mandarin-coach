@@ -83,6 +83,37 @@ async function enterApp() {
       $("welcome").hidden = false;
     }
   } catch { /* non-fatal */ }
+  updateTopbar();
+  restoreChatHistory();  // bring back the text-coach conversation if the server still has it
+}
+
+// Repopulate the text-coach transcript from the server's in-memory history (survives a
+// reload within a server session). Best-effort and idempotent — bails if turns already exist.
+async function restoreChatHistory() {
+  if ($("chat").querySelector(".turn")) return;
+  let data;
+  try { data = await (await api(`/api/chat/history?thread_id=${encodeURIComponent(threadId())}`)).json(); }
+  catch { return; }
+  const msgs = (data && data.messages) || [];
+  if (!msgs.length) return;
+  const empty = $("chat").querySelector(".chat-empty");
+  if (empty) empty.remove();
+  msgs.forEach((m) => {
+    if (m.role === "user") {
+      addTurn($("chat"), "user", m.content);
+    } else {
+      const turn = addTurn($("chat"), "assistant", "");
+      renderCoachBody(turn, m.content);
+      addCopyButton(turn);
+    }
+  });
+  $("chat").scrollTop = $("chat").scrollHeight;
+}
+
+// The top bar holds the welcome stat (left) and, on the Text-coach tab, the pīnyīn switch
+// (right). Collapse the whole bar when neither is showing, so it never leaves an empty strip.
+function updateTopbar() {
+  $("topbar").hidden = $("welcome").hidden && $("coach-pinyin").hidden;
 }
 
 $("logout").addEventListener("click", async () => {
@@ -90,13 +121,109 @@ $("logout").addEventListener("click", async () => {
   show("login");
 });
 
+// ---- theme (light/dark) --------------------------------------------------- //
+// The <head> script already applied any saved choice before paint; here we just keep
+// the toggle icon in sync and let the user flip + persist it.
+function effectiveTheme() {
+  return document.documentElement.getAttribute("data-theme")
+    || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+}
+function syncThemeIcon() {
+  // Show the action, not the state: a moon when we're light (click → dark), sun when dark.
+  $("theme-toggle").textContent = effectiveTheme() === "dark" ? "☀️" : "🌙";
+}
+syncThemeIcon();
+$("theme-toggle").addEventListener("click", () => {
+  const next = effectiveTheme() === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+  syncThemeIcon();
+});
+
 // ---- tabs ----------------------------------------------------------------- //
-const TABS = { pronounce: "pronounce-pane", coach: "coach-pane", voice: "voice-pane" };
+const TABS = { pronounce: "pronounce-pane", coach: "coach-pane", voice: "voice-pane", progress: "progress-pane" };
 function selectTab(which) {
   for (const [name, pane] of Object.entries(TABS)) {
     $(`tab-${name}`).classList.toggle("active", name === which);
     $(pane).hidden = name !== which;
   }
+  $("coach-pinyin").hidden = which !== "coach";  // the pīnyīn switch belongs to the text coach
+  updateTopbar();
+  // Focus the pane's primary input so the learner can type immediately (voice has no field).
+  const focusTarget = which === "coach" ? "chat-input" : which === "pronounce" ? "pron-input" : null;
+  if (focusTarget) $(focusTarget).focus();
+  if (which === "progress") loadProgress();  // refresh each time it's opened
+}
+
+// ---- progress (errors dashboard) ------------------------------------------ //
+// Fetch the corpus stats + recent errors and render a category breakdown (with trend)
+// plus a recent-corrections list. Rebuilt each time the tab opens so it stays current.
+async function loadProgress() {
+  const body = $("progress-body");
+  body.textContent = "Loading…";
+  let stats, errs;
+  try {
+    stats = await (await api("/api/stats")).json();
+    errs = await (await api("/api/errors?limit=25")).json();
+  } catch { body.textContent = "Couldn't load your progress — try again."; return; }
+  body.textContent = "";
+
+  if (!stats || !stats.total) {
+    const p = document.createElement("p");
+    p.className = "progress-empty muted";
+    p.textContent = "No logged errors yet. Chat with the coach or practise pronunciation, "
+      + "and the recurring mistakes we catch will collect here.";
+    body.appendChild(p);
+    return;
+  }
+
+  const total = document.createElement("div");
+  total.className = "stat-total";
+  total.textContent = `${stats.total} logged ${stats.total === 1 ? "error" : "errors"}`;
+  body.appendChild(total);
+
+  // Category breakdown: a bar per category, with a trend arrow (up = getting worse).
+  const cats = Object.entries(stats.by_category);
+  const max = Math.max(...cats.map(([, c]) => c), 1);
+  const list = document.createElement("div");
+  list.className = "cat-list";
+  cats.forEach(([cat, count]) => {
+    const row = document.createElement("div"); row.className = "cat-row";
+    const name = document.createElement("div"); name.className = "cat-name"; name.textContent = cat.replace(/_/g, " ");
+    const bar = document.createElement("div"); bar.className = "cat-bar";
+    const fill = document.createElement("span"); fill.style.width = `${(count / max) * 100}%`; bar.appendChild(fill);
+    const meta = document.createElement("div"); meta.className = "cat-meta";
+    meta.appendChild(document.createTextNode(`${count} `));
+    const trend = (stats.trend || {})[cat];
+    const t = document.createElement("span");
+    t.className = trend === "increasing" ? "trend-up" : trend === "decreasing" ? "trend-down" : "";
+    t.textContent = trend === "increasing" ? "↑" : trend === "decreasing" ? "↓" : "→";
+    t.title = trend === "increasing" ? "happening more lately" : trend === "decreasing" ? "improving" : "steady";
+    meta.appendChild(t);
+    row.append(name, bar, meta);
+    list.appendChild(row);
+  });
+  body.appendChild(list);
+
+  // Recent corrections.
+  const h = document.createElement("h2"); h.textContent = "Recent corrections"; body.appendChild(h);
+  const errList = document.createElement("div"); errList.className = "err-list";
+  (errs.errors || []).forEach((e) => {
+    const card = document.createElement("div"); card.className = "err-card";
+    const head = document.createElement("div"); head.className = "err-head";
+    const cat = document.createElement("span"); cat.className = "err-cat"; cat.textContent = (e.category || "").replace(/_/g, " ");
+    head.appendChild(cat);
+    if (e.source === "voice") { const b = document.createElement("span"); b.className = "badge-voice"; b.textContent = "voice"; head.appendChild(b); }
+    card.appendChild(head);
+    const fix = document.createElement("p"); fix.className = "err-fix";
+    const wrong = document.createElement("span"); wrong.className = "wrong"; wrong.textContent = e.original || "—";
+    const right = document.createElement("span"); right.className = "right"; right.textContent = e.correction || "—";
+    fix.append(wrong, document.createTextNode("  →  "), right);
+    card.appendChild(fix);
+    if (e.explanation) { const ex = document.createElement("p"); ex.className = "err-note"; ex.textContent = e.explanation; card.appendChild(ex); }
+    errList.appendChild(card);
+  });
+  body.appendChild(errList);
 }
 Object.keys(TABS).forEach((name) => $(`tab-${name}`).addEventListener("click", () => selectTab(name)));
 
@@ -106,20 +233,58 @@ const HANZI = /[一-鿿]/;
 // Render 汉字 with pīnyīn underneath each character, inline, via <ruby>. Built with the
 // DOM (not innerHTML) so model/transcript text can never inject markup. Non-Han runs
 // (punctuation, latin) pass through as plain text so the sentence still reads naturally.
-function renderRuby(bodyEl, segments) {
-  bodyEl.textContent = "";
-  bodyEl.classList.add("ruby");
-  segments.forEach((s) => {
+// Turn aligned pīnyīn segments into DOM nodes: one <ruby>汉字<rt>pīn</rt></ruby> per Han
+// char, plain text for the non-Han runs. Built with the DOM so text can't inject markup.
+function segmentsToNodes(segments) {
+  return segments.map((s) => {
     if (s.hanzi) {
       const ruby = document.createElement("ruby");
       ruby.appendChild(document.createTextNode(s.hanzi));
       const rt = document.createElement("rt");
       rt.textContent = s.pinyin || "";
       ruby.appendChild(rt);
-      bodyEl.appendChild(ruby);
-    } else {
-      bodyEl.appendChild(document.createTextNode(s.text || ""));
+      return ruby;
     }
+    return document.createTextNode(s.text || "");
+  });
+}
+
+function renderRuby(bodyEl, segments) {
+  bodyEl.textContent = "";
+  bodyEl.classList.add("ruby");
+  segmentsToNodes(segments).forEach((n) => bodyEl.appendChild(n));
+}
+
+// Look up aligned pīnyīn for a string, cached (the same example sentence recurs, and the
+// toggle re-renders existing turns — no point re-fetching). Resolves to segments or null.
+const _pinyinCache = new Map();
+function fetchSegments(text) {
+  if (_pinyinCache.has(text)) return Promise.resolve(_pinyinCache.get(text));
+  return api(`/api/pinyin?text=${encodeURIComponent(text)}`)
+    .then((r) => r.json())
+    .then((d) => { const segs = d.segments || null; if (segs) _pinyinCache.set(text, segs); return segs; })
+    .catch(() => null);
+}
+
+// Walk a rendered subtree and replace every Han-bearing text node with ruby (汉字 over
+// pīnyīn). Skips code/pre (verbatim) and anything already rubied. Fetches are async and
+// best-effort — a failure leaves the plain hanzi in place.
+const _RUBY_SKIP = new Set(["CODE", "PRE", "RUBY", "RT"]);
+function rubifyHanzi(root) {
+  const targets = [];
+  (function walk(node) {
+    Array.from(node.childNodes).forEach((child) => {
+      if (child.nodeType === 3) { if (HANZI.test(child.nodeValue)) targets.push(child); }
+      else if (child.nodeType === 1 && !_RUBY_SKIP.has(child.tagName)) walk(child);
+    });
+  })(root);
+  targets.forEach((node) => {
+    fetchSegments(node.nodeValue).then((segs) => {
+      if (!segs || !node.parentNode) return;
+      const frag = document.createDocumentFragment();
+      segmentsToNodes(segs).forEach((n) => frag.appendChild(n));
+      node.parentNode.replaceChild(frag, node);
+    });
   });
 }
 
@@ -145,35 +310,253 @@ function addTurn(container, role, text, { withPinyin = false, segments = null, c
   return turn;
 }
 
-function markLogged(turn, logged) {
-  if (!logged) return;
+// Render a small, safe Markdown subset (the coach replies in Markdown: **bold** for
+// corrections, bullet/numbered lists for drills, `code`, headings, example sentences).
+// Built with the DOM — model text only ever becomes textContent, so nothing it emits can
+// inject markup (same discipline as renderRuby). Deliberately does NOT treat `_` as
+// emphasis: the coach names tools like error_pattern_analyser and snake_case must survive.
+function appendInline(parent, text) {
+  const re = /`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\(([^)\s]+)\)/g;
+  let last = 0, m;
+  while ((m = re.exec(text))) {
+    if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
+    let el;
+    if (m[1] != null) { el = document.createElement("code"); el.textContent = m[1]; }
+    else if (m[2] != null) { el = document.createElement("strong"); el.textContent = m[2]; }
+    else if (m[3] != null) { el = document.createElement("em"); el.textContent = m[3]; }
+    else { // link — only http(s) or root-relative hrefs; anything else stays plain text
+      el = document.createElement("a"); el.textContent = m[4];
+      if (/^(https?:\/\/|\/)/i.test(m[5])) { el.href = m[5]; el.target = "_blank"; el.rel = "noopener noreferrer"; }
+    }
+    parent.appendChild(el);
+    last = re.lastIndex;
+  }
+  if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+}
+
+function renderMarkdown(bodyEl, src) {
+  bodyEl.textContent = "";
+  bodyEl.classList.add("md");
+  const lines = String(src || "").replace(/\r\n?/g, "\n").split("\n");
+  const isBlank = (l) => /^\s*$/.test(l);
+  const isFence = (l) => /^\s*```/.test(l);
+  const isHeading = (l) => /^#{1,6}\s+/.test(l);
+  const isUl = (l) => /^\s*[-*+]\s+/.test(l);
+  const isOl = (l) => /^\s*\d+\.\s+/.test(l);
+  const isHr = (l) => /^\s*([-*_])(\s*\1){2,}\s*$/.test(l);           // ---  ***  ___
+  const isQuote = (l) => /^\s*>\s?/.test(l);                          // > blockquote
+  const isTableSep = (l) => /^\s*\|?\s*:?-{1,}:?\s*(\|\s*:?-{1,}:?\s*)+\|?\s*$/.test(l);
+  const cells = (l) => l.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (isBlank(line)) { i++; continue; }
+    if (isFence(line)) {                                   // ``` fenced code block
+      i++;
+      const buf = [];
+      while (i < lines.length && !isFence(lines[i])) { buf.push(lines[i]); i++; }
+      i++;  // consume the closing fence
+      const pre = document.createElement("pre");
+      const code = document.createElement("code");
+      code.textContent = buf.join("\n");
+      pre.appendChild(code); bodyEl.appendChild(pre);
+      continue;
+    }
+    if (isHr(line)) { bodyEl.appendChild(document.createElement("hr")); i++; continue; }
+    if (isQuote(line)) {                                   // > blockquote (one <p> per line)
+      const bq = document.createElement("blockquote");
+      while (i < lines.length && isQuote(lines[i])) {
+        const p = document.createElement("p");
+        appendInline(p, lines[i].replace(/^\s*>\s?/, ""));
+        bq.appendChild(p); i++;
+      }
+      bodyEl.appendChild(bq); continue;
+    }
+    // GFM table: a `| … |` header row immediately followed by a `|---|---|` separator.
+    if (line.includes("|") && i + 1 < lines.length && isTableSep(lines[i + 1])) {
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const htr = document.createElement("tr");
+      cells(line).forEach((c) => { const th = document.createElement("th"); appendInline(th, c); htr.appendChild(th); });
+      thead.appendChild(htr); table.appendChild(thead);
+      i += 2;  // consume header + separator
+      const tbody = document.createElement("tbody");
+      while (i < lines.length && !isBlank(lines[i]) && lines[i].includes("|")) {
+        const tr = document.createElement("tr");
+        cells(lines[i]).forEach((c) => { const td = document.createElement("td"); appendInline(td, c); tr.appendChild(td); });
+        tbody.appendChild(tr); i++;
+      }
+      table.appendChild(tbody); bodyEl.appendChild(table);
+      continue;
+    }
+    const h = line.match(/^(#{1,6})\s+(.*)$/);             // # heading (capped to h3/h4)
+    if (h) {
+      const el = document.createElement(h[1].length <= 1 ? "h3" : "h4");
+      appendInline(el, h[2].trim());
+      bodyEl.appendChild(el); i++; continue;
+    }
+    if (isUl(line) || isOl(line)) {                        // - / 1. lists
+      const ordered = isOl(line);
+      const list = document.createElement(ordered ? "ol" : "ul");
+      const match = ordered ? isOl : isUl;
+      const strip = ordered ? /^\s*\d+\.\s+/ : /^\s*[-*+]\s+/;
+      while (i < lines.length && match(lines[i])) {
+        const li = document.createElement("li");
+        appendInline(li, lines[i].replace(strip, ""));
+        list.appendChild(li); i++;
+      }
+      bodyEl.appendChild(list); continue;
+    }
+    const para = [];                                       // paragraph (soft breaks -> <br>)
+    const startsTable = (n) => lines[n].includes("|") && n + 1 < lines.length && isTableSep(lines[n + 1]);
+    while (i < lines.length && !isBlank(lines[i]) && !isFence(lines[i]) && !isHr(lines[i])
+           && !isQuote(lines[i]) && !isHeading(lines[i]) && !isUl(lines[i]) && !isOl(lines[i]) && !startsTable(i)) {
+      para.push(lines[i]); i++;
+    }
+    const p = document.createElement("p");
+    para.forEach((ln, idx) => { if (idx) p.appendChild(document.createElement("br")); appendInline(p, ln); });
+    bodyEl.appendChild(p);
+  }
+}
+
+// One shared "logged to your error corpus" chip, used by the chat, pronounce and voice
+// panes so the same event looks the same everywhere. The 📝 comes from CSS (::before).
+function loggedChip(text) {
   const el = document.createElement("div");
   el.className = "logged";
-  el.textContent = `📝 logged (${logged.category}): ${logged.original} → ${logged.correction}`;
-  turn.appendChild(el);
+  el.textContent = text;
+  return el;
+}
+
+function markLogged(turn, logged) {
+  if (!logged) return;
+  turn.appendChild(loggedChip(`logged (${logged.category}): ${logged.original} → ${logged.correction}`));
 }
 
 // ---- text coach ----------------------------------------------------------- //
-$("chat-form").addEventListener("submit", async (e) => {
+// A live "…" typing indicator (animated dots) for the pending reply. Built with the DOM
+// so it swaps cleanly for the real answer once renderMarkdown clears the body.
+function showThinking(bodyEl) {
+  bodyEl.textContent = "";
+  const dots = document.createElement("span");
+  dots.className = "typing";
+  for (let i = 0; i < 3; i++) dots.appendChild(document.createElement("span"));
+  bodyEl.appendChild(dots);
+}
+
+// Render a coach reply's Markdown, then (when the pīnyīn toggle is on) rubify its Chinese.
+// The raw Markdown is stashed on the turn so the toggle can re-render in place, and the
+// toggle re-runs this over every existing coach turn — hence the pinyin fetch cache above.
+let showPinyin = localStorage.getItem("coach_pinyin") !== "off";  // default on (learner-first)
+function renderCoachBody(turn, md) {
+  if (md != null) turn._md = md;
+  const body = turn.querySelector(".body");
+  renderMarkdown(body, turn._md);
+  body.classList.toggle("pinyin", showPinyin);
+  if (showPinyin) rubifyHanzi(body);
+}
+
+// A hover "copy" affordance on a coach reply. Copies the raw Markdown (clean hanzi + text,
+// no ruby interleaving) — what a learner wants when grabbing a corrected sentence or drill.
+// Appended to the turn (not the body), so it survives a pīnyīn re-render of the body.
+function addCopyButton(turn) {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.type = "button";
+  btn.textContent = "copy";
+  btn.addEventListener("click", () => {
+    const text = turn._md || turn.querySelector(".body").innerText || "";
+    // navigator.clipboard is undefined on insecure (http) origins — guard so the click
+    // can't throw synchronously past the .catch. Falls back to a legacy execCommand copy.
+    const done = () => { btn.textContent = "copied ✓"; setTimeout(() => { btn.textContent = "copy"; }, 1200); };
+    const fail = () => { btn.textContent = "copy failed"; setTimeout(() => { btn.textContent = "copy"; }, 1200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fail);
+    } else {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        document.execCommand("copy") ? done() : fail();
+        ta.remove();
+      } catch { fail(); }
+    }
+  });
+  turn.appendChild(btn);
+}
+
+// Grow a textarea to fit its content (capped by the CSS max-height, which then scrolls),
+// so a multi-line message isn't trapped in a one-row slot.
+function autoGrow(el) {
+  el.style.height = "auto";
+  el.style.height = el.scrollHeight + "px";
+}
+
+const chatForm = $("chat-form");
+const chatSend = chatForm.querySelector("button[type=submit]");
+let chatBusy = false;  // guards against a double-submit (Enter + click, or a fast second Enter)
+
+chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  if (chatBusy) return;
   const input = $("chat-input");
   const msg = input.value.trim();
   if (!msg) return;
   input.value = "";
+  autoGrow(input);  // collapse the box back to one row after clearing it
+  const emptyHint = $("chat").querySelector(".chat-empty");
+  if (emptyHint) emptyHint.remove();
   addTurn($("chat"), "user", msg);
-  const pending = addTurn($("chat"), "assistant", "…");
+  const pending = addTurn($("chat"), "assistant", "");
+  showThinking(pending.querySelector(".body"));
+  chatBusy = true;
+  chatSend.disabled = true;
   try {
     const r = await api("/api/chat", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg, thread_id: threadId() }),
     });
     const data = await r.json();
-    pending.querySelector(".body").textContent = data.answer;
+    renderCoachBody(pending, data.answer);
     markLogged(pending, data.logged);
+    addCopyButton(pending);
   } catch (err) {
     pending.querySelector(".body").textContent = "Error: " + (err.message || err);
+  } finally {
+    chatBusy = false;
+    chatSend.disabled = false;
   }
   $("chat").scrollTop = $("chat").scrollHeight;
+  input.focus();  // keep the learner typing — don't leave focus on the Send button
+});
+
+$("chat-input").addEventListener("input", (e) => autoGrow(e.target));
+$("pron-input").addEventListener("input", (e) => autoGrow(e.target));  // same behaviour on the pronounce composer
+
+// Enter sends; Shift+Enter inserts a newline (standard chat UX). The box is a <textarea>,
+// so without this Enter would just add a line and the user has to reach for the Send button.
+$("chat-input").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    chatForm.requestSubmit();
+  }
+});
+
+// 拼音 toggle: show/hide pīnyīn under the coach's Chinese. Re-renders every existing coach
+// turn in place (cheap — Markdown is re-parsed from the stashed source, pinyin is cached).
+const pinyinToggle = $("coach-pinyin");
+function reflectPinyinToggle() {
+  pinyinToggle.classList.toggle("on", showPinyin);
+  pinyinToggle.setAttribute("aria-checked", showPinyin ? "true" : "false");
+}
+reflectPinyinToggle();
+pinyinToggle.addEventListener("click", () => {
+  showPinyin = !showPinyin;
+  localStorage.setItem("coach_pinyin", showPinyin ? "on" : "off");
+  reflectPinyinToggle();
+  $("chat").querySelectorAll(".turn.assistant").forEach((turn) => {
+    if (turn._md != null) renderCoachBody(turn);
+  });
 });
 
 // ---- voice partner (hold to speak) ---------------------------------------- //
