@@ -466,10 +466,21 @@ function addCopyButton(turn) {
   btn.textContent = "copy";
   btn.addEventListener("click", () => {
     const text = turn._md || turn.querySelector(".body").innerText || "";
-    navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = "copied ✓";
-      setTimeout(() => { btn.textContent = "copy"; }, 1200);
-    }).catch(() => { btn.textContent = "copy failed"; });
+    // navigator.clipboard is undefined on insecure (http) origins — guard so the click
+    // can't throw synchronously past the .catch. Falls back to a legacy execCommand copy.
+    const done = () => { btn.textContent = "copied ✓"; setTimeout(() => { btn.textContent = "copy"; }, 1200); };
+    const fail = () => { btn.textContent = "copy failed"; setTimeout(() => { btn.textContent = "copy"; }, 1200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fail);
+    } else {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        document.execCommand("copy") ? done() : fail();
+        ta.remove();
+      } catch { fail(); }
+    }
   });
   turn.appendChild(btn);
 }
