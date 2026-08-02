@@ -48,7 +48,15 @@
       <button id="logout" class="link">log out</button>
     </header>
 
-    <p id="welcome" class="welcome" hidden></p>
+    <!-- Top bar: welcome stat (left) + the pīnyīn switch (right, Text-coach tab only). -->
+    <div id="topbar" class="topbar" hidden>
+      <p id="welcome" class="welcome-text" hidden></p>
+      <button id="coach-pinyin" type="button" class="pinyin-switch on" role="switch" aria-checked="true" hidden
+              title="Show pīnyīn (pronunciation) under the coach's Chinese">
+        <span class="ps-label">拼音 Show pīnyīn</span>
+        <span class="ps-track"><span class="ps-knob"></span></span>
+      </button>
+    </div>
 
     <!-- Pronunciation coach (default) — compose your own sentence, get it corrected, say it -->
     <div id="pronounce-pane" class="pane">
@@ -98,7 +106,6 @@
         <kbd>Shift</kbd>+<kbd>Enter</kbd> for a new line.</p>
       </div>
       <form id="chat-form" class="composer">
-        <button id="coach-pinyin" type="button" class="pinyin-toggle" title="Show pīnyīn under the coach's Chinese">拼音</button>
         <textarea id="chat-input" rows="1" placeholder="Type Chinese to check, or ask a question…"></textarea>
         <button type="submit">Send</button>
       </form>

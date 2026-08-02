@@ -83,6 +83,13 @@ async function enterApp() {
       $("welcome").hidden = false;
     }
   } catch { /* non-fatal */ }
+  updateTopbar();
+}
+
+// The top bar holds the welcome stat (left) and, on the Text-coach tab, the pīnyīn switch
+// (right). Collapse the whole bar when neither is showing, so it never leaves an empty strip.
+function updateTopbar() {
+  $("topbar").hidden = $("welcome").hidden && $("coach-pinyin").hidden;
 }
 
 $("logout").addEventListener("click", async () => {
@@ -97,6 +104,8 @@ function selectTab(which) {
     $(`tab-${name}`).classList.toggle("active", name === which);
     $(pane).hidden = name !== which;
   }
+  $("coach-pinyin").hidden = which !== "coach";  // the pīnyīn switch belongs to the text coach
+  updateTopbar();
 }
 Object.keys(TABS).forEach((name) => $(`tab-${name}`).addEventListener("click", () => selectTab(name)));
 
@@ -370,11 +379,15 @@ $("chat-input").addEventListener("keydown", (e) => {
 // 拼音 toggle: show/hide pīnyīn under the coach's Chinese. Re-renders every existing coach
 // turn in place (cheap — Markdown is re-parsed from the stashed source, pinyin is cached).
 const pinyinToggle = $("coach-pinyin");
-pinyinToggle.classList.toggle("on", showPinyin);
+function reflectPinyinToggle() {
+  pinyinToggle.classList.toggle("on", showPinyin);
+  pinyinToggle.setAttribute("aria-checked", showPinyin ? "true" : "false");
+}
+reflectPinyinToggle();
 pinyinToggle.addEventListener("click", () => {
   showPinyin = !showPinyin;
   localStorage.setItem("coach_pinyin", showPinyin ? "on" : "off");
-  pinyinToggle.classList.toggle("on", showPinyin);
+  reflectPinyinToggle();
   $("chat").querySelectorAll(".turn.assistant").forEach((turn) => {
     if (turn._md != null) renderCoachBody(turn);
   });
