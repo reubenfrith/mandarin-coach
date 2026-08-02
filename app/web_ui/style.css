@@ -48,6 +48,40 @@ nav { display: flex; gap: 0.25rem; }
 .turn .body { line-height: 1.5; white-space: pre-wrap; }
 .turn .logged { font-size: 0.75rem; color: var(--accent); margin-top: 0.35rem; }
 
+/* Text-coach empty state — mirrors the voice pane's intro so the tab isn't a blank void. */
+.chat-empty { text-align: center; margin: auto; max-width: 34rem; line-height: 1.7; }
+
+/* "Thinking" indicator: three dots that fade in sequence while the coach replies. */
+.typing { display: inline-flex; gap: 0.28rem; align-items: center; padding: 0.15rem 0; }
+.typing span { width: 0.42rem; height: 0.42rem; border-radius: 50%; background: var(--muted); opacity: 0.35; animation: typing-blink 1.2s infinite ease-in-out; }
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing-blink { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
+
+/* Markdown-rendered coach replies. Block elements own their spacing, so drop the
+   pre-wrap that plain-text turns use. Tight first/last margins keep the bubble snug. */
+.turn .body.md { white-space: normal; }
+.turn .body.md > :first-child { margin-top: 0; }
+.turn .body.md > :last-child { margin-bottom: 0; }
+.turn .body.md p { margin: 0 0 0.6rem; }
+.turn .body.md ul, .turn .body.md ol { margin: 0.3rem 0 0.6rem; padding-left: 1.4rem; }
+.turn .body.md li { margin: 0.15rem 0; }
+.turn .body.md li::marker { color: var(--muted); }
+.turn .body.md h3, .turn .body.md h4 { margin: 0.7rem 0 0.35rem; line-height: 1.3; }
+.turn .body.md h3 { font-size: 1.05rem; }
+.turn .body.md h4 { font-size: 0.95rem; }
+.turn .body.md strong { font-weight: 650; }
+.turn .body.md a { color: var(--accent); }
+.turn .body.md code { font-family: ui-monospace, Menlo, monospace; font-size: 0.9em; background: #f0f0f0; border-radius: 4px; padding: 0.05rem 0.3rem; }
+.turn .body.md pre { background: #f5f5f5; border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.75rem; overflow-x: auto; margin: 0.4rem 0 0.6rem; }
+.turn .body.md pre code { background: none; padding: 0; font-size: 0.85em; }
+.turn .body.md hr { border: none; border-top: 1px solid var(--border); margin: 0.8rem 0; }
+/* Tables scroll inside their own box so a wide one never widens the chat bubble. */
+.turn .body.md table { display: block; overflow-x: auto; border-collapse: collapse; margin: 0.4rem 0 0.7rem; font-size: 0.92em; }
+.turn .body.md th, .turn .body.md td { border: 1px solid var(--border); padding: 0.35rem 0.6rem; text-align: left; vertical-align: top; }
+.turn .body.md thead th { background: #f5f0ee; font-weight: 650; }
+.turn .body.md tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+
 /* 汉字 with pīnyīn underneath each character (ruby). Extra line-height so stacked
    ruby lines never collide when a bubble wraps to multiple rows. */
 .turn .body.ruby { font-size: 1.35rem; line-height: 2.5; white-space: normal; }

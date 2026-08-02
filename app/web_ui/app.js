@@ -145,6 +145,105 @@ function addTurn(container, role, text, { withPinyin = false, segments = null, c
   return turn;
 }
 
+// Render a small, safe Markdown subset (the coach replies in Markdown: **bold** for
+// corrections, bullet/numbered lists for drills, `code`, headings, example sentences).
+// Built with the DOM — model text only ever becomes textContent, so nothing it emits can
+// inject markup (same discipline as renderRuby). Deliberately does NOT treat `_` as
+// emphasis: the coach names tools like error_pattern_analyser and snake_case must survive.
+function appendInline(parent, text) {
+  const re = /`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\(([^)\s]+)\)/g;
+  let last = 0, m;
+  while ((m = re.exec(text))) {
+    if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
+    let el;
+    if (m[1] != null) { el = document.createElement("code"); el.textContent = m[1]; }
+    else if (m[2] != null) { el = document.createElement("strong"); el.textContent = m[2]; }
+    else if (m[3] != null) { el = document.createElement("em"); el.textContent = m[3]; }
+    else { // link — only http(s) or root-relative hrefs; anything else stays plain text
+      el = document.createElement("a"); el.textContent = m[4];
+      if (/^(https?:\/\/|\/)/i.test(m[5])) { el.href = m[5]; el.target = "_blank"; el.rel = "noopener noreferrer"; }
+    }
+    parent.appendChild(el);
+    last = re.lastIndex;
+  }
+  if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+}
+
+function renderMarkdown(bodyEl, src) {
+  bodyEl.textContent = "";
+  bodyEl.classList.add("md");
+  const lines = String(src || "").replace(/\r\n?/g, "\n").split("\n");
+  const isBlank = (l) => /^\s*$/.test(l);
+  const isFence = (l) => /^\s*```/.test(l);
+  const isHeading = (l) => /^#{1,6}\s+/.test(l);
+  const isUl = (l) => /^\s*[-*+]\s+/.test(l);
+  const isOl = (l) => /^\s*\d+\.\s+/.test(l);
+  const isHr = (l) => /^\s*([-*_])(\s*\1){2,}\s*$/.test(l);           // ---  ***  ___
+  const isTableSep = (l) => /^\s*\|?\s*:?-{1,}:?\s*(\|\s*:?-{1,}:?\s*)+\|?\s*$/.test(l);
+  const cells = (l) => l.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (isBlank(line)) { i++; continue; }
+    if (isFence(line)) {                                   // ``` fenced code block
+      i++;
+      const buf = [];
+      while (i < lines.length && !isFence(lines[i])) { buf.push(lines[i]); i++; }
+      i++;  // consume the closing fence
+      const pre = document.createElement("pre");
+      const code = document.createElement("code");
+      code.textContent = buf.join("\n");
+      pre.appendChild(code); bodyEl.appendChild(pre);
+      continue;
+    }
+    if (isHr(line)) { bodyEl.appendChild(document.createElement("hr")); i++; continue; }
+    // GFM table: a `| … |` header row immediately followed by a `|---|---|` separator.
+    if (line.includes("|") && i + 1 < lines.length && isTableSep(lines[i + 1])) {
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const htr = document.createElement("tr");
+      cells(line).forEach((c) => { const th = document.createElement("th"); appendInline(th, c); htr.appendChild(th); });
+      thead.appendChild(htr); table.appendChild(thead);
+      i += 2;  // consume header + separator
+      const tbody = document.createElement("tbody");
+      while (i < lines.length && !isBlank(lines[i]) && lines[i].includes("|")) {
+        const tr = document.createElement("tr");
+        cells(lines[i]).forEach((c) => { const td = document.createElement("td"); appendInline(td, c); tr.appendChild(td); });
+        tbody.appendChild(tr); i++;
+      }
+      table.appendChild(tbody); bodyEl.appendChild(table);
+      continue;
+    }
+    const h = line.match(/^(#{1,6})\s+(.*)$/);             // # heading (capped to h3/h4)
+    if (h) {
+      const el = document.createElement(h[1].length <= 1 ? "h3" : "h4");
+      appendInline(el, h[2].trim());
+      bodyEl.appendChild(el); i++; continue;
+    }
+    if (isUl(line) || isOl(line)) {                        // - / 1. lists
+      const ordered = isOl(line);
+      const list = document.createElement(ordered ? "ol" : "ul");
+      const match = ordered ? isOl : isUl;
+      const strip = ordered ? /^\s*\d+\.\s+/ : /^\s*[-*+]\s+/;
+      while (i < lines.length && match(lines[i])) {
+        const li = document.createElement("li");
+        appendInline(li, lines[i].replace(strip, ""));
+        list.appendChild(li); i++;
+      }
+      bodyEl.appendChild(list); continue;
+    }
+    const para = [];                                       // paragraph (soft breaks -> <br>)
+    const startsTable = (n) => lines[n].includes("|") && n + 1 < lines.length && isTableSep(lines[n + 1]);
+    while (i < lines.length && !isBlank(lines[i]) && !isFence(lines[i]) && !isHr(lines[i])
+           && !isHeading(lines[i]) && !isUl(lines[i]) && !isOl(lines[i]) && !startsTable(i)) {
+      para.push(lines[i]); i++;
+    }
+    const p = document.createElement("p");
+    para.forEach((ln, idx) => { if (idx) p.appendChild(document.createElement("br")); appendInline(p, ln); });
+    bodyEl.appendChild(p);
+  }
+}
+
 function markLogged(turn, logged) {
   if (!logged) return;
   const el = document.createElement("div");
@@ -154,26 +253,58 @@ function markLogged(turn, logged) {
 }
 
 // ---- text coach ----------------------------------------------------------- //
-$("chat-form").addEventListener("submit", async (e) => {
+// A live "…" typing indicator (animated dots) for the pending reply. Built with the DOM
+// so it swaps cleanly for the real answer once renderMarkdown clears the body.
+function showThinking(bodyEl) {
+  bodyEl.textContent = "";
+  const dots = document.createElement("span");
+  dots.className = "typing";
+  for (let i = 0; i < 3; i++) dots.appendChild(document.createElement("span"));
+  bodyEl.appendChild(dots);
+}
+
+const chatForm = $("chat-form");
+const chatSend = chatForm.querySelector("button[type=submit]");
+let chatBusy = false;  // guards against a double-submit (Enter + click, or a fast second Enter)
+
+chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  if (chatBusy) return;
   const input = $("chat-input");
   const msg = input.value.trim();
   if (!msg) return;
   input.value = "";
+  const emptyHint = $("chat").querySelector(".chat-empty");
+  if (emptyHint) emptyHint.remove();
   addTurn($("chat"), "user", msg);
-  const pending = addTurn($("chat"), "assistant", "…");
+  const pending = addTurn($("chat"), "assistant", "");
+  showThinking(pending.querySelector(".body"));
+  chatBusy = true;
+  chatSend.disabled = true;
   try {
     const r = await api("/api/chat", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg, thread_id: threadId() }),
     });
     const data = await r.json();
-    pending.querySelector(".body").textContent = data.answer;
+    renderMarkdown(pending.querySelector(".body"), data.answer);
     markLogged(pending, data.logged);
   } catch (err) {
     pending.querySelector(".body").textContent = "Error: " + (err.message || err);
+  } finally {
+    chatBusy = false;
+    chatSend.disabled = false;
   }
   $("chat").scrollTop = $("chat").scrollHeight;
+});
+
+// Enter sends; Shift+Enter inserts a newline (standard chat UX). The box is a <textarea>,
+// so without this Enter would just add a line and the user has to reach for the Send button.
+$("chat-input").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    chatForm.requestSubmit();
+  }
 });
 
 // ---- voice partner (hold to speak) ---------------------------------------- //
