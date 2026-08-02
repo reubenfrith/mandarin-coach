@@ -24,11 +24,13 @@ def test_outcome_coach_is_positive():
 
 
 def test_code_path_matches_real_heuristic():
-    # Han-only and Latin-only and empty are resolved by the zero-latency heuristic;
-    # only a mixed-script turn reaches the classifier.
-    assert vie.code_path("我昨天去了公园") == "heuristic"      # Han only
-    assert vie.code_path("why was that wrong") == "heuristic"  # Latin only
+    # The tuned router fast-paths the UNAMBIGUOUS (plain Mandarin statement, short English aside,
+    # empty) and classifies the AMBIGUOUS (Mandarin question, longer English, mixed).
+    assert vie.code_path("我昨天去了公园") == "heuristic"       # Mandarin statement
+    assert vie.code_path("me too") == "heuristic"              # short English glue
     assert vie.code_path("。。。") == "heuristic"               # empty
+    assert vie.code_path("这个词是什么意思？") == "classifier"   # Mandarin question
+    assert vie.code_path("why was that wrong?") == "classifier"  # longer English
     assert vie.code_path("这个 refund 怎么申请") == "classifier"  # mixed
 
 

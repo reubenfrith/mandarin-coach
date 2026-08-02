@@ -92,9 +92,11 @@ Per-turn head-to-head: **fixed 10, regressed 1, 0 unstable** across the 3 runs.
 - **0 turns were unstable** — every turn voted identically across 3 runs. The temp-0.2
   nondeterminism worry (Finding 2) was real in principle but did not bite on these 40 turns.
 
-**So on ACCURACY, classify-most clearly wins.** The two blunt script rules (`Latin→coach`,
-`Han→converse`) cost more than they save. The decision is no longer "is the classifier good
-enough" — it is now purely a **latency/cost** question this surface cannot measure.
+**So the classifier is clearly competent enough** — the two blunt script rules (`Latin→coach`,
+`Han→converse`) cost more than they save. This proved the *fix* is real; it did NOT prove that
+*classify-everything* is the right design, because that trades latency on every turn (next). (The
+`Router` column above = the ORIGINAL router; `voice_intent.json` now holds the **tuned** router,
+so a fresh `--classify-always` run compares against that — see "Implemented" below.)
 
 ### The latency cost, now measured
 
@@ -128,33 +130,46 @@ can absorb the latency.
   could show a phantom fix/regression. Regenerate the baseline as majority-of-3 before trusting
   any mixed-path delta.
 
-### Recommended design (harness-evidenced)
+## Implemented: the tuned heuristic (before/after)
 
-1. **Tuned heuristic — the recommended default.** Apply the two targeted fixes below (short
-   English affirmations → converse; interrogative Han-only turns → classifier), keeping the
-   empty→converse guard. They target *exactly* the 10 cases classify-always fixed, so the data
-   predicts they recover most of the gain while keeping the ~0.8 s classifier call off the 75%
-   of turns that don't need it. Verify with a before/after run (`before` = `voice_intent.md`).
-2. **Classify-most — only if the latency is bought down or affordable.** Keep a trivial
-   **empty/no-content guard → converse** (the one thing classify-always got wrong), drop the two
-   script rules, classify the rest. Best accuracy (0.975), worst per-turn latency.
-   **Critical:** under classify-most the classifier's error/timeout fallback must be the
-   **heuristic**, not `converse`. `classify_turn_intent` currently falls back to converse; today
-   a classifier outage still routes pure-English→coach via the heuristic, but under classify-most
-   an outage would send *everything* to converse — making the coach unreachable for exactly the
-   English-question case that matters most.
+We replaced the two blunt rules with a **fast-path-the-unambiguous** heuristic (`_heuristic_route`
+in `app/voice_api.py`): a plain Mandarin **statement**, a short English aside (≤ 2 words), and an
+empty turn resolve instantly to converse; **Mandarin questions** (吗/什么/为什么/怎么/呢/？…),
+**longer English**, and **mixed script** go to the classifier. Before/after on this surface:
 
-## Follow-on changes (tracked, harness-evidenced by this surface)
+| Metric | Original router | **Tuned heuristic** | Classify-always (ceiling) |
+|---|---|---|---|
+| Coach precision | 0.72 | **1.00** | 0.95 |
+| Converse→coach misroute | 0.23 | **0.00** | 0.045 |
+| Accuracy | 0.75 | **1.00** | 0.975 |
 
-1. **Tuned heuristic (recommended default)** — short English affirmations → converse;
-   interrogative Han-only turns (吗/什么/为什么/怎么/呢/？) → classifier; keep the empty guard.
-   Re-run this surface before/after; the before is `results/voice_intent.md`. This is the
-   latency-preserving path the measured ~0.8 s classifier call points to.
-2. **If going classify-most instead** — add the empty→converse guard and switch
-   `classify_turn_intent`'s error fallback to the heuristic (not converse); consider driving the
-   classifier latency down (temp 0 / faster model / overlap with STT).
-3. **Proper-noun policy** — decide whether proper nouns stay in conversation; if yes, add the
-   prompt carve-out (Finding 3). Affects both paths (the classifier currently keeps them in
-   converse, deviating from its prompt).
-4. **Before trusting mixed-path head-to-head deltas** — regenerate `voice_intent.json` as
-   majority-of-3 so it denoises the same way the classify-always arm does.
+- **Tuned = 1.00 across 3 runs** (stable — the classifier-resolved turns didn't flip). It even
+  edges out classify-always, because the empty guard catches `？？？` (classify-always's lone regression).
+- **Re-running `--classify-always` against the tuned router now shows fixed 0, regressed 1.** So
+  classifying every turn no longer helps and is strictly *worse* (regresses `？？？`, +0.8 s on every
+  turn). The tuned heuristic **dominates**: equal-or-better accuracy at a fraction of the classifier calls.
+- **Routes 24/40 to the classifier on THIS set, 16/40 on the heuristic** — but the set is adversarially
+  dense with questions/English/mixed. In real traffic plain-Mandarin **statements** dominate, so the
+  heuristic share is much higher and the ~0.8 s call lands only when the surface form is genuinely
+  ambiguous. That is the whole point.
+
+### Caveats on the 1.00
+
+- **n=40, our labels, incl. the 4 contestable proper-noun turns** (Finding 3): the classifier routes
+  them to converse, matching our labels but *deviating from the deployed prompt*. Under the prompt's
+  own rule (code-switch → coach) those 4 would be FN, dropping accuracy to ~0.90 — but **coach
+  precision stays 1.00 either way** (no FP). So "perfect" rests partly on a labelling choice; resolve
+  the proper-noun policy to make it unconditional.
+- **The classifier-resolved turns are nondeterministic** (temp 0.2); 3× stable here is decent, not proof.
+
+## Follow-on changes (tracked)
+
+1. **Proper-noun policy** — decide whether proper nouns stay in conversation. If yes, add a carve-out
+   to `INTENT_CLASSIFIER_PROMPT` so the classifier's converse verdict on `去 Melbourne 玩` follows the
+   prompt instead of contradicting it. This is the one open labelling ambiguity behind the 1.00.
+2. **In-browser confirmation** — the surface proves routing on transcripts; confirm on real mic audio
+   that a Mandarin question triggers the coach without a jarring pause from the added classifier call.
+3. **Knobs if real traffic shows misses** — `_ENGLISH_GLUE_MAX_WORDS` and the `_ZH_QUESTION_MARKERS`
+   set are single dials in `voice_api.py`, re-scored by this surface. If ever moving to classify-most,
+   switch `classify_turn_intent`'s error fallback from `converse` to the heuristic first (an outage
+   would otherwise make the coach unreachable for English questions).

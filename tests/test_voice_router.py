@@ -1,8 +1,10 @@
 """Phase-2 checks for the voice intent router + the /api/voice/turn branch.
 
 Two layers, both no-network:
-  * _route_intent: manual override wins; a zero-latency script heuristic routes the clear
-    cases (English -> coach, Mandarin -> converse); only a mixed turn calls the classifier.
+  * _route_intent: manual override wins; the tuned zero-latency heuristic resolves the
+    UNAMBIGUOUS turns (plain Mandarin statements + short English asides -> converse, empty ->
+    converse); the AMBIGUOUS ones (Mandarin questions, longer English, mixed script) call the
+    classifier. (The classifier is stubbed here, so this stays no-network.)
   * /api/voice/turn: the endpoint branches to the right brain, speaks the right text, and
     only logs learner errors on a conversation turn (a coach question has none).
 
@@ -44,12 +46,16 @@ async def router_checks():
 
         check("manual override -> coach", await route("我今天很好", "coach") == "coach")
         check("manual override -> converse", await route("why is this wrong", "converse") == "converse")
-        check("pure English -> coach (no classifier)", await route("why was that wrong?") == "coach")
-        check("pure Mandarin -> converse (no classifier)", await route("我昨天去了公园") == "converse")
-        check("punctuation only -> converse", await route("。。。？") == "converse")
-        check("  ...classifier NOT called for the clear cases", calls["classify"] == 0)
+        # Unambiguous → heuristic, no classifier call.
+        check("Mandarin statement -> converse (no classifier)", await route("我昨天去了公园") == "converse")
+        check("short English glue -> converse (no classifier)", await route("me too") == "converse")
+        check("punctuation only -> converse (no classifier)", await route("。。。？") == "converse")
+        check("  ...classifier NOT called for the unambiguous turns", calls["classify"] == 0)
+        # Ambiguous → the classifier decides (stubbed to 'coach' here).
+        check("Mandarin question -> classifier decides", await route("这个词是什么意思？") == "coach")
+        check("longer English -> classifier decides", await route("why was that wrong?") == "coach")
         check("mixed script -> classifier decides", await route("explain 了 please") == "coach")
-        check("  ...classifier called exactly once (only the mixed turn)", calls["classify"] == 1)
+        check("  ...classifier called once per ambiguous turn (3)", calls["classify"] == 3)
     finally:
         voice_api.classify_turn_intent = orig
 
@@ -75,8 +81,12 @@ def endpoint_checks():
         calls["extract"] += 1
         return {"category": "particle", "original": u, "correction": "x"}
 
+    async def fake_classify(text):  # "why was that wrong?" is a longer English turn → classifier
+        return "coach"
+
     voice_api._reply = fake_reply
     voice_api._coach_reply = fake_coach
+    voice_api.classify_turn_intent = fake_classify
     voice_api.extract_and_log_error_voice = fake_extract
     voice_api._synthesize = lambda client, text: b"ID3-fake-mp3"
     voice_api._openai_client = lambda: object()

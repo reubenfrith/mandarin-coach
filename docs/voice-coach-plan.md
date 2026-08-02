@@ -187,12 +187,18 @@ output, no second call, no structured-output-vs-tools conflict.
   classify-most: trading ~0.8 s on every conversational turn for +0.225 accuracy is a poor deal when a
   tuned heuristic can likely recover the same 10 fixes while paying the classifier only on ambiguous
   turns. Full write-up + decision rule: `evals/notes/voice-router-findings.md`.
-- **Calibration follow-ons, harness-evidenced:** (1) **tuned heuristic (default)** — short English
-  affirmations → converse, interrogative Han-only turns → classifier, keep the empty guard (targets
-  exactly the 10 fixed cases; verify before/after); (2) **if classify-most instead** — add the empty
-  guard and switch the classifier's error fallback to the heuristic (not converse); (3) proper-noun
-  policy / prompt carve-out; (4) regenerate the router baseline as majority-of-3 before trusting any
-  mixed-path head-to-head delta.
+- **Tuned heuristic — IMPLEMENTED (`_heuristic_route` in `app/voice_api.py`).** Replaced the two blunt
+  rules with fast-path-the-unambiguous: plain Mandarin statement / short English aside / empty →
+  converse instantly; Mandarin questions, longer English, mixed → classifier. Before/after on the
+  surface: coach precision 0.72→**1.00**, misroute 0.23→**0.00**, accuracy 0.75→**1.00** (stable over
+  3 runs; edges out classify-always because the empty guard catches `？？？`). Re-running
+  `--classify-always` vs the tuned router now shows fixed 0 / regressed 1 — classifying everything no
+  longer helps and is strictly worse. Router unit tests (`tests/test_voice_router.py`) updated to lock
+  the new routing. Caveat: the 1.00 leans on the 4 contestable proper-noun labels (coach precision
+  stays 1.00 regardless; accuracy ~0.90 under the deployed prompt's rule).
+- **Remaining follow-ons:** (1) proper-noun policy / `INTENT_CLASSIFIER_PROMPT` carve-out — the one
+  open labelling ambiguity; (2) in-browser confirmation on real mic audio; (3) `_ENGLISH_GLUE_MAX_WORDS`
+  / `_ZH_QUESTION_MARKERS` are single dials if real traffic shows misses.
 - Wiring tests (`tests/test_voice_router.py`): stub the classifier + both brains; assert manual
   override wins, pure-Chinese skips the classifier, coach path injects history and writes a
   summarised turn back, CONVERSE-only logging.

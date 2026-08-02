@@ -22,28 +22,36 @@
         "correct": 15,
         "accuracy": 1.0,
         "fp": 0,
-        "fn": 0
+        "fn": 0,
+        "heuristic": 0,
+        "classifier": 15
       },
       "english": {
         "n": 12,
         "correct": 12,
         "accuracy": 1.0,
         "fp": 0,
-        "fn": 0
+        "fn": 0,
+        "heuristic": 0,
+        "classifier": 12
       },
       "mixed": {
         "n": 10,
         "correct": 10,
         "accuracy": 1.0,
         "fp": 0,
-        "fn": 0
+        "fn": 0,
+        "heuristic": 0,
+        "classifier": 10
       },
       "empty": {
         "n": 3,
         "correct": 2,
         "accuracy": 0.6666666666666666,
         "fp": 1,
-        "fn": 0
+        "fn": 0,
+        "heuristic": 0,
+        "classifier": 3
       }
     },
     "resolution": {
@@ -85,82 +93,11 @@
   },
   "head_to_head": {
     "n_compared": 40,
-    "fixed_n": 10,
+    "fixed_n": 0,
     "regressed_n": 1,
-    "both_right": 29,
+    "both_right": 39,
     "both_wrong": 0,
-    "fixed": [
-      {
-        "id": "m11",
-        "text": "这个词是什么意思？",
-        "bucket": "mandarin",
-        "router": "FN",
-        "classify_always": "TP"
-      },
-      {
-        "id": "m12",
-        "text": "这样说对吗？",
-        "bucket": "mandarin",
-        "router": "FN",
-        "classify_always": "TP"
-      },
-      {
-        "id": "m13",
-        "text": "刚才那个句子为什么不对？",
-        "bucket": "mandarin",
-        "router": "FN",
-        "classify_always": "TP"
-      },
-      {
-        "id": "m14",
-        "text": "“把”和“被”有什么区别？",
-        "bucket": "mandarin",
-        "router": "FN",
-        "classify_always": "TP"
-      },
-      {
-        "id": "m15",
-        "text": "再给我一个例子好吗？",
-        "bucket": "mandarin",
-        "router": "FN",
-        "classify_always": "TP"
-      },
-      {
-        "id": "e08",
-        "text": "And you?",
-        "bucket": "english",
-        "router": "FP",
-        "classify_always": "TN"
-      },
-      {
-        "id": "e09",
-        "text": "Yeah, exactly.",
-        "bucket": "english",
-        "router": "FP",
-        "classify_always": "TN"
-      },
-      {
-        "id": "e10",
-        "text": "Haha okay.",
-        "bucket": "english",
-        "router": "FP",
-        "classify_always": "TN"
-      },
-      {
-        "id": "e11",
-        "text": "One sec.",
-        "bucket": "english",
-        "router": "FP",
-        "classify_always": "TN"
-      },
-      {
-        "id": "e12",
-        "text": "Me too!",
-        "bucket": "english",
-        "router": "FP",
-        "classify_always": "TN"
-      }
-    ],
+    "fixed": [],
     "regressed": [
       {
         "id": "z02",

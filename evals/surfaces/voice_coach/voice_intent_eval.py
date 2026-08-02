@@ -5,10 +5,10 @@ brain answers it: the Mandarin conversation partner ('converse') or the English 
 ('coach'). The router is a two-stage thing and this surface measures BOTH stages against
 ground truth, kept separable:
 
-  1. a zero-latency SCRIPT heuristic that resolves the clear cases with NO LLM call —
-     Latin-only → coach, Han-only / empty → converse;
-  2. an LLM classifier (`classify_turn_intent`) that only fires on a genuinely MIXED-script
-     turn.
+  1. a zero-latency heuristic that resolves the UNAMBIGUOUS turns with NO LLM call — a plain
+     Mandarin statement and a short English aside → converse, empty → converse;
+  2. an LLM classifier (`classify_turn_intent`) for the AMBIGUOUS turns — Mandarin questions,
+     longer English, and mixed script.
 
 Precision-first toward CONVERSE. The dangerous error is a CONVERSE turn routed to COACH — an
 English lecture when the learner wanted to talk. Treating **coach as the positive class**,
@@ -59,12 +59,25 @@ BUCKET_ORDER = ["mandarin", "english", "mixed", "empty"]
 
 
 def code_path(text: str) -> str:
-    """Which stage of the real router resolves this turn: the zero-latency script heuristic,
-    or the LLM classifier? Derived from the SAME predicates `_route_intent` uses, so a
-    mis-bucketed dataset case is caught rather than silently mislabelled."""
+    """Which stage of the real router resolves this turn: the zero-latency heuristic, or the LLM
+    classifier? Calls the SAME `_heuristic_route` the router uses (None → the classifier fires),
+    so this never drifts from production behaviour."""
+    return "heuristic" if voice_api._heuristic_route(text) is not None else "classifier"
+
+
+def script_bucket(text: str) -> str:
+    """The dataset's `bucket` = the SCRIPT class of the turn. Recompute it from the real
+    predicates so a mis-bucketed case is caught. (Since the tuned heuristic routes by CONTENT,
+    script no longer predicts the code path — that's why resolved_by is recorded separately.)"""
     han = voice_api._has_han(text)
     latin = bool(voice_api._LATIN_WORD.search(text))
-    return "classifier" if (han and latin) else "heuristic"
+    if han and latin:
+        return "mixed"
+    if han:
+        return "mandarin"
+    if latin:
+        return "english"
+    return "empty"
 
 
 def outcome(gold: str, pred: str) -> str:
@@ -78,11 +91,11 @@ async def eval_case(case: dict) -> dict:
     text = case["text"]
     pred = await voice_api._route_intent("eval-user", text, "auto")
     path = code_path(text)
-    bucket_mismatch = None
-    # mandarin/english/empty must be heuristic-resolved; mixed must hit the classifier.
-    expected_path = "classifier" if case["bucket"] == "mixed" else "heuristic"
-    if path != expected_path:
-        bucket_mismatch = f"bucket={case['bucket']} but code path={path}"
+    # Guard the dataset's script bucketing (not the code path — the tuned heuristic routes by
+    # content, so a bucket can span both paths).
+    actual_bucket = script_bucket(text)
+    bucket_mismatch = None if actual_bucket == case["bucket"] else \
+        f"bucket={case['bucket']} but actual script={actual_bucket}"
     return {
         "id": case["id"],
         "text": text,
@@ -215,8 +228,9 @@ def summarise(rows: list[dict]) -> dict:
     converse_total = tn + fp
     misroute_rate = (fp / converse_total) if converse_total else None
 
-    # Per-bucket accuracy — keeps the trivially-correct heuristic cases from inflating, and
-    # isolates heuristic error (mandarin/english/empty) from classifier error (mixed).
+    # Per-bucket accuracy, with the heuristic/classifier split recorded per bucket (the tuned
+    # router splits WITHIN a script bucket: plain Mandarin statements stay heuristic, Mandarin
+    # questions go to the classifier), so heuristic vs classifier error stay legible.
     buckets = {}
     for b in BUCKET_ORDER:
         brs = [r for r in rows if r["bucket"] == b]
@@ -229,6 +243,8 @@ def summarise(rows: list[dict]) -> dict:
             "accuracy": correct / len(brs),
             "fp": sum(1 for r in brs if r["outcome"] == "FP"),
             "fn": sum(1 for r in brs if r["outcome"] == "FN"),
+            "heuristic": sum(1 for r in brs if r["resolved_by"] == "heuristic"),
+            "classifier": sum(1 for r in brs if r["resolved_by"] == "classifier"),
         }
 
     # Classifier-only slice (mixed bucket) — the LLM's own confusion, isolated.
@@ -280,11 +296,12 @@ def render_md(summary: dict, rows: list[dict]) -> str:
     lines = [
         "# Voice-router intent eval — `_route_intent`",
         "",
-        f"Classifier model **{summary['model']}** (mixed-script turns only; "
-        f"{summary['resolution']['heuristic']}/{summary['n_cases']} cases are resolved by the "
-        f"zero-latency script heuristic with no LLM call). Coach is the positive class: a "
-        "CONVERSE turn routed to COACH is the jarring false positive the router is tuned to "
-        "avoid. See `results/README.md` for how to re-derive any number.",
+        f"Classifier model **{summary['model']}** ("
+        f"{summary['resolution']['heuristic']}/{summary['n_cases']} cases resolved by the "
+        f"zero-latency heuristic with no LLM call; {summary['resolution']['classifier']} ambiguous "
+        "turns — Mandarin questions, substantive English, mixed script — hit the classifier). Coach "
+        "is the positive class: a CONVERSE turn routed to COACH is the jarring false positive the "
+        "router is tuned to avoid. See `results/README.md` for how to re-derive any number.",
         "",
         "## Routing decision (coach = positive)",
         "",
@@ -302,48 +319,39 @@ def render_md(summary: dict, rows: list[dict]) -> str:
         f"- Converse precision {pct(summary['converse_precision'])} · recall {pct(summary['converse_recall'])}",
         f"- Overall accuracy {pct(summary['accuracy'])}",
         "",
-        "## Per-bucket accuracy (heuristic error vs classifier error, kept separate)",
+        "## Per-bucket accuracy (script bucket × which stage resolved it)",
         "",
-        "Bucket = the script the heuristic sees, which fixes the code path. Pure buckets are "
-        "labelled by TRUE intent, so they are NOT guaranteed correct — the adversarial cases "
-        "(English glue, Mandarin questions) are exactly where the heuristic loses.",
+        "Bucket = the SCRIPT of the turn; labelled by TRUE intent. The tuned router splits WITHIN "
+        "a bucket — plain Mandarin statements stay on the heuristic, Mandarin questions go to the "
+        "classifier — so the heuristic/classifier column shows how each bucket was resolved.",
         "",
-        "| Bucket | Path | n | Accuracy | FP (→coach) | FN (→converse) |",
+        "| Bucket | heur/clf | n | Accuracy | FP (→coach) | FN (→converse) |",
         "|---|---|---|---|---|---|",
     ]
     for b in BUCKET_ORDER:
         pb = summary["per_bucket"].get(b)
         if not pb:
             continue
-        path = "classifier" if b == "mixed" else "heuristic"
-        lines.append(f"| {b} | {path} | {pb['n']} | {pct(pb['accuracy'])} | {pb['fp']} | {pb['fn']} |")
+        split = f"{pb['heuristic']}/{pb['classifier']}"
+        lines.append(f"| {b} | {split} | {pb['n']} | {pct(pb['accuracy'])} | {pb['fp']} | {pb['fn']} |")
     clf = summary["classifier_only"]
     lines += [
         "",
-        f"**Classifier alone** (the {clf['n']} mixed turns): {clf['FP']} FP / {clf['FN']} FN "
-        f"(TP {clf['TP']} FP {clf['FP']} FN {clf['FN']} TN {clf['TN']}) — **treat as *no errors "
-        "observed, not a validation*** (see caveats).",
+        f"**Classifier-resolved turns** ({clf['n']} of {summary['n_cases']}): "
+        f"{clf['FP']} FP / {clf['FN']} FN (TP {clf['TP']} FP {clf['FP']} FN {clf['FN']} TN {clf['TN']}).",
         "",
-        "## Findings & caveats",
+        "## Caveats",
         "",
-        "- **The robust, headline finding — 100% of misroutes are the HEURISTIC's, not the "
-        "classifier's.** Every false positive is short English glue the `Latin→coach` rule routes "
-        "to a lecture *without ever calling the classifier*; every false negative is a Mandarin "
-        "question the `Han→converse` rule sends to chat. This rests on unambiguous labels, is "
-        "deterministic, and is directly actionable: **the calibration target is the script "
-        "heuristic** (e.g. route short English affirmations to converse; let the classifier see "
-        "Han-only turns that look interrogative — 吗/什么/为什么/怎么/呢/？).",
-        f"- **The classifier slice is NOT a validation.** n={clf['n']} is small; the classifier "
-        "runs at the production temperature (`get_llm` default 0.2, **nondeterministic** — a rerun "
-        f"may differ); and **{clf['contestable_labels']} of the {clf['n']} labels are contestable** "
-        "against the deployed prompt.",
-        "- **Prompt/intent misalignment this surface exposes.** `INTENT_CLASSIFIER_PROMPT` mandates "
-        "coach for ALL code-switching (`我很喜欢 hiking` → coach). We labelled proper-noun "
-        "code-switches (`去 Melbourne 玩`, `Netflix`, `Starbucks`, `David`) as **converse** — a "
-        "learner naming a place/brand isn't asking to be taught the word. So the classifier "
-        "returning converse there *deviates* from its own instructions, and our label rewards the "
-        "deviation. If the product wants proper nouns left in conversation, the fix is a "
-        "**proper-noun carve-out in the prompt**, not a claim the classifier is already correct.",
+        "- **The classifier is nondeterministic** — it runs at the production temperature "
+        "(`get_llm` default 0.2), so the classifier-resolved turns can differ run to run. The "
+        "heuristic-resolved turns are deterministic.",
+        "- **Small, single dataset (n=40), our labels.** Four mixed proper-noun turns "
+        "(`去 Melbourne 玩`, `Netflix`, `Starbucks`, `David`) are labelled **converse**, which "
+        "contests the deployed `INTENT_CLASSIFIER_PROMPT` (it mandates coach for ALL code-switching). "
+        "If the product wants proper nouns left in conversation, that's a prompt carve-out — see the "
+        "findings note.",
+        "- **Full narrative, the classify-always counterfactual, latency, and the routing history "
+        "are in [`notes/voice-router-findings.md`](../../notes/voice-router-findings.md).**",
         "",
     ]
     if summary["bucket_mismatches"]:

@@ -6,9 +6,9 @@ Counterfactual: skip the script heuristic and send **every** turn to the LLM cla
 
 | Metric | Router (heuristic+classifier) | Classify-always | Δ |
 |---|---|---|---|
-| Coach precision (headline) | 0.722 | 0.947 | +0.225 |
-| Converse→coach misroute | 0.227 | 0.045 | -0.182 |
-| Accuracy | 0.750 | 0.975 | +0.225 |
+| Coach precision (headline) | 1.000 | 0.947 | -0.053 |
+| Converse→coach misroute | 0.000 | 0.045 | +0.045 |
+| Accuracy | 1.000 | 0.975 | -0.025 |
 
 Classify-always confusion (coach = positive): TP 18 FP 1 FN 0 TN 21.
 
@@ -21,22 +21,9 @@ Classify-always confusion (coach = positive): TP 18 FP 1 FN 0 TN 21.
 
 ## Head-to-head vs the router (per turn)
 
-- **Fixed** (router misrouted → classify-always correct): **10**
+- **Fixed** (router misrouted → classify-always correct): **0**
 - **Regressed** (router correct → classify-always misrouted — the cost of taxing every turn with a nondeterministic LLM): **1**
-- Both right: 29 · both wrong: 0 (of 40 compared)
-
-### Fixed by classify-always
-
-- `m11` (mandarin): `这个词是什么意思？` — router FN → classify-always TP
-- `m12` (mandarin): `这样说对吗？` — router FN → classify-always TP
-- `m13` (mandarin): `刚才那个句子为什么不对？` — router FN → classify-always TP
-- `m14` (mandarin): `“把”和“被”有什么区别？` — router FN → classify-always TP
-- `m15` (mandarin): `再给我一个例子好吗？` — router FN → classify-always TP
-- `e08` (english): `And you?` — router FP → classify-always TN
-- `e09` (english): `Yeah, exactly.` — router FP → classify-always TN
-- `e10` (english): `Haha okay.` — router FP → classify-always TN
-- `e11` (english): `One sec.` — router FP → classify-always TN
-- `e12` (english): `Me too!` — router FP → classify-always TN
+- Both right: 39 · both wrong: 0 (of 40 compared)
 
 ### Regressed (the heuristic was protecting these)
 

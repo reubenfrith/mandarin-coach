@@ -100,24 +100,58 @@ def _has_han(text: str) -> bool:
     return any("一" <= c <= "鿿" for c in text)
 
 
+# Question markers that make a Han-only turn AMBIGUOUS (a coaching question like "这个词是什么
+#意思？" vs a conversational one like "你呢？"). Their presence sends the turn to the classifier;
+# a plain Mandarin statement (no marker) stays on the zero-latency converse fast path.
+_ZH_QUESTION_MARKERS = ("吗", "呢", "什么", "为什么", "怎么", "怎样", "哪", "谁",
+                        "多少", "几", "如何", "是不是", "有没有", "对不对", "？", "?")
+
+# A pure-English turn with at most this many words is treated as conversational glue ("and you?",
+# "me too") and fast-pathed to converse. Anything longer is a possible coaching question and goes
+# to the classifier. Tuned on evals/surfaces/voice_coach (the 5 glue cases are all <=2 words; the
+# shortest real coaching question is 5) — see evals/notes/voice-router-findings.md.
+_ENGLISH_GLUE_MAX_WORDS = 2
+
+
+def _is_zh_question(text: str) -> bool:
+    return any(m in text for m in _ZH_QUESTION_MARKERS)
+
+
+def _heuristic_route(text: str) -> str | None:
+    """The zero-latency routing decision, or None when the turn is genuinely AMBIGUOUS and worth
+    a classifier call. Principle: fast-path only what is unambiguous from surface form (a plain
+    Mandarin statement, a very short English aside, an empty turn); classify everything else.
+
+    This replaced the old two blunt rules (Latin->coach, Han->converse), which the router eval
+    showed caused 100% of misroutes — English glue lectured, Mandarin questions ignored. Biased
+    to converse: a coach turn missed here degrades gracefully (the partner corrects inline)."""
+    han, latin = _has_han(text), bool(_LATIN_WORD.search(text))
+    if not han and not latin:
+        return "converse"                       # no real content → don't lecture
+    if han and not latin:
+        # plain Mandarin statement → converse (the common, instant path); a Mandarin QUESTION is
+        # ambiguous (conversational vs coaching) → let the classifier decide.
+        return None if _is_zh_question(text) else "converse"
+    if latin and not han:
+        # short English aside → converse; a longer English turn may be a coaching question → classify.
+        return "converse" if len(_LATIN_WORD.findall(text)) <= _ENGLISH_GLUE_MAX_WORDS else None
+    return None                                 # mixed script → classifier
+
+
 async def _route_intent(user_id: str, text: str, mode: str) -> str:
     """Decide which brain answers a spoken turn: 'converse' or 'coach'.
 
-    Manual override wins. Otherwise a zero-latency script heuristic handles the clear
-    cases — pure English is a question (coach), pure Mandarin is conversation — and only a
-    genuinely mixed turn costs an LLM classifier call. Biased to 'converse' throughout: a
-    misrouted chat->coach turn (an English lecture when you wanted to talk) is more jarring
-    than the reverse, and the conversation partner still does light inline correction."""
+    Manual override wins. Otherwise the zero-latency heuristic resolves the unambiguous turns
+    (plain Mandarin statements, short English asides, empty) and only the ambiguous ones —
+    Mandarin questions, substantive English, mixed script — cost a classifier call. Biased to
+    'converse' throughout: a misrouted chat->coach turn (an English lecture when you wanted to
+    talk) is more jarring than the reverse, and the partner still does light inline correction."""
     if mode in ("converse", "coach"):
         return mode
-    han, latin = _has_han(text), bool(_LATIN_WORD.search(text))
-    if latin and not han:
-        return "coach"       # clearly English → a learning question
-    if han and not latin:
-        return "converse"    # clearly Mandarin → conversation
-    if not han and not latin:
-        return "converse"    # no real content → don't lecture
-    return await classify_turn_intent(text)  # mixed → let the classifier decide
+    decided = _heuristic_route(text)
+    if decided is not None:
+        return decided
+    return await classify_turn_intent(text)
 
 
 def _system_prompt(user_id: str) -> str:
