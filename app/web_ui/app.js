@@ -210,6 +210,30 @@ function stopRecording() {
   $("record-btn").classList.remove("recording");
 }
 
+// Fetch the reply audio from /api/voice/speak and play it. This is split out of the turn so the
+// transcript + reply text render the MOMENT the brain is done (~2s sooner than the old path,
+// which waited on TTS before showing anything). Audio is best-effort — any failure is silent and
+// the text stands. (We deliberately don't do MediaSource chunk-streaming: gpt-4o-mini-tts's
+// latency is front-loaded — first byte lands ~2s in even when streaming — so incremental playback
+// buys ~0.4s while adding real browser-quirk risk. The text-early decouple is the actual win.)
+async function speakReply(text) {
+  if (!text) return;
+  try {
+    const resp = await fetch("/api/voice/speak", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+    if (!resp.ok) return;
+    const audio = $("reply-audio");
+    audio.src = URL.createObjectURL(await resp.blob());
+    audio.play().catch(() => {});
+  } catch (_e) {
+    /* audio is best-effort; the reply text is already on screen */
+  }
+}
+
 async function sendTurn() {
   if (!chunks.length) { $("voice-status").textContent = "didn't catch that — try again"; return; }
   const blob = new Blob(chunks, { type: mediaRecorder.mimeType || "audio/webm" });
@@ -226,11 +250,9 @@ async function sendTurn() {
     const reply = addTurn($("voice-transcript"), "assistant", data.assistant_text,
       { withPinyin: true, segments: data.assistant_segments, coach: isCoach });
     markLogged(reply, data.logged);
-    if (data.audio_b64) {
-      $("reply-audio").src = "data:audio/mp3;base64," + data.audio_b64;
-      $("reply-audio").play().catch(() => {});
-    }
+    // Text is on screen now; the audio streams in behind it (best-effort — never block the turn).
     $("voice-status").textContent = "your turn — hold to speak";
+    speakReply(data.spoken_text);
   } catch (err) {
     $("voice-status").textContent = "error: " + (err.message || err);
   }

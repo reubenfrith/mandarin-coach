@@ -16,10 +16,10 @@ Shares the corpus with the text coach: notable spoken mistakes are logged via
 `extract_and_log_error_voice` into the same per-user ChromaDB corpus (source="voice").
 """
 import asyncio
-import base64
 import re
 
-from fastapi import APIRouter, Depends, File, Form, UploadFile
+from fastapi import APIRouter, Body, Depends, File, Form, UploadFile
+from fastapi.responses import Response, StreamingResponse
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from openai import OpenAI
 
@@ -212,7 +212,8 @@ async def voice_turn(
 ):
     """Full spoken turn. `mode` is auto|converse|coach (the UI's toggle). Routes the turn to
     the conversation partner or the voice coach, and returns the transcripts (with ruby
-    segments), the detected intent, what was spoken, and the reply audio as base64 mp3."""
+    segments), the detected intent, and what was spoken — but NOT the audio: the reply audio is
+    streamed separately from /api/voice/speak so the text renders without waiting on TTS."""
     audio_bytes = await audio.read()
 
     # STT is a blocking HTTP call; keep it off the event loop. Auto-detect the language
@@ -240,8 +241,9 @@ async def voice_turn(
         # extraction guard remain the corpus-pollution protection.
         logged = await extract_and_log_error_voice(user_id, user_text, assistant_text, confidence=None)
 
-    audio_out = await asyncio.to_thread(_synthesize, _openai_client(), spoken)
-
+    # NOTE: no TTS here. The reply audio is fetched separately from /api/voice/speak so the
+    # transcript + reply text render the moment the brain is done (~2s sooner than waiting on
+    # TTS), and the audio then STREAMS (first sound ~1s sooner than a full clip). See app.js.
     return {
         "intent": intent,
         "user_text": user_text,
@@ -252,9 +254,30 @@ async def voice_turn(
         # coach answer these ruby-annotate only the Chinese example sentences.
         "user_segments": pinyin_segments(user_text),
         "assistant_segments": pinyin_segments(assistant_text),
-        "audio_b64": base64.b64encode(audio_out).decode("ascii"),
         "logged": logged,
     }
+
+
+@router.post("/api/voice/speak")
+def voice_speak(text: str = Body(..., embed=True), user_id: str = Depends(require_user)):
+    """Stream the TTS audio for one line of text as OpenAI synthesises it, so the browser can
+    start playing ~1s sooner than waiting for the whole mp3 (gpt-4o-mini-tts has ~2s of fixed
+    latency; time-to-first-byte is ~1s). Split out of /api/voice/turn so the reply text shows
+    immediately while the audio streams behind it."""
+    line = (text or "").strip()
+    if not line:
+        return Response(status_code=204)
+
+    def gen():
+        client = _openai_client()
+        with client.audio.speech.with_streaming_response.create(
+            model=TTS_MODEL, voice=TTS_VOICE, input=line, response_format="mp3"
+        ) as resp:
+            for chunk in resp.iter_bytes(4096):
+                yield chunk
+
+    # StreamingResponse iterates the sync generator in a threadpool, keeping the event loop free.
+    return StreamingResponse(gen(), media_type="audio/mpeg")
 
 
 @router.post("/api/voice/reset")
