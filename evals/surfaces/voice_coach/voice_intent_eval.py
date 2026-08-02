@@ -33,7 +33,7 @@ Prereq: datagen/voice_intent_dataset.json (build with generate_voice_intent_data
 import pathlib
 import sys
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))  # evals/ on path
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))  # evals/ on path
 from lib import _env  # noqa: E402,F401  — bootstrap: .env, app path, chroma, ragas shim
 
 import argparse  # noqa: E402

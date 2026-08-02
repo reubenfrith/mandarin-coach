@@ -1,4 +1,4 @@
-"""Guards the voice-router eval's scoring math (evals/surfaces/voice_intent_eval.py).
+"""Guards the voice-router eval's scoring math (evals/surfaces/voice_coach/voice_intent_eval.py).
 
 The metric definitions are the kind of thing that silently rots — 'coach = positive', so a
 CONVERSE turn routed to COACH is a FALSE POSITIVE (the jarring failure) and drives coach
@@ -7,8 +7,8 @@ PRECISION. These pure functions have no model calls, so they're cheap to pin. Ru
 import importlib.util
 import pathlib
 
-# The eval lives under evals/surfaces (not a package on the default path); load it by path.
-_SURFACE = pathlib.Path(__file__).resolve().parents[1] / "evals" / "surfaces" / "voice_intent_eval.py"
+# The eval lives under evals/surfaces/voice_coach (not a package on the default path); load by path.
+_SURFACE = pathlib.Path(__file__).resolve().parents[1] / "evals" / "surfaces" / "voice_coach" / "voice_intent_eval.py"
 _spec = importlib.util.spec_from_file_location("voice_intent_eval", _SURFACE)
 vie = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(vie)

@@ -55,7 +55,7 @@ convenience).
 | Deliverable | Pts | Write-up (README §) | Code / artifact |
 |---|---|---|---|
 | Prepare a test data set | 2 | [Test set design](README.md#test-set-design) | Generators: `evals/datagen/generate_dataset.py` → `test_dataset.json` (60: 40/10/10), `generate_extraction_dataset.py` → `extraction_dataset.json` (51: 34+17), `seed_data.py` (C_scale corpus). Metric scorers: `evals/lib/llm_judge.py`, `evals/lib/agg_parse.py` |
-| Evaluation harness relevant to the problem | 10 | [Results](README.md#results) | Four surfaces: `evals/surfaces/eval_harness.py` (head-to-head), `ragas_rag.py`, `ragas_agentic.py`, `extraction_eval.py`. Outputs in `evals/results/*.{md,json}`; recompute guide `evals/results/README.md` |
+| Evaluation harness relevant to the problem | 10 | [Results](README.md#results) | Four surfaces: `evals/surfaces/text_coach/eval_harness.py` (head-to-head), `ragas_rag.py`, `ragas_agentic.py`, `extraction_eval.py`. Outputs in `evals/results/*.{md,json}`; recompute guide `evals/results/README.md` |
 | Conclusions about pipeline performance | 3 | [Conclusions](README.md#conclusions) + [per-surface result tables](README.md#results) | Backed by `evals/results/head_to_head.md`, `ragas_rag.md`, `ragas_agentic.md`, `extraction.md` |
 
 ---
@@ -64,9 +64,9 @@ convenience).
 
 | Deliverable | Pts | Write-up (README §) | Code / artifact |
 |---|---|---|---|
-| Advanced retrieval technique + why (1–2 sentences) | 6 | [6.1 Advanced retrieval: hybrid search](README.md#61-advanced-retrieval-hybrid-search) | Hybrid BM25(jieba)+dense RRF, in production: `app/memory.py` `query_grammar_rules_hybrid()` / `_get_grammar_index()`; swept in `evals/surfaces/retrieval_sweep.py`; non-circular query set built by `evals/datagen/build_retrieval_queries.py` → `retrieval_queries.json` (43) |
+| Advanced retrieval technique + why (1–2 sentences) | 6 | [6.1 Advanced retrieval: hybrid search](README.md#61-advanced-retrieval-hybrid-search) | Hybrid BM25(jieba)+dense RRF, in production: `app/memory.py` `query_grammar_rules_hybrid()` / `_get_grammar_index()`; swept in `evals/surfaces/text_coach/retrieval_sweep.py`; non-circular query set built by `evals/datagen/build_retrieval_queries.py` → `retrieval_queries.json` (43) |
 | Performance vs original RAG, in a table | 2 | [6.1 sweep table](README.md#61-advanced-retrieval-hybrid-search) | `evals/results/retrieval_sweep.{md,json}` |
-| Change to ≥1 other piece, harness-evidenced | 6 | [6.2 Grammar coverage](README.md#62-grammar-coverage-tripled) **and** [6.3 Extraction guard](README.md#63-extraction-guard) | **6.2** coverage ×3 (98→315 docs): ingest `data/grammar_patterns.json` via `app/memory.py` `_grammar_pattern_text()`, measured by `evals/surfaces/coverage_check.py` → `results/coverage_check.*`. **6.3** extraction retry/validation guard: `app/agent.py` `extract_and_log_error()` / `_extract_record()` / `_record_complete()`, before/after via `extraction_eval.py --guarded` → `results/extraction_guarded.*`, unit-checked by `tests/test_extraction_guard.py`. (Also: model bake-off `evals/surfaces/model_bakeoff.py` → `results/model_bakeoff.*`.) |
+| Change to ≥1 other piece, harness-evidenced | 6 | [6.2 Grammar coverage](README.md#62-grammar-coverage-tripled) **and** [6.3 Extraction guard](README.md#63-extraction-guard) | **6.2** coverage ×3 (98→315 docs): ingest `data/grammar_patterns.json` via `app/memory.py` `_grammar_pattern_text()`, measured by `evals/surfaces/text_coach/coverage_check.py` → `results/coverage_check.*`. **6.3** extraction retry/validation guard: `app/agent.py` `extract_and_log_error()` / `_extract_record()` / `_record_complete()`, before/after via `extraction_eval.py --guarded` → `results/extraction_guarded.*`, unit-checked by `tests/test_extraction_guard.py`. (Also: model bake-off `evals/surfaces/text_coach/model_bakeoff.py` → `results/model_bakeoff.*`.) |
 
 ---
 

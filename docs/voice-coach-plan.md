@@ -151,7 +151,7 @@ output, no second call, no structured-output-vs-tools conflict.
 - (Power-user Shift+Space and the tab rename remain optional/deferred — cosmetic.)
 
 **Phase 4 — measure** ✅ DONE
-- Router **precision** surface `evals/surfaces/voice_intent_eval.py` over a 40-turn hand-labelled
+- Router **precision** surface `evals/surfaces/voice_coach/voice_intent_eval.py` over a 40-turn hand-labelled
   set (`evals/datagen/voice_intent_dataset.json`, deterministic generator — no LLM, so we're not
   grading the classifier against LLM-written labels). Coach = positive class, so the jarring
   converse→coach misroute is a false positive and **coach precision is the headline**
@@ -192,7 +192,7 @@ output, no second call, no structured-output-vs-tools conflict.
 - `app/agent.py` — `build_voice_coach`, `run_voice_coach`, `TurnIntent`.
 - `app/prompts.py` — `VOICE_COACH_SYSTEM_PROMPT`, `INTENT_CLASSIFIER_PROMPT`.
 - `app/web_ui/{app.js,index.html,style.css}` — mode toggle, coach styling.
-- `tests/test_voice_router.py` (new); `evals/surfaces/voice_intent_eval.py` (new).
+- `tests/test_voice_router.py` (new); `evals/surfaces/voice_coach/voice_intent_eval.py` (new).
 
 ## Open / deferred
 

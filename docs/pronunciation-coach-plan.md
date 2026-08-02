@@ -103,7 +103,7 @@ both error types → same corpus + error_stats trends → LLM suggests what to d
 - **API** (TestClient) — `/api/pronounce/correct` (stub the LLM) returns a corrected string +
   logs a grammar error; `/api/pronounce/assess` (feed a synthesized WAV) returns per-syllable
   verdicts and writes a `category="tones"` record that appears in `error_stats`.
-- **Eval before auto-logging** — `evals/surfaces/tone_assessment_eval.py`: labeled/synthetic
+- **Eval before auto-logging** — `evals/surfaces/pronunciation/tone_assessment_eval.py`: labeled/synthetic
   set → measure tone precision/recall → set the logging threshold. Same "measure before you
   trust it" discipline as the guarded text extractor. **Done:** the ungated predicate scored
   precision 0.833 (8 false positives on shallow T2/T3 flipping to flat T1); a calibrated

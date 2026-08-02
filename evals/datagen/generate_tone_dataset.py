@@ -1,7 +1,7 @@
 """Generate the labeled tone-assessment dataset (recipe form) → datagen/tone_dataset.json.
 
 Each case is a SYNTHESIS RECIPE — a Chao pitch-level sequence + synth params + a gold
-label — NOT audio bytes. The eval (surfaces/tone_assessment_eval.py) renders every recipe
+label — NOT audio bytes. The eval (surfaces/pronunciation/tone_assessment_eval.py) renders every recipe
 to a WAV and runs it through the real pYIN pipeline, so the dataset stays light (a few KB
 of JSON, not MB of audio) and is fully reproducible: synthesis is deterministic in the
 stored seed.

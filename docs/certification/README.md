@@ -547,7 +547,7 @@ Building the sweep exposed a flaw in the Task 5 retrieval numbers, which had to 
 - **Fix 2:** a **separate 43-query non-circular set** — fresh erroneous sentences with new vocabulary, never copied from any rule document, each mapped by construction to the one rule that explains its error.
 - On this set the baseline drops to recall@1 0.49 — real headroom for the sweep to discriminate.
 
-`evals/surfaces/retrieval_sweep.py` scores each configuration with deterministic exact-rule-id matching plus wall-clock latency — no LLM judge, fully reproducible:
+`evals/surfaces/text_coach/retrieval_sweep.py` scores each configuration with deterministic exact-rule-id matching plus wall-clock latency — no LLM judge, fully reproducible:
 
 | Configuration | recall@1 | recall@3 | recall@5 | MRR | latency p50 / p95 (ms) |
 |---|---|---|---|---|---|
@@ -571,7 +571,7 @@ Decisions:
 - After the sweep, 217 Chinese Grammar Wiki points were ingested as a separate `grammar_patterns` collection, unioned with the curated 98 at query time — roughly 3× the grammar coverage.
 - The sweep was deliberately not re-run on the union: each of the 43 queries has a single gold rule id, and the CGW set contains near-duplicate points (为了, 把, 一…就), so retrieving the CGW twin of a gold would score a miss — a label collision, not a quality change. The hybrid-over-dense choice is independent of corpus size and stands.
 
-A separate check, `evals/surfaces/coverage_check.py`, measures the two things that can move:
+A separate check, `evals/surfaces/text_coach/coverage_check.py`, measures the two things that can move:
 
 | | Curated only | Union | Meaning |
 |---|---|---|---|
@@ -601,7 +601,7 @@ Net: three times the coverage at essentially unchanged precision.
 
 ### 6.4 Model bake-off
 
-This settles the DeepSeek keep-or-drop question with the columns Task 5 lacked. Setup (`evals/surfaces/model_bakeoff.py`):
+This settles the DeepSeek keep-or-drop question with the columns Task 5 lacked. Setup (`evals/surfaces/text_coach/model_bakeoff.py`):
 
 - 12 A_stateless cases per model, run as grounded-correction generation — every model receives the same retrieved rules, so the model is the only variable. (Running the full agent would leak the default model's latency into every arm via the drill generator's internal LLM call.)
 - Each turn is bounded at 120 s, so a hang counts as a timeout instead of stalling the run; the judge is fixed across models.

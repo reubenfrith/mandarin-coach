@@ -73,10 +73,10 @@ python3 -c "import json; r=next(x for x in json.load(open('evals/results/head_to
 ## Reproduce a whole surface
 
 ```bash
-uv run python evals/surfaces/eval_harness.py                                  # head-to-head (60)
-uv run python evals/surfaces/ragas_rag.py                                     # RAG surface (40)
-REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=3 uv run python evals/surfaces/ragas_agentic.py   # agentic (60 + probes)
-uv run python evals/surfaces/tone_assessment_eval.py                          # tone auto-logging gate (80)
+uv run python evals/surfaces/text_coach/eval_harness.py                                  # head-to-head (60)
+uv run python evals/surfaces/text_coach/ragas_rag.py                                     # RAG surface (40)
+REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=3 uv run python evals/surfaces/text_coach/ragas_agentic.py   # agentic (60 + probes)
+uv run python evals/surfaces/pronunciation/tone_assessment_eval.py                          # tone auto-logging gate (80)
 ```
 
 The tone surface is fully local (pYIN DSP, no model calls) and deterministic — synthesis

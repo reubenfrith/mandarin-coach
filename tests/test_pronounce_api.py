@@ -86,7 +86,7 @@ def main():
         # THE GATE: a shallow-dip T3 on 好 (hǎo, T3) that the classifier flips to flat T1 —
         # a wrong LABEL but a low-confidence near-miss (margin < LOG_MARGIN). It must be
         # flagged not-ok for the UI yet NOT written to the corpus (calibrated in
-        # evals/surfaces/tone_assessment_eval.py). Protects against false-positive logs.
+        # evals/surfaces/pronunciation/tone_assessment_eval.py). Protects against false-positive logs.
         r = c.post("/api/pronounce/assess", files={"audio": ("a.wav", wav([2.8, 2.0, 3.4], seed=0), "audio/wav")},
                    data={"target": "好"}).json()
         syl = r["syllables"][0]

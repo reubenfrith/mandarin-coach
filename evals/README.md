@@ -11,10 +11,13 @@ this file is the **map of the folder** — what each file is and how the pieces 
 evals/
   lib/        shared modules, imported not run   (_env.py, llm_judge.py, agg_parse.py)
   datagen/    dataset builders + frozen data     (seed_data.py, generate_*.py, *.json)
-  surfaces/   9 runnable evaluations             Task 5: preflight_typec, eval_harness, ragas_rag, ragas_agentic, extraction_eval
-                                                 Task 6: retrieval_sweep, coverage_check, model_bakeoff
-                                                 Voice coach Phase 4: voice_intent_eval
+  surfaces/   10 runnable evaluations, grouped by the product surface they exercise:
+    text_coach/     the agent + RAG + tools    preflight_typec, eval_harness, ragas_rag, ragas_agentic,
+                                               extraction_eval, retrieval_sweep, coverage_check, model_bakeoff
+    voice_coach/    the spoken intent router   voice_intent_eval
+    pronunciation/  the tone coach             tone_assessment_eval
   results/    every surface's output + its own README (verification recipes)
+  notes/      findings + decision records that span runs (e.g. voice-router-findings.md)
 ```
 
 ## The pipeline, in order
@@ -32,7 +35,7 @@ datagen/seed_data.py ──▶ datagen/generate_dataset.py ──────▶
                                                                                 │                    │
    ┌────────────────────────────────────────────────────────────────────────  ┘                    │
    ▼                                                                                                 ▼
-surfaces/preflight_typec   surfaces/eval_harness   surfaces/ragas_rag   surfaces/ragas_agentic   surfaces/extraction_eval
+surfaces/text_coach/preflight_typec   surfaces/text_coach/eval_harness   surfaces/text_coach/ragas_rag   surfaces/text_coach/ragas_agentic   surfaces/text_coach/extraction_eval
 (thesis check)             (head-to-head)          (RAG metrics)        (agentic metrics)        (corpus-writer)
    │                            │                       │                    │                        │
    └────────────────────────────┴──────────── results/ ────────────────────┴────────────────────────┘
@@ -63,6 +66,11 @@ The three **Task 6** surfaces (`retrieval_sweep`, `coverage_check`, `model_bakeo
 
 ### `surfaces/` — the runnable evaluations (each writes into `results/`)
 
+Grouped by the product surface they exercise. The **text coach** is the original certification
+scope (Tasks 5–6); **voice coach** and **pronunciation** are the product extensions.
+
+#### `surfaces/text_coach/` — the agent, its RAG, and its tools
+
 | File | What it measures | Writes |
 |---|---|---|
 | `preflight_typec.py` | The load-bearing thesis check: can the agent aggregate at scale at all? Run this first — if it fails, nothing else matters. | `results/preflight_typec.md` |
@@ -73,7 +81,18 @@ The three **Task 6** surfaces (`retrieval_sweep`, `coverage_check`, `model_bakeo
 | `retrieval_sweep.py` (Task 6.1) | Advanced-retrieval sweep over 43 fresh non-circular queries: baseline dense vs BGE-M3 vs hybrid (BM25+dense, RRF). Deterministic exact rule-id match + wall-clock latency, no LLM judge. | `results/retrieval_sweep.{md,json}` |
 | `coverage_check.py` (Task 6.2) | Effect of unioning the +217 CGW `grammar_patterns` set: coverage on 15 CGW-only topics + precision retention on the 43 curated queries. Deterministic. | `results/coverage_check.{md,json}` |
 | `model_bakeoff.py` (Task 6.4) | DeepSeek V4 / GLM-5.2 / Qwen3.5 head-to-head on grounded corrections: correct-fix, misleading claims, timeout rate, latency p50/p95. Settles the keep/drop-DeepSeek decision. | `results/model_bakeoff.{md,json}` |
-| `voice_intent_eval.py` (Voice coach Phase 4) | The voice router `_route_intent`: coach-precision + converse→coach misroute rate over 40 turns bucketed by script but labelled by true intent, so per-bucket accuracy separates the zero-latency heuristic's error from the LLM classifier's. Precision-first on converse. | `results/voice_intent.{md,json}` |
+
+#### `surfaces/voice_coach/` — the spoken intent router
+
+| File | What it measures | Writes |
+|---|---|---|
+| `voice_intent_eval.py` (Phase 4) | The voice router `_route_intent`: coach-precision + converse→coach misroute rate over 40 turns bucketed by script but labelled by true intent, so per-bucket accuracy separates the zero-latency heuristic's error from the LLM classifier's. Precision-first on converse. Findings + the classify-always question are written up in [`notes/voice-router-findings.md`](notes/voice-router-findings.md). | `results/voice_intent.{md,json}` |
+
+#### `surfaces/pronunciation/` — the tone coach
+
+| File | What it measures | Writes |
+|---|---|---|
+| `tone_assessment_eval.py` | The pronunciation coach's corpus writer (`_log_tone_error`): precision/recall of the wrong-tone log predicate, swept over a confidence-margin gate to set `LOG_MARGIN`. Precision is the headline (a false positive logs a correctly-said syllable). Fully local DSP (pYIN), deterministic. | `results/tone_assessment.{md,json}` |
 
 **Results** — `results/` holds the output of every surface. **Start at
 [`results/README.md`](results/README.md)**: it indexes all surfaces and gives copy-paste
@@ -91,26 +110,30 @@ Run from the repo root (each script puts `evals/` on the path itself, so no `cd`
 uv run python evals/datagen/generate_dataset.py
 REQUEST_TIMEOUT=150 uv run python evals/datagen/generate_extraction_dataset.py   # prereq: results/head_to_head.json
 
-# 2. Run the surfaces
-uv run python evals/surfaces/preflight_typec.py                                        # thesis check
-uv run python evals/surfaces/eval_harness.py                                           # head-to-head (60)
-uv run python evals/surfaces/eval_harness.py --limit 2 --types C                       # cheap partial run
-uv run python evals/surfaces/ragas_rag.py                                              # RAG surface (40 A_stateless)
-REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=3 uv run python evals/surfaces/ragas_agentic.py   # agentic surface (60)
-REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=4 uv run python evals/surfaces/extraction_eval.py # extraction surface (34+17)
-uv run python evals/surfaces/extraction_eval.py --from-rows                            # re-aggregate saved rows, no model calls
+# 2. Text coach surfaces (agent + RAG + tools)
+uv run python evals/surfaces/text_coach/preflight_typec.py                                        # thesis check
+uv run python evals/surfaces/text_coach/eval_harness.py                                           # head-to-head (60)
+uv run python evals/surfaces/text_coach/eval_harness.py --limit 2 --types C                       # cheap partial run
+uv run python evals/surfaces/text_coach/ragas_rag.py                                              # RAG surface (40 A_stateless)
+REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=3 uv run python evals/surfaces/text_coach/ragas_agentic.py   # agentic surface (60)
+REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=4 uv run python evals/surfaces/text_coach/extraction_eval.py # extraction surface (34+17)
+uv run python evals/surfaces/text_coach/extraction_eval.py --from-rows                            # re-aggregate saved rows, no model calls
 
 # 3. Task 6 surfaces (retrieval + coverage + model bake-off)
 uv sync --extra task6                                                                  # BM25 (jieba) + BGE-M3 deps
-uv run python evals/surfaces/retrieval_sweep.py --configs baseline,bge_m3,hybrid       # 6.1 retrieval sweep (43 queries)
-uv run python evals/surfaces/coverage_check.py                                         # 6.2 grammar coverage / precision retention
-uv run python evals/surfaces/extraction_eval.py --guarded                              # 6.3 guarded re-run (before/after the guard)
-REQUEST_TIMEOUT=150 uv run python evals/surfaces/model_bakeoff.py                       # 6.4 model bake-off (12 cases × 3 models)
+uv run python evals/surfaces/text_coach/retrieval_sweep.py --configs baseline,bge_m3,hybrid       # 6.1 retrieval sweep (43 queries)
+uv run python evals/surfaces/text_coach/coverage_check.py                                         # 6.2 grammar coverage / precision retention
+uv run python evals/surfaces/text_coach/extraction_eval.py --guarded                              # 6.3 guarded re-run (before/after the guard)
+REQUEST_TIMEOUT=150 uv run python evals/surfaces/text_coach/model_bakeoff.py                       # 6.4 model bake-off (12 cases × 3 models)
 
 # 4. Voice coach Phase 4 (router intent)
 uv run python evals/datagen/generate_voice_intent_dataset.py                            # build the 40-turn labelled set
-EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_intent_eval.py                    # router precision surface (40 turns)
-uv run python evals/surfaces/voice_intent_eval.py --from-rows                           # re-aggregate saved rows, no model calls
+EVAL_CONCURRENCY=4 uv run python evals/surfaces/voice_coach/voice_intent_eval.py                    # router precision surface (40 turns)
+uv run python evals/surfaces/voice_coach/voice_intent_eval.py --from-rows                           # re-aggregate saved rows, no model calls
+
+# 5. Pronunciation coach (tone auto-logging gate) — fully local DSP, no model calls
+uv run python evals/datagen/generate_tone_dataset.py                                    # build the synthetic tone recipe set
+uv run python evals/surfaces/pronunciation/tone_assessment_eval.py                      # tone log precision/recall + LOG_MARGIN gate (80)
 ```
 
 ## Methodology notes (decisions made during the build)

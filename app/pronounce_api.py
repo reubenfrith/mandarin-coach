@@ -29,7 +29,7 @@ WEAK_SCORE = 60
 # `margin` = how much better the predicted (wrong) tone fits than the target; we only log
 # when that margin clears LOG_MARGIN, so an ambiguous near-miss (a shallow-but-real T2/T3
 # that flips to flat T1) never poisons the corpus. Calibrated on the labeled set in
-# evals/surfaces/tone_assessment_eval.py: at margin 0 (log on any mismatch) precision was
+# evals/surfaces/pronunciation/tone_assessment_eval.py: at margin 0 (log on any mismatch) precision was
 # 0.83 (8/48 borderline logs were false); this gate lifts it to 1.00 at 0.95 recall. The
 # value is the midpoint of the empirical gap between the worst false-positive and the
 # nearest true-positive margin (0.0651–0.0689). Re-run the eval to recalibrate.

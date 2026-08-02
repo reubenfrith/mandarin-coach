@@ -177,7 +177,7 @@ def assess(f0_hz, target_tones) -> dict:
         score = _score(dist)
         # Confidence of a wrong-tone call: how much better the predicted tone fits than the
         # target (0 when they agree). The auto-logger gates on this — a small margin is an
-        # ambiguous near-miss we stay silent on. Calibrated in evals/surfaces/tone_assessment_eval.
+        # ambiguous near-miss we stay silent on. Calibrated in evals/surfaces/pronunciation/tone_assessment_eval.
         margin = dist - dists.get(predicted, dist)
         return {
             "voiced": True,
