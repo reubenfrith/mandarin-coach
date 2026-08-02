@@ -16,12 +16,12 @@ from collections import namedtuple
 from langchain.agents import create_agent
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.checkpoint.memory import MemorySaver
+from openai import OpenAI
 from pydantic import BaseModel, Field
 
 import memory
-from typing import Literal
 
-from config import CONVERSATION_MODEL, DEFAULT_MODEL, FALLBACK_MODEL, get_llm
+from config import CONVERSATION_MODEL, DEFAULT_MODEL, FALLBACK_MODEL, get_llm, openai_key
 from prompts import (
     AGENT_SYSTEM_PROMPT,
     ERROR_EXTRACTION_PROMPT,
@@ -132,28 +132,39 @@ def _split_spoken(full_text: str) -> tuple[str, str]:
 VOICE_INTENT_TIMEOUT = float(os.environ.get("VOICE_INTENT_TIMEOUT", "12"))
 
 
-class TurnIntent(BaseModel):
-    """Which voice brain should handle one spoken turn."""
+_classifier_client: OpenAI | None = None
 
-    intent: Literal["converse", "coach"] = Field(
-        description="'coach' for a question/explanation request about the language or a "
-        "correction; 'converse' for ordinary conversation."
-    )
+
+def _classifier_openai() -> OpenAI:
+    """Cached direct-OpenAI client for the router classifier — the whole voice pipeline runs
+    direct on OpenAI, and a raw 1-token completion is both faster and more robust than the
+    ChatLiteLLM + structured-output wrapper (which added latency and the structured-output
+    flakiness seen in the extractor)."""
+    global _classifier_client
+    if _classifier_client is None:
+        _classifier_client = OpenAI(api_key=openai_key())
+    return _classifier_client
 
 
 async def classify_turn_intent(text: str) -> str:
-    """Classify a mixed-language spoken turn as 'converse' or 'coach'. Uses the fast voice
-    model; on timeout or any error returns 'converse' (precision-first: don't lecture when
-    the learner wanted to chat)."""
-    llm = get_llm(CONVERSATION_MODEL, streaming=False).with_structured_output(TurnIntent)
-    try:
-        result = await asyncio.wait_for(
-            llm.ainvoke(
-                [SystemMessage(content=INTENT_CLASSIFIER_PROMPT), HumanMessage(content=text)]
-            ),
-            timeout=VOICE_INTENT_TIMEOUT,
+    """Classify a mixed-language spoken turn as 'converse' or 'coach' via a direct OpenAI
+    one-token completion. Anything that isn't a clear 'coach' — including a timeout or any
+    error — returns 'converse' (precision-first: don't lecture when the learner wanted to chat)."""
+    def _call() -> str:
+        r = _classifier_openai().chat.completions.create(
+            model=CONVERSATION_MODEL,  # bare OpenAI model name (voice runs direct on OpenAI)
+            messages=[
+                {"role": "system",
+                 "content": INTENT_CLASSIFIER_PROMPT + "\n\nReply with exactly one word: coach or converse."},
+                {"role": "user", "content": text},
+            ],
+            max_tokens=2, temperature=0.2,  # parity with the prior get_llm default
         )
-        return result.intent
+        return (r.choices[0].message.content or "").strip().lower()
+
+    try:
+        out = await asyncio.wait_for(asyncio.to_thread(_call), timeout=VOICE_INTENT_TIMEOUT)
+        return "coach" if out.startswith("coach") else "converse"
     except Exception as e:  # noqa: BLE001 — timeout/malformed → safe default
         print(f"[classify_turn_intent] failed: {type(e).__name__}: {e}; defaulting to converse")
         return "converse"
