@@ -26,7 +26,7 @@ is re-derivable from the rows, and every scored answer is inspectable.
 3. **Deterministic cross-checks anchor the LLM-judged metrics** — recall@k by exact rule-id
    match validates RAGAS ContextRecall; required-tool recall validates ToolCallAccuracy;
    `agg_parse` validates C_scale. Where an LLM judge proved unreliable it was demoted and the
-   deterministic signal headlined (see "What broke along the way" in the root README, Task 5).
+   deterministic signal headlined (see "What broke along the way" in the certification README, Task 5).
 
 ## Verify a headline number yourself
 

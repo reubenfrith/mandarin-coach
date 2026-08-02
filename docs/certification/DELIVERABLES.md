@@ -46,7 +46,7 @@ convenience).
 
 | Deliverable | Pts | Write-up (README §) | Code / artifact |
 |---|---|---|---|
-| End-to-end prototype, deployed with a front end | 15 | [Task 4: Prototype](README.md#task-4-prototype) | **Live:** https://34-129-227-111.nip.io. **Front end + auth:** `app/main.py` (`auth_callback`, `starters`, `on_chat_start`, `on_message`). **Accounts:** `app/users.py`. **Agent:** `app/agent.py` (`build_agent`, `run_agent`, `extract_and_log_error`). **Model gateway:** `app/config.py` `get_llm()`. **Tools:** `app/tools.py` `make_tools()`. **Memory/vector store:** `app/memory.py` (`error_stats`, `add_personal_error`, query fns). **Deploy:** `Dockerfile`, `docker-compose.yml`, `Caddyfile`, [`DEPLOY.md`](DEPLOY.md) |
+| End-to-end prototype, deployed with a front end | 15 | [Task 4: Prototype](README.md#task-4-prototype) | **Live:** https://34-129-227-111.nip.io. **Front end + auth:** `app/main.py` (`auth_callback`, `starters`, `on_chat_start`, `on_message`). **Accounts:** `app/users.py`. **Agent:** `app/agent.py` (`build_agent`, `run_agent`, `extract_and_log_error`). **Model gateway:** `app/config.py` `get_llm()`. **Tools:** `app/tools.py` `make_tools()`. **Memory/vector store:** `app/memory.py` (`error_stats`, `add_personal_error`, query fns). **Deploy:** `Dockerfile`, `docker-compose.yml`, `Caddyfile`, [`DEPLOY.md`](../../DEPLOY.md) |
 
 ---
 

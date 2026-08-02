@@ -2,7 +2,7 @@
 
 All evaluation code and data for **Task 5** (evaluation harness) and **Task 6**
 (retrieval + model bake-off). The Task 5 write-up with results and conclusions lives in
-the root [`README.md`](../README.md#results--what-was-actually-built-and-what-it-showed);
+the certification write-up [`docs/certification/README.md`](../docs/certification/README.md#results--what-was-actually-built-and-what-it-showed);
 this file is the **map of the folder** — what each file is and how the pieces fit together.
 
 ## The folder, at a glance
@@ -158,7 +158,7 @@ REQUEST_TIMEOUT=150 uv run python evals/surfaces/model_bakeoff.py               
 
 ## Model comparison (Task 6.4) — DONE
 
-12 grounded-correction cases per model, per-turn timeout 120 s (see `results/model_bakeoff.md`). Standings are the July 2026 Chinese-leaderboard positions the roster was shortlisted from (root README → Model selection).
+12 grounded-correction cases per model, per-turn timeout 120 s (see `results/model_bakeoff.md`). Standings are the July 2026 Chinese-leaderboard positions the roster was shortlisted from (certification README → Model selection).
 
 | Model | correct_fix | misleading | timeout rate | latency p95 | Decision |
 |---|---|---|---|---|---|

@@ -108,7 +108,7 @@ both error types → same corpus + error_stats trends → LLM suggests what to d
   trust it" discipline as the guarded text extractor. **Done:** the ungated predicate scored
   precision 0.833 (8 false positives on shallow T2/T3 flipping to flat T1); a calibrated
   confidence gate `LOG_MARGIN = 0.067` lifts it to 1.00 at 0.95 recall (Surface 5 in the
-  root README).
+  certification README).
 - **Manual** — full practice loop (correction + TTS need the OpenRouter key; assessment runs
   locally).
 
