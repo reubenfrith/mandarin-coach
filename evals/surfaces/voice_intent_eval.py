@@ -135,6 +135,11 @@ def summarise(rows: list[dict]) -> dict:
     ctn = sum(1 for r in clf if r["outcome"] == "TN")
     clf_p, clf_r, _ = _prf(ctp, cfp, cfn)
 
+    # Of the classifier cases, how many are labelled converse — i.e. contest the deployed
+    # INTENT_CLASSIFIER_PROMPT, which mandates coach for ALL code-switching. On these the
+    # classifier returning converse DEVIATES from its prompt; our label scores that as correct.
+    clf_contestable = sum(1 for r in clf if r["gold_intent"] == "converse")
+
     heuristic_n = sum(1 for r in rows if r["resolved_by"] == "heuristic")
     return {
         "n_cases": len(rows),
@@ -149,6 +154,7 @@ def summarise(rows: list[dict]) -> dict:
         "classifier_only": {
             "n": len(clf), "TP": ctp, "FP": cfp, "FN": cfn, "TN": ctn,
             "precision": clf_p, "recall": clf_r,
+            "contestable_labels": clf_contestable,
         },
         "bucket_mismatches": [r["id"] for r in rows if r.get("bucket_mismatch")],
         "model": CONVERSATION_MODEL,
@@ -210,8 +216,30 @@ def render_md(summary: dict, rows: list[dict]) -> str:
     clf = summary["classifier_only"]
     lines += [
         "",
-        f"**Classifier alone** (the {clf['n']} mixed turns): precision {pct(clf['precision'])}, "
-        f"recall {pct(clf['recall'])} (TP {clf['TP']} FP {clf['FP']} FN {clf['FN']} TN {clf['TN']}).",
+        f"**Classifier alone** (the {clf['n']} mixed turns): {clf['FP']} FP / {clf['FN']} FN "
+        f"(TP {clf['TP']} FP {clf['FP']} FN {clf['FN']} TN {clf['TN']}) — **treat as *no errors "
+        "observed, not a validation*** (see caveats).",
+        "",
+        "## Findings & caveats",
+        "",
+        "- **The robust, headline finding — 100% of misroutes are the HEURISTIC's, not the "
+        "classifier's.** Every false positive is short English glue the `Latin→coach` rule routes "
+        "to a lecture *without ever calling the classifier*; every false negative is a Mandarin "
+        "question the `Han→converse` rule sends to chat. This rests on unambiguous labels, is "
+        "deterministic, and is directly actionable: **the calibration target is the script "
+        "heuristic** (e.g. route short English affirmations to converse; let the classifier see "
+        "Han-only turns that look interrogative — 吗/什么/为什么/怎么/呢/？).",
+        f"- **The classifier slice is NOT a validation.** n={clf['n']} is small; the classifier "
+        "runs at the production temperature (`get_llm` default 0.2, **nondeterministic** — a rerun "
+        f"may differ); and **{clf['contestable_labels']} of the {clf['n']} labels are contestable** "
+        "against the deployed prompt.",
+        "- **Prompt/intent misalignment this surface exposes.** `INTENT_CLASSIFIER_PROMPT` mandates "
+        "coach for ALL code-switching (`我很喜欢 hiking` → coach). We labelled proper-noun "
+        "code-switches (`去 Melbourne 玩`, `Netflix`, `Starbucks`, `David`) as **converse** — a "
+        "learner naming a place/brand isn't asking to be taught the word. So the classifier "
+        "returning converse there *deviates* from its own instructions, and our label rewards the "
+        "deviation. If the product wants proper nouns left in conversation, the fix is a "
+        "**proper-noun carve-out in the prompt**, not a claim the classifier is already correct.",
         "",
     ]
     if summary["bucket_mismatches"]:

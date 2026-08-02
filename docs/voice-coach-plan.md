@@ -163,17 +163,24 @@ output, no second call, no structured-output-vs-tools conflict.
   would score 1.0 by construction (the retrieval-saturation trap) and only `mixed` would test
   anything. Per-bucket accuracy is reported so heuristic error and classifier error stay separate.
 - **Result (gpt-4o-mini, `results/voice_intent.md`): coach precision 0.72, converse→coach misroute
-  0.23, accuracy 0.75.** The decisive finding: **100% of the misroutes are the HEURISTIC's, not the
-  classifier's.** The classifier scored 10/10 on the mixed turns — including correctly keeping all
-  four borderline proper-noun turns ("我周末想去 Melbourne 玩") as converse. Every false positive
-  is short English glue the `Latin→coach` rule sends to coach *without ever calling the classifier*;
-  every false negative is a Mandarin question the `Han→converse` rule sends to chat. The precision-
-  first bet holds (the classifier isn't over-coaching); the calibration target is the **heuristic**.
-- **Calibration implication (not yet applied):** refine the script heuristic, not the classifier —
-  e.g. route short English turns with no question mark / on an affirmation list to converse, and
-  let the classifier see Han-only turns that look interrogative (吗/什么/为什么/怎么/呢/？) rather
-  than blindly routing them to converse. Tracked as a follow-on change, harness-evidenced by this
-  surface.
+  0.23, accuracy 0.75.** The robust, headline finding: **100% of the misroutes are the HEURISTIC's.**
+  Every false positive is short English glue the `Latin→coach` rule sends to coach *without ever
+  calling the classifier*; every false negative is a Mandarin question the `Han→converse` rule sends
+  to chat. This rests on unambiguous labels, is deterministic, and is directly actionable.
+- **The classifier's 0-FP/0-FN on the 10 mixed turns is NOT a validation** — n is small, it runs at
+  the production temperature (`get_llm` default 0.2, nondeterministic — a rerun may differ), and 4 of
+  the 10 labels are contestable (below). No classifier errors *observed*; not "classifier proven fine."
+- **A prompt/intent misalignment the surface exposes:** `INTENT_CLASSIFIER_PROMPT` mandates coach for
+  ALL code-switching ("我很喜欢 hiking" → coach), yet we labelled proper-noun code-switches ("去
+  Melbourne 玩", Netflix, Starbucks, David) as *converse* — a learner naming a place/brand isn't asking
+  to be taught the word. So the classifier returning converse there *deviates* from its prompt and our
+  label rewards it. If the product wants proper nouns left in conversation, that's a **proper-noun
+  carve-out in the prompt**, not evidence the classifier is already right.
+- **Calibration implications (not yet applied), harness-evidenced by this surface:** (1) refine the
+  script heuristic — route short English turns with no question mark / on an affirmation list to
+  converse, and let the classifier see Han-only turns that look interrogative (吗/什么/为什么/怎么/呢/？)
+  rather than blindly routing them to converse; (2) decide the proper-noun policy and, if needed, add
+  the prompt carve-out above. Both tracked as follow-on changes.
 - Wiring tests (`tests/test_voice_router.py`): stub the classifier + both brains; assert manual
   override wins, pure-Chinese skips the classifier, coach path injects history and writes a
   summarised turn back, CONVERSE-only logging.

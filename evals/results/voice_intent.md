@@ -26,7 +26,13 @@ Bucket = the script the heuristic sees, which fixes the code path. Pure buckets 
 | mixed | classifier | 10 | 1.000 | 0 | 0 |
 | empty | heuristic | 3 | 1.000 | 0 | 0 |
 
-**Classifier alone** (the 10 mixed turns): precision 1.000, recall 1.000 (TP 6 FP 0 FN 0 TN 4).
+**Classifier alone** (the 10 mixed turns): 0 FP / 0 FN (TP 6 FP 0 FN 0 TN 4) — **treat as *no errors observed, not a validation*** (see caveats).
+
+## Findings & caveats
+
+- **The robust, headline finding — 100% of misroutes are the HEURISTIC's, not the classifier's.** Every false positive is short English glue the `Latin→coach` rule routes to a lecture *without ever calling the classifier*; every false negative is a Mandarin question the `Han→converse` rule sends to chat. This rests on unambiguous labels, is deterministic, and is directly actionable: **the calibration target is the script heuristic** (e.g. route short English affirmations to converse; let the classifier see Han-only turns that look interrogative — 吗/什么/为什么/怎么/呢/？).
+- **The classifier slice is NOT a validation.** n=10 is small; the classifier runs at the production temperature (`get_llm` default 0.2, **nondeterministic** — a rerun may differ); and **4 of the 10 labels are contestable** against the deployed prompt.
+- **Prompt/intent misalignment this surface exposes.** `INTENT_CLASSIFIER_PROMPT` mandates coach for ALL code-switching (`我很喜欢 hiking` → coach). We labelled proper-noun code-switches (`去 Melbourne 玩`, `Netflix`, `Starbucks`, `David`) as **converse** — a learner naming a place/brand isn't asking to be taught the word. So the classifier returning converse there *deviates* from its own instructions, and our label rewards the deviation. If the product wants proper nouns left in conversation, the fix is a **proper-noun carve-out in the prompt**, not a claim the classifier is already correct.
 
 ## False positives — conversation routed to coach (the jarring failure — inspect)
 

@@ -57,7 +57,8 @@
       "FN": 0,
       "TN": 4,
       "precision": 1.0,
-      "recall": 1.0
+      "recall": 1.0,
+      "contestable_labels": 4
     },
     "bucket_mismatches": [],
     "model": "gpt-4o-mini"
