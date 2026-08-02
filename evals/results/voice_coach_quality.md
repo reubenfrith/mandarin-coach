@@ -4,46 +4,28 @@
 
 ## Headlines
 
-- **Misleading claims: 3/20** (the dangerous error — a wrong grammar claim spoken aloud; ids: sc05, g02, g03)
-- **Meets expectation: 0.850** (did the reply do the job the turn required, per its rubric)
-- **Explanation in English (judge): 1.000** · spoken line English (deterministic): 0.750
+- **Misleading claims: 0/20** (the dangerous error — a wrong grammar claim spoken aloud)
+- **Meets expectation: 1.000** (did the reply do the job the turn required, per its rubric)
+- **Explanation in English (judge): 1.000** · spoken line English (deterministic): 0.700
 - **Split format valid: 1.000** (spoken line present + markdown-free) · breakdown present 1.000
 
 ## Spoken-line speakability (non-garbled turns)
 
-The first line is read aloud, so it must be one short sentence. Word count — p50 **15**, p95 **20**, max **20** (over 40 words = too long to speak). Speakable rate 1.000, markdown-free 1.000.
+The first line is read aloud, so it must be one short sentence. Word count — p50 **15**, p95 **26**, max **26** (over 40 words = too long to speak). Speakable rate 1.000, markdown-free 1.000.
 
 ## Behaviour slices
 
-- **Noise robustness** (garbled turns): correctly handled **0.500** — i.e. asked the learner to clarify instead of inventing a correction for the noise. (The `asks_to_repeat` judge flag, 0.500, is NOT a reliable noise signal: the coach's trailing 'try saying …' drill reads to the judge as a repeat request even when it fabricated a correction — so meets_expectation is the metric here.)
+- **Noise robustness** (garbled turns): correctly handled **1.000** — i.e. asked the learner to clarify instead of inventing a correction for the noise. (The `asks_to_repeat` judge flag, 1.000, is NOT a reliable noise signal: the coach's trailing 'try saying …' drill reads to the judge as a repeat request even when it fabricated a correction — so meets_expectation is the metric here.)
 - **History grounding** (referential turns): meets-expectation 1.000; wrongly asked to repeat 0/4 (the context already held the answer).
 
 ## By turn type
 
 | Type | n | meets_expectation | misleading | English |
 |---|---|---|---|---|
-| sentence_coach | 6 | 0.833 | 1 | 1.000 |
+| sentence_coach | 6 | 1.000 | 0 | 1.000 |
 | question | 6 | 1.000 | 0 | 1.000 |
 | referential | 4 | 1.000 | 0 | 1.000 |
-| garbled | 4 | 0.500 | 2 | 1.000 |
-
-## Misleading claims (inspect — spoken to the learner)
-
-- `sc05` (sentence_coach): The reply incorrectly suggests that the learner's sentence is less natural, which is misleading since the original sentence is already correct and natural.
-  - spoken: `Please say "给我一杯水" for a more natural request.`
-- `g02` (garbled): The reply incorrectly attempts to correct the garbled sentence instead of asking the learner to repeat, and it misleadingly suggests '我在' for 'I was,' which is incorrect.
-  - spoken: `Your sentence is not correct and doesn't make sense in Mandarin.`
-- `g03` (garbled): The reply incorrectly assumes the learner's intent and provides a Mandarin sentence instead of asking for repetition.
-  - spoken: `Your sentence needs some adjustments for clarity and correctness. A more natural way to say it would be "我去的地方是..." (Wǒ qù de dìfāng shì...), meaning "The place I am going to is...".`
-
-## Did not meet expectation
-
-- `sc05` (sentence_coach) — _control — a correct sentence must not be 'corrected'_: The reply incorrectly suggests that the learner's sentence is less natural, which is misleading since the original sentence is already correct and natural.
-  - spoken: `Please say "给我一杯水" for a more natural request.`
-- `g02` (garbled) — _mixed-noise mis-transcription_: The reply incorrectly attempts to correct the garbled sentence instead of asking the learner to repeat, and it misleadingly suggests '我在' for 'I was,' which is incorrect.
-  - spoken: `Your sentence is not correct and doesn't make sense in Mandarin.`
-- `g03` (garbled) — _failed romanised STT_: The reply incorrectly assumes the learner's intent and provides a Mandarin sentence instead of asking for repetition.
-  - spoken: `Your sentence needs some adjustments for clarity and correctness. A more natural way to say it would be "我去的地方是..." (Wǒ qù de dìfāng shì...), meaning "The place I am going to is...".`
+| garbled | 4 | 1.000 | 0 | 1.000 |
 
 ## Caveats
 
