@@ -164,8 +164,28 @@ noise**, while additionally fitting the one case it missed (`？？？`). Beatin
 not winning. (Re-running `--classify-always` vs the tuned router shows fixed 0 / regressed 1 — read as
 "the two agree except on the case the heuristic was fit to", not "tuned dominates".)
 
-**Out-of-sample accuracy is UNKNOWN** until the in-browser mic check below — that is the real
-generalization test. What holds *without* a test set is the structural claim above.
+**Out-of-sample, clean-audio: validated 9/9 end-to-end** (below). The remaining unknown is
+**noisy real-mic STT and the felt experience** — that still needs a human at the mic.
+
+### End-to-end validation through the real endpoint (`/api/voice/turn`)
+
+Ran the tuned build locally and drove OpenAI TTS → audio → the real voice-turn endpoint (real
+STT + the tuned `_route_intent` + branching), reading back the chosen intent. **9/9 routed as
+expected** — 4 representative phrases (overlap the tuned set; a wiring check) **plus 5 genuinely
+out-of-sample** phrases not in the 40, including the two hardest:
+
+- `你觉得这个周末会下雨吗？` — a **conversational** Mandarin *question* (hits the classifier since
+  it has 吗/？): correctly → **converse**. The classifier told a chat-question from a coach-question
+  on a novel input — the real generalization signal, and it held.
+- `我不太喜欢辣的菜。` — a statement with 不 (marker-adjacent): stayed on the heuristic → converse,
+  no over-trigger.
+
+Two incidental confirmations: an English coaching turn correctly referenced the sentence from a
+prior *converse* turn (shared spoken history works across the handoff), and the converse turn
+*after* an English coaching aside replied in **Mandarin** (no English-drift on that sequence).
+Caveat: clean TTS audio can't reproduce noisy-mic STT, and one clip came back with a traditional
+character (週 for 周) — harmless to routing here, but the STT-quality + felt-latency questions are
+exactly what the human mic check covers.
 
 ### Other caveats
 
@@ -187,8 +207,9 @@ generalization test. What holds *without* a test set is the structural claim abo
 1. **Proper-noun policy** — decide whether proper nouns stay in conversation. If yes, add a carve-out
    to `INTENT_CLASSIFIER_PROMPT` so the classifier's converse verdict on `去 Melbourne 玩` follows the
    prompt instead of contradicting it. This is the one open labelling ambiguity behind the 1.00.
-2. **In-browser confirmation** — the surface proves routing on transcripts; confirm on real mic audio
-   that a Mandarin question triggers the coach without a jarring pause from the added classifier call.
+2. **In-browser confirmation** — DONE for clean audio (9/9 end-to-end above); the open part is a
+   human at the mic: noisy real-mic STT, and whether the added classifier call on questions produces
+   a jarring pause, plus English-drift over a longer real conversation.
 3. **Knobs if real traffic shows misses** — `_ENGLISH_GLUE_MAX_WORDS` and the `_ZH_QUESTION_MARKERS`
    set are single dials in `voice_api.py`, re-scored by this surface. If ever moving to classify-most,
    switch `classify_turn_intent`'s error fallback from `converse` to the heuristic first (an outage

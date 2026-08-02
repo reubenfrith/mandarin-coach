@@ -198,8 +198,12 @@ output, no second call, no structured-output-vs-tools conflict.
   **matches classify-always (0.975) within noise** (the less-circular number), plus fits the one case
   it missed (`？？？`). Out-of-sample accuracy is unknown until the in-browser check. See
   `evals/notes/voice-router-findings.md`.
-- **Remaining follow-ons:** (1) **in-browser mic check — the real generalization test** (out-of-sample
-  accuracy is currently unknown); (2) proper-noun policy / `INTENT_CLASSIFIER_PROMPT` carve-out — the
+- **End-to-end validated (clean audio, 9/9):** drove OpenAI TTS → the real `/api/voice/turn` (STT +
+  tuned router) — 4 in-sample + 5 out-of-sample phrases all routed correctly, incl. a conversational
+  Mandarin question → converse and a marker-adjacent statement not over-triggering. Shared history +
+  no English-drift observed on the sequence. See `evals/notes/voice-router-findings.md`.
+- **Remaining follow-ons:** (1) **human mic check** — noisy real-mic STT + felt latency/drift (the one
+  part clean audio can't cover); (2) proper-noun policy / `INTENT_CLASSIFIER_PROMPT` carve-out — the
   one open labelling ambiguity; (3) `_ENGLISH_GLUE_MAX_WORDS` / `_ZH_QUESTION_MARKERS` are single dials
   if real traffic shows misses (marker over-triggers like 不怎么 cost latency, not misroutes).
 - Wiring tests (`tests/test_voice_router.py`): stub the classifier + both brains; assert manual
