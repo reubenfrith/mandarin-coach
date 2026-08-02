@@ -323,12 +323,18 @@ function renderMarkdown(bodyEl, src) {
   }
 }
 
-function markLogged(turn, logged) {
-  if (!logged) return;
+// One shared "logged to your error corpus" chip, used by the chat, pronounce and voice
+// panes so the same event looks the same everywhere. The 📝 comes from CSS (::before).
+function loggedChip(text) {
   const el = document.createElement("div");
   el.className = "logged";
-  el.textContent = `📝 logged (${logged.category}): ${logged.original} → ${logged.correction}`;
-  turn.appendChild(el);
+  el.textContent = text;
+  return el;
+}
+
+function markLogged(turn, logged) {
+  if (!logged) return;
+  turn.appendChild(loggedChip(`logged (${logged.category}): ${logged.original} → ${logged.correction}`));
 }
 
 // ---- text coach ----------------------------------------------------------- //
