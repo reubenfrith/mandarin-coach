@@ -106,20 +106,58 @@ const HANZI = /[一-鿿]/;
 // Render 汉字 with pīnyīn underneath each character, inline, via <ruby>. Built with the
 // DOM (not innerHTML) so model/transcript text can never inject markup. Non-Han runs
 // (punctuation, latin) pass through as plain text so the sentence still reads naturally.
-function renderRuby(bodyEl, segments) {
-  bodyEl.textContent = "";
-  bodyEl.classList.add("ruby");
-  segments.forEach((s) => {
+// Turn aligned pīnyīn segments into DOM nodes: one <ruby>汉字<rt>pīn</rt></ruby> per Han
+// char, plain text for the non-Han runs. Built with the DOM so text can't inject markup.
+function segmentsToNodes(segments) {
+  return segments.map((s) => {
     if (s.hanzi) {
       const ruby = document.createElement("ruby");
       ruby.appendChild(document.createTextNode(s.hanzi));
       const rt = document.createElement("rt");
       rt.textContent = s.pinyin || "";
       ruby.appendChild(rt);
-      bodyEl.appendChild(ruby);
-    } else {
-      bodyEl.appendChild(document.createTextNode(s.text || ""));
+      return ruby;
     }
+    return document.createTextNode(s.text || "");
+  });
+}
+
+function renderRuby(bodyEl, segments) {
+  bodyEl.textContent = "";
+  bodyEl.classList.add("ruby");
+  segmentsToNodes(segments).forEach((n) => bodyEl.appendChild(n));
+}
+
+// Look up aligned pīnyīn for a string, cached (the same example sentence recurs, and the
+// toggle re-renders existing turns — no point re-fetching). Resolves to segments or null.
+const _pinyinCache = new Map();
+function fetchSegments(text) {
+  if (_pinyinCache.has(text)) return Promise.resolve(_pinyinCache.get(text));
+  return api(`/api/pinyin?text=${encodeURIComponent(text)}`)
+    .then((r) => r.json())
+    .then((d) => { const segs = d.segments || null; if (segs) _pinyinCache.set(text, segs); return segs; })
+    .catch(() => null);
+}
+
+// Walk a rendered subtree and replace every Han-bearing text node with ruby (汉字 over
+// pīnyīn). Skips code/pre (verbatim) and anything already rubied. Fetches are async and
+// best-effort — a failure leaves the plain hanzi in place.
+const _RUBY_SKIP = new Set(["CODE", "PRE", "RUBY", "RT"]);
+function rubifyHanzi(root) {
+  const targets = [];
+  (function walk(node) {
+    Array.from(node.childNodes).forEach((child) => {
+      if (child.nodeType === 3) { if (HANZI.test(child.nodeValue)) targets.push(child); }
+      else if (child.nodeType === 1 && !_RUBY_SKIP.has(child.tagName)) walk(child);
+    });
+  })(root);
+  targets.forEach((node) => {
+    fetchSegments(node.nodeValue).then((segs) => {
+      if (!segs || !node.parentNode) return;
+      const frag = document.createDocumentFragment();
+      segmentsToNodes(segs).forEach((n) => frag.appendChild(n));
+      node.parentNode.replaceChild(frag, node);
+    });
   });
 }
 
@@ -179,6 +217,7 @@ function renderMarkdown(bodyEl, src) {
   const isUl = (l) => /^\s*[-*+]\s+/.test(l);
   const isOl = (l) => /^\s*\d+\.\s+/.test(l);
   const isHr = (l) => /^\s*([-*_])(\s*\1){2,}\s*$/.test(l);           // ---  ***  ___
+  const isQuote = (l) => /^\s*>\s?/.test(l);                          // > blockquote
   const isTableSep = (l) => /^\s*\|?\s*:?-{1,}:?\s*(\|\s*:?-{1,}:?\s*)+\|?\s*$/.test(l);
   const cells = (l) => l.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
   let i = 0;
@@ -197,6 +236,15 @@ function renderMarkdown(bodyEl, src) {
       continue;
     }
     if (isHr(line)) { bodyEl.appendChild(document.createElement("hr")); i++; continue; }
+    if (isQuote(line)) {                                   // > blockquote (one <p> per line)
+      const bq = document.createElement("blockquote");
+      while (i < lines.length && isQuote(lines[i])) {
+        const p = document.createElement("p");
+        appendInline(p, lines[i].replace(/^\s*>\s?/, ""));
+        bq.appendChild(p); i++;
+      }
+      bodyEl.appendChild(bq); continue;
+    }
     // GFM table: a `| … |` header row immediately followed by a `|---|---|` separator.
     if (line.includes("|") && i + 1 < lines.length && isTableSep(lines[i + 1])) {
       const table = document.createElement("table");
@@ -235,7 +283,7 @@ function renderMarkdown(bodyEl, src) {
     const para = [];                                       // paragraph (soft breaks -> <br>)
     const startsTable = (n) => lines[n].includes("|") && n + 1 < lines.length && isTableSep(lines[n + 1]);
     while (i < lines.length && !isBlank(lines[i]) && !isFence(lines[i]) && !isHr(lines[i])
-           && !isHeading(lines[i]) && !isUl(lines[i]) && !isOl(lines[i]) && !startsTable(i)) {
+           && !isQuote(lines[i]) && !isHeading(lines[i]) && !isUl(lines[i]) && !isOl(lines[i]) && !startsTable(i)) {
       para.push(lines[i]); i++;
     }
     const p = document.createElement("p");
@@ -263,6 +311,18 @@ function showThinking(bodyEl) {
   bodyEl.appendChild(dots);
 }
 
+// Render a coach reply's Markdown, then (when the pīnyīn toggle is on) rubify its Chinese.
+// The raw Markdown is stashed on the turn so the toggle can re-render in place, and the
+// toggle re-runs this over every existing coach turn — hence the pinyin fetch cache above.
+let showPinyin = localStorage.getItem("coach_pinyin") !== "off";  // default on (learner-first)
+function renderCoachBody(turn, md) {
+  if (md != null) turn._md = md;
+  const body = turn.querySelector(".body");
+  renderMarkdown(body, turn._md);
+  body.classList.toggle("pinyin", showPinyin);
+  if (showPinyin) rubifyHanzi(body);
+}
+
 const chatForm = $("chat-form");
 const chatSend = chatForm.querySelector("button[type=submit]");
 let chatBusy = false;  // guards against a double-submit (Enter + click, or a fast second Enter)
@@ -287,7 +347,7 @@ chatForm.addEventListener("submit", async (e) => {
       body: JSON.stringify({ message: msg, thread_id: threadId() }),
     });
     const data = await r.json();
-    renderMarkdown(pending.querySelector(".body"), data.answer);
+    renderCoachBody(pending, data.answer);
     markLogged(pending, data.logged);
   } catch (err) {
     pending.querySelector(".body").textContent = "Error: " + (err.message || err);
@@ -305,6 +365,19 @@ $("chat-input").addEventListener("keydown", (e) => {
     e.preventDefault();
     chatForm.requestSubmit();
   }
+});
+
+// 拼音 toggle: show/hide pīnyīn under the coach's Chinese. Re-renders every existing coach
+// turn in place (cheap — Markdown is re-parsed from the stashed source, pinyin is cached).
+const pinyinToggle = $("coach-pinyin");
+pinyinToggle.classList.toggle("on", showPinyin);
+pinyinToggle.addEventListener("click", () => {
+  showPinyin = !showPinyin;
+  localStorage.setItem("coach_pinyin", showPinyin ? "on" : "off");
+  pinyinToggle.classList.toggle("on", showPinyin);
+  $("chat").querySelectorAll(".turn.assistant").forEach((turn) => {
+    if (turn._md != null) renderCoachBody(turn);
+  });
 });
 
 // ---- voice partner (hold to speak) ---------------------------------------- //

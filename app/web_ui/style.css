@@ -41,6 +41,10 @@ nav { display: flex; gap: 0.25rem; }
 .composer { display: flex; gap: 0.5rem; padding: 0.75rem 1rem; border-top: 1px solid var(--border); background: var(--card); max-width: 820px; width: 100%; margin: 0 auto; align-items: center; }
 .composer textarea { resize: none; }
 
+/* 拼音 toggle in the coach composer — off looks like a chip, on lights up like a tab. */
+.pinyin-toggle { flex: 0 0 auto; background: var(--card); color: var(--muted); border: 1px solid var(--border); padding: 0.5rem 0.7rem; border-radius: 8px; font-size: 0.95rem; }
+.pinyin-toggle.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+
 .turn { padding: 0.6rem 0.85rem; border-radius: 10px; border: 1px solid var(--border); max-width: 90%; }
 .turn.user { background: var(--user); align-self: flex-end; }
 .turn.assistant { background: var(--assistant); align-self: flex-start; }
@@ -75,7 +79,14 @@ nav { display: flex; gap: 0.25rem; }
 .turn .body.md code { font-family: ui-monospace, Menlo, monospace; font-size: 0.9em; background: #f0f0f0; border-radius: 4px; padding: 0.05rem 0.3rem; }
 .turn .body.md pre { background: #f5f5f5; border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.75rem; overflow-x: auto; margin: 0.4rem 0 0.6rem; }
 .turn .body.md pre code { background: none; padding: 0; font-size: 0.85em; }
+/* pīnyīn under the coach's 汉字 (ruby). Extra line-height only when it's on, so stacked
+   pinyin never collides with the line above; code/pre keep their verbatim look. */
+.turn .body.md.pinyin { line-height: 2.0; }
+.turn .body.md ruby { ruby-position: under; -webkit-ruby-position: under; }
+.turn .body.md rt { font-size: 0.62em; color: var(--muted); font-weight: 400; letter-spacing: 0.02em; }
 .turn .body.md hr { border: none; border-top: 1px solid var(--border); margin: 0.8rem 0; }
+.turn .body.md blockquote { margin: 0.4rem 0 0.6rem; padding: 0.15rem 0 0.15rem 0.8rem; border-left: 3px solid var(--border); }
+.turn .body.md blockquote p { margin: 0.15rem 0; }
 /* Tables scroll inside their own box so a wide one never widens the chat bubble. */
 .turn .body.md table { display: block; overflow-x: auto; border-collapse: collapse; margin: 0.4rem 0 0.7rem; font-size: 0.92em; }
 .turn .body.md th, .turn .body.md td { border: 1px solid var(--border); padding: 0.35rem 0.6rem; text-align: left; vertical-align: top; }
