@@ -74,6 +74,9 @@ Dockerfile · docker-compose.yml · Caddyfile · DEPLOY.md    deployment
 - **Feature plans** — [`docs/voice-coach-plan.md`](docs/voice-coach-plan.md),
   [`docs/pronunciation-coach-plan.md`](docs/pronunciation-coach-plan.md)
 - **Evaluation harness** — [`evals/README.md`](evals/README.md)
+- **Presentation** — a self-contained slide deck ([`docs/presentation.html`](docs/presentation.html) —
+  open in any browser, arrow keys / scroll to advance, ⌘P to export a PDF) with a
+  matching speaker script ([`docs/presentation-script.md`](docs/presentation-script.md)).
 
 ## Origins
 
