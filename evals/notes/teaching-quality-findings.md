@@ -295,3 +295,36 @@ not replace them.** Hand the 13 (`corpus_harm_confirmed.md`) to the expert; don'
 - Drive a **before/after**: two coach prompts, report the teaching-quality delta, gated on κ so
   the delta is believable. (This "is the surface *useful*" half was cut from the slice, which
   only answers "is the judge *feasible*".)
+
+## Deferred — and the honest reason we're NOT doing it now (2026-08-03)
+
+We shipped the two highest-confidence corpus fixes (`gr_verb_reduplication`, `gr_gei_coverb`) and
+stopped there deliberately. What's left, and why each is parked rather than pushed:
+
+- **The other ~11 "confirmed" flags + the wider 71 audit candidates.** *Why not now:* they are NOT
+  safe to auto-apply. The pipeline over-flags, and gpt-5's proposed "correct" sentences were
+  sometimes themselves wrong (才+了, missing 就/都) — so batch-editing would *introduce* errors, not
+  remove them. Each needs the human expert's per-rule linguistic judgement, which shouldn't be
+  rushed. And the marginal value is low: most are defensible beginner simplifications, not active
+  harms like the two we fixed. Right move = the expert adjudicates `corpus_harm_confirmed.md` when
+  they have focused time; it's a candidate list, not a backlog we're committed to burning down.
+
+- **Building out the teaching-quality surface** (≥2 labellers, ~40 real replies, the `grounded`
+  dimension, a coach-prompt before/after). *Why not now:* the slice already answered the only
+  question a slice should — *is the axis feasible to judge* (yes) — so the next step is a real
+  investment gated on a *reason to spend it*: a second human labeller's time (the binding
+  constraint, not code) and a concrete coach change worth measuring. Building it speculatively,
+  with no prompt change to evaluate and no second labeller lined up, would produce infrastructure
+  that bit-rots before it's used. Build it when there's a delta to measure.
+
+- **A stronger/second judge or empirical grounding to converge the corpus audit further.** *Why not
+  now:* diminishing returns. We already learned the load-bearing lesson — LLM self-triage can't
+  calibrate itself; the human is the irreducible arbiter — so pouring more model passes at the 71
+  wouldn't change the conclusion, only the cost. The cheap 7× narrowing is done; the last mile is
+  human, and that's a person's afternoon, not an engineering task.
+
+**The through-line:** this whole thread's value was *diagnostic* — build the eval infra, learn the
+coach's real behaviour, learn the limits of LLM pipelines, fix the two things that clearly warranted
+it. The remaining items are each gated on either **human expert judgement that shouldn't be rushed**
+or **a triggering reason to invest** that doesn't exist yet. Recording this so a future session
+doesn't re-derive the analysis or mistake "parked" for "unfinished".
