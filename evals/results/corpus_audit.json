@@ -1,0 +1,1442 @@
+{
+  "summary": {
+    "n": 98,
+    "judge_model": "gpt-5",
+    "flagged": 71,
+    "major": 45,
+    "minor": 26,
+    "major_ids": [
+      "gr_bei_passive",
+      "gr_shi_de",
+      "gr_zai_progressive",
+      "gr_time_before_place",
+      "gr_liang_er",
+      "gr_youdianr_yidianr",
+      "gr_hui_neng_keyi",
+      "gr_jiu_cai",
+      "gr_resultative",
+      "gr_yinwei_suoyi",
+      "gr_suiran_danshi",
+      "gr_haishi_huozhe",
+      "gr_double_le",
+      "gr_yao_le_imminent",
+      "gr_le_negation_drop",
+      "gr_ma_question",
+      "gr_ba_suggestion",
+      "gr_hui_de_certainty",
+      "gr_xiang_yao_want",
+      "gr_dei_must",
+      "gr_ji_duoshao",
+      "gr_yuelaiyue",
+      "gr_bi_degree_diff",
+      "gr_ruguo_jiu",
+      "gr_zhiyao_jiu",
+      "gr_chule_yiwai",
+      "gr_xian_ranhou",
+      "gr_wulun_dou",
+      "gr_deshihou",
+      "gr_yiqian_yihou",
+      "gr_dao_resultative",
+      "gr_gei_resultative",
+      "gr_qilai_inchoative",
+      "gr_xiaqu_continue",
+      "gr_cong_dao",
+      "gr_weile_purpose",
+      "gr_yong_instrument",
+      "gr_zai_location_verb",
+      "gr_di_ordinal",
+      "gr_mei_every",
+      "gr_money_spoken",
+      "gr_adj_predicate_hen",
+      "gr_zai_you_again",
+      "gr_zhi_only",
+      "gr_verb_reduplication"
+    ],
+    "minor_ids": [
+      "gr_ba_disposal",
+      "gr_le_change",
+      "gr_measure_words",
+      "gr_de_complement",
+      "gr_de_di_de",
+      "gr_duration_complement",
+      "gr_directional",
+      "gr_zhe_durative",
+      "gr_yinggai_should",
+      "gr_meiyou_comparison",
+      "gr_yue_yue",
+      "gr_zhiyou_cai",
+      "gr_yi_jiu",
+      "gr_bushi_ershi",
+      "gr_jian_perception",
+      "gr_li_distance",
+      "gr_gei_coverb",
+      "gr_shi_identity",
+      "gr_zai_location",
+      "gr_duo_approx",
+      "gr_xie_some",
+      "gr_ye_also",
+      "gr_dou_all",
+      "gr_tai_le",
+      "gr_frequency_adverb",
+      "gr_lai_qu_purpose"
+    ]
+  },
+  "rows": [
+    {
+      "id": "gr_ba_disposal",
+      "name": "把 (bǎ) disposal construction",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "“The verb must be transitive …” — This is over‑broad. In standard usage, verbs that aren’t canonically transitive or are adjective‑like can appear in 把 sentences when they form a causative/resultative predicate, e.g., 这话把我笑死了, 这消息把他高兴坏了, 把我急坏了. Minimal fix: “The verb should denote an action that affects the object (typically a transitive verb) and is usually followed by a result/complement or 了.”",
+        "“…use it with intransitive/stative verbs” (as a blanket ‘common mistake’) — Over‑broad as written. While bare intransitives/statives (e.g., 来/去/是/在/有) or a bare verb like 把书看 are wrong, many adjective‑like/stative verbs are fine in 把 when they form a resultative affecting the object (e.g., 把他气坏了/笑死了/累坏了). Minimal fix: “Don’t use 把 with bare intransitives or non‑affecting statives (来、去、是、在、有), or with a bare verb lacking a result; adjective‑like verbs are fine when they form a resultative (e.g., 这消息把他高兴坏了).”"
+      ],
+      "reason": "The rule is broadly sound, but two absolute statements about verb transitivity and stative verbs are over‑broad given common, standard causative/resultative uses in 把‑sentences.",
+      "explanation": "The 把 construction moves the object before the verb to emphasise what is DONE TO that object: Subject + 把 + Object + Verb + (result/complement). The verb must be transitive and must carry something extra after it (a complement, 了, a result), because 把 stresses the disposal or effect on the object.",
+      "common_mistake": "English speakers use 把 with a bare verb and no result (把书看), or use it with intransitive/stative verbs, or combine it with 被 in the same clause."
+    },
+    {
+      "id": "gr_bei_passive",
+      "name": "被 (bèi) passive construction",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim in common mistake: \"...leaving the verb bare with no complement.\" Why this is over-broad/wrong: 被-sentences can legitimately have a bare verb (no resultative complement and no 了), especially for habitual/generic statements or in formal/news style. Examples: 他经常被批评。/ 她常被人欺负。/ 嫌疑人被捕（headline/register). Minimal fix: Rephrase to \"In one-off, event-focused passives, it’s more natural to show a result or completion (了, a resultative complement, a quantity/object, etc.). Bare verbs are fine in habitual/generic statements (经常/常/总是被...), and in formal/news style.\""
+      ],
+      "reason": "Labeling bare-verb 被-clauses as a mistake would incorrectly mark many common, grammatical sentences as wrong.",
+      "explanation": "被 marks the passive: Receiver + 被 + (Agent) + Verb + (extra). The subject is the thing acted UPON. The agent after 被 is optional. Like 把, the verb usually needs a complement or 了 after it.",
+      "common_mistake": "Combining 被 with 把 in one clause, or leaving the verb bare with no complement."
+    },
+    {
+      "id": "gr_le_completion",
+      "name": "了 (le) as completed action",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule accurately describes aspectual 了 as marking completion/actualization (not general past), and the “common mistake” and examples appropriately warn against using 了 with habitual/stative contexts; no materially over-broad or incorrect claims found.",
+      "explanation": "Verb + 了 marks that an action is completed or actualised, especially with a quantified or specific object: 我买了三本书. It is about completion of a specific event, not past tense in general.",
+      "common_mistake": "Treating 了 as a past-tense marker and attaching it to every past action, including habitual or stative ones (以前我是了学生)."
+    },
+    {
+      "id": "gr_le_change",
+      "name": "了 (le) as change of state (sentence-final)",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"It reports that something is now different from before.\" — Sentence‑final 了 can also mark an impending change, not only a state that is already true (e.g., 快下雨了, 要迟到了, 天要黑了). Minimal fix: \"Sentence‑final 了 signals a new or impending situation/change; it often indicates that something is now (or about to be) different from before.\"",
+        "\"Omitting sentence‑final 了 when reporting a new state\" (and labeling 我今年二十岁 as incorrect) — Omitting 了 is not categorically wrong; without 了 it reads as a general/current fact and is acceptable in contexts like answering 你今年多大? Minimal fix: \"To highlight a newly reached state (e.g., just turned an age), add 了; without 了 it sounds like a general fact rather than emphasizing the change (better: 我今年二十岁了).\" Replace “incorrect” with “less precise/natural for ‘just turned’ meaning.”"
+      ],
+      "reason": "The core rule is sound, but two statements are too absolute: sentence‑final 了 can also indicate an impending change, and omitting 了 in age statements is not inherently incorrect.",
+      "explanation": "Sentence-final 了 signals a new situation or change of state: 我饿了 (I'm hungry now), 天黑了 (it's gotten dark). It reports that something is now different from before.",
+      "common_mistake": "Omitting sentence-final 了 when reporting a new state, or confusing it with the verbal completion 了."
+    },
+    {
+      "id": "gr_guo_experience",
+      "name": "过 (guò) experiential aspect",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The explanation accurately captures experiential 过 versus perfective 了, the common mistake note is reasonable, and the example is correct for the intended meaning; no over-broad or false claims found.",
+      "explanation": "Verb + 过 says an experience has happened at least once in the past: 我去过中国 (I have been to China). It emphasises past experience, not a specific completed event.",
+      "common_mistake": "Using 了 where experiential 过 is meant, or adding 过 to ongoing/present situations."
+    },
+    {
+      "id": "gr_shi_de",
+      "name": "是……的 (shì...de) emphasis construction",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Using 了 instead of 是……的 to highlight the time/place/manner of a known past event.\" — This overstates it as an error. Sentences with 了 that include time/place/manner are often perfectly correct (e.g., 他昨天来了 / 他昨天在上海买了票). They simply don’t create the same focus as 是……的. Minimal fix: \"Using 了 is grammatical, but it doesn’t add the same focus. To highlight the circumstance of a known past event, prefer 是……的. Note: with 怎么 to ask ‘by what means,’ use 是……的 (or just 怎么…的); 怎么…了 usually means ‘how come’.\""
+      ],
+      "reason": "The note incorrectly treats many valid 了-sentences as mistakes; the core rule about 是……的 is fine but the prohibition is over-broad.",
+      "explanation": "For a completed action, 是……的 emphasises a circumstance — when, where, how, or with whom: 我是昨天来的 (it was yesterday that I came). 是 goes before the emphasised element; 的 comes at the end.",
+      "common_mistake": "Using 了 instead of 是……的 to highlight the time/place/manner of a known past event."
+    },
+    {
+      "id": "gr_measure_words",
+      "name": "Measure words (量词)",
+      "category": "measure_word",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"Chinese requires a measure word between a number/demonstrative and a noun: Number + Measure Word + Noun.\" — This is over-broad. With numbers, many words are themselves measurement units and take no extra classifier (e.g., 三天, 两年, 五岁, 三点). With demonstratives, some high-frequency nouns can omit 个 in standard colloquial or set phrases (e.g., 这人/那事), and formal style allows 人 without a classifier after numbers (三人). Minimal fix: \"In general, when a number or 这/那 modifies a countable noun, use a measure word: Number/这(那) + Measure Word + Noun. Common exceptions include time/age/measurement units (天、年、岁、点、分等), set phrases like 三人, and colloquial 这人/那事 where 个 is often omitted.\""
+      ],
+      "reason": "The rule states an absolute requirement that ignores several well-established exceptions in standard Mandarin (time/measure units, 三人, 这人/那事).",
+      "explanation": "Chinese requires a measure word between a number/demonstrative and a noun: Number + Measure Word + Noun. Different nouns take different measure words (本 for books, 个 for general items, 张 for flat things, 杯 for cups).",
+      "common_mistake": "Dropping the measure word (三书) or defaulting to 个 for everything (三个书)."
+    },
+    {
+      "id": "gr_zai_progressive",
+      "name": "在/正在 (zài/zhèngzài) progressive aspect",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"This describes ongoing actions, not states.\" Why it's over-broad: 在/正在 can also appear with some state-like or situation predicates to mean “to be in the middle of that state,” e.g., 他在忙呢/他正在忙, 他正在住院, 她正(在)怀孕. Minimal fix: “It’s generally used with dynamic actions and not with stative verbs like 知道、喜欢、认识, but it can also occur with ongoing situations such as 忙、住院、怀孕 to mean ‘be in the middle of.’”"
+      ],
+      "reason": "The absolute ban on states is false; common, natural counterexamples like 他在忙/他正在住院 exist.",
+      "explanation": "在 or 正在 before the verb marks an action in progress: 我在看书 (I am reading). 呢 can be added at the end for emphasis. This describes ongoing actions, not states.",
+      "common_mistake": "Applying 在……呢 to stative verbs (在知道), or confusing progressive 在 with the locational 在 (to be at)."
+    },
+    {
+      "id": "gr_de_complement",
+      "name": "得 (de) degree/manner complement",
+      "category": "particle",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"If the verb has an object, repeat the verb: 他说汉语说得很好.\" — This is over-broad. You must repeat the verb only if the object stays after the verb; you can also front the object and not repeat the verb, e.g., \"他汉语说得很好/汉语他说得很好,\" or use 把: \"他把汉字写得很漂亮.\" Minimal fix: \"If the object stays after the verb, repeat the verb (他说汉语说得很好). Alternatively, move the object before the verb (他汉语说得很好) or use 把 (他把汉字写得很漂亮).\"",
+        "\"Omitting the repeated verb when there is an object (他说汉语得很好)\" — As phrased, this implies you must always repeat the verb whenever there is an object, which isn’t true if the object is fronted (e.g., \"他汉语说得很好\"). Minimal fix: \"Omitting the repeated verb when the object follows the verb (他说汉语得很好). If you move the object before the verb, repetition isn’t needed: 他汉语说得很好.\""
+      ],
+      "reason": "The core rule is sound, but two statements are overly absolute and ignore the common alternative of fronting the object or using 把, which yields correct sentences without verb repetition.",
+      "explanation": "Verb + 得 + complement describes how well or to what degree an action is done: 他跑得很快 (he runs fast). If the verb has an object, repeat the verb: 他说汉语说得很好.",
+      "common_mistake": "Omitting the repeated verb when there is an object (他说汉语得很好), or confusing 得 with 的/地."
+    },
+    {
+      "id": "gr_de_di_de",
+      "name": "的 / 得 / 地 (de) distinction",
+      "category": "particle",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "Claim: \"得 links a verb to a complement of degree/result (走得慢).\" Why over-broad/wrong: 得 also attaches to adjective predicates, not only verbs, e.g., 高兴得不得了, 累得要命, 冷得发抖. Minimal fix: \"得 links a predicate (verb or adjective) to a complement of degree/extent/result, e.g., 走得慢, 高兴得不得了.\""
+      ],
+      "reason": "Core rule is sound, but describing 得 as only linking a verb is too narrow for standard usage; it also follows adjective predicates.",
+      "explanation": "All read 'de' but differ: 的 links a modifier to a noun (我的书), 地 links an adverbial to a verb (慢慢地走), 得 links a verb to a complement of degree/result (走得慢).",
+      "common_mistake": "Writing 的 for all three because they sound the same."
+    },
+    {
+      "id": "gr_bi_comparison",
+      "name": "比 (bǐ) comparison",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The structure and guidance are accurate for standard Mandarin: 比 takes the adjective without 很/非常, and intensity can be shown with 更 or degree/amount complements like 一点儿/得多; the example correction is correct.",
+      "explanation": "A + 比 + B + Adjective states A is more [adj] than B: 他比我高. Do NOT use 很/非常 with the adjective; use 更 or a concrete amount (高一点儿, 高得多).",
+      "common_mistake": "Inserting 很/非常 before the adjective (他比我很高), a direct calque of 'much taller'."
+    },
+    {
+      "id": "gr_time_before_place",
+      "name": "Word order: time and place before the verb",
+      "category": "word_order",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Chinese puts time-when and place adverbials BEFORE the verb, not after: Subject + Time + Place + Verb + Object.\" — Over-broad. Place phrases often appear after the verb as the complement/object of motion or location verbs: e.g., 我明年去中国, 他住在北京, 把书放在桌子上. Minimal fix: \"In neutral statements, put time-when before the verb. Place can appear before the main verb as a 在/到/从 phrase (我在家看书), or after motion/location verbs as their complement/object (我去中国, 他住在北京). Avoid putting a simple time-when at the very end.\"",
+        "\"Common mistake: Following English order and putting time/place after the verb or object.\" — Misleading for \"place\": placing the place after certain verbs is correct (我去中国/他住在北京). Minimal fix: \"Common mistake: putting a simple time-when at the end (×我去中国明年). Keep 在/到/从 phrases before the main verb (我在家看书), but let motion/location verbs take their place complement after the verb (我去中国).\""
+      ],
+      "reason": "The rule overgeneralizes placement of place phrases and labels some correct postverbal locations as errors, notably with motion/location verbs and locative complements.",
+      "explanation": "Chinese puts time-when and place adverbials BEFORE the verb, not after: Subject + Time + Place + Verb + Object. 我明天在家看书, not 我看书在家明天.",
+      "common_mistake": "Following English order and putting time/place after the verb or object."
+    },
+    {
+      "id": "gr_duration_complement",
+      "name": "Duration complement (time how long)",
+      "category": "word_order",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"Placing the duration before the verb like a time-when phrase (我两年学汉语).\" — Over-broad. Preverbal duration is not always wrong in standard Mandarin: it is natural with negation to mean “for X time not V” (e.g., 我两年没学汉语, 他三天没来) and with resultative/achievement meanings to express “it took X time to …” (e.g., 他三天就学会了游泳, 我两年才学会汉语). Minimal fix: \"For expressing how long you did something, don’t put the duration before the verb (avoid 我两年学汉语 for ‘I studied Chinese for two years’). Note: preverbal duration is fine in patterns like 他三天没来 or 他三天就学会了游泳.\"",
+        "\"With an object, repeat the verb or place duration between verb and object: 我学汉语学了两年 / 我学了两年汉语.\" — Incomplete to the point of being over-broad. A very common, fully correct option is to place the duration after the object (often with sentence-final 了 when meaning ‘up to now’): 我学汉语两年了, 我等你两个小时了. Minimal fix: add a third option: \"…or put the duration after the object (especially with 了): 我学汉语两年了.\""
+      ],
+      "reason": "The rule is mostly sound, but the ‘common mistake’ overgeneralizes about preverbal duration and the explanation omits a very common VP+Object+Duration(+了) pattern.",
+      "explanation": "Duration goes AFTER the verb: Verb + Duration. With an object, repeat the verb or place duration between verb and object: 我学汉语学了两年 / 我学了两年汉语.",
+      "common_mistake": "Placing the duration before the verb like a time-when phrase (我两年学汉语)."
+    },
+    {
+      "id": "gr_liang_er",
+      "name": "两 (liǎng) vs 二 (èr)",
+      "category": "word_order",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "'Common mistake' note: \"Using 二 before a measure word (二个人).\" — This is over-broad. While 二个(人) is nonstandard (use 两个/两个人), 二 can precede measure words in several common, correct cases: in compound numbers (二十个，不说“两十个”), in fixed labels/names (二号线、二路车、二班), with the polite classifier 位 in formal style (二位来宾), and with the weight measure 两 (二两肉). Minimal fix: \"Using 二 directly with a measure word to mean ‘two’ (e.g., 二个人) is nonstandard; use 两个/两个人. Note: 二 is correct before measure words in compound numbers and fixed labels (e.g., 二十个、二号线/二路车), in formal address with 位 (二位), and with the weight 两 (二两).\""
+      ],
+      "reason": "The blanket prohibition on 二 before measure words is false because there are several standard exceptions (compound numbers, labels like 二号/二路, formal 二位, and the weight 二两).",
+      "explanation": "Use 两 before a measure word to mean 'two of something' (两个人); use 二 for the number itself, counting, and ordinals (第二, 二十).",
+      "common_mistake": "Using 二 before a measure word (二个人)."
+    },
+    {
+      "id": "gr_youdianr_yidianr",
+      "name": "有点儿 (yǒudiǎnr) vs 一点儿 (yìdiǎnr)",
+      "category": "word_order",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Swapping them: 一点儿贵 or 有点儿便宜 in the wrong slot.\" — Labeling 有点儿便宜 as a blanket error is over-broad. 有点儿 often conveys a mildly negative/undesirable nuance, so 有点儿便宜 is perfectly natural when ‘being too cheap’ is undesirable or suspicious (e.g., 这家店卖得有点儿便宜，我不太放心). Minimal fix: \"Common mistake: Saying 一点儿贵 instead of 有点儿贵. Note: 有点儿便宜 is fine when you mean ‘a bit too cheap (undesirably)’. Use 便宜一点儿 when you mean ‘a little cheaper’ as a neutral comparison/request.\""
+      ],
+      "reason": "The note incorrectly treats 有点儿便宜 as wrong, but it is acceptable when ‘cheap’ is viewed as undesirable (e.g., suspiciously cheap).",
+      "explanation": "有点儿 + Adjective goes before the adjective and implies something undesirable (有点儿贵 = a bit too expensive). Adjective + 一点儿 goes after and means 'a little more' as a comparison (便宜一点儿 = a little cheaper).",
+      "common_mistake": "Swapping them: 一点儿贵 or 有点儿便宜 in the wrong slot."
+    },
+    {
+      "id": "gr_hui_neng_keyi",
+      "name": "会 / 能 / 可以 (huì/néng/kěyǐ) modals",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Common mistake: Using 能 for learned skills\" — In standard Mandarin, 能 can be (and often is) used to state ability/skill, e.g., 你能说中文吗? is natural; the preference is to use 会 when highlighting an acquired skill. Minimal fix: \"For learned skills, prefer 会; 能 is also possible when you’re emphasizing general ability or circumstances.\"",
+        "\"incorrect: 我能说三种语言。 → correct: 我会说三种语言。\" — 我能说三种语言 is not incorrect; it’s acceptable, though 我会说三种语言 better highlights a learned skill. Minimal fix: label it \"Less natural: 我能说三种语言 → More natural (emphasizing learned skill): 我会说三种语言,\" or replace with a true error for permission (e.g., \"incorrect: 这里会抽烟吗 → correct: 这里可以/能抽烟吗\")."
+      ],
+      "reason": "The rule wrongly labels a common and acceptable use of 能 (for ability/skill) as an error and marks a correct sentence as incorrect.",
+      "explanation": "会 = a learned ability (会说汉语); 能 = physical capability or possibility in the moment (今天不能来); 可以 = permission (这里可以抽烟吗). They overlap but the core sense differs.",
+      "common_mistake": "Using 能 for learned skills or 会 for permission."
+    },
+    {
+      "id": "gr_jiu_cai",
+      "name": "就 (jiù) vs 才 (cái)",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Common mistake: \"Adding 了 after 才\" — This labels grammatical sentences as wrong. In the ‘not until’ sense, 才 typically doesn’t take verbal 了 (他九点才来 is natural), but 了 can appear sentence‑finally (他现在才来了) and with certain verbs like 发现/想到 to mark perfective (我才发现了一个问题). Minimal fix: “When 才 means ‘not until,’ usually don’t add 了 right after the verb (他九点才来). Sentence‑final 了 is fine (他现在才来了), and with verbs of realization it’s also common (我才发现了一个问题).”"
+      ],
+      "reason": "The rule wrongly bans 了 after 才 across the board, though native usage allows it in common patterns (especially sentence‑final 了 and with realization verbs).",
+      "explanation": "就 suggests something happens sooner/easily than expected (他七点就来了 = as early as 7); 才 suggests later/harder than expected (他九点才来 = not until 9). Note 就 often takes 了; 才 usually does not.",
+      "common_mistake": "Adding 了 after 才, or reversing the earlier/later nuance."
+    },
+    {
+      "id": "gr_resultative",
+      "name": "Resultative complements (看完, 听懂)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Negate with 没 (没看完), not 不.\" — Over-broad. While factual non-achievement is negated with 没(有) (e.g., 我没看完), 不 is common and grammatical in potential complements to express inability (听不懂, 看不完) and in habitual/volitional contexts (e.g., 不做完作业不玩). Minimal fix: \"To state the result did not occur (past/factual), use 没(有): 我没看完. Use 不 with potential complements to express inability (看不完/听不懂) or for habitual/volitional negation.\"\n\"Expressing the result separately in English style, or negating with 不 (不看完).\" — As a blanket “mistake,” this is too strong. 不+V+RC is ungrammatical for past factual negation, but it is fine in conditional/volitional patterns (不看完这本书不睡觉) and the V不RC potential form is very common (听不懂/看不完). Minimal fix: \"Mistake: using 不 for simple past/non-achievement (✗我不看完). Use 没(有). Note: 不 is fine in potential forms (听不懂/看不完 ‘can’t…’) and in conditional/volitional patterns (不做完作业不玩).\""
+      ],
+      "reason": "The rule’s blanket ban on 不 with resultative complements ignores common and grammatical uses of 不 in potential and volitional contexts, which would mislead learners.",
+      "explanation": "A second verb/adjective attaches to the main verb to show the RESULT: 看完 (finish reading), 听懂 (understand by listening), 写错 (write wrongly). Negate with 没 (没看完), not 不.",
+      "common_mistake": "Expressing the result separately in English style, or negating with 不 (不看完)."
+    },
+    {
+      "id": "gr_directional",
+      "name": "Directional complements (进来, 出去)",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"来/去 and directional verbs (上下进出回过) attach to a verb to show direction relative to the speaker\" — Over-broad: 来/去 mark motion relative to the deictic center, which is usually the speaker but can also be the listener or a previously established location in narrative (e.g., 小王从外面走进来, even if the narrator isn’t in that room). Minimal fix: \"…show direction relative to the deictic center (usually the speaker).\"",
+        "\"Common mistake: Wrong order of the place object and 来/去, or omitting the direction.\" — Over-broad/ambiguous: It’s often grammatical to omit 来/去 (e.g., 他跑进教室了), so saying \"omitting the direction\" risks labeling correct sentences as errors. The typical learner error is using 来/去 without a needed simple directional like 进/出 (e.g., 他跑来教室). Minimal fix: \"…or using 来/去 without a needed simple directional (如 进/出/上/下), e.g., 他跑来教室；注意 来/去 并非总是必须：他跑进教室(了) 也对。\""
+      ],
+      "reason": "The rule is broadly sound, but the deictic center is not always the speaker and the 'omitting the direction' note is too broad and could misclassify correct sentences.",
+      "explanation": "来/去 and directional verbs (上下进出回过) attach to a verb to show direction relative to the speaker: 进来 (come in), 拿出去 (take out). A place object goes before 来/去: 回家来.",
+      "common_mistake": "Wrong order of the place object and 来/去, or omitting the direction."
+    },
+    {
+      "id": "gr_yinwei_suoyi",
+      "name": "因为……所以…… (yīnwèi...suǒyǐ) cause and result",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Assuming that using both 'because' and 'so' is wrong, as it would be in English, and dropping 所以.\" — This implies that dropping 所以 is a mistake, but in standard Mandarin using only 因为 at the start is fully correct and common (e.g., 因为下雨，我没去。). Minimal fix: \"A common misconception is thinking the pair is ungrammatical; in Chinese you can use both (因为…所以…), or just one: 因为…(no 所以) or …，所以…。\"",
+        "\"incorrect: 因为下雨，我没去。（acceptable, but learners often force English single-conjunction）\" — The sentence labeled \"incorrect\" is actually correct. Minimal fix: relabel as \"also correct: 因为下雨，我没去。\" and keep \"correct: 因为下雨，所以我没去。\" (optionally add \"下雨了，所以我没去。\" to show only 所以 is also fine)."
+      ],
+      "reason": "The rule wrongly marks a correct structure as incorrect and overstates that dropping 所以 is an error; both paired and single-conjunction patterns are standard in Mandarin.",
+      "explanation": "Paired conjunctions are common in Chinese: 因为 (because) in the first clause, 所以 (so) in the second. Using both is natural, unlike English which uses only one.",
+      "common_mistake": "Assuming that using both 'because' and 'so' is wrong, as it would be in English, and dropping 所以."
+    },
+    {
+      "id": "gr_suiran_danshi",
+      "name": "虽然……但是…… (suīrán...dànshì) although",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Both are used together in Chinese.\" — Over-broad. 虽然 often pairs with 但是/可是, but 但是 can be omitted when the contrast is clear, and other markers (却/还是/但/不过) or no overt marker are common. Also, 但是 can appear without 虽然. Minimal fix: \"虽然 usually pairs with 但是/可是, especially in beginner usage, but 但是 may be omitted if the contrast is clear (often with 还是/却), and 但是 can also be used on its own.\"",
+        "\"Common mistake: Dropping 但是 because English uses only 'although'.\" — Mislabels correct usage as an error. Omitting 但是 is acceptable: e.g., 虽然很累，我还是/却很开心。Even 虽然很累，我很开心 is acceptable in many contexts. Minimal fix: \"Beginner pitfall: Omitting any clear contrast in the second clause. To be safe, include 但是/可是 or use adverbs like 还是/却 to mark the contrast.\"",
+        "\"incorrect: 虽然很累，我很开心。 → correct: 虽然很累，但是我很开心。\" — The first sentence is not incorrect in standard Mandarin; it's acceptable (often improved with 还是/却). Minimal fix: Present both as acceptable, e.g., \"虽然很累，但是我很开心。/ 虽然很累，我还是很开心。\" and note that including 但是/可是 is the safest pattern for beginners."
+      ],
+      "reason": "The rule wrongly states mandatory pairing and labels a grammatical omission of 但是 as incorrect, which misleads learners about standard usage.",
+      "explanation": "虽然 (although) pairs with 但是/可是 (but) in the following clause. Both are used together in Chinese.",
+      "common_mistake": "Dropping 但是 because English uses only 'although'."
+    },
+    {
+      "id": "gr_haishi_huozhe",
+      "name": "还是 (háishì) vs 或者 (huòzhě) — 'or'",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Using 或者 in a choice question or 还是 in a statement.\" — Labeling \"还是 in a statement\" as a mistake is wrong. 还是 is regularly used inside statements in embedded/indirect choice clauses and in “whether A or B” patterns, e.g., 我不知道他是坐地铁还是打车来 and 不管你去还是不去，我都支持你. Minimal fix: \"Using 或者 in a direct choice question (use 还是 there). Note: 还是 can appear in statements inside embedded ‘whether A or B’ clauses (e.g., 我不知道他是去北京还是去上海), but for simple declarative ‘A or B’ use 或者.\""
+      ],
+      "reason": "The common-mistake note incorrectly bans 还是 from statements, despite its standard use in embedded/indirect choice clauses and “whether A or B” structures.",
+      "explanation": "还是 is 'or' in questions offering a choice (你喝茶还是咖啡？); 或者 is 'or' in statements (我喝茶或者咖啡都行).",
+      "common_mistake": "Using 或者 in a choice question or 还是 in a statement."
+    },
+    {
+      "id": "gr_double_le",
+      "name": "Verb + 了 + object + 了 (ongoing up to now)",
+      "category": "particle",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: “Using one 了 and losing the 'and still continuing' meaning.” Why this is wrong/over-broad: Many perfectly correct ongoing-present sentences use only the sentence-final 了 and no verb-after 了, e.g., 我来中国三年了, 我们认识三年了, 他们结婚三年了. Labeling “one 了” as a mistake would mark these natural sentences wrong. Minimal fix: “Leaving off the sentence-final 了 often loses the ‘still continuing’ meaning. In many verbs/structures the first 了 is optional or not used; what’s essential here is usually the sentence-final 了.”",
+        "Claim (rule name): “Verb + 了 + object + 了 (ongoing up to now).” Why this is wrong/over-broad: The middle slot is typically a duration/quantity phrase, not an ‘object’; many correct forms have no object at all (e.g., 学了两年了), and with some verbs the object appears elsewhere. Minimal fix: Rename to “Verb (+ object) + 了 + duration + 了” or simply “Verb + 了 + duration + 了 (ongoing up to now).”",
+        "Claim: “Two 了 with a duration mean an action has been going on and continues.” Why this is over-broad: While V + 了 + duration + 了 is a common way to show ongoing action, many ongoing sentences use only the sentence-final 了 (e.g., 我来中国三年了, 我们认识三年了; 结婚三年了), and with certain verbs the first 了 is odd or avoided. Minimal fix: “A common pattern for ongoing action is V + 了 + duration + 了; often the sentence-final 了 is the key to ‘up to now’. The first 了 may be optional or omitted with certain verbs.”"
+      ],
+      "reason": "The rule overstates that two 了 are required and mislabels the duration slot as an ‘object’; many natural ongoing-present sentences use only sentence-final 了.",
+      "explanation": "Two 了 with a duration mean an action has been going on and continues: 我学了两年汉语了 (I have been studying Chinese for two years and still am). The sentence-final 了 adds the 'up to now, still true' sense.",
+      "common_mistake": "Using one 了 and losing the 'and still continuing' meaning."
+    },
+    {
+      "id": "gr_ne_question",
+      "name": "呢 (ne) follow-up question",
+      "category": "particle",
+      "hsk_level": 1,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The explanation and warning about not using 吗 in place of 呢 for elliptical follow-up questions are accurate and the example is correct for standard Mandarin.",
+      "explanation": "呢 turns a noun/pronoun into a 'what about...?' follow-up question when a topic is already established: 我很好，你呢？(I'm fine, and you?).",
+      "common_mistake": "Using 吗 for a follow-up 'what about you' (你吗？), which is ungrammatical here."
+    },
+    {
+      "id": "gr_zhe_durative",
+      "name": "着 (zhe) durative / accompanying state",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"It describes a persisting state, not a dynamic action in progress (that is 在).\" — This is too absolute: in colloquial Mandarin, V+着+呢 (and with some verbs like weather verbs) can mark an ongoing action, e.g., 外面下着雨呢 ‘It’s raining,’ 他哭着呢 ‘He’s crying.’ Minimal fix: \"It typically marks a persisting state or a background manner, not a plain ongoing action (use 在/正在 for that). Note: V+着+呢 and some verbs (e.g., 下着雨) can also express an action currently happening.\"",
+        "\"Using 着 for a plain ongoing action where 在 is needed\" — Over-broad as stated; V+着+呢 can indicate ongoing action in everyday speech (e.g., 她笑着呢). Minimal fix: \"Generally don’t use 着 by itself for plain ongoing actions; prefer 在/正在. Exception: V+着+呢 (and some set patterns like 下着雨) can also show an action is in progress.\""
+      ],
+      "reason": "The rule’s core contrast is sound, but two absolute claims overstate that 着 cannot mark ongoing action, ignoring common V+着+呢 and certain verb types like weather verbs.",
+      "explanation": "Verb + 着 marks a continuing state or a manner accompanying another action (V1着 + V2): 门开着 (the door is open), 他笑着说 (he said, smiling). It describes a persisting state, not a dynamic action in progress (that is 在).",
+      "common_mistake": "Using 着 for a plain ongoing action where 在 is needed, or dropping 着 for an accompanying manner."
+    },
+    {
+      "id": "gr_yao_le_imminent",
+      "name": "(快)要……了 imminent action",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "“The final 了 is required.” — Over-broad. In the imminent ‘要/快要/就要…了’ pattern, 了 is normally used to mark the impending change, and omitting it often shifts the meaning toward ‘want to/plan to’. However, in some contexts (e.g., with an explicit time adverbial or before another clause), speakers do drop 了: 再过五分钟就要出发，请大家做好准备。 Minimal fix: “In this pattern 了 is normally used to mark ‘about to’; omitting it often changes the meaning. In some contexts (especially with a time word or before another clause) 了 may be dropped.”",
+        "“Omitting the final 了, or using 会 for an imminent event.” — Over-broad. 会 by itself doesn’t specifically mean ‘about to’, but it is perfectly natural with adverbs like 马上/很快/一会儿 to predict a near-future event (e.g., 马上会下雨). Calling any use of 会 for an imminent event a mistake is misleading. Minimal fix: “Don’t use 会 by itself to mean ‘about to’; use 要/快要/就要…了. 会 can be used with time adverbs (马上/很快/一会儿) to predict a near-future event.”"
+      ],
+      "reason": "Two absolute claims are too strong: 了 is not strictly obligatory in all contexts, and 会 can be used (with time adverbs) to talk about near-future events.",
+      "explanation": "要……了 / 快要……了 / 就要……了 says something is about to happen: 火车快要开了 (the train is about to leave). The final 了 is required.",
+      "common_mistake": "Omitting the final 了, or using 会 for an imminent event."
+    },
+    {
+      "id": "gr_mei_guo_negation",
+      "name": "没……过 negating an experience",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule correctly states that experiential 过 is negated with 没(有) and that 过 is retained (e.g., 我没去过中国), and the “common mistake” example using 不 is indeed incorrect in standard Mandarin for this usage.",
+      "explanation": "Negate experiential 过 with 没(有) while KEEPING 过: 我没去过中国 (I have never been to China).",
+      "common_mistake": "Negating with 不, or dropping 过 in the negative."
+    },
+    {
+      "id": "gr_le_negation_drop",
+      "name": "没 negates a completed action and drops 了",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Common mistake: Keeping 了 after 没 (没……了).\" — Over-broad. 没…了 is perfectly grammatical in standard Mandarin in patterns like duration up to now or change of state, e.g. 我已经三天没吃饭了, 他很久没联系我了, 我没钱了. What is ungrammatical here is the perfective 了 placed right after the verb when negating a specific past event (e.g., *昨天我没去了). Minimal fix: \"Common mistake: Adding the perfective 了 after the verb (没 + V + 了) when negating a completed event. Note: 没…了 is correct in patterns expressing ‘haven’t V‑ed for… (up to now)’ or change of state (e.g., 我三天没睡觉了).\"",
+        "\"To negate a completed action, use 没(有) before the verb and DROP 了: 我没去 … never 我没去了.\" — As written, \"DROP 了\" can be misunderstood as banning any 了; the real constraint is the perfective 了 after the verb. Minimal fix: \"…use 没(有) before the verb and drop the perfective 了 after the verb: 我没去 (not *我没去了). Sentence‑final 了 can still appear in other patterns (e.g., 我已经三天没吃饭了).\""
+      ],
+      "reason": "The rule overgeneralizes by banning 没…了 outright, but 没…了 is standard in duration-up-to-now and change-of-state constructions; only the perfective 了 after the verb must be dropped when using 没 to negate a completed event.",
+      "explanation": "To negate a completed action, use 没(有) before the verb and DROP 了: 我没去 (I didn't go), never 我没去了.",
+      "common_mistake": "Keeping 了 after 没 (没……了)."
+    },
+    {
+      "id": "gr_ma_question",
+      "name": "吗 (ma) yes/no question particle",
+      "category": "particle",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Do not use it when the sentence already contains a question word.\"\nWhy: This is over‑broad. 吗 normally doesn’t appear with true wh‑information questions (哪儿/什么时候/为什么/怎么等), but it can co‑occur with 什么/谁 when they function as indefinites under 有/还有/有没有/想要等, e.g., 你有什么问题吗？还有谁吗？想吃点什么吗？\nMinimal fix: \"Don’t add 吗 to wh‑information questions (like 哪儿、什么时候、为什么、怎么). But when 什么/谁 mean ‘any/some’ (often with 有/还有/有没有/想要), adding 吗 is fine: 你有什么问题吗？还有谁吗？想吃点什么吗？\"",
+        "Common mistake note: \"Adding 吗 to a question that already has a question word (哪儿 / 什么 / 谁).\"\nWhy: Grouping 什么/谁 with 哪儿 is inaccurate; with 什么/谁 used as indefinites, 吗 is natural (e.g., 你有什么事吗？还有谁吗？). Marking all such cases as mistakes would flag correct sentences.\nMinimal fix: \"Avoid adding 吗 to content wh‑questions (e.g., 你去哪儿？你什么时候来？). Exception: 什么/谁 can appear with 吗 when they mean ‘any/some’ (often with 有/还有/有没有/想要): 你有什么问题吗？还有谁吗？\""
+      ],
+      "reason": "The rule overstates a prohibition against using 吗 with any question word, ignoring common and correct patterns with 什么/谁 used as indefinites.",
+      "explanation": "Add 吗 to the end of a statement to make a yes/no question: 你是学生吗？ Do not use it when the sentence already contains a question word.",
+      "common_mistake": "Adding 吗 to a question that already has a question word (哪儿 / 什么 / 谁)."
+    },
+    {
+      "id": "gr_ba_suggestion",
+      "name": "吧 (ba) suggestion / supposition",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"incorrect: 我们走吗，现在很晚了。\" — This sentence is not ungrammatical. With 吗 it’s a neutral yes–no question (Are we leaving?), not a softened suggestion. Minimal fix: Don’t label it incorrect; contrast meanings instead, e.g. 我们走吧，现在很晚了。(Let’s go; it’s late.) vs 我们走吗？现在很晚了。(Are we going to leave? It’s late.)",
+        "\"Using 吗 for a suggestion or a 'right?' supposition where 吧 is natural.\" — Over-broad. Using 吗 isn’t a mistake per se; it changes the nuance from suggestion/supposition to a neutral confirmation question (e.g., 你是老师吗？). Minimal fix: \"Using 吗 turns it into a neutral yes–no question; use 吧 to soften a suggestion (我们走吧) or to voice an assumption seeking confirmation (你是老师吧？).\""
+      ],
+      "reason": "The rule about sentence-final 吧 is fine, but the note/example wrongly treat a grammatical 吗-question as incorrect and overstate that using 吗 is a mistake rather than a nuance change.",
+      "explanation": "Sentence-final 吧 softens a statement into a suggestion (我们走吧 let's go) or a supposition seeking confirmation (你是老师吧？ you're a teacher, right?).",
+      "common_mistake": "Using 吗 for a suggestion or a 'right?' supposition where 吧 is natural."
+    },
+    {
+      "id": "gr_de_attributive",
+      "name": "的 (de) attributive / relative clause",
+      "category": "particle",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "All claims are accurate for teaching standard relative clauses with 的; the example correctly contrasts the needed 的 for an attributive clause, and no materially over-broad absolutes are made.",
+      "explanation": "的 links a modifier — including a whole relative clause — to the noun it describes: 我买的书 (the book I bought), 穿红衣服的人 (the person wearing red). The modifier goes before 的 and before the noun.",
+      "common_mistake": "Dropping 的 in a relative clause, or following English word order."
+    },
+    {
+      "id": "gr_hui_de_certainty",
+      "name": "会……的 future certainty",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Common mistake: \"Dropping 会 or the framing 的\" — Treating the sentence-final 的 as required is over-broad. 的 adds a reassuring/insistent tone, but \"他会来\" (without 的) is fully grammatical and common. Minimal fix: say that 会 is needed for the prediction here, while sentence-final 的 is optional and adds reassurance (e.g., 他会来 vs. 他会来的).",
+        "Common mistake: \"using 要 for a confident prediction\" — 要 is not categorically wrong for confident future statements; it often marks plans/schedules or imminence and can convey strong certainty (e.g., 他明天要来, 他要来了, 快要下雨了). Minimal fix: note that 要 typically expresses plan/intention or imminence, whereas 会…的 is a natural choice to reassure; avoid labeling 要 as an error across the board."
+      ],
+      "reason": "The common-mistake note wrongly treats optional 的 as required and overstates that 要 cannot express confident future, which would mislead learners about correct, common forms.",
+      "explanation": "会 + Verb + 的 expresses a confident prediction: 别担心，他会来的 (don't worry, he'll definitely come).",
+      "common_mistake": "Dropping 会 or the framing 的; using 要 for a confident prediction."
+    },
+    {
+      "id": "gr_xiang_yao_want",
+      "name": "想 vs 要 (to want)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Using 要 for a polite wish where 想 is more appropriate.\" — Over-broad. 要 is often perfectly acceptable and not impolite in many contexts (e.g., service encounters or casual equal-status situations: 我要一杯咖啡。/ 我要买两张票。). It’s mainly in deference-sensitive requests (to a teacher, superior, stranger) that 要 can sound blunt. Minimal fix: \"In requests to someone you owe deference (e.g., a teacher), 要 before a request can sound too direct; 想 is softer. In many service/ordering contexts, 要 is normal.\"",
+        "\"incorrect: 老师，我要看看您的书，可以吗？\" — This sentence is grammatically fine; with 可以吗 it is just more direct and may feel pushy toward a teacher, not \"incorrect.\" Minimal fix: label it as \"less polite/more direct\" rather than incorrect, e.g., \"less polite: 老师，我要看看您的书，可以吗？ → more polite: 老师，我想看看您的书，可以吗？\" (or \"老师，我可以看看您的书吗？\")."
+      ],
+      "reason": "The rule overstates that 要 is wrong in polite wishes and labels a grammatical sentence as incorrect; the issue is register/politeness, not grammaticality, and 要 is acceptable in many contexts.",
+      "explanation": "想 + Verb = would like to / feel like (softer, more polite); 要 + Verb = want to / intend to (stronger, can sound demanding). For a mild wish, prefer 想.",
+      "common_mistake": "Using 要 for a polite wish where 想 is more appropriate."
+    },
+    {
+      "id": "gr_yinggai_should",
+      "name": "应该 (yīnggāi) should / ought to",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"Placing 应该 at the end like an English tag, or omitting it.\" — Omitting 应该 is not inherently a mistake in Chinese; speakers often leave it out to make an imperative or use other suggestion forms (e.g., 你去看医生吧, 我们现在走). It’s only a mistake if the learner intends to express the specific meaning of “should.” Minimal fix: \"Don’t put 应该 at the end. If you want to say ‘should,’ place 应该 before the predicate. It’s fine to omit 应该 if you mean an imperative or use another modal (e.g., 最好/得/该).\""
+      ],
+      "reason": "The rule and example are correct, but the ‘common mistake’ note overgeneralizes by treating omission of 应该 as an error in all cases.",
+      "explanation": "应该 + Verb = should / ought to. It is an auxiliary and goes before the main verb.",
+      "common_mistake": "Placing 应该 at the end like an English tag, or omitting it."
+    },
+    {
+      "id": "gr_dei_must",
+      "name": "得 (děi) must / have to",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"incorrect: 现在很晚了，我不得走。 → correct: 现在很晚了，我得走了。\" — 我不得走 is not ungrammatical; 不得 means “must not/are not allowed to,” so this sentence can be correct in contexts (e.g., 宿舍关门了，我不得走). The problem is only if the learner intends “don’t have to.” Minimal fix: clarify the meaning contrast and show the proper negation: incorrect for ‘don’t have to’: 现在很晚了，我不得走。 → correct: 现在很晚了，我不用走。/ 我不必走。 Also note: 不得 means ‘must not/Not allowed to.’"
+      ],
+      "reason": "The rule’s explanation is fine, but the example wrongly labels a grammatical sentence with 不得 as incorrect and should instead contrast meanings and show 不用/不必 for ‘don’t have to.’",
+      "explanation": "得(děi) + Verb = must / have to (colloquial). Its negative ('need not') is 不用, NOT 不得.",
+      "common_mistake": "Negating with 不得 to mean 'don't have to'."
+    },
+    {
+      "id": "gr_keneng_maybe",
+      "name": "可能 (kěnéng) possibly / maybe",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule accurately states the common adverbial placement of 可能 before the verb and correctly flags sentence-final 可能 as incorrect; no over-broad or false claims are made for beginner-level guidance.",
+      "explanation": "可能 = maybe / possibly; as an adverb it goes before the verb: 他可能来 (he might come).",
+      "common_mistake": "Placing 可能 at the end of the sentence like English 'maybe'."
+    },
+    {
+      "id": "gr_a_not_a",
+      "name": "A-not-A question",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "All claims align with standard Mandarin: A-not-A forms take no sentence-final 吗, and the example accurately reflects this.",
+      "explanation": "Repeat the verb/adjective in affirmative-negative form for a neutral yes/no question: 你去不去？ 好不好？ Do NOT add 吗.",
+      "common_mistake": "Combining an A-not-A question with 吗."
+    },
+    {
+      "id": "gr_qword_in_situ",
+      "name": "Question words stay in place (in-situ)",
+      "category": "word_order",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule correctly captures Mandarin’s default wh-in-situ pattern and the example of fronting as incorrect is appropriate; no over-broad absolutes or false claims are made for standard information-seeking questions.",
+      "explanation": "A question word (什么/谁/哪儿/怎么) occupies the SAME slot the answer would; the sentence is not reordered as in English: 你想吃什么？",
+      "common_mistake": "Fronting the question word English-style."
+    },
+    {
+      "id": "gr_ji_duoshao",
+      "name": "几 vs 多少 (how many)",
+      "category": "grammar",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"多少 asks about larger or unknown quantities and needs no measure word (多少钱).\" → Over-broad/wrong: With count nouns, 多少 typically takes a classifier (e.g., 多少本书, 多少个苹果). It can omit one mainly in set phrases (多少钱) or with nouns that allow classifier omission (e.g., 多少人) or with mass nouns (多少水). Minimal fix: \"多少 asks about larger or unknown quantities. With count nouns, use a measure word (多少本书/多少个苹果); in set phrases or with some nouns you may omit it (多少钱/多少人).\"",
+        "\"Common mistake: Using 几 for large amounts\" → Over-broad: 几 can legitimately form large-quantity expressions with 十/百/千/万 to mean \"several X\" (e.g., 几百块钱, 几千人), which are correct (though not interrogative). The issue is using interrogative 几 to ask about very large/open-ended totals where 多少 is preferred. Minimal fix: \"When asking about very large or open-ended quantities, prefer 多少; note that 几 also means 'several' in combinations like 几十/几百/几千 (not questions).\"",
+        "\"Common mistake: ... inserting a measure word that is not needed after 多少.\" → Misleading: After 多少, a classifier is often required with count nouns (多少个学生, 多少本书). Calling classifier insertion a mistake is incorrect. Minimal fix: \"Don’t add a classifier in fixed phrases like 多少钱, but do use one with count nouns (多少个学生/多少本书).\""
+      ],
+      "reason": "The rule misstates classifier use with 多少 and overgeneralizes about 几 and large numbers, labeling correct forms as errors.",
+      "explanation": "几 asks about small numbers and takes a measure word (几个人); 多少 asks about larger or unknown quantities and needs no measure word (多少钱).",
+      "common_mistake": "Using 几 for large amounts, or inserting a measure word that is not needed after 多少."
+    },
+    {
+      "id": "gr_zenmeyang",
+      "name": "怎么样 (zěnmeyàng) how / how about",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule correctly distinguishes 怎么样 (assessment/suggestion) from 怎么 (manner/how come), and the example appropriately flags an unnatural use of 怎么 for a “how about” tag in standard Mandarin.",
+      "explanation": "怎么样 asks for an assessment ('how is it?') or makes a suggestion ('how about?'): 天气怎么样？ 这个怎么样？ 怎么 alone asks manner/reason ('how / why').",
+      "common_mistake": "Using 怎么 where 怎么样 (how about / how is it) is meant."
+    },
+    {
+      "id": "gr_meiyou_comparison",
+      "name": "A 没有 B (那么) + adj — not as ... as",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"不比 (which means 'not necessarily more than')\" — The phrase 'not necessarily more than' suggests it could still be more, which is wrong. 不比X高 means 'no taller than X' (i.e., not taller; could be equal or shorter), never 'possibly taller.' Minimal fix: say \"不比 means 'no more … than' / 'not …‑er than' (may be equal or less).\"",
+        "\"incorrect: 我不比他高。\" — This sentence is grammatical and natural, meaning \"I’m not taller than him\" (i.e., no taller). It's only wrong if used to mean \"I’m shorter than him.\" Minimal fix: label it \"Not correct for expressing 'not as tall as'; use 我没有他高.\""
+      ],
+      "reason": "Core rule is correct, but the gloss of 不比 is inaccurate and the example is mislabeled as incorrect rather than incorrect for the intended meaning.",
+      "explanation": "A + 没有 + B + (那么/这么) + Adjective = A is not as [adj] as B: 我没有他高. This, not 不比, is the normal way to say 'not as ... as'.",
+      "common_mistake": "Using 不比 (which means 'not necessarily more than') to mean 'not as ... as'."
+    },
+    {
+      "id": "gr_gen_yiyang",
+      "name": "A 跟/和 B 一样 — the same as",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The pattern explanation and examples are accurate for standard Mandarin, and the “common mistake” warning is appropriate within this structure without making over-broad claims.",
+      "explanation": "A + 跟/和 + B + 一样 (+ Adjective) states A is the same as B, or equally [adj]: 我的书跟你的一样 / 他跟我一样高.",
+      "common_mistake": "Dropping 一样, or omitting the connective 跟/和."
+    },
+    {
+      "id": "gr_yuelaiyue",
+      "name": "越来越 (yuèláiyuè) more and more",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: “越来越 + Adjective/Verb = more and more.” Why it’s over-broad: 越来越 can directly take adjectives and many stative/mental verbs (e.g., 喜欢/想/担心/懂), but it does not freely take dynamic action verbs; saying ✗“他越来越跑” is ungrammatical. With action verbs you typically need a degree/adverbial structure, e.g., “他跑得越来越快” or “他越来越认真地工作,” or use a suitable complement/object, e.g., “我吃得越来越多.” Minimal fix: “越来越 + Adjective or stative/mental verb (e.g., 喜欢/想/担心/懂). For action verbs, use patterns like V + 得 + 越来越 + Adj. (跑得越来越快) or 越来越 + Adj. + 地 + V (越来越认真地工作).”"
+      ],
+      "reason": "The rule overgeneralizes that 越来越 can directly modify any verb, which leads to ungrammatical outputs with many dynamic verbs.",
+      "explanation": "越来越 + Adjective/Verb = more and more: 天气越来越冷 (the weather is getting colder and colder).",
+      "common_mistake": "Calquing English with 更来更 or repeated 比."
+    },
+    {
+      "id": "gr_yue_yue",
+      "name": "越 A 越 B — the more ... the more",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"越 + Verb1 + 越 + Verb2/Adj = the more A, the more B\" — This makes it sound like the first slot must be a verb, but in standard usage both slots can be verbs, adjectives, or even short clauses. Counterexamples: 越多越好, 天气越冷，人越懒, 越复杂越有意思. Minimal fix: \"越 + X + 越 + Y (X/Y can be verbs, adjectives, or short clauses) = the more A, the more B.\""
+      ],
+      "reason": "The structure description is overly narrow about what can appear after each 越, though the core rule and examples are correct.",
+      "explanation": "越 + Verb1 + 越 + Verb2/Adj = the more A, the more B: 雨越下越大 / 你越说越快.",
+      "common_mistake": "Using 更 twice, or English 'the more ... the more' word order."
+    },
+    {
+      "id": "gr_bi_degree_diff",
+      "name": "比 + adj + amount of difference",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"With 比, the amount of difference goes AFTER the adjective\" — This is over-broad. With numeral–measure phrases and dimensional adjectives, the amount can also precede the adjective, e.g. 他比我三岁大; 这条河比那条河三米宽; 他比我两公分高. Minimal fix: \"In 比-comparisons the amount usually follows the adjective (高一点儿/高得多/高两公分). With numeral–measure phrases (三厘米/两岁/三米) and dimensional adjectives (高、矮、长、短、宽、厚、大、小、重等), the amount can go before or after the adjective: 他比我高两公分/他比我两公分高. Note that 一点儿/一些/得多 must follow the adjective.\"",
+        "\"Common mistake: Placing the amount before the adjective, or using 很/非常.\" — This labels some correct sentences as errors and is too absolute. Preposing a numeral–measure amount (他比我两公分高) is fine, and 非常 can appear in 得-constructions (他比我高得非常多). Minimal fix: \"Don’t put 很/非常 directly before the adjective in a 比-comparison (✗ 他比我很高). Use 更/还 or degree complements instead (他比我更高/高很多/高得非常多). Preposing a numeral–measure amount is acceptable with dimensional adjectives (他比我两公分高).\""
+      ],
+      "reason": "The rule overstates that amounts must follow the adjective and the mistake note bans structures that are acceptable in standard Mandarin under common conditions.",
+      "explanation": "With 比, the amount of difference goes AFTER the adjective: 他比我高一点儿 / 高得多 / 高两公分.",
+      "common_mistake": "Placing the amount before the adjective, or using 很/非常."
+    },
+    {
+      "id": "gr_ruguo_jiu",
+      "name": "如果……就…… (if ... then)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"如果 (+的话) in the condition clause pairs with 就 in the result clause: 如果你有时间，就来我家.\" Why over-broad: This implies 就 must appear after 如果, but in standard Mandarin 就 is optional; e.g., \"如果下雨，我们不去\" and \"如果下雨，我们就不去\" are both correct, with 就 adding a sense of natural/resulting action. Minimal fix: \"如果… often pairs with 就 in the result clause, but 就 is optional: 如果你有时间，（就）来我家。就 makes the result feel more immediate or like a natural consequence.\"",
+        "Claim (Common mistake): \"Dropping 就 in the result clause.\" Why wrong: Omitting 就 is not an error; it’s common and grammatical in both spoken and written Mandarin, e.g., \"如果你有时间，来我家。\" Minimal fix: \"Not a mistake: 就 is optional. Using 就 is very common and can make the relation clearer or more emphatic, but leaving it out is also correct.\"",
+        "Example labeling: \"incorrect: 如果你有时间，来我家。 → correct: 如果你有时间，就来我家。\" Why wrong: The sentence without 就 is acceptable; marking it incorrect teaches a false rule. Minimal fix: Show both as correct with a note on nuance: \"如果你有时间，来我家。/ 如果你有时间，就来我家。就 adds a sense of ‘then/right away’ or clear linkage.\""
+      ],
+      "reason": "The rule and example incorrectly present 就 as obligatory after 如果 and label a correct sentence as wrong; 就 is optional and affects nuance, not grammaticality.",
+      "explanation": "如果 (+的话) in the condition clause pairs with 就 in the result clause: 如果你有时间，就来我家.",
+      "common_mistake": "Dropping 就 in the result clause."
+    },
+    {
+      "id": "gr_zhiyao_jiu",
+      "name": "只要……就…… (as long as)",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Pairing 只要 with 才 (that belongs to 只有).\" — Over-broad/wrong: In standard Mandarin, 只要…才… is attested and natural; it shifts the meaning from a sufficient condition to emphasizing necessity (close to 只有…才…). E.g., 只要坚持，我们才能成功; 只要你去，我才去. Minimal fix: \"For this pattern, we usually teach 只要…就… to express a sufficient condition. 只要…才… is also used to emphasize ‘only then,’ similar to 只有…才….\"",
+        "\"incorrect: 只要努力，才能成功。 → correct: 只要努力，就能成功。\" — The sentence marked as incorrect is in fact grammatical and common; it means \"Only if you work hard can you succeed\" (necessary condition). Minimal fix: Present both as correct with different meanings, e.g., \"只要努力，就能成功\" (sufficient) vs \"只要努力，才能成功\" ≈ \"只有努力，才能成功\" (necessary)."
+      ],
+      "reason": "The note wrongly labels the acceptable 只要…才… pattern (and its example) as an error, rather than distinguishing its different meaning from 只要…就…. ",
+      "explanation": "只要 states a sufficient condition and pairs with 就: 只要努力，就能成功 (as long as you work hard, you'll succeed).",
+      "common_mistake": "Pairing 只要 with 才 (that belongs to 只有)."
+    },
+    {
+      "id": "gr_zhiyou_cai",
+      "name": "只有……才…… (only if)",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "“Pairing 只有 with 就 (that belongs to 只要).” — Over-broad. In the conditional ‘only if’ pattern, 只有…才… is correct and 只有…就… is wrong, but 只有 also has a different meaning (‘only/there is only’) where 就 is fine, e.g., 只有一个人就行了/够了. Minimal fix: “In the conditional ‘only if’ structure, use 只有…才…; don’t pair 只有 with 就 there. (就 goes with 只要…就… to mean ‘as long as… then…’.) Note: 只有 can also mean ‘only/there is only,’ where 就 may appear, e.g., 只有一个人就行了.”"
+      ],
+      "reason": "The rule is sound for the conditional pattern, but the blanket warning against 只有…就… ignores legitimate non-conditional uses of 只有 where 就 is acceptable.",
+      "explanation": "只有 states a necessary condition and pairs with 才: 只有努力，才能成功 (only by working hard can you succeed).",
+      "common_mistake": "Pairing 只有 with 就 (that belongs to 只要)."
+    },
+    {
+      "id": "gr_budan_erqie",
+      "name": "不但……而且…… (not only ... but also)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule and example reflect standard, beginner-appropriate usage of 不但……而且/也/还……, and the warning against omitting the connector in the second clause is sound; no factually wrong or over-broad claims detected.",
+      "explanation": "不但 in the first clause pairs with 而且 (often + 也/还) in the second: 他不但会说英语，而且会说法语.",
+      "common_mistake": "Dropping 而且/也/还 in the second clause."
+    },
+    {
+      "id": "gr_yi_jiu",
+      "name": "一……就…… (as soon as)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "Claim: \"Using 然后 for the immediate second event, or dropping 就.\" (specifically: \"dropping 就\") — This overstates that 就 is obligatory. In modern Mandarin, 就 is strongly preferred in the 一…就… pattern, but it can be omitted when the result is clear, often with 了 in the second clause (e.g., \"他一来，我走了。\" \"天一黑，我们回家了。\" \"他一说话，大家都笑了。\"). Minimal fix: \"In this pattern, 就 is strongly preferred and usually expected; beginners should keep 就. It can sometimes be omitted when the result is clear (often with 了), but don’t drop it in sentences like 我一到家就给你打电话.\""
+      ],
+      "reason": "The note treats dropping 就 as an error, but native usage does allow omission in some common contexts, so the statement is too absolute.",
+      "explanation": "一 + Event1 + 就 + Event2 = as soon as A, then B: 我一到家就给你打电话.",
+      "common_mistake": "Using 然后 for the immediate second event, or dropping 就."
+    },
+    {
+      "id": "gr_chule_yiwai",
+      "name": "除了……以外 (besides / except)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"除了……(以外) pairs with 都 (except: everyone else) or 还/也 (besides: in addition).\" – This sounds mandatory, but 除了…(以外) can also combine with other structures (e.g., 没/没有/没人, 只有/就, 其他/其余) or sometimes omit these adverbs without being ungrammatical. Minimal fix: \"除了……(以外) often pairs with 都 for the ‘except’ meaning and with 还/也 for the ‘besides’ meaning, though other patterns like 除了他以外，没有人去了 / 除了他以外，其他人去了 / 除了他以外，就我们去了 are also common.\"\n\"Dropping the paired 都/还/也 in the main clause.\" – Presented as a blanket \"mistake,\" but many correct sentences don’t use them (e.g., 除了他以外，没有人去了; 除了他以外，其他人去了). Minimal fix: \"In beginner target patterns, forgetting 都/还/也 often makes the meaning unclear or sounds odd; use them when stating ‘everyone else’ or ‘in addition.’ But it’s not mandatory in all structures (e.g., with 没/没有/没人, 只有/就, 其他).\""
+      ],
+      "reason": "The rule overstates that 都/还/也 must pair with 除了…(以外) and labels omission as an error, whereas many standard, grammatical alternatives do not use them.",
+      "explanation": "除了……(以外) pairs with 都 (except: everyone else) or 还/也 (besides: in addition): 除了他以外，我们都去了 / 除了英语，我还会说中文.",
+      "common_mistake": "Dropping the paired 都/还/也 in the main clause."
+    },
+    {
+      "id": "gr_you_you",
+      "name": "又……又…… (both ... and)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule and example accurately present 又…又… for linking two predicate adjectives, and the note correctly warns against using 和 in this predicate context; no over-broad or incorrect claims found.",
+      "explanation": "又 + Adj1 + 又 + Adj2 links two simultaneous qualities: 这个菜又便宜又好吃.",
+      "common_mistake": "Using 和 to join two predicate adjectives."
+    },
+    {
+      "id": "gr_yibian_yibian",
+      "name": "一边……一边…… (doing two things at once)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The pattern 一边…一边… for simultaneous actions is correctly described, the warning against using 和 to link two predicate actions is appropriate for this context, and the example is correct.",
+      "explanation": "一边 + V1 + 一边 + V2 = do two actions simultaneously: 他一边吃饭一边看电视.",
+      "common_mistake": "Using 和 to join two simultaneous actions."
+    },
+    {
+      "id": "gr_xian_ranhou",
+      "name": "先……然后…… (first ... then)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Common mistake note: \"Reversing 先/然后 or omitting 先.\" — Labeling \"omitting 先\" as a mistake is over-broad. In standard Mandarin, 先 is often optional when the sequence is clear, and sentences like \"我们吃饭，然后看电影\" are perfectly natural and correct. Minimal fix: Change to \"Reversing 先/然后 is a mistake. Note: 先 is optional; it just highlights the first action. You can also say: 我们吃饭，然后看电影 or 先……再…… (e.g., 我们先吃饭，再看电影).\""
+      ],
+      "reason": "The rule itself is fine, but the note wrongly treats omission of 先 as an error, even though 然后 alone (or 先…再…) is standard and common.",
+      "explanation": "先 marks the first action, 然后(再) the next: 我们先吃饭，然后看电影.",
+      "common_mistake": "Reversing 先/然后 or omitting 先."
+    },
+    {
+      "id": "gr_bushi_ershi",
+      "name": "不是……而是…… (not A but B)",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"Using 但是 instead of 而是 for a correction.\" — This overgeneralizes. 但是 can express the same correction/contrast if the second part is a full clause, e.g., 这不是茶，但是是咖啡/但是这是咖啡/但是它是咖啡. The problem in the example is dropping 是 and using 但是 to link a bare noun phrase. Minimal fix: Clarify that in the fixed pattern use 而是 to connect A and B; if you use 但是, the B-part must be a full clause with 是/subject (e.g., 这不是茶，但是是咖啡/但是这是咖啡)."
+      ],
+      "reason": "The rule itself is fine, but the common-mistake note wrongly implies 但是 cannot be used for such corrections at all, rather than warning about the need for a full clause after 但是.",
+      "explanation": "不是 A 而是 B corrects a wrong assumption: 这不是茶，而是咖啡.",
+      "common_mistake": "Using 但是 instead of 而是 for a correction."
+    },
+    {
+      "id": "gr_wulun_dou",
+      "name": "无论/不管……都…… (no matter)",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Dropping 都/也\" [is a common mistake]. Why over-broad/wrong: In standard Mandarin, 都/也 is common after 无论/不管, but it is not mandatory. Many perfectly natural sentences omit it, e.g. \"不管他来不来，我不等了。/ 不管你信不信，我是真的。/ 无论多少钱，我就不买。\" Minimal fix: Rephrase to \"After 无论/不管, 都/也 is very common and a safe default, but it can be omitted, especially when the main clause has 要/会/能/就/还是/一定等 or the meaning is clear.\"\nClaim (example labeling): \"incorrect: 不管天气怎么样，我去。 → correct: 不管天气怎么样，我都去。\" Why over-broad/wrong: \"不管天气怎么样，我去。\" is acceptable and natural; adding 都 just makes the correlation more explicit. Minimal fix: Present both as correct with a preference note: \"不管天气怎么样，我（都）去。/ 不管天气怎么样，我还是要去。\""
+      ],
+      "reason": "The rule overstates that 都/也 must appear; omitting it is often natural, so marking such sentences as incorrect is misleading.",
+      "explanation": "无论/不管 + a choice/question word pairs with 都/也 in the main clause: 不管天气怎么样，我都去.",
+      "common_mistake": "Dropping 都/也, or using 虽然."
+    },
+    {
+      "id": "gr_deshihou",
+      "name": "……的时候 (when / while)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Using an English-style front 'when' without 的时候.\" — This is over-broad. In standard Mandarin, 当 can function as a conjunction without 的时候 when followed by a full clause (e.g., 当你准备好了，我们就出发。). The problem in the example is specifically 当我小, which is ungrammatical because 当 + adjective phrase is odd, not because 的时候 is always required. Minimal fix: \"Avoid 当 + adjective like 当我小. For this meaning, say 我小的时候/小时候…, or use 当…时/当…的时候 with a full clause (e.g., 当你准备好了，我们就出发。).\""
+      ],
+      "reason": "The common-mistake note incorrectly generalizes that omitting 的时候 after a fronted 'when' is wrong, whereas 当 can validly introduce a clause on its own; the issue is the specific pattern 当 + adjective.",
+      "explanation": "A time clause is closed by 的时候 at its END, before the main clause: 我小的时候，住在北京 (when I was young, I lived in Beijing).",
+      "common_mistake": "Using an English-style front 'when' without 的时候."
+    },
+    {
+      "id": "gr_yiqian_yihou",
+      "name": "以前 / 以后 clause order",
+      "category": "word_order",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "'Common mistake' note: Following English order and putting 以前/以后 first. — Over-broad. 以前/以后 can appear sentence-initial when used as independent time adverbs meaning ‘previously/in the future’ (e.g., 以前我住在北京。/ 以后我要注意。). Minimal fix: “When you mean ‘before/after [event]’, don’t put 以前/以后 before the event; say 下课以后, not 以后下课. But 以前/以后 can also start a sentence when they mean ‘previously/from now on’.”",
+        "incorrect: 以后下课，我回家。 — This can be acceptable if 以后 is read as ‘from now on’: 以后，下课我就回家。 Labeling it simply “incorrect” is misleading. Minimal fix: “Not correct for expressing ‘after class I go home’; use: 下课以后，我回家。 Note: 以后 can start a sentence with the meaning ‘from now on’: 以后，下课我就回家。”"
+      ],
+      "reason": "The rule overgeneralizes by implying sentence-initial 以前/以后 is wrong and labels a potentially correct sentence as incorrect, rather than restricting the prohibition to the ‘before/after [event]’ postpositional use.",
+      "explanation": "以前 (before) and 以后 (after) come AFTER the event they refer to: 下课以后 (after class), 睡觉以前 (before sleeping).",
+      "common_mistake": "Following English order and putting 以前/以后 first."
+    },
+    {
+      "id": "gr_potential_complement",
+      "name": "Potential complement 得/不 (听得懂 / 听不懂)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule and example accurately describe the potential complement pattern with 得/不 for ability/possibility and correctly contrast it with front-negation (不看清楚), which has a different meaning in this context; no over-broad or false claims detected.",
+      "explanation": "Insert 得 (can) or 不 (cannot) between a verb and its result complement for ability/possibility: 听得懂 (can understand) / 看不清楚 (cannot see clearly).",
+      "common_mistake": "Using 不 + Verb + complement (不看清楚) instead of the infixed 看不清楚."
+    },
+    {
+      "id": "gr_dao_resultative",
+      "name": "到 as a resultative (找到 / 看到)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Omitting 到, so successful attainment is not expressed.\" — This is over-broad. With some verbs (e.g., 找/看/听/等), leaving off 到 does lose the attainment meaning (找→‘look for’ vs 找到→‘find’), but with others like 买, the plain verb with 了 already implies success (我买了票了 is perfectly natural and means ‘I bought the ticket’). 到 with 买 often adds an ‘managed to/after some difficulty’ nuance. Minimal fix: \"With activity verbs like 找/看, omitting 到 usually loses the ‘found/saw’ result. With verbs like 买, 买了 already expresses success; 买到 adds an ‘managed to’/emphasis on attainment.\""
+      ],
+      "reason": "The warning about always needing 到 to express success is too absolute; verbs like 买 already convey successful attainment without 到.",
+      "explanation": "到 attaches to a verb to mark that its goal was attained: 找到 (find), 看到 (catch sight of), 买到 (manage to buy).",
+      "common_mistake": "Omitting 到, so successful attainment is not expressed."
+    },
+    {
+      "id": "gr_jian_perception",
+      "name": "见 for involuntary perception (看见 / 听见)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"见 for involuntary perception (看见 / 听见)\" — Calling 见 \"involuntary\" is over-broad. 见 as a resultative complement simply marks that the sensory event was achieved; it does not by itself encode (in)voluntariness. E.g., 我仔细听，终于听见了他的脚步声 shows deliberate effort with 听见. Minimal fix: rename to \"见 for perception result\" or \"用“见”表示感知到的结果\".",
+        "\"Common mistake: Using bare 看/听 when the perceptual result is meant.\" — Over-broad as a blanket warning. Bare 看/听 can validly express completed perception in many collocations (e.g., 我看了那份通知了 ‘I read the notice,’ 我已经听了录音), whereas when reporting detecting a specific stimulus like 人/声音/动静, a resultative complement (见/到) is typically needed. Minimal fix: \"Relying only on 看/听 to report that you perceived a specific stimulus (e.g., 声音/人/动静); add a resultative complement like 见/到 (看见/看到, 听见/听到) to show the result.\""
+      ],
+      "reason": "Labeling 见 as “involuntary” and framing bare 看/听 as a general mistake are both over-broad; 见 marks result regardless of intent, and bare 看/听 are acceptable in many contexts.",
+      "explanation": "见 attaches to perception verbs to mark the result of perceiving: 看见 (see), 听见 (hear) — the perception actually registered.",
+      "common_mistake": "Using bare 看/听 when the perceptual result is meant."
+    },
+    {
+      "id": "gr_gei_resultative",
+      "name": "Verb + 给 + recipient (送给 / 还给)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "'Common mistake' note: 'Omitting 给 or misordering the recipient.' — Labeling omission of 给 as a mistake is over-broad and wrong for common transfer verbs like 送 and 还. In standard Mandarin, both 我送他一本书 and 我送给他一本书 are correct; likewise 我还你钱 and 我还给你钱 are both fine. Minimal fix: \"With some transfer verbs (e.g., 送, 还), 给 is optional when the recipient directly follows the verb (我送他一本书 / 我还你钱). With others (e.g., 递, 交, 发), 给 is typically needed before the recipient (我递给他一本书). The real mistake is placing 给 after the object (✗ 我送他一本书给).\""
+      ],
+      "reason": "The note incorrectly treats omission of 给 as an error, but with verbs like 送/还 both forms (with or without 给) are standard in Mandarin.",
+      "explanation": "给 after certain verbs marks transfer to a recipient: 送给他一本书 (give him a book), 还给我 (return to me).",
+      "common_mistake": "Omitting 给 or misordering the recipient."
+    },
+    {
+      "id": "gr_degree_extreme",
+      "name": "极了 / 死了 extreme degree",
+      "category": "particle",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule accurately describes the common colloquial pattern Adj + 极了/死了/坏了 to mean “extremely,” the examples are correct, and the cautions about not combining with 很 in the same slot and including 了 are appropriate for standard usage.",
+      "explanation": "Adjective + 极了/死了/坏了 = extremely (colloquial), and takes 了: 好极了 (great), 累死了 (dead tired).",
+      "common_mistake": "Combining with 很, or omitting 了."
+    },
+    {
+      "id": "gr_hao_completion",
+      "name": "好 as a resultative (做好 / 准备好)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule and example accurately describe the common resultative use of 好 to indicate a completed/satisfactory/ready state; the “common mistake” note is appropriately scoped and the example labeled incorrect is indeed unidiomatic for meaning “I’m ready.”",
+      "explanation": "好 as a complement marks that an action is done properly / is ready: 做好了 (done), 准备好 (ready), 坐好 (sit properly).",
+      "common_mistake": "Omitting 好 when 'ready / done properly' is meant."
+    },
+    {
+      "id": "gr_qilai_inchoative",
+      "name": "起来 — inception / 'seem' / recall",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Example labeled as correct is ungrammatical/nonnative: “我突然想起来那个词了。” In resultative constructions with 起来, 了 should either follow the whole complement (想起来了) or the object should be placed between 起 and 来 with 了 at the end. Minimal fixes: “我突然想起了那个词。” or “我突然想起那个词来了。” (also acceptable: “我突然想起来了那个词。”)."
+      ],
+      "reason": "The rule explanation is fine, but the provided “correct” example misplaces 了 in a 起来 construction.",
+      "explanation": "起来 extends beyond 'up': it marks the start of an action (下起雨来 it started raining), a judgement (看起来 it looks..., 说起来 speaking of...), or recall (想起来 to recall).",
+      "common_mistake": "Reading 起来 only literally as 'up' and omitting it for these senses."
+    },
+    {
+      "id": "gr_xiaqu_continue",
+      "name": "下去 — continue an action",
+      "category": "grammar",
+      "hsk_level": 4,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Using 下来 for 'continue', or 继续 awkwardly without the complement.\" Problem: 继续 does not require 下去 and is perfectly natural on its own (e.g., 老师让我们继续读; 请继续; 我们明天继续). The real mistake is using 下来 to mean simple continuation. Minimal fix: \"Using 下来 to mean 'continue', or thinking 继续 must be followed by 下去. 继续可单独使用（老师让我们继续读），也可与下去并用以强调（老师让我们继续读下去）。\""
+      ],
+      "reason": "The note incorrectly treats standard, common uses of 继续 without 下去 as awkward/incorrect, which would mislead learners.",
+      "explanation": "Verb + 下去 = keep doing / continue: 说下去 (go on speaking), 坚持下去 (keep it up).",
+      "common_mistake": "Using 下来 for 'continue', or 继续 awkwardly without the complement."
+    },
+    {
+      "id": "gr_cong_dao",
+      "name": "从……到…… (from ... to)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Using 到 alone\" [is a common mistake]. Why wrong: In ranges, A到B without 从 is fully grammatical and very common for time and space (and other ranges). Examples: 我九点到五点工作; 北京到上海有很多航班; 周一到周五上班. Minimal fix: Rephrase to \"Avoid putting the time range after the verb (我工作九点到五点✗). Put it before the verb: 我九点到五点工作. Both 从A到B and A到B are acceptable to show a span; 从…到… is the full form and is often a bit more explicit/formal.\""
+      ],
+      "reason": "The note incorrectly labels the widely used A到B range pattern as an error, which would mislead learners.",
+      "explanation": "从 A 到 B spans time or space: 我从九点到五点工作 / 从北京到上海.",
+      "common_mistake": "Using 到 alone, or following English word order with the times after the verb."
+    },
+    {
+      "id": "gr_li_distance",
+      "name": "离 (lí) distance from",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"Using 从 for a static distance.\" — This is over-broad. While the structure \"A 从 B 很近/很远\" is ungrammatical (you should use 离), 从 can express distance in static statements when paired with 到, e.g., \"从这儿到学校很近/不远.\" Minimal fix: \"Don’t use the pattern A 从 B 近/远; use A 离 B 近/远. However, you can say 从 A 到 B 很近/很远 to describe distance.\""
+      ],
+      "reason": "The rule about 离 is correct, but the common-mistake note overgeneralizes by implying 从 cannot be used for distance at all, ignoring the valid 从…到… pattern.",
+      "explanation": "A + 离 + B + 远/近 states the distance between two points: 我家离学校很近.",
+      "common_mistake": "Using 从 for a static distance."
+    },
+    {
+      "id": "gr_dui_regarding",
+      "name": "对 (duì) toward / regarding",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The explanation and example are correct for standard Mandarin, and the “common mistake” note is a reasonable beginner warning without making an over-broad or false claim.",
+      "explanation": "对 + object introduces the target of an attitude or effect: 他对我很好 (he's good to me), 运动对身体好 (exercise is good for the body).",
+      "common_mistake": "Using 给 or 跟 where 对 (toward/regarding) is needed."
+    },
+    {
+      "id": "gr_gei_coverb",
+      "name": "给 (gěi) + recipient + verb (for / to)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"Omitting 给, or following English order (verb before recipient) where the coverb is expected.\" — This overstates that placing the verb before the recipient is a mistake. In many cases, V + 给 + recipient is perfectly standard (e.g., 我打电话给你, 写信给他, 发邮件给她). Minimal fix: \"Don’t drop 给 with verbs like 打电话/写信/发短信: say 给你打电话 or 打电话给你, not 我打电话你.\"",
+        "\"Omitting 给\" framed as a general mistake is over-broad. Some verbs take a recipient directly without 给 (e.g., 送他一本书, 教他中文, 告诉你). Minimal fix: qualify it to \"With verbs that need 给 to introduce the recipient (e.g., 打电话/写信/发短信), don’t omit 给.\""
+      ],
+      "reason": "The core pattern is fine, but the common-mistake note wrongly implies verb-before-recipient order is incorrect and overgeneralizes the necessity of 给 across verbs.",
+      "explanation": "给 + recipient + Verb marks who an action is done for/to: 我给你打电话 (I'll call you), 给妈妈做饭.",
+      "common_mistake": "Omitting 给, or following English order (verb before recipient) where the coverb is expected."
+    },
+    {
+      "id": "gr_gen_he_with",
+      "name": "跟/和 (gēn/hé) + person (with)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule and example accurately reflect standard usage of 跟/和 for the comitative, and the “common mistake” note correctly warns against sentence-final placement and misuse of 用; no over-broad or false claims detected.",
+      "explanation": "跟/和 + person + Verb means doing something with someone: 我跟朋友去看电影.",
+      "common_mistake": "Putting 'with ...' at the end English-style, or using 用."
+    },
+    {
+      "id": "gr_wang_xiang_direction",
+      "name": "往/向 (wǎng/xiàng) toward a direction",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule accurately captures how 往/向 mark direction before motion verbs and the note correctly warns against 到/去 with bare direction words; the example correction is sound.",
+      "explanation": "往/向 + direction + Verb points the action a way: 往前走 (walk forward), 向右拐 (turn right).",
+      "common_mistake": "Using 到/去 for a bare direction of motion."
+    },
+    {
+      "id": "gr_weile_purpose",
+      "name": "为了 (wèile) in order to",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Placing the purpose at the end, or using 因为 (because) for a purpose.\" — Labeling sentence-final purpose placement as a mistake is incorrect. Standard Mandarin allows the purpose after the main clause with 是: 我学中文是为了找到好工作, and also after the subject: 我为了找到好工作学中文. Minimal fix: \"Don’t use bare 因为 + 动词短语 to mean 'in order to.' Note: The 为了-phrase can go before the main clause, after the subject, or after the clause with 是: 我为了找到好工作学中文 / 我学中文是为了找到好工作.\"",
+        "\"…or using 因为 (because) for a purpose.\" — This is over-broad. 因为 can introduce a motive if the clause expresses intention/desire: 我学中文是因为想/要找到好工作. The actual error is bare 因为 + VP like 我学中文因为找到好工作. Minimal fix: \"Avoid bare 因为 + VP for purpose (e.g., 我学中文因为找到好工作 ×). Use 为了 + VP, or with 因为 add 想/要/希望: 我学中文是因为想/要找到好工作.\""
+      ],
+      "reason": "The note wrongly bans valid word orders and overstates that 因为 cannot be used for motives, which would mislead learners; the core pattern with 为了 is fine.",
+      "explanation": "为了 + purpose, then the main clause: 为了找到好工作，我在学中文.",
+      "common_mistake": "Placing the purpose at the end, or using 因为 (because) for a purpose."
+    },
+    {
+      "id": "gr_yong_instrument",
+      "name": "用 (yòng) + tool + verb (by means of)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Following English 'with ...' order and putting the tool after the verb.\" Why it's wrong/over-broad: In Mandarin, placing the instrument as a postverbal 用-phrase is grammatical and common (the problem in the bad example is omitting 用, not its position). Counterexamples: 我吃饭用筷子。/ 你写字用铅笔吗？/ 我上网用手机。 Minimal fix: Change to \"Common mistake: Omitting 用 and saying 我吃饭筷子. Remember to mark the instrument with 用. Both 我用筷子吃饭 and 我吃饭用筷子 are correct.\""
+      ],
+      "reason": "The note wrongly labels postverbal 用-phrases as an error, whereas Mandarin allows both preverbal and postverbal placement as long as 用 is present.",
+      "explanation": "用 + instrument + Verb says what is used to do something: 用筷子吃饭 (eat with chopsticks), 用中文写.",
+      "common_mistake": "Following English 'with ...' order and putting the tool after the verb."
+    },
+    {
+      "id": "gr_zai_location_verb",
+      "name": "在 + place + verb (do at a location)",
+      "category": "word_order",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Common mistake: Following English order and putting the place after the verb.\" — This is over-broad. Many verbs naturally take 在+place after the verb (e.g., 我住在北京, 把书放在桌子上, 他站在门口). Minimal fix: \"With general activity verbs like 学习/工作/吃饭, don’t put the 在-place after the verb (e.g., ✘我学习在图书馆 → ✔我在图书馆学习). Note: Some verbs do take 在+place after the verb, e.g., 我住在北京, 他站在门口.\""
+      ],
+      "reason": "The rule example is fine, but the blanket warning against postverbal 在-phrases is incorrect because many standard verbs allow V + 在 + place.",
+      "explanation": "The location coverb 在 + place goes BEFORE the verb: 我在图书馆学习.",
+      "common_mistake": "Following English order and putting the place after the verb."
+    },
+    {
+      "id": "gr_you_existential",
+      "name": "有 (yǒu) existential — there is/are",
+      "category": "grammar",
+      "hsk_level": 1,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule and warning accurately capture the core existential use of 有 and the typical learner error of using 是/在 for presentational “there is/are,” and the example contrasts are correct for standard Mandarin.",
+      "explanation": "Place + 有 + Noun introduces the existence of something: 桌子上有一本书 (there's a book on the table).",
+      "common_mistake": "Using 是 or 在 to introduce a newly-mentioned existing thing."
+    },
+    {
+      "id": "gr_shi_identity",
+      "name": "是 (shì) identity — no 是 before an adjective",
+      "category": "grammar",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "Claim: \"It is NOT used before an adjective predicate — use 很 there instead.\" Why over-broad: In simple descriptive sentences this is correct, but 是 can appear before adjectives in other well-formed structures, e.g., as a focus marker with 的 for emphasis (他是很忙的) or in contrastive sentences (他是高，但是……). Minimal fix: \"In simple descriptive sentences, don’t put 是 directly before an adjective; use 很 (or other degree words) instead: 他很忙. Note: 是 can appear with adjectives in emphatic patterns like 是…的 (他是很忙的) or in contrastive focus (他是高，但是……).\"",
+        "Common mistake note: \"Inserting 是 before an adjective (他是高 / 他是很忙).\" Why over-broad: As an across-the-board ban this labels forms that are acceptable in emphasis/contrast or in 是…的 as wrong (e.g., 他是很忙的; 他是高，但是…). Minimal fix: \"In simple statements, inserting 是 before a bare adjective is incorrect (say 他很忙). It’s fine in emphatic/contrastive patterns or with 的 (e.g., 他是很忙的; 他是高，但是…).\""
+      ],
+      "reason": "The core rule is right for basic sentences, but the absolute “NOT used” wording and blanket “common mistake” ignore standard emphatic/contrastive uses like 是…的 or contrastive 是 + adjective.",
+      "explanation": "是 equates two nouns (A 是 B): 他是老师. It is NOT used before an adjective predicate — use 很 there instead.",
+      "common_mistake": "Inserting 是 before an adjective (他是高 / 他是很忙)."
+    },
+    {
+      "id": "gr_zai_location",
+      "name": "在 (zài) to be located at",
+      "category": "grammar",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"Using 有 or 是 for the location of a specific known thing.\" — Over-broad. 有 can appear in existential sentences with a place topic even when the noun is specific (e.g., 桌子上有我的手机/你要找的那部手机) to present what is at a place. Minimal fix: \"Don’t use X + 有 + 地方 to mean ‘X is at Y’; use 在. 有 is for Place + 有 + N to introduce what exists/appears there (typically new or non-specific).\"",
+        "\"Using 有 or 是 for the location of a specific known thing.\" — Over-broad. 是 can be used in the focus pattern 是…在… to emphasize location (e.g., 手机是在桌子上，不是在沙发上). Minimal fix: \"Don’t use bare 是 as the main verb for location; use 在. 是…在… is possible for emphasis.\u000b"
+      ],
+      "reason": "The core rule is correct, but the “common mistake” note overstates bans on 有 and 是, which both have acceptable uses in specific constructions.",
+      "explanation": "A specific/known thing + 在 + Place states where it is: 我的手机在桌子上 / 爸爸在家.",
+      "common_mistake": "Using 有 or 是 for the location of a specific known thing."
+    },
+    {
+      "id": "gr_duo_approx",
+      "name": "Number + 多 approximation",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "“Putting 多 before the number” (as a blanket mistake). In other valid structures, 多 can precede the number to mean “an extra N,” e.g., 再多三天, 多两个人, 多三块钱. Minimal fix: “In this ‘-odd/more than’ pattern, don’t put 多 before the number (say 三十多岁, not 多三十岁).”"
+      ],
+      "reason": "The rule is sound for the approximation pattern, but the common-mistake note overgeneralizes by implying 多 can’t appear before a number in Mandarin at all.",
+      "explanation": "多 after a round number means '-odd / more than': 三十多岁 (thirty-odd), 一百多块.",
+      "common_mistake": "Putting 多 before the number, or omitting it for 'more than'."
+    },
+    {
+      "id": "gr_ban_half",
+      "name": "半 (bàn) half",
+      "category": "measure_word",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule and example are accurate for standard usage; it’s a sound beginner simplification with no over-broad or false claims.",
+      "explanation": "半 before a measure word = half (半个小时); after Number+MW = 'and a half' (一个半小时).",
+      "common_mistake": "Putting the number after 半, or wrong slot for 'and a half'."
+    },
+    {
+      "id": "gr_di_ordinal",
+      "name": "第 (dì) ordinal numbers",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"Omitting 第 for an ordinal (using a bare cardinal).\" — This is over-broad. Many perfectly standard ordinals in Mandarin do not take 第, especially in naming/labeling contexts where a bare numeral + classifier is used: 星期一/周一 (Monday), 二楼/二层 (2nd floor), 二号线 (Line 2), 二号 (the 2nd/day number/No. 2), 二班 (Class 2), 二队 (Team 2). Minimal fix: \"Often a mistake when you mean ‘the Nth time/position/item in a sequence’ (e.g., 第一次, 第三章, 第五个), but many set names and labels use a bare numeral + classifier instead of 第 (e.g., 星期一, 二楼, 二号线, 二号).\""
+      ],
+      "reason": "The rule itself is fine, but the “common mistake” wrongly implies 第 must always mark ordinals, ignoring common contexts where bare numerals are correct.",
+      "explanation": "第 + Number (+ Measure Word) forms an ordinal: 第一次 (the first time), 第三个.",
+      "common_mistake": "Omitting 第 for an ordinal (using a bare cardinal)."
+    },
+    {
+      "id": "gr_mei_every",
+      "name": "每 (měi) + measure word (every)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Omitting the measure word after 每\" (as a blanket mistake).\nWhy over-broad: Many words can follow 每 without an extra classifier, e.g., 每天、每年、每月、每人, and measure-like words such as 次 already serve as the classifier (每次). Marking all omissions as errors would wrongly flag very common sentences like 我每天跑步.\nMinimal fix: \"With countable nouns, add an appropriate classifier after 每 (每个学生、每本书、每位老师). But time words and a few nouns can appear directly (每天、每年、每月、每人、每次).\"",
+        "Claim: \"…or dropping 都\" (as a blanket mistake).\nWhy over-broad: 都 is common when 每-phrase is the subject/topic (每个人都知道), but it’s often not used with time/frequency adverbials or other modifiers: 我每天跑步、他每年回国一次、我每个星期去两次 are all natural without 都.\nMinimal fix: \"Use 都 when 每 introduces the subject/topic to emphasize ‘all’ (每个人都…); with time/frequency or adverbial 每-phrases (每天、每年、每个星期…), 都 is usually omitted.\""
+      ],
+      "reason": "The 'common mistake' section treats optional elements (measure word after 每 and 都) as mandatory, which would mislabel many natural sentences as incorrect.",
+      "explanation": "每 + MW + Noun = every; the main clause usually takes 都: 每个学生都喜欢老师.",
+      "common_mistake": "Omitting the measure word after 每, or dropping 都."
+    },
+    {
+      "id": "gr_xie_some",
+      "name": "些 / 一些 / 这些 (some, plural)",
+      "category": "measure_word",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"It replaces number+MW and takes no measure word of its own.\" — Over-broad. In colloquial Mandarin, 个 can appear after 些/这些/那些 for emphasis (e.g., 一些个苹果, 这些个孩子; also 好些个… is common). Minimal fix: \"Generally 些 is used directly before a noun and does not take a measure word; in colloquial speech 个 may appear after 些 (一些个/这些个), but avoid this in neutral or formal style.\"",
+        "\"Common mistake: Adding a measure word after 些 (一些个)\" and marking \"我买了一些个苹果。\" as incorrect — This treats an attested colloquial pattern as an error. Minimal fix: Recast as a register note: \"In standard written Mandarin, avoid adding 个 after 些; forms like 一些个 are colloquial/emphatic (more common in northern speech). Prefer 一些苹果 in neutral style.\" Change the example labels to \"colloquial → neutral\" rather than \"incorrect → correct.\"",
+        "\"...or a number before it.\" — As written this would also forbid 一, yet 一些 is standard. Minimal fix: \"...or a number other than 一 (些 doesn’t combine with other numerals like 三些).\""
+      ],
+      "reason": "The rule overstates that 些 never takes a measure word and labels the colloquial 一些个 pattern as wrong; better to present it as a colloquial exception and clarify the numeral restriction.",
+      "explanation": "些 marks an unspecified plural amount: 一些书, 这些人. It replaces number+MW and takes no measure word of its own.",
+      "common_mistake": "Adding a measure word after 些 (一些个) or a number before it."
+    },
+    {
+      "id": "gr_reduplicated_mw",
+      "name": "Reduplicated measure word (天天 / 个个) — every one",
+      "category": "measure_word",
+      "hsk_level": 4,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule and example are accurate for standard Mandarin at a beginner level, and the warning about not combining with 每 (e.g., 每天天) is correct; no materially false or over-broad claims are made.",
+      "explanation": "Reduplicating a measure word means 'every single one': 天天 (every day), 个个 (every one), 条条.",
+      "common_mistake": "Combining with 每 (每天天) or misforming the reduplication."
+    },
+    {
+      "id": "gr_date_order",
+      "name": "Dates: year–month–day order",
+      "category": "word_order",
+      "hsk_level": 1,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule accurately states the standard Chinese date order (year–month–day) and the example correction is correct; no over-broad or false claims.",
+      "explanation": "Dates run big-to-small: 年 + 月 + 日/号: 2026年7月13号.",
+      "common_mistake": "Using English small-to-big order."
+    },
+    {
+      "id": "gr_time_telling",
+      "name": "Telling the clock (点 / 分 / 半 / 刻)",
+      "category": "word_order",
+      "hsk_level": 1,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule accurately reflects standard Mandarin usage for telling time, including using 两 for 2 o’clock and avoiding 小时 for clock time, with no materially over-broad or false claims.",
+      "explanation": "Clock time uses 点 (o'clock), 分 (minute), 半 (half past), 刻 (quarter): 两点半 / 三点一刻. Use 两 (not 二) for 2 o'clock.",
+      "common_mistake": "Using 二 for 2 o'clock, or 小时 (duration) for clock time."
+    },
+    {
+      "id": "gr_money_spoken",
+      "name": "Spoken money (块 / 毛 / 分)",
+      "category": "measure_word",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Using written 元/角 in speech\" [is a common mistake]. Why it’s wrong: 元 and 角 are acceptable in spoken Mandarin, especially in neutral/formal contexts (e.g., prices read out in shops, on announcements). Calling them a mistake mislabels correct usage. Minimal fix: Rephrase to \"In casual speech, people usually say 块/毛 (rather than 元/角), which sound more formal/written. Both are correct; 块/毛 just sound more colloquial.\""
+      ],
+      "reason": "Labeling 元/角 in speech as a mistake is incorrect; they are acceptable (though more formal) in standard spoken Mandarin.",
+      "explanation": "In speech, money uses 块 (=元), 毛 (=角), 分, big unit first: 三块五 (3.5 yuan), 十块二毛.",
+      "common_mistake": "Using written 元/角 in speech, or reversing the unit order."
+    },
+    {
+      "id": "gr_adj_predicate_hen",
+      "name": "Adjective predicate takes 很, not 是",
+      "category": "grammar",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "“An adjective predicate needs a degree adverb (usually a bland 很) and NO 是: 他很高.” — This is too absolute. Bare adjectives are fine in several common contexts (e.g., negation: 他不高; A‑not‑A/questions: 他高不高/他高吗; exclamatives: 你高啊), and 是 can appear with adjectives when nominalized with 的 or used for emphasis (他是对的; 他是高，但是不壮). Minimal fix: “In simple neutral statements, an adjective predicate usually takes a degree adverb (often neutral 很) and not 是. Don’t use 是 as a copula before a bare adjective (他很高, not 他是高).”",
+        "“incorrect: 今天天气好。 → correct: 今天天气很好。” — 今天天气好 is not incorrect; it’s idiomatic and often used (though it can sound contrastive/contextual). Minimal fix: label it as a preference, e.g., “Neutral statement: 今天天气很好。 Bare adjective is also possible but often sounds contrastive: 今天天气好(啊).”"
+      ],
+      "reason": "The rule overstates the need for 很/ban on 是 and labels an actually acceptable sentence as incorrect, which would mislead learners about standard usage.",
+      "explanation": "An adjective predicate needs a degree adverb (usually a bland 很) and NO 是: 他很高. A bare adjective (他高) implies comparison/contrast.",
+      "common_mistake": "Using 是 before the adjective, or leaving a neutral statement with a bare adjective."
+    },
+    {
+      "id": "gr_ye_also",
+      "name": "也 (yě) also — before the verb",
+      "category": "word_order",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "Claim: \"也 (also/too) goes before the verb or adjective, never at the end.\"\nWhy over-broad: In full sentences, 也 is not sentence-final, but in common elliptical replies the predicate is omitted and 也 can appear last (e.g., A: 我去。 B: 我也。 ‘Me too.’), which is perfectly natural in modern Mandarin.\nMinimal fix: \"In full sentences, 也 goes before the verb or adjective and should not be sentence-final. In short elliptical replies like ‘我也。’ (‘me too’), 也 can appear at the end because the verb is omitted.\""
+      ],
+      "reason": "Core placement is correct, but the absolute \"never at the end\" ignores common elliptical replies like 我也。",
+      "explanation": "也 (also/too) goes before the verb or adjective, never at the end: 我也去.",
+      "common_mistake": "Placing 也 at the end like English 'too'."
+    },
+    {
+      "id": "gr_dou_all",
+      "name": "都 (dōu) all/both — before the verb, scope to its left",
+      "category": "word_order",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "Common mistake: \"Placing 都 before the subject it quantifies, or after the verb.\" — The blanket ban on \"after the verb\" is over-broad: in standard Mandarin there are set patterns where 都 follows an initial copy of the verb (e.g., 看都不看, 去都去了, 说都说了), which are grammatical but involve a different use from the quantifier 'all/both'. Minimal fix: \"In the ‘all/both’ use taught here, don’t put 都 after the main predicate; it typically appears before the verb phrase and associates with material to its left. Note there are other patterns (e.g., 看都不看, V都V了) where 都 can follow a first verb—those are different uses.\""
+      ],
+      "reason": "The rule itself is fine for the ‘all/both’ use, but the “after the verb” prohibition is stated too absolutely and ignores common, grammatical patterns where 都 comes after an initial verb in other constructions.",
+      "explanation": "都 goes before the verb and refers to something already mentioned to its LEFT: 我们都是学生.",
+      "common_mistake": "Placing 都 before the subject it quantifies, or after the verb."
+    },
+    {
+      "id": "gr_hai_still",
+      "name": "还 (hái) still / in addition — before the verb",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule accurately captures common uses of 还 as an adverb for continuation and addition, the placement before the predicate, and correctly contrasts it with 又/再 for ‘again’; the example and mistake note are sound for standard Mandarin.",
+      "explanation": "还 before the verb means still / yet / in addition: 他还在睡觉 (still sleeping), 我还要一个 (I want one more).",
+      "common_mistake": "Using 又/再 for 'still', or placing 还 at the end."
+    },
+    {
+      "id": "gr_zai_you_again",
+      "name": "再 vs 又 (again: future vs past)",
+      "category": "grammar",
+      "hsk_level": 3,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "\"又 = again for a past/realised one\" — This is over-broad. 又 can also mark expected/near-future or imminent repetition, especially with 要/会/能 or a future time adverbial, e.g., \"明天又要下雨了\", \"他又要迟到了\", \"我们下周又见面\". Minimal fix: \"又 typically indicates repetition that has happened or is seen as certain/imminent (often with 要/会/能 or a future time), e.g., 他又迟到了; 明天又要下雨了.\"",
+        "\"Common mistake: Swapping them — … 又 for a future one.\" — This incorrectly labels some correct sentences as errors, since 又 is acceptable for (near) future repetition in patterns like 又要/又会… (e.g., \"明天又要开会\"). Minimal fix: \"Common mistake: Using 再 for a completed repetition. Note: 又 is also used for expected/near-future repetition (又要/又会…), while 再 is for planned/volitional future actions (再来一次/我们明天再说).\""
+      ],
+      "reason": "The rule overstates that 又 is only for past events; in standard Mandarin 又 also expresses imminent/expected future repetition, so saying using 又 for future is a mistake is incorrect.",
+      "explanation": "再 = again for a future/unrealised repetition (再来一次); 又 = again for a past/realised one (他又迟到了).",
+      "common_mistake": "Swapping them — 再 for a completed repetition or 又 for a future one."
+    },
+    {
+      "id": "gr_zhi_only",
+      "name": "只 (zhǐ) only — before the verb",
+      "category": "word_order",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"Placing 只 after the verb, or using 就 for 'only'.\" — The blanket prohibition on using 就 for “only” is wrong. In standard Mandarin, 就 often means “only/just,” especially before numerals or small quantities, and even with 有 or verbs (e.g., 我就有两个 ‘I only have two,’ 就我们三个人 ‘there are only three of us,’ 我就问一个问题 ‘I’ll only ask one question’). Minimal fix: Keep “Don’t place 只 after the verb,” but change the rest to: “Note: 就 can also mean ‘only/just,’ especially before numbers. Use 只 before verbs like 有/喜欢 (e.g., 我只有两个 / 他只喜欢你).”"
+      ],
+      "reason": "The note incorrectly labels a common, standard use of 就 meaning “only/just” as a mistake.",
+      "explanation": "只 (only) goes before the verb: 我只有十块钱 / 他只喜欢你.",
+      "common_mistake": "Placing 只 after the verb, or using 就 for 'only'."
+    },
+    {
+      "id": "gr_tai_le",
+      "name": "太……了 (too / so)",
+      "category": "particle",
+      "hsk_level": 1,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "\"Omitting 了 after 太\" (as a blanket 'common mistake'). 了 is very common in the standalone/exclamatory 太… predicate, but it is not required in all uses of 太: e.g., attributive modifier 太贵的手机我不买, or clipped/casual predications/exclamations like 这个太贵。/ 今天太热。 are natural in speech and writing. Minimal fix: \"In standalone exclamations/predications, 太 usually takes sentence-final 了 to sound natural (这个太贵了). Without 了 is fine before 的 (太贵的…) or in clipped/casual comments (这个太贵).\"",
+        "Labeling \"incorrect: 这个太贵。 → correct: 这个太贵了。\" as an error. 这个太贵。 is acceptable (especially in casual speech or when followed by a clause), though 这个太贵了。 is the canonical beginner-friendly pattern. Minimal fix: present it as a preference: \"More natural/standard: 这个太贵了。 Colloquial/clipped: 这个太贵。\""
+      ],
+      "reason": "The rule overstates that 了 must follow 太, and the example marks a form that is acceptable in many contexts as incorrect; the core pattern itself is fine.",
+      "explanation": "太 + Adjective + 了 = too / so (excess or exclamation): 太贵了 / 太好了.",
+      "common_mistake": "Omitting 了 after 太, or replacing 太 with 很."
+    },
+    {
+      "id": "gr_frequency_adverb",
+      "name": "常常 / 经常 frequency — before the verb",
+      "category": "word_order",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "Claim: “Placing the frequency adverb after the verb or at the end.” — stated as categorically wrong. Why over-broad: In V‑得 complement structures, frequency words can appear after the verb, e.g., 他来得不常 / 他联系得不经常 are natural, so not every post‑verb placement is ungrammatical. Minimal fix: “In simple SVO sentences, don’t put these after the verb or at the sentence end (e.g., 我去常常那儿/我去那儿常常 ✗). Note: in V‑得 complements, forms like 不常/不经常 can follow 得 (e.g., 他来得不常).”"
+      ],
+      "reason": "The core rule is fine for beginners, but the “after the verb is wrong” note is too absolute because V‑得 complement constructions permit post‑verb frequency words like 不常/不经常.",
+      "explanation": "Frequency adverbs (常常/经常/有时候) go before the verb: 我常常去那儿.",
+      "common_mistake": "Placing the frequency adverb after the verb or at the end."
+    },
+    {
+      "id": "gr_verb_reduplication",
+      "name": "Verb reduplication (看看 / 休息休息)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "major",
+      "issues": [
+        "Claim: \"two-syllable ABAB (休息休息), NOT AABB.\"\nWhy it’s over-broad: Many very common two-syllable verbs are separable VO verbs (离合词) and do not reduplicate as ABAB productively; instead they typically reduplicate by doubling only the verb (AA + O), e.g., 见见面、聊聊天、跳跳舞、帮帮忙、睡睡觉. Saying all two-syllable verbs take ABAB will mislead learners to produce unnatural forms like 见面见面.\nMinimal fix: \"For most non-separable disyllabic verbs, use ABAB (休息休息、讨论讨论). For separable VO verbs (e.g., 见面、聊天、帮忙), reduplicate only the verb: AA + O (见见面、聊聊天、帮帮忙、睡睡觉). AABB like 休休息息 is not used for verb reduplication.\""
+      ],
+      "reason": "The blanket \"two-syllable = ABAB\" claim ignores common separable VO verbs that reduplicate as AA+O, so it would teach an incorrect generalization.",
+      "explanation": "Reduplicating a verb softens it to 'a little / give it a try': one-syllable AA (看看) or A一A (看一看); two-syllable ABAB (休息休息), NOT AABB.",
+      "common_mistake": "Reduplicating a two-syllable verb as AABB (休休息息)."
+    },
+    {
+      "id": "gr_yixia",
+      "name": "Verb + 一下 (do briefly / once)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": false,
+      "severity": "none",
+      "issues": [],
+      "reason": "The rule accurately describes the common post-verb placement and softening/brief meaning of 一下 for this use, and the flagged “before the verb” example is indeed incorrect in this context.",
+      "explanation": "Verb + 一下 softens an action to 'briefly / just once', like reduplication: 看一下, 等一下.",
+      "common_mistake": "Placing 一下 before the verb."
+    },
+    {
+      "id": "gr_lai_qu_purpose",
+      "name": "来/去 + verb phrase (come/go to do)",
+      "category": "grammar",
+      "hsk_level": 2,
+      "has_issue": true,
+      "severity": "minor",
+      "issues": [
+        "Claim: \"Inserting 为了 / an English 'to' marker between the motion and the purpose verb.\" Why over-broad: While placing bare 为了 right after 来/去 is generally ungrammatical or awkward (e.g., 我去为了买东西商店), 为了 can appear with 来/去 in correct patterns, such as 我去商店是为了买东西 or 我为了买东西去商店. Minimal fix: \"Don’t put bare 为了 directly after 来/去 to mark purpose. Say 我去商店买东西. If you want 为了, use 我为了买东西去商店 or 我去商店是为了买东西.\""
+      ],
+      "reason": "The rule is sound, but the common-mistake note is slightly over-broad because 为了 can appear with 来/去 in certain correct patterns.",
+      "explanation": "来/去 + (place) + Verb phrase expresses the purpose of coming or going: 我去商店买东西 (I'm going to the shop to buy things).",
+      "common_mistake": "Inserting 为了 / an English 'to' marker between the motion and the purpose verb."
+    }
+  ]
+}

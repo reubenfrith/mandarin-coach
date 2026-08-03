@@ -206,6 +206,32 @@ qualitatively better errors, i.e. near-expert with a human adjudicating the rare
 flag. Cost + latency are higher, acceptable for an offline eval. Caveat unchanged: n=9, one gold
 labeller — directional, and a proper build needs a larger real set + ≥2 labellers.
 
+Follow-through (2026-08-03): `--secondary` now defaults to the gpt-5 judge (env-overridable); the
+other modes keep gpt-4o (cheaper, fine for the language / explains-why dims).
+
+## Corpus-quality audit — 2026-08-03 (`results/corpus_audit.{md,json}`)
+
+Built `corpus_quality_audit.py` + `llm_judge.audit_grammar_rule` to fix systematic errors AT THE
+SOURCE: a corpus error propagates to every reply grounded on that rule (the A06 reply error traced
+to `gr_shi_de`; the A08 class to `gr_zai_progressive`). gpt-5 audited all 98 rules for factually
+wrong / materially over-broad `explanation`/`common_mistake` claims.
+
+**Result: 71/98 flagged (45 "major") — the flags are REAL but the severity is MIS-CALIBRATED.**
+Spot-checked 6 majors: all linguistically correct, not hallucinations —
+- `gr_verb_reduplication` genuinely wrong (2-syllable → ABAB ignores 离合词: 见见面/帮帮忙 = AA+O);
+- `gr_shi_de` / `gr_le_change` / `gr_mei_every` / `gr_di_ordinal` / `gr_adj_predicate_hen` correctly
+  note the `common_mistake` is phrased as an ABSOLUTE ("omitting X is a mistake") when 他昨天来了 /
+  我每天跑步 / 二楼 / 他不高 are all fine.
+
+The problem: gpt-5's "major" conflates *linguistically over-broad* with *pedagogically harmful*, and
+for a BEGINNER tool many of these absolutes are defensible simplifications. So 45 "major" over-states
+the actionable count — the same "LLM judge needs calibration + human adjudication" lesson, now on the
+audit itself. **The actionable subset is narrower: rules whose wording would make the COACH mark a
+CORRECT, level-appropriate learner sentence as WRONG** (the A06 class — real product harm), as opposed
+to mere incompleteness. Re-ranking by that harm criterion (a focused second pass, or human triage of
+the 71) is the next step before editing `data/grammar_rules.json`. As-is, the audit is a valid but
+over-inclusive candidate list, not a to-do list.
+
 ## For the full surface (deferred)
 
 - Run the blind round with ≥2 labellers; report human–human κ as the ceiling.
