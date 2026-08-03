@@ -124,6 +124,28 @@ which it was, twice. So the shape of a real surface is:
   in hints/drills/tables. Worth a prompt fix (e.g. "do not assert measure words or exception
   lists you are not certain of") regardless of how the surface matures.
 
+## Prompt guard shipped + verified (directionally) 2026-08-03
+
+Extended the coach's existing "do not guess pinyin/HSK" guard to measure words / "can-cannot"
+exception lists / drill answers, in `AGENT_SYSTEM_PROMPT` and `VOICE_COACH_SYSTEM_PROMPT`. Then
+re-generated the 4 affected replies **3× each** with the guard live (deepseek, clean provenance),
+re-judged + eyeballed each for the specific known error:
+
+| case | original error | with guard (3 samples) |
+|---|---|---|
+| A07 | 猫 takes 个 | **fixed 3/3** — all give 只 (table + drill answers) |
+| A08 | 想 barred from 在 | **fixed 3/3** — 想 omitted, or correctly qualified ("when meaning want") |
+| A02 | "把/被 never both" overstated | **not fixed 3/3** — still absolute (but a defensible beginner heuristic; out of the guard's scope) |
+| A06 | table mislabels 你怎么来了这里 | **partial** — mislabel gone, but 了-placement still fumbled in ~1/3 |
+
+**Honest limits of this verification:** it is NOT a clean A/B. The coach runs at temperature, so
+each regenerated reply is entirely different *content* from the original — "the guard helped"
+cannot be cleanly separated from "resampling produced different text," and n=3/case is
+underpowered for a rate. Directional, not proof. The measure-word win (A07) is the most credible
+(3/3 varied replies all correct where the original was wrong); the structural cases (A02/A06)
+were not helped, consistent with a real competence gap the guard can't fix. A proper A/B (old
+prompt vs new, ≥5 samples/case, same judge) is the follow-up if this needs to be conclusive.
+
 ## For the full surface (deferred)
 
 - Run the blind round with ≥2 labellers; report human–human κ as the ceiling.
