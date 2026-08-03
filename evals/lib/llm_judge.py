@@ -370,3 +370,47 @@ async def judge_secondary_errors(learner_input: str, grammar_point: str, answer:
     return await _judge(SecondaryVerdict).ainvoke(
         [SystemMessage(content=_SECONDARY_SYS), HumanMessage(content=msg)]
     )
+
+
+# --------------------------------------------------------------------------- #
+# 8. Corpus-quality audit — grade the REFERENCE RULE itself (fix errors at source)
+# --------------------------------------------------------------------------- #
+# The secondary-error work found the coach's ONE systematic error (把/被 "never both") traces to a
+# corpus `common_mistake` field that over-flattens the rule — and a corpus error propagates to every
+# reply grounded on that rule. So audit the rules themselves: does a rule's explanation / common_mistake
+# assert something factually WRONG or materially OVER-BROAD in standard Mandarin (an absolute
+# never/always/only/cannot with real exceptions an advanced speaker would reject)? Beginner-true
+# simplifications are fine. Runs best with a frontier judge (gpt-5 caught exactly this class).
+class RuleAuditVerdict(BaseModel):
+    has_issue: bool = Field(description="Does the rule's explanation or common_mistake contain a claim that is factually WRONG or materially OVER-BROAD in standard Mandarin (e.g. an absolute never/always/only/cannot that has real exceptions)? A beginner-appropriate simplification that is true-enough is NOT an issue.")
+    severity: str = Field(description="Worst issue severity: 'none', 'minor' (pedantic edge case), or 'major' (would teach an advanced learner something false).")
+    issues: list[str] = Field(description="One entry per problem: quote the offending claim, say why it is wrong/over-broad, and suggest a minimal fix. Empty if none.")
+    reason: str = Field(description="One sentence overall justification.")
+
+
+_AUDIT_SYS = (
+    "You are a native-level Mandarin linguist auditing a single grammar rule that a tutoring app "
+    "teaches to English-speaking learners. You are given the rule's name, its explanation, the "
+    "'common mistake' note, and its examples. Flag ONLY claims that are factually WRONG or "
+    "materially OVER-BROAD in standard Mandarin — especially absolute statements (never / always / "
+    "only / cannot / must) that have real exceptions an advanced speaker would object to, or a "
+    "'common mistake' that labels correct usage as an error. Do NOT flag: pedagogical "
+    "simplifications that are true-enough for a beginner, stylistic preferences, register notes, or "
+    "the examples unless an example is actually incorrect. For each genuine problem, quote the "
+    "specific claim, explain why it is wrong or over-broad (with a counterexample if you can), and "
+    "suggest a minimal fix that keeps it beginner-friendly. If the rule is sound to teach, set "
+    "has_issue=false, severity='none', empty issues. Be precise and conservative — a false alarm "
+    "wastes a reviewer's time."
+)
+
+
+async def audit_grammar_rule(name: str, explanation: str, common_mistake: str, examples: str) -> RuleAuditVerdict:
+    msg = (
+        f"Rule name: {name}\n\n"
+        f"Explanation (taught to the learner):\n{explanation}\n\n"
+        f"'Common mistake' note:\n{common_mistake or '(none)'}\n\n"
+        f"Examples:\n{examples or '(none)'}"
+    )
+    return await _judge(RuleAuditVerdict).ainvoke(
+        [SystemMessage(content=_AUDIT_SYS), HumanMessage(content=msg)]
+    )

@@ -133,7 +133,9 @@ uv run python evals/datagen/generate_teaching_slice.py                          
 uv run python evals/surfaces/text_coach/teaching_quality_eval.py                                  # teaching-quality SLICE (judge = gpt-4o); floor + length-bias survive, κ is circular
 uv run python evals/surfaces/text_coach/teaching_quality_eval.py --emit-blind                     # write a blank sheet for an independent labeller
 uv run python evals/surfaces/text_coach/teaching_quality_eval.py --score-human results/teaching_blind_labels.json  # the INDEPENDENT judge-vs-human κ
-uv run python evals/surfaces/text_coach/teaching_quality_eval.py --secondary                      # misleading-SECONDARY judge vs expert gold → recall 3/4, precision 60% (triage, not oracle)
+uv run python evals/surfaces/text_coach/teaching_quality_eval.py --secondary                      # misleading-SECONDARY judge (default gpt-5) vs expert gold → recall 4/4
+uv run python evals/surfaces/text_coach/corpus_quality_audit.py                                   # audit the 98 reference rules for over-broad claims (gpt-5, first-pass triage)
+uv run python evals/surfaces/text_coach/corpus_quality_audit.py --limit 8                          # cheap smoke run
 
 # 3. Task 6 surfaces (retrieval + coverage + model bake-off)
 uv sync --extra task6                                                                  # BM25 (jieba) + BGE-M3 deps

@@ -347,7 +347,13 @@ async def run_secondary():
     """Judge the coach replies for MISLEADING SECONDARY content (hints/drills/tables/side-claims),
     scored against the expert blind labels as gold. Gold `has_secondary_error` = the cases the
     human marked `explains_why=False` (they failed the reply precisely on a wrong supporting claim);
-    their note is the human rationale. This is the axis a human found that no other surface sees."""
+    their note is the human rationale. This is the axis a human found that no other surface sees.
+
+    Judge defaults to **gpt-5** here (override with JUDGE_MODEL): the head-to-head in the findings
+    note showed gpt-4o is too weak for this open-ended grammar-correctness call (recall 3/4, two
+    BASIC false alarms), while gpt-5 hit 4/4 with only a defensible edge-case flag. The other modes
+    keep gpt-4o (cheaper, and fine for the language/explains-why dims)."""
+    llm_judge.JUDGE_MODEL = os.environ.get("JUDGE_MODEL", "gpt-5")
     if not BLIND.exists():
         print(f"Need the expert blind labels at {BLIND} (run --emit-blind, label, then this).")
         return
