@@ -75,8 +75,37 @@ def _load_hsk_map() -> dict:
     return _hsk_map
 
 
+def _apply_bu_sandhi(tone_marks: list[str], tone3_marks: list[str]) -> list[str]:
+    """不 → bú before a 4th-tone syllable, in place. The ONE 一/不 sandhi rule fully
+    determined by the following syllable's citation tone alone, so it is safe to apply
+    positionally without word context.
+
+    We fire only where pypinyin emits 不 as a full 4th tone ('bu4'). That deliberately skips
+    the cases pypinyin already renders neutral or pre-sandhi'd — the V不C potential complements
+    where 不 is toneless (看不见→bú, 差不多→bu, 买不到→bú) — which would need grammatical context
+    we don't have here. `一` (ordinal 一月/第一 vs cardinal 一个) and grammatical `地`/`得` (vs
+    lexical 地方/得到) are NOT governed by neighbouring tone; applying them by character would
+    regress real strings, so they are left to pypinyin. See the `pinyin_accuracy` eval — its
+    `sandhi_no_apply` bucket is the regression guard for exactly this scope decision."""
+    for k in range(len(tone_marks) - 1):
+        if tone3_marks[k] == "bu4" and tone3_marks[k + 1].endswith("4"):
+            tone_marks[k] = "bú"
+    return tone_marks
+
+
+def _run_tone_marks(run: str) -> list[str]:
+    """TONE pinyin, one entry per Han char, for a CONTIGUOUS Han run — with 不 sandhi applied.
+    Run-local so sandhi never crosses punctuation; used by both surfaces below so their marks
+    stay identical."""
+    tone = [s[0] for s in _pinyin(run, style=Style.TONE)]
+    tone3 = [s[0] for s in _pinyin(run, style=Style.TONE3, neutral_tone_with_five=True)]
+    return _apply_bu_sandhi(tone, tone3)
+
+
 def _tone_pinyin(text: str) -> str:
-    return " ".join(s[0] for s in _pinyin(text, style=Style.TONE))
+    tone = [s[0] for s in _pinyin(text, style=Style.TONE)]
+    tone3 = [s[0] for s in _pinyin(text, style=Style.TONE3, neutral_tone_with_five=True)]
+    return " ".join(_apply_bu_sandhi(tone, tone3))
 
 
 def pinyin_segments(text: str) -> list[dict]:
@@ -88,7 +117,9 @@ def pinyin_segments(text: str) -> list[dict]:
 
     pīnyīn is looked up per maximal Han run (not per isolated character) so pypinyin's
     word context still applies — e.g. 银行→yín háng, 不行→bù xíng — which per-character
-    lookup would get wrong for polyphones."""
+    lookup would get wrong for polyphones. 不 tone sandhi (不→bú before a 4th tone) is applied
+    over the run via `_run_tone_marks`, the same helper `_tone_pinyin` uses, so the ruby marks
+    and the `/api/pinyin` string never diverge."""
     is_han = lambda c: "一" <= c <= "鿿"
     segs: list[dict] = []
     i, n = 0, len(text)
@@ -98,9 +129,9 @@ def pinyin_segments(text: str) -> list[dict]:
             while j < n and is_han(text[j]):
                 j += 1
             run = text[i:j]
-            marks = _pinyin(run, style=Style.TONE)  # one entry per char, with word context
+            marks = _run_tone_marks(run)  # one entry per char, word context + 不 sandhi
             for k, ch in enumerate(run):
-                segs.append({"hanzi": ch, "pinyin": marks[k][0] if k < len(marks) else ""})
+                segs.append({"hanzi": ch, "pinyin": marks[k] if k < len(marks) else ""})
             i = j
         else:
             j = i

@@ -9,6 +9,7 @@
       "t3_multi": "3+ T3 contested → carried, unscored",
       "redup": "neutral 2nd syllable; SOFT gold (secondary)",
       "control": "gold == pypinyin; sanity floor, must be ~100%",
+      "sandhi_no_apply": "sandhi MUST NOT fire here; regression guard (raw==post-pass), unscored",
       "erhua": "unexpressible in per-hanzi ruby → excluded"
     }
   },
@@ -885,6 +886,141 @@
       "harm": "n/a",
       "scored": true,
       "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "第一",
+      "gold": "dì yī",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal → stays yī"
+    },
+    {
+      "text": "一号",
+      "gold": "yī hào",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal (the 1st) → stays yī despite T4 号"
+    },
+    {
+      "text": "一楼",
+      "gold": "yī lóu",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal (1st floor) → stays yī"
+    },
+    {
+      "text": "星期一",
+      "gold": "xīng qī yī",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 final (Monday) → stays yī"
+    },
+    {
+      "text": "统一",
+      "gold": "tǒng yī",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 final → stays yī"
+    },
+    {
+      "text": "唯一",
+      "gold": "wéi yī",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 final → stays yī"
+    },
+    {
+      "text": "一月",
+      "gold": "yī yuè",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal (January) → yī; pypinyin already WRONG (yí yuè)"
+    },
+    {
+      "text": "一年级",
+      "gold": "yī nián jí",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal (1st grade) → yī; pypinyin already WRONG (yì)"
+    },
+    {
+      "text": "看不见",
+      "gold": "kàn bu jiàn",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "V不C potential complement → 不 neutral"
+    },
+    {
+      "text": "差不多",
+      "gold": "chà bu duō",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "fixed expression → 不 neutral"
+    },
+    {
+      "text": "对不对",
+      "gold": "duì bu duì",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "V不V question → 不 neutral"
+    },
+    {
+      "text": "说不定",
+      "gold": "shuō bu dìng",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "fixed adverb → 不 ideally neutral; pypinyin emits full bù"
+    },
+    {
+      "text": "阵地",
+      "gold": "zhèn dì",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "地 as noun (position) → dì"
+    },
+    {
+      "text": "目的地",
+      "gold": "mù dì dì",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "地 as noun (destination) → dì"
+    },
+    {
+      "text": "值得",
+      "gold": "zhí dé",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "得 as verb (worth) → dé"
     },
     {
       "text": "花儿",

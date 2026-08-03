@@ -149,6 +149,35 @@ def build() -> dict:
         cases.append(_c(text, gold, "control", "polyphone", "n/a", True,
                         "lexical polyphone pypinyin resolves correctly — sanity floor"))
 
+    # ------------------------------------------- sandhi MUST NOT apply (the regression guard)
+    # Where a naive character-level sandhi rule would REGRESS correct output — the guard the
+    # positive buckets structurally lack. The shipped 不-rule (bú before a 4th tone, firing
+    # only on a full-tone 'bù') must leave every one of these UNCHANGED; 一 and 地/得 are
+    # deliberately not auto-corrected, and these cases show why. Not scored for accuracy (gold
+    # mixes in pypinyin's own pre-existing 一 errors); the eval checks raw==post-pass instead.
+    no_apply = [
+        # 一 as ORDINAL / counting / final → stays yī (a following-tone rule would break it)
+        ("第一", "dì yī", "一 ordinal → stays yī"),
+        ("一号", "yī hào", "一 ordinal (the 1st) → stays yī despite T4 号"),
+        ("一楼", "yī lóu", "一 ordinal (1st floor) → stays yī"),
+        ("星期一", "xīng qī yī", "一 final (Monday) → stays yī"),
+        ("统一", "tǒng yī", "一 final → stays yī"),
+        ("唯一", "wéi yī", "一 final → stays yī"),
+        ("一月", "yī yuè", "一 ordinal (January) → yī; pypinyin already WRONG (yí yuè)"),
+        ("一年级", "yī nián jí", "一 ordinal (1st grade) → yī; pypinyin already WRONG (yì)"),
+        # 不 in V不C / V不V → toneless bu (NOT full 不-sandhi)
+        ("看不见", "kàn bu jiàn", "V不C potential complement → 不 neutral"),
+        ("差不多", "chà bu duō", "fixed expression → 不 neutral"),
+        ("对不对", "duì bu duì", "V不V question → 不 neutral"),
+        ("说不定", "shuō bu dìng", "fixed adverb → 不 ideally neutral; pypinyin emits full bù"),
+        # lexical 地/得 → dì/dé (a blanket 地/得→de would break these)
+        ("阵地", "zhèn dì", "地 as noun (position) → dì"),
+        ("目的地", "mù dì dì", "地 as noun (destination) → dì"),
+        ("值得", "zhí dé", "得 as verb (worth) → dé"),
+    ]
+    for text, gold, note in no_apply:
+        cases.append(_c(text, gold, "sandhi_no_apply", "no_apply", "n/a", False, note))
+
     # ---------------------------------------------------------------- erhua (excluded)
     # 花儿→huār is one spoken syllable; pinyin_segments is one-pinyin-per-hanzi, so it
     # CANNOT express erhua. A ruby-model limitation, not a pypinyin miss → not scored.
@@ -168,6 +197,7 @@ def build() -> dict:
                 "t3_multi": "3+ T3 contested → carried, unscored",
                 "redup": "neutral 2nd syllable; SOFT gold (secondary)",
                 "control": "gold == pypinyin; sanity floor, must be ~100%",
+                "sandhi_no_apply": "sandhi MUST NOT fire here; regression guard (raw==post-pass), unscored",
                 "erhua": "unexpressible in per-hanzi ruby → excluded",
             },
         },
@@ -209,7 +239,7 @@ def main():
             mark = "  ✓ match" if got == c["gold"] else f"  ✗ pypinyin={got!r}"
             print(f"   {c['text']:6s} gold={c['gold']:14s}{mark}")
         print()
-    for b in ("t3_multi", "erhua"):
+    for b in ("t3_multi", "erhua", "sandhi_no_apply"):
         rows = [c for c in cases if c["bucket"] == b]
         print(f"=== {b}  ({len(rows)} cases, UNSCORED): {[c['text'] for c in rows]}")
     print(f"\n  total: {len(cases)} cases "

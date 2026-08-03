@@ -1,12 +1,17 @@
 {
   "summary": {
-    "n_cases": 102,
+    "n_cases": 117,
     "n_scored": 93,
     "seg_agrees_all": true,
     "sandhi": {
       "n": 36,
-      "k": 12,
-      "rate": 0.3333333333333333,
+      "k": 21,
+      "rate": 0.5833333333333334,
+      "before": {
+        "n": 36,
+        "k": 12,
+        "rate": 0.3333333333333333
+      },
       "mixin": {
         "n": 36,
         "k": 22,
@@ -17,6 +22,11 @@
           "n": 8,
           "k": 8,
           "rate": 1.0,
+          "before": {
+            "n": 8,
+            "k": 8,
+            "rate": 1.0
+          },
           "inconsistent": false,
           "mixin": {
             "n": 8,
@@ -26,8 +36,13 @@
         },
         "bu_T4": {
           "n": 14,
-          "k": 5,
-          "rate": 0.35714285714285715,
+          "k": 14,
+          "rate": 1.0,
+          "before": {
+            "n": 14,
+            "k": 5,
+            "rate": 0.35714285714285715
+          },
           "inconsistent": true,
           "mixin": {
             "n": 14,
@@ -39,6 +54,11 @@
           "n": 10,
           "k": 4,
           "rate": 0.4,
+          "before": {
+            "n": 10,
+            "k": 4,
+            "rate": 0.4
+          },
           "inconsistent": true,
           "mixin": {
             "n": 10,
@@ -50,6 +70,11 @@
           "n": 12,
           "k": 3,
           "rate": 0.25,
+          "before": {
+            "n": 12,
+            "k": 3,
+            "rate": 0.25
+          },
           "inconsistent": true,
           "mixin": {
             "n": 12,
@@ -63,6 +88,11 @@
       "n": 10,
       "k": 1,
       "rate": 0.1,
+      "before": {
+        "n": 10,
+        "k": 1,
+        "rate": 0.1
+      },
       "mixin": {
         "n": 10,
         "k": 1,
@@ -73,6 +103,11 @@
           "n": 5,
           "k": 1,
           "rate": 0.2,
+          "before": {
+            "n": 5,
+            "k": 1,
+            "rate": 0.2
+          },
           "inconsistent": true,
           "mixin": {
             "n": 5,
@@ -84,6 +119,11 @@
           "n": 5,
           "k": 0,
           "rate": 0.0,
+          "before": {
+            "n": 5,
+            "k": 0,
+            "rate": 0.0
+          },
           "inconsistent": false,
           "mixin": {
             "n": 5,
@@ -97,6 +137,11 @@
       "n": 18,
       "k": 0,
       "rate": 0.0,
+      "before": {
+        "n": 18,
+        "k": 0,
+        "rate": 0.0
+      },
       "mixin": {
         "n": 18,
         "k": 7,
@@ -107,6 +152,11 @@
           "n": 18,
           "k": 0,
           "rate": 0.0,
+          "before": {
+            "n": 18,
+            "k": 0,
+            "rate": 0.0
+          },
           "inconsistent": false,
           "mixin": {
             "n": 18,
@@ -120,6 +170,11 @@
       "n": 9,
       "k": 1,
       "rate": 0.1111111111111111,
+      "before": {
+        "n": 9,
+        "k": 1,
+        "rate": 0.1111111111111111
+      },
       "mixin": {
         "n": 9,
         "k": 1,
@@ -130,6 +185,11 @@
           "n": 9,
           "k": 1,
           "rate": 0.1111111111111111,
+          "before": {
+            "n": 9,
+            "k": 1,
+            "rate": 0.1111111111111111
+          },
           "inconsistent": true,
           "mixin": {
             "n": 9,
@@ -143,6 +203,11 @@
       "n": 12,
       "k": 12,
       "rate": 1.0,
+      "before": {
+        "n": 12,
+        "k": 12,
+        "rate": 1.0
+      },
       "mixin": {
         "n": 12,
         "k": 12,
@@ -153,6 +218,11 @@
           "n": 12,
           "k": 12,
           "rate": 1.0,
+          "before": {
+            "n": 12,
+            "k": 12,
+            "rate": 1.0
+          },
           "inconsistent": false,
           "mixin": {
             "n": 12,
@@ -161,6 +231,18 @@
           }
         }
       }
+    },
+    "regression_guard": {
+      "n": 15,
+      "changed": 1,
+      "cases": [
+        {
+          "text": "说不定",
+          "raw": "shuō bù dìng",
+          "got": "shuō bú dìng",
+          "gold": "shuō bu dìng"
+        }
+      ]
     },
     "unscored": {
       "t3_multi": [
@@ -175,6 +257,23 @@
         "一点儿",
         "这儿",
         "那儿"
+      ],
+      "sandhi_no_apply": [
+        "第一",
+        "一号",
+        "一楼",
+        "星期一",
+        "统一",
+        "唯一",
+        "一月",
+        "一年级",
+        "看不见",
+        "差不多",
+        "对不对",
+        "说不定",
+        "阵地",
+        "目的地",
+        "值得"
       ]
     }
   },
@@ -186,10 +285,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú shì",
+      "raw": "bú shì",
       "got": "bú shì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bú shì",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -199,10 +301,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú duì",
+      "raw": "bú duì",
       "got": "bú duì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bú duì",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -212,10 +317,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú qù",
-      "got": "bù qù",
+      "raw": "bù qù",
+      "got": "bú qù",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bù qù",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -225,10 +333,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú cuò",
-      "got": "bù cuò",
+      "raw": "bù cuò",
+      "got": "bú cuò",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bú cuò",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -238,10 +349,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú yòng",
-      "got": "bù yòng",
+      "raw": "bù yòng",
+      "got": "bú yòng",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bú yòng",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -251,10 +365,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú yào",
+      "raw": "bú yào",
       "got": "bú yào",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bú yào",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -264,10 +381,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú huì",
+      "raw": "bú huì",
       "got": "bú huì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bú huì",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -277,10 +397,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú dàn",
-      "got": "bù dàn",
+      "raw": "bù dàn",
+      "got": "bú dàn",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bú dàn",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -290,10 +413,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú zài",
-      "got": "bù zài",
+      "raw": "bù zài",
+      "got": "bú zài",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bú zài",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -303,10 +429,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú xiàng",
-      "got": "bù xiàng",
+      "raw": "bù xiàng",
+      "got": "bú xiàng",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bú xiàng",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -316,10 +445,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú dào",
+      "raw": "bú dào",
       "got": "bú dào",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bú dào",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -329,10 +461,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú suàn",
-      "got": "bù suàn",
+      "raw": "bù suàn",
+      "got": "bú suàn",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bú suàn",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -342,10 +477,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú bì",
-      "got": "bù bì",
+      "raw": "bù bì",
+      "got": "bú bì",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bú bì",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -355,10 +493,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bú gòu",
-      "got": "bù gòu",
+      "raw": "bù gòu",
+      "got": "bú gòu",
+      "changed": true,
       "seg_agrees": true,
       "mixin_got": "bú gòu",
-      "match": false,
+      "match": true,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -368,10 +509,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bù chī",
+      "raw": "bù chī",
       "got": "bù chī",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù chī",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -381,10 +525,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bù lái",
+      "raw": "bù lái",
       "got": "bù lái",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù lái",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -394,10 +541,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bù hǎo",
+      "raw": "bù hǎo",
       "got": "bù hǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù hǎo",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -407,10 +557,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bù xíng",
+      "raw": "bù xíng",
       "got": "bù xíng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù xíng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -420,10 +573,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bù néng",
+      "raw": "bù néng",
       "got": "bù néng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù néng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -433,10 +589,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bù duō",
+      "raw": "bù duō",
       "got": "bù duō",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù duō",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -446,10 +605,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bù shǎo",
+      "raw": "bù shǎo",
       "got": "bù shǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù shǎo",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -459,10 +621,13 @@
       "harm": "real",
       "scored": true,
       "gold": "bù nán",
+      "raw": "bù nán",
       "got": "bù nán",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù nán",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -472,10 +637,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí gè",
+      "raw": "yí gè",
       "got": "yí gè",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yí gè",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -485,10 +653,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí yàng",
+      "raw": "yī yàng",
       "got": "yī yàng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī yàng",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -498,10 +669,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí jiàn",
+      "raw": "yī jiàn",
       "got": "yī jiàn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī jiàn",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -511,10 +685,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí dìng",
+      "raw": "yí dìng",
       "got": "yí dìng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yí dìng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -524,10 +701,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí xià",
+      "raw": "yī xià",
       "got": "yī xià",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī xià",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -537,10 +717,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí cì",
+      "raw": "yī cì",
       "got": "yī cì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī cì",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -550,10 +733,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí bàn",
+      "raw": "yí bàn",
       "got": "yí bàn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yí bàn",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -563,10 +749,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí kuài",
+      "raw": "yī kuài",
       "got": "yī kuài",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī kuài",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -576,10 +765,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí wèi",
+      "raw": "yī wèi",
       "got": "yī wèi",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī wèi",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -589,10 +781,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí jù",
+      "raw": "yī jù",
       "got": "yī jù",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī jù",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -602,10 +797,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí biàn",
+      "raw": "yī biàn",
       "got": "yī biàn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī biàn",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -615,10 +813,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yí bù",
+      "raw": "yī bù",
       "got": "yī bù",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī bù",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -628,10 +829,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì qǐ",
+      "raw": "yì qǐ",
       "got": "yì qǐ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yì qǐ",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -641,10 +845,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì diǎn",
+      "raw": "yì diǎn",
       "got": "yì diǎn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yì diǎn",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -654,10 +861,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì tiān",
+      "raw": "yī tiān",
       "got": "yī tiān",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī tiān",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -667,10 +877,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì nián",
+      "raw": "yī nián",
       "got": "yī nián",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī nián",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -680,10 +893,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì xiē",
+      "raw": "yī xiē",
       "got": "yī xiē",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yì xiē",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -693,10 +909,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì zhí",
+      "raw": "yì zhí",
       "got": "yì zhí",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yì zhí",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -706,10 +925,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì bān",
+      "raw": "yì bān",
       "got": "yì bān",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yì bān",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -719,10 +941,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì biān",
+      "raw": "yī biān",
       "got": "yī biān",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī biān",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -732,10 +957,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì bēi",
+      "raw": "yī bēi",
       "got": "yī bēi",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yī bēi",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -745,10 +973,13 @@
       "harm": "real",
       "scored": true,
       "gold": "yì tiáo",
+      "raw": "yī tiáo",
       "got": "yī tiáo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yì tiáo",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -758,10 +989,13 @@
       "harm": "real",
       "scored": true,
       "gold": "gāo xìng de",
+      "raw": "gāo xìng dì",
       "got": "gāo xìng dì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "gāo xìng dì",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -771,10 +1005,13 @@
       "harm": "real",
       "scored": true,
       "gold": "màn màn de",
+      "raw": "màn màn dì",
       "got": "màn màn dì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "màn màn dì",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -784,10 +1021,13 @@
       "harm": "real",
       "scored": true,
       "gold": "rèn zhēn de",
+      "raw": "rèn zhēn dì",
       "got": "rèn zhēn dì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "rèn zhēn dì",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -797,10 +1037,13 @@
       "harm": "real",
       "scored": true,
       "gold": "kāi xīn de",
+      "raw": "kāi xīn dì",
       "got": "kāi xīn dì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "kāi xīn dì",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -810,10 +1053,13 @@
       "harm": "real",
       "scored": true,
       "gold": "qīng qīng de",
+      "raw": "qīng qīng dì",
       "got": "qīng qīng dì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "qīng qīng dì",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -823,10 +1069,13 @@
       "harm": "real",
       "scored": true,
       "gold": "kàn de jiàn",
+      "raw": "kàn dé jiàn",
       "got": "kàn dé jiàn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "kàn dé jiàn",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -836,10 +1085,13 @@
       "harm": "real",
       "scored": true,
       "gold": "pǎo de kuài",
+      "raw": "pǎo dé kuài",
       "got": "pǎo dé kuài",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "pǎo dé kuài",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -849,10 +1101,13 @@
       "harm": "real",
       "scored": true,
       "gold": "shuō de hǎo",
+      "raw": "shuō dé hǎo",
       "got": "shuō dé hǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "shuō dé hǎo",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -862,10 +1117,13 @@
       "harm": "real",
       "scored": true,
       "gold": "zǒu de màn",
+      "raw": "zǒu dé màn",
       "got": "zǒu dé màn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "zǒu dé màn",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -875,10 +1133,13 @@
       "harm": "real",
       "scored": true,
       "gold": "tīng de dǒng",
+      "raw": "tīng de dǒng",
       "got": "tīng de dǒng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "tīng de dǒng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -888,10 +1149,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "ní hǎo",
+      "raw": "nǐ hǎo",
       "got": "nǐ hǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "ní hǎo",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -901,10 +1165,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "hén hǎo",
+      "raw": "hěn hǎo",
       "got": "hěn hǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "hěn hǎo",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -914,10 +1181,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "láo hǔ",
+      "raw": "lǎo hǔ",
       "got": "lǎo hǔ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "lǎo hǔ",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -927,10 +1197,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "xiáo gǒu",
+      "raw": "xiǎo gǒu",
       "got": "xiǎo gǒu",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "xiǎo gǒu",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -940,10 +1213,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "suó yǐ",
+      "raw": "suǒ yǐ",
       "got": "suǒ yǐ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "suǒ yǐ",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -953,10 +1229,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "ké yǐ",
+      "raw": "kě yǐ",
       "got": "kě yǐ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "ké yǐ",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -966,10 +1245,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "háo jiǔ",
+      "raw": "hǎo jiǔ",
       "got": "hǎo jiǔ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "háo jiǔ",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -979,10 +1261,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "shóu biǎo",
+      "raw": "shǒu biǎo",
       "got": "shǒu biǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "shǒu biǎo",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -992,10 +1277,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "xí zǎo",
+      "raw": "xǐ zǎo",
       "got": "xǐ zǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "xí zǎo",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -1005,10 +1293,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "méi hǎo",
+      "raw": "měi hǎo",
       "got": "měi hǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "méi hǎo",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -1018,10 +1309,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "líng dǎo",
+      "raw": "lǐng dǎo",
       "got": "lǐng dǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "lǐng dǎo",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1031,10 +1325,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "yóng gǎn",
+      "raw": "yǒng gǎn",
       "got": "yǒng gǎn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yǒng gǎn",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1044,10 +1341,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "yú shuǐ",
+      "raw": "yǔ shuǐ",
       "got": "yǔ shuǐ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yú shuǐ",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -1057,10 +1357,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "xú kě",
+      "raw": "xǔ kě",
       "got": "xǔ kě",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "xú kě",
       "match": false,
+      "raw_match": false,
       "mixin_match": true
     },
     {
@@ -1070,10 +1373,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "tú fěi",
+      "raw": "tǔ fěi",
       "got": "tǔ fěi",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "tǔ fěi",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1083,10 +1389,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "bái shǒu",
+      "raw": "bǎi shǒu",
       "got": "bǎi shǒu",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bǎi shǒu",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1096,10 +1405,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "dáo yǔ",
+      "raw": "dǎo yǔ",
       "got": "dǎo yǔ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "dǎo yǔ",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1109,10 +1421,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "shuí guǒ",
+      "raw": "shuǐ guǒ",
       "got": "shuǐ guǒ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "shuǐ guǒ",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1122,10 +1437,13 @@
       "harm": "weak",
       "scored": false,
       "gold": null,
+      "raw": "wǒ hěn hǎo",
       "got": "wǒ hěn hǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "wǒ hěn hǎo",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     },
     {
@@ -1135,10 +1453,13 @@
       "harm": "weak",
       "scored": false,
       "gold": null,
+      "raw": "mǎi shǒu biǎo",
       "got": "mǎi shǒu biǎo",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "mǎi shǒu biǎo",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     },
     {
@@ -1148,10 +1469,13 @@
       "harm": "weak",
       "scored": false,
       "gold": null,
+      "raw": "qǐng nǐ gěi wǒ",
       "got": "qǐng nǐ gěi wǒ",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "qǐng nǐ gěi wǒ",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     },
     {
@@ -1161,10 +1485,13 @@
       "harm": "weak",
       "scored": false,
       "gold": null,
+      "raw": "hěn yǒng gǎn",
       "got": "hěn yǒng gǎn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "hěn yǒng gǎn",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     },
     {
@@ -1174,10 +1501,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "xiè xie",
+      "raw": "xiè xiè",
       "got": "xiè xiè",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "xiè xiè",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1187,10 +1517,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "mā ma",
+      "raw": "mā mā",
       "got": "mā mā",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "mā mā",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1200,10 +1533,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "kàn kan",
+      "raw": "kàn kàn",
       "got": "kàn kàn",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "kàn kàn",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1213,10 +1549,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "shì shi",
+      "raw": "shì shì",
       "got": "shì shì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "shì shì",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1226,10 +1565,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "xiǎng xiang",
+      "raw": "xiǎng xiǎng",
       "got": "xiǎng xiǎng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "xiǎng xiǎng",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1239,10 +1581,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "bà ba",
+      "raw": "bà bà",
       "got": "bà bà",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bà bà",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1252,10 +1597,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "gē ge",
+      "raw": "gē gē",
       "got": "gē gē",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "gē gē",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1265,10 +1613,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "dì di",
+      "raw": "dì di",
       "got": "dì di",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "dì di",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1278,10 +1629,13 @@
       "harm": "weak",
       "scored": true,
       "gold": "xīng xing",
+      "raw": "xīng xīng",
       "got": "xīng xīng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "xīng xīng",
       "match": false,
+      "raw_match": false,
       "mixin_match": false
     },
     {
@@ -1291,10 +1645,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "yín háng",
+      "raw": "yín háng",
       "got": "yín háng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yín háng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1304,10 +1661,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "cháng jiāng",
+      "raw": "cháng jiāng",
       "got": "cháng jiāng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "cháng jiāng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1317,10 +1677,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "xiào zhǎng",
+      "raw": "xiào zhǎng",
       "got": "xiào zhǎng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "xiào zhǎng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1330,10 +1693,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "zhòng yào",
+      "raw": "zhòng yào",
       "got": "zhòng yào",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "zhòng yào",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1343,10 +1709,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "chóng fù",
+      "raw": "chóng fù",
       "got": "chóng fù",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "chóng fù",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1356,10 +1725,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "bù xíng",
+      "raw": "bù xíng",
       "got": "bù xíng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "bù xíng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1369,10 +1741,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "mù dì",
+      "raw": "mù dì",
       "got": "mù dì",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "mù dì",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1382,10 +1757,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "dé dào",
+      "raw": "dé dào",
       "got": "dé dào",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "dé dào",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1395,10 +1773,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "dì fāng",
+      "raw": "dì fāng",
       "got": "dì fāng",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "dì fāng",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1408,10 +1789,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "dì tú",
+      "raw": "dì tú",
       "got": "dì tú",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "dì tú",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1421,10 +1805,13 @@
       "harm": "n/a",
       "scored": true,
       "gold": "dí què",
+      "raw": "dí què",
       "got": "dí què",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "dí què",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
     },
     {
@@ -1434,11 +1821,254 @@
       "harm": "n/a",
       "scored": true,
       "gold": "jué de",
+      "raw": "jué de",
       "got": "jué de",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "jué de",
       "match": true,
+      "raw_match": true,
       "mixin_match": true
+    },
+    {
+      "text": "第一",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "dì yī",
+      "raw": "dì yī",
+      "got": "dì yī",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "dì yī",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "一号",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "yī hào",
+      "raw": "yī hào",
+      "got": "yī hào",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "yī hào",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "一楼",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "yī lóu",
+      "raw": "yī lóu",
+      "got": "yī lóu",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "yī lóu",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "星期一",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "xīng qī yī",
+      "raw": "xīng qī yī",
+      "got": "xīng qī yī",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "xīng qī yī",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "统一",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "tǒng yī",
+      "raw": "tǒng yī",
+      "got": "tǒng yī",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "tǒng yī",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "唯一",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "wéi yī",
+      "raw": "wéi yī",
+      "got": "wéi yī",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "wéi yī",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "一月",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "yī yuè",
+      "raw": "yí yuè",
+      "got": "yí yuè",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "yí yuè",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "一年级",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "yī nián jí",
+      "raw": "yì nián jí",
+      "got": "yì nián jí",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "yì nián jí",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "看不见",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "kàn bu jiàn",
+      "raw": "kàn bú jiàn",
+      "got": "kàn bú jiàn",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "kàn bú jiàn",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "差不多",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "chà bu duō",
+      "raw": "chà bu duō",
+      "got": "chà bu duō",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "chà bu duō",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "对不对",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "duì bu duì",
+      "raw": "duì bú duì",
+      "got": "duì bú duì",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "duì bú duì",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "说不定",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "shuō bu dìng",
+      "raw": "shuō bù dìng",
+      "got": "shuō bú dìng",
+      "changed": true,
+      "seg_agrees": true,
+      "mixin_got": "shuō bú dìng",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "阵地",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "zhèn dì",
+      "raw": "zhèn dì",
+      "got": "zhèn dì",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "zhèn dì",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "目的地",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "mù dì dì",
+      "raw": "mù dì dì",
+      "got": "mù dì dì",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "mù dì dì",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
+    },
+    {
+      "text": "值得",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "gold": "zhí dé",
+      "raw": "zhí de",
+      "got": "zhí de",
+      "changed": false,
+      "seg_agrees": true,
+      "mixin_got": "zhí de",
+      "match": null,
+      "raw_match": null,
+      "mixin_match": null
     },
     {
       "text": "花儿",
@@ -1447,10 +2077,13 @@
       "harm": "n/a",
       "scored": false,
       "gold": null,
+      "raw": "huā ér",
       "got": "huā ér",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "huā ér",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     },
     {
@@ -1460,10 +2093,13 @@
       "harm": "n/a",
       "scored": false,
       "gold": null,
+      "raw": "wán ér",
       "got": "wán ér",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "wán ér",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     },
     {
@@ -1473,10 +2109,13 @@
       "harm": "n/a",
       "scored": false,
       "gold": null,
+      "raw": "yì diǎn ér",
       "got": "yì diǎn ér",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "yì diǎn ér",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     },
     {
@@ -1486,10 +2125,13 @@
       "harm": "n/a",
       "scored": false,
       "gold": null,
+      "raw": "zhè ér",
       "got": "zhè ér",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "zhè ér",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     },
     {
@@ -1499,10 +2141,13 @@
       "harm": "n/a",
       "scored": false,
       "gold": null,
+      "raw": "nà ér",
       "got": "nà ér",
+      "changed": false,
       "seg_agrees": true,
       "mixin_got": "nà ér",
       "match": null,
+      "raw_match": null,
       "mixin_match": null
     }
   ]

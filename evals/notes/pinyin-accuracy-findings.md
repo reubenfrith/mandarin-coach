@@ -97,26 +97,41 @@ reader will ask about, so the eval scores it too. It is a **partial** remedy, an
 So the mixin is not a drop-in fix — it closes under half the sandhi gap and none of the
 neutral-particle gap.
 
-## Decision
+## Decision — what shipped, and why only that
 
-**The tone marks need a small rule-based post-pass over the per-hanzi output of
-`pinyin_segments`; pypinyin `Style.TONE` alone (with or without the mixin) is not
-display-safe.** A deterministic pass can fix the two unassailable classes cleanly:
+The first draft of this note promised a post-pass taking "一/不 12/36 → 36/36, 地/得 1/10 → 10/10."
+Working through the implementation **disproved that target**: two of the three classes can't be
+fixed by a character-level rule without regressing real strings. So the shipped change is
+narrower and precise, and the eval now guards it (a `sandhi_no_apply` regression bucket, §1b).
 
-- **一/不 sandhi** is fully rule-governed given the *following* syllable's tone (which the
-  segmenter already has per character) → apply it uniformly instead of relying on lexicalised
-  coverage.
-- **Grammatical 地/得** → `de` when acting as the adverbial/complement particle.
+**✅ Shipped — 不 tone sandhi (不 → bú before a 4th tone).** This is the one rule fully governed by
+the *following* syllable's citation tone, which the segmenter already has. Implemented in
+`tools._apply_bu_sandhi`, shared by both `_tone_pinyin` and `pinyin_segments` so the ruby and the
+`/api/pinyin` string can't diverge (`seg_agrees` stays true). It fires **only where pypinyin
+emits a full-tone `bù`** — which automatically skips the V不C potential-complements it already
+renders `bú`/neutral (看不见, 差不多, 买不到), the cases that would need grammar to handle. Result:
+`bu_T4` **5/14 → 14/14**, and on the 15-case regression guard it changes exactly **one** string —
+`说不定` (`shuō bù dìng` → `shuō bú dìng`), a fixed expression where pypinyin's own `bù` isn't the
+neutral standard either, so no *correct* value is broken (lateral, documented in §1b).
 
-And **citation-vs-spoken for pure third-tone sandhi should be an explicit product choice** — it
-is currently citation by default (0/18 spoken coverage), which is defensible but was never a
-decision. If the product wants the ruby to model *speech*, third-tone sandhi joins the post-pass;
-if it wants to model the *written* citation reading, it stays and the sandhi rule is taught
-separately. The eval does not pre-decide this — it surfaces it.
+**⛔ Deliberately NOT auto-fixed — 一 sandhi.** Not rule-governed by the neighbouring tone: 一 is
+cardinal (一个 → yí) in some contexts and ordinal/final (一月, 一楼, 第一, 星期一 → yī) in others,
+and only the cardinal takes sandhi. A following-tone rule would wrongly change the ordinals, and
+pypinyin is *already* wrong on some (一月 → yí yuè). Correct handling needs POS/context, so 一 is
+left to pypinyin (yi_T4 3/12, yi_T123 4/10 — still citation-inconsistent, documented not fixed).
 
-Nothing here is wired into production yet: this surface **measures and localises** the Phase-2
-gap `tools.py` already acknowledged, and gives the post-pass a before/after target (一/不 12/36 →
-36/36, 地/得 1/10 → 10/10, with T3 gated on the product decision).
+**⛔ Deliberately NOT auto-fixed — grammatical 地/得.** Real defect (1/10), but the adverbial 地 /
+V得C 得 (`de`) are **indistinguishable at the character level** from lexical 地方/阵地/得到 (which
+pypinyin gets *right*). A blanket 地/得 → de would regress those. Needs POS. Left to pypinyin.
+
+**Decision, not a defect — pure third-tone sandhi.** Citation by default (0/18 spoken coverage).
+If the product wants the ruby to model *speech* (你好 → ní hǎo), T3 sandhi joins the post-pass; if
+it wants the *written* citation reading, it stays and the rule is taught separately. The eval
+surfaces this, unchanged, rather than pre-deciding it.
+
+Net: a small, safe, fully-understood fix for the highest-frequency class (不 negation), with the
+eval left as a permanent before/after + regression guard. The remaining classes are localised and
+their fix scoped to "needs a POS-aware pass," not hand-waved as "apply the rule."
 
 ## Honest scope
 

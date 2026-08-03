@@ -70,23 +70,31 @@ def _seg_pinyin(text: str) -> str:
     return " ".join(s["pinyin"] for s in pinyin_segments(text) if "pinyin" in s)
 
 
+def _raw_pinyin(text: str) -> str:
+    """Bare pypinyin `Style.TONE`, WITHOUT our 不-sandhi post-pass — the pre-change baseline,
+    so every row is a before/after of the shipped fix and a regression can be seen directly."""
+    return " ".join(s[0] for s in _pinyin(text, style=Style.TONE))
+
+
 def analyse_case(case: dict) -> dict:
     text = case["text"]
-    got = _tone_pinyin(text)
+    raw = _raw_pinyin(text)            # pypinyin alone (before the post-pass)
+    got = _tone_pinyin(text)           # production now (pypinyin + our 不-sandhi post-pass)
     seg = _seg_pinyin(text)
     row = {
         "text": text, "bucket": case["bucket"], "sub_rule": case["sub_rule"],
         "harm": case["harm"], "scored": case["scored"], "gold": case["gold"],
-        "got": got,
+        "raw": raw, "got": got,
+        "changed": got != raw,             # did our post-pass touch this string?
         "seg_agrees": seg == got,          # ruby marks == /api/pinyin marks (structural check)
         "mixin_got": _mixin_pinyin(text),  # what pypinyin's own sandhi converter would print
     }
     if case["scored"]:
-        row["match"] = got == case["gold"]                     # citation output correct?
+        row["match"] = got == case["gold"]                     # production correct now?
+        row["raw_match"] = raw == case["gold"]                 # …before the post-pass
         row["mixin_match"] = row["mixin_got"] == case["gold"]  # built-in fix correct?
     else:
-        row["match"] = None
-        row["mixin_match"] = None
+        row["match"] = row["raw_match"] = row["mixin_match"] = None
     return row
 
 
@@ -107,8 +115,9 @@ def _sub_rule_table(rows: list[dict], bucket: str) -> dict:
     subs = {}
     for sr in sorted({r["sub_rule"] for r in rows if r["bucket"] == bucket}):
         srr = [r for r in rows if r["bucket"] == bucket and r["sub_rule"] == sr]
-        st = _rate(srr)
-        st["inconsistent"] = 0 < st["k"] < st["n"]
+        st = _rate(srr)                                          # after the post-pass
+        st["before"] = _rate(srr, pred=lambda r: r["raw_match"])  # pypinyin alone
+        st["inconsistent"] = 0 < st["before"]["k"] < st["before"]["n"]  # the pre-fix diagnosis
         st["mixin"] = _rate(srr, pred=lambda r: r["mixin_match"])
         subs[sr] = st
     return subs
@@ -127,17 +136,25 @@ def summarise(rows: list[dict]) -> dict:
     def bucket_summary(b):
         br = bucket_rows(b)
         s = _rate(br)
+        s["before"] = _rate(br, pred=lambda r: r["raw_match"])
         s["mixin"] = _rate(br, pred=lambda r: r["mixin_match"])
         s["sub_rules"] = _sub_rule_table(rows, b)
         return s
+
+    # Regression guard: on the sandhi_no_apply cases the post-pass must change nothing.
+    # `changed` rows are where our rule fired on a "must not apply" case — each one inspected.
+    na = [r for r in rows if r["bucket"] == "sandhi_no_apply"]
+    regressions = [{"text": r["text"], "raw": r["raw"], "got": r["got"], "gold": r["gold"]}
+                   for r in na if r["changed"]]
 
     return {
         "n_cases": len(rows),
         "n_scored": len(scored),
         "seg_agrees_all": all(r["seg_agrees"] for r in rows),  # ruby == /api/pinyin marks
-        # --- the headline: 一/不 sandhi consistency (where sandhi should change the form) ---
+        # --- 一/不 sandhi: the pre-fix diagnosis (consistency) AND the shipped 不 before/after ---
         "sandhi": {
-            **_rate(yb_applies),
+            **_rate(yb_applies),                                    # after the post-pass
+            "before": _rate(yb_applies, pred=lambda r: r["raw_match"]),
             "mixin": _rate(yb_applies, pred=lambda r: r["mixin_match"]),
             "sub_rules": _sub_rule_table(rows, "yi_bu_sandhi"),
         },
@@ -145,9 +162,10 @@ def summarise(rows: list[dict]) -> dict:
         "t3_bisyllabic": bucket_summary("t3_bisyllabic"),
         "redup": bucket_summary("redup"),
         "control": bucket_summary("control"),
+        "regression_guard": {"n": len(na), "changed": len(regressions), "cases": regressions},
         "unscored": {
             b: [r["text"] for r in rows if r["bucket"] == b]
-            for b in ("t3_multi", "erhua")
+            for b in ("t3_multi", "erhua", "sandhi_no_apply")
         },
     }
 
@@ -168,7 +186,10 @@ def render_md(summary: dict, rows: list[dict]) -> str:
     npt = summary["neutral_particle"]
     t3 = summary["t3_bisyllabic"]
     ctrl = summary["control"]
+    reg = summary["regression_guard"]
     control_ok = ctrl["rate"] == 1.0
+    sr = sd["sub_rules"]
+    bu4 = sr["bu_T4"]
 
     lines = [
         "# Pīnyīn-accuracy eval — `tools.pinyin_segments` / `_tone_pinyin`",
@@ -177,84 +198,106 @@ def render_md(summary: dict, rows: list[dict]) -> str:
         "`/api/pinyin` string come from pypinyin `Style.TONE` — **citation tones**. Wrong "
         "pīnyīn under a hanzi teaches a wrong pronunciation, so we score whether the displayed "
         "tone is the one the learner should say. **Fully deterministic** — no model calls, no "
-        "judge — over a hand-authored gold set.",
+        "judge — over a hand-authored gold set. This surface both **diagnosed** the gap and now "
+        "**guards a shipped fix** (the 不-sandhi post-pass in `tools.py`), before → after below.",
         "",
         "> **Framing (what is and isn't a defect).** Citation tones are a *defensible* "
-        "dictionary convention, so we do **not** headline \"pypinyin doesn't apply sandhi.\" We "
-        "headline **inconsistency**: pypinyin applies the *same* rule to some words and not "
-        "others (不是→bú but 不去→bù), which is wrong under citation **or** spoken convention. "
-        "The pure third-tone gap (你好→nǐ hǎo) is reported as a **coverage gap under the "
-        "spoken-tone product choice** (weak harm), not a defect — that decision is surfaced to "
-        "you, not pre-made.",
+        "dictionary convention, so we do **not** headline \"pypinyin doesn't apply sandhi.\" The "
+        "diagnosis headlined **inconsistency**: pypinyin applies the *same* rule to some words "
+        "and not others (不是→bú but 不去→bù), wrong under citation **or** spoken convention. The "
+        "pure third-tone gap (你好→nǐ hǎo) is a **coverage gap under the spoken-tone product "
+        "choice** (weak harm), not a defect — surfaced as a decision, not pre-made.",
         "",
     ]
 
-    # ---- Decision block ----
-    sr = sd["sub_rules"]
-    incon = [k for k, v in sr.items() if v["inconsistent"]]  # 一/不 sub-rules only
+    # ---- Decision / outcome block ----
     lines += [
-        f"**Decision — the tone marks need a rule-based post-pass; pypinyin `Style.TONE` alone "
-        f"is not display-safe.** Two unassailable defect classes, independent of the "
-        f"citation-vs-spoken question:",
+        f"**Outcome — shipped the one rule that's safe to apply positionally; the other two need "
+        f"POS we don't have.** The diagnosis found 一/不 sandhi applied to only "
+        f"**{sd['before']['k']}/{sd['before']['n']}** ({_pct(sd['before']['rate'])}) syllables, "
+        f"scattered *within* each sub-rule — a defect under any convention. But only **不-sandhi** "
+        f"is rule-governed by the following syllable's tone alone:",
         "",
-        f"1. **一/不 sandhi is inconsistent** — where sandhi should change the citation form, "
-        f"pypinyin applies it to only **{sd['k']}/{sd['n']}** ({_pct(sd['rate'])}) syllables, "
-        f"scattered *within* each sub-rule (inconsistent: {', '.join(incon) or 'none'}). Same "
-        f"rule, different output, decided only by which bigram is lexicalised.",
-        f"2. **Grammatical 地/得 get the wrong reading** — the adverbial 地 and the V得C "
-        f"complement 得 are the neutral syllable `de`, but pypinyin prints `dì`/`dé` in "
-        f"**{npt['n'] - npt['k']}/{npt['n']}** cases. Not sandhi — the wrong lexical reading.",
+        f"- **✅ Shipped — 不 → bú before a 4th tone.** `bu_T4` goes "
+        f"**{bu4['before']['k']}/{bu4['before']['n']} → {bu4['k']}/{bu4['n']}** with "
+        f"**{reg['changed']}** regression on the {reg['n']}-case guard "
+        f"(`sandhi_no_apply`). Fires only where pypinyin emits a full-tone `bù`, so it skips the "
+        f"V不C potential-complements it already handles (看不见→bú).",
+        f"- **⛔ Not auto-fixed — 一 sandhi.** Context-dependent (cardinal 一个→yí vs ordinal "
+        f"一月/第一→yī): a following-tone rule would misfire on ordinals, and pypinyin is *already* "
+        f"wrong on some (一月→yí yuè). Needs POS. Left as citation (yi_T4 {sr['yi_T4']['k']}/"
+        f"{sr['yi_T4']['n']}, yi_T123 {sr['yi_T123']['k']}/{sr['yi_T123']['n']}).",
+        f"- **⛔ Not auto-fixed — grammatical 地/得.** Adverbial 地 / V得C 得 are `de`, but they're "
+        f"indistinguishable at the character level from lexical 地方/得到 (which pypinyin gets "
+        f"right). A blanket rule would regress those. Needs POS. ({npt['k']}/{npt['n']} correct.)",
+        f"- **decision, not a defect — pure T3** (你好→nǐ hǎo): citation by default, "
+        f"{_pct(t3['rate'])} spoken coverage. Ship spoken-tone T3 only if the product wants the "
+        f"ruby to model speech over the written citation reading.",
         "",
-        f"pypinyin's own `ToneSandhiMixin` is a **partial** remedy (recovers "
-        f"{sd['mixin']['k']}/{sd['mixin']['n']} of the 一/不 cases and "
-        f"{npt['mixin']['k']}/{npt['mixin']['n']} of the neutral-particle cases — see the "
-        f"per-rule tables), so it is not a drop-in fix. **Recommendation:** add a small "
-        f"rule-based sandhi/neutral-tone post-pass over the per-hanzi marks in "
-        f"`pinyin_segments`, and make citation-vs-spoken for pure T3 an explicit product "
-        f"choice (currently citation by default, {_pct(t3['rate'])} coverage of the spoken "
-        f"form).",
+        f"pypinyin's own `ToneSandhiMixin` was the obvious alternative — rejected as a partial, "
+        f"lopsided remedy (recovers {sd['mixin']['k']}/{sd['mixin']['n']} of 一/不 but **0** of "
+        f"the neutral particles, and doesn't generalise even across 一+T4). The targeted 不 rule "
+        f"is smaller and fully understood.",
         "",
-        f"Sanity floor: the **control** bucket (lexical polyphones pypinyin resolves — 银行, "
-        f"长江, 目的, 觉得) scores **{_pct(ctrl['rate'])}** "
-        f"({ctrl['k']}/{ctrl['n']}). "
-        + ("The test is not rigged against pypinyin — it passes exactly where pypinyin is right."
+        f"Sanity floor: the **control** bucket (lexical polyphones — 银行, 长江, 目的, 觉得) scores "
+        f"**{_pct(ctrl['rate'])}** ({ctrl['k']}/{ctrl['n']}). "
+        + ("The test isn't rigged against pypinyin — it passes exactly where pypinyin is right."
            if control_ok else
            "**⚠ control < 1.0 — the eval or gold is broken, not pypinyin. Fix before trusting "
            "any number above.**"),
         "",
-        f"Dataset: **{summary['n_cases']}** cases ({summary['n_scored']} scored). Ruby marks "
-        f"match the `/api/pinyin` marks on every case "
+        f"Dataset: **{summary['n_cases']}** cases ({summary['n_scored']} scored + "
+        f"{reg['n']} regression-guard). Ruby marks match the `/api/pinyin` marks on every case "
         f"({'✓' if summary['seg_agrees_all'] else '✗ — surfaces diverge!'}). See "
         f"`results/README.md` to re-derive any number.",
         "",
-        "## 1. 一/不 sandhi — consistency (the headline)",
+        "## 1. 一/不 sandhi — diagnosis (before) and the shipped 不 fix (after)",
         "",
-        "`applied` = pypinyin already prints the sandhi form. The story is the **spread inside "
-        "a single sub-rule**: a rule engine would be 0/N or N/N, never scattered.",
+        "`before` = bare pypinyin; `after` = production now (with the 不-sandhi post-pass). The "
+        "diagnosis was the **spread inside a single sub-rule** — a rule engine would be 0/N or "
+        "N/N, never scattered. The fix makes 不+T4 uniform; 一 is deliberately left to pypinyin.",
         "",
-        "| Sub-rule | applied | rate | inconsistent? | mixin recovers |",
+        "| Sub-rule | before | after | was inconsistent? | mixin |",
         "|---|---|---|---|---|",
     ]
     labels = {
-        "bu_T4": "不 + 4th tone → bú",
+        "bu_T4": "不 + 4th tone → bú  ✅ fixed",
         "bu_T123": "不 + 1/2/3 → bù (no sandhi; control)",
-        "yi_T4": "一 + 4th tone → yí",
-        "yi_T123": "一 + 1/2/3 → yì",
+        "yi_T4": "一 + 4th tone → yí  ⛔ needs POS",
+        "yi_T123": "一 + 1/2/3 → yì  ⛔ needs POS",
     }
     for k in ("bu_T4", "yi_T4", "yi_T123", "bu_T123"):
         v = sr[k]
         inc = "**yes**" if v["inconsistent"] else ("n/a (control)" if k == "bu_T123" else "no")
-        lines.append(f"| {labels[k]} | {v['k']}/{v['n']} | {_pct(v['rate'])} | {inc} | "
-                     f"{v['mixin']['k']}/{v['mixin']['n']} |")
+        lines.append(f"| {labels[k]} | {v['before']['k']}/{v['before']['n']} | "
+                     f"{v['k']}/{v['n']} | {inc} | {v['mixin']['k']}/{v['mixin']['n']} |")
     lines += [
         "",
-        "The `bu_T123` row is a **fairness control**: when no sandhi applies, citation IS "
-        "correct and pypinyin scores full marks — the eval only faults it where the tone "
-        "genuinely changes.",
+        "`bu_T123` is a **fairness control**: when no sandhi applies, citation IS correct and "
+        "pypinyin scores full marks — the eval only faults it where the tone genuinely changes.",
         "",
-        "## 2. Grammatical neutral particles 地 / 得 (unassailable defect)",
+        "## 1b. Regression guard — the 不 fix changed nothing it shouldn't",
         "",
-        "| Sub-rule | correct | rate | mixin recovers |",
+        f"The `sandhi_no_apply` bucket ({reg['n']} cases) is where a naïve rule would break "
+        f"correct output: 一 ordinals (一月/第一/一号), 不 in V不C/V不V (看不见/差不多/对不对), and "
+        f"lexical 地/得 (阵地/目的地/值得). The shipped 不 rule must leave every one **unchanged** — "
+        f"and it changes **{reg['changed']}**"
+        + (":" if reg["cases"] else ", so there are no regressions."),
+    ]
+    for c in reg["cases"]:
+        lines.append(f"- `{c['text']}`: `{c['raw']}` → `{c['got']}` (ideal `{c['gold']}`). "
+                     f"A V不C fixed expression where pypinyin emits full `bù`; the rule applies "
+                     f"general sandhi. **Lateral, not a regression** — neither `bù` nor `bú` is "
+                     f"the neutral-standard `bu`, so no *correct* value was broken.")
+    lines += [
+        "",
+        "## 2. Grammatical neutral particles 地 / 得 — diagnosed, NOT auto-fixed (needs POS)",
+        "",
+        "The adverbial 地 and V得C 得 are the neutral `de`; pypinyin prints `dì`/`dé`. This is a "
+        "real defect, but **not** shippable as a character rule: 高兴**地**(de) is indistinguishable "
+        "from 阵**地**(dì) / 目的**地**(dì) without knowing the grammatical role. Left to pypinyin.",
+        "",
+        "| Sub-rule | correct | rate | mixin |",
         "|---|---|---|---|",
     ]
     for k in ("di_adverbial", "de_complement"):
@@ -266,7 +309,7 @@ def render_md(summary: dict, rows: list[dict]) -> str:
     lines += [
         "",
         "Note 得 is *also* internally inconsistent — `听得懂`→`de` (right) while `看得见`→`dé` "
-        "(wrong), same V得C grammar. Wrong renderings:",
+        "(wrong), same V得C grammar. Wrong renderings (still present — not targeted by the 不 fix):",
         "",
     ]
     for r in npt_fails:
@@ -291,6 +334,10 @@ def render_md(summary: dict, rows: list[dict]) -> str:
         "",
         "## 5. Carried but not scored (honesty)",
         "",
+        f"- **sandhi_no_apply** ({reg['n']} cases): the regression guard in §1b — scored only for "
+        f"whether the post-pass leaves them unchanged, not for pypinyin's absolute correctness "
+        f"(some, like 一月→yí yuè, are pre-existing pypinyin 一 errors that reinforce why 一 isn't "
+        f"auto-fixed).",
         f"- **3+ stacked third tones** ({', '.join(summary['unscored']['t3_multi'])}): "
         f"realisation is prosody/grouping-dependent and genuinely contested — scoring it would "
         f"measure our opinion, not a defect.",
@@ -324,16 +371,17 @@ def main():
 
     sd, npt, t3, ctrl = (summary["sandhi"], summary["neutral_particle"],
                          summary["t3_bisyllabic"], summary["control"])
-    print(f"\nDone. {summary['n_cases']} cases ({summary['n_scored']} scored).")
-    print(f"  一/不 sandhi applied: {sd['k']}/{sd['n']} ({_pct(sd['rate'])}) "
-          f"— inconsistent within sub-rules")
-    print(f"  地/得 neutral particle correct: {npt['k']}/{npt['n']} ({_pct(npt['rate'])})")
-    print(f"  T3 bisyllabic spoken-coverage: {t3['k']}/{t3['n']} ({_pct(t3['rate'])}) "
-          f"— coverage gap, weak harm")
+    bu4, reg = sd["sub_rules"]["bu_T4"], summary["regression_guard"]
+    print(f"\nDone. {summary['n_cases']} cases ({summary['n_scored']} scored + {reg['n']} guard).")
+    print(f"  ✅ SHIPPED 不-sandhi: bu_T4 {bu4['before']['k']}/{bu4['before']['n']} → "
+          f"{bu4['k']}/{bu4['n']}  |  regressions on guard: {reg['changed']}/{reg['n']}")
+    print(f"  一/不 overall before→after: {sd['before']['k']}/{sd['before']['n']} → "
+          f"{sd['k']}/{sd['n']} (一 left to pypinyin — needs POS)")
+    print(f"  ⛔ 地/得 neutral (not auto-fixed): {npt['k']}/{npt['n']} ({_pct(npt['rate'])})")
+    print(f"  decision — T3 spoken-coverage: {t3['k']}/{t3['n']} ({_pct(t3['rate'])})")
     print(f"  control (sanity floor): {ctrl['k']}/{ctrl['n']} ({_pct(ctrl['rate'])})"
-          + ("" if ctrl["rate"] == 1.0 else "  ⚠ EVAL BROKEN — control must be 1.0"))
-    print(f"  built-in ToneSandhiMixin recovers: 一/不 {sd['mixin']['k']}/{sd['mixin']['n']}, "
-          f"neutral {npt['mixin']['k']}/{npt['mixin']['n']}")
+          + ("" if ctrl["rate"] == 1.0 else "  ⚠ EVAL BROKEN — control must be 1.0")
+          + f"  |  seg==tone_pinyin: {'✓' if summary['seg_agrees_all'] else '✗'}")
     print(f"  wrote {RESULTS / 'pinyin_accuracy.md'} and .json")
 
 
