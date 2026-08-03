@@ -40,6 +40,13 @@ MODELS = {
     # as an INDEPENDENT eval judge (a stronger, different model grading the gpt-4o-mini coach,
     # so a same-model self-preference can't inflate a surface's scores).
     "gpt-4o": "openai/gpt-4o",
+    # Frontier EVAL-ONLY judges (no live coach path uses them). Routed via OpenRouter because the
+    # direct-OpenAI gpt-5/o-series reject temperature=0 (needed for reproducible judging); the
+    # OpenRouter route accepts it. Both are cross-provider from the deepseek coach, so no
+    # self-preference. Used to test whether a stronger judge closes the secondary-error gaps
+    # (see evals/notes/teaching-quality-findings.md).
+    "claude-opus": "openrouter/anthropic/claude-opus-4.8",
+    "gpt-5": "openrouter/openai/gpt-5",
 }
 
 DEFAULT_MODEL = "deepseek"

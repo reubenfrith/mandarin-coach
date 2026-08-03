@@ -177,6 +177,35 @@ this small you'd need much larger n.
 false positives / 39 (a drill blank read as a claim; a correctly-qualified 想（认为）read as the
 error) — even a narrowed LLM scorer needs a human read of the flags.
 
+## Better-judge experiment — 2026-08-03 — a frontier judge flips "triage, not oracle"
+
+The "triage, not oracle" verdict above was measured with **gpt-4o**. Re-ran the secondary-error
+detector on the same 9 replies (expert gold) with two frontier judges (registered eval-only in
+`config.MODELS`, cross-provider from the deepseek coach): `claude-opus` (claude-opus-4.8) and
+`gpt-5`, both via OpenRouter at temp 0.
+
+| judge | recall | precision | caught A02? | false alarms |
+|---|---|---|---|---|
+| gpt-4o | 3/4 | 60% | ✗ | A01, A14 — both **basic** (打开, 两点 are correct; judge hallucinated) |
+| claude-opus-4.8 | 1/4 | 100% | ✗ | none — ultra-conservative, misses 3/4 real errors |
+| **gpt-5** | **4/4** | 80% | **✓** | A14 only |
+
+**gpt-5 dominates gpt-4o on both axes, and the error *type* improved:**
+- Caught **A02** — reasoning more precise than the gold: 把/被 *can* co-occur when 被 is in a
+  modifier clause (他把被他借走的书还了); they only clash marking the same event in one predicate.
+- gpt-4o's **basic hallucinations vanished** (it no longer calls 打开 / 两点 wrong). gpt-5's one
+  remaining "false alarm" (A14) is a **defensible edge-case catch** — the coach's absolute "always
+  两 before a measure word" misses 二两 (二 + the weight measure 两). Arguably out-nuancing the human
+  gold, not failing.
+- **claude-opus** is the opposite tradeoff — high precision, poor recall — wrong for a recall-first
+  "don't let a wrong fact reach the learner" goal.
+
+**Revised verdict:** the secondary-error axis IS judgeable — the earlier "not trustworthy" was
+gpt-4o-specific, not intrinsic. With a frontier reasoning judge (gpt-5) it reaches 4/4 recall with
+qualitatively better errors, i.e. near-expert with a human adjudicating the rare borderline/pedantic
+flag. Cost + latency are higher, acceptable for an offline eval. Caveat unchanged: n=9, one gold
+labeller — directional, and a proper build needs a larger real set + ≥2 labellers.
+
 ## For the full surface (deferred)
 
 - Run the blind round with ≥2 labellers; report human–human κ as the ceiling.
