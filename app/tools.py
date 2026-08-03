@@ -147,7 +147,10 @@ def annotate_tones(text: str) -> list[dict]:
 
     Returns e.g. [{"hanzi": "你", "pinyin": "nǐ", "tone": 3}, ...], one entry per Chinese
     character (non-Han characters are skipped). Tone 5 = neutral. Per-character lookup keeps
-    hanzi↔pinyin alignment exact; tone sandhi is not applied here (a Phase-2 refinement)."""
+    hanzi↔pinyin alignment exact; tone sandhi is deliberately NOT applied here — unlike the
+    display ruby (`_apply_bu_sandhi`), these are ASSESSMENT targets and the pronunciation coach
+    scores one syllable at a time, so the citation tone is the right target. If a future
+    multi-syllable target renders 不/一 words, revisit (see the `pinyin_accuracy` eval)."""
     out = []
     for ch in text:
         if "一" <= ch <= "鿿":
