@@ -414,3 +414,46 @@ async def audit_grammar_rule(name: str, explanation: str, common_mistake: str, e
     return await _judge(RuleAuditVerdict).ainvoke(
         [SystemMessage(content=_AUDIT_SYS), HumanMessage(content=msg)]
     )
+
+
+# --------------------------------------------------------------------------- #
+# 9. Rule-harm re-rank — turn the over-inclusive audit into an actionable to-do list
+# --------------------------------------------------------------------------- #
+# The audit (§8) over-flags: gpt-5 marks any linguistically-over-broad claim "major", including
+# defensible beginner simplifications. This second pass re-ranks a FLAGGED rule by the criterion
+# that actually causes product harm: would a coach following this rule literally mark a CORRECT,
+# LEVEL-APPROPRIATE (HSK 1-4) learner sentence as WRONG? That separates "would reject correct usage"
+# (real harm — the A06 class) from "merely incomplete / omits an advanced-register exception a
+# beginner won't produce" (leave it). The 'level-appropriate' filter is what screens out the
+# pedantic edge cases (二两, formal 两国) that inflated the audit's major count.
+class RuleHarmVerdict(BaseModel):
+    would_reject_correct: bool = Field(description="Would a coach applying this rule LITERALLY mark a CORRECT sentence — one a beginner/intermediate (HSK 1-4) learner would plausibly write — as an error? True only for real harm, not for omitting an advanced/formal/edge-register exception a beginner won't produce.")
+    rejected_example: str = Field(description="A concrete, correct, level-appropriate learner sentence this rule would wrongly flag as an error (in Chinese, with a short English gloss). Empty string if would_reject_correct is false.")
+    fix: str = Field(description="Minimal wording change to the rule's explanation/common_mistake that removes the harm while staying beginner-friendly. Empty if no change needed.")
+    reason: str = Field(description="One sentence justification.")
+
+
+_HARM_SYS = (
+    "You triage a grammar rule taught by a beginner/intermediate (HSK 1-4) Mandarin tutoring app, to "
+    "decide whether it should be EDITED now. Apply ONE test: if the coach follows this rule literally, "
+    "would it mark a CORRECT, LEVEL-APPROPRIATE learner sentence as an ERROR? Answer would_reject_correct "
+    "= true ONLY when a sentence a beginner/intermediate learner would actually produce, and which is "
+    "correct, gets wrongly rejected (real product harm) — e.g. an absolute 'you must use X' that condemns "
+    "a correct alternative the learner would use. Answer FALSE when the rule is merely incomplete: it omits "
+    "an exception that only shows up in advanced, formal, literary, or rare-register usage a beginner will "
+    "not produce (those simplifications are appropriate — do NOT flag them). Give a concrete correct "
+    "sentence that would be wrongly rejected (or empty if none), and a minimal beginner-friendly fix. Be "
+    "strict: the goal is a short, real edit list, not a linguistics-completeness review."
+)
+
+
+async def judge_rule_harm(name: str, explanation: str, common_mistake: str, examples: str) -> RuleHarmVerdict:
+    msg = (
+        f"Rule name: {name}\n\n"
+        f"Explanation (taught to the learner):\n{explanation}\n\n"
+        f"'Common mistake' note:\n{common_mistake or '(none)'}\n\n"
+        f"Examples:\n{examples or '(none)'}"
+    )
+    return await _judge(RuleHarmVerdict).ainvoke(
+        [SystemMessage(content=_HARM_SYS), HumanMessage(content=msg)]
+    )

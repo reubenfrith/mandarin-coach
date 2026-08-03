@@ -228,9 +228,35 @@ for a BEGINNER tool many of these absolutes are defensible simplifications. So 4
 the actionable count — the same "LLM judge needs calibration + human adjudication" lesson, now on the
 audit itself. **The actionable subset is narrower: rules whose wording would make the COACH mark a
 CORRECT, level-appropriate learner sentence as WRONG** (the A06 class — real product harm), as opposed
-to mere incompleteness. Re-ranking by that harm criterion (a focused second pass, or human triage of
-the 71) is the next step before editing `data/grammar_rules.json`. As-is, the audit is a valid but
-over-inclusive candidate list, not a to-do list.
+to mere incompleteness.
+
+### Harm re-rank — 2026-08-03 — did NOT converge, and that's the lesson (`corpus_audit_todo.{md,json}`)
+
+Added `judge_rule_harm` + `--rerank`: re-scored the 71 flagged rules by "would the coach, applying
+this literally, reject a CORRECT level-appropriate learner sentence?", with a 'level-appropriate'
+filter meant to screen out advanced-edge exceptions. Result: **69/71 still flagged** — the re-rank
+barely narrowed the list. Spot-check: a MIX — genuine harms (`gr_ma_question` 你有什么问题吗？;
+`gr_di_ordinal` 今天三号; `gr_verb_reduplication` 聊聊天 / 离合词) alongside reaching edge cases
+(`gr_shi_identity` 这是对的; `gr_dou_all` 都可以; `gr_zhe_durative` 正吃着饭呢) a careful coach
+wouldn't actually misfire on.
+
+**The lesson (the real finding of this sub-thread): LLM self-triage cannot calibrate its own
+over-flagging by prompt engineering.** A frontier model asked "does this absolute rule have *some*
+correct counterexample" will almost always construct one — so both passes (audit severity, then harm
+re-rank) returned ~70/98 regardless of the framing. The `level-appropriate` / `plausibly produce`
+qualifiers did not bind.
+
+**The reliable calibrator is empirical or human, not another judge pass:**
+- **Empirical (repo-preferred):** feed gpt-5's proposed `rejected_example` sentences to the ACTUAL
+  coach and keep only rules where it genuinely marks a correct sentence wrong — a behavioural test
+  with a real signal, converging on the true harm set. (~69 coach runs; deepseek, so flaky/slow.)
+- **Human:** the expert triages the 71 directly — fast and authoritative, and the honest baseline
+  given two failed automated triage attempts.
+
+As-is, `corpus_audit_todo.md` is still a candidate list, not a to-do list. The durable takeaways that
+DID land: the audit found real corpus errors (`gr_verb_reduplication` 离合词; the A06 source
+`gr_shi_de`; A08's `gr_zai_progressive`), and LLM triage of LLM over-flagging is a dead end — ground
+it in coach behaviour or a human.
 
 ## For the full surface (deferred)
 

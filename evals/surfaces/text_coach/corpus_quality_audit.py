@@ -111,11 +111,99 @@ def render_md(summary: dict, rows: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def _examples(rule: dict) -> str:
+    return f"incorrect: {rule.get('incorrect_example', '')}  →  correct: {rule.get('correct_example', '')}"
+
+
+async def run_rerank():
+    """Re-rank the FLAGGED rules (from corpus_audit.json) by actual product harm: would the rule,
+    applied literally, make the coach mark a CORRECT level-appropriate learner sentence WRONG? Turns
+    the over-inclusive audit into a short to-do list (`corpus_audit_todo.{md,json}`)."""
+    audit = json.loads((RESULTS / f"{STEM}.json").read_text())
+    flagged = [r for r in audit["rows"] if r["has_issue"]]
+    rules = json.loads(RULES.read_text())
+    rules = {r["id"]: r for r in (rules if isinstance(rules, list) else rules.get("rules", rules))}
+    sem = asyncio.Semaphore(CONCURRENCY)
+
+    async def one(r):
+        async with sem:
+            src = rules.get(r["id"], {})
+            try:
+                v = await llm_judge.judge_rule_harm(
+                    r.get("name") or r["id"], src.get("explanation", r.get("explanation", "")),
+                    src.get("common_mistake", r.get("common_mistake", "")), _examples(src))
+            except Exception as e:  # noqa: BLE001
+                print(f"  ! {r['id']} failed: {type(e).__name__}: {str(e).splitlines()[0][:80]}")
+                return None
+            return {"id": r["id"], "name": r.get("name"), "audit_severity": _sev(r),
+                    "would_reject_correct": v.would_reject_correct, "rejected_example": v.rejected_example,
+                    "fix": v.fix, "reason": v.reason,
+                    "common_mistake": src.get("common_mistake", r.get("common_mistake", ""))}
+
+    print(f"Harm re-rank over {len(flagged)} flagged rules (judge={llm_judge.JUDGE_MODEL}, conc {CONCURRENCY})...")
+    rows = [r for r in await asyncio.gather(*[one(r) for r in flagged]) if r is not None]
+    todo = [r for r in rows if r["would_reject_correct"]]
+    incomplete = [r for r in rows if not r["would_reject_correct"]]
+
+    summary = {"judge_model": llm_judge.JUDGE_MODEL, "n_flagged": len(flagged), "n_judged": len(rows),
+               "n_todo": len(todo), "n_incomplete_only": len(incomplete),
+               "todo_ids": [r["id"] for r in todo]}
+    lines = [
+        "# Corpus audit — harm re-rank (the actionable to-do list)",
+        "",
+        f"Re-ranked the {len(flagged)} audit-flagged rules by the one criterion that matters: would the "
+        f"rule, applied literally, make the coach mark a CORRECT level-appropriate (HSK 1-4) learner "
+        f"sentence WRONG? Judge = **{summary['judge_model']}**.",
+        "",
+        f"## To fix: {len(todo)}/{len(flagged)} flagged rules would reject correct usage",
+        "",
+        f"_(The other {len(incomplete)} are merely incomplete — they omit advanced/edge-register "
+        "exceptions a beginner won't produce; leave them for a beginner tool. Still a human's call.)_",
+        "",
+        "| rule | correct sentence it would wrongly reject | minimal fix |",
+        "|---|---|---|",
+    ]
+    for r in todo:
+        ex = (r["rejected_example"] or "").replace("|", "\\|").replace("\n", " ")
+        fix = (r["fix"] or "").replace("|", "\\|").replace("\n", " ")
+        lines.append(f"| `{r['id']}` {r['name']} | {ex[:120]} | {fix[:160]} |")
+    lines += ["", "## Detail", ""]
+    for r in todo:
+        lines.append(f"### `{r['id']}` — {r['name']}")
+        lines.append(f"- **common_mistake (current):** {r['common_mistake'] or '(none)'}")
+        lines.append(f"- **would wrongly reject:** {r['rejected_example']}")
+        lines.append(f"- **fix:** {r['fix']}")
+        lines.append("")
+    lines += [
+        "## Merely incomplete (not editing for a beginner tool — verify)", "",
+        ", ".join(f"`{r['id']}`" for r in incomplete) or "(none)", "",
+        "## Caveats", "",
+        "- Still a judge's triage — confirm each to-do before editing `data/grammar_rules.json`, then "
+        "re-seed the corpus so grounded replies pick up the fix.",
+        "- The `level-appropriate` cut is a judgement; a rule parked as 'incomplete' may still be worth "
+        "a note if your learners are advanced.",
+        "",
+    ]
+    (RESULTS / "corpus_audit_todo.json").write_text(
+        json.dumps({"summary": summary, "todo": todo, "incomplete": incomplete}, ensure_ascii=False, indent=2))
+    (RESULTS / "corpus_audit_todo.md").write_text("\n".join(lines))
+    print(f"\nTo fix: {len(todo)}/{len(flagged)} would reject correct usage; "
+          f"{len(incomplete)} incomplete-only.")
+    print(f"  to-do: {', '.join(summary['todo_ids'])}")
+    print(f"  wrote {RESULTS / 'corpus_audit_todo.md'}")
+
+
 async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None, help="audit only the first N rules (smoke run)")
     ap.add_argument("--from-rows", action="store_true", help="re-render from saved rows, no calls")
+    ap.add_argument("--rerank", action="store_true",
+                    help="harm re-rank the flagged rules into an actionable to-do list (reads corpus_audit.json)")
     args = ap.parse_args()
+
+    if args.rerank:
+        await run_rerank()
+        return
 
     if args.from_rows:
         saved = json.loads((RESULTS / f"{STEM}.json").read_text())
