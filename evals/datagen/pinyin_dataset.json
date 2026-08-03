@@ -1,0 +1,1071 @@
+{
+  "meta": {
+    "description": "Labeled pīnyīn for the ruby/`/api/pinyin` accuracy surface.",
+    "surface": "tools.pinyin_segments / tools._tone_pinyin (pypinyin Style.TONE)",
+    "gold_semantics": {
+      "yi_bu_sandhi": "standard 一/不 sandhi form; metric is CONSISTENCY (defect)",
+      "neutral_particle": "地/得 grammatical particle → de; wrong lexical reading (defect)",
+      "t3_bisyllabic": "spoken T2+T3; COVERAGE GAP under spoken choice, not a defect (weak harm)",
+      "t3_multi": "3+ T3 contested → carried, unscored",
+      "redup": "neutral 2nd syllable; SOFT gold (secondary)",
+      "control": "gold == pypinyin; sanity floor, must be ~100%",
+      "sandhi_no_apply": "sandhi MUST NOT fire here; regression guard (raw==post-pass), unscored",
+      "erhua": "unexpressible in per-hanzi ruby → excluded"
+    }
+  },
+  "cases": [
+    {
+      "text": "不是",
+      "gold": "bú shì",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不对",
+      "gold": "bú duì",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不去",
+      "gold": "bú qù",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不错",
+      "gold": "bú cuò",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不用",
+      "gold": "bú yòng",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不要",
+      "gold": "bú yào",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不会",
+      "gold": "bú huì",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不但",
+      "gold": "bú dàn",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不再",
+      "gold": "bú zài",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不像",
+      "gold": "bú xiàng",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不到",
+      "gold": "bú dào",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不算",
+      "gold": "bú suàn",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不必",
+      "gold": "bú bì",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不够",
+      "gold": "bú gòu",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before a 4th tone → bú (2nd tone)"
+    },
+    {
+      "text": "不吃",
+      "gold": "bù chī",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before 1/2/3 tone → bù (no sandhi; pypinyin correct)"
+    },
+    {
+      "text": "不来",
+      "gold": "bù lái",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before 1/2/3 tone → bù (no sandhi; pypinyin correct)"
+    },
+    {
+      "text": "不好",
+      "gold": "bù hǎo",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before 1/2/3 tone → bù (no sandhi; pypinyin correct)"
+    },
+    {
+      "text": "不行",
+      "gold": "bù xíng",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before 1/2/3 tone → bù (no sandhi; pypinyin correct)"
+    },
+    {
+      "text": "不能",
+      "gold": "bù néng",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before 1/2/3 tone → bù (no sandhi; pypinyin correct)"
+    },
+    {
+      "text": "不多",
+      "gold": "bù duō",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before 1/2/3 tone → bù (no sandhi; pypinyin correct)"
+    },
+    {
+      "text": "不少",
+      "gold": "bù shǎo",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before 1/2/3 tone → bù (no sandhi; pypinyin correct)"
+    },
+    {
+      "text": "不难",
+      "gold": "bù nán",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "bu_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "不 before 1/2/3 tone → bù (no sandhi; pypinyin correct)"
+    },
+    {
+      "text": "一个",
+      "gold": "yí gè",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一样",
+      "gold": "yí yàng",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一件",
+      "gold": "yí jiàn",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一定",
+      "gold": "yí dìng",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一下",
+      "gold": "yí xià",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一次",
+      "gold": "yí cì",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一半",
+      "gold": "yí bàn",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一块",
+      "gold": "yí kuài",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一位",
+      "gold": "yí wèi",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一句",
+      "gold": "yí jù",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一遍",
+      "gold": "yí biàn",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一部",
+      "gold": "yí bù",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T4",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before a 4th tone → yí (2nd tone)"
+    },
+    {
+      "text": "一起",
+      "gold": "yì qǐ",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一点",
+      "gold": "yì diǎn",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一天",
+      "gold": "yì tiān",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一年",
+      "gold": "yì nián",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一些",
+      "gold": "yì xiē",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一直",
+      "gold": "yì zhí",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一般",
+      "gold": "yì bān",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一边",
+      "gold": "yì biān",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一杯",
+      "gold": "yì bēi",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "一条",
+      "gold": "yì tiáo",
+      "bucket": "yi_bu_sandhi",
+      "sub_rule": "yi_T123",
+      "harm": "real",
+      "scored": true,
+      "note": "一 before 1/2/3 tone → yì (4th tone)"
+    },
+    {
+      "text": "高兴地",
+      "gold": "gāo xìng de",
+      "bucket": "neutral_particle",
+      "sub_rule": "di_adverbial",
+      "harm": "real",
+      "scored": true,
+      "note": "adverbial 地 → de (neutral); pypinyin prints dì"
+    },
+    {
+      "text": "慢慢地",
+      "gold": "màn màn de",
+      "bucket": "neutral_particle",
+      "sub_rule": "di_adverbial",
+      "harm": "real",
+      "scored": true,
+      "note": "adverbial 地 → de (neutral); pypinyin prints dì"
+    },
+    {
+      "text": "认真地",
+      "gold": "rèn zhēn de",
+      "bucket": "neutral_particle",
+      "sub_rule": "di_adverbial",
+      "harm": "real",
+      "scored": true,
+      "note": "adverbial 地 → de (neutral); pypinyin prints dì"
+    },
+    {
+      "text": "开心地",
+      "gold": "kāi xīn de",
+      "bucket": "neutral_particle",
+      "sub_rule": "di_adverbial",
+      "harm": "real",
+      "scored": true,
+      "note": "adverbial 地 → de (neutral); pypinyin prints dì"
+    },
+    {
+      "text": "轻轻地",
+      "gold": "qīng qīng de",
+      "bucket": "neutral_particle",
+      "sub_rule": "di_adverbial",
+      "harm": "real",
+      "scored": true,
+      "note": "adverbial 地 → de (neutral); pypinyin prints dì"
+    },
+    {
+      "text": "看得见",
+      "gold": "kàn de jiàn",
+      "bucket": "neutral_particle",
+      "sub_rule": "de_complement",
+      "harm": "real",
+      "scored": true,
+      "note": "V得C complement 得 → de (neutral); pypinyin prints dé"
+    },
+    {
+      "text": "跑得快",
+      "gold": "pǎo de kuài",
+      "bucket": "neutral_particle",
+      "sub_rule": "de_complement",
+      "harm": "real",
+      "scored": true,
+      "note": "V得C complement 得 → de (neutral); pypinyin prints dé"
+    },
+    {
+      "text": "说得好",
+      "gold": "shuō de hǎo",
+      "bucket": "neutral_particle",
+      "sub_rule": "de_complement",
+      "harm": "real",
+      "scored": true,
+      "note": "V得C complement 得 → de (neutral); pypinyin prints dé"
+    },
+    {
+      "text": "走得慢",
+      "gold": "zǒu de màn",
+      "bucket": "neutral_particle",
+      "sub_rule": "de_complement",
+      "harm": "real",
+      "scored": true,
+      "note": "V得C complement 得 → de (neutral); pypinyin prints dé"
+    },
+    {
+      "text": "听得懂",
+      "gold": "tīng de dǒng",
+      "bucket": "neutral_particle",
+      "sub_rule": "de_complement",
+      "harm": "real",
+      "scored": true,
+      "note": "V得C complement 得 → de (neutral); pypinyin prints dé"
+    },
+    {
+      "text": "你好",
+      "gold": "ní hǎo",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "很好",
+      "gold": "hén hǎo",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "老虎",
+      "gold": "láo hǔ",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "小狗",
+      "gold": "xiáo gǒu",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "所以",
+      "gold": "suó yǐ",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "可以",
+      "gold": "ké yǐ",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "好久",
+      "gold": "háo jiǔ",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "手表",
+      "gold": "shóu biǎo",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "洗澡",
+      "gold": "xí zǎo",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "美好",
+      "gold": "méi hǎo",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "领导",
+      "gold": "líng dǎo",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "勇敢",
+      "gold": "yóng gǎn",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "雨水",
+      "gold": "yú shuǐ",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "许可",
+      "gold": "xú kě",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "土匪",
+      "gold": "tú fěi",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "摆手",
+      "gold": "bái shǒu",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "岛屿",
+      "gold": "dáo yǔ",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "水果",
+      "gold": "shuí guǒ",
+      "bucket": "t3_bisyllabic",
+      "sub_rule": "t3_t3",
+      "harm": "weak",
+      "scored": true,
+      "note": "T3+T3 → T2+T3 in speech; pypinyin shows citation (defensible)"
+    },
+    {
+      "text": "我很好",
+      "gold": null,
+      "bucket": "t3_multi",
+      "sub_rule": "t3_stack",
+      "harm": "weak",
+      "scored": false,
+      "note": "3+ T3 in a row; realisation is contested → reported, not graded"
+    },
+    {
+      "text": "买手表",
+      "gold": null,
+      "bucket": "t3_multi",
+      "sub_rule": "t3_stack",
+      "harm": "weak",
+      "scored": false,
+      "note": "3+ T3 in a row; realisation is contested → reported, not graded"
+    },
+    {
+      "text": "请你给我",
+      "gold": null,
+      "bucket": "t3_multi",
+      "sub_rule": "t3_stack",
+      "harm": "weak",
+      "scored": false,
+      "note": "3+ T3 in a row; realisation is contested → reported, not graded"
+    },
+    {
+      "text": "很勇敢",
+      "gold": null,
+      "bucket": "t3_multi",
+      "sub_rule": "t3_stack",
+      "harm": "weak",
+      "scored": false,
+      "note": "3+ T3 in a row; realisation is contested → reported, not graded"
+    },
+    {
+      "text": "谢谢",
+      "gold": "xiè xie",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "妈妈",
+      "gold": "mā ma",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "看看",
+      "gold": "kàn kan",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "试试",
+      "gold": "shì shi",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "想想",
+      "gold": "xiǎng xiang",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "爸爸",
+      "gold": "bà ba",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "哥哥",
+      "gold": "gē ge",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "弟弟",
+      "gold": "dì di",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "星星",
+      "gold": "xīng xing",
+      "bucket": "redup",
+      "sub_rule": "redup",
+      "harm": "weak",
+      "scored": true,
+      "note": "reduplicated 2nd syllable → neutral (soft: some dicts keep tone)"
+    },
+    {
+      "text": "银行",
+      "gold": "yín háng",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "长江",
+      "gold": "cháng jiāng",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "校长",
+      "gold": "xiào zhǎng",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "重要",
+      "gold": "zhòng yào",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "重复",
+      "gold": "chóng fù",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "不行",
+      "gold": "bù xíng",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "目的",
+      "gold": "mù dì",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "得到",
+      "gold": "dé dào",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "地方",
+      "gold": "dì fāng",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "地图",
+      "gold": "dì tú",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "的确",
+      "gold": "dí què",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "觉得",
+      "gold": "jué de",
+      "bucket": "control",
+      "sub_rule": "polyphone",
+      "harm": "n/a",
+      "scored": true,
+      "note": "lexical polyphone pypinyin resolves correctly — sanity floor"
+    },
+    {
+      "text": "第一",
+      "gold": "dì yī",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal → stays yī"
+    },
+    {
+      "text": "一号",
+      "gold": "yī hào",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal (the 1st) → stays yī despite T4 号"
+    },
+    {
+      "text": "一楼",
+      "gold": "yī lóu",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal (1st floor) → stays yī"
+    },
+    {
+      "text": "星期一",
+      "gold": "xīng qī yī",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 final (Monday) → stays yī"
+    },
+    {
+      "text": "统一",
+      "gold": "tǒng yī",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 final → stays yī"
+    },
+    {
+      "text": "唯一",
+      "gold": "wéi yī",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 final → stays yī"
+    },
+    {
+      "text": "一月",
+      "gold": "yī yuè",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal (January) → yī; pypinyin already WRONG (yí yuè)"
+    },
+    {
+      "text": "一年级",
+      "gold": "yī nián jí",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "一 ordinal (1st grade) → yī; pypinyin already WRONG (yì)"
+    },
+    {
+      "text": "看不见",
+      "gold": "kàn bu jiàn",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "V不C potential complement → 不 neutral"
+    },
+    {
+      "text": "差不多",
+      "gold": "chà bu duō",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "fixed expression → 不 neutral"
+    },
+    {
+      "text": "对不对",
+      "gold": "duì bu duì",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "V不V question → 不 neutral"
+    },
+    {
+      "text": "说不定",
+      "gold": "shuō bu dìng",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "fixed adverb → 不 ideally neutral; pypinyin emits full bù"
+    },
+    {
+      "text": "阵地",
+      "gold": "zhèn dì",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "地 as noun (position) → dì"
+    },
+    {
+      "text": "目的地",
+      "gold": "mù dì dì",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "地 as noun (destination) → dì"
+    },
+    {
+      "text": "值得",
+      "gold": "zhí dé",
+      "bucket": "sandhi_no_apply",
+      "sub_rule": "no_apply",
+      "harm": "n/a",
+      "scored": false,
+      "note": "得 as verb (worth) → dé"
+    },
+    {
+      "text": "花儿",
+      "gold": null,
+      "bucket": "erhua",
+      "sub_rule": "erhua",
+      "harm": "n/a",
+      "scored": false,
+      "note": "儿化 collapses two hanzi into one spoken syllable; unexpressible in per-hanzi ruby → structural exclusion, not a miss"
+    },
+    {
+      "text": "玩儿",
+      "gold": null,
+      "bucket": "erhua",
+      "sub_rule": "erhua",
+      "harm": "n/a",
+      "scored": false,
+      "note": "儿化 collapses two hanzi into one spoken syllable; unexpressible in per-hanzi ruby → structural exclusion, not a miss"
+    },
+    {
+      "text": "一点儿",
+      "gold": null,
+      "bucket": "erhua",
+      "sub_rule": "erhua",
+      "harm": "n/a",
+      "scored": false,
+      "note": "儿化 collapses two hanzi into one spoken syllable; unexpressible in per-hanzi ruby → structural exclusion, not a miss"
+    },
+    {
+      "text": "这儿",
+      "gold": null,
+      "bucket": "erhua",
+      "sub_rule": "erhua",
+      "harm": "n/a",
+      "scored": false,
+      "note": "儿化 collapses two hanzi into one spoken syllable; unexpressible in per-hanzi ruby → structural exclusion, not a miss"
+    },
+    {
+      "text": "那儿",
+      "gold": null,
+      "bucket": "erhua",
+      "sub_rule": "erhua",
+      "harm": "n/a",
+      "scored": false,
+      "note": "儿化 collapses two hanzi into one spoken syllable; unexpressible in per-hanzi ruby → structural exclusion, not a miss"
+    }
+  ]
+}
