@@ -258,6 +258,34 @@ DID land: the audit found real corpus errors (`gr_verb_reduplication` 离合词;
 `gr_shi_de`; A08's `gr_zai_progressive`), and LLM triage of LLM over-flagging is a dead end — ground
 it in coach behaviour or a human.
 
+### Empirical harm confirmation — 2026-08-03 (`results/corpus_harm_confirmed.{md,json}`)
+
+Ran the behavioural test (`--confirm-harm`): fed each of the 69 candidates' proposed correct sentence
+to the REAL coach (deepseek, 2×), detector (gpt-4o) = did the coach mark the correct sentence wrong.
+**69 → 13 "confirmed"** — a big narrowing, and the empirical stage did the heavy lifting the two LLM
+triage passes couldn't.
+
+**But reading the 13 critically, only ~3–4 are genuine harm** — two flaws remain, both about trusting
+LLM-generated inputs:
+1. **gpt-5's "correct" example was sometimes actually WRONG**, so the coach correctly rejected it and
+   the test miscounted: `gr_jiu_cai` (他九点才来了 — 才+了 is wrong), `gr_yi_jiu` (missing 就),
+   `gr_wulun_dou` (missing 都), `gr_duo_approx` (一百块多 nonstandard).
+2. **The detector over-called a naturalness nudge as a rejection**: `gr_youdianr_yidianr`,
+   `gr_hui_neng_keyi`, `gr_yinwei_suoyi` — the coach said "语法上没有错误 / 基本正确" then suggested a
+   more natural phrasing (not marking it wrong).
+
+Genuine on inspection (~3–4), headlined by **`gr_gei_coverb`**: the coach called 我打电话给你 ("I'll
+call you") an "English direct translation" — flatly wrong, that's idiomatic Mandarin. (`gr_zhiyao_jiu`,
+`gr_suiran_danshi` plausible; the rest need the expert's call.)
+
+**The closing lesson of the whole corpus sub-thread:** a 3-stage automated pipeline (audit → harm
+re-rank → empirical coach test) cut the review from **98 rules to 13** — real, worth doing — but could
+NOT produce a clean bug list on its own, because every automated stage trusts an LLM (to flag, to
+propose a "correct" sentence, to detect rejection) and each injects error. The empirical stage is the
+most trustworthy (it grounds in real coach behaviour) yet still inherits gpt-5's bad example sentences.
+**The human expert is the irreducible final arbiter — the pipeline's job is to shrink their pile ~7×,
+not replace them.** Hand the 13 (`corpus_harm_confirmed.md`) to the expert; don't auto-edit the corpus.
+
 ## For the full surface (deferred)
 
 - Run the blind round with ≥2 labellers; report human–human κ as the ceiling.

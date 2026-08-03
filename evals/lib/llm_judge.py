@@ -457,3 +457,32 @@ async def judge_rule_harm(name: str, explanation: str, common_mistake: str, exam
     return await _judge(RuleHarmVerdict).ainvoke(
         [SystemMessage(content=_HARM_SYS), HumanMessage(content=msg)]
     )
+
+
+# --------------------------------------------------------------------------- #
+# 10. Did the coach REJECT a correct sentence? — behavioural detector (empirical harm test)
+# --------------------------------------------------------------------------- #
+# The audit + harm re-rank both over-flag (LLM self-triage can't calibrate itself). The rigorous
+# convergent test is behavioural: feed each proposed CORRECT sentence to the real coach and see if it
+# actually marks it wrong. This detector classifies ONE coach reply — did it treat the (correct)
+# sentence as an error and correct it, or affirm it? Affirming while offering a stylistic tweak is
+# NOT a rejection. Easy classification — a cheap judge (gpt-4o) suffices.
+class RejectionVerdict(BaseModel):
+    marked_wrong: bool = Field(description="Did the coach treat the learner's sentence as containing an ERROR — saying it is wrong/incorrect/unnatural, or giving a 'corrected' replacement? True = rejected. False = affirmed it as correct (offering an optional stylistic alternative while affirming correctness is still False).")
+    evidence: str = Field(description="Quote the phrase showing rejection or affirmation.")
+
+
+_REJECT_SYS = (
+    "You are given a learner's Chinese sentence that is KNOWN TO BE CORRECT, and a Mandarin coach's "
+    "reply to it. Decide only this: did the coach REJECT the sentence — i.e. treat it as containing an "
+    "error, call it wrong/incorrect/unnatural, or hand back a 'corrected' version — or did it AFFIRM the "
+    "sentence as correct? If the coach affirms it is correct and merely offers an optional more-natural "
+    "or stylistic alternative, that is NOT a rejection (marked_wrong=false). Quote the deciding phrase."
+)
+
+
+async def judge_coach_rejected(sentence: str, reply: str) -> RejectionVerdict:
+    msg = f"Learner's (correct) sentence: {sentence}\n\nCoach's reply:\n{reply}"
+    return await _judge(RejectionVerdict).ainvoke(
+        [SystemMessage(content=_REJECT_SYS), HumanMessage(content=msg)]
+    )

@@ -193,16 +193,117 @@ async def run_rerank():
     print(f"  wrote {RESULTS / 'corpus_audit_todo.md'}")
 
 
+async def run_confirm_harm(samples: int = 2):
+    """EMPIRICAL harm test: feed each re-rank 'rejected_example' (a correct sentence) to the REAL
+    coach `samples` times; a rule is CONFIRMED harmful iff the coach marks the correct sentence wrong
+    in >=1 sample. Converges the over-flagged candidate list to what the coach actually misfires on —
+    behaviour, not opinion. Reads corpus_audit_todo.json; writes corpus_harm_confirmed.{md,json}."""
+    import memory  # noqa: PLC0415 — lazy: other modes don't need the coach/corpus
+    from agent import build_agent, invoke_with_trace  # noqa: PLC0415
+
+    todo = json.loads((RESULTS / "corpus_audit_todo.json").read_text())["todo"]
+    cases = [r for r in todo if (r.get("rejected_example") or "").strip()]
+    # Take the Chinese sentence before any ' — ' / ' (' English gloss.
+    def sentence_of(r):
+        ex = r["rejected_example"].strip()
+        for sep in [" — ", " (", "  ", "\n"]:
+            if sep in ex:
+                ex = ex.split(sep)[0].strip()
+        return ex
+
+    memory.load_reference_data()
+    llm_judge.JUDGE_MODEL = "gpt-4o"  # cheap detector; the coach is deepseek (independent)
+    sem = asyncio.Semaphore(CONCURRENCY)
+
+    async def run_case(r):
+        sent = sentence_of(r)
+        rejections = []
+        for k in range(samples):
+            async with sem:
+                uid = f"harm_{r['id']}_{k}"
+                try:
+                    reply, _ = await invoke_with_trace(build_agent(uid).primary, sent, f"{uid}_t")
+                except Exception as e:  # noqa: BLE001
+                    rejections.append({"k": k, "marked_wrong": None, "evidence": f"(coach failed: {type(e).__name__})", "reply": ""})
+                    continue
+            v = await llm_judge.judge_coach_rejected(sent, reply)
+            rejections.append({"k": k, "marked_wrong": v.marked_wrong, "evidence": v.evidence, "reply": reply})
+        confirmed = any(x["marked_wrong"] for x in rejections)
+        n_wrong = sum(1 for x in rejections if x["marked_wrong"])
+        return {"id": r["id"], "name": r["name"], "sentence": sent,
+                "common_mistake": r.get("common_mistake", ""), "fix": r.get("fix", ""),
+                "confirmed_harm": confirmed, "n_marked_wrong": n_wrong, "n_samples": len(rejections),
+                "samples": rejections}
+
+    print(f"Empirical harm test: {len(cases)} candidate rules x {samples} coach runs "
+          f"(coach=deepseek, detector=gpt-4o, conc {CONCURRENCY})...")
+    rows = [r for r in await asyncio.gather(*[run_case(r) for r in cases])]
+    confirmed = [r for r in rows if r["confirmed_harm"]]
+    clear = [r for r in rows if not r["confirmed_harm"]]
+    confirmed.sort(key=lambda r: -r["n_marked_wrong"])
+
+    summary = {"coach": "deepseek", "detector": "gpt-4o", "samples": samples,
+               "n_candidates": len(rows), "n_confirmed": len(confirmed), "n_clear": len(clear),
+               "confirmed_ids": [r["id"] for r in confirmed]}
+    lines = [
+        "# Corpus harm — EMPIRICAL confirmation (does the coach actually misfire?)",
+        "",
+        f"Fed each candidate rule's proposed CORRECT sentence to the real coach (**deepseek**, "
+        f"{samples}x each); a rule is CONFIRMED harmful iff the coach marked that correct sentence WRONG "
+        f"in >=1 run (detector = gpt-4o). Behaviour, not opinion — this converges the over-flagged "
+        f"candidate list ({len(rows)}) to what the coach actually gets wrong.",
+        "",
+        f"## Confirmed harmful: {len(confirmed)}/{len(rows)}",
+        "",
+        "| rule | correct sentence | coach misfired | fix |",
+        "|---|---|---|---|",
+    ]
+    for r in confirmed:
+        ev = ""
+        for x in r["samples"]:
+            if x["marked_wrong"]:
+                ev = (x["evidence"] or "").replace("|", "\\|").replace("\n", " ")[:80]
+                break
+        fix = (r["fix"] or "").replace("|", "\\|").replace("\n", " ")[:120]
+        lines.append(f"| `{r['id']}` {r['name']} | {r['sentence']} | {r['n_marked_wrong']}/{r['n_samples']}: {ev} | {fix} |")
+    lines += [
+        "",
+        f"## Not confirmed ({len(clear)}) — coach affirmed the sentence in all {samples} runs",
+        "",
+        ", ".join(f"`{r['id']}`" for r in clear) or "(none)",
+        "",
+        "## Caveats",
+        "",
+        f"- Coach runs at temperature; {samples} samples/rule is a first cut. A rule marked 'not "
+        "confirmed' may still misfire sometimes (false negatives possible); a 'confirmed' one genuinely "
+        "misfired at least once (real). Raise `samples` to tighten.",
+        "- Assumes gpt-5's proposed sentence is actually correct — spot-check the confirmed list before "
+        "editing `data/grammar_rules.json`.",
+        "",
+    ]
+    (RESULTS / "corpus_harm_confirmed.json").write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=2))
+    (RESULTS / "corpus_harm_confirmed.md").write_text("\n".join(lines))
+    print(f"\nConfirmed harmful: {len(confirmed)}/{len(rows)} (coach actually misfired)")
+    print(f"  {', '.join(summary['confirmed_ids'])}")
+    print(f"  wrote {RESULTS / 'corpus_harm_confirmed.md'}")
+
+
 async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None, help="audit only the first N rules (smoke run)")
     ap.add_argument("--from-rows", action="store_true", help="re-render from saved rows, no calls")
     ap.add_argument("--rerank", action="store_true",
                     help="harm re-rank the flagged rules into an actionable to-do list (reads corpus_audit.json)")
+    ap.add_argument("--confirm-harm", action="store_true",
+                    help="EMPIRICAL: run each re-rank sentence through the real coach; confirm which rules it misfires on")
+    ap.add_argument("--samples", type=int, default=2, help="coach runs per sentence for --confirm-harm")
     args = ap.parse_args()
 
     if args.rerank:
         await run_rerank()
+        return
+    if args.confirm_harm:
+        await run_confirm_harm(args.samples)
         return
 
     if args.from_rows:

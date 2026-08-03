@@ -1,0 +1,1683 @@
+{
+  "summary": {
+    "coach": "deepseek",
+    "detector": "gpt-4o",
+    "samples": 2,
+    "n_candidates": 69,
+    "n_confirmed": 13,
+    "n_clear": 56,
+    "confirmed_ids": [
+      "gr_youdianr_yidianr",
+      "gr_jiu_cai",
+      "gr_le_negation_drop",
+      "gr_zhiyao_jiu",
+      "gr_yi_jiu",
+      "gr_wulun_dou",
+      "gr_cong_dao",
+      "gr_duo_approx",
+      "gr_le_change",
+      "gr_hui_neng_keyi",
+      "gr_yinwei_suoyi",
+      "gr_suiran_danshi",
+      "gr_gei_coverb"
+    ]
+  },
+  "rows": [
+    {
+      "id": "gr_ba_disposal",
+      "name": "把 (bǎ) disposal construction",
+      "sentence": "请把书给我。",
+      "common_mistake": "English speakers use 把 with a bare verb and no result (把书看), or use it with intransitive/stative verbs, or combine it with 被 in the same clause.",
+      "fix": "Clarify that the verb just can’t be bare; it must be followed by something — a result/directional/state complement, 了/着, a duration/measure or location phrase, OR a second object/recipient (e.g., 把书给我/把钱还给他/把书放在桌子上).",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**请把书给我。** — \"Please give me the book.\"\n\nThis is a textbook example of the **把 (bǎ)** construction:\n\n> **Subject (implied: 你) + 把 + Object (书) + Verb (给) + Indirect Object (我)**\n\nThe 把 construction moves the object (书) before the verb to emphasise how the object is **disposed of** or **affected** — here, the book is being \"given\" to someone.\n\n---\n\n### 🧩 A small extension for you\n\nSince you've got the 把 structure down, try this variation with a **direction complement**:\n\n> **请把书给我。** ✅ (Please give me the book.)\n> **请把书拿给我。** ✅ (Please take the book and give it to me. / Please hand me the book.)\n\nThe difference: 拿 (ná) = \"take/carry\" adds the sense of physically picking it up and handing it over. It makes the action more vivid.\n\nWant to practise 把 sentences with different verbs like 放 (put), 带 (bring), or 还 (return)? I can generate a short drill for you!"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "看起来你的句子是正确的！✅",
+          "reply": "看起来你的句子是正确的！✅\n\n**请把书给我。** — “Please give me the book.”\n\nThis is a perfectly formed **把 sentence**:\n\n| 请 | 把 | 书 | 给 | 我 |\n|---|---|---|---|---|\n| please | (object marker) | book | give | me |\n\nThe structure follows the standard pattern:\n\n**Subject + 把 + Object + Verb + Indirect Object**\n\nHere: 请 (polite) + 把 + 书 (object being acted upon) + 给 (verb) + 我 (recipient)\n\nYou've correctly used 把 to **front the object** (书) before the verb (给), which is exactly right when you want to emphasise what happens to the object. This is the natural way to say \"give me the book\" in Mandarin.\n\n---\n\n**A small extension for you:**\n\nIf you want to be more specific about *which* book, you can add a demonstrative or measure word after 把:\n\n- 请把那本书给我。 — *Please give me **that** book.*\n- 请把这本书给我。 — *Please give me **this** book.*\n\nOr if you want to soften it even more (like a request between friends):\n\n- 请把那本书给我一下。 — Adds 一下 to make it feel lighter / more casual.\n\nGreat job! Would you like to practise the 把 structure with a few drills, or do you have another sentence to check?"
+        }
+      ]
+    },
+    {
+      "id": "gr_bei_passive",
+      "name": "被 (bèi) passive construction",
+      "sentence": "我没被邀请。",
+      "common_mistake": "Combining 被 with 把 in one clause, or leaving the verb bare with no complement.",
+      "fix": "Edit the line to: “In 被-sentences the verb phrase is usually not bare — it often has 了, a result, an object, or other info. But after 没/没有 don’t use 了 (我没被邀请), and some verbs (e.g., 取消/邀请/允许) are fine without 了 (比赛被取消).” Keep the ‘don’t mix 被 and 把’ note.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**Sentence:** 我没被邀请。 (Wǒ méi bèi yāoqǐng.)\n\n**Meaning:** \"I wasn't invited.\"\n\n**Grammar note:** You've correctly used **没被** (méi bèi) to negate the passive voice in the past. In Chinese, the passive (被) is negated with **没(有)**, not 不. So it's **没被邀请**, not **不被称为邀请**. Perfect.\n\n**A small extension:**\nIf you want to mention who didn't invite you, you can add the agent after 被:\n- 我没被他邀请。 (Wǒ méi bèi tā yāoqǐng. — I wasn't invited by him.)\n\nOr if you want to make it a bit more natural in everyday speech, you could also say:\n- 没有人邀请我。 (Méiyǒu rén yāoqǐng wǒ. — No one invited me.)\n\nThis second version avoids the passive altogether and is very common in conversation.\n\nGreat work — keep it up! 加油！🚀"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **完全正确** ✅",
+          "reply": "你的句子 **完全正确** ✅\n\n**\"我没被邀请。\"** (Wǒ méi bèi yāoqǐng.)\n\nThis follows the standard passive negation pattern perfectly:\n- **Subject (receiver)** + **没** + **被** + **Verb**\n- 你正确地省略了施动者（谁没邀请你），这在中文里很自然，当施动者不明确或不重要时。\n\n---\n\n### 一点小扩展 🌱\n\n如果你想强调是**谁**没邀请你，可以加上施动者：\n\n> 我没被**他们**邀请。  \n> *(Wǒ méi bèi tāmen yāoqǐng. — I wasn't invited **by them**.)*\n\n如果你想表达这件事**让你感到失望**，可以说：\n\n> 我没被邀请，有点失望。  \n> *(Wǒ méi bèi yāoqǐng, yǒudiǎn shīwàng. — I wasn't invited, a bit disappointed.)*\n\n---\n\n有任何相关语法问题，或者想练习一下 **被** 字句吗？我很乐意帮你！"
+        }
+      ]
+    },
+    {
+      "id": "gr_le_change",
+      "name": "了 (le) as change of state (sentence-final)",
+      "sentence": "我饿。",
+      "common_mistake": "Omitting sentence-final 了 when reporting a new state, or confusing it with the verbal completion 了.",
+      "fix": "Add: “Sentence-final 了 highlights a new/changed situation; it’s not required if you’re simply stating a current fact.” Update Common mistake: “Thinking you must always add 了—use 我饿了 to stress the change (‘I’m hungry now/already’), but 我饿 is also correct as a plain statement.” Update example: “If you mean ‘I’ve just turned twenty,’ say 我今年二十岁了; if you’re just stating age, 我今年二十岁 is fine.”",
+      "confirmed_harm": true,
+      "n_marked_wrong": 1,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 \"我饿\" 在口语中完全可以理解",
+          "reply": "你的句子 \"我饿\" 在口语中完全可以理解，但更自然、更完整的说法是：\n\n**✅ 我饿了。**  \n(Wǒ è le.)\n\n这里加上了 **了**，表示状态的变化——从“不饿”变成了“饿”。在中文里，形容词加上 **了** 通常表示一种新状态的出现。\n\n---\n\n### 为什么需要“了”？\n\n- **我饿** – 听起来像在陈述一个事实，但缺少“变化”的感觉。\n- **我饿了** – 更自然，表示“我饿了（现在）”。\n\n类似的例子：\n- 我渴了。 (Wǒ kě le.)\n- 我累了。 (Wǒ lèi le.)\n- 我饱了。 (Wǒ bǎo le.)\n\n---\n\n### 小练习\n\n把下面的句子改成更自然的说法：\n\n1. 我冷。 → __________  \n2. 我热。 → __________  \n3. 我困。 → __________  \n\n答案：\n1. 我冷了。  \n2. 我热了。  \n3. 我困了。\n\n继续加油！💪"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "Your sentence **我饿** is understandable, but it sounds a bit off to a native speaker.",
+          "reply": "Your sentence **我饿** is understandable, but it sounds a bit off to a native speaker. Here's why:\n\n**The issue:** In Chinese, a bare adjective predicate (just the adjective, no adverb) implies **comparison or contrast** — like \"I am hungry (as opposed to someone else who isn't).\" For a neutral statement, you need a degree word or a particle.\n\n**The fix:** Use one of these natural patterns:\n\n| Pattern | Example | Meaning |\n|---------|---------|---------|\n| 很 + Adj | **我很饿** | I'm hungry (neutral) |\n| Adj + 了 | **我饿了** | I'm hungry (new state — wasn't hungry before) |\n| Adj + 死了 | **我饿死了** | I'm starving (emphatic) |\n\n**Root cause:** English speakers often translate \"I am hungry\" word-for-word as 我饿, but Mandarin adjectives behave like verbs — they need 很 (to soften the statement) or 了 (to mark a change of state) to sound natural.\n\n**For your situation:** If you just walked into the kitchen and want to say \"I'm hungry,\" **我饿了** is the most natural choice. If you're just stating a fact, **我很饿** works well.\n\n---\n\nWant a quick drill on this? I can give you 3–5 sentences to practice the \"adjective needs 很 or 了\" rule!"
+        }
+      ]
+    },
+    {
+      "id": "gr_shi_de",
+      "name": "是……的 (shì...de) emphasis construction",
+      "sentence": "你怎么来的？",
+      "common_mistake": "Using 了 instead of 是……的 to highlight the time/place/manner of a known past event.",
+      "fix": "Common mistake: Thinking you must use 是……的. Plain past with 了 is also correct; 是……的 just adds focus to the time/place/manner. For example, 你怎么来的？ and 你是怎么来的？ are both correct (the latter is more emphatic). Note: 是 is often optional in this pattern: 我是昨天来的 / 我昨天来的。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你这个句子完全正确！✅",
+          "reply": "你这个句子完全正确！✅\n\n**你怎么来的？** — *How did you come / get here?*\n\nThis is a natural use of the **是...的** construction (without the 是, which is often dropped in casual speech). It emphasises the **manner** of a past action — here, how you arrived.\n\n**A small extension for you:**\n\nIf you want to be more explicit (or answer formally), you'd use the full form:\n\n> **你是**怎么来的？\n\nAnd you could answer with:\n\n> 我是**坐地铁**来的。 — *I came by subway.*\n> 我是**开车**来的。 — *I came by car.*\n> 我是**走路**来的。 — *I came on foot.*\n\nNote that the **的** stays at the end, and the method (坐地铁, 开车, 走路) goes in the middle.\n\nGreat job — keep it up! 🎉 Do you have another sentence you'd like me to check?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**你怎么来的？** — This is the natural way to ask \"How did you get here?\" (asking about the means/manner of arrival).\n\nYou're using the **是……的** construction (even though 是 is omitted here, which is common in casual speech) to emphasise the *how* of a completed action. This is exactly right — and it's actually a common trap for English speakers, who often wrongly use 了 here (e.g. ❌ *你怎么来了？* — which would mean \"Why did you come?\" or \"How come you're here?\").\n\n---\n\n**Small extension 🌱**\n\nIf you want to be more explicit:\n\n- **你是怎么来的？** — slightly more formal, same meaning.\n- A possible answer: **我是坐地铁来的。** (I came by subway.)\n\n---\n\nWould you like a short drill on the **是……的** construction to lock this in?"
+        }
+      ]
+    },
+    {
+      "id": "gr_measure_words",
+      "name": "Measure words (量词)",
+      "sentence": "我们两人都去。",
+      "common_mistake": "Dropping the measure word (三书) or defaulting to 个 for everything (三个书).",
+      "fix": "Change to: “Chinese usually requires a measure word between a number/demonstrative and a noun: Number + Measure Word + Noun. Common beginner exceptions: with ordinals 第 + number, some nouns don’t take a measure word (e.g., 第一课, 第三章); with 人, forms like 一人/两人/三人 are common (我们两人), though 两个人 is also fine.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我们两人都去。** — \"Both of us are going.\"\n\nThis is natural and idiomatic. Here's a quick breakdown:\n\n| Word | Role |\n|------|------|\n| 我们 | we |\n| 两人 | two people |\n| 都 | all / both |\n| 去 | go |\n\n**A small extension for you:**\n\nIf you want to emphasise **\"both of us (and no one else)\"**, you could also say:\n- **我们俩都去。** — slightly more colloquial (俩 = 两个, two people)\n\nOr, to specify *where* you're going:\n- **我们两人都去北京。** — Both of us are going to Beijing.\n\nIf you'd like to practise variations or similar structures (e.g. using 都 with 我们/你们/他们), just let me know! 加油！💪"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "句子正确！",
+          "reply": "**句子正确！** ✅\n\n\"我们两人都去\" is perfectly natural and grammatically sound.\n\n**Breakdown:**\n- **我们两人** – \"the two of us\" (both people)\n- **都** – placed correctly **before** the verb, quantifying the subject to its left → \"both\"\n- **去** – \"go\"\n\n**Small extension** — you can say the same thing in a couple of other ways:\n\n- **我们都去** – \"We both go / We all go\" (simpler, slightly less specific about the number)\n- **我们两个都去** – \"We two both go\" (more colloquial, using 两个 instead of 两人)\n\n---\n\nAny new sentence you'd like me to check? 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_zai_progressive",
+      "name": "在/正在 (zài/zhèngzài) progressive aspect",
+      "sentence": "我看书呢。",
+      "common_mistake": "Applying 在……呢 to stative verbs (在知道), or confusing progressive 在 with the locational 在 (to be at).",
+      "fix": "Clarify that 呢 can also directly mark an action in progress by itself after the verb: 我看书呢。 You can also combine it with 在/正在 for extra emphasis: 我在看书呢。 (Still avoid stative verbs: not 在知道.)",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "实际上，你的句子 **\"我看书呢\"** 是完全正确且地道的口语表达！",
+          "reply": "实际上，你的句子 **\"我看书呢\"** 是完全正确且地道的口语表达！不需要加\"在\"。\n\n我之前的建议有点过于严格了。在口语中：\n\n- **\"我看书呢\"** ✅ 自然、常用\n- **\"我在看书呢\"** ✅ 也对，但\"在\"不是必须的\n\n两者都正确，但语气略有不同：\n\n| 句子 | 语气 |\n|------|------|\n| 我看书呢。 | 更随意、口语化 |\n| 我在看书呢。 | 强调\"正在\"进行 |\n\n所以你的原句非常好！👍\n\n---\n\n### 小扩展\n\n如果你想表达更丰富的意思，可以试试：\n\n- **我看书呢，别打扰我。** (I'm reading, don't disturb me.)\n- **我看书呢，有什么事待会儿说。** (I'm reading, talk to me later.)\n\n你现在想练习什么？比如：\n- 进行时态的其他用法？\n- 还是想让我帮你看看别的句子？"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这个句子完全正确！✅",
+          "reply": "这个句子完全正确！✅\n\n**我看书呢** — \"I'm reading (a book).\"\n\nYou're using the **呢** particle to indicate an ongoing action, which is spot on. Dropping the 在 (as in 我在看书呢) is very natural in casual spoken Chinese.\n\n### 小扩展 (A small extension)\n\nIf you want to add **where** you're reading:\n\n- 我在**家里**看书呢。 — I'm reading at home.\n- 我在**图书馆**看书呢。 — I'm reading at the library.\n\nOr if you want to specify **what** you're reading:\n\n- 我看**小说**呢。 — I'm reading a novel.\n- 我看**中文书**呢。 — I'm reading a Chinese book.\n\nWant to drill the 呢 pattern for ongoing actions, or ask about something else? 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_de_complement",
+      "name": "得 (de) degree/manner complement",
+      "sentence": "他把字写得很漂亮。",
+      "common_mistake": "Omitting the repeated verb when there is an object (他说汉语得很好), or confusing 得 with 的/地.",
+      "fix": "Say: Use V + O + V + 得 + complement when the object comes directly after the verb (他说汉语说得很好). If the object is moved before the verb (topic or in 把/被), don’t repeat the verb: 汉语他说得很好；他把字写得很漂亮。 It’s also fine to drop the object if it’s clear: 他说得很好。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "No history yet, so you're off to a great start! 🎉",
+          "reply": "No history yet, so you're off to a great start! 🎉\n\n**One small extension** — since you clearly know the 把 + 得 pattern, you might also like this related structure:\n\n> **他把字写得**非常 **漂亮** → **他把字写得**有多 **漂亮？**\n\n(You can swap 很 for other degree adverbs: 非常, 特别, 真 — but never use 很 with 非常 or 特别, just like in English you wouldn't say \"very extremely beautiful.\")\n\nIf you'd like to practise **把 sentences** or drill any other grammar point, just ask!"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "Perfect sentence! Zero errors.",
+          "reply": "✅ **Perfect sentence!** Zero errors.\n\n**Grammar:** This is a textbook 把 (bǎ) construction + degree complement (得). You've correctly:\n- Put the object (字) after 把 and before the verb\n- Used a transitive verb (写) that acts on the object\n- Added 得 + 很漂亮 to show *how* the action is done\n\n**Structure:** 他 + 把 + 字 + 写 + 得 + 很漂亮\n\n---\n\n**A small extension for you:**\n\nTry changing the complement to express a **result** instead of a degree:\n\n> 他把字写完了。  \n> *Tā bǎ zì xiě wán le.*  \n> \"He finished writing the characters.\"\n\nThis uses a result complement (完 = finished) instead of a degree complement (很漂亮). The 把 construction works naturally with both!\n\nWant to drill the difference between 把 + degree complement vs. 把 + result complement? 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_de_di_de",
+      "name": "的 / 得 / 地 (de) distinction",
+      "sentence": "他认真学习汉语。",
+      "common_mistake": "Writing 的 for all three because they sound the same.",
+      "fix": "Add: “地 usually marks an adverbial before a verb, but in modern usage it’s often omitted with common short adverbials/adjectives: 慢慢走、认真学习 are also correct. Don’t mark these as wrong.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "这句话本身是**正确的**，没有语法错误。✅",
+          "reply": "这句话本身是**正确的**，没有语法错误。✅\n\n**句子分析：**\n- **他** (subject)\n- **认真** (adverb — \"diligently/seriously\")\n- **学习** (verb — \"study\")\n- **汉语** (object — \"Chinese language\")\n\n结构很清晰：**Subject + Adverb + Verb + Object**。语序和用词都没问题。\n\n---\n\n**一个小扩展：** 如果你想让它听起来更自然、更像母语者日常说的，可以加一个 **在** 表示\"正在\"：\n\n> 他**在**认真学习汉语。  \n> *He is studying Chinese diligently.*\n\n或者加一个 **很** 来强调\"非常认真\"：\n\n> 他学习汉语**很认真**。  \n> （话题-评论结构：As for studying Chinese, he is very diligent.）\n\n---\n\n目前你还需要我帮你检查某个特定的语法点，或者想练习什么吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你写的句子 **“他认真学习汉语。”** 在语法上是完全正确的！✅",
+          "reply": "你写的句子 **“他认真学习汉语。”** 在语法上是完全正确的！✅\n\n- **他** (tā) – he  \n- **认真** (rènzhēn) – seriously / diligently  \n- **学习** (xuéxí) – to study  \n- **汉语** (Hànyǔ) – Chinese language  \n\n**结构：** Subject + Adverb + Verb + Object → 完全符合汉语语序。\n\n---\n\n### 小扩展\n\n如果你想表达得更自然、更像母语者，可以加一个 **“很”** 来加强程度：\n\n> **他学习汉语很认真。**  \n> (He studies Chinese very diligently.)\n\n这个结构把“很认真”放在句尾作补语，是更常见的口语表达方式。\n\n---\n\n### 想继续练习吗？\n\n如果你想练习 **“Subject + 很 + Adjective + 地 + Verb”** 或者 **“Verb + Object + 得 + 很 + Adjective”** 这两种结构，我可以给你出几个小练习！😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_time_before_place",
+      "name": "Word order: time and place before the verb",
+      "sentence": "我住在北京。",
+      "common_mistake": "Following English order and putting time/place after the verb or object.",
+      "fix": "Edit the explanation to: “Time-when goes before the verb. Place is often set with 在 + place before the verb (我明天在家看书), but with many verbs it naturally comes after the verb: 我明年去中国, 我住在北京, 把书放在桌子上. Don’t put a time word at the very end (✗ 我去中国明年).”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你写的句子 **我住在北京** 完全正确！✅",
+          "reply": "你写的句子 **我住在北京** 完全正确！✅\n\n这个句子使用了 **在 + location** 的结构，表示动作发生的地点。这里的用法是标准的。\n\n如果你想扩展一下，可以说：\n\n> **我在北京住。**  \n> （意思相同，但语序稍有不同。两种都自然。）\n\n或者更详细一点：\n\n> **我住在北京朝阳区。**  \n> *I live in Chaoyang District, Beijing.*\n\n你做得很棒！有什么想继续练习的吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **完全正确** ✅",
+          "reply": "你的句子 **完全正确** ✅\n\n**我住在北京。**  \n→ \"I live in Beijing.\"\n\n这个句子结构标准：  \n- **Subject + Verb + 在 + Location** → 我 + 住 + 在 + 北京\n\n如果你想扩展一下，可以试试：\n\n- **我住在北京，已经三年了。**  \n  (I've lived in Beijing for three years already.)\n\n- **我住在北京，很喜欢这个城市。**  \n  (I live in Beijing and really like this city.)\n\n有什么关于这个句子或相关语法想问的吗？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_duration_complement",
+      "name": "Duration complement (time how long)",
+      "sentence": "我三天没吃饭。",
+      "common_mistake": "Placing the duration before the verb like a time-when phrase (我两年学汉语).",
+      "fix": "Clarify: In affirmative sentences, duration goes after the verb. With an object, you can use (a) V 了 Duration O (我学了两年汉语), (b) V O V 了 Duration (我学汉语学了两年), or (c) V 了 O Duration when the object is short/specific (e.g., pronouns): 我等了你三个小时。 Note: In negative “how long not” sentences, put duration before 没/不: 我三天没吃饭。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我三天没吃饭”** 是完全正确的！✅",
+          "reply": "你的句子 **“我三天没吃饭”** 是完全正确的！✅\n\n这句话的意思是 **“I haven’t eaten for three days.”** 结构很标准：\n\n> **Subject + Time Duration + 没 + Verb Phrase**\n\n- 我 (I)\n- 三天 (three days)\n- 没吃饭 (haven't eaten)\n\n这个结构用来表达 **“某段时间没做某事”**，非常常用。比如：\n- 他两天没睡觉了。 (He hasn't slept for two days.)\n- 我一个月没运动了。 (I haven't exercised for a month.)\n\n---\n\n### 一个小延伸 🌱\n\n如果你想强调 **“到现在已经三天了”**，可以在句尾加一个 **了**：\n\n> **我三天没吃饭了。**\n\n这个 **了** 表示“情况持续到现在”，语气更自然。不过不加 **了** 也完全没问题，口语里两种都常见。\n\n---\n\n### 想练练这个结构吗？\n\n试试把下面几个句子翻译成中文：\n\n1. I haven't watched a movie for two weeks.\n2. She hasn't called me for three days.\n3. We haven't seen each other for a year.\n\n需要我帮你检查答案吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我三天没吃饭。”** 完全正确！✅",
+          "reply": "你的句子 **“我三天没吃饭。”** 完全正确！✅\n\n**结构分析：**\n- 我 (I)\n- 三天没 (for three days haven't) + 吃饭 (eaten)\n\n这是标准的时间长度 + 没 + 动词的句型，表示某动作在一段时间内没有发生。\n\n**想再进一步吗？** 这里有几个自然的小扩展，供你参考：\n\n| 句子 | 意思 |\n|------|------|\n| 我三天没吃饭了。 | 加了 **了**，语气更自然，强调“到现在已经三天没吃了”。 |\n| 我三天没好好吃饭了。 | 加了 **好好**，意思是“没好好吃”，不是完全没吃。 |\n| 我已经三天没吃饭了。 | 加 **已经**，强调“已经”三天了。 |\n\n**“我三天没吃饭了”**（带 `了`）是日常中最自然的说法。不过你原来的句子也完全没问题，母语者一听就懂。\n\n有什么其他句子想让我帮你看看吗？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_liang_er",
+      "name": "两 (liǎng) vs 二 (èr)",
+      "sentence": "你是第二个人。",
+      "common_mistake": "Using 二 before a measure word (二个人).",
+      "fix": "Revise the common-mistake note: “不要在量词前用‘二’来表示‘两个’（×二个人 → ✓两个人；×二杯 → ✓两杯）。但在这些情况下用‘二’没问题：第二个、二十个；以及和百/千/万/亿连用时（如二百/两百都可以）。”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“你是第二个人”** 完全正确！🎉",
+          "reply": "你的句子 **“你是第二个人”** 完全正确！🎉\n\n这是一个非常自然的句子，语法和用词都没有问题。\n\n- **你** = you  \n- **是** = is/are  \n- **第二** = second (ordinal number)  \n- **个** = measure word (general, fine for 人 in casual contexts)  \n- **人** = person  \n\n如果你想表达得更礼貌一些（比如在正式场合），可以用 **位** 代替 **个**：\n\n> 您是第二位客人。  \n> *(You are the second guest.)*\n\n但日常对话中，**“你是第二个人”** 完全没问题！\n\n---\n\n**小延伸 🌱**  \n如果你想表达“你是第二个来的”或“你是第二名”，可以说：\n\n> 你是第二个到的。  \n> (You are the second to arrive.)\n\n> 你是第二名。  \n> (You are second place / the runner-up.)\n\n需要我帮你看看其他句子，或者想练练什么话题吗？"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**你是第二个人。** — *You are the second person.*\n\n- **第 (dì)** + **二 (èr)** + **个 (gè)** + **人 (rén)** follows the standard ordinal structure perfectly: 第 + Number + Measure Word + Noun.\n- And **个** is the correct measure word for **人**, so no issue there.\n\nSince you've got this down, here's a small extension:\n\n> 你是**第一个人**。 — *You are the first person.*\n> 你是**第三个人**。 — *You are the third person.*\n\nYou can swap in any number: 第四个人, 第五个人, etc.\n\nIf you'd like, I can show you how to use this pattern with other measure words (like 本 for books, 只 for animals) — just let me know!"
+        }
+      ]
+    },
+    {
+      "id": "gr_youdianr_yidianr",
+      "name": "有点儿 (yǒudiǎnr) vs 一点儿 (yìdiǎnr)",
+      "sentence": "这个有点儿便宜。",
+      "common_mistake": "Swapping them: 一点儿贵 or 有点儿便宜 in the wrong slot.",
+      "fix": "有点儿 + 形容词多表示轻微抱怨/不理想（有点儿贵）。当“便宜”被视为不理想时，也可以说“有点儿便宜”。形容词 + 一点儿用于比较，表示“再/更……一点儿”（便宜一点儿）。不要把“一点儿”放在形容词前（不用：一点儿贵）。",
+      "confirmed_harm": true,
+      "n_marked_wrong": 2,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "你的句子语法上没有错误，但用词有点儿不自然。",
+          "reply": "好问题！你的句子语法上**没有错误**，但用词有点儿不自然。\n\n## 问题所在\n\n**有点儿 (yǒudiǎnr)** 通常搭配**负面/不想要的**形容词，比如：\n- 有点儿贵 (a bit expensive — 贵不好)\n- 有点儿累 (a bit tired — 累不好)\n- 有点儿大 (a bit too big)\n\n**便宜 (piányi — cheap)** 在中文里通常被认为是**正面的**（省钱是好事），所以「有点儿便宜」听起来别扭——好像便宜是坏事。\n\n## 怎么改？\n\n| 你想表达的意思 | 正确的说法 |\n|---|---|\n| \"a bit **cheaper**\" (比较) | 这个**便宜一点儿**。 |\n| \"relatively cheap\" (中性) | 这个**比较便宜**。 |\n| \"a bit too cheap\" (负面，暗示质量差) | 这个**有点儿太便宜了**。 |\n\n根据你的语境，最可能的答案：\n\n**✗** 这个有点儿便宜。\n**✓** 这个**便宜一点儿**。 *(如果你想说比别的便宜一点)*\n**✓** 这个**比较便宜**。 *(如果你想说这个挺便宜的)*\n\n---\n\n## 关键规则\n\n> **有点儿 + Adj** → 通常用于负面形容词 (贵、难、累、胖)\n> **Adj + 一点儿** → 用于比较，表示\"一点\" (便宜一点儿、大一点儿、快一点儿)\n\n要不要我出几个练习帮你巩固这个区别？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "用 \"有点儿便宜\" 听起来有点奇怪",
+          "reply": "你写的句子是：\n\n**这个有点儿便宜。**\n\n---\n\n### 问题出在哪里？\n\n**有点儿 (yǒudiǎnr)** 通常和**负面/不想要的**形容词搭配（贵、累、麻烦、吵等等）。它表达的是\"有点太……了，不太好\"。\n\n而 **便宜** (pián yi, \"cheap\") 一般来说是**正面的/想要的**特质（便宜 = 省钱，好事）。所以用 \"有点儿便宜\" 听起来有点奇怪——除非你是在说它便宜得让人怀疑质量。\n\n| 正确用法 | 意思 |\n|----------|------|\n| 这个**有点儿贵**。 | 这个有点太贵了（不好） |\n| 这个**便宜一点儿**。 | 这个比别的便宜一些（比较） |\n\n---\n\n### 修正方案\n\n👉 如果你想说 **\"这个价格比较低 / 这个挺便宜的\"**（中性或正面）：\n\n> 这个**挺便宜的**。  \n> 这个**比较便宜**。\n\n👉 如果你想说 **\"这个比那个便宜一点\"**（比较）：\n\n> 这个比那个**便宜一点儿**。\n\n👉 如果确实是想说 **\"便宜得让人不放心\"**（负面语境），那么 \"有点儿便宜\" 也不是完全错，但更自然的说法是：\n\n> 这个**太便宜了，我有点担心质量**。\n\n---\n\n### 核心规则（记住这个！）\n\n| 结构 | 位置 | 含义 | 搭配 |\n|------|------|------|------|\n| **有点儿** + Adj | 形容词前面 | \"有点太……了\"（不好） | 负面形容词：有点儿贵 / 有点儿累 / 有点儿吵 |\n| Adj + **一点儿** | 形容词后面 | \"……一点\"（比较） | 正面或中性：便宜一点儿 / 大一点儿 / 快一点儿 |\n\n---\n\n### 小练习\n\n试试看，该填 **有点儿** 还是 **一点儿**？\n\n1. 这个苹果____贵，我不买了。  \n2. 那个苹果比这个便宜____。  \n3. 今天____冷，多穿点衣服。  \n4. 请说慢____，我听不懂。\n\n需要我揭晓答案吗？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_hui_neng_keyi",
+      "name": "会 / 能 / 可以 (huì/néng/kěyǐ) modals",
+      "sentence": "我能说三种语言。",
+      "common_mistake": "Using 能 for learned skills or 会 for permission.",
+      "fix": "Change the “Common mistake” to: “For learned skills, 会 is more natural; 能 is also used and not wrong. Use 可以 (not 会) for permission.” Update the example label to: “Less natural: 我能说三种语言。 → More natural: 我会说三种语言。”",
+      "confirmed_harm": true,
+      "n_marked_wrong": 1,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "你的句子基本正确，但有一个**很细微却很关键**的地方可以改进。",
+          "reply": "你的句子基本正确，但有一个**很细微却很关键**的地方可以改进。\n\n### ✅ 纠正\n\n> **我会说三种语言。**\n> (Wǒ huì shuō sān zhǒng yǔyán.)\n\n### 🔍 为什么？\n\n你用 **能 (néng)** 说「我能说三种语言」，这在中文里听起来有点奇怪。原因如下：\n\n| 词 | 核心意思 | 适用于语言吗？ |\n|---|---|---|\n| **会 (huì)** | 通过学习获得的能力 (**know how to**) | ✅ **会说汉语** = 我学过，所以我会 |\n| **能 (néng)** | 身体/客观条件下**能不能做** (**physically able to / possible**) | ❌ **能说三种语言** → 听起来像「我嗓子没问题，所以能说」，而不是「我学会了」 |\n\n**能** 更适合物理条件（比如：我现在嗓子疼，**不能**说话）。而谈论**掌握的语言**，99% 的情况用 **会**。\n\n---\n\n### 🎯 一个小练习\n\n把下面的句子改成更自然的说法：\n\n1. 他能说英语和法语。 → ？\n2. 我不能说法语，因为我没学过。 → ？\n\n<details>\n<summary>💡 答案</summary>\n\n1. **他会说英语和法语。**\n2. **我不会说法语，因为我没学过。**（这里用「不能」也可以，但「不会」更自然，因为强调的是没学过，而不是身体条件不允许）\n\n</details>\n\n整体来说，你的句子结构非常棒（主语 + 能/会 + 动词 + 数量词 + 名词），只是那个**能 vs 会**需要记住！要继续练习吗？ 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "不算“错”，但用 **会** 更地道。",
+          "reply": "你的句子语法上没有大问题，但有一个很常见的**用词**小问题！让我解释一下。\n\n---\n\n**你的句子：** 我能说三种语言。  \n**更自然的说法：** **我会说三种语言。** ✅\n\n---\n\n**为什么？** 这涉及到 **能** vs **会** 的区别：\n\n| 词 | 用法 | 例子 |\n|---|---|---|\n| **会** | 学会的技能（learned ability） | 我会说汉语 / 我会弹钢琴 |\n| **能** | 身体能力或客观条件允许（physical capability / possibility） | 我**能**吃辣 / 今天**能**来吗？ |\n\n说语言是一种**学来的技能**，所以用 **会** 更准确。不过在日常口语中，很多人也混用 **能**，所以不算“错”，但用 **会** 更地道。\n\n---\n\n**想练一练吗？** 试试看，下面这些句子该用 **会** 还是 **能**？\n\n1. 我____游泳，我三岁就学了。\n2. 他生病了，不____来上课。\n3. 我____写汉字，但写得很慢。\n4. 这里不____抽烟。\n\n告诉我你的答案，我来帮你检查！😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_jiu_cai",
+      "name": "就 (jiù) vs 才 (cái)",
+      "sentence": "他九点才来了。",
+      "common_mistake": "Adding 了 after 才, or reversing the earlier/later nuance.",
+      "fix": "Revise the note to: “With 才, don’t put 了 right after the verb in simple past statements (他九点才来). Sentence-final 了 is OK to show a new situation: 他九点才来了。”",
+      "confirmed_harm": true,
+      "n_marked_wrong": 2,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "**Corrected sentence:** 他九点才来。",
+          "reply": "**Corrected sentence:**\n\n他九点才来。 — *He didn't come until nine (later than expected).*\n\n**Why it's wrong:**\n\nThe rule is: **才 (cái) usually does NOT take 了.** It's the opposite of 就 (jiù), which often *does* take 了.\n\n- ✅ 他七点**就来了**。 → *He came as early as 7.* (earlier than expected — takes 了)\n- ❌ 他九点**才来了**。 → *He came not until 9.* (later than expected — no 了)\n- ✅ 他九点**才来**。 → *He didn't come until 9.*\n\n**Root cause:** You're treating 才 like 就. In English, both \"as early as 7\" and \"not until 9\" use the same past tense, so it's natural to carry 了 over to both. But in Chinese, 才 itself already marks the \"lateness\" timing — adding 了 is redundant and ungrammatical.\n\n---\n\n**Mini drill — fill in the blank with 就…了 or 才… (no 了):**\n\n1. 他今天早上五点半 _____ 起床 _____。 (very early)\n2. 他昨天半夜十二点 _____ 回家。 (very late)\n3. 我弟弟十六岁 _____ 上大学 _____。 (earlier than expected)\n4. 我哥哥三十岁 _____ 结婚。 (later than expected)\n\n*Want me to give you the answers?*"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "The adverb **才** (cái) means \"not until / only then\" — it emphasises that the action happened **later than expected**. When used this way, **才** generally **does not pair with 了** at the end of the sentence.",
+          "reply": "Your sentence: **他九点才来了。**\n\n✅ **Corrected version:** **他九点才来。** (He didn't come until 9 / He only came at 9.)\n\n**What's wrong?**\n\nThe adverb **才** (cái) means \"not until / only then\" — it emphasises that the action happened **later than expected**. When used this way, **才** generally **does not pair with 了** at the end of the sentence. That's a common trap for English speakers because we naturally want to mark the past tense.\n\nCompare:\n- ✅ 他**九点才来** — \"He didn't come until 9\" (late, no 了)\n- ✅ 他**七点就来了** — \"He came as early as 7\" (early, 就 + 了 ✔)\n\nThe rule: **就 (early/unexpectedly early) + 了** ✔ vs **才 (late/unexpectedly late) — no 了** ✘\n\n**Why?**  \n才 already carries the \"later than expected\" meaning. Adding 了 creates a conflict — 了 marks a completed action, but 才 is about the **timing relative to expectation**, not simply about completion.\n\n---\n\n**Quick drill** — choose the correct one:\n\n1. 他昨天很晚 ___ 睡觉。  \n   a) 就  \n   b) 才  \n\n2. 我昨天七点 ___ 起床了。 (I got up at 7, which was early.)  \n   a) 就  \n   b) 才  \n\n3. 她十点 ___ 来。 (She didn't come until 10.)  \n   a) 就  \n   b) 才  \n\n*(Answers: 1b, 2a, 3b — let me know if you want me to explain any!)*"
+        }
+      ]
+    },
+    {
+      "id": "gr_resultative",
+      "name": "Resultative complements (看完, 听懂)",
+      "sentence": "我听不懂老师的话。",
+      "common_mistake": "Expressing the result separately in English style, or negating with 不 (不看完).",
+      "fix": "Negate a result that didn’t happen with 没(有): 我没看完。/ 我没听懂。 To express inability or predicted non-completion, put 不 between the verb and the result: 我看不完、听不懂、找不到。Don’t use 不 before the whole verb-result chunk (×我不听懂).",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**句子：** 我听不懂老师的话。\n\n**结构：** 我 + 听 + 不 + 懂 + 老师的话\n\nThis is a textbook **potential complement** (可能补语) using the **Verb + 不 + Result** pattern — exactly right. 听懂 = \"to understand by listening,\" and 听不懂 = \"can't understand (by listening).\"\n\n**小小扩展：**\n\n| 肯定 | 否定 |\n|------|------|\n| 听得懂老师的话 | 听不懂老师的话 |\n| 看得懂这本书 | 看不懂这本书 |\n\n如果你想表达更具体的原因，可以试试：\n\n- 老师说得太快，**我听不懂**。\n- 这个口音很奇怪，我**听不懂**。\n\n你有想练习的句子吗？或者想问某个语法点？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "一切正确！",
+          "reply": "一切正确！Here's a quick breakdown of why it works:\n\n| Part | Role |\n|------|------|\n| **我** | subject |\n| **听不懂** | potential complement — \"can't understand (by listening)\" |\n| **老师** | \"teacher\" |\n| **的** | possessive marker |\n| **话** | \"words / speech\" |\n\n**Potential complement pattern:**  \n听得懂 ✅ (can understand)  \n听不懂 ✅ (cannot understand)\n\n---\n\n### 🎯 Small extension\n\nYou could also say:\n\n- **我听不懂老师说什么。** — \"I can't understand what the teacher is saying.\"\n  (Using 说什么 instead of 的话 — slightly more conversational.)\n\n- **我听懂了老师的话。** — \"I understood what the teacher said.\"\n  (Using 听懂了 — the affirmative form.)\n\nWould you like to practise the **potential complement** pattern (听得懂 / 听不懂, 看得见 / 看不见, etc.) with a short drill? Or do you have another sentence you'd like me to check?"
+        }
+      ]
+    },
+    {
+      "id": "gr_directional",
+      "name": "Directional complements (进来, 出去)",
+      "sentence": "我回家。",
+      "common_mistake": "Wrong order of the place object and 来/去, or omitting the direction.",
+      "fix": "Edit the explanation to: “If there is a place noun, put it before 来/去, but 来/去 is optional and only used to show toward/away from the speaker: 他跑进教室(来); 我回家。” Edit the common-mistake line to remove “or omitting the direction,” leaving: “Wrong order of the place object and 来/去 (don’t put 来/去 before the place).”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我回家”** 是完全正确的！✅",
+          "reply": "你的句子 **“我回家”** 是完全正确的！✅\n\n**Meaning:** *I go home / I return home.*\n\nIt's a clean subject–verb–object (SVO) sentence:\n- **我** (wǒ) — I\n- **回** (huí) — return to / go back to\n- **家** (jiā) — home\n\n**A small extension:** If you want to be more specific about the timing, you could add:\n\n| Chinese | Meaning |\n|---------|---------|\n| 我回家了。 | I'm going home (now) / I went home (already). |\n| 我要回家。 | I want to go home. / I'm going to go home. |\n| 我回家去。 | I'm heading home (emphasising direction). |\n\nNone of these are \"corrections\" — just natural variations depending on what you mean. 😊\n\nIf you have a specific context in mind (e.g. you meant to say \"I went home yesterday\"), feel free to share and I can help you fine-tune it!"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我回家”** 完全正确！✅",
+          "reply": "你的句子 **“我回家”** 完全正确！✅\n\n**huí jiā** = to return home / go home.\n\nSince you're new here — welcome! Let me give you a small extension to build on this:\n\n---\n\n### 小小扩展 (A little extension)\n\nYou can add time words or particles to make it more natural in context:\n\n| Sentence | Meaning |\n|----------|---------|\n| 我回家。 | I go home. (general / habitual) |\n| 我**要**回家。 | I **want to** go home. |\n| 我**想**回家。 | I **would like to** go home. |\n| 我**正在**回家。 | I am **on my way** home. |\n| 我回家了。 | I **have** gone home / I'm going home now. (了 = change of state / completion) |\n\n---\n\nWould you like to try writing a slightly longer sentence with 回家 — maybe adding *when* or *with whom*? Or if you have a sentence you're unsure about, send it over and I'll check it!"
+        }
+      ]
+    },
+    {
+      "id": "gr_yinwei_suoyi",
+      "name": "因为……所以…… (yīnwèi...suǒyǐ) cause and result",
+      "sentence": "因为下雨，我没去。",
+      "common_mistake": "Assuming that using both 'because' and 'so' is wrong, as it would be in English, and dropping 所以.",
+      "fix": "Explanation: 因为…所以… is a common and natural pairing, but in everyday Chinese 所以 is often optional after 因为; you can also use only 所以 (…，所以…). Common mistake: Thinking you must not use both, or that you must always use both—actually both 因为……所以…… and 因为……(结果) are correct. Examples: 因为下雨，所以我没去。/ 因为下雨，我没去。/ 下雨了，所以我没去。",
+      "confirmed_harm": true,
+      "n_marked_wrong": 1,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“因为下雨，我没去。”** 是完全正确的 ✅",
+          "reply": "你的句子 **“因为下雨，我没去。”** 是完全正确的 ✅\n\n意思很清楚：“Because it rained, I didn’t go.”\n\n### 结构分析\n- **因为 + 原因** → 下雨 (it rained)\n- **主语 + 没 + 动词** → 我没去 (I didn't go)\n\n这是中文里非常自然的因果句。口语中经常省略“了”，所以“因为下雨，我没去”完全没问题。\n\n### 如果你想扩展一下，可以试试：\n- **因为下雨了，所以我没去。**（加了“了”和“所以”，更完整）\n- **因为下雨，我没去成。**（“没去成”强调“最终没能去”）\n\n### 一个小问题考考你 😊\n如果想说 **“Because it was raining, I didn't go to the park.”**，你会怎么说？\n\n试试看，我可以帮你检查！"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "语法上不被判错，但不够地道，有“英语直译”的味道",
+          "reply": "你的句子 **“因为下雨，我没去。”** 是完全可以理解的，母语者也经常这么说。不过，这里有一个值得注意的**地道性**问题。\n\n---\n\n### 问题：缺少配对连词 **所以**\n\n在中文里，**因为**和**所以**是一对关联词，习惯于成对使用。而英语中，“because”和“so”不能同时出现在一个句子里，所以英语母语者常常会下意识地省略掉**所以**。\n\n| 版本 | 分析 |\n|------|------|\n| ❌ *因为下雨，我没去。* | 语法上不被判错，但不够地道，有“英语直译”的味道 |\n| ✅ **因为下雨，所以我没去。** | 更自然的中文表达，符合中文成对关联词的习惯 |\n\n**根因：** 英语思维让你只用一个连词（because），但中文习惯用一对（因为…所以…）。\n\n---\n\n### 小练习（帮你巩固）\n\n把下面句子补充完整，加上**所以**：\n\n1. 因为太累了，______ 我想早点睡觉。\n2. 因为明天要考试，______ 我今天不能出去玩。\n3. 因为没吃早饭，______ 我现在很饿。\n\n**答案：** 1. 所以 2. 所以 3. 所以\n\n下次再说原因结果的时候，试着加上**所以**，你的中文听起来会更地道！🎯"
+        }
+      ]
+    },
+    {
+      "id": "gr_suiran_danshi",
+      "name": "虽然……但是…… (suīrán...dànshì) although",
+      "sentence": "虽然很累，我很开心。",
+      "common_mistake": "Dropping 但是 because English uses only 'although'.",
+      "fix": "Revise explanation: “虽然 (although) often pairs with 但是/可是 (but), but 但是/可是 is optional when the contrast is clear. Both 虽然很累，但是我很开心 and 虽然很累，我很开心 are correct.” Update common mistake: “Not a mistake to drop 但是—just ensure the second clause shows the contrast.”",
+      "confirmed_harm": true,
+      "n_marked_wrong": 1,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "Your sentence is very close, but it has a classic **\"虽然...但是...\"** issue.",
+          "reply": "Your sentence is very close, but it has a classic **\"虽然...但是...\"** issue.\n\n---\n\n### ❌ Your sentence\n虽然很累，我很开心。\n\n### ✅ Corrected sentence\n**虽然很累，但是我很开心。**  \n(suīrán hěn lèi, **dànshì** wǒ hěn kāixīn.)\n\n---\n\n### 🔍 What's wrong & why\n\nEnglish uses just *\"although\"* — the *\"but\"* is optional (e.g., *\"Although tired, I'm happy\"*). But **Chinese is different**: the patterns **虽然……但是……** (or 虽然……可是……) require *both* halves. You can't skip the 但是/可是.\n\nThink of it as a **pair**:\n- 虽然 = \"although\" (sets up the contrast)\n- 但是/可是 = \"but\" (delivers the contrast)\n\nWithout 但是, the second clause feels abruptly attached — like a missing link.\n\n---\n\n### 🎯 Quick drill\n\nFill in the blanks:\n\n1. 虽然下雨，______我还是要去公园。  \n2. 虽然他学习很忙，______他每天运动。  \n3. ______很贵，但是我很喜欢这件衣服。\n\nWant me to write the answers and explain any you're unsure about?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "Keep it up! You're already thinking in correct Chinese patterns. 🚀",
+          "reply": "### Drill: Fill in the missing word\n\nComplete each sentence with the missing word (the \"but\" part of the pair):\n\n1. 虽然外面下雨，__________ 我还是想去公园散步。\n2. 虽然这道菜很辣，__________ 他吃得非常开心。\n3. 虽然她今天很忙，__________ 她答应帮我看孩子。\n4. 虽然这个手机很贵，__________ 质量非常好。\n5. 虽然他不喜欢运动，__________ 他每天坚持跑步。\n\n**Answers:** All take **但是** (or 可是). Try saying them aloud — notice how natural the contrast feels with both words present.\n\nKeep it up! You're already thinking in correct Chinese patterns. 🚀"
+        }
+      ]
+    },
+    {
+      "id": "gr_haishi_huozhe",
+      "name": "还是 (háishì) vs 或者 (huòzhě) — 'or'",
+      "sentence": "我不知道他是学生还是老师。",
+      "common_mistake": "Using 或者 in a choice question or 还是 in a statement.",
+      "fix": "Edit Common mistake to: “Using 或者 in a choice question.” Add a note to the Explanation: “Use 还是 for ‘or’ in direct questions. In normal statements, use 或者. But if the ‘or’ part is inside a clause (after 我不知道/问/告诉/看看 etc.), still use 还是: 我不知道他是学生还是老师；请告诉我你要茶还是咖啡。”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "看起来你的句子完全正确！✅",
+          "reply": "看起来你的句子完全正确！✅\n\n**你的句子：** 我不知道他是学生还是老师。\n\n**意思是：** \"I don't know whether he is a student or a teacher.\"\n\n**为什么正确：**\n你正确使用了 **\"是...还是...\"** 结构，这是中文里用来表示选择疑问（alternative questions）的标准句式。和英语的 \"whether... or...\" 用法一致。\n\n**结构分析：**\n- 我 **不知道** → I don't know\n- 他 **是** 学生 **还是** 老师 → whether he is a student **or** a teacher\n\n**一个小扩展：**\n如果你想表达更正式一点，也可以说：\n> 我不清楚他是学生还是老师。\n> (I'm not clear whether he is a student or a teacher.)\n\n**不清楚** (bù qīngchu) 比 **不知道** 稍微正式一些，但两者都可以。\n\n如果你愿意，我可以给你出几个 **\"是...还是...\"** 的练习题来巩固这个结构！😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 “我不知道他是学生还是老师。” 完全正确！✅",
+          "reply": "你的句子 **“我不知道他是学生还是老师。”** 完全正确！✅\n\n**意思：** “I don’t know if he is a student or a teacher.”\n\n**结构：** 主语 + 不知道 + 是A还是B\n\n你用的 **“是...还是...”** 结构正是选择疑问句的标准形式，表示“whether A or B”。这里语法和用词都没有问题。\n\n---\n\n**一个小扩展：** 如果你想更自然一点，可以加 **“到底”** 来强调“到底/究竟”：\n\n> 我不知道他**到底**是学生还是老师。\n> I don’t know **at all** / **exactly** whether he is a student or a teacher.\n\n但只要保持现在这个句子，也是完全地道的。继续加油！💪"
+        }
+      ]
+    },
+    {
+      "id": "gr_double_le",
+      "name": "Verb + 了 + object + 了 (ongoing up to now)",
+      "sentence": "我学汉语两年了。",
+      "common_mistake": "Using one 了 and losing the 'and still continuing' meaning.",
+      "fix": "Teach: To express “started before and still true now,” include sentence‑final 了. A common pattern is V + 了 + Duration + 了 (e.g., 我在这儿住了三年了), but the first 了 is optional in many sentences (e.g., 我学汉语两年了／我已经学汉语两年了／他们结婚三年了). Common mistake: leaving off the sentence‑final 了 when you mean it’s still true (我在这儿住了三年 → sounds finished).",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **「我学汉语两年了」** 是完全正确的，意思也很清楚！👍",
+          "reply": "你的句子 **「我学汉语两年了」** 是完全正确的，意思也很清楚！👍\n\n这句话的意思是：*I have studied Chinese for two years (and still do).*\n\n---\n\n### 一个小扩展\n\n如果你想强调 **“已经学了两年，并且还在继续学”** 这个持续到现在的状态，可以用更完整的 **双“了”结构**：\n\n> **我学了两年汉语了。**\n\n| 结构 | 例句 | 语气 |\n|------|------|------|\n| S + V + O + Duration + 了 | 我学汉语两年了。 | 自然、口语化 |\n| S + V + 了 + Duration + O + 了 | 我学了两年汉语了。 | 更强调“持续到现在” |\n\n两种都可以，双“了”稍微更明确地传达“到现在还在继续”的意思。\n\n---\n\n### 想试试练习吗？\n\n如果你想练一下这个 **持续到现在的“了”用法**，我可以给你出几个小练习，比如把下面这些句子改成正确的形式：\n\n1. 我住北京三年。（我住北京三年了 → 对？）\n2. 他工作一年。（他工作一年了 → 对？）\n\n要不要试试，或者我直接给你出几个针对性的练习？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **\"我学汉语两年了。\"** 是完全正确的！✅",
+          "reply": "你的句子 **\"我学汉语两年了。\"** 是完全正确的！✅\n\n这句话的意思是：**\"I have studied Chinese for two years.\"** (and you're still studying it now).\n\n你用了 **Subj. + Verb + Obj. + Duration + 了** 这个结构，这正是表达“从过去开始一直持续到现在”的正确方式。很地道！\n\n---\n\n如果你想更进一步，这里有几个自然的扩展：\n\n- **我学汉语学了两年了。**（更口语化，重复动词强调“学”这个动作的持续性）\n- **我学汉语已经两年了。**（加上 **已经**，语气更强烈）\n\n---\n\n如果你愿意，我可以帮你看看你写的其他中文句子，或者专门针对 **“动态助词‘了’ vs 语气助词‘了’”** 做一些练习——这是很多学习者容易混淆的地方。😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_zhe_durative",
+      "name": "着 (zhe) durative / accompanying state",
+      "sentence": "我正吃着饭呢。",
+      "common_mistake": "Using 着 for a plain ongoing action where 在 is needed, or dropping 着 for an accompanying manner.",
+      "fix": "Revise the explanation to: “Verb + 着 usually marks a continuing state or a manner accompanying another action (V1着 + V2): 门开着, 他笑着说. For actions in progress, use 在/正在/呢; note that in colloquial speech V + 着 + 呢 also shows an action in progress (e.g., 我正吃着饭呢).” Revise the common mistake to: “Using 着 alone for a plain ongoing action — say 我在/正在看电视呢; V + 着 + 呢 is also acceptable (我正打着电话呢). Dropping 着 in the V1着 + V2 pattern can be wrong (他站着看书).”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "Looks good — this sentence is perfectly correct! ✅",
+          "reply": "Looks good — this sentence is perfectly correct! ✅\n\n**Sentence:** 我正吃着饭呢。\n**Meaning:** \"I'm in the middle of eating right now.\"\n\nYou've used the **正 + Verb + 着 + 呢** pattern, which is the standard way to emphasise that an action is in progress at this very moment. Each part is in the right place:\n\n| 我 | 正 | 吃 | 着 | 饭 | 呢 |\n|---|---|---|---|---|---|\n| I | right now | eat | (continuous) | meal | (emphatic particle) |\n\nA small extension for you — you can also vary this pattern slightly:\n\n- **我正在吃着饭呢** — adds 在 for extra naturalness (slightly more colloquial)\n- **我正吃饭呢** — drops 着 but keeps the progressive meaning (also fine)\n- **我吃着饭呢** — drops 正, still means \"I'm eating\" (very common in speech)\n\nGreat work! Would you like me to drill you on this pattern, or do you have another sentence to check?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你这个句子完全正确！✅",
+          "reply": "你这个句子完全正确！✅\n\n**我正吃着饭呢。** — \"I'm (in the middle of) eating.\"\n\nThis is a great example of the **正 + Verb + 着 + 呢** pattern, which emphasises that an action is in progress *right now*. It's a bit more vivid than just using **在**:\n\n- **我在吃饭。** → \"I'm eating.\" (neutral)\n- **我正吃着饭呢。** → \"I'm in the middle of eating (right now).\" (more emphatic, conversational)\n\n---\n\n**A small extension:**\n\nYou can swap the verb and object to make other present-moment sentences:\n\n| Pattern | Example |\n|---------|---------|\n| 正 + Verb + 着 + 呢 | 我正**看**着**电视**呢。 |\n| 正 + Verb + 着 + 呢 | 他正**睡**着**觉**呢。 |\n\nWant to try making one yourself, or would you like a drill on the **正…着…呢** pattern?"
+        }
+      ]
+    },
+    {
+      "id": "gr_yao_le_imminent",
+      "name": "(快)要……了 imminent action",
+      "sentence": "一会儿会下雨。",
+      "common_mistake": "Omitting the final 了, or using 会 for an imminent event.",
+      "fix": "Change “The final 了 is required.” to “In this pattern, 了 is normally used to show ‘about to’; without 了 it often just means a plan/general future, not ‘about to’.” Change the mistake note to: “For the ‘about to’ meaning, don’t forget 了. 会 can also talk about future likelihood (e.g., 一会儿会下雨), but it doesn’t give the strong ‘about to’ sense.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **完全正确！** ✅",
+          "reply": "你的句子 **完全正确！** ✅\n\n**一会儿会下雨。** — *It will rain in a little while / soon.*\n\n- **一会儿** (yīhuìr) = \"in a moment / a little while\" — a time expression placed at the start.\n- **会** (huì) = \"will / be likely to\" — expresses a future prediction.\n- **下雨** (xià yǔ) = \"to rain.\"\n\nThe structure is natural and grammatically sound. No errors here! 🎉\n\n---\n\n**A small extension for you:**\n\nYou can also use **快要…了** (kuàiyào…le) for a similar meaning — \"about to\":\n\n| Chinese | Meaning |\n|---------|---------|\n| 一会儿会下雨。 | It will rain soon. (prediction) |\n| 一会儿**快要下雨了**。 | It's **about to** rain soon. (imminent) |\n\nOr, if you want to express certainty (emphasising \"it's definitely going to rain\"), you can add **的** at the end:\n\n> 一会儿**会下雨的**。 — *It will rain soon (for sure).*\n\nKeep up the great work! Want to try writing a sentence with **快要…了** to practise?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **完全正确**！✅",
+          "reply": "你的句子 **完全正确**！✅\n\n**一会儿会下雨。** — \"It's going to rain in a little while.\"\n\n这是很自然的口语表达。结构是：**时间词（一会儿） + 会 + 动词短语（下雨）**，主语（天/天气）省略了，这在中文里很常见。\n\n---\n\n**一点小扩展：**\n\n如果想更口语化，也可以说：\n\n- **一会儿要下雨了。** — 加了了表示\"即将发生变化\"，语气更肯定。\n\n- **过一会儿会下雨。** — 意思相同，过一会儿和一会儿可以互换。\n\n如果你想说\"可能不会下\"：\n\n- **一会儿不会下雨。** — 用不会表示否定推测。\n\n---\n\n**如果想练习相关语法点：**\n\n- 会 vs 要（推测 vs 打算）\n- 了（变化语气）\n\n你想做哪个方向的练习？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_le_negation_drop",
+      "name": "没 negates a completed action and drops 了",
+      "sentence": "他没来了。",
+      "common_mistake": "Keeping 了 after 没 (没……了).",
+      "fix": "Say: “To negate a completed action, use 没(有) + V and do not use the perfective 了 right after the verb: 我没去 (not 我没去‘了’ for simple negation). Note: sentence‑final 了 (change of situation) can appear: 他没来了 (= 他不来了); 糟了，我没带手机了。”",
+      "confirmed_harm": true,
+      "n_marked_wrong": 2,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "你的句子 **“他没来了”** 有一个很常见的语法错误。",
+          "reply": "你的句子 **“他没来了”** 有一个很常见的语法错误。\n\n---\n\n### ❌ 错误\n**他没来了。**\n\n### ✅ 两种改法（意思不同）\n\n| 你想说什么？ | 正确说法 |\n|---|---|\n| **He didn't come**（单纯否定过去发生的事） | **他没来。** |\n| **He's not coming anymore**（状态改变，原本会来，现在不来了） | **他不来了。** |\n\n---\n\n### 📖 语法规则\n\n**没(有) + Verb → 不能加 了**\n\n当用 **没** 否定一个已经完成的动作时，必须 **去掉 了**。\n\n- ❌ 昨天我没去了。\n- ✅ 昨天我没去。\n\n而 **不 + Verb + 了** 表示“情况变了”（change of state）：\n\n- 他不来了 = He's not coming anymore (he was going to come, but now he won't).\n- 我不吃了 = I'm not eating anymore (I was eating, but now I've stopped).\n\n---\n\n### 🎯 小练习\n\n把下面的句子改成正确的否定形式：\n\n1. 我昨天去商店了。→ 我昨天 **____** 去商店。\n2. 他以前抽烟，现在 **____** 抽了。（用 不 / 没？）\n\n需要我告诉你答案吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "这是一个非常典型的错误。",
+          "reply": "你的句子是：\n\n**✗ 他没来了。**\n\n这是一个非常典型的错误。原因如下：\n\n**根因**：在汉语里，**没(有)** 已经表示否定“完成”或“过去”的动作，这时必须**去掉**句尾的 **了**。规则是：**没 + Verb → 不加 了**。\n\n- ✅ 他没来。 (He didn't come.)\n- ❌ 他没来了。\n- ✅ 我昨天没去。 (I didn't go yesterday.)\n- ❌ 我昨天没去了。\n\n换句话说，**没** 和 **了** 在这个结构中不能共存。\n\n---\n\n**正确说法：**\n\n> **他没来。**\n\n如果你想强调“他以前来，但现在不来了”（状态变化），语法不同，但那是另一个结构（不……了）——以后再说 😊\n\n---\n\n**小练习**：把下面错误的句子改正：\n\n1. ✗ 我没吃饭了。 → ✅ ________\n2. ✗ 她没买那本书了。 → ✅ ________\n3. ✗ 昨天他们没来了。 → ✅ ________\n\n<details>\n<summary>答案</summary>\n\n1. 我没吃饭。\n2. 她没买那本书。\n3. 昨天他们没来。\n</details>\n\n如果你想说“He hasn't come yet”或“He didn't come”，随时问我，我帮你区分！"
+        }
+      ]
+    },
+    {
+      "id": "gr_ma_question",
+      "name": "吗 (ma) yes/no question particle",
+      "sentence": "你有什么问题吗？",
+      "common_mistake": "Adding 吗 to a question that already has a question word (哪儿 / 什么 / 谁).",
+      "fix": "Revise to: “Add 吗 at the end of a statement to make a yes/no question (你是学生吗？). Do not add 吗 when a question word is asking for specific information (谁、什么、哪儿、什么时候…): 你去哪儿？ Not 你去哪儿吗？ But when words like 什么/谁/哪儿 don’t ask for specifics and mean ‘any/some/every’—often after 有/没有 or with 都/也—you can use 吗: 你有什么问题吗？ 哪儿都可以吗？”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "这句话完全正确！✅",
+          "reply": "这句话完全正确！✅\n\n**你** (you) + **有** (have) + **什么** (what) + **问题** (question) + **吗** (question particle) — all in the right order, with the right particle.\n\nA small extension — you could also say it more casually:\n\n> **你还有什么问题吗？** — *Do you have any other questions?* (adding 还 for \"else/further\")\n\nOr in a formal setting:\n\n> **您有什么问题吗？** — using 您 (polite \"you\").\n\nSo... do *you* have any questions about Chinese? 😊 I'm here to help!"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这个句子完全正确！✅",
+          "reply": "这个句子完全正确！✅\n\n**Correct sentence:** 你有什么问题吗？(Nǐ yǒu shénme wèntí ma?)\n\n这是很自然、地道的问法。如果你想表达得更礼貌，可以说：\n\n- **您有什么问题吗？** (Nín yǒu shénme wèntí ma?) — 更正式 (more formal, using 您)\n\n- **有什么问题尽管问。** (Yǒu shénme wèntí jǐnguǎn wèn.) — \"If you have any questions, feel free to ask.\" (更鼓励的语气)\n\n如果你想学一个相近但不同的表达：\n\n- **你有什么要问的吗？** (Nǐ yǒu shénme yào wèn de ma?) — \"Is there anything you want to ask?\"\n\n没问题！我在这里等着你的问题。😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_ba_suggestion",
+      "name": "吧 (ba) suggestion / supposition",
+      "sentence": "你是老师吗？",
+      "common_mistake": "Using 吗 for a suggestion or a 'right?' supposition where 吧 is natural.",
+      "fix": "Tweak the “Common mistake” to: Use 吧 when you want to make a suggestion or a tentative “I think…” guess; use 吗 for a neutral yes/no question. For example: 我们走吗？= “Are we leaving?” (neutral question); 我们走吧。= “Let’s go.” 你是老师吗？= “Are you a teacher?”; 你是老师吧？= “You’re a teacher, right?” Also relabel the example as “Different meaning (a real question): 我们走吗？现在很晚了。 To make a suggestion, say: 我们走吧，现在很晚了。”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "这句话完全正确！✅",
+          "reply": "这句话完全正确！✅\n\n**你是老师吗？** — \"Are you a teacher?\"\n\nThis is a perfect example of the **吗 (ma) question structure**:\n\n- **你** (nǐ) — you\n- **是** (shì) — to be\n- **老师** (lǎoshī) — teacher\n- **吗** (ma) — question particle\n\nThe structure is simple: **Subject + 是 + Noun + 吗？**\n\nYes, I am your Mandarin coach! 😊 A small extension for you:\n\n> **是，我是你的中文教练。**  \n> (Yes, I am your Chinese coach.)\n\nIf you want to sound more natural in conversation, you could also say:\n\n> **你是教中文的老师吗？**  \n> (Are you a teacher who teaches Chinese?)\n\nThat adds a bit more specificity. But your original sentence is perfectly fine! Got any Chinese sentences you'd like me to check?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这句话完全正确！✅",
+          "reply": "这句话完全正确！✅\n\n**你是老师吗？** — *Nǐ shì lǎoshī ma?*\n\n- **你** (nǐ) = you\n- **是** (shì) = am/are/is\n- **老师** (lǎoshī) = teacher\n- **吗** (ma) = question particle\n\nNo errors at all. The word order, the use of 是, and the question particle 吗 are all perfect. 👏\n\nTo answer your question: **是的，我是老师！** (Yes, I am a teacher!) — I'm your Mandarin coach. 😊\n\nWould you like to practise anything else? Maybe a follow-up like \"你教什么？\" (What do you teach?) or \"你是哪国人？\" (Where are you from?)"
+        }
+      ]
+    },
+    {
+      "id": "gr_hui_de_certainty",
+      "name": "会……的 future certainty",
+      "sentence": "别担心，他会来。",
+      "common_mistake": "Dropping 会 or the framing 的; using 要 for a confident prediction.",
+      "fix": "Explain: “会 + Verb (+ 的) expresses a confident prediction; 的 adds reassurance/emphasis and is optional.” Common mistake: “Dropping 会 (changes the meaning). 要 is usually for plans/arrangements or something imminent; for a neutral prediction use 会.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "Looks good — this sentence is perfectly correct! ✅",
+          "reply": "Looks good — this sentence is perfectly correct! ✅\n\n**别担心，他会来。**  \n*\"Don't worry, he will come.\"*\n\nLet me break it down quickly:\n\n- **别担心** — \"Don't worry.\" 别 is the negative imperative marker, and 担心 is \"to worry.\" Standard and natural.\n- **他会来** — \"He will come.\" 会 here expresses a future possibility or intention (rather than a plan or schedule). Very natural for reassuring someone.\n\nThere's nothing to fix here. If you'd like, I can show you a small extension to make it sound even more natural in conversation:\n\n**别担心，他一定会来的。**  \n→ Adds **一定** (\"definitely\") and sentence-final **的** for emphasis — a very common pattern when reassuring someone.\n\nWant to try that structure, or do you have another sentence you'd like me to check?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这个句子完全正确！✅",
+          "reply": "这个句子完全正确！✅\n\n**别担心，他会来。**\n- 别担心 (bié dānxīn) — \"Don't worry\" ✔️\n- 他 (tā) — \"he\" ✔️\n- 会 (huì) — \"will\" (future possibility / intention) ✔️\n- 来 (lái) — \"come\" ✔️\n\nIt's a natural, everyday sentence. No errors at all.\n\n---\n\n**A small extension for you:**\n\nIf you want to sound even more reassuring, you could add **一定** (yīdìng — \"definitely\"):\n\n> **别担心，他一定会来。**\n> \"Don't worry, he will definitely come.\"\n\nOr if you want to soften it with a reason:\n\n> **别担心，他说了会来。**\n> \"Don't worry, he said he would come.\"\n\nWould you like to practise similar reassuring sentences, or try a different pattern?"
+        }
+      ]
+    },
+    {
+      "id": "gr_xiang_yao_want",
+      "name": "想 vs 要 (to want)",
+      "sentence": "我要一杯咖啡，谢谢。",
+      "common_mistake": "Using 要 for a polite wish where 想 is more appropriate.",
+      "fix": "Clarify tone vs. correctness and limit the warning to deferential requests: “想 + 动词 = 较委婉；要 + 动词 = 更坚定/打算（语气更强）。在需要表示客气的请求（如对老师/陌生人求助）里，用 想/想要 或 加上 能/可以…吗 来委婉；在点单、说明计划等场合，用 要 很自然：我要一杯咖啡；明天我要去北京。” Also change the example label from “incorrect” to “less polite → more polite.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我要一杯咖啡，谢谢。** — 非常自然，没问题。\n\n- **杯** (bēi) is the correct measure word for 咖啡 (coffee) — perfect.\n- The word order is natural for ordering.\n\n**小扩展：** 如果你想更具体一点，可以说：\n\n> 我要一杯**热**咖啡，谢谢。 — *I'd like a hot coffee, please.*\n> 我要一杯**冰**咖啡，谢谢。 — *I'd like an iced coffee, please.*\n\nKeep up the great work! 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我要一杯咖啡，谢谢。** — \"I'd like a cup of coffee, thanks.\"\n\n- **杯** is the correct measure word for drinks like coffee, tea, water, etc. 👍\n- **谢谢** at the end is polite and natural.\n\n### 小小扩展\n\nIf you want to sound even more polite in a restaurant or café, you can say:\n\n**请给我一杯咖啡，谢谢。**\n*(Please give me a cup of coffee, thanks.)*\n\nUsing **请给我** (qǐng gěi wǒ) is a slightly softer request than **我要** (wǒ yào — \"I want\").\n\nWould you like a drill on measure words for drinks (杯, 瓶, 壶, etc.)?"
+        }
+      ]
+    },
+    {
+      "id": "gr_yinggai_should",
+      "name": "应该 (yīnggāi) should / ought to",
+      "sentence": "你去看医生吧。",
+      "common_mistake": "Placing 应该 at the end like an English tag, or omitting it.",
+      "fix": "Change the note to: “Don’t put 应该 at the end; it normally comes before the verb. Note: You can also give advice with other patterns (…吧, 最好, 得/要…), which don’t use 应该.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "这句话完全正确！✅",
+          "reply": "这句话完全正确！✅\n\n**你去看医生吧。** — \"You should go see a doctor.\"\n\nYou've used:\n- **去** + verb (看) — the purpose-of-going structure correctly\n- **吧** — the suggestive mood particle, perfect for giving gentle advice\n\nIf you'd like to make it sound even more caring, you could add:\n\n> **你还是去看医生吧。** — \"You'd better go see a doctor (after all).\" (adding 还是 softens the suggestion)\n\nOther natural variations:\n- **你最好去看医生。** — \"You'd better go see a doctor.\"\n- **我建议你去看医生。** — \"I suggest you go see a doctor.\"\n\nDo you have a sentence you'd like me to check, or would you like a drill on suggestion patterns (吧 vs 建议 vs 最好)?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这句话完全正确！✅",
+          "reply": "这句话完全正确！✅\n\n**你去看医生吧。** — \"You should go see a doctor.\"\n\n- 你 (you) + 去 (go) + 看医生 (see a doctor) + 吧 (suggestion particle) — all used naturally.\n- 看医生 is the standard collocation for \"see a doctor\" in Chinese.\n\nNothing to correct here. Keep up the good work! 👍\n\n**A small extension** for you — if you want to sound even more caring, you could add a reason:\n\n> 你脸色不太好，**去看医生吧**。  \n> *(You don't look well — go see a doctor.)*\n\nOr if you want to make it a bit softer:\n\n> 你**最好**去看医生。  \n> *(You'd better go see a doctor.)*\n\nWould you like to practise the difference between 吧 (suggestion) and 最好 (stronger advice)?"
+        }
+      ]
+    },
+    {
+      "id": "gr_dei_must",
+      "name": "得 (děi) must / have to",
+      "sentence": "你不必来。(You don’t need to come.)",
+      "common_mistake": "Negating with 不得 to mean 'don't have to'.",
+      "fix": "To express “don’t have to/need not,” use 不用 or 不必 (also 不需要), not 不得 (which means “must not,” formal). Note: 不得不 + Verb means “have to.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**\"你不必来。\"** — 语法正确，用词恰当。\n\nHere's a small extension for you:\n\n**不必** (bú bì) is the more formal/literary sibling of **不用** (bù yòng). Both mean \"need not\" / \"don't have to\". In daily conversation, **不用** is more common, but **不必** is perfectly fine — it sounds slightly more polite or written.\n\n| Expression | Register | Example |\n|---|---|---|\n| 不用 | Casual / spoken | 你不用来。 |\n| 不必 | Formal / written | 你不必来。 |\n\nWant to practise the difference between 不必 and 不用 in a quick drill?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**你不必来。** — \"You don't need to come.\" (grammatically perfect, and a natural thing to say)\n\nA couple of useful extensions:\n\n**1. 不必 vs. 不用 — same meaning, different register**\n- 不必来 — slightly more formal / written\n- 不用来 — the everyday colloquial version\nBoth mean \"you don't have to come.\" Neither means \"you mustn't come.\"\n\n**2. Don't confuse \"need not\" with \"must not\"**\n\n| Chinese | Meaning |\n|---|---|\n| 你不必来。 | You don't need to come (no obligation) |\n| 你不能来。 | You can't come (prohibition) |\n| 你不可以来。 | You're not allowed to come (strong prohibition) |\n\n**3. Tone tip:** 不 before a 4th-tone syllable (必 bì) changes to 2nd tone → **bú bì**. This is the same change as in 不是 (bú shì), 不去 (bú qù).\n\nIf you'd like, I can give you a quick drill on 不必/不用 vs. 不能/不可以 to lock this in — just say the word! 🙂"
+        }
+      ]
+    },
+    {
+      "id": "gr_ji_duoshao",
+      "name": "几 vs 多少 (how many)",
+      "sentence": "你们班有多少个人？",
+      "common_mistake": "Using 几 for large amounts, or inserting a measure word that is not needed after 多少.",
+      "fix": "Change to: “几” asks about small numbers and usually takes a measure word (几个苹果、几点、几岁). “多少” can be used for any/unknown amount and often takes a measure word with countable nouns: 多少本书、多少个人. For money, both 多少钱 and 多少块(钱) are correct. Common mistake: omitting the measure word after 几, or after 多少 when the noun requires one.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！",
+          "reply": "**你的句子完全正确！** ✅\n\n**你们班有多少个人？** — \"How many people are in your class?\"\n\nThis is a natural, grammatically correct sentence. Here's a quick breakdown:\n\n| Part | Meaning |\n|------|---------|\n| 你们班 | your class |\n| 有 | have / there are |\n| 多少 | how many |\n| 个人 | people (个 = measure word, 人 = person) |\n\n**A small nuance you might notice:**\n\n- **你们班有多少人？** — more common, and sounds a bit more natural to many native speakers. With 多少, the measure word is optional (unlike 几, which *requires* one: 你们班有**几个人**？).\n- **你们班有多少个人？** — also correct and widely used. Adding 个 puts a little extra emphasis on counting *individuals*.\n\nBoth are perfectly fine. If you're ever unsure, **多少人** is the safer default, but **多少个人** is not wrong in the slightest.\n\n---\n\nSince you're new here, would you like a short drill on **几 vs 多少** to lock in the difference? Let me know!"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子「你们班有多少个人？」从语法上来看是完全正确的，母语者完全能理解。",
+          "reply": "你的句子「你们班有多少个人？」从语法上来看是完全正确的，母语者完全能理解。\n\n不过，有一个非常细微的**自然度**问题（不是语法错误）：\n\n> 问班级人数时，更自然的说法是 **「你们班有多少人？」**，而不是「你们班有多少个人？」\n\n原因很简单：**在问一个集体/单位的人数时，通常不加\"个\"**。\n\n| 自然（不加\"个\"） | 不太自然（加\"个\"） |\n|---|---|\n| 你们班有多少**人**？ | 你们班有多少**个人**？ |\n| 你家有几口**人**？ | 你家有几**个人**？ |\n| 公司有多少**人**？ | 公司有多少**个人**？ |\n\n但**具体指个体**时，加\"个\"就很自然，比如：\n- 你们班有**三个**新**同学** → 你们班有**三个**新**同学**（这里\"个\"是量词）\n- 你邀请了**几个**人？ → 这里\"几个\"是固定搭配，没问题\n\n所以你的句子**不是错句**，只是稍微有点啰嗦。去掉\"个\"会更地道：\n\n> ✅ **你们班有多少人？**\n\n如果你想练习，我可以给你出几个关于\"集体人数问法\"的小练习！"
+        }
+      ]
+    },
+    {
+      "id": "gr_meiyou_comparison",
+      "name": "A 没有 B (那么) + adj — not as ... as",
+      "sentence": "我不比他高。",
+      "common_mistake": "Using 不比 (which means 'not necessarily more than') to mean 'not as ... as'.",
+      "fix": "Explain: 用 “A 没有 B (那么/这么) + Adj” 表示 A 比 B 程度低/“not as … as”(A < B)。Add to note: “不比”表示“not more … than”(A ≤ B)，句子如“我不比他高”是对的，但如果要表达“我比他矮/不如他高”，用“我没有他高”。Remove the label ‘incorrect: 我不比他高’.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的用法完全正确！👏",
+          "reply": "你的句子 **“我不比他高”** 在语法上是完全正确的！✅\n\n这句话使用的是 **“A 不比 B + 形容词”** 结构，意思是“A 不比 B 更……”。你的句子意思是：\n\n> **“I am not taller than him.”**（可能一样高，也可能更矮。）\n\n这个结构与 **“A 没有 B + 形容词”**（“A 不如 B 那么……”）有细微区别：\n\n| 结构 | 意思 |\n|------|------|\n| 我不比他高。 | 我跟他一样高，或者我比他矮。 |\n| 我没有他高。 | 我比他矮（重点强调不如他高）。 |\n\n两者都对，但语气不同。你的用法完全正确！👏\n\n如果你想扩展一下，可以说：\n\n- **我不比他高，我们一样高。** (I'm not taller than him; we're the same height.)\n- **我不比他高，但我比他胖。** (I'm not taller than him, but I'm heavier than him.)\n\n如果你愿意，我可以帮你生成关于“比较句”的小练习来巩固这个概念。要不要试试？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 「我不比他高」 在语法上是正确的",
+          "reply": "你的句子 **「我不比他高」** 在语法上是正确的，但有一个很重要的语用差别。\n\n---\n\n### 核心区别：不比 vs 没有\n\n| 结构 | 含义 | 语气 |\n|------|------|------|\n| **A 没有 B + adj** | A 不如 B… (A 矮) | 明确表示\"更差\" |\n| **A 不比 B + adj** | 并非A比B更… (可能相等或更矮) | 否定对方\"更\"的假设，语气较委婉 |\n\n**你的句子** `我不比他高` → 意思是 **\"我并非比他高\"**（可能一样高，也可能比他矮）。\n\n**如果想说\"我没他高\"（明确比他矮）**，更自然的说法是：\n\n> ✅ **我没有他高。**  \n> (Wǒ méiyǒu tā gāo.)\n\n---\n\n### 为什么容易搞混？\n\n因为英语的 **\"I am not taller than him\"** 可以覆盖两种意思（更矮或一样高）。但中文用 **没有** 和 **不比** 来区分这两种情况：\n\n- **没有** = 否定程度（\"不如\"）\n- **不比** = 否定比较的命题（\"并非A比B更…\"）\n\n---\n\n### 一个小练习\n\n想试试看能不能区分这两个句子？请选择正确的填空：\n\n1. 我弟弟 _____ 我聪明，他考试总是比我差。  \n   A. 不比  B. 没有  \n\n2. 这件衣服 _____ 那件贵，但质量差不多。  \n   A. 不比  B. 没有  \n\n（答案在下面👇）\n\n---\n\n**答案：** 1. **B**（没有 — 明确表示不如）  \n**2. A**（不比 — 否定\"更贵\"，但可能价格相同或略低）\n\n你原来想表达哪个意思？想清楚之后，我可以帮你出更针对性的练习！"
+        }
+      ]
+    },
+    {
+      "id": "gr_yuelaiyue",
+      "name": "越来越 (yuèláiyuè) more and more",
+      "sentence": "我越学越喜欢中文。",
+      "common_mistake": "Calquing English with 更来更 or repeated 比.",
+      "fix": "Keep the core pattern, but add: Related alternatives (also correct): 越 + X + 越 + Y (我越学越喜欢中文) and 一天比一天 + 形容词 (天气一天比一天冷)。不要把这些当错。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "Perfect — you've nailed the **越 A 越 B** construction! The structure is spot on:",
+          "reply": "Perfect — you've nailed the **越 A 越 B** construction! The structure is spot on:\n\n> **越 + Verb₁ + 越 + Verb₂**\n> 学 (study) → 喜欢 (like)\n\nNo errors here. 🎉\n\n---\n\n### A small extension for you\n\nYou can also use this pattern with **adjectives**:\n\n- **他越跑越快** — *The more he runs, the faster he gets.*\n- **雨越下越大** — *The rain is falling more and more heavily.*\n\nAnd you can connect two different subjects:\n\n- **你越努力，结果越好** — *The harder you work, the better the result.*\n\n---\n\nWould you like a short drill on the **越...越...** pattern, or shall we move on to another sentence?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这个句子完全正确！✅",
+          "reply": "这个句子完全正确！✅\n\n**我越学越喜欢中文。** — *The more I study Chinese, the more I like it.*\n\nYou've used the **越…越…** *(the more… the more…)* construction perfectly here:\n\n| Pattern | Example |\n|---------|---------|\n| 越 + Verb₁ + 越 + Verb₂ | 越学 + 越喜欢 |\n\nThis is a very natural, native-sounding sentence — and it's a great sign that you're thinking in Chinese patterns rather than translating from English. (An English speaker might mistakenly say \"我更多学更更多喜欢\" — but you avoided that trap entirely.)\n\n---\n\nAs a small extension, try adding a **duration** or **time phrase**:\n\n> **我越学中文越喜欢它。**  \n> *(The more I study Chinese, the more I like it.)*\n\nOr try the **越来越** variation for a slightly different feel:\n\n> **我越来越喜欢中文了。**  \n> *(I like Chinese more and more.)*\n\nKeep it up — 你越练习越进步！(The more you practise, the more you improve!)"
+        }
+      ]
+    },
+    {
+      "id": "gr_yue_yue",
+      "name": "越 A 越 B — the more ... the more",
+      "sentence": "他越忙越累。",
+      "common_mistake": "Using 更 twice, or English 'the more ... the more' word order.",
+      "fix": "Change the pattern to: 越 + A + 越 + B (A/B can be verbs, adjectives, or quantity words/phrases). Add an example like: 他越忙越累；越多越好。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**他越忙越累。** — *The busier he is, the more tired he gets.*\n\nThis is a textbook use of the **越 A 越 B** pattern (HSK 4). You've followed the structure perfectly:\n\n> **Subject + 越 + Adj/Verb + 越 + Adj/Verb**\n\nSince this is your first submission, I don't have any past errors to compare — but nothing to fix here!\n\n---\n\n**A small extension to try:**\n\nYou can add a comma or **就** for emphasis, especially in writing:\n\n> 他**越忙，就越累。**  \n> (With a comma and 就 — slightly more formal/emphatic.)\n\nOr flip it to describe a trend:\n\n> 他**越来越忙，也越来越累。**  \n> *He's getting busier and busier, and more and more tired.*\n\n---\n\nWant to try writing a sentence with two different subjects? E.g. *The more he works, the less she complains.* That's a different pattern — happy to show you."
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“他越忙越累”** 完全正确！🎉",
+          "reply": "你的句子 **“他越忙越累”** 完全正确！🎉\n\n**结构：** 他 + 越忙 + 越累  \n= *The busier he is, the more tired he gets.*\n\n你正确地使用了 **越 A 越 B** 结构（HSK 4），表示“the more A, the more B”。这里主语是一致的（他），两个形容词（忙、累）也都用对了。\n\n---\n\n**一个小扩展：** 你也可以换主语，做成两个分句：\n\n> **他越忙，我越累。**  \n> *The busier he is, the more tired **I** get.*\n\n挑战一下：如果你想表达 “The more he sleeps, the more tired he gets”，你会怎么说？试试看！"
+        }
+      ]
+    },
+    {
+      "id": "gr_bi_degree_diff",
+      "name": "比 + adj + amount of difference",
+      "sentence": "他比我更高。",
+      "common_mistake": "Placing the amount before the adjective, or using 很/非常.",
+      "fix": "With 比, amounts like 一点儿/得多/多了/两公分 go AFTER the adjective: 他比我高一点儿/高得多/高两公分. You can also use 更 before the adjective: 他比我更高. Do not use 很/非常.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**他比我更高。** — *He is even taller than me.*\n\nThis is a perfectly natural use of **更 (gèng)** to mean \"even more\" in a **比** comparison. The structure is:\n\n> A **比** B **更** + Adjective\n\nYou didn't fall into the common trap of inserting **很** or **非常** before the adjective (e.g. ❌ *他比我很高*), so well done!\n\n---\n\n### A small extension\n\nYou can also drop **更** and just say:\n\n- **他比我高。** — *He is taller than me.* (neutral comparison)\n\nOr add a specific degree:\n\n- **他比我高一点儿。** — *He's a bit taller than me.*\n- **他比我高得多。** — *He's much taller than me.*\n\nWant to practise these variations? I can generate a quick drill for you."
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **\"他比我更高\"** 是完全正确的 ✅",
+          "reply": "你的句子 **\"他比我更高\"** 是完全正确的 ✅\n\n不过，这里有一个很实用的语感区别：\n\n| 句子 | 意思 | 语气 |\n|------|------|------|\n| 他比我高。 | He is taller than me. | 客观陈述 |\n| 他比我**更**高。 | He is **even** taller than me. | 强调差距更大 |\n\n**什么时候用「更」？**\n- 当你想强调 \"even more\" 时，用 `A + 比 + B + 更 + Adj` 很自然\n- 如果只是客观比较，不加「更」更简洁\n\n**常见错误提醒**（你没犯，但很多学习者会犯）：\n❌ 他比我**很**高。 ← 比后面不能加 很/非常/太\n✅ 他比我高。\n✅ 他比我更高。\n✅ 他比我高**很多** / **一点儿** / **三厘米**。\n\n---\n\n**想练一下吗？** 试试把下面两句翻译成中文：\n\n1. \"This phone is even more expensive than that one.\"\n2. \"She runs faster than me.\" (不用「更」)\n\n或者如果你有其他句子想让我检查，直接发过来！😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_ruguo_jiu",
+      "name": "如果……就…… (if ... then)",
+      "sentence": "如果你有时间，来我家。",
+      "common_mistake": "Dropping 就 in the result clause.",
+      "fix": "Explanation: Use the pattern 如果……，(就)…… — 就 is common but optional. Common mistake: Thinking 就 is required. Both are correct: 如果你有时间，就来我家 / 如果你有时间，来我家。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子几乎正确，完全能听懂",
+          "reply": "你的句子几乎正确，完全能听懂，但有一个小地方可以让它更自然。\n\n---\n\n**建议：** 在结果句中加入 **就**，让条件关系更清楚。\n\n> ~~如果你有时间，来我家。~~\n> ✅ **如果你有时间，就来我家。**\n> *Rúguǒ nǐ yǒu shíjiān, jiù lái wǒ jiā.*\n> \"If you have time, **then** come to my house.\"\n\n**原因：** \n在汉语里，**如果……就……** 是固定搭配。英语的 \"if... (then)...\" 允许省略 \"then\"，但汉语的 **就** 在条件句里非常自然，它能清晰地连接条件和结果。没有 **就** 时，句子听起来像两个独立的命令拼在一起。\n\n---\n\n**要不要试试这个小练习？** 把 **就** 填到正确的位置：\n\n1. 如果明天不下雨，______去公园。\n2. 如果饿的话，______吃饭。\n3. 如果他不来，我们______自己去吧。\n\n需要我帮你看看答案吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子几乎正确！不过有一个小细节可以让它更地道。",
+          "reply": "你的句子几乎正确！不过有一个小细节可以让它更地道。\n\n## ✅ 修正建议\n\n**原句：** 如果你有时间，来我家。\n\n**更自然的说法：** **如果你有时间，就来我家。**\n\n## 🔍 原因\n\n在汉语的 **\"如果……就……\"** 条件句中，结果分句前面通常要加上 **就** (then)，表示\"如果条件成立，那么……就会发生\"。少了 **就**，句子虽然还能听懂，但听起来不够完整，像是缺少了那个\"那么就\"的逻辑连接。\n\n**正确结构：** 如果 + 条件 + 就 + 结果\n\n| 如果…… | 就…… |\n|---|---|\n| 如果你有时间 | **就** 来我家 |\n| 如果明天下雨 | **就** 别去了 |\n| 如果你饿了 | **就** 先吃吧 |\n\n## 🎯 小练习\n\n把 **就** 填到正确的位置：\n\n1. 如果他不来，我们____自己去吧。\n2. 如果你喜欢这本书，____拿去看吧。\n3. 要是太贵了，我____不买了。\n\n*(答案：都填 就)*\n\n当然，在非常口语的对话中，有些人也会省略 **就**，但作为学习者，加上 **就** 会让你的汉语更规范、更自然！以后你遇到 如果/要是/假如 这类词时，记得在结果句里加上 **就** 哦 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_zhiyao_jiu",
+      "name": "只要……就…… (as long as)",
+      "sentence": "只要你是学生，门票才五十块。",
+      "common_mistake": "Pairing 只要 with 才 (that belongs to 只有).",
+      "fix": "Common mistake: After 只要, link the result with 就 (只要…就…). Don’t use 才 to mean “only then” (that pattern is 只有…才…). Note: 才 can still appear with other meanings like “only (amount)” or “just now”: 只要你是学生，门票才五十块。",
+      "confirmed_harm": true,
+      "n_marked_wrong": 2,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "你的句子意思很清楚，但有一个常见的语法搭配错误。",
+          "reply": "你的句子意思很清楚，但有一个常见的语法搭配错误。\n\n## 🚩 问题分析\n\n**搭配错误：** `只要……才……`\n\n`只要` **必须与 `就` 搭配**，不能与 `才` 搭配。\n\n| 结构 | 含义 | 搭配 |\n|------|------|------|\n| **只要……就……** | \"As long as…\" (充分条件) | ✅ `只要` + `就` |\n| **只有……才……** | \"Only if…\" (必要条件) | ✅ `只有` + `才` |\n| 你写的 | 只要…才… | ❌ 混搭了 |\n\n你写的是：\n> ❌ **只要**你是学生，门票**才**五十块。\n\n可以改成两种之一：\n\n---\n\n### ✅ 方案一：保持「只要」的意思 → 搭配 `就`\n\n> **只要**你是学生，门票**就**（只要）五十块。\n\n更自然地说：\n> **只要**你是学生，门票**就**五十块。\n> *\"As long as you're a student, the ticket is 50 yuan.\"*\n\n（也可以用 `就只要` 强调\"只需要\"：*只要你是学生，门票就只要五十块。*）\n\n---\n\n### ✅ 方案二：如果意思是\"只有学生才享这个价\" → 用 `只有……才……`\n\n> **只有**你是学生，门票**才**五十块。\n> *\"Only if you're a student is the ticket 50 yuan.\"*\n\n（注意：这个语气更强——不是学生就不行。）\n\n---\n\n## 🔍 根因\n\n英语里 \"as long as\" 和 \"only if\" 都可以跟一个条件句，但中文里 **`只要` 和 `只有` 搭配的副词完全不同**。这个混淆是英语母语者非常常见的错误。\n\n---\n\n## 🎯 小练习\n\n看看你能不能选对搭配：\n\n1. ___ 你有空，我们 ___ 一起去吃饭。\n2. ___ 努力练习，你 ___ 能进步。\n3. ___ 到了18岁，你 ___ 能考驾照。\n\n（答案：1. 只要…就 / 2. 只要…就 / 3. 只有…才）\n\n想让我给你更多类似的 drill 吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "你的句子用了 **只要**（充分条件）却接了 **才**（必要条件），不匹配。",
+          "reply": "好的，现在来修正。\n\n---\n\n## 问题\n\n你把 **只要** 和 **才** 搭配在一起了。这两个词属于不同的条件结构：\n\n| 结构 | 含义 | 搭配 |\n|------|------|------|\n| 只要…就… | \"as long as…\"（充分条件） | 只要 A，**就** B |\n| 只有…才… | \"only if…\"（必要条件） | 只有 A，**才** B |\n\n你的句子用了 **只要**（充分条件）却接了 **才**（必要条件），不匹配。\n\n---\n\n## 修正方案\n\n根据你想表达的意思，有两种改法：\n\n**选项 A — 保留「只要」**  \n> 只要你是学生，门票**就**五十块。  \n> (As long as you're a student, the ticket is 50 yuan.)\n\n如果你想强调\"只要五十块\"（only 50 yuan），可以再加一个 **只**：  \n> 只要你是学生，门票就**只**要五十块。\n\n**选项 B — 保留「才」**  \n> 只有你是学生，门票才五十块。  \n> (Only if you're a student is the ticket 50 yuan.)\n\n**最自然的说法**（推荐）：\n> 只要你是学生，门票就只要五十块。\n\n这里第一个 **只要** = \"as long as\", 第二个 **只要** = \"only\"（价格低），完全正确且自然。\n\n---\n\n## 根因\n\n英语里 \"as long as\" 和 \"only\" 是分开的，但中文里 **只要** 可以表示两个不同的意思，而你把它和 **才** 混用了。记住固定搭配口诀：\n\n> **只要…就…** ✅  \n> **只有…才…** ✅  \n> **只要…才…** ❌\n\n---\n\n## 小练习\n\n把你下面句子中的错误搭配改正：\n\n1. 只要你有钱，才买得到。\n2. 只有你来了，就能开始。\n3. 只要天气好，我才去公园。\n\n想试试吗？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_zhiyou_cai",
+      "name": "只有……才…… (only if)",
+      "sentence": "我只有三十块钱，就买不了这个包。",
+      "common_mistake": "Pairing 只有 with 就 (that belongs to 只要).",
+      "fix": "Clarify scope: In the ‘only if’ conditional meaning, use 只有…才…, not 只有…就…. But 只有 can also mean ‘only/only have’ (e.g., 我只有三十块钱), and in that use 才 is not needed and 就 may appear in the next clause as ‘then/so’.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子是**正确的**，口语中很自然！👍",
+          "reply": "你的句子是**正确的**，口语中很自然！👍\n\n**结构分析：**\n- 我**只有**三十块钱 → 这里的 **只有** = \"only have\"（动词短语），不是连词\"只有……才……\"\n- **就**买不了这个包 → **就** 表示自然的结果/推论，口语中很常见\n\n**类似的自然说法：**\n- 我没时间，就不去了。\n- 太晚了，就明天再说吧。\n\n**如果你想换种说法，也可以说：**\n- 我只有三十块钱，**所以**买不了这个包。（更正式一点）\n- 我只有三十块钱，**那**买不了这个包。（更口语）\n\n**一个小扩展：**\n如果你想强调\"即使只有30块也想买\"，可以说：\n> 我**虽然**只有三十块钱，**但是**还是想买这个包。\n\n想练习一下 **只有……才……**（\"only if\"）和 **只要……就……**（\"as long as\"）的区别吗？我可以给你出几个小练习！"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "✅ **句子完全正确，不需要修改。**",
+          "reply": "你写的句子**本身没有语法错误**，而且非常自然！我们来分析一下：\n\n---\n\n**原句：** 我只有三十块钱，就买不了这个包。\n\n**意思：** \"I only have 30 yuan, so I can't buy this bag.\"\n\n这里的语法并没有问题：\n- **我只有三十块钱** — \"I only have 30 yuan\"（只有作为动词短语，意思是\"仅仅有\"）\n- **就买不了这个包** — \"then (I) can't buy this bag\"（就表示自然的因果结果）\n\n这个结构是 **[原因/情况] + 就 + [结果]**，非常地道。比如：\n- 天气太冷，我们就不去了。\n- 他没时间，就不来了。\n\n---\n\n✅ **句子完全正确，不需要修改。**\n\n不过，如果你想用另一种同样自然的说法，也可以说：\n\n> 我只有三十块钱，**所以**买不了这个包。\n\n这里的 **所以** 更明确地强调因果关系，而 **就** 更偏口语化、自然连接。\n\n---\n\n**想继续练习吗？** 我可以给你出几个类似的\"情况 + 就 + 结果\"造句练习，或者你可以发更多句子让我帮你看看！"
+        }
+      ]
+    },
+    {
+      "id": "gr_yi_jiu",
+      "name": "一……就…… (as soon as)",
+      "sentence": "你一到家给我打电话。",
+      "common_mistake": "Using 然后 for the immediate second event, or dropping 就.",
+      "fix": "Revise the note to: “不要用‘一……然后……’。一般用‘一……就……’。口语里，尤其在要求/提醒时，可以省略‘就’（如：你一到家给我打电话），但用‘就’更保险：你一到家就给我打电话。”",
+      "confirmed_harm": true,
+      "n_marked_wrong": 2,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "**错误：** 缺少 **就** (jiù)",
+          "reply": "**错误：** 缺少 **就** (jiù)\n\n**纠正后的句子：**\n> **你一到家就给我打电话。**\n> *(Nǐ yī dào jiā jiù gěi wǒ dǎ diànhuà.)*\n\n**为什么？**\n英语直接说 *\"As soon as you get home, call me\"* 不需要中间的连接词。但中文的 **\"一……就……\"** 是一个固定结构 — **\"一 + 动作A + 就 + 动作B\"**，意思是\"一旦A发生，马上做B\"。没有 **就**，这个结构就不完整，听起来像漏了词。\n\n**一个简单的记忆方法：**  \n\"一\"是\"一旦\"，\"就\"是\"那么/就\"。两个都需要！\n\n---\n\n✅ 正确：**你一到家就给我打电话。**  \n❌ 错误：你一到家给我打电话。 (缺\"就\")\n\n---\n\n想练一下这个结构吗？我可以给你出几个填空练习 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "你的句子几乎对了，只差一个关键词！",
+          "reply": "你的句子几乎对了，只差一个关键词！让我给你解释一下。\n\n---\n\n## 问题\n\n**原文：** 你一到家给我打电话。  \n**问题：** 缺少 **就**。\n\n**一...就...** 结构（\"as soon as\"）必须搭配 **就** 放在第二个事件前面：\n\n> ✅ **你一到家*就*给我打电话。**  \n> *\"Call me as soon as you get home.\"*\n\n**结构：** 一 + 事件1 + **就** + 事件2\n\n---\n\n## 为什么会出现这个错误？\n\n这是英语母语者常见的错误。英语说 \"as soon as you get home, call me\" — 两个分句之间不需要额外的词。但中文里 **就** 是连接两个事件的必要桥梁，不能省略。\n\n---\n\n## 小练习\n\n把下面的句子补充完整，填入正确的词：\n\n1. 我一起床______刷牙洗脸。  \n2. 他一到家______开始做饭。  \n3. 你一看完这本书______还给我。\n\n---\n\n**答案：** 全部填 **就** ✅\n\n1. 我一起床**就**刷牙洗脸。  \n2. 他一到家**就**开始做饭。  \n3. 你一看完这本书**就**还给我。\n\n---\n\n下次写 **一...就...** 的时候，记得中间加 **就**！继续加油 💪"
+        }
+      ]
+    },
+    {
+      "id": "gr_chule_yiwai",
+      "name": "除了……以外 (besides / except)",
+      "sentence": "除了他以外，没人去。",
+      "common_mistake": "Dropping the paired 都/还/也 in the main clause.",
+      "fix": "通常“除了……(以外)”要配“都”（表示“除了A，其余都……”）或“还/也”（表示“除了A，还……”）。但如果主句是否定或疑问，或已用到“没人/没有/其他/只有”等限定词，就可以不再用“都/还/也”。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "The sentence is correct! ✅",
+          "reply": "The sentence is correct! ✅\n\n**除了他以外，没人去。**\n\"Except for him, no one went.\" / \"No one went except him.\"\n\nThis is a textbook example of the **除了...以外** (chúle...yǐwài) pattern, meaning \"except for / besides.\" The structure is perfect:\n\n| Part | Meaning |\n|------|---------|\n| 除了...以外 | except for / besides |\n| 他 | him |\n| 没人去 | no one went |\n\n**A small extension** for you — you can also use the same pattern to mean \"besides / in addition to\":\n\n- **除了他以外，还有三个人去。** — \"Besides him, three other people went.\"\n\nWould you like to practise the **除了...以外** pattern with a quick drill, or is there a sentence you're unsure about?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子「除了他以外，没人去。」在语法上是完全正确的。",
+          "reply": "你的句子「除了他以外，没人去。」在语法上是**完全正确的**。👍\n\n意思是：\"Other than him, no one went.\" 或 \"Except for him, nobody went.\"\n\n### 结构分析\n\n| 部分 | 作用 |\n|------|------|\n| 除了...以外 | \"except / besides\" 框架 |\n| 他 | 被排除的人 |\n| 没人 | \"no one\"（主语） |\n| 去 | 谓语动词 |\n\n这个句子自然、地道，没有错误。\n\n### 小扩展\n\n如果你想表达 **\"除了他以外，没人**会**去\"**（强调意愿或将来），可以加一个 **会**：\n\n> 除了他以外，没人**会**去。\n\n如果你想表达 **\"除了他以外，没人**想**去\"**（强调意愿），可以加 **想**：\n\n> 除了他以外，没人**想**去。\n\n但你的原句「除了他以外，没人去。」本身完全正确，在日常对话中很常用。\n\n有什么其他句子想让我检查吗？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_xian_ranhou",
+      "name": "先……然后…… (first ... then)",
+      "sentence": "我们吃饭，然后看电影。",
+      "common_mistake": "Reversing 先/然后 or omitting 先.",
+      "fix": "Change the common-mistake line to: “把‘然后’放在第一件事前面是错的。‘先’可省略：A，然后/再 B 也对。” And tweak the explanation to: “先 marks the first action; 然后或再 the next.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我们吃饭，然后看电影。**  \n(Wǒmen chīfàn, ránhòu kàn diànyǐng.)  \n\"We eat, then watch a movie.\"\n\nThis is a clear, natural way to describe two sequential actions. No errors here.\n\n---\n\n### A small extension\n\nIf you want to sound even more natural, you can add **先** (xiān) to emphasise the order:\n\n> **我们先吃饭，然后看电影。**  \n> \"First we eat, then we watch a movie.\"\n\nThis is a very common pattern: **先……，然后……** — it works exactly like \"first…, then…\" in English.\n\n---\n\nWhat would you like to do next?\n\n- **Practise** the 先……然后…… pattern with a short drill?\n- **Or** submit another sentence for me to check?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **「我们吃饭，然后看电影。」** 是完全正确的！✅",
+          "reply": "你的句子 **「我们吃饭，然后看电影。」** 是完全正确的！✅\n\n**语法分析**：这是一个标准的连动结构，用 **然后** 连接两个连续的动作（先吃饭，后看电影），语序和连接词都使用得当。\n\n如果你想稍微丰富一下表达，可以试试：\n\n- **我们吃了饭，然后去看电影。**（加个 **了** 强调第一个动作完成，再加个 **去** 让第二个动作更自然）\n- **我们先吃饭，然后再看电影。**（加 **先……再……** 结构，强调先后顺序）\n\n不过你原来的句子在日常对话中完全没问题！👍\n\n有没有特定想练习的语法点，或者想让我看看别的句子？"
+        }
+      ]
+    },
+    {
+      "id": "gr_bushi_ershi",
+      "name": "不是……而是…… (not A but B)",
+      "sentence": "这不是茶，是咖啡。",
+      "common_mistake": "Using 但是 instead of 而是 for a correction.",
+      "fix": "Teach: 不是A，而是B 用来纠正；口语里也常说：不是A，是B（可以省略“而”）。不要用“但是”直接连接A和B。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **完全正确**！✅",
+          "reply": "你的句子 **完全正确**！✅\n\n> 这不是茶，是咖啡。  \n> *\"This is not tea, it's coffee.\"*\n\n**结构分析：**  \n- 这 = this  \n- 不是 = is not  \n- 茶 = tea  \n- 是 = is  \n- 咖啡 = coffee  \n\n这个句子使用了很自然的\"不是A，是B\"结构，语法完全没问题。\n\n---\n\n**小扩展：** 如果你想说得更口语化一点，也可以加一个\"而\"（表示转折）：\n\n> 这不是茶，**而**是咖啡。  \n> *\"This is not tea, but rather coffee.\"*\n\n不过不加\"而\"也完全自然，你的原句很好！🚀\n\n有什么想继续练习的吗？"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**Sentence:** 这不是茶，是咖啡。  \n**Pinyin:** Zhè bù shì chá, shì kāfēi.  \n**Meaning:** This is not tea, it's coffee.\n\n**Structure spot-on:** You've used the common pattern **A 不是 B，是 C** (A is not B, it's C) — a basic and very useful contrastive construction.\n\n---\n\n**A small extension to stretch a little:**\n\nYou could also add a polite clarification:\n\n- **这不是茶，是咖啡。你要不要来一杯？**  \n  *Zhè bù shì chá, shì kāfēi. Nǐ yào bù yào lái yī bēi?*  \n  \"This isn't tea, it's coffee. Would you like a cup?\"\n\nNotice the measure word for coffee: **一杯咖啡** (yī bēi kāfēi) — 杯 (bēi) is the cup/glass measure word for drinks.\n\nAny particular pattern you'd like to practise next?"
+        }
+      ]
+    },
+    {
+      "id": "gr_wulun_dou",
+      "name": "无论/不管……都…… (no matter)",
+      "sentence": "不管天气怎么样，我去。",
+      "common_mistake": "Dropping 都/也, or using 虽然.",
+      "fix": "Edit to: “无论/不管 + … usually takes 都/也 in the main clause. Use 都/也 to sound clear and natural (especially in writing), but in casual speech it can be omitted: 不管天气怎么样，我（都）去。” Update the mistake note to: “Don’t replace 无论/不管 with 虽然.”",
+      "confirmed_harm": true,
+      "n_marked_wrong": 2,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "有一个小问题让它听起来不太自然。",
+          "reply": "很好！你这句话的意思很清楚，但有一个小问题让它听起来不太自然。\n\n**问题:** 不管……都/也……结构需要搭配使用。\n\n**规则:** 不管 + 疑问词/选择 + **都/也** + 结果\n\n**修正:**\n> 不管天气怎么样，**我**都**去**。\n\n**为什么？**\n不管 introduces a condition (\"no matter what the weather is like\"), and 都/也 in the second clause emphasizes that the result stays the same regardless. Without 都/也, the sentence sounds incomplete — like saying *\"No matter the weather, I go\"* instead of *\"No matter the weather, I still go.\"*\n\n---\n\n### 小练习\n\nFill in the missing word (都 / 也):\n\n1. 不管他怎么说，我______不信。\n2. 不管你去不去，我们______要去。\n3. 不管多难，她______不会放弃。\n4. 不管在哪里，我______会想家。\n\n> 答案：1. 都/也  2. 都  3. 都  4. 都\n\nWant me to generate a full drill set on the 不管...都/也 pattern?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "有一个小语法问题。",
+          "reply": "你的句子意思很明白，但有一个小语法问题。\n\n**问题**：在用 **不管**（no matter）的句子里，第二个分句通常需要 **都** 或 **也**，不能省略。这是汉语的固定结构。\n\n**不正确**：不管天气怎么样，我去 ❌  \n**正确**：不管天气怎么样，**我**都**去** ✅\n\n---\n\n**规则**：  \n> **不管 + 疑问词/选择** + **Subj. + 都/也 + Result**\n\n不管后面跟的是“什么/怎么/谁/哪”等，主句就需要用 **都**（强调“结果不变”）或 **也**（强调“即使…也…”）。\n\n- 不管你去不去，**我**都**去**。  \n- 不管他怎么说，**我**都**不相信**。  \n- 不管谁打电话，**都**别**接**。\n\n---\n\n**小练习** – 在空格里填上“都”或“也”：\n\n1. 不管多忙，我 ______ 会给你打电话。  \n2. 不管你说什么，他 ______ 不会同意。  \n3. 不管天气好不好，我们 ______ 要出发。\n\n（答案：1. 都 / 也 都可以  2. 也  3. 都）\n\n试试看，把这个句子再写一次给我？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_deshihou",
+      "name": "……的时候 (when / while)",
+      "sentence": "我小时候住在北京。",
+      "common_mistake": "Using an English-style front 'when' without 的时候.",
+      "fix": "Use 的时候 after a verb/adjective clause to mean “when”: 我小的时候… / 我吃饭的时候…. But some fixed time expressions don’t need 的时候 and can stand alone before the main clause: 小时候，我住在北京。Both 我小的时候 and 我小时候 are correct.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我小时候住在北京。**\n→ \"When I was little, I lived in Beijing.\"\n\n自然、地道，没有语法错误。你用 **小时候** 来设定过去的时间背景，就不需要再加 **了** 了，因为时间已经足够清楚。\n\n**一些延伸表达：**\n\n如果你想更具体一点，可以说：\n- **我小时候住在北京，后来搬到了上海。**  \n  (When I was little I lived in Beijing; later I moved to Shanghai.)\n\n- **我小时候在北京住了五年。**  \n  (When I was little I lived in Beijing for five years — here **了** is used because 住了 specifies the duration completed.)\n\n想试试用这些延伸句子练习一下，或者你有其他想写的句子吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！🎉",
+          "reply": "你的句子完全正确！🎉\n\n**我小时候住在北京。**  \n\"Wǒ xiǎoshíhou zhù zài Běijīng.\"\n\n结构自然，语法完美。👍\n\n---\n\n这里有一个小小的扩展，如果你想让表达更丰富一点：\n\n| 中文 | 拼音 | 意思 |\n|------|------|------|\n| 我小时候住在北京。 | Wǒ xiǎoshíhou zhù zài Běijīng. | (你原来的句子) |\n| 我小时候住在北京**，后来搬到了上海。** | …hòulái bān dào le Shànghǎi. | …后来搬到了上海。 |\n| 我小时候**在北京**住过几年。 | Wǒ xiǎoshíhou **zài Běijīng** zhù guo jǐ nián. | 我在北京住过几年。 |\n\n注意一个细微的区别：\n- **住在北京** = 强调居住的处所（状态）\n- **在北京住** = 更强调动作发生的地点（口语中很常见，两者都正确）\n\n你的句子完全没问题！有什么想继续练习的吗？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_yiqian_yihou",
+      "name": "以前 / 以后 clause order",
+      "sentence": "以前我不喝咖啡。",
+      "common_mistake": "Following English order and putting 以前/以后 first.",
+      "fix": "Keep 以前/以后 after the specific event they modify (下课以后, 睡觉以前). But when 以前/以后 mean “in the past” / “from now on” as a general time word, they can go at the start: 以前我不喝咖啡；以后我早点睡；以后下课就回家。 For the example, say: 下课以后我回家 (after class I go home). If you mean “from now on,” use: 以后下课就回家。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子「以前我不喝咖啡。」语法上完全正确，意思也很清楚。👍",
+          "reply": "你的句子「以前我不喝咖啡。」语法上完全正确，意思也很清楚。👍\n\n这句话的意思是：*In the past, I didn't drink coffee.*（暗示现在可能喝。）\n\n**结构分析：**\n- **以前** — 时间状语，设定过去的时间范围\n- **我** — 主语\n- **不喝** — 否定过去的习惯（不 + 动词）\n- **咖啡** — 宾语\n\n**一点小延伸：** 如果你想强调“以前从来不喝，现在开始喝了”，也可以用更自然的说法：\n\n> **我以前不喝咖啡，现在喝了。**\n> (Yǐqián wǒ bù hē kāfēi, xiànzài hē le.)\n\n如果你愿意，我也可以给你出几个关于**否定词“不” vs “没”** 的小练习——这是很多学习者容易混淆的地方。需要吗？"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "This sentence is correct! ✅",
+          "reply": "This sentence is correct! ✅\n\n**以前我不喝咖啡。** — \"I didn't use to drink coffee.\"\n\nIt's a natural way to contrast a past habit with a different present situation. The structure is:\n\n> **以前 + Subject + 不 + Verb + Object**\n\nIf you want to hint that things *have changed* (e.g. you drink coffee now), you could follow it with something like:\n\n> **以前我不喝咖啡，但是现在喝。**  \n> \"I didn't use to drink coffee, but now I do.\"\n\nWould you like to try extending this sentence, or shall I suggest a small drill on expressing past habits with 以前 vs. 过去?"
+        }
+      ]
+    },
+    {
+      "id": "gr_dao_resultative",
+      "name": "到 as a resultative (找到 / 看到)",
+      "sentence": "我看见他了。",
+      "common_mistake": "Omitting 到, so successful attainment is not expressed.",
+      "fix": "Change the note to: “Common mistake: Using just 找/看/买 when you mean ‘successfully’ — add a resultative complement to show the result. 到 is one common choice (找到/看到/买到), but alternatives like 看见、找着 are also correct.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "Your sentence is correct! ✅",
+          "reply": "Your sentence is correct! ✅\n\n**我看见他了。** — \"I saw him.\"\n\nThis is a textbook-perfect use of **了** as a completed-action marker. 看见 (kàn jiàn) means \"to see / catch sight of,\" and here **了** shows that the seeing actually happened — a specific, completed event. You didn't fall into the common trap of using 了 with habitual or stative actions, so nice work.\n\n**A small extension to play with:**\n\n- 我刚才看见他了。(I saw him just now.)\n- 你看见他了吗？(Did you see him?)\n- 我看见他了，但是他没看见我。(I saw him, but he didn't see me.)\n\nOne nuance worth knowing: if you just want to say \"I *have seen* him before (at some point in my life),\" you'd switch to **过** instead:\n\n- 我以前见过他。(I've met/seen him before.)\n\nWant a quick drill to lock in the difference between **了** (completed specific event) and **过** (experience)? Just say the word! 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我看见他了”** 完全正确！✅",
+          "reply": "你的句子 **“我看见他了”** 完全正确！✅\n\n**意思：** “I saw him.”\n\n**结构：**\n- 我 (wǒ) — I\n- 看见 (kànjiàn) — to see / catch sight of\n- 他 (tā) — him\n- 了 (le) — completion particle (marks that the action happened)\n\n**为什么是对的：**\n- 看见 is a **resultative verb compound** (看 + 见). 见 indicates the result — you looked and *succeeded* in seeing.\n- 了 after the object (他了) is the standard way to say the action is completed in the past.\n\n**小扩展：**\n如果你想强调“我看到了他，但没跟他说话”，可以说：\n\n> **我看到他了，但是没跟他说话。**\n\n或者，如果你想用更口语的说法：\n\n> **我见着他了。** (更口语化，北方常用)\n\n想练习一下 **结果补语**（比如 看见、听到、找到）吗？我可以给你出几个小练习 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_jian_perception",
+      "name": "见 for involuntary perception (看见 / 听见)",
+      "sentence": "我听到一个奇怪的声音。",
+      "common_mistake": "Using bare 看/听 when the perceptual result is meant.",
+      "fix": "见或到都可以作结果补语来表示确实感知到：看见/看到、听见/听到 都常用。表达“无意中感知到”时，不要用单独的 看/听；用 看见/看到、听见/听到。表达有意的活动时，用 看/听 + 宾语：我看了新闻、我听了音乐。例：更自然（表示听到）→ 我听见/听到一个奇怪的声音。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "✅ **Your sentence is correct!**",
+          "reply": "✅ **Your sentence is correct!**\n\n**Sentence:** 我听到一个奇怪的声音。  \n**Pinyin:** Wǒ tīngdào yī gè qíguài de shēngyīn.  \n**Translation:** *I heard a strange sound.*\n\n**Why it works:**\n- 听到 (tīngdào) — \"heard\" (with result, i.e., you successfully perceived the sound).\n- 一个 (yī gè) — 个 is a perfectly fine measure word for 声音 (sound), so no issue here.\n- 奇怪 (qíguài) — \"strange\" + 的 connects the adjective to the noun correctly.\n\n**Extension (to push you a little):**\n\nIf you want to specify *what kind* of sound, you could add a verb phrase:\n\n> 我听到一个奇怪的声音，**像是猫在叫**。  \n> *I heard a strange sound, **like a cat crying**.*\n\nOr if you want to get more specific about the sound itself:\n\n> 我听到一个奇怪的**响声**。  \n> *I heard a strange **noise/thud**.*\n\n(响声 is a more concrete word for a bang or clatter — HSK 4.)\n\nNice work! Feel free to send more sentences — I'm happy to check them. 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我听到一个奇怪的声音。**\n*Wǒ tīngdào yī gè qíguài de shēngyīn.*\n\"I heard a strange sound.\"\n\nEverything is in order:\n- **听到** (hear / heard) — the resultative compound is used correctly here (听 + 到 = successfully hear).\n- **一个** — 个 is a perfectly natural measure word for 声音 (sound).\n- **奇怪的声音** — adjective + 的 + noun, correct word order.\n\n---\n\n### 小小扩展 (A small extension)\n\nIf you want to be more specific about the **type** of sound, you could use other measure words:\n\n| Measure word | When to use | Example |\n|---|---|---|\n| 个 | general / any sound | 一个声音 |\n| 种 (zhǒng) | a **kind** of sound | 一种奇怪的声音 |\n| 阵 (zhèn) | a **burst** of sound | 一阵奇怪的声音 |\n\nSo for example:\n> 我听到**一阵**奇怪的声音。  \n> \"I heard a **burst of** strange sound.\" (e.g. a sudden noise that came and went)\n\nBut your original sentence is perfectly fine as-is. Nice work! 😊\n\nWould you like to practise anything related to this — like resultative verbs (听到, 看到, 找到) or measure words for sounds?"
+        }
+      ]
+    },
+    {
+      "id": "gr_gei_resultative",
+      "name": "Verb + 给 + recipient (送给 / 还给)",
+      "sentence": "我送他一本书。",
+      "common_mistake": "Omitting 给 or misordering the recipient.",
+      "fix": "With 送/还 you can use either pattern: 送给/还给 + recipient + object, or 送/还 + recipient + object. Both are common: 我送给他一本书 = 我送他一本书；把书还给我 = 还我书。Don’t put 给 at the end (✗我送他一本书给).",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我送他一本书** — 语法正确，表达自然。\n\n这个句子用了**双宾结构**（S + V + 间接宾语 + 直接宾语）：\n- 我（主语）\n- 送（动词）\n- 他（间接宾语 — 接收者）\n- 一本书（直接宾语 — 被送的东西）\n\n量词 **本** 是书的正确量词，用得很好！👍\n\n---\n\n### 一个小延伸 ✨\n\n你也可以在动词后加 **给** 来强调\"传递\"的方向：\n\n> **我送给他一本书。**\n\n两种说法都正确，但语气稍有不同：\n- **我送他一本书** — 更口语化、更直接\n- **我送给他一本书** — 稍微强调\"送给他\"这个动作\n\n---\n\n想练习一下双宾结构吗？试试把下面几句翻译成中文：\n\n1. I gave my friend a gift.\n2. My mom bought me a phone.\n3. Teacher taught us Chinese.\n\n告诉我你的答案，我可以帮你看看！😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "✅ 这个句子完全正确！**This sentence is perfectly correct!**",
+          "reply": "你写的句子是：\n\n**我送他一本书。**\n\n✅ 这个句子完全正确！**This sentence is perfectly correct!**\n\nIt follows the classic **双宾语句 (double-object construction)**:\n\n| Subject | Verb | Indirect Object | Direct Object |\n|---------|------|----------------|---------------|\n| 我 | 送 | 他 | 一本书 |\n| I | give | him | a book |\n\nYou've used the right word order — very natural for a gift-giving verb like 送, 给, 教, 借, etc.\n\nWould you like to try a small extension? For example, you could add **了** for a completed action (\"I gave him a book\"):\n\n> **我送了他一本书。**\n\nOr, if you want to say where you bought it, you could add a second sentence:\n\n> **我送他一本书。这本书是我在书店买的。**\n\nLet me know if you'd like to practise similar double-object verbs like 借 (lend/borrow), 教 (teach), or 问 (ask)!"
+        }
+      ]
+    },
+    {
+      "id": "gr_qilai_inchoative",
+      "name": "起来 — inception / 'seem' / recall",
+      "sentence": "我突然想起那个词了。(I suddenly remembered that word.)",
+      "common_mistake": "Reading 起来 only literally as 'up' and omitting it for these senses.",
+      "fix": "Change the note to: “Don’t read 起来 only as ‘up’, but also don’t force it. For ‘recall/start/seem’, 起来 is common, but other correct options exist: 想起/想到, 看上去, 下雨了/开始下雨了. For example: 我突然想起/想到那个词了 都可以。”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我突然想起那个词了。** — This is natural and correctly structured.\n\nHere's why it works:\n\n- **想起** (xiǎng qǐ) = \"to recall / think of\" — a resultative verb compound (想 + 起). You used it correctly without an extra 到 or 了 after the verb.\n- The sentence-final **了** is a **change-of-state 了** — it signals that before, you *couldn't* remember the word, and *now* you can. This is exactly the right 了 to use here.\n\n**A small extension for you:**\n\nSince you mentioned \"suddenly remembered,\" you might also learn this related expression:\n\n> **我突然想起来了！** — \"I suddenly remembered!\" (more colloquial, emphasising the moment of recall)\n\n**想起来了** = 想起 + 来 + 了 — the 来 adds a sense of \"coming back to mind.\" It's a tiny nuance, but very common in everyday speech.\n\nNo drills needed today — your sentence was spot on. Keep up the great work! 🎉\n\nWhat would you like to work on next?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "Your sentence is perfectly correct! ✅",
+          "reply": "Your sentence is **perfectly correct**! ✅\n\n**我突然想起那个词了。** — \"I suddenly remembered that word.\"\n\nLet me break down why it works so well:\n\n| Part | Role |\n|------|------|\n| 我 | subject |\n| 突然 | adverb — \"suddenly\" |\n| 想起 | verb — \"recall/think of\" (a compound of 想 + 起, meaning the thought \"arises\") |\n| 那个词 | object — \"that word\" |\n| 了 | sentence-final **change of state** — you didn't remember it before, but now you do |\n\nThe 了 here is the \"change of state\" 了, not the \"completion\" 了 — it signals that your mental state has shifted. That's exactly the right choice for this sentence. 👍\n\n**Want a small extension?** If you wanted to emphasise that you *hadn't* been able to remember it for a while, you could say:\n\n> 我刚才一直想不起来，现在突然想起那个词了。  \n> *I couldn't think of that word just now, and now I suddenly remembered it.*\n\nOr if you wanted to say \"I finally remembered\":\n\n> 我终于想起那个词了。\n\nLet me know if you'd like to practise any related patterns (e.g. 想起 vs 记得 vs 记住)!"
+        }
+      ]
+    },
+    {
+      "id": "gr_xiaqu_continue",
+      "name": "下去 — continue an action",
+      "sentence": "老师让我们继续读。",
+      "common_mistake": "Using 下来 for 'continue', or 继续 awkwardly without the complement.",
+      "fix": "Update the Common mistake note to: “不要把‘继续’和‘下来’连用。可以说 ‘继续+动词’（老师让我们继续读），也可以说 ‘动词+下去’（老师让我们读下去）。‘继续读下来’不自然。”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**老师让我们继续读。** — *The teacher told us to continue reading.*\n\nThis is a perfect use of the **让 (ràng)** causative construction:\n- **Subject** + 让 + **Person** + **Verb Phrase**\n- 老师 (teacher) + 让 (let/told) + 我们 (us) + 继续读 (continue reading)\n\nNothing to fix here! \n\n**A small extension** — you could also specify *what* to read:\n\n| Sentence | Nuance |\n|---|---|\n| 老师让我们继续读。 | Continue reading (whatever we were reading) |\n| 老师让我们继续读课文。 | Continue reading the text |\n| 老师让我们继续读下去。 | Continue reading (with emphasis on *going on*) |\n\nWould you like a drill on the 让 construction, or would you like to try a more complex sentence?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "✅ Your sentence is correct!",
+          "reply": "✅ Your sentence is correct! \n\n**老师让我们继续读。** — \"The teacher told us to continue reading.\"\n\nThe structure is spot-on: **Subject (老师) + 让 (ràng) + Person (我们) + Verb phrase (继续读)**. This is the causative 让 construction, and you've used it exactly right — 让 takes a person/object and makes them do the following action, no other connecting word needed.\n\nOne small note: since the action is ongoing reading (\"continue reading\"), you don't need 了 here — the sentence simply reports what the teacher did, and 继续 already carries the ongoing sense. If the teacher's action itself were complete and you wanted to emphasise it, you could say 老师让我们继续读了 — but your version is perfectly natural as is.\n\n**A small extension to try:** 让, 叫, and 请 all translate roughly as \"have/tell someone to do something,\" but they differ in tone:\n- **让** — neutral, \"have/let\" (your sentence ✓)\n- **叫** — more direct/colloquial, \"tell someone to\"\n- **请** — polite, \"invite/ask someone to\"\n\nWant a quick drill to practise choosing between 让 / 叫 / 请? I can generate one. 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_cong_dao",
+      "name": "从……到…… (from ... to)",
+      "sentence": "我九点到五点上班。",
+      "common_mistake": "Using 到 alone, or following English word order with the times after the verb.",
+      "fix": "Change the note to: “Don’t put the time range after the verb (e.g., 我工作九点到五点 is unnatural). Note: A 到 B without 从 is also common and correct when the range is clear, especially with times/places: 我九点到五点上班 / 星期一到星期五 / 北京到上海。”",
+      "confirmed_harm": true,
+      "n_marked_wrong": 2,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "你的句子意思很清晰，但缺少一个关键的词。",
+          "reply": "你的句子意思很清晰，但缺少一个关键的词。\n\n**纠正后的句子：**\n> **我从九点到五点上班。**\n\n**原因：**\n在中文里，表示“从……到……”（时间或地点范围）时，**必须**加上 **从** 开头。只用 **到** 就像英语只说 \"to 5 o'clock\" 而没说 \"from 9\"。\n\n**结构：**\n> **从** + 时间/地点 + **到** + 时间/地点\n\n**对比一下：**\n| ❌ 少了 | ✅ 正确 |\n|---|---|\n| 我九点到五点上班。 | 我**从**九点到五点上班。 |\n| 我工作到下午五点。✅ (这里\"到\"单独表示\"until\"，是对的) | 我**从**早上九点工作到下午五点。✅ |\n\n**注意：** \"到\" 单独用可以表示 \"until\"（我工作到五点），但要说 \"from A to B\" 时，就需要 **从...到...** 一起用。\n\n---\n\n来个小练习吧！把下面的句子补充完整：\n\n1. 我 ______ 星期一到星期五上班。\n2. 他 ______ 上海到北京坐高铁。\n3. 我们 ______ 2019年到2023年住在纽约。\n\n试试看！😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "缺了“从”",
+          "reply": "你的句子 \"我九点到五点上班\" 意思很清楚，但**缺了“从”**。\n\n### 问题\n在中文里，表示时间范围“从……到……”时，**“从”通常不能省略**。英语说 *\"I work 9 to 5\"*，中文直译成“九点到五点”就不完整了。\n\n> ✅ **我从九点到五点上班。**  \n\n或者更自然地说：\n\n> ✅ **我从九点工作到五点。**  \n> ✅ **我九点上班，五点下班。** （侧重上下班时间）\n\n### 为什么？\n“从 A 到 B” 是一个固定结构，覆盖时间或空间——**“从”标记起点，“到”标记终点**。少了“从”，听起来像漏了半个结构。\n\n---\n\n### 小练习（帮你内化）\n\n把下面句子翻译成中文：\n\n1. 我从星期一到星期五工作。  \n2. 他从早上8点学到晚上10点。  \n3. 她从北京到上海出差。\n\n（写出来我帮你检查 😊）"
+        }
+      ]
+    },
+    {
+      "id": "gr_li_distance",
+      "name": "离 (lí) distance from",
+      "sentence": "从我家到学校不远。",
+      "common_mistake": "Using 从 for a static distance.",
+      "fix": "Change the note to: “Don’t use 从 by itself for static distance (我家从学校很近 ✗). Use 离: 我家离学校很近 ✓. You can also use 从A到B with distance/time or 远/不远: 从我家到学校不远 / 走十分钟 ✓.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "这句话看起来完全正确！✅",
+          "reply": "这句话看起来完全正确！✅\n\n**从我家到学校不远** — \"It's not far from my home to school.\"\n\nYou've used the standard pattern **从 A 到 B + 距离描述** correctly:\n\n- **从我家** (from my home)\n- **到学校** (to school)\n- **不远** (not far)\n\nThis is a natural, common way to express distance in Chinese. No error here.\n\n---\n\n### 一点小扩展 (A small extension)\n\nYou can also add **很/太** for emphasis:\n\n| 句子 | 意思 |\n|------|------|\n| 从我家到学校**很**远。 | It's very far from my home to school. |\n| 从我家到学校**不太**远。 | It's not too far from my home to school. |\n| 从我家到学校**非常**近。 | It's extremely close from my home to school. |\n\nGreat work! 你想继续练习这种句型吗？或者有其他句子想让我看看？"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 「从我家到学校不远」 是正确的 ✅",
+          "reply": "你的句子 **「从我家到学校不远」** 是正确的 ✅\n\n这是很自然的汉语表达，意思是 \"From my home to school (the journey) is not far.\" 结构 **从 A 到 B + 形容词** 完全正确，日常口语中常用。例如：\n\n- 从北京到上海很远。\n- 从公司到地铁站很近。\n\n---\n\n### 一个小小的延伸\n\n你还可以用 **离** 来表达静态距离，意思稍有不同：\n\n| 句子 | 强调 |\n|------|------|\n| **从**我家到学校不远。 | 强调 **路程/行程** (the journey/route) |\n| 我家**离**学校不远。 | 强调 **静态距离** (the static distance between two places) |\n\n两者都正确，但 **离** 更直接表达 \"A is not far from B\" 这个意思。\n\n---\n\n### 例句对比\n\n- **从**我家到学校走路十分钟。 (From my home to school, walking 10 minutes.)\n- 我家**离**学校只有一公里。 (My home is only 1 km from school.)\n\n你的句子完全没问题，继续加油！🎉 如果想练习相关句型，告诉我，我可以给你出几个小练习。"
+        }
+      ]
+    },
+    {
+      "id": "gr_gei_coverb",
+      "name": "给 (gěi) + recipient + verb (for / to)",
+      "sentence": "我打电话给你。",
+      "common_mistake": "Omitting 给, or following English order (verb before recipient) where the coverb is expected.",
+      "fix": "Teach both common orders and note verbs that don’t use 给: 给 + recipient + 动词, and also 动词 + 给 + recipient are both common with many verbs (e.g., 我给你打电话 / 我打电话给你; 给他写信 / 写信给他). Don’t add 给 with verbs that take a person directly (e.g., 我告诉你, 我问他, 我帮你).",
+      "confirmed_harm": true,
+      "n_marked_wrong": 1,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "听起来像是英语直译",
+          "reply": "你的句子 **\"我打电话给你\"** 是可以被理解的，但更自然、更地道的说法是：\n\n> ✅ **我给你打电话。**\n> (Wǒ gěi nǐ dǎ diànhuà.)\n\n---\n\n### 为什么？\n\n中文里，**给 + 人 + 动词** 是一个固定结构，表示动作是为谁做的或指向谁。英语说 *\"I call you\"*（动词 + 人），但中文习惯把 **给 + 人** 放在动词前面：\n\n| 英语结构 | 中文结构 |\n|-----------|----------|\n| call **you** | **给你** 打电话 |\n| cook **for mom** | **给妈妈** 做饭 |\n| send **him** a message | **给他** 发消息 |\n\n所以 **\"我打电话给你\"** 听起来像是英语直译（verb + recipient），而 **\"我给你打电话\"** 才是地道的汉语语序。\n\n---\n\n### 小练习\n\n把下面句子改成正确的 **给** 结构：\n\n1. 我发邮件你。 → 我 **____** 发邮件。\n2. 他买礼物我。 → 他 **____** 买礼物。\n3. 她说故事孩子。 → 她 **____** 说故事。\n\n试试看！😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我打电话给你”** 是完全正确的！✅",
+          "reply": "你的句子 **“我打电话给你”** 是完全正确的！✅\n\n这是中文里非常自然的表达方式。两种常见说法都正确：\n\n| 说法 | 语气 |\n|------|------|\n| **我给你打电话** | 更标准、正式 |\n| **我打电话给你** | 口语化，日常交流常用 |\n\n两者都表示 \"I'll call you\"。\n\n---\n\n### 小小延伸 🌱\n\n如果你想说 **“我一到家就给你打电话”**（\"I'll call you as soon as I get home\"），可以试试这个结构：\n\n**一 + 动作1 + 就 + 动作2**\n\n> 我一到家就给你打电话。\n\n这个句型很常用，下次可以试试看！😊\n\n有什么其他句子想让我看看吗？"
+        }
+      ]
+    },
+    {
+      "id": "gr_weile_purpose",
+      "name": "为了 (wèile) in order to",
+      "sentence": "我学中文是为了找到好工作。",
+      "common_mistake": "Placing the purpose at the end, or using 因为 (because) for a purpose.",
+      "fix": "Allow more positions: 为了+目的 can go at the start (为了找到好工作，我在学中文) or after the subject (我为了找到好工作在学中文); it can also follow the main clause with 是 (我学中文是为了找到好工作). The real mistake is using 因为 to express purpose.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**Sentence:** 我学中文是为了找到好工作。  \n**Meaning:** *I study Chinese in order to find a good job.*\n\nYou've used the **⋯⋯是 + 为了 + Purpose** structure perfectly here. This is the correct way to express purpose at the end of a sentence. Many English speakers mistakenly use 因为 (because) here, but you've got it right! 👏\n\n---\n\n**A small extension**\n\nYou could also move the purpose to the front for emphasis:\n\n> **为了找到好工作，我学中文。**  \n> *In order to find a good job, I study Chinese.*\n\nAnd if you want to sound more natural in conversation, you could add a 的 at the end (common in colloquial speech):\n\n> 我学中文是为了找到好工作的。\n\nWant to keep going? You could try answering: *除了找工作，你学中文还有什么原因？* (Besides finding a job, what other reasons do you have for studying Chinese?)"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我学中文是为了找到好工作。**\n\nThis is a perfect use of the **是 + 为了** structure to express purpose. The grammar rule says: \n\n> 是 + 为了 + Purpose → Subject + 是 + 为了 + [goal]\n\nYou've used it exactly right — the goal (找到好工作) comes after 为了, and the sentence flows naturally.\n\n**Would you like a small extension?** Here's one way to add a bit more natural flow:\n\n> 我学中文是为了找到好工作，所以我每天练习。  \n> (I study Chinese to find a good job, so I practice every day.)\n\nOr if you want to sound more conversational:\n\n> 我学中文是为了找到一份好工作。  \n> *(Adding 一份 — a measure word for jobs — makes it feel more natural.)*\n\nWant to drill the **为了** structure further, or try a different sentence?"
+        }
+      ]
+    },
+    {
+      "id": "gr_yong_instrument",
+      "name": "用 (yòng) + tool + verb (by means of)",
+      "sentence": "我吃饭用筷子。",
+      "common_mistake": "Following English 'with ...' order and putting the tool after the verb.",
+      "fix": "Update the common-mistake note to: “不要把‘用’省略。工具短语可以放在动词前，也可以放在动词（或动宾结构）后：我用筷子吃饭／我吃饭用筷子。‘我吃饭筷子’（没有‘用’）是不对的。”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我吃饭用筷子”** 完全正确，而且非常地道！🎉",
+          "reply": "你的句子 **“我吃饭用筷子”** 完全正确，而且非常地道！🎉\n\n### 为什么这个句子是对的？\n\n这里用了汉语常见的 **话题—评论结构**：\n\n- **话题（Topic）**：吃饭（\"关于吃饭这件事\"）\n- **评论（Comment）**：用筷子（\"我用筷子\"）\n\n意思就是：*\"As for eating, I use chopsticks.\"*\n\n这跟另一种常见结构 **“我用筷子吃饭”** 意思一样，只是语序不同，都很自然。\n\n### 一个小扩展 🌱\n\n如果你想强调 **用什么工具做某事**，这两个结构都可以用：\n\n| 结构 | 例句 |\n|------|------|\n| 用 + 工具 + 动词 | 我用筷子吃饭。 |\n| 动词 + 宾语 + 用 + 工具 | 我吃饭用筷子。 |\n\n**注意**：不能说 ❌ *“我吃饭筷子”* —— 缺少动词 **用**，句子就不完整了。\n\n---\n\n你的句子没问题！如果你愿意，我可以给你出几个关于 **“用”** 的小练习，或者你可以继续发句子让我检查。😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我吃饭用筷子。”** 是完全正确的，而且很自然！👍",
+          "reply": "你的句子 **“我吃饭用筷子。”** 是完全正确的，而且很自然！👍\n\n这句话的结构是：\n> **Subject + Action + 用 + Instrument**\n\n意思就是“I eat using chopsticks”或“I use chopsticks to eat”。\n\n---\n\n如果你想让它更丰富一点，也可以说：\n\n- **我用筷子吃饭。** – 更常见的主谓宾结构（Subject + 用 + Instrument + Action）。\n- **我吃饭的时候用筷子。** – “When I eat, I use chopsticks.”\n\n但你的原句完全没问题，口语中很常用！👏\n\n需要继续练习其他句子吗？"
+        }
+      ]
+    },
+    {
+      "id": "gr_zai_location_verb",
+      "name": "在 + place + verb (do at a location)",
+      "sentence": "我住在北京。",
+      "common_mistake": "Following English order and putting the place after the verb.",
+      "fix": "Explanation: For most activities, put 在 + place before the verb: 我在图书馆学习. But with location verbs like 住/坐/站/放, 在 follows the verb: 我住在北京, 他坐在椅子上. Common mistake: For activity verbs (学习/工作/吃/玩 etc.), don’t say 我学习在图书馆 → use 我在图书馆学习. Sentences like 我住在北京 are correct.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你写的句子 “我住在北京。” 是完全正确的！✅",
+          "reply": "你写的句子 **“我住在北京。”** 是完全正确的！✅\n\n**结构：** 我 + 住 + 在 + 北京  \n这是表达“I live in Beijing”的标准方式。动词 **住** 后面用 **在** 来引入地点，语法完全没问题。\n\n---\n\n### 小扩展 🌱\n\n如果你想说得更具体一点，可以试试：\n\n- **我住在北京市中心。**  \n  *Wǒ zhù zài Běijīng shì zhōngxīn.*  \n  “I live in central Beijing.”\n\n- **我住在北京三年了。**  \n  *Wǒ zhù zài Běijīng sān nián le.*  \n  “I’ve lived in Beijing for three years.”（注意这里用了 **了** 表示持续到现在）\n\n- **我住在北京，离公司很近。**  \n  *Wǒ zhù zài Běijīng, lí gōngsī hěn jìn.*  \n  “I live in Beijing, very close to my office.”\n\n---\n\n有什么想继续练习的吗？比如“住在” vs “在……住”的区别，或者聊聊你在北京的生活？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“我住在北京”** 是完全正确的！✅",
+          "reply": "你的句子 **“我住在北京”** 是完全正确的！✅\n\n**结构：** 我 + 住 + 在 + 北京  \n这是表达“居住在某地”的标准方式。动词 **住** 后面接 **在** 来引入地点，非常自然。\n\n如果你想扩展一下，这里有几个相关的表达：\n\n- **我住在北京。** → *I live in Beijing.*\n- **我住在北京朝阳区。** → *I live in Beijing's Chaoyang district.*\n- **你住在哪儿？** → *Where do you live?*\n\n如果你愿意，我可以给你出几个关于“住在 + 地点”的小练习，帮你巩固这个结构。要不要试试？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_shi_identity",
+      "name": "是 (shì) identity — no 是 before an adjective",
+      "sentence": "这是对的。",
+      "common_mistake": "Inserting 是 before an adjective (他是高 / 他是很忙).",
+      "fix": "Edit to: “Don’t use 是 before a bare adjective predicate — use 很/不 instead: 他很忙/他不高. But when the adjective is turned into a noun with 的, 是 is fine: 这是对的/这个菜是辣的/这件衣服是新的.” Update the mistake note: “Wrong: 他是高、他是很忙. (But 是 + 形容词 + 的 is OK: 他是对的.)”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "没错，这句话是对的！✅",
+          "reply": "没错，这句话是**对的**！✅\n\n**这是对的** 完全正确，是日常中文里很自然的表达。意思是 *\"This is correct\"* 或 *\"That's right\"*。\n\n如果你想换几种说法，也可以试试：\n\n- **你说的对。** — *You're right (what you said is correct).*\n- **没错。** — *That's right / No mistake.* (更口语化)\n- **正确。** — *Correct.* (更正式/简洁)\n\n你写的这个句子没有问题！要继续练习什么吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 \"这是对的\" 完全正确！✅",
+          "reply": "你的句子 \"这是对的\" 完全正确！✅\n\n**Why it works:**\n- **这** (zhè) = \"this\"\n- **是** (shì) = \"is\"\n- **对的** (duì de) = \"correct\" (adjective + 的, forming a nominal predicate)\n\nThis is a standard **是…的** construction used to state an opinion, judgment, or fact. Here, 对的 functions as a noun phrase meaning \"the correct thing\" — so it literally means \"This is the correct one / This is correct.\"\n\n**No errors at all.** You're communicating clearly! 🎉\n\nWould you like to explore a related pattern — like how to say \"That's not right\" (这不对) or \"That was correct\" (刚才是对的)? Or feel free to send me a sentence you'd like me to check!"
+        }
+      ]
+    },
+    {
+      "id": "gr_zai_location",
+      "name": "在 (zài) to be located at",
+      "sentence": "桌子上有我的手机。",
+      "common_mistake": "Using 有 or 是 for the location of a specific known thing.",
+      "fix": "Common mistake: Don’t put 有 or 是 after the thing as the subject to express its location (e.g., 我的手机有/是桌子上✗). Use 在: 我的手机在桌子上✓. Note: Use 有 when the place is the subject to say what is there: 桌子上有一部手机/有我的手机.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“桌子上有我的手机。”** 是完全正确的！✅",
+          "reply": "你的句子 **“桌子上有我的手机。”** 是完全正确的！✅\n\n**结构分析**\n- 桌子 **上** → 方位词，正确\n- 有 → 存在句，表示“某处有某物”\n- 我的手机 → 名词短语，正确\n\n**语法规则**\n这正是汉语的 **存在句（存现句）**：**Place + 有 + Noun**。你用得完全标准。\n\n---\n\n**想不想拓展一下？** 这里有几个相关的表达：\n\n| 句子 | 意思 |\n|------|------|\n| 桌子上 **是** 我的手机。 | 桌上（放着的）是我的手机（强调“是”后面的东西） |\n| 桌子上 **放着** 我的手机。 | 桌上放着一部手机（描述状态） |\n| 我的手机 **在** 桌子上。 | 我的手机在桌子上（强调位置） |\n\n**有** vs **是** 在存在句中的区别，你清楚吗？如果需要，我可以给你讲讲或者出几个小练习。😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **“桌子上有我的手机。”** 是完全正确的 ✅",
+          "reply": "你的句子 **“桌子上有我的手机。”** 是完全正确的 ✅\n\n这句话使用的是 **“有”字存在句**（existential sentence with 有），结构是：\n\n> **地点 + 有 + 人/物**\n\n- **桌子上** — location (on the table)\n- **有** — indicates existence\n- **我的手机** — the thing that exists\n\n**语法要点：**  \n在中文里，表示“某处有某物”时，一定要把地点放在前面，这是最自然的语序。你的句子完全符合这个规则。\n\n---\n\n**进阶扩展：**  \n如果你想表达“我的手机在桌子上”，那也是一个正确的句子，但意思上略有不同：\n\n- **桌子上有我的手机。** → 强调“桌子上”这个地方有什么（存在句）\n- **我的手机在桌子上。** → 强调“我的手机”在哪里（位置句）\n\n两者都可以用，但要根据你想强调什么来选择。\n\n---\n\n你还有其他句子想让我检查吗？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_duo_approx",
+      "name": "Number + 多 approximation",
+      "sentence": "一百块多。",
+      "common_mistake": "Putting 多 before the number, or omitting it for 'more than'.",
+      "fix": "Teach both orders: 多 can go after the number or after the measure word: 三十多岁 / 三十岁多；一百多块 / 一百块多。Don’t put 多 before the number (×他多三十岁). Note: “more than” can also be expressed with 超过/以上/多于, which are also correct.",
+      "confirmed_harm": true,
+      "n_marked_wrong": 2,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": true,
+          "evidence": "你的句子 **一百块多** 需要调整一下语序。",
+          "reply": "你的句子 **一百块多** 需要调整一下语序。\n\n---\n\n**问题：** “多” 的位置放错了。\n\n在中文里，表示“比某个整数多一点点”时，结构是：\n\n**数字 + 多 + 量词 + (名词)**\n\n✅ **一百多块** — “more than 100 yuan”\n❌ ~~一百块多~~ — 这听起来不自然\n\n**更多例子：**\n- 三十多岁 → more than 30 years old\n- 两百多个人 → more than 200 people\n- 三个多月 → more than 3 months\n\n---\n\n**为什么？**  \n英语是 \"100 dollars **more**\"（多放在量词后），但中文里“多”要放在**数字和量词之间**。这是英语母语者很容易犯的典型错误！😊\n\n---\n\n**更正：**\n> ✅ **一百多块**\n\n---\n\n**小练习：** 请把下面英文翻译成中文：\n1. \"more than 50 yuan\"\n2. \"more than 10 days\"\n3. \"more than 200 students\"\n\n（试试看，我帮你检查！）"
+        },
+        {
+          "k": 1,
+          "marked_wrong": true,
+          "evidence": "你这个句子几乎对了，但词序需要调整一下。",
+          "reply": "你这个句子几乎对了，但词序需要调整一下。\n\n**错误：** ❌ 一百块**多**\n\n**正确：** ✅ **一百多块** (yī bǎi duō kuài)\n\n**为什么？**\n\n在中文里，表示“超过某个数量”时，结构是：\n\n**数字 + 多 + 量词 + (名词)**\n\n而不是 *数字 + 量词 + 多*。\n\n| 错误 ❌ | 正确 ✅ |\n|---------|---------|\n| 一百块多 | **一百多块** |\n| 三个多小时 | ✗ |\n| 三个小时多 | ❌ **三多个小时** |\n\n**小练习：**\n\n把下面的句子改成正确的说法：\n\n1. 二十块多 → __________\n2. 五个多月 → （这个已经是正确的，猜猜为什么？）\n3. 他六十岁多了 → __________\n\n<details>\n<summary>答案</summary>\n\n1. **二十多块** — 二十多块钱\n2. **五个多月** ✅ 正确！因为“多”放在数字和量词之间：五 + 多 + 个月 → 五个多月（注意：这里“个”是量词，所以“五**个**多**月**”）\n3. **他六十多岁了** — 他六十多岁了\n\n</details>\n\n继续加油！💪 你离很自然的中文表达只差这一个小调整。"
+        }
+      ]
+    },
+    {
+      "id": "gr_di_ordinal",
+      "name": "第 (dì) ordinal numbers",
+      "sentence": "今天三号。",
+      "common_mistake": "Omitting 第 for an ordinal (using a bare cardinal).",
+      "fix": "Common mistake: Omitting 第 when it’s needed before many ordered nouns like 次/个/位/课/题 (e.g., 第一次、第三个、第三位、第三课、第三题). But don’t use 第 with set labels like dates and floors: 今天三号, 我住在三楼。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**今天三号。** — \"Today is the 3rd.\" 很自然，不需要加“是”。\n\n---\n\n### 小扩展 (A small extension)\n\n如果你想说得更完整或更正式，也可以加“是”：\n\n- **今天是三号。** — \"Today is the 3rd.\" (slightly more formal)\n\n如果想带月份：\n\n- **今天三月三号。** — \"Today is March 3rd.\"\n- **今天是三月三号。** — \"Today is March 3rd.\" (with 是)\n\n你是在说日期还是别的什么？如果是练习，我可以给你出几个关于“日期表达”的题目 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**今天三号。** — \"Today is the 3rd.\"\n\nThis is a natural, colloquial way to say it. In spoken Chinese, you can drop **是** (to be) for short, common statements like dates. It's just as correct as the fuller version **今天是三号** — just a little more casual.\n\n---\n\n**小小的延伸 (A small extension):**\n\nIf you want to add the month, remember the big-to-small order:\n\n- **今天三月三号。** — Today is March 3rd.\n- **今天五月三号。** — Today is May 3rd.\n\nNo 是 needed here either!\n\nKeep it up — you're off to a clean start! 加油！💪"
+        }
+      ]
+    },
+    {
+      "id": "gr_mei_every",
+      "name": "每 (měi) + measure word (every)",
+      "sentence": "我每天跑步。",
+      "common_mistake": "Omitting the measure word after 每, or dropping 都.",
+      "fix": "Clarify: 每 + (量词) + 名词. With common time words, don’t add 个: 每天、每年、每月、每星期/每周；also fixed form 每人. Use 都 when the 每‑phrase is the subject meaning “each …” (每个学生都喜欢老师). With time/frequency phrases, 都 is optional: 我每天(都)跑步；我每个星期三(都)上中文课。",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**我每天跑步。** — *I run every day.*\n\nThis is a clean, natural sentence. The word order is perfect:\n- **Subject + Time + Verb** → 我 + 每天 + 跑步\n\n**A small extension for you:**\n\nIf you want to add **where** you run, you can put the location before the verb:\n\n- 我每天**在公园**跑步。 — *I run in the park every day.*\n- 我每天**在健身房**跑步。 — *I run at the gym every day.*\n\nOr if you want to add **duration** (how long), it comes after the verb:\n\n- 我每天跑步**一个小时**。 — *I run for an hour every day.*\n\nWant to try combining both? 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这个句子完全正确！✅",
+          "reply": "这个句子完全正确！✅\n\n**我每天跑步。** — *I run every day.*\n\n结构清晰，语法正确。如果你想稍微扩展一下，可以试试：\n\n- **我每天跑步半小时。** — *I run for half an hour every day.*（加了时间长度）\n- **我每天早上跑步。** — *I run every morning.*（加了具体时间）\n\n你说得对，不需要修改。继续加油！💪\n\n有什么想写的句子，或者想练习的语法点吗？"
+        }
+      ]
+    },
+    {
+      "id": "gr_xie_some",
+      "name": "些 / 一些 / 这些 (some, plural)",
+      "sentence": "我们在找一些个子高的学生。",
+      "common_mistake": "Adding a measure word after 些 (一些个) or a number before it.",
+      "fix": "Say: “Don’t put a classifier right after 些 when 些 directly modifies the noun (一些苹果, 这些人). But if 个 is part of the next word (e.g., 个人, 个子), that’s fine: 我有一些个人的想法; 我们在找一些个子高的学生.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你写的句子完全正确！✅",
+          "reply": "你写的句子完全正确！✅\n\n**Sentence:** 我们在找一些个子高的学生。\n\n**Meaning:** \"We are looking for some tall students.\"\n\n**Grammar notes:**\n- **在** correctly marks the progressive aspect (\"are looking for\").\n- **一些** is the right quantifier for \"some\" (general quantity).\n- **个子高的** is a textbook **subject-predicate phrase** (主谓短语) used as a modifier. 个子 (stature) + 高 (tall) + 的 turns the whole phrase into an attribute for 学生.\n- This is a very natural, idiomatic way to describe people's height in Chinese.\n\n**Extension — a small nudge:**\n\nIf you want to sound even more natural in spoken Chinese, you could also say:\n\n> 我们在找一些**高个子**的学生。\n\n**高个子** (gāo gè zi) is a compact noun meaning \"tall person\" — it's a common, colloquial alternative to the more formal 个子高. Both are correct; the latter is a bit more conversational.\n\nGreat work — keep it up! 😊 Do you have any other sentences you'd like me to check?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确，自然流畅！✅",
+          "reply": "你的句子完全正确，自然流畅！✅\n\n**我们在找一些个子高的学生。**\n*— We are looking for some tall students.*\n\n这句话的语法和用词都没问题：\n\n- **在找** — 正确使用了进行时态表达“正在寻找”\n- **一些个子高的学生** — “个子高”是主谓结构 + 的，用来修饰“学生”，非常地道\n\n---\n\n如果你想让表达更丰富，这里有几个小扩展：\n\n1. **更口语化**（日常对话中也很常见）：\n   > 我们在找一些**高个子**的学生。\n   *（“高个子”作定语，更简洁）*\n\n2. **强调“身高”这个条件**：\n   > 我们在找一些**身高**高的学生。\n   *（“身高”比“个子”更正式，适合书面语或招聘场景）*\n\n3. **加上“来”表示目的**：\n   > 我们在找一些个子高的学生**来参加活动**。\n   *（补充目的，意思更完整）*\n\n---\n\n你做得很棒！如果有什么具体的语法点或者你想练习的内容，随时告诉我，我可以帮你设计几个小练习 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_money_spoken",
+      "name": "Spoken money (块 / 毛 / 分)",
+      "sentence": "我花了二十元。",
+      "common_mistake": "Using written 元/角 in speech, or reversing the unit order.",
+      "fix": "Explanation: In casual speech, people usually say 块(=元), 毛(=角), 分, big unit first: 三块五, 十块二毛. 元 is also fine in speech (more neutral/formal), and 角 is less common than 毛.\nCommon mistake: Reversing the unit order (e.g., 这个五毛三块). In casual chat, prefer 块/毛, but 元 isn’t wrong.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你写的句子 **\"我花了二十元\"** 是完全正确的！✅",
+          "reply": "你写的句子 **\"我花了二十元\"** 是完全正确的！✅\n\n这是一个非常自然、地道的句子。语法上没问题：\n\n- **花** (to spend)  \n- **了** (completed action marker)  \n- **二十元** (20 yuan — 元 is the standard currency unit)\n\n**小扩展 (a small extension):**\n\n如果你想说得更口语化，也可以说 **\"我花了二十块钱\"** (kuài is the colloquial version of 元). 两者都对，但 **\"块钱\"** 在日常对话中更常用。\n\n比如：\n- 我花了二十块。✅\n- 我花了二十块钱。✅\n- 我花了二十元。✅ (更正式/书面)\n\n你还有其他句子想让我检查吗？😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子 **\"我花了二十元。\"** 是完全正确的！✅",
+          "reply": "你的句子 **\"我花了二十元。\"** 是完全正确的！✅\n\n**语法结构** (Grammar): 我 + 花 + 了 + 二十 + 元 — perfect.\n\n不过有一个小小的语体提示：在口语中，中国人更常说 **\"块\"** (kuài) 而不是 **\"元\"** (yuán)。两者都对，但：\n\n- **元** = 更正式（像英语的 \"dollars\"）\n- **块** = 更口语化（像英语的 \"bucks\"）\n\n所以日常聊天中，你更常听到：\n> 我花了**二十块**。\n\n而**元**常用于新闻、银行、正式场合。\n\n---\n\n**一个小扩展 🌱**\n\n你也可以说：\n\n> 我花了二十**块**钱。  \n> (I spent 20 kuài.)\n\n或者加个\"多\"：\n\n> 我花了二十**多**块。  \n> (I spent more than 20 kuài.)\n\n想练习一下\"花\"的用法，或者聊聊其他话题吗？😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_adj_predicate_hen",
+      "name": "Adjective predicate takes 很, not 是",
+      "sentence": "今天天气好。",
+      "common_mistake": "Using 是 before the adjective, or leaving a neutral statement with a bare adjective.",
+      "fix": "Revise to: “For neutral statements with adjective predicates, we usually add 很 and not 是: 他很高. But bare adjectives are also correct in common patterns like topic–comment (今天天气好), change-of-state with 了 (我饿了/天气好了), and short answers (高). Don’t mark these as wrong; 很 just gives a neutral tone.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "Correct! ✅ Your sentence is perfectly natural.",
+          "reply": "**Correct!** ✅ Your sentence is perfectly natural.\n\n> 今天天气好。 — \"Today the weather is good.\"\n\nThis is a classic **topic-comment** structure: **今天** (topic) → **天气好** (comment). No grammar issues at all.\n\n---\n\n**A small extension** to help you level up:\n\nIf you want to make it sound more conversational, you can add **很** or **真** before the adjective — not for emphasis, but because in Chinese, a bare adjective without 很 can sound like a comparison:\n\n| Sentence | Tone |\n|----------|------|\n| 今天天气好。 | Fine, but could sound like \"it's good **(not bad)**\" |\n| 今天天气**很**好。 | Neutral, natural statement |\n| 今天天气**真**好！ | Exclamation — \"What nice weather!\" |\n\nSo if you're just making a casual observation, **今天天气很好** is the most natural choice. Try it out! 😊\n\nWant a quick drill on adjective usage (with/without 很)?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你说的句子 **“今天天气好”** 是完全正确的 ✅",
+          "reply": "你说的句子 **“今天天气好”** 是完全正确的 ✅\n\n这是一个简单的主谓结构：**今天**（时间）→ **天气好**（主谓短语作谓语）。意思很清楚：“Today the weather is good.”\n\n---\n\n### 一个小延伸 🌱\n\n如果你想让它听起来更自然、更像一个**中性陈述**（而非强调“今天” vs 其他天），可以加一个 **很**：\n\n> **今天天气很好。**  \n> *Jīntiān tiānqì hěn hǎo.*  \n> “Today the weather is good.”（中性、自然）\n\n**“好” vs “很好” 的区别：**\n\n- **今天天气好。** — 可以，但通常带对比或强调的语气（“今天天气好，明天不好”）。\n- **今天天气很好。** — 更自然的日常说法，没有对比意味。\n\n另外，你还可以说：\n\n> **今天天气不错。**  \n> *Jīntiān tiānqì bùcuò.*  \n> “Today’s weather is not bad.”（很常用的口语）\n\n---\n\n**你想练习一下用“很”的句子，或者聊聊别的天气表达吗？** 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_dou_all",
+      "name": "都 (dōu) all/both — before the verb, scope to its left",
+      "sentence": "（A：你要茶还是咖啡？）B：都可以。",
+      "common_mistake": "Placing 都 before the subject it quantifies, or after the verb.",
+      "fix": "Change to: “都 is placed before the predicate (verb/adj) and quantifies something already given (usually to its left in the sentence or understood from context). In full sentences use S + 都 + V: 我们都喜欢…; but in short answers or commands with an omitted subject, sentence-initial 都 is natural: 都可以。都别说话。” Update the mistake note to: “Don’t put 都 after the main predicate.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "这个对话完全正确！✅",
+          "reply": "这个对话完全正确！✅\n\n**A: 你要茶还是咖啡？** — 你正确地使用了 **还是** (háishì) 来提问选择。在问句里表示\"or\"的时候，只能用 **还是**，不能用 **或者** (huòzhě)。\n\n**B: 都可以。** — 这里的 **都** 放在动词 **可以** 前面，意思是\"两者都行\"，语法完全正确。\n\n---\n\n**想再学一点吗？**\n\n如果B想表达\"随便，我无所谓\"（更口语化一点），可以说：\n\n> **都行** (dōu xíng) — 更自然、更随意\n> **随便** (suíbiàn) — \"Whatever, I don't mind\"\n\n或者如果B想礼貌地给A决定权：\n\n> **你决定吧。** (Nǐ juédìng ba.) — \"You decide.\"\n\n---\n\n继续保持！你的中文基础很好 😊 有什么问题可以问我。"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确，没问题！👏",
+          "reply": "你的句子完全正确，没问题！👏\n\n**A：** 你要茶还是咖啡？  \n**B：** 都可以。\n\n**为什么是对的？**  \n- **\"还是\"** 用于疑问句中的选择（而 \"或者\" 用于陈述句），这里用得很准确。  \n- **\"都可以\"** 是标准回答，意思是 \"either is fine / I don't mind\"。它由 **都**（all/either） + **可以**（okay/possible）组成，非常地道。\n\n**一个小扩展：** 如果你想更自然一点，还可以说：  \n- **\"随便\"** — 更随意，意思是 \"whatever\"（但有时显得有点无所谓，看语气）。  \n- **\"我都可以\"** — 稍微更完整，和 \"都可以\" 意思一样。\n\n如果你愿意，我可以给你出几个关于 **\"还是\" vs \"或者\"** 的选择题练习，让你巩固一下！😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_zai_you_again",
+      "name": "再 vs 又 (again: future vs past)",
+      "sentence": "明天又要下雨了。",
+      "common_mistake": "Swapping them — 再 for a completed repetition or 又 for a future one.",
+      "fix": "Revise explanation: 再 = again for a planned/intended future action (often a request/suggestion): 再说一次。又 = again for something that has happened before and is happening now or is expected to happen again (often with 要/会/了): 他又迟到了；明天又要下雨了。 Update common mistake: Using 又 to make a request/plan is wrong (我们再见一次吧, not 我们又见一次吧), but using 又 with 要/会 for a predicted recurrence is correct.",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**明天又要下雨了。**\n*(It's going to rain again tomorrow.)*\n\nYou've used the **又 + 要 + Verb + 了** pattern perfectly here. This structure means \"it's going to happen again (and it's imminent/a change of state).\" The 又 marks that this has happened before (it's rained before), 要 adds the future intention, and 了 signals the new situation.\n\nSince you've got this down, here's a small extension to watch out for:\n\n- **又** = \"again\" for something that **has already happened** (or is certain to happen again based on past experience)\n- **再** = \"again\" for something **yet to happen** (a future plan/request)\n\nCompare:\n- 明天**又**要下雨了。→ *It's going to rain again tomorrow* (it's rained before, and the forecast says it'll happen again — you're stating a fact).\n- 明天**再**下雨，我就不出门了。→ *If it rains again tomorrow, I won't go out* (hypothetical future condition).\n\nWant to practise the 又 vs 再 distinction? I can generate a quick drill for you!"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这句中文完全正确！✅",
+          "reply": "这句中文完全正确！✅\n\n**明天又要下雨了。** — \"Tomorrow it's going to rain again.\"\n\nThe structure **又 + 要 + verb + 了** is used perfectly here. It means \"it's going to happen again\" (with the 了 signaling a change of state — it's not raining now, but it will be).\n\n### A small extension\n\nIf you want to sound even more natural in conversation, you could add a bit of emotion:\n\n- **唉，明天又要下雨了。** — *Ai, míngtiān yòu yào xiàyǔ le.* (Sigh, it's going to rain again tomorrow.)\n- **明天又要下雨了，真烦。** — *Míngtiān yòu yào xiàyǔ le, zhēn fán.* (Tomorrow it's going to rain again, so annoying.)\n\nThe 又 carries that \"here we go again\" feeling — very natural in Chinese!\n\nAre you getting tired of the rain, or did you just want to check this sentence? Let me know if you'd like to drill the **又 + 要 + 了** pattern or any other topic! 😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_zhi_only",
+      "name": "只 (zhǐ) only — before the verb",
+      "sentence": "我就一个问题。",
+      "common_mistake": "Placing 只 after the verb, or using 就 for 'only'.",
+      "fix": "Keep: “只放在动词前：我只有十块钱 / 他只喜欢你。不要把‘只’放在动词后。” Replace the ‘common mistake’ with: “注意：就也可以表示‘只有’，常见于数量/时间前或‘一个…’：我就一个问题 / 我就两块钱。这些用法是对的，本课只讲‘只’放在动词前。”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "完全正确！✅",
+          "reply": "\"我就一个问题\" — 完全正确！✅\n\nThis is a perfectly natural and colloquial way to say **\"I just have one question.\"** The 就 here means \"just/only,\" giving it a lighter, more casual feel than the more formal 我只有一个问题.\n\n您请说！What's your question? I'm ready to help. 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**“我就一个问题”** — 很自然的中文表达。这里“就”表示“只是/仅仅”（just/only），整句话意思是 *“I just have one question.”*\n\n如果你想让它更完整一点，也可以说：\n\n- **我只有一个问题。** — 更正式的说法（wǒ zhǐ yǒu yī gè wèntí）\n- **我就想问一个问题。** — *I just want to ask one question.*\n\n请问你的问题是什么？我洗耳恭听！😊"
+        }
+      ]
+    },
+    {
+      "id": "gr_tai_le",
+      "name": "太……了 (too / so)",
+      "sentence": "这个不太贵。",
+      "common_mistake": "Omitting 了 after 太, or replacing 太 with 很.",
+      "fix": "Only require 了 when 太 + Adjective is a standalone exclamation/comment (e.g., 这个太贵了). Do not add 了 in 不太 + Adjective (这个不太贵) or when 太 + Adjective modifies a noun (太贵的手机). 很 is fine if you mean “very,” not “too.”",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "这个句子完全正确！✅",
+          "reply": "这个句子完全正确！✅\n\n**这个不太贵。** — \"This one is not too expensive.\"\n\n- **这个** (zhè ge) – \"this one\" (correct measure word for general objects)\n- **不太贵** (bù tài guì) – \"not too expensive\" (correct negation pattern with 太)\n\nThe structure **Subject + 不太 + Adjective** is spot-on. No errors here.\n\n---\n\n### Mini extension\n\nIf you want to add more nuance, you could try:\n\n- **这个不太贵，但是那个很贵。**  \n  *This one isn't too expensive, but that one is very expensive.*\n\n- **这个不太贵，而且质量很好。**  \n  *This one isn't too expensive, and the quality is very good.*\n\nWould you like me to drill you on the 不太 + adjective pattern, or try a more complex sentence?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "这个句子完全正确！✅",
+          "reply": "这个句子完全正确！✅\n\n**Sentence:** 这个不太贵。  \n**Pinyin:** Zhège bù tài guì.  \n**Meaning:** This one is not too expensive.\n\nYou've used the common pattern **这个 + 不太 + adjective** correctly. 太 (tài) here means \"too\" (excessively), and 不太 (bù tài) = \"not too…\" / \"not very…\"\n\n**Small extension — two useful variations:**\n\n1. **Add 了** for a change of state:  \n   这个不太贵了。 (Zhège bù tài guì le.) – \"This one is no longer too expensive.\" (e.g., after a discount)\n\n2. **Swap 太 for 很** for a different nuance:  \n   这个不很贵。 (Zhège bù hěn guì.) – \"This one isn't very expensive.\" (less common, softer)\n\nWould you like a drill on using 太 vs. 很 in negative sentences, or is there another sentence you'd like me to check?"
+        }
+      ]
+    },
+    {
+      "id": "gr_verb_reduplication",
+      "name": "Verb reduplication (看看 / 休息休息)",
+      "sentence": "我们聊聊天吧。",
+      "common_mistake": "Reduplicating a two-syllable verb as AABB (休休息息).",
+      "fix": "Clarify patterns: Monosyllabic verbs: AA / A一A (also A了A, e.g., 看了看). Two-syllable simple verbs: ABAB (休息休息). For verb–object verbs like 聊天/唱歌/跳舞, reduplicate the verb only: V V O (聊聊天、唱唱歌、跳跳舞). AABB isn’t used for verbs here (it’s common with adjectives like 高高兴兴).",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "好的，我们聊聊天吧！😊",
+          "reply": "好的，我们聊聊天吧！😊 你想聊什么？比如：你的日常生活、兴趣爱好、学习中文的经历，或者任何你想练习的话题都可以！\n\n我先来问一个简单的问题吧：\n\n**你最近在做什么？** (Nǐ zuìjìn zài zuò shénme?) — What have you been up to lately?"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "好啊！我们聊聊天吧～ 😊",
+          "reply": "好啊！我们聊聊天吧～ 😊\n\n你想聊什么呢？可以聊聊你的学习进展，或者日常生活中的事情。你最近学了什么有趣的中文吗？或者你有没有什么中文句子想让我帮你检查一下？\n\n如果你想练习，尽管发中文句子给我，我会帮你看看有没有需要改进的地方！"
+        }
+      ]
+    },
+    {
+      "id": "gr_lai_qu_purpose",
+      "name": "来/去 + verb phrase (come/go to do)",
+      "sentence": "我去商店是为了买东西。",
+      "common_mistake": "Inserting 为了 / an English 'to' marker between the motion and the purpose verb.",
+      "fix": "Common mistake: Putting 为了 right after 来/去 in this pattern. Usually you don’t need any extra marker: 来/去 + (place) + VP → 我去商店买东西。 If you want to use 为了, put it before the whole clause (我为了买东西去商店) or use 是为了 after the motion clause (我去商店是为了买东西).",
+      "confirmed_harm": false,
+      "n_marked_wrong": 0,
+      "n_samples": 2,
+      "samples": [
+        {
+          "k": 0,
+          "marked_wrong": false,
+          "evidence": "你的句子完全正确！✅",
+          "reply": "你的句子完全正确！✅\n\n**Sentence:** 我去商店是为了买东西。  \n**Meaning:** \"I go to the store in order to buy things.\"\n\nThis uses the **是 + 为了 + Purpose** structure, which is a valid way to **emphasise** the purpose of an action. It's like saying \"It's for the purpose of buying things that I go to the store.\"\n\n---\n\n### A small tip for naturalness\n\nIn everyday conversation, native speakers usually drop 是为了 and just say:\n\n> **我去商店买东西。**  \n> (I'm going to the store to buy things.)\n\nThis uses the **来/去 + (place) + verb phrase** pattern (HSK 2), which is more concise and common for stating a purpose directly.\n\nCompare:\n\n| Sentence | Nuance |\n|---|---|\n| 我去商店买东西。 | Neutral — \"I'm going to the store to shop.\" |\n| 我去商店是为了买东西。 | Emphatic — \"The **reason** I go to the store is to buy things.\" (e.g. not to browse or meet friends) |\n\nSo your sentence is **correct**, just a little more emphatic than the everyday version. Both are fine depending on what you want to say!\n\n---\n\nWould you like a short drill on the **来/去 + place + verb** pattern vs. **是为了** to lock this in? 😊"
+        },
+        {
+          "k": 1,
+          "marked_wrong": false,
+          "evidence": "你的句子是对的！✅",
+          "reply": "你的句子是对的！✅\n\n**\"我去商店是为了买东西。\"** — This is perfectly correct Mandarin. You've used the **是……为了** structure to emphasise purpose, which is a natural pattern. It means: *\"I go to the store for the purpose of buying things.\"*\n\n---\n\n**A small extension for you:**\n\nTry this version — it's even more compact and natural for everyday speech:\n\n> **我去商店买东西。**  \n> (I'm going to the store to buy things.)\n\nWhen the purpose is obvious, native speakers often drop **是……为了** and just use a **Verb + Verb** serial structure. Compare:\n\n| English | Chinese | Nuance |\n|---|---|---|\n| I go to the store **in order to** buy things. | 我去商店**是为了**买东西。 | Emphasises the *purpose* (e.g. to contrast with another reason). |\n| I go to the store to buy things. | 我去商店买东西。 | Neutral, everyday statement. |\n\nBoth are correct — which flavour you choose depends on how much emphasis you want to put on the reason.\n\n---\n\n**Want to drill?** Let me know if you'd like practice on serial verb constructions (去 + place + verb + object) or the 是……的/为了 emphasis patterns. Happy to generate a few exercises!"
+        }
+      ]
+    }
+  ]
+}
