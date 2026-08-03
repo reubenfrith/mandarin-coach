@@ -142,14 +142,22 @@ persists on the `chroma-data` volume across restarts.
 
 ## Operating notes
 
-- **Update after a push:** `git pull && docker compose up -d --build`
+- **Update after a push:** `git pull && docker compose up -d --build`. Prefer building *before*
+  taking the old container down so a build failure means no downtime (see "Fresh redeploy" below).
 - **Upgrading the reference corpus (e.g. the Task 6 grammar 24→98 expansion):** `load_reference_data()`
   only seeds a collection when it is *empty*, so a running deployment on the persistent disk will
-  **not** auto-pick-up new rules in `data/grammar_rules.json`. Force a rebuild after pulling:
+  **not** auto-pick-up new rules in `data/grammar_rules.json`. Either wipe `/var/data` for a fresh
+  start (it re-seeds the full current corpus automatically) or force a rebuild after pulling:
   `docker compose exec app python -c "import sys; sys.path.insert(0,'app'); import memory; print(memory.load_reference_data(force=True))"`
-  (⚠️ the live VM is currently on the original 24-rule corpus until this is run; user-authored
-  `*_personal_errors` collections are untouched by the `force` rebuild — only the shared reference
-  collections are re-seeded).
+  (⚠️ `force` re-seeds only the shared reference collections — user-authored `*_personal_errors`
+  collections are untouched).
+- **Fresh redeploy (discard all data — corpus + accounts):** build first, then switch:
+  `git pull` → `docker compose build` → `docker compose down` →
+  `sudo rm -rf /mnt/mandarin-data/chroma_db /mnt/mandarin-data/users.db` →
+  `docker compose up -d` → `docker image prune -f`. Startup re-seeds the current corpus
+  on the now-empty disk (`{grammar_rules: 98, grammar_patterns: 217, error_patterns: 16,
+  hsk_vocabulary: 4991}`). As of 2026-08-03 the live VM was fresh-deployed this way onto the
+  current FastAPI build; before that it had drifted to a stale 2-week-old Chainlit build.
 - **Logs:** `docker compose logs -f app`
 - **Persistence:** the ChromaDB corpus + user accounts live on the `/mnt/mandarin-data`
   persistent disk, which survives VM deletion and `compose down`. Snapshot it with
