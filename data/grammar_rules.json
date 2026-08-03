@@ -1124,8 +1124,8 @@
     "name": "给 (gěi) + recipient + verb (for / to)",
     "category": "grammar",
     "hsk_level": 2,
-    "explanation": "给 + recipient + Verb marks who an action is done for/to: 我给你打电话 (I'll call you), 给妈妈做饭.",
-    "common_mistake": "Omitting 给, or following English order (verb before recipient) where the coverb is expected.",
+    "explanation": "给 + recipient + Verb marks who an action is done for/to: 我给你打电话 (I'll call you), 给妈妈做饭. Many verbs (打电话, 写信, 发短信…) also allow Verb + 给 + recipient: 我打电话给你 / 写信给他 — both orders are correct.",
+    "common_mistake": "Omitting 给 altogether (我打电话你). Note: putting the verb before the recipient is NOT itself an error — 我打电话给你 is correct — the mistake is dropping 给.",
     "incorrect_example": "我打电话你。",
     "correct_example": "我给你打电话。",
     "keywords": [
@@ -1547,8 +1547,8 @@
     "name": "Verb reduplication (看看 / 休息休息)",
     "category": "grammar",
     "hsk_level": 2,
-    "explanation": "Reduplicating a verb softens it to 'a little / give it a try': one-syllable AA (看看) or A一A (看一看); two-syllable ABAB (休息休息), NOT AABB.",
-    "common_mistake": "Reduplicating a two-syllable verb as AABB (休休息息).",
+    "explanation": "Reduplicating a verb softens it to 'a little / give it a try': one-syllable AA (看看) or A一A (看一看); ordinary two-syllable verbs ABAB (休息休息), NOT AABB. BUT separable verb-object verbs (离合词) double only the verb part: 聊天→聊聊天, 帮忙→帮帮忙, 见面→见见面, 睡觉→睡睡觉 (not 聊天聊天).",
+    "common_mistake": "Reduplicating an ordinary two-syllable verb as AABB (休休息息), or reduplicating a separable verb (离合词) as ABAB (聊天聊天 instead of 聊聊天).",
     "incorrect_example": "我们休休息息吧。",
     "correct_example": "我们休息休息吧。",
     "keywords": [
