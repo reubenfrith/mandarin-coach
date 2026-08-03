@@ -87,7 +87,7 @@ precise, and the on-slide source line says as much.
 > "The answer is a browser agent with three surfaces that all feed **one** private
 > error corpus."
 
-- **Chat** — a LangGraph agent with five tools; corrects, grounds the "why" in a
+- **Text** — a LangGraph agent with five tools; corrects, grounds the "why" in a
   real grammar rule, and silently logs each mistake.
 - **Voice** — free-form spoken Mandarin; an intent router flips to an English
   *coaching* answer the second you ask "why was that wrong?"
@@ -109,7 +109,7 @@ Then the "why an agent, not just a model" beat:
 Play the screen-recording embedded on the slide and narrate over it (fallback: the
 live app at **34-129-227-111.nip.io**). Talk through these beats in order:
 
-- **A — Chat correction.** Submit `她把书被他借走了`. Point out the coach catches the
+- **A — Text-coach correction.** Submit `她把书被他借走了`. Point out the coach catches the
   把/被 conflict, fixes it, explains disposal vs. passive — and files the error.
 - **B — The memory payoff.** Ask "how many 把 errors have I made?" It returns an
   **exact count and trend** — computed over the corpus, not estimated. *This is the
