@@ -11,9 +11,10 @@ this file is the **map of the folder** — what each file is and how the pieces 
 evals/
   lib/        shared modules, imported not run   (_env.py, llm_judge.py, agg_parse.py)
   datagen/    dataset builders + frozen data     (seed_data.py, generate_*.py, *.json)
-  surfaces/   12 runnable evaluations, grouped by the product surface they exercise:
+  surfaces/   13 runnable evaluations, grouped by the product surface they exercise:
     text_coach/     the agent + RAG + tools    preflight_typec, eval_harness, ragas_rag, ragas_agentic,
-                                               extraction_eval, retrieval_sweep, coverage_check, model_bakeoff
+                                               extraction_eval, retrieval_sweep, coverage_check, model_bakeoff,
+                                               teaching_quality (slice)
     voice_coach/    router + coach quality     voice_intent_eval, voice_coach_quality
     pronunciation/  tone coach + pīnyīn ruby   tone_assessment_eval, pinyin_eval
   results/    every surface's output + its own README (verification recipes)
@@ -67,6 +68,8 @@ The three **Task 6** surfaces (`retrieval_sweep`, `coverage_check`, `model_bakeo
 | `voice_coach_dataset.json` | Frozen gold set for the voice-coach quality surface. |
 | `generate_pinyin_dataset.py` | Builds `pinyin_dataset.json`: 117 hand-authored pīnyīn golds for the ruby surface, bucketed by phenomenon (一/不 sandhi · grammatical 地/得 · bisyllabic T3 · reduplication · lexical-polyphone control · a `sandhi_no_apply` regression guard · 3+ T3 and 儿化 carried-but-unscored). Gold from ground-truth probes; prints a gold-vs-pypinyin diff **and** asserts each 一/不 case sits in the right tone-bucket (a linguistic guard, not just a typo check). No LLM. |
 | `pinyin_dataset.json` | Frozen gold set for the pīnyīn-accuracy surface. |
+| `generate_teaching_slice.py` | Builds `teaching_slice_dataset.json`: the calibration slice for the teaching-quality judge — 9 real coach replies (lifted from `results/head_to_head.json`) + 4 hand-authored controls (fix-only floor · padded-empty length-probe · terse-with-rule · Chinese-fix-only), each with the author's hand labels on `explains_why` / `explanation_in_english`. A **feasibility probe**, not a production set. No LLM. |
+| `teaching_slice_dataset.json` | Frozen calibration slice for the teaching-quality surface. |
 
 ### `surfaces/` — the runnable evaluations (each writes into `results/`)
 
@@ -98,6 +101,7 @@ scope (Tasks 5–6); **voice coach** and **pronunciation** are the product exten
 | File | What it measures | Writes |
 |---|---|---|
 | `tone_assessment_eval.py` | The pronunciation coach's corpus writer (`_log_tone_error`): precision/recall of the wrong-tone log predicate, swept over a confidence-margin gate to set `LOG_MARGIN`. Precision is the headline (a false positive logs a correctly-said syllable). Fully local DSP (pYIN), deterministic. | `results/tone_assessment.{md,json}` |
+| `teaching_quality_eval.py` (SLICE) | The axis the correction judges miss: does the coach *teach*, not just correct? Judges `explains_why` / `explanation_in_english` (gpt-4o, independent) on 9 real replies + 4 controls. **Feasibility probe** — the headline is NOT a coach score but what survives self-referential labelling: the judge catches the non-teaching floor (3/3) and resists a length-bias probe. The κ vs the author's labels is **circular** (one author wrote both labels and prompt) and flagged as such; the independent number comes from `--emit-blind` → a second person labels blind → `--score-human`. Deferred vs the full surface: the `grounded` dimension and a before/after between two coach prompts. | `results/teaching_quality_slice.{md,json}` |
 | `pinyin_eval.py` | The learner-facing pīnyīn ruby (`pinyin_segments` / `_tone_pinyin`, pypinyin `Style.TONE`): is the tone under each hanzi the one to say? **Diagnosed** the gap (一/不 sandhi applied to only 12/36, scattered within each sub-rule — inconsistent under any convention; grammatical 地/得 misread 9/10) **and now guards a shipped fix**: the 不-sandhi post-pass (`tools._apply_bu_sandhi`) takes `bu_T4` **5/14 → 14/14** with **0** true regressions on a 15-case `sandhi_no_apply` guard. 一 (ordinal/cardinal) and 地/得 (grammatical/lexical) are deliberately left to pypinyin — indistinguishable without POS; the guard proves a naïve rule would regress them. Bisyllabic T3 (0/18) is a coverage gap surfaced as a product choice, not a defect. Control = 12/12 floor. Deterministic, no LLM. Findings in [`notes/pinyin-accuracy-findings.md`](notes/pinyin-accuracy-findings.md). | `results/pinyin_accuracy.{md,json}` |
 
 **Results** — `results/` holds the output of every surface. **Start at
@@ -124,6 +128,12 @@ uv run python evals/surfaces/text_coach/ragas_rag.py                            
 REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=3 uv run python evals/surfaces/text_coach/ragas_agentic.py   # agentic surface (60)
 REQUEST_TIMEOUT=150 EVAL_CONCURRENCY=4 uv run python evals/surfaces/text_coach/extraction_eval.py # extraction surface (34+17)
 uv run python evals/surfaces/text_coach/extraction_eval.py --from-rows                            # re-aggregate saved rows, no model calls
+
+uv run python evals/datagen/generate_teaching_slice.py                                            # build the teaching calibration slice (13)
+uv run python evals/surfaces/text_coach/teaching_quality_eval.py                                  # teaching-quality SLICE (judge = gpt-4o); floor + length-bias survive, κ is circular
+uv run python evals/surfaces/text_coach/teaching_quality_eval.py --emit-blind                     # write a blank sheet for an independent labeller
+uv run python evals/surfaces/text_coach/teaching_quality_eval.py --score-human results/teaching_blind_labels.json  # the INDEPENDENT judge-vs-human κ
+uv run python evals/surfaces/text_coach/teaching_quality_eval.py --secondary                      # misleading-SECONDARY judge vs expert gold → recall 3/4, precision 60% (triage, not oracle)
 
 # 3. Task 6 surfaces (retrieval + coverage + model bake-off)
 uv sync --extra task6                                                                  # BM25 (jieba) + BGE-M3 deps

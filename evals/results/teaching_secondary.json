@@ -1,0 +1,123 @@
+{
+  "summary": {
+    "n": 9,
+    "judge_model": "gpt-4o",
+    "gold_positives": 4,
+    "judge_positives": 5,
+    "tp": 3,
+    "fp": 2,
+    "fn": 1,
+    "tn": 3,
+    "precision": 0.6,
+    "recall": 0.75,
+    "agreement": 0.6666666666666666,
+    "kappa": 0.3414634146341463,
+    "caught": [
+      "A07",
+      "A08",
+      "A06"
+    ],
+    "missed": [
+      "A02"
+    ],
+    "false_alarms": [
+      "A01",
+      "A14"
+    ]
+  },
+  "rows": [
+    {
+      "id": "A01",
+      "rule_name": "把 (bǎ) disposal construction",
+      "gold_has_error": false,
+      "gold_note": "The core rule is right — the verb in a 把 sentence can't be bare; it needs a complement, result, quantity, or 了. All four fix-table options and the drill answers (做完/开/丢) are valid. Minor caveat: 我把书看了 is the weakest of the four, since bare V+了 in 把 sentences sits best with disposal/consumption verbs (把饭吃了、把手机丢了). 看完了 is the safer teaching answer.",
+      "judge_has_error": true,
+      "judge_errors": [
+        "The drill answer for '他把门打______了。 (opened)' is given as '开', but it should be '开开' or '开了'. In standard Mandarin, '开' alone is not typically used as a resultative complement in this context."
+      ],
+      "judge_reason": "The drill answer for opening the door is incorrect as it doesn't use a proper resultative complement."
+    },
+    {
+      "id": "A02",
+      "rule_name": "被 (bèi) passive construction",
+      "gold_has_error": true,
+      "gold_note": "The correction is right and both rewrites are good, but the stated rule is overstated: \"一个句子只能选择其中一种结构\" is not true. The 被…把… pattern is grammatical — 他被人把钱偷走了、我被他把眼镜打破了 — with 被 preceding 把 and the subject as the affected party. Fine as a beginner heuristic, wrong as an absolute law.",
+      "judge_has_error": false,
+      "judge_errors": [],
+      "judge_reason": "All supporting content, including explanations and example sentences, is factually correct and appropriately simplified for the learner's level."
+    },
+    {
+      "id": "A05",
+      "rule_name": "过 (guò) experiential aspect",
+      "gold_has_error": false,
+      "gold_note": "我吃过日本菜 is the right fix, the completed-action vs lived-experience contrast is accurate, and all four drill answers (了/过/了/过) check out.",
+      "judge_has_error": false,
+      "judge_errors": [],
+      "judge_reason": "All supporting content, including explanations, examples, and drill answers, is factually correct regarding the use of 了 and 过 in Mandarin."
+    },
+    {
+      "id": "A07",
+      "rule_name": "Measure words (量词)",
+      "gold_has_error": true,
+      "gold_note": "The rule and the 三本书 correction are right, but the hint is wrong: it says cats and people both take 个. Cats take 只 — 两只猫. 个 is correct for 人 and 苹果.",
+      "judge_has_error": true,
+      "judge_errors": [
+        "The claim '猫和人都用 **个**' is incorrect. The measure word for '猫' (cat) is '只', not '个'.",
+        "The prompt '两 ___ 猫 (cat)' should use '只' as the measure word for '猫', not '个'."
+      ],
+      "judge_reason": "The coach incorrectly states that '个' is the measure word for '猫', which should be '只', and this error is reflected in the exercise prompt."
+    },
+    {
+      "id": "A08",
+      "rule_name": "在/正在 (zài/zhèngzài) progressive aspect",
+      "gold_has_error": true,
+      "gold_note": "我知道答案 is the right fix and the 看/吃 contrast is good, but the summary list is wrong to include 想. 想 in its \"think about / miss\" sense is an activity verb and takes 在 freely: 我在想这件事、我在想办法、我在想你. Only the \"hold the opinion that\" sense resists it. 知道、喜欢、爱、认识 are fine on that list.",
+      "judge_has_error": true,
+      "judge_errors": [
+        "The claim \"想（think）\" is a stative verb and cannot be used with '在' is incorrect. '想' can be used with '在' when it means 'thinking about' or 'considering', as in '我在想这个问题。'"
+      ],
+      "judge_reason": "The reply incorrectly states that '想' cannot be used with '在', which is not true when '想' means 'thinking about' or 'considering'."
+    },
+    {
+      "id": "A10",
+      "rule_name": "的 / 得 / 地 (de) distinction",
+      "gold_has_error": false,
+      "gold_note": "他高兴地笑了 is correct, the modifier-to-noun vs adverbial-to-verb split is accurately stated, and the three drill blanks resolve cleanly to 地 / 的 / 得.",
+      "judge_has_error": false,
+      "judge_errors": [],
+      "judge_reason": "All supporting content correctly explains the use of 的, 地, and 得, and the drill questions and answers are appropriate for the grammar point."
+    },
+    {
+      "id": "A11",
+      "rule_name": "比 (bǐ) comparison",
+      "gold_has_error": false,
+      "gold_note": "今天比昨天热 is right; 很 is genuinely blocked in a 比 comparison, and 更 and 多了 are the correct ways to add degree. The English-interference explanation is sound.",
+      "judge_has_error": false,
+      "judge_errors": [],
+      "judge_reason": "All supporting content is factually correct regarding the use of 比 (bǐ) in comparisons and the alternatives for emphasis."
+    },
+    {
+      "id": "A14",
+      "rule_name": "两 (liǎng) vs 二 (èr)",
+      "gold_has_error": false,
+      "gold_note": "我要两杯咖啡 is right, the split (二 for the numeral/ordinals/digits, 两 before measure words) is accurate, and all four drill answers hold, including 两点 for two o'clock.",
+      "judge_has_error": true,
+      "judge_errors": [
+        "The claim '现在是 __ 点。' should use '两' is incorrect. It should be '二' because time uses '二' for hours, e.g., '现在是二点。'"
+      ],
+      "judge_reason": "The exercise incorrectly suggests using '两' for telling time, which should use '二' instead."
+    },
+    {
+      "id": "A06",
+      "rule_name": "是……的 (shì...de) emphasis construction",
+      "gold_has_error": true,
+      "gold_note": "he 是……的 half is correct: 你是怎么来的 for asking means, with 了 excluded, and both drill answers are right. But the summary table marks 你怎么来了这里 as for 'why did you come here.' That sentence is awkward — 了 doesn't sit comfortably between the verb and a place object. Natural options are 你怎么来这里了? or 你怎么会来这里？, and 你为什么来这里？(also listed) is fine.",
+      "judge_has_error": true,
+      "judge_errors": [
+        "The claim \"'Why did you come here?' | 你怎么来了这里？ / 你为什么来这里？\" is incorrect. The sentence '你怎么来了这里？' is not a standard way to ask 'Why did you come here?' in Mandarin. The correct form should be '你为什么来了这里？' or '你为什么来这里？' without '了'.",
+        "The claim \"问已完成动作的 方式/手段 → 用 是……的 结构，不用 了。\" is overstated. While 是……的 is commonly used for emphasis on means or manner, using 了 is not incorrect and can be used in some contexts to indicate completion or change of state."
+      ],
+      "judge_reason": "The reply contains incorrect and overstated claims about the use of 是……的 and 了 in Mandarin."
+    }
+  ]
+}

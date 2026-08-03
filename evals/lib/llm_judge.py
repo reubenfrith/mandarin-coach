@@ -274,3 +274,99 @@ async def judge_voice_answer(context: str, question: str, expectation: str, answ
     return await _judge(VoiceQualityVerdict).ainvoke(
         [SystemMessage(content=_VOICE_SYS), HumanMessage(content=msg)]
     )
+
+
+# --------------------------------------------------------------------------- #
+# 6. Teaching quality — subjective judge (text_coach surface; calibrated vs human)
+# --------------------------------------------------------------------------- #
+# The correction judges above ask "is the coach RIGHT?" (identifies_error / correct_fix /
+# misleading). This one asks the orthogonal question the learner actually feels: does the
+# reply TEACH? Two booleans, deliberately not a 1–5 score (the same OpenRouter constrained-int
+# problem the module header documents):
+#   * explains_why — does it convey the underlying rule/principle (WHY the error is an error),
+#     not merely hand back the corrected sentence? A fix-only or padded-but-empty reply is False.
+#   * explanation_in_english — is the EXPLANATION prose in English (these are English-speaker
+#     learners)? An explanation written entirely in Chinese is a real teaching defect — the
+#     learner may not be able to read it. Chinese used only for the example words/sentences is
+#     fine and expected (mirrors the voice surface's explanation_in_english).
+# This surface's whole point is that the judge is CALIBRATED against human labels (Cohen's κ)
+# before its verdicts are trusted — so use a strong, independent judge (gpt-4o, not the coach).
+class TeachingVerdict(BaseModel):
+    # No field defaults — gpt-4o's strict JSON-schema mode requires every property in
+    # `required`; a default makes it optional and the schema is rejected (see VoiceQualityVerdict).
+    explains_why: bool = Field(description="Does the reply explain the underlying RULE or PRINCIPLE — WHY the learner's version is wrong / why the fix is right — rather than only giving the corrected sentence or generic encouragement? A reply that just shows the fix, or that is long but never states the actual rule, is False.")
+    explanation_in_english: bool = Field(description="Is the EXPLANATION prose written in English (the learner's first language)? Chinese used only for the example words/sentences themselves is fine and expected — judge the explanatory prose, not the examples. An explanation written substantially in Chinese is False.")
+    reason: str = Field(description="One sentence justification.")
+
+
+_TEACHING_SYS = (
+    "You judge the TEACHING QUALITY of a Mandarin coach's reply to an English-speaking learner "
+    "who made an error. Assume the correction itself is already known to be correct — do NOT "
+    "re-grade correctness. Judge only two things about how well it teaches: (1) explains_why — "
+    "does the reply convey the underlying grammar RULE or PRINCIPLE (why the learner's version is "
+    "wrong and the fix is right), rather than merely handing back the corrected sentence or "
+    "offering generic praise/encouragement with no rule? A reply can be long and friendly yet "
+    "still fail this if it never states the actual rule. (2) explanation_in_english — is the "
+    "EXPLANATORY PROSE in English? These learners are English speakers; an explanation written "
+    "substantially in Chinese is a teaching defect. Chinese used only for the example words and "
+    "sentences is correct and expected — judge the prose, not the examples. Be strict but fair."
+)
+
+
+async def judge_teaching(learner_input: str, rule_why: str, answer: str) -> TeachingVerdict:
+    msg = (
+        f"Learner's erroneous sentence: {learner_input}\n\n"
+        f"The grammar point at issue (reference — what a good explanation would convey):\n{rule_why}\n\n"
+        f"Coach's reply:\n{answer}"
+    )
+    return await _judge(TeachingVerdict).ainvoke(
+        [SystemMessage(content=_TEACHING_SYS), HumanMessage(content=msg)]
+    )
+
+
+# --------------------------------------------------------------------------- #
+# 7. Misleading SECONDARY content — subjective judge (the axis a human found)
+# --------------------------------------------------------------------------- #
+# The head-to-head correction judge only checks the HEADLINE fix. But the reply also carries
+# hints, drill answers, example tables, measure-word assignments, exception lists, side-claims —
+# and an expert blind-labeller found real errors in exactly that auxiliary content (cats take 只
+# not 个; 想 CAN take 在; 被…把… co-occurrence is not forbidden; a summary table mislabelled a
+# sentence) that NO other surface in the suite inspects. This judge targets that class alone:
+#   * has_error   — does the SUPPORTING content contain a claim that is factually wrong or
+#                   materially overstated in standard Mandarin?  (The main correction is assumed
+#                   correct and is out of scope — do not re-grade it.)
+#   * errors      — each specific wrong claim (quote it + say why wrong), so the flag can be
+#                   checked for the RIGHT reason, not just a coincidental trip.
+# This is open-ended grammar correctness — genuinely hard for a judge — so the eval scores it
+# against the expert's independent gold (precision/recall on the known errors), not on trust.
+class SecondaryVerdict(BaseModel):
+    # No defaults — gpt-4o strict JSON-schema requires every field (see VoiceQualityVerdict).
+    has_error: bool = Field(description="Does the reply's SUPPORTING content (hints, drill answers/prompts, example tables, measure-word assignments, exception lists, parenthetical side-claims — anything OTHER than the headline corrected sentence) contain a claim that is factually WRONG or materially OVERSTATED in standard Mandarin?")
+    errors: list[str] = Field(description="One entry per wrong/overstated claim found: quote the claim and state why it's wrong. Empty list if none.")
+    reason: str = Field(description="One sentence overall justification.")
+
+
+_SECONDARY_SYS = (
+    "You are a meticulous native-level Mandarin proofreader checking a coach's reply for factual "
+    "errors in its SUPPORTING material — NOT the main correction. Assume the headline corrected "
+    "sentence is already correct and OUT OF SCOPE. Scrutinise everything else the reply asserts: "
+    "hints, drill questions AND their given answers, example sentences, measure-word choices "
+    "(e.g. 只 vs 个 vs 张), lists of 'words that can/can't do X', comparative/aspect claims, and "
+    "any summary table. Flag a claim ONLY if it is actually wrong or materially overstated in "
+    "standard Mandarin — e.g. assigning the wrong measure word, calling a grammatical pattern "
+    "impossible when it exists, mislabelling an example, or a drill answer that is incorrect. Do "
+    "NOT flag stylistic preferences, simplifications that are true-enough for a beginner, or the "
+    "main correction. Be precise: quote the specific claim and explain the error. If the "
+    "supporting content is all correct, return has_error=false with an empty errors list."
+)
+
+
+async def judge_secondary_errors(learner_input: str, grammar_point: str, answer: str) -> SecondaryVerdict:
+    msg = (
+        f"Learner's original sentence: {learner_input}\n"
+        f"Grammar point being taught: {grammar_point}\n\n"
+        f"Coach's reply (check its SUPPORTING content only):\n{answer}"
+    )
+    return await _judge(SecondaryVerdict).ainvoke(
+        [SystemMessage(content=_SECONDARY_SYS), HumanMessage(content=msg)]
+    )

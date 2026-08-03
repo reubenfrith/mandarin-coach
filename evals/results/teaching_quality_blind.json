@@ -1,0 +1,24 @@
+{
+  "n": 9,
+  "per_dim": {
+    "explains_why": {
+      "judge_vs_human_kappa": 0.0,
+      "judge_vs_human_agreement": 0.5555555555555556,
+      "author_vs_human_kappa": 0.0,
+      "author_vs_human_agreement": 0.5555555555555556,
+      "judge_human_disagreements": [
+        "A02",
+        "A07",
+        "A08",
+        "A06"
+      ]
+    },
+    "explanation_in_english": {
+      "judge_vs_human_kappa": 1.0,
+      "judge_vs_human_agreement": 1.0,
+      "author_vs_human_kappa": 1.0,
+      "author_vs_human_agreement": 1.0,
+      "judge_human_disagreements": []
+    }
+  }
+}

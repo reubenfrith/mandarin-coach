@@ -1,0 +1,56 @@
+[
+  {
+    "id": "A01",
+    "explains_why": true,
+    "explanation_in_english": true,
+    "notes": "The core rule is right — the verb in a 把 sentence can't be bare; it needs a complement, result, quantity, or 了. All four fix-table options and the drill answers (做完/开/丢) are valid. Minor caveat: 我把书看了 is the weakest of the four, since bare V+了 in 把 sentences sits best with disposal/consumption verbs (把饭吃了、把手机丢了). 看完了 is the safer teaching answer."
+  },
+  {
+    "id": "A02",
+    "explains_why": false,
+    "explanation_in_english": false,
+    "notes": "The correction is right and both rewrites are good, but the stated rule is overstated: \"一个句子只能选择其中一种结构\" is not true. The 被…把… pattern is grammatical — 他被人把钱偷走了、我被他把眼镜打破了 — with 被 preceding 把 and the subject as the affected party. Fine as a beginner heuristic, wrong as an absolute law."
+  },
+  {
+    "id": "A05",
+    "explains_why": true,
+    "explanation_in_english": true,
+    "notes": "我吃过日本菜 is the right fix, the completed-action vs lived-experience contrast is accurate, and all four drill answers (了/过/了/过) check out."
+  },
+  {
+    "id": "A07",
+    "explains_why": false,
+    "explanation_in_english": false,
+    "notes": "The rule and the 三本书 correction are right, but the hint is wrong: it says cats and people both take 个. Cats take 只 — 两只猫. 个 is correct for 人 and 苹果."
+  },
+  {
+    "id": "A08",
+    "explains_why": false,
+    "explanation_in_english": false,
+    "notes": "我知道答案 is the right fix and the 看/吃 contrast is good, but the summary list is wrong to include 想. 想 in its \"think about / miss\" sense is an activity verb and takes 在 freely: 我在想这件事、我在想办法、我在想你. Only the \"hold the opinion that\" sense resists it. 知道、喜欢、爱、认识 are fine on that list."
+  },
+  {
+    "id": "A10",
+    "explains_why": true,
+    "explanation_in_english": true,
+    "notes": "他高兴地笑了 is correct, the modifier-to-noun vs adverbial-to-verb split is accurately stated, and the three drill blanks resolve cleanly to 地 / 的 / 得."
+  },
+  {
+    "id": "A11",
+    "explains_why": true,
+    "explanation_in_english": true,
+    "notes": "今天比昨天热 is right; 很 is genuinely blocked in a 比 comparison, and 更 and 多了 are the correct ways to add degree. The English-interference explanation is sound."
+  },
+  {
+    "id": "A14",
+    "explains_why": true,
+    "explanation_in_english": false,
+    "notes": "我要两杯咖啡 is right, the split (二 for the numeral/ordinals/digits, 两 before measure words) is accurate, and all four drill answers hold, including 两点 for two o'clock."
+  },
+  {
+    "id": "A06",
+    "explains_why": false,
+    "explanation_in_english": false,
+    "notes": "he 是……的 half is correct: 你是怎么来的 for asking means, with 了 excluded, and both drill answers are right. But the summary table marks 你怎么来了这里 as for 'why did you come here.' That sentence is awkward — 了 doesn't sit comfortably between the verb and a place object. Natural options are 你怎么来这里了? or 你怎么会来这里？, and 你为什么来这里？(also listed) is fine."
+  }
+]

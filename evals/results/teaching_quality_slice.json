@@ -1,0 +1,250 @@
+{
+  "summary": {
+    "n_cases": 13,
+    "n_real": 9,
+    "n_control": 4,
+    "judge_model": "gpt-4o",
+    "per_dim": {
+      "explains_why": {
+        "kappa": 1.0,
+        "raw_agreement": 1.0,
+        "confusion": {
+          "tp": 10,
+          "tn": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "human_true": 10,
+        "judge_true": 10,
+        "n": 13,
+        "disagreements": []
+      },
+      "explanation_in_english": {
+        "kappa": 1.0,
+        "raw_agreement": 1.0,
+        "confusion": {
+          "tp": 7,
+          "tn": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "human_true": 7,
+        "judge_true": 7,
+        "n": 13,
+        "disagreements": []
+      }
+    },
+    "floor": {
+      "n": 3,
+      "caught": [
+        "C1_fix_only",
+        "C2a_padded_empty",
+        "C3_cn_fix_only"
+      ],
+      "missed": []
+    },
+    "length_bias_probe": {
+      "padded_explains_why_judge": false,
+      "terse_explains_why_judge": true,
+      "length_bias_detected": false,
+      "discriminates": true
+    }
+  },
+  "rows": [
+    {
+      "id": "A01",
+      "role": "real",
+      "rule_name": "把 (bǎ) disposal construction",
+      "note": "English prose, states the 把+complement rule + root cause.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge_reason": "The reply clearly explains the rule of the 把 construction, why the learner's sentence is incorrect, and provides examples and drills in English."
+    },
+    {
+      "id": "A02",
+      "role": "real",
+      "rule_name": "被 (bèi) passive construction",
+      "note": "Explains 把/被 clash well, but the entire explanation is in Chinese.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge_reason": "The reply explains the rule about not mixing 把 and 被 in a single sentence, but the explanation is written substantially in Chinese."
+    },
+    {
+      "id": "A05",
+      "role": "real",
+      "rule_name": "过 (guò) experiential aspect",
+      "note": "English, clean 了-vs-过 contrast table + root cause.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge_reason": "The reply clearly explains the difference between 了 and 过, providing the underlying rule and examples, and the explanation is entirely in English."
+    },
+    {
+      "id": "A07",
+      "role": "real",
+      "rule_name": "Measure words (量词)",
+      "note": "States Number+MW+Noun rule, but explanation is Chinese prose.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge_reason": "The reply explains the rule about using measure words between numbers and nouns, but the explanation is written substantially in Chinese, not English."
+    },
+    {
+      "id": "A08",
+      "role": "real",
+      "rule_name": "在/正在 (zài/zhèngzài) progressive aspect",
+      "note": "Good stative-verb rule, but explanation is in Chinese.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge_reason": "The reply explains the rule about stative verbs not taking '在' for ongoing actions, but the explanation is substantially in Chinese, not English."
+    },
+    {
+      "id": "A10",
+      "role": "real",
+      "rule_name": "的 / 得 / 地 (de) distinction",
+      "note": "English, distinguishes 的/地/得 by what they link.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge_reason": "The coach clearly explains the rule for using 的 and 地, specifying their grammatical functions and why 地 is correct in this context, and the explanation is entirely in English."
+    },
+    {
+      "id": "A11",
+      "role": "real",
+      "rule_name": "比 (bǐ) comparison",
+      "note": "English, explains 比 already carries the comparative (no 很).",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge_reason": "The reply clearly explains the rule about not using 很 in 比 comparisons and provides examples and a drill, all in English."
+    },
+    {
+      "id": "A14",
+      "role": "real",
+      "rule_name": "两 (liǎng) vs 二 (èr)",
+      "note": "States 两-vs-二 rule clearly, but in Chinese prose.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge_reason": "The reply explains the rule about when to use '两' versus '二', but the explanation is substantially in Chinese, not English."
+    },
+    {
+      "id": "A06",
+      "role": "real",
+      "rule_name": "是……的 (shì...de) emphasis construction",
+      "note": "BORDERLINE: the saved reply opens mid-way on a 总结 table — states the 是……的 rule but with little reasoning; Chinese prose. A second labeller could reasonably call explains_why=False.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": false
+      },
+      "judge_reason": "The reply explains the rule about using 是……的 for completed actions to emphasize means, but the explanation is written in Chinese."
+    },
+    {
+      "id": "C1_fix_only",
+      "role": "control",
+      "rule_name": null,
+      "note": "FLOOR: correction only, no rule stated — must score explains_why=False.",
+      "human": {
+        "explains_why": false,
+        "explanation_in_english": true
+      },
+      "judge": {
+        "explains_why": false,
+        "explanation_in_english": true
+      },
+      "judge_reason": "The reply provides the correct sentence but does not explain the rule that the 把 construction requires a complement/result after the verb."
+    },
+    {
+      "id": "C2a_padded_empty",
+      "role": "control",
+      "rule_name": null,
+      "note": "LENGTH-BIAS probe: long, warm, encouraging — but never states the rule. Must be explains_why=False despite the length. Compare with C2b.",
+      "human": {
+        "explains_why": false,
+        "explanation_in_english": true
+      },
+      "judge": {
+        "explains_why": false,
+        "explanation_in_english": true
+      },
+      "judge_reason": "The reply does not explain the underlying rule about why '很' is incorrect in a 比 comparison; it only provides encouragement and the corrected sentence."
+    },
+    {
+      "id": "C2b_terse_why",
+      "role": "control",
+      "rule_name": null,
+      "note": "The probe's honest twin: one short sentence, but it DOES state the rule. explains_why=True.",
+      "human": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge": {
+        "explains_why": true,
+        "explanation_in_english": true
+      },
+      "judge_reason": "The reply explains the rule that '比' already implies 'more', so '很' is unnecessary, and it provides the correct usage options."
+    },
+    {
+      "id": "C3_cn_fix_only",
+      "role": "control",
+      "rule_name": null,
+      "note": "Correction only, and in Chinese — explains_why=False, explanation_in_english=False.",
+      "human": {
+        "explains_why": false,
+        "explanation_in_english": false
+      },
+      "judge": {
+        "explains_why": false,
+        "explanation_in_english": false
+      },
+      "judge_reason": "The reply only provides the corrected sentence without explaining the rule or principle, and it lacks any explanatory prose in English."
+    }
+  ]
+}
