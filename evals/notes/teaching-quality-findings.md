@@ -141,10 +141,41 @@ re-judged + eyeballed each for the specific known error:
 **Honest limits of this verification:** it is NOT a clean A/B. The coach runs at temperature, so
 each regenerated reply is entirely different *content* from the original — "the guard helped"
 cannot be cleanly separated from "resampling produced different text," and n=3/case is
-underpowered for a rate. Directional, not proof. The measure-word win (A07) is the most credible
-(3/3 varied replies all correct where the original was wrong); the structural cases (A02/A06)
-were not helped, consistent with a real competence gap the guard can't fix. A proper A/B (old
-prompt vs new, ≥5 samples/case, same judge) is the follow-up if this needs to be conclusive.
+underpowered for a rate. Directional, not proof. A proper A/B (old prompt vs new, ≥5
+samples/case, focused detector) followed — and **overturned the directional read**, see below.
+
+## A/B with a control arm — 2026-08-03 — the directional claim above does NOT survive
+
+Ran both arms: OLD prompt (pre-guard) vs NEW prompt (guard), 5 samples/case, same deepseek coach,
+scored by a FOCUSED per-case detector (one yes/no about the specific known error — the open-ended
+secondary judge was too noisy). Error-present rate (after correcting 2 detector false positives by
+reading the replies):
+
+| case | old (no guard) | new (guard) |
+|---|---|---|
+| A07 (猫→个) | 0/5 | 0/5 |
+| A08 (想 barred from 在) | 0/5 | 1/5 |
+| A02 (把/被 "never both") | 4/5 | 4/5 |
+| A06 (了-placement) | 4/5 | 1/4 |
+| **all** | ~8/20 | ~6/19 |
+
+**The single-arm "fixed 3/3" was resampling noise, not the guard — retracted.** The control arm
+shows the OLD prompt already gets A07 right 5/5 and A08 right ~5/5 on resampling: the original
+head_to_head errors were **low-frequency (~1-in-5) samples, not systematic failures**, so
+regenerating "cleared" them regardless of the guard. This is exactly the confound the earlier note
+flagged; the A/B confirms it bites.
+
+**Verdict on the guard:** no demonstrable effect at n=5. A02 unchanged (both overstate — and that
+"error" is a defensible beginner heuristic anyway); A07/A08 unchanged (both already low-rate); only
+A06 is suggestive (4/5→1/4) but has the smallest n, one timed-out run, and its status as an error
+is itself contestable (你怎么来了这里 may be acceptable colloquial Mandarin). The dominant source of
+variation is temperature, not the prompt. The guard is kept as cheap, harmless prompt hygiene that
+*may* help at the margin, but the evidence does not show it measurably does — to detect an effect
+this small you'd need much larger n.
+
+**Methodology note (on-theme):** the focused detector beat the open-ended judge but still made ~2
+false positives / 39 (a drill blank read as a claim; a correctly-qualified 想（认为）read as the
+error) — even a narrowed LLM scorer needs a human read of the flags.
 
 ## For the full surface (deferred)
 
