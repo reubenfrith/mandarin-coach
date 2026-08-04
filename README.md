@@ -27,6 +27,41 @@ what to drill next.
 
 ## Architecture
 
+Three entry surfaces — text, voice, and pronunciation — all feed **one** per-user error corpus:
+
+```mermaid
+flowchart TD
+  U["User — browser / phone"] --> F["FastAPI — single process<br/>cookie auth namespaces the corpus"]
+
+  F --> T["Text coach<br/>LangGraph agent · 5 tools"]
+  F --> V["Voice<br/>STT → router → brain → TTS"]
+  F --> P["Pronounce<br/>two-pass tone coach"]
+
+  T --> RET["Hybrid retriever<br/>BM25 + dense · RRF"]
+  P --> DSP["Pass 2 — pure DSP<br/>pYIN + DTW · no model"]
+
+  T --> DB[("ChromaDB — one shared corpus<br/>per-user errors · 98 rules · 217 patterns · 4,991 HSK")]
+  V --> DB
+  P --> DB
+  RET --> DB
+
+  T --> OR["OpenRouter · LiteLLM<br/>DeepSeek V4 · GLM fallback"]
+  P --> OR
+  T --> EXT["CC-CEDICT · Tavily"]
+  V --> OA["OpenAI<br/>STT · chat · TTS · embeddings"]
+  RET --> OA
+  F -.->|traces every call| LS["LangSmith"]
+
+  classDef text stroke:#C13B24,stroke-width:2px;
+  classDef voice stroke:#A87A2B,stroke-width:2px;
+  classDef pron stroke:#3F7D63,stroke-width:2px;
+  classDef corpus stroke:#C13B24,stroke-width:3px;
+  class T,RET,EXT text
+  class V,OA voice
+  class P,DSP pron
+  class DB corpus
+```
+
 - **Frontend** — hand-rolled single-page app (`app/web_ui/`: `index.html`, `app.js`,
   `practice.js`, `style.css`) served directly by FastAPI. No framework.
 - **Server** — FastAPI (`app/server.py` boots `uvicorn app.server:app`); auth via a signed
