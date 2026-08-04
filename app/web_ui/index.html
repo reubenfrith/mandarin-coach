@@ -66,6 +66,12 @@
         <span class="ps-label">拼音 Show pīnyīn</span>
         <span class="ps-track"><span class="ps-knob"></span></span>
       </button>
+      <button id="chat-reset" type="button" class="chat-reset-btn" hidden
+              title="Start a new conversation — your saved progress is kept">
+        <svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+        New chat
+      </button>
     </div>
 
     <!-- Pronunciation coach (default) — compose your own sentence, get it corrected, say it -->
@@ -114,9 +120,6 @@
         <p class="chat-empty muted">Type a Chinese sentence to get it corrected, or ask a grammar
         question in English — “why do I need 了 here?”. Press <kbd>Enter</kbd> to send,
         <kbd>Shift</kbd>+<kbd>Enter</kbd> for a new line.</p>
-      </div>
-      <div class="chat-controls">
-        <button id="chat-reset" type="button" class="link">new chat</button>
       </div>
       <form id="chat-form" class="composer">
         <textarea id="chat-input" rows="1" placeholder="Type Chinese to check, or ask a question…"></textarea>

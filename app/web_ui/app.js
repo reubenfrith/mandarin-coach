@@ -148,6 +148,7 @@ function selectTab(which) {
     $(pane).hidden = name !== which;
   }
   $("coach-pinyin").hidden = which !== "coach";  // the pīnyīn switch belongs to the text coach
+  $("chat-reset").hidden = which !== "coach";    // as does the "New chat" reset
   updateTopbar();
   // Focus the pane's primary input so the learner can type immediately (voice has no field).
   const focusTarget = which === "coach" ? "chat-input" : which === "pronounce" ? "pron-input" : null;
