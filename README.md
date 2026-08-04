@@ -76,8 +76,9 @@ Dockerfile · docker-compose.yml · Caddyfile · DEPLOY.md    deployment
 - **Evaluation harness** — [`evals/README.md`](evals/README.md)
 - **Presentation** — a self-contained slide deck, live at
   **https://reubenfrith.github.io/mandarin-coach/** (source: [`docs/presentation.html`](docs/presentation.html) —
-  open in any browser, arrow keys / scroll to advance, ⌘P to export a PDF) with a
-  matching speaker script ([`docs/presentation-script.md`](docs/presentation-script.md)).
+  open in any browser, arrow keys / scroll to advance, ⌘P to export a PDF), a
+  matching speaker script ([`docs/presentation-script.md`](docs/presentation-script.md)),
+  and a live-demo runsheet ([`docs/demo-runsheet.md`](docs/demo-runsheet.md)).
 
 ## Origins
 
