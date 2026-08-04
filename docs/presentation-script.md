@@ -7,60 +7,47 @@ budget (~9–13 min total); the slides carry the visuals, this carries the words
 
 ## 0 · Cover — *Correct. Explain. Remember.* (~20s)
 
-> "This is Mandarin Coach. Three words describe the whole product: it **corrects**
+> This is Mandarin Coach. Three words describe the whole product: it **corrects**
 > what you say, **explains** the root cause, and — the part nothing else does —
-> **remembers** it. It's live, deployed end-to-end, with three surfaces: chat,
-> voice, and pronunciation."
-
-The four curves are the four Mandarin tones — that pitch-contour idea comes back in
-the demo, because tone is something the app actually measures.
+> **remembers** it. There are three surfaces: chat,
+> voice, and pronunciation.
+> Mandarin has four tones and can be tricky to learn.
 
 ---
 
 ## 1 · Why Chinese? — *the hook* (~45s)
 
-**Open with your own reason — make it personal.** This is the cold open; it earns the
-audience before you've shown a single feature.
+> But why learn chinese - nobody learns it by accident.
+> Mine is a love story - my wife is chinese and I want to chat with her family and enjoy yummy food and her culture. 
+> But yours might be going to china for a holiday or joining a chinese AI research lab.
 
-> "Nobody learns Chinese by accident. Everyone starts for a reason — mine is a love
-> story. Yours might be a job at a Chinese AI lab, or family, or a move to Shanghai."
-
-Then the universal turn — this is the whole setup for everything after:
-
-> "But whatever the reason, the path is the same. You push past 你好, past the first
+> Whatever the reason, the path is the same.
+> You push past 你好, past the first
 > few hundred words… and then you hit the **intermediate plateau**. The place where
-> language learning goes to die. Me, and most learners, get stuck right here."
-
-Note: the "me and most learners get stuck here" line quietly introduces the audience,
-so slide 3 just sharpens it. Keep this slide short and human — no numbers yet.
+> language learning goes to die. Me, and most learners, get stuck right here.
 
 ---
 
 ## 2 · Problem — *Every correction evaporates* (1–2 min)
 
 > "Intermediate learners — roughly HSK 2 to 4 — keep making the same handful of
-> mistakes for **months**. Misordered clauses, the wrong measure word, misusing
-> 了, 把, 过."
+> mistakes for **months**. Misordered clauses, the wrong measure word, misusing tenses
 
-> "The tools all correct you *in the moment*: Duolingo flags a wrong answer, a tutor
-> fixes it in session, a language partner rephrases. Then the session ends and the
-> correction is **gone**. Nothing keeps a record."
-
-Land the line: **no tool today can say "you've made this exact mistake nine times —
-let's drill it."** So learners re-study what they already know while the errors that
-actually block fluency go unmeasured.
+> Theres a lot of language learning apps out there but they all correct you *in the moment* none of them say "you've made this exact mistake 9 times lets practice it"
+> Duolingo flags a wrong answer, a tutor, fixes it in session, a language partner rephrases. Then the session ends and the
+> correction is **gone**. Nothing keeps a record.
+> Additionally, a lot of these apps follow a curriculum and don't let you explore and learn things that are personal to you.
+>
+> These problems mean learners re study content, their errors go untracked and they don't get to personalise their learning to them
 
 ---
 
 ## 3 · Audience — *The intermediate plateau* (1–2 min)
 
-> "Adult English speakers teaching themselves, stuck at the intermediate plateau.
+> Mandarin coach is for "Adult English speakers teaching themselves, stuck at the intermediate plateau.
 > They can build sentences and hold a slow conversation — but at natural speed a
 > native speaker has to strain to follow them, and they can't see *which* recurring
 > errors are causing it."
-
-The scope insight worth saying aloud: **those errors are identical in speech and in
-writing** — so a text-first tool can track and trend them.
 
 > "They already patch it with Duolingo, Anki, YouTube, the odd iTalki tutor. Every
 > one of those shares the same gap: no persistent error log, no adaptation to the
@@ -74,11 +61,6 @@ The stats strip gives the plateau some weight — hit one or two, don't read all
 - **B1–B2** — the intermediate band is the single most-documented plateau in
   second-language-acquisition research (Richards, *Moving Beyond the Plateau*, 2008).
 - **~48%** — roughly half of app learners quit before they even reach intermediate.
-
-Provenance note (for you, not the slide): the 2,200-hour FSI figure is rock-solid;
-the plateau-at-B1–B2 is well-established in SLA literature; the ~48% dropout is from
-industry / app-learning summaries, so it carries a "~" — treat it as indicative, not
-precise, and the on-slide source line says as much.
 
 ---
 
