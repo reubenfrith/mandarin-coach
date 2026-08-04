@@ -694,6 +694,18 @@ $("voice-reset").addEventListener("click", async () => {
   $("voice-status").textContent = "conversation reset — hold to speak";
 });
 
+// "New chat" for the text coach: start a fresh conversation thread. The error corpus is
+// keyed per-login (not per-thread), so progress/stats are untouched — only the on-screen
+// chat clears. threadId() mints a new key on the next send.
+$("chat-reset").addEventListener("click", () => {
+  localStorage.removeItem("coach_thread");
+  $("chat").innerHTML =
+    '<p class="chat-empty muted">Type a Chinese sentence to get it corrected, or ask a grammar ' +
+    'question in English — “why do I need 了 here?”. Press <kbd>Enter</kbd> to send, ' +
+    '<kbd>Shift</kbd>+<kbd>Enter</kbd> for a new line.</p>';
+  $("chat-input").focus();
+});
+
 // ---- boot: resume an existing session if the cookie is still valid --------- //
 (async () => {
   try {
