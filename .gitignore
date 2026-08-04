@@ -16,3 +16,6 @@ chroma_db/
 
 # Eval scratch (isolated ChromaDB for eval runs)
 evals/.eval_chroma/
+
+# Local-only technical FAQ / Q&A prep (not shared)
+docs/FAQ.md
