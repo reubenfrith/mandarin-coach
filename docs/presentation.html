@@ -217,6 +217,10 @@
   .videoscreen .vlabel { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-faint); }
   .vcap { text-align: center; font-size: .76rem; color: var(--fg-faint); margin: .7rem 0 0; }
   .demovid { width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; border: 1px solid var(--rule); background: #000; box-shadow: var(--shadow); display: block; }
+  .videoembed { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid var(--rule); box-shadow: var(--shadow); background: #000; }
+  .videoembed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .vcap a { color: var(--accent); text-decoration: none; }
+  .vcap a:hover { text-decoration: underline; }
 
   /* infra diagram */
   .diagram { display: flex; flex-direction: column; gap: .7rem; }
@@ -563,13 +567,14 @@
   <section class="slide" id="s-demo" data-title="Demo">
     <div class="slide__inner">
       <p class="eyebrow">05 · Demo</p>
-      <!-- Presenting locally? swap the frame below for the real recording:
-           <video class="demovid" controls playsinline src="demo.mp4"></video> -->
-      <div class="videoscreen" aria-label="app demo video">
-        <div class="chrome"><i></i><i></i><i></i><span class="url">mandarin-coach · live</span></div>
-        <span class="play">▶</span>
-        <span class="vlabel">App demo</span>
+      <div class="videoembed">
+        <iframe src="https://www.youtube-nocookie.com/embed/O0jcxvkNCfY"
+                title="Mandarin Coach — app demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen loading="lazy"></iframe>
       </div>
+      <p class="vcap">▶ <a href="https://www.youtube.com/watch?v=O0jcxvkNCfY" target="_blank" rel="noopener">Watch the demo on YouTube ↗</a></p>
     </div>
   </section>
 
