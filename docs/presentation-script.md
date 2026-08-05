@@ -48,10 +48,7 @@ budget (~9–13 min total); the slides carry the visuals, this carries the words
 > They can build sentences and hold a slow conversation — but at natural speed a
 > native speaker has to strain to follow them, and they can't see *which* recurring
 > errors are causing it."
-
-> "They already patch it with Duolingo, Anki, YouTube, the odd iTalki tutor. Every
-> one of those shares the same gap: no persistent error log, no adaptation to the
-> individual, and nothing guiding them *between* sessions."
+> The intermediate plateau is a sad and dangerous place. Learners are motivated, but they don't know what to do next it is the most doumented stall in language learning and when it takes roughly 2200 hours to reach professional proficiency, it can be a lonely place.
 
 The stats strip gives the plateau some weight — hit one or two, don't read all three:
 
@@ -66,14 +63,14 @@ The stats strip gives the plateau some weight — hit one or two, don't read all
 
 ## 4 · Solution — *Three coaches, one corpus* (2 min)
 
-> "The answer is a browser agent with three surfaces that all feed **one** private
-> error corpus."
+> Incomes mandarin coach to save the day it is a browser agent with three surfaces that all feed **one** private
+> error corpus.
 
 - **Text** — a LangGraph agent with five tools; corrects, grounds the "why" in a
   real grammar rule, and silently logs each mistake.
-- **Voice** — free-form spoken Mandarin; an intent router flips to an English
+- **Voice** — which allows for free-form spoken Mandarin; an intent router flips to an English
   *coaching* answer the second you ask "why was that wrong?"
-- **Pronounce** — compose-and-correct, then say-and-score: a per-syllable tone
+- **Pronounce** — practices your tones and gives a per-syllable tone
   verdict from real pitch analysis (pYIN + DTW), no speech-recognition guesswork.
 
 Then the "why an agent, not just a model" beat:
@@ -111,35 +108,25 @@ The diagram is three colour-coded flows — Text (red), Voice (gold), Pronounce
 (green) — all entering through one FastAPI process and all writing to one corpus.
 Trace the three, then land the punchline.
 
-> "Everything runs in a single process on one always-on VM, and auth namespaces
-> each learner's corpus. From there the three surfaces split: **Text** runs the
-> LangGraph agent — five tools and the hybrid retriever — over the OpenRouter models.
-> **Voice** is its own low-latency chain: speech-to-text, an intent router, the
-> conversation-or-coach brain, streamed speech back — all on OpenAI. **Pronounce**
-> is the odd one out: two passes, and the scoring pass is **pure DSP — pitch analysis
-> with no model at all**, for the reason we covered earlier."
+> Text
+> "The text coach is a LangGraph agent with five tools and a hybrid retriever. It
+> runs over OpenRouter models - it has a primary model of Deep Seek v4 flash, the CC-CEDICT dictionary, a grammar-rule corpus,
+> and a web-search tool. It extracts each error and logs it to your corpus."
 
-> "But follow all three lines down and they converge on the same box: **one shared
-> corpus**. That's the whole point — a mistake you make out loud in voice practice
-> and a mistake you type in chat land in the same place."
+> Voice
+> "The voice coach is a free-form spoken conversation partner that speaks Mandarin as well as a coaching brain that switches to English when you ask a learning question. It runs on OpenAI's models and has a low-latency chain: speech-to-text, an intent router, the conversation-or-coach brain, and streamed speech back."
+
+> Pronounce
+>  "The pronunciation coach is a two-pass tone coach: compose and correct a sentence, then say it and score it. It analyses the raw audio of your voice directly — measuring how your pitch moves across each syllable and comparing that curve to the correct tone shape — to give a per-syllable tone verdict and a curve overlay. There's no AI model involved at all."
 
 Two rationale lines if asked:
 
-- **Why a VM, not serverless:** ChromaDB is SQLite-backed and needs a real
-  filesystem; always-on means no cold starts, and the corpus sits on a persistent
-  disk that survives the VM.
 - **Why LiteLLM + OpenRouter:** three Chinese-leaderboard models behind one key,
   swappable with zero code change.
 
 ---
 
 ## 7 · Evals — *Does it actually work?* (1 min)
-
-The closing proof, right before you wrap. Be honest up front: this is a working
-prototype, not a business with users, so "success" means an **eval harness** that
-proves each piece does what it claims. The slide reads left to right — **what we
-measured, what was good, what was honestly weak.** The third column is the one that
-buys you credibility; don't skip it.
 
 **What we measured** (one line): corrections against a naked LLM, retrieval, the
 memory-writer, tool use, voice routing, and tone scoring — a surface per subsystem.
@@ -156,10 +143,7 @@ memory-writer, tool use, voice routing, and tone scoring — a surface per subsy
 
 - On *one-off* corrections the agent is ≈ a plain LLM — the edge is the memory, not
   the individual fix (we measured that parity on purpose).
-- Tone scoring hit 1.00 precision, but only on clean **synthetic** audio — real
-  learner speech is untested.
 - It declines only **2 of 4** off-topic questions — the topic guardrail is thin.
-- Retrieval still misses at rank-1 on look-alikes (的 / 得 / 地).
 
 Close on the discipline line: **every judged number is paired with a deterministic
 cross-check, and when they disagree, the deterministic one wins.**
