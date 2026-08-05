@@ -86,6 +86,8 @@ function renderLogged(container, logged) {
   container.innerHTML = "";
   // loggedChip is the shared chip defined in app.js (loaded first).
   (logged || []).forEach((l) => container.appendChild(loggedChip(`logged: ${l.hanzi} — ${l.explanation}`)));
+  // refreshWelcome is defined in app.js; bump the "N logged errors" header on a tone log.
+  if ((logged || []).length && typeof refreshWelcome === "function") refreshWelcome();
 }
 
 // ---- Pass 1: compose & correct -------------------------------------------- //

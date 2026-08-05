@@ -69,21 +69,29 @@ document.querySelectorAll(".hsk-options button").forEach((b) =>
   })
 );
 
-async function enterApp() {
-  show("app");
+// Refresh the "Welcome back — N logged errors" stat from the server. Called on entry AND
+// after any error is logged, so the count updates live as the learner is corrected.
+// Plain fetch (not api()): a non-fatal stat lookup must never trip api()'s 401 bounce.
+async function refreshWelcome() {
   try {
-    // Plain fetch (not api()): this is a non-fatal welcome-stat lookup, so a hiccup
-    // here must never trip api()'s global 401 handler and bounce us back to login.
     const r = await fetch("/api/stats", { credentials: "include" });
     if (!r.ok) return;
     const stats = await r.json();
+    const w = $("welcome");
     if (stats.total > 0) {
       const top = Object.keys(stats.by_category)[0];
-      $("welcome").textContent = `Welcome back — ${stats.total} logged errors so far` + (top ? `, most common: ${top}.` : ".");
-      $("welcome").hidden = false;
+      w.textContent = `Welcome back — ${stats.total} logged errors so far` + (top ? `, most common: ${top}.` : ".");
+      w.hidden = false;
+    } else {
+      w.hidden = true;
     }
   } catch { /* non-fatal */ }
   updateTopbar();
+}
+
+async function enterApp() {
+  show("app");
+  await refreshWelcome();
   restoreChatHistory();  // bring back the text-coach conversation if the server still has it
 }
 
@@ -432,6 +440,7 @@ function loggedChip(text) {
 function markLogged(turn, logged) {
   if (!logged) return;
   turn.appendChild(loggedChip(`logged (${logged.category}): ${logged.original} → ${logged.correction}`));
+  refreshWelcome();  // keep the "N logged errors" header in sync as errors accumulate
 }
 
 // ---- text coach ----------------------------------------------------------- //
