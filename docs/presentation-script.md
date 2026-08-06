@@ -7,7 +7,7 @@ budget (~9–13 min total); the slides carry the visuals, this carries the words
 
 ## 0 · Cover — *Correct. Explain. Remember.* (~20s)
 
-> Ni hao wo jiao Reuben - hi my name is Reuben and this is mandarin coach. An agent that corrects what you say, explains the root cause, and remembers it. There are three surfaces: chat, voice, and pronunciation. Mandarin has four tones and can be tricky to learn.
+> Ni hao wo de mingzi Reuben - hi my name is Reuben and this is mandarin coach. A coach that corrects what you say, explains the root cause, and remembers it.
 
 ---
 
@@ -24,11 +24,10 @@ budget (~9–13 min total); the slides carry the visuals, this carries the words
 
 ## 2 · The plateau — *the problem* (1–2 min)
 
-> The intermediate plateau is the place where language learning goes to die. Me, and most learners, get stuck right here — it is a well-documented stall in language learning — we keep making the same handful of mistakes. Misordered clauses, the wrong measure word, misusing tenses.
+> The intermediate plateau is the place where language learning goes to die.  learners get stuck right here — it is a well-documented stall in language learning — we keep making the same handful of mistakes. Misordered clauses, the wrong measure word, misusing tenses.
 
 > There are already a lot of language learning apps out there but they all correct you *in the moment* none of them say "you've made this exact mistake 9 times lets practice it"
-> Duolingo flags a wrong answer, a tutor fixes it in session, a language partner rephrases. Then the session ends and the correction is **gone**. Nothing keeps a record.
-> Additionally, a lot of these apps follow a curriculum and don't let you explore and learn things that are personal to you. This all means you can find yourself restudying content and repeating the same mistakes over and over again.
+> Duolingo flags a wrong answer, a tutor fixes it in session, a language partner rephrases. Then the session ends and the correction is **gone**.
 > Mandarin's a hard language where it takes roughly 2200 hours to reach professional proficiency, so the quicker someone can move through the intermediate level the better.
 
 ---
@@ -42,8 +41,6 @@ budget (~9–13 min total); the slides carry the visuals, this carries the words
 - **Voice** — which allows for free-form spoken Mandarin as well as a coaching answer to help you learn as you go;
 - **Pronounce** — practices your tones and gives a per-syllable tone
   verdict from real pitch analysis (pYIN + DTW), no speech-recognition guesswork.
-
-
 
 ---
 
