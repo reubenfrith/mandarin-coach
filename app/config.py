@@ -61,11 +61,14 @@ REQUEST_TIMEOUT = float(os.environ.get("REQUEST_TIMEOUT", "90"))
 
 # --------------------------------------------------------------------------- #
 # Voice pipeline — all-OpenAI, turn-based (no speech-to-speech realtime API).
-# One spoken turn is STT (transcribe) -> chat LLM (converse) -> TTS (speak). Every
-# leg runs DIRECT on OPENAI_API_KEY: TTS has to (OpenRouter has no TTS model), and
-# STT + chat were moved off OpenRouter too — the OpenRouter proxy hop plus a reasoning
-# chat model (glm/deepseek) made live voice turns sluggish. Keeping voice on one fast
-# provider is the latency fix. The TEXT coach still uses the OpenRouter models above.
+# One spoken turn is STT (transcribe) -> chat LLM (converse) -> TTS (speak). Every leg
+# runs DIRECT on OPENAI_API_KEY to keep voice on one fast provider with no proxy hop —
+# the OpenRouter hop plus a reasoning chat model (glm/deepseek) made live turns sluggish.
+# NOTE: OpenRouter has SINCE added an OpenAI-compatible TTS route (POST /audio/speech,
+# streaming, same SDK call we use) and an STT route (though its /audio/transcriptions
+# takes base64 input_audio, not the SDK's multipart file — not a drop-in). So direct-
+# OpenAI is now a LATENCY preference, not a hard requirement: a future fallback provider
+# could route voice through OpenRouter. The TEXT coach still uses the OpenRouter models above.
 # --------------------------------------------------------------------------- #
 OPENROUTER_BASE_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
 # The voice conversation/coach LLM is a MODELS key. gpt-4o-mini is fast and NON-reasoning
@@ -73,7 +76,7 @@ OPENROUTER_BASE_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.
 # before each reply). Routes direct to OpenAI (see the MODELS note above).
 CONVERSATION_MODEL = os.environ.get("CONVERSATION_MODEL", "gpt-4o-mini")
 # STT goes DIRECT to OpenAI (OPENAI_API_KEY), using OpenAI's native, unprefixed model
-# name. (Both STT and TTS bypass OpenRouter — see the pipeline note above.)
+# name — one fast provider, no proxy hop (see the pipeline note above).
 STT_MODEL = os.environ.get("STT_MODEL", "gpt-4o-mini-transcribe")
 # Voice-coach STT language hint. Empty/unset => auto-detect (omit the hint), so a spoken
 # English clarifying question ("why is that wrong?") transcribes AS English instead of
@@ -86,12 +89,12 @@ TTS_VOICE = os.environ.get("TTS_VOICE", "alloy")
 
 
 def openai_key() -> str:
-    """OpenAI key for the TTS leg of the voice pipeline (OpenRouter has no TTS model)."""
+    """OpenAI key for the direct-OpenAI voice pipeline (STT + TTS)."""
     key = os.environ.get("OPENAI_API_KEY", "").strip()
     if not key or key.startswith("#"):
         raise RuntimeError(
-            "OPENAI_API_KEY is not set (required for voice TTS — OpenRouter has no "
-            "text-to-speech model)."
+            "OPENAI_API_KEY is not set (required for the direct-OpenAI voice "
+            "pipeline — STT and TTS)."
         )
     return key
 

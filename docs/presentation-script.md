@@ -7,11 +7,7 @@ budget (~9–13 min total); the slides carry the visuals, this carries the words
 
 ## 0 · Cover — *Correct. Explain. Remember.* (~20s)
 
-> This is Mandarin Coach. Three words describe the whole product: it **corrects**
-> what you say, **explains** the root cause, and — the part nothing else does —
-> **remembers** it. There are three surfaces: chat,
-> voice, and pronunciation.
-> Mandarin has four tones and can be tricky to learn.
+> Ni hao wo jiao Reuben - hi my name is Reuben and this is mandarin coach. An agent that corrects what you say, explains the root cause, and remembers it. There are three surfaces: chat, voice, and pronunciation. Mandarin has four tones and can be tricky to learn.
 
 ---
 
@@ -20,89 +16,55 @@ budget (~9–13 min total); the slides carry the visuals, this carries the words
 > But why learn chinese - nobody learns it by accident.
 > Mine is a love story - my wife is chinese and I want to chat with her family and enjoy yummy food and her culture. 
 > But yours might be going to china for a holiday or joining a chinese AI research lab.
-
 > Whatever the reason, the path is the same.
 > You push past 你好, past the first
-> few hundred words… and then you hit the **intermediate plateau**. The place where
-> language learning goes to die. Me, and most learners, get stuck right here.
+> few hundred words… and then you hit the **intermediate plateau**. 
 
 ---
 
-## 2 · Problem — *Every correction evaporates* (1–2 min)
+## 2 · The plateau — *the problem* (1–2 min)
 
-> "Intermediate learners — roughly HSK 2 to 4 — keep making the same handful of
-> mistakes for **months**. Misordered clauses, the wrong measure word, misusing tenses
+> The intermediate plateau is the place where language learning goes to die. Me, and most learners, get stuck right here — it is a well-documented stall in language learning — we keep making the same handful of mistakes. Misordered clauses, the wrong measure word, misusing tenses.
 
-> Theres a lot of language learning apps out there but they all correct you *in the moment* none of them say "you've made this exact mistake 9 times lets practice it"
-> Duolingo flags a wrong answer, a tutor, fixes it in session, a language partner rephrases. Then the session ends and the
-> correction is **gone**. Nothing keeps a record.
-> Additionally, a lot of these apps follow a curriculum and don't let you explore and learn things that are personal to you.
->
-> These problems mean learners re study content, their errors go untracked and they don't get to personalise their learning to them
-
----
-
-## 3 · Audience — *The intermediate plateau* (1–2 min)
-
-> Mandarin coach is for "Adult English speakers teaching themselves, stuck at the intermediate plateau.
-> They can build sentences and hold a slow conversation — but at natural speed a
-> native speaker has to strain to follow them, and they can't see *which* recurring
-> errors are causing it."
-> The intermediate plateau is a sad and dangerous place. Learners are motivated, but they don't know what to do next it is the most doumented stall in language learning and when it takes roughly 2200 hours to reach professional proficiency, it can be a lonely place.
-
-The stats strip gives the plateau some weight — hit one or two, don't read all three:
-
-- **2,200 hours** — the FSI's estimate to reach professional proficiency in Mandarin,
-  its hardest tier. This is a *long* road, which is why the middle of it is where
-  people stall.
-- **B1–B2** — the intermediate band is the single most-documented plateau in
-  second-language-acquisition research (Richards, *Moving Beyond the Plateau*, 2008).
-- **~48%** — roughly half of app learners quit before they even reach intermediate.
+> There are already a lot of language learning apps out there but they all correct you *in the moment* none of them say "you've made this exact mistake 9 times lets practice it"
+> Duolingo flags a wrong answer, a tutor fixes it in session, a language partner rephrases. Then the session ends and the correction is **gone**. Nothing keeps a record.
+> Additionally, a lot of these apps follow a curriculum and don't let you explore and learn things that are personal to you. This all means you can find yourself restudying content and repeating the same mistakes over and over again.
+> Mandarin's a hard language where it takes roughly 2200 hours to reach professional proficiency, so the quicker someone can move through the intermediate level the better.
 
 ---
 
 ## 4 · Solution — *Three coaches, one corpus* (2 min)
 
-> Incomes mandarin coach to save the day it is a browser agent with three surfaces that all feed **one** private
-> error corpus.
+> Incomes mandarin coach to save the day it is a browser agent with three surfaces that all feed **one** private error corpus.
 
-- **Text** — a LangGraph agent with five tools; corrects, grounds the "why" in a
-  real grammar rule, and silently logs each mistake.
-- **Voice** — which allows for free-form spoken Mandarin; an intent router flips to an English
-  *coaching* answer the second you ask "why was that wrong?"
+- **Text** — an agent with five tools; it corrects, grounds the "why" in a
+  real grammar rule and expected vocabulary, and logs each mistake.
+- **Voice** — which allows for free-form spoken Mandarin as well as a coaching answer to help you learn as you go;
 - **Pronounce** — practices your tones and gives a per-syllable tone
   verdict from real pitch analysis (pYIN + DTW), no speech-recognition guesswork.
 
-Then the "why an agent, not just a model" beat:
 
-> "A frontier model already fixes an isolated sentence well — so on one-off
-> corrections we *assumed parity*. The build earns its keep on three things a model
-> can't do even with your history in its context: **grounded facts** it looks up
-> instead of hallucinating, **exact aggregation** over your corpus, and being
-> **proactive** — it opens on your weakest area and the value compounds with use."
 
 ---
 
 ## 5 · Demo — *The correction that remembers* (2–4 min)
 
-Play the screen-recording embedded on the slide and narrate over it (fallback: the
-live app at **34-129-227-111.nip.io**). Talk through these beats in order:
+Lets jump into mandarin coach,
 
-- **A — Text-coach correction.** Submit `她把书被他借走了`. Point out the coach catches the
-  把/被 conflict, fixes it, explains disposal vs. passive — and files the error.
-- **B — The memory payoff.** Ask "how many 把 errors have I made?" It returns an
-  **exact count and trend** — computed over the corpus, not estimated. *This is the
-  moment the whole pitch lands.*
-- **C — Voice.** Speak a Mandarin sentence, get a spoken reply, then ask "why was
-  that wrong?" — watch it switch to English coaching mid-conversation.
-- **D — Pronounce.** Say `妈`. Show the pitch-contour overlay and the per-syllable
-  tone verdict.
+Text-coach correction: 
+wo you liang ge mao - 我有两个猫 is this correct ?
+wo qu zou tian - 我去昨天 is this correct ? 
 
-If you only have time for one thing: **do A and B.** That's the differentiator.
+Voice-coach correction:
+Wo xiang he kafei - 我想喝咖啡 
+How to say this more politely ?
+
+Pronounce:
+Wo xiang he kafei - 我想喝咖啡
 
 ---
 
-## 6 · Infrastructure — *One VM, one process, one corpus* (1–2 min)
+## 6 · Infrastructure (1–2 min)
 
 The diagram is three colour-coded flows — Text (red), Voice (gold), Pronounce
 (green) — all entering through one FastAPI process and all writing to one corpus.
@@ -112,41 +74,29 @@ Trace the three, then land the punchline.
 > "The text coach is a LangGraph agent with five tools and a hybrid retriever. It
 > runs over OpenRouter models - it has a primary model of Deep Seek v4 flash, the CC-CEDICT dictionary, a grammar-rule corpus,
 > and a web-search tool. It extracts each error and logs it to your corpus."
+> For this I focused on using models that are strong on Chinese, and I wanted to be able to swap them out with zero code change. So I used LiteLLM + OpenRouter, which lets me use three different Chinese-leaderboard models behind one key. I have deepseek-v4-flash as the primary with glm as a fallback behind a turn-timeout guard. 
 
 > Voice
-> "The voice coach is a free-form spoken conversation partner that speaks Mandarin as well as a coaching brain that switches to English when you ask a learning question. It runs on OpenAI's models and has a low-latency chain: speech-to-text, an intent router, the conversation-or-coach brain, and streamed speech back."
+> "The voice coach is a free-form spoken conversation partner that speaks Mandarin as well as a coaching brain that switches to English when you ask a learning question. It runs on OpenAI's models and has a low-latency chain: speech-to-text, an intent router, the conversation-or-coach brain, and streamed speech back." This uses openai's models for the voice coach because they are strong on Chinese and have a low-latency chain: speech-to-text, an intent router, the conversation-or-coach brain, and streamed speech back.
 
 > Pronounce
->  "The pronunciation coach is a two-pass tone coach: compose and correct a sentence, then say it and score it. It analyses the raw audio of your voice directly — measuring how your pitch moves across each syllable and comparing that curve to the correct tone shape — to give a per-syllable tone verdict and a curve overlay. There's no AI model involved at all."
-
-Two rationale lines if asked:
-
-- **Why LiteLLM + OpenRouter:** three Chinese-leaderboard models behind one key,
-  swappable with zero code change.
+>  "The pronunciation coach is a two-pass tone coach: It analyses the raw audio of your voice directly — measuring how your pitch moves across each syllable and comparing that curve to the correct tone shape — to give a per-syllable tone verdict and a curve overlay. There's no AI model involved at all." This is because text to speech models are trained to hear what you *meant* to say, not what you actually *said* - they are designed to be forgiving, so I wanted a pure signal processing approach to tone scoring.
 
 ---
 
 ## 7 · Evals — *Does it actually work?* (1 min)
 
-**What we measured** (one line): corrections against a naked LLM, retrieval, the
-memory-writer, tool use, voice routing, and tone scoring — a surface per subsystem.
+Evals helps us say is it working and back it up with numbers. 
 
-**What was good** — linger on the first, it's the whole thesis:
+One of the core questions is - "Is this actually better than just using a naked LLM like ChatGPT?" 
+With one-off corrections and questions the naked-LLM control and Mandarin Coach were similar, however the differentiation happens when we start having longer conversations at scale and want to track our mistakes. Mandarin Coach earns its keep on three things a model
+can't do even with your history in its context: **grounded facts** it looks up
+instead of hallucinating, **exact aggregation** over your corpus, and being
+**proactive** — it opens on your weakest area and the value compounds with use. Our agent is grounded in facts and has a memory that allows us to track mistakes over time.
 
-- **10/10 vs 7/10** — remembering at scale. A naked LLM given every advantage (same
-  model, your records pasted in) still loses, because counting dozens of records is a
-  database job, not a language job.
-- **97% vs 82%** correct fixes, zero misleading; **1.00** logging precision (text and
-  tone); the right tool called **99%** of the time.
+Some other things we measured were the retrieval, the memory-writer, tool use, voice routing — most surfaces had some kind of metric to ensure good performance.
 
-**What was honestly weak** — say these plainly, it lands better than pretending:
-
-- On *one-off* corrections the agent is ≈ a plain LLM — the edge is the memory, not
-  the individual fix (we measured that parity on purpose).
-- It declines only **2 of 4** off-topic questions — the topic guardrail is thin.
-
-Close on the discipline line: **every judged number is paired with a deterministic
-cross-check, and when they disagree, the deterministic one wins.**
+Additionally where we had LLMs judging for correctness we paired that with a deterministic cross-check, and when they disagreed, the deterministic one won. This is because a judge you can't cross-check isn't evidence.
 
 ---
 
@@ -156,25 +106,18 @@ Frame it as lessons, not a victory lap — it's more honest and more memorable.
 
 **Lessons learnt:**
 
-- **A judge you can't cross-check isn't evidence.** The single biggest methodological
-  lesson — every LLM-judged number is paired with a deterministic check, and the
-  deterministic one wins.
-- **Measure the differentiator, not the easy part.** A naked-LLM control arm showed
-  one-off corrections are parity; the value — and the eval that matters — is memory
-  at scale.
-- **Fix the source, not the reply.** The coach's wrong corrections traced back to
-  over-broad rules in the corpus; fixing the *data* fixed every downstream answer.
+- **tools are the differentiator.** The LLM is a commodity; the value is in the tools, the memory, and the grounded lookups.
+- **Build in fallbacks** Relying on a single model is a risk; we built in a fallback behind a turn-timeout guard.
 - **Not everything should be AI.** Tone scoring is pure signal processing precisely
   because speech-to-text hears what you *meant*, not what you *said*.
 
 **What's next** (each tied to something above):
 
 - User file upload — .txt and Anki decks (the one deferred data feature).
-- Cross-encoder reranking for the rank-1 look-alike misses.
-- Realtime voice, and tone scoring validated on real learner audio (not synthetic).
+- Realtime voice, and tone scoring validated on real learner audio.
 - A topic-adherence guardrail — closes the "declines only 2 of 4" gap from the evals.
 
-Close on the three words: **"Correct. Explain. Remember." 谢谢。**
+That's Mandarin Coach: Thanks for your time - xiexie 谢谢。
 
 ---
 
