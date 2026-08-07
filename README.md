@@ -11,6 +11,10 @@ curriculum.
 
 **Live app:** https://34-129-227-111.nip.io
 
+**Demo video:** [watch on YouTube ↗](https://www.youtube.com/watch?v=O0jcxvkNCfY)
+
+[![Watch the Mandarin Coach demo](https://img.youtube.com/vi/O0jcxvkNCfY/maxresdefault.jpg)](https://www.youtube.com/watch?v=O0jcxvkNCfY)
+
 ---
 
 ## Three coaches, one corpus
