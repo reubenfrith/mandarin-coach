@@ -70,7 +70,6 @@ REQUEST_TIMEOUT = float(os.environ.get("REQUEST_TIMEOUT", "90"))
 # OpenAI is now a LATENCY preference, not a hard requirement: a future fallback provider
 # could route voice through OpenRouter. The TEXT coach still uses the OpenRouter models above.
 # --------------------------------------------------------------------------- #
-OPENROUTER_BASE_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
 # The voice conversation/coach LLM is a MODELS key. gpt-4o-mini is fast and NON-reasoning
 # — the right default for a live back-and-forth (glm/deepseek emit a ~5s reasoning trace
 # before each reply). Routes direct to OpenAI (see the MODELS note above).
@@ -96,13 +95,6 @@ def openai_key() -> str:
             "OPENAI_API_KEY is not set (required for the direct-OpenAI voice "
             "pipeline — STT and TTS)."
         )
-    return key
-
-
-def openrouter_key() -> str:
-    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
-    if not key or key.startswith("#"):
-        raise RuntimeError("OPENROUTER_API_KEY is not set (required for the voice pipeline).")
     return key
 
 

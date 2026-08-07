@@ -37,7 +37,7 @@ Three entry surfaces — text, voice, and pronunciation — all feed **one** per
 flowchart TD
   U["User — browser / phone"] --> F["FastAPI — single process<br/>cookie auth namespaces the corpus"]
 
-  F --> T["Text coach<br/>LangGraph agent · hybrid retriever · 5 tools<br/>OpenRouter — DeepSeek V4 → GLM · CC-CEDICT · Tavily"]
+  F --> T["Text coach<br/>LangGraph agent · hybrid retriever · 6 tools<br/>OpenRouter — DeepSeek V4 → GLM · CC-CEDICT · Tavily"]
   F --> V["Voice<br/>STT → router → brain → TTS<br/>OpenAI"]
   F --> P["Pronounce<br/>two-pass tone coach<br/>pYIN + DTW DSP · no model"]
   F -.->|traces every call| LS["LangSmith"]
@@ -94,7 +94,6 @@ data/           reference corpora (grammar rules/patterns, HSK vocab, error patt
 evals/          evaluation harness — surfaces, datasets, and results (see evals/README.md)
 tests/          pytest suite
 docs/           feature plans + the certification write-up (see below)
-archive/        dead pre-pivot Chainlit UI, kept for reference only
 Dockerfile · docker-compose.yml · Caddyfile · DEPLOY.md    deployment
 ```
 

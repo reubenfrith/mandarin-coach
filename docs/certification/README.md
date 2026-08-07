@@ -129,9 +129,11 @@ flowchart TD
         end
         AGENT --> EPA["🔧 Error pattern analyser<br/>frequency, trends, insights"]
         AGENT --> GRF["🔧 Grammar rule fetcher<br/>full rule + examples"]
+        AGENT --> VOC["🔧 HSK vocab explorer<br/>level-appropriate themed words"]
         AGENT --> DG["🔧 Drill generator<br/>targeted exercises from error category"]
         EPA --> DB[("ChromaDB<br/>personal_errors · grammar_rules<br/>grammar_patterns · hsk_vocabulary · error_patterns")]
         GRF --> DB
+        VOC --> DB
         DB --- EMB["OpenAI embeddings<br/>text-embedding-3-small"]
     end
     AGENT --> GW["LiteLLM gateway → OpenRouter<br/>DeepSeek V4 default · GLM-5.2 fallback"]
@@ -147,7 +149,7 @@ One sentence per component:
 | LLM | DeepSeek V4 (default), GLM-5.2 (fallback), Qwen3.5-397B | Shortlisted from Chinese-language benchmarks rather than general popularity (see [Model selection](#model-selection)); the production default was settled by the Task 6 bake-off. |
 | LLM gateway | LiteLLM + OpenRouter | All three candidate models behind one API key, swappable with zero code changes. |
 | Agent orchestration | LangGraph (`create_agent`) + LangChain | Provides the tool-calling loop plus a `MemorySaver` checkpointer for per-conversation memory, with one grouped LangSmith trace per turn. |
-| Tools | 5 tools (see [Agent tools](#agent-tools)) | Choosing between tools by intent is what makes this an agent rather than a chatbot. |
+| Tools | 6 tools (see [Agent tools](#agent-tools)) | Choosing between tools by intent is what makes this an agent rather than a chatbot. |
 | Embedding model | OpenAI `text-embedding-3-small` | Strong, cheap, well-documented baseline; Chinese-native alternatives were measured against it in Task 6. |
 | Vector database | ChromaDB | Simple persistent local store whose collections are namespaced per user, isolating each learner's corpus. |
 | Authentication | Chainlit username/password | An authenticated identity to namespace each user's data in ~10 lines of code; OAuth is a drop-in swap later. |
@@ -170,11 +172,12 @@ Western models (Claude, GPT-4o) were considered but do not lead Chinese-language
 
 ### Agent tools
 
-The agent picks between five tools based on the user's intent:
+The agent picks between six tools based on the user's intent:
 
 | Tool | Type | Trigger | Returns |
 |---|---|---|---|
 | CC-CEDICT dictionary lookup | External API | Unfamiliar or misspelled word in the input | Definition, pinyin, HSK level, examples |
+| HSK vocabulary explorer | Internal (ChromaDB) | Suggesting level-appropriate words on a theme | Semantically matched HSK 1–6 words with pinyin, level, meaning |
 | Tavily web search | External API | Corpus lacks examples; current-usage questions | Live Chinese text, cultural notes |
 | Error pattern analyser | Internal (ChromaDB) | "What am I getting wrong?", drills, insights | Error categories ranked by frequency, trends |
 | Grammar rule fetcher | Internal (ChromaDB) | An identified error needs its rule | Full rule, common mistakes, examples |
@@ -211,14 +214,18 @@ flowchart TD
     ROUTER -- "drill / insights" --> EPA2["🔧 Error pattern analyser<br/>top errors by frequency;<br/>trend: improving vs persisting"]
     EPA2 --> DRILL["🔧 Drill generator<br/>3–5 exercises from top error category"]
 
+    ROUTER -- "vocabulary request" --> VOC1["🔧 HSK vocab explorer<br/>level-appropriate words on a theme"]
+    VOC1 --> VLIST["Suggest words with pinyin + meaning,<br/>capped to the learner's HSK level"]
+
     LOG --> RESP["Response returned to user in Chainlit"]
     EXPL --> RESP
     DRILL --> RESP
+    VLIST --> RESP
     RESP --> REVIEW["👤 HUMAN REVIEW<br/>user reads correction + explanation inline;<br/>'Log this error' / 'Dismiss' actions,<br/>auto-log after 5 s to keep friction low"]
     REVIEW -.-> TRACE["LangSmith traces every tool call and LLM step"]
 ```
 
-The user chats in a browser on laptop or phone. On first login the agent runs a short onboarding (HSK level, stored in the user profile) and shows three starter prompts; returning users get a summary of their recent errors and a drill offer, so there is never a blank chat window. Each message is routed by intent. For a correction, the agent fetches the relevant grammar rule, pulls semantically similar past mistakes from the user's personal error collection, and answers with a root-cause explanation rather than just a fix — "this is your fourth 把-structure error; the underlying issue is applying a disposal marker to an intransitive verb." Unknown words go to the CC-CEDICT dictionary tool; thin corpus coverage triggers Tavily web search.
+The user chats in a browser on laptop or phone. On first login the agent runs a short onboarding (HSK level, stored in the user profile) and shows three starter prompts; returning users get a summary of their recent errors and a drill offer, so there is never a blank chat window. Each message is routed by intent. For a correction, the agent fetches the relevant grammar rule, pulls semantically similar past mistakes from the user's personal error collection, and answers with a root-cause explanation rather than just a fix — "this is your fourth 把-structure error; the underlying issue is applying a disposal marker to an intransitive verb." Unknown words go to the CC-CEDICT dictionary tool; when the learner wants vocabulary on a theme, the HSK vocab explorer suggests level-appropriate words from the graded HSK 1–6 list (capped to their level); thin corpus coverage triggers Tavily web search.
 
 Every correction ends with the new error being logged back to ChromaDB, which is what makes the next session smarter than this one. The drill generator turns the most recent (or most persistent) error category into 3–5 exercises grounded in the retrieved rule, and the error pattern analyser powers an insights mode — a ranked view of the user's error categories with trend direction. The requirements are covered by the stack: LiteLLM + OpenRouter is the LLM gateway, session memory (LangGraph checkpointer) plus long-term memory (ChromaDB) is the memory component, and Chainlit serves both phone and laptop browsers.
 
@@ -288,7 +295,7 @@ Browser ─▶ Chainlit UI ─▶ password auth (per-user namespace)
         ─▶ LangGraph agent (create_agent + MemorySaver, keyed by thread_id)
         ─▶ ChatLiteLLM ─▶ OpenRouter (DeepSeek V4 default, GLM-5.2 fallback)
              │
-             ├─ 5 tools (grammar / error-history / drill / dictionary / web)
+             ├─ 6 tools (grammar / error-history / drill / dictionary / hsk-vocab / web)
              ├─ ChromaDB (reference collections + per-user error corpus)
              └─ LangSmith trace per turn
         ─▶ post-turn: extract_and_log_error() grows the user's corpus
@@ -300,7 +307,7 @@ Browser ─▶ Chainlit UI ─▶ password auth (per-user namespace)
 | Accounts | SQLite, salted-hash credentials, per-user HSK profile | `app/users.py` |
 | Agent | LangGraph `create_agent` + `MemorySaver` checkpointer per conversation | `app/agent.py` |
 | Model gateway | `ChatLiteLLM` → OpenRouter, one API key, model swappable by short key | `app/config.py` |
-| Tools | The five tools, bound per user via `make_tools(user_id)` | `app/tools.py` |
+| Tools | The six tools, bound per user via `make_tools(user_id)` | `app/tools.py` |
 | Memory | ChromaDB collections + deterministic `error_stats()` for counts/trends | `app/memory.py` |
 | Reference data | 315 grammar documents, 4,991 HSK entries, 16 error patterns, CC-CEDICT | `data/` |
 | Monitoring | LangSmith (`mandarin-coach`; evals route to `mandarin-coach-evals`) | `app/config.py` |

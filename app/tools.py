@@ -1,4 +1,4 @@
-"""The five agent tools.
+"""The six agent tools.
 
 Built via make_tools(user_id) so the personal-error tools are bound to the right
 user namespace without the LLM having to supply a user id. The agent selects
@@ -8,8 +8,9 @@ than a chatbot.
   1. grammar_rule_fetcher   — hybrid BM25+dense RAG over grammar_rules (internal)
   2. error_pattern_analyser — personal error history + deterministic stats (internal)
   3. drill_generator        — LLM-generated targeted exercises (internal LLM call)
-  4. dictionary_lookup      — grounded pinyin/definition/HSK (external CC-CEDICT + pypinyin)
-  5. web_search             — Tavily live search (external)
+  4. dictionary_lookup      — grounded pinyin/definition/HSK for ONE word (external CC-CEDICT + pypinyin)
+  5. vocab_explorer         — semantic RAG over the graded HSK 1-6 vocab collection (internal)
+  6. web_search             — Tavily live search (external)
 """
 import json
 import os
@@ -245,6 +246,26 @@ def make_tools(user_id: str) -> list:
         return "\n".join(parts)
 
     @tool
+    def vocab_explorer(topic: str, max_hsk_level: int = 0) -> str:
+        """Suggest HSK vocabulary related to a topic or theme, drawn from the graded HSK
+        1-6 word list. Use this to offer level-appropriate words the learner could use —
+        e.g. to build a themed set ('travel', 'food', 'feelings'), to enrich a correction
+        with natural alternatives, or when the learner asks for words on a subject. Set
+        max_hsk_level (1-6) to cap difficulty to the learner's level; leave 0 for no cap.
+        To look up ONE specific known word's pinyin/definition, use dictionary_lookup instead."""
+        where = {"hsk_level": {"$lte": max_hsk_level}} if 1 <= max_hsk_level <= 6 else None
+        hits = memory.query_hsk_vocabulary(topic, n=6, where=where)
+        if not hits:
+            return "No matching HSK vocabulary found."
+        out = []
+        for h in hits:
+            m = h["metadata"]
+            full = m.get("meaning") or ""
+            meaning = full[:100] + ("…" if len(full) > 100 else "")
+            out.append(f"- {m['word']} ({m['pinyin']}, HSK {m['hsk_level']}, {m['pos']}): {meaning}")
+        return "\n".join(out)
+
+    @tool
     def web_search(query: str) -> str:
         """Search the live web for real-world Chinese usage examples, cultural context,
         or current usage when the built-in corpus is insufficient. Use sparingly."""
@@ -267,5 +288,6 @@ def make_tools(user_id: str) -> list:
         error_pattern_analyser,
         drill_generator,
         dictionary_lookup,
+        vocab_explorer,
         web_search,
     ]

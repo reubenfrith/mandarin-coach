@@ -31,7 +31,7 @@ async def fake_correct(text):
 
 def main():
     import app.server as s
-    import agent, memory, pronounce_api, voice_api
+    import agent, memory, voice_api
 
     memory.load_reference_data = lambda *a, **k: {}
     agent.correct_sentence = fake_correct

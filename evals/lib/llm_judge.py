@@ -4,11 +4,12 @@ Two kinds of scoring, kept deliberately separate:
 
 * JUDGE (subjective, LLM decides): Correction Accuracy and Personalisation — the
   judge returns a structured verdict at temperature 0 for repeatability.
-* EXTRACT-then-CHECK (objective, code decides): for Aggregation Accuracy and
-  Factual Grounding the LLM only *extracts* the claims an answer makes into
-  structured fields; the pass/fail is then computed in Python against frozen truth
-  (seeded counts) or the reference corpus (CC-CEDICT / HSK). Applied symmetrically
-  to both arms so neither is scored more leniently.
+* EXTRACT-then-CHECK (objective, code decides): for Factual Grounding the LLM only
+  *extracts* the claims an answer makes into structured fields; the pass/fail is then
+  computed in Python against the reference corpus (CC-CEDICT / HSK). Aggregation
+  Accuracy is scored the same way but with a deterministic parser (lib/agg_parse.py)
+  in place of the LLM extractor, checked against frozen truth (seeded counts).
+  Applied symmetrically to both arms so neither is scored more leniently.
 
 The judge model is configurable via JUDGE_MODEL. Because both arms use the same
 model under test, a same-model judge cannot systematically favour one arm over the
@@ -39,7 +40,6 @@ def _judge(schema):
 # --------------------------------------------------------------------------- #
 # Category normalisation (answers say "particles", "助词", "Particle" ...)
 # --------------------------------------------------------------------------- #
-CANON = ["particle", "tones", "measure_word", "word_order", "vocabulary", "grammar"]
 _ALIASES = {
     "particle": "particle", "particles": "particle", "助词": "particle", "把": "particle",
     "tone": "tones", "tones": "tones", "声调": "tones",
@@ -140,28 +140,6 @@ class AggregationClaims(BaseModel):
             "vocabulary": self.vocabulary_count,
         }
         return {k: v for k, v in m.items() if v is not None}
-
-
-_AGG_SYS = (
-    "You are a precise information extractor. Read a tutoring answer and extract ONLY the "
-    "numerical claims it actually makes about the learner's error statistics. The answer "
-    "often uses a MARKDOWN TABLE with a Count column and a Trend column, and/or prose. "
-    "Read BOTH. Capture a category's count whether it appears in a table row, a full "
-    "breakdown, OR prose (e.g. 'you've made 15 particle errors' -> particle_count=15; a "
-    "table row '| Particle | 15 | Increasing |' -> particle_count=15 and particle is "
-    "increasing). Map synonyms to the right field (把/了/的/得/地 -> particle; word choice -> "
-    "vocabulary; 量词 -> measure_word). For trend, treat words 'increasing/rising/worse' and "
-    "up-arrows (⬆️ 📈 🔺) as INCREASING, and 'decreasing/falling/improving/better' and "
-    "down-arrows (⬇️ 📉 🔻) as DECREASING; 'steady/stable' or ➡️ is neither. Put each category "
-    "in the increasing or decreasing list according to its stated trend. Do NOT infer counts "
-    "the answer does not give; leave unstated counts null."
-)
-
-
-async def extract_aggregation(answer: str) -> AggregationClaims:
-    return await _judge(AggregationClaims).ainvoke(
-        [SystemMessage(content=_AGG_SYS), HumanMessage(content=f"Answer:\n{answer}")]
-    )
 
 
 def score_aggregation(ask: str, claims: AggregationClaims, truth: dict) -> tuple[bool, str]:

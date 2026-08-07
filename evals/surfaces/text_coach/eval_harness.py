@@ -29,7 +29,6 @@ import argparse  # noqa: E402
 import asyncio  # noqa: E402
 import json  # noqa: E402
 import os  # noqa: E402
-from collections import defaultdict  # noqa: E402
 from datetime import datetime, timedelta, timezone  # noqa: E402
 from types import SimpleNamespace  # noqa: E402
 

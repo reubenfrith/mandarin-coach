@@ -36,7 +36,7 @@ budget (~9–13 min total); the slides carry the visuals, this carries the words
 
 > Incomes mandarin coach to save the day it is a browser agent with three surfaces that all feed **one** private error corpus.
 
-- **Text** — an agent with five tools; it corrects, grounds the "why" in a
+- **Text** — an agent with six tools; it corrects, grounds the "why" in a
   real grammar rule and expected vocabulary, and logs each mistake.
 - **Voice** — which allows for free-form spoken Mandarin as well as a coaching answer to help you learn as you go;
 - **Pronounce** — practices your tones and gives a per-syllable tone
@@ -68,7 +68,7 @@ The diagram is three colour-coded flows — Text (red), Voice (gold), Pronounce
 Trace the three, then land the punchline.
 
 > Text
-> "The text coach is a LangGraph agent with five tools and a hybrid retriever. It
+> "The text coach is a LangGraph agent with six tools and a hybrid retriever. It
 > runs over OpenRouter models - it has a primary model of Deep Seek v4 flash, the CC-CEDICT dictionary, a grammar-rule corpus,
 > and a web-search tool. It extracts each error and logs it to your corpus."
 > For this I focused on using models that are strong on Chinese, and I wanted to be able to swap them out with zero code change. So I used LiteLLM + OpenRouter, which lets me use three different Chinese-leaderboard models behind one key. I have deepseek-v4-flash as the primary with glm as a fallback behind a turn-timeout guard. 
